@@ -16,7 +16,9 @@ Para usar R es recomendable usar una interfaz gráfica como [RStudio](http://www
 Podéis descargar el instalador desde http://www.rstudio.com/ide/download/desktop. 
 Os aconsejo que leáis esta [breve introducción](http://www.rstudio.com/ide/docs/using/source).
 
-Una de las grandes riquezas de R es la cantidad de paquetes (más de 4000 actualmente) que amplían sus funcionalidades. La lista completa está en http://cran.es.r-project.org/web/packages/. En la sesión del viernes emplearemos los siguientes:
+Una de las grandes riquezas de R es la cantidad de paquetes (más de 4000 actualmente) que amplían sus funcionalidades. 
+La lista completa está en http://cran.es.r-project.org/web/packages/. 
+Emplearemos los siguientes:
 
 * [lattice](http://lattice.r-forge.r-project.org/)
 * [zoo](http://cran.es.r-project.org/web/packages/zoo/)
