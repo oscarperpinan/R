@@ -4,6 +4,7 @@ library("sp")
 library("latticeExtra")
 
 proj <- CRS("+proj=longlat +ellps=WGS84")
+##setwd('~/Docencia/eoi/R')
 
 ##################################################################
 ## CM-SAF
@@ -37,7 +38,14 @@ spSIAR <- SpatialPointsDataFrame(SIAR[, c(6, 7)], SIAR[, -c(6, 7)],
 levelplot(SISmm, layers='Jun') + layer(sp.points(spSIAR, pch=19, col='black', cex=0.6))
 
 CMSAF.SIAR <- extract(SISmm, spSIAR)
-CMSAF.SIAR <- zoo(t(CMSAF.SIAR), idx)
+CMSAF.SIAR <- zoo(t(CMSAF.SIAR), as.yearmon(idx))
 names(CMSAF.SIAR) <- spSIAR$Estacion
 
-xyplot(CMSAF.SIAR, superpose=TRUE, auto.key=FALSE)
+summary(CMSAF.SIAR)
+
+madridSIAR <- subset(SIAR, Provincia == "Madrid")
+spMadrid <- SpatialPoints(madridSIAR[, c('lon', 'lat')], proj4str=proj)
+CMSAFMadrid <- extract(SISmm, spMadrid)
+CMSAFMadrid <- zoo(t(CMSAFMadrid), as.yearmon(idx))
+names(CMSAFMadrid) <- madridSIAR$Estacion
+xyplot(CMSAFMadrid, superpose=TRUE, auto.key=list(space='right'))
