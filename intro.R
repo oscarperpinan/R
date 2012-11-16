@@ -38,36 +38,41 @@ y <- seq(2, 100, length=50)
 z <- c(x, y)
 z
 z + c(1, 2)
-
+z + c(1, 2, 3, 4, 5, 6, 7)
 z <- c(z, z, z, z)
 z
+rep(1:10, 4)
+
 length(z)
 
 rep(c(1, 2, 3), 10)
 rep(c(1, 2, 3), each=10)
-
+help(rep)
 
 ## Indexado
 
 x <- seq(1, 100, 2)
+1:5
 x[c(1, 2, 3, 4, 5)]
 x[1:5]
+x[10:5]
 
 x==37
 x[x==37]
-x[x!=10]
+x[x!=9]
 x[x=10]
 
 y <- seq(101, 200, 2)
 y %in% c(101, 127, 141)
 y
 y[y %in% c(101, 127, 141)]
-
+y[y>130]
 z <- c(x, y)
-
+z
 z>150
 z[z>150]
 z[z<30 | z>150]
+z[z>=30 & z<=150]
 z[50]
 z[c(1, 10, 40, 80)]
 
@@ -98,6 +103,9 @@ x + y
 x - y
 x * y
 x^2 + y^3
+exp(x)
+log(x)
+help(exp)
 
 class(sum)
 help(sum)
@@ -118,10 +126,12 @@ quantile(x)
 
 ## missing values con NA
 class(NA)
+class(TRUE)
 
 seq_along(x)
 idx <- sample(seq_along(x), 10)
 idx
+x[idx]
 x2 <- x
 x2[idx] <- NA
 x2
@@ -139,12 +149,13 @@ z <- 1:12
 M  <-  matrix(z, nrow=3)
 M
 z
-
+help(matrix)
 class(M)
 dim(M)
 
 t(M)
 class(t)
+dim(t(M))
 
 M * M
 M ^ 2
@@ -165,22 +176,25 @@ apply(M, 1, mean)
 colMeans(M)
 apply(M, 2, mean)
 
-apply(M, 1, sd)
+apply(M, 1, sd, na.rm=TRUE)
 apply(M, 2, sd)
-
+help(apply)
 M
+M[]
 M[1, ]
 M[, 1]
 sum(M[, 1])
-M[1:3, ]
-M[1:3, 1:3]
+M[1:2, ]
+M[1:2, 2:3]
 M[1, c(1, 4)]
 M[-1,]
-M[-c(1, 2, 4),]
+M[-c(1, 2),]
 
 x <- 1:10
 y <- 1:10
 z <- 1:10
+z <- y <- x <- 1:10
+
 M <- cbind(x, y, z)
 M
 M <- rbind(x, y, z)
@@ -205,7 +219,8 @@ foo
 foo(1:10)
 
 rnorm(100)
-foo(rnorm(100))
+help(rnorm)
+foo(rnorm(1e5))
 
 rowMeans(M)
 apply(M, 1, foo)
@@ -215,6 +230,8 @@ apply(M, 2, foo)
 f <- function(x, y)x^2+y^2
 f
 f(1, 2)
+x
+y
 
 z <- outer(x, y, f)
 z
@@ -241,6 +258,7 @@ length(lista)
 length(lista$a)
 length(lista$b)
 length(lista$c)
+
 lapply(lista, length)
 sapply(lista, length)
 
@@ -277,11 +295,12 @@ xyplot(y ~ x, data=df, type='l')
 xyplot(y ~ x, data=df, type='b')
 xyplot(y ~ x, data=df, type=c('b', 'g'))
 xyplot(y ~ x, data=df, type=c('b', 'r', 'g'))
-
+help(xyplot)
 
 x <- y <- seq(-4*pi, 4*pi, len=200)
 df <- expand.grid(x = x, y = y)
 head(df)
+tail(df)
 summary(df)
 dim(df)
 names(df)
@@ -291,8 +310,10 @@ circles <- function(object){
   res <- cos(r^2)*exp(-r/6)
   res}
 
-head(cosExp(df))
+head(circles(df))
 
-df$result <- cosExp(df)
+df$result <- circles(df)
+head(df)
 
 levelplot(result ~ x * y, data=df)
+xyplot(result ~ x, data=df)
