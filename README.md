@@ -1,5 +1,5 @@
-R en el [Máster de Energías Renovables y Mercado Energético de la EOI](http://www.eoi.es/portal/guest/medio-ambiente/cursos?EOI_id_curso=42&EOI_tipoPagina=1)
-======
+Introducción a R
+====
 ¿Qué es [R](http://procomun.wordpress.com/2011/02/23/que-es-r/)? 
 Es un lenguaje de programación principalmente orientado al análisis estadístico y visualización de información cuantitativa y cualitativa y publicado como software libre con licencia GNU-GPL. 
 Esta entrada de la lista de correo R-help ([How do I get my IT department to “bless” R?](http://tolstoy.newcastle.edu.au/R/e6/help/09/02/4456.html)) lo describe de forma muy interesante.
