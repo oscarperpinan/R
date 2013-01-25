@@ -10,7 +10,8 @@ Para instalar R:
 * Si utilizáis Mac debéis ir a esta página: http://cran.es.r-project.org/bin/macosx/.
 * Y si utilizáis Linux, posiblemente lo tengáis disponible en vuestro gestor de aplicaciones. En todo caso, la página para Linux está aquí: http://cran.es.r-project.org/bin/linux/.
 
-Podéis consultar el [manual introductorio](http://cran.r-project.org/doc/manuals/R-intro.html), los [manuales oficiales](http://cran.r-project.org/manuals.html) y los [manuales externos](http://cran.r-project.org/other-docs.html).
+Podéis consultar el [manual introductorio](http://cran.r-project.org/doc/manuals/R-intro.html), los [manuales oficiales](http://cran.r-project.org/manuals.html) y los [manuales externos](http://cran.r-project.org/other-docs.html). 
+Además, las [listas de correo ](http://www.r-project.org/mail.html) son una fuente excelente de información y un lugar privilegiado para solicitar ayuda (sin olvidar respetar [estos consejos](http://www.r-project.org/posting-guide.html)).
 
 En mi opinión, la mejor interfaz para R es [ESS](http://ess.r-project.org/) con [Emacs](http://www.gnu.org/software/emacs/). 
 Para los que prefieren una interfaz gráfica es recomendable [RStudio](http://www.rstudio.com/ide/). 
