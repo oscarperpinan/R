@@ -18,10 +18,9 @@ Os aconsejo que leáis esta [breve introducción](http://www.rstudio.com/ide/doc
 
 Una de las grandes riquezas de R es la cantidad de paquetes (más de 4000 actualmente) que amplían sus funcionalidades. 
 La lista completa está en http://cran.es.r-project.org/web/packages/. 
-Emplearemos los siguientes:
+Entre otros, emplearemos los siguientes:
 
 * [lattice](http://lattice.r-forge.r-project.org/)
 * [zoo](http://cran.es.r-project.org/web/packages/zoo/)
 * [sp](http://cran.r-project.org/web/packages/sp/)
 * [raster](http://cran.es.r-project.org/web/packages/raster/) y [rasterVis](http://rastervis.r-forge.r-project.org/)
-* [solaR](http://solar.r-forge.r-project.org/)
