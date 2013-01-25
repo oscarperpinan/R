@@ -12,9 +12,9 @@ Para instalar R:
 
 Podéis consultar el [manual introductorio](http://cran.r-project.org/doc/manuals/R-intro.html), los [manuales oficiales](http://cran.r-project.org/manuals.html) y los [manuales externos](http://cran.r-project.org/other-docs.html).
 
-Para usar R es recomendable usar una interfaz gráfica como [RStudio](http://www.rstudio.com/ide/). 
-Podéis descargar el instalador desde http://www.rstudio.com/ide/download/desktop. 
-Os aconsejo que leáis esta [breve introducción](http://www.rstudio.com/ide/docs/using/source).
+En mi opinión, la mejor interfaz para R es [ESS](http://ess.r-project.org/) con [Emacs](http://www.gnu.org/software/emacs/). 
+Para los que prefieren una interfaz gráfica es recomendable [RStudio](http://www.rstudio.com/ide/). 
+Podéis descargar el instalador desde [aquí](http://www.rstudio.com/ide/download/desktop). Os aconsejo que leáis esta [breve introducción](http://www.rstudio.com/ide/docs/using/source).
 
 Una de las grandes riquezas de R es la cantidad de paquetes (más de 4000 actualmente) que amplían sus funcionalidades. 
 La lista completa está en http://cran.es.r-project.org/web/packages/. 
