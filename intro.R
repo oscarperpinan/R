@@ -24,6 +24,9 @@ y <- 1:10
 x + y
 x * y
 x^2
+x^2 + y^3
+exp(x)
+log(x)
 
 ## Generar vectores con =seq=
 
@@ -157,30 +160,6 @@ help(exp)
 help(sum)
 help(quantile)
 
-## ¿Qué es =NA=?
-
-class(NA)
-seq_along(x)
-idx <- sample(seq_along(x), 10)
-idx
-x[idx]
-x2 <- x
-x2[idx] <- NA
-x2
-
-## =NA= en las funciones
-
-summary(x2)
-mean(x2)
-sum(x2)
-
-## =NA= en las funciones
-
-mean(x2, na.rm=TRUE)
-sum(x2, na.rm=TRUE)
-sd(x2, na.rm=TRUE)
-class(TRUE)
-
 ## Construir una matriz
 
 z <- 1:12
@@ -252,6 +231,34 @@ M[1, c(1, 4)]
 M[-1,]
 M[-c(1, 2),]
 
+## ¿Qué es =NA=?
+
+class(NA)
+x <- rnorm(100)
+idx <- sample(length(x), 10)
+idx
+x[idx]
+x2 <- x
+x2[idx] <- NA
+x2
+
+## =NA= en las funciones
+
+summary(x)
+mean(x)
+sum(x)
+
+summary(x2)
+mean(x2)
+sum(x2)
+
+## =NA= en las funciones
+
+mean(x2, na.rm=TRUE)
+sum(x2, na.rm=TRUE)
+sd(x2, na.rm=TRUE)
+class(TRUE)
+
 ## Para definir una función usamos la función =function=
 
 myFun <- function(x, y) x + y
@@ -306,14 +313,15 @@ lista <- list(a=c(1,3,5),
 class(list)
 class(lista)
 
-## Podemos acceder a los elementos por su nombre
+## Podemos acceder a los elementos...
+## - Por su nombre
 
 lista
 lista$a
 lista$b
 lista$c
 
-## o por su índice
+## - o por su índice
 
 lista[1]
 lista[[1]]
@@ -327,14 +335,15 @@ lista[[2]]
 class(lista[2])
 class(lista[[2]])
 
-## Cada elemento es de una clase diferente
+## Cada elemento es diferente
+## - Clase
 
 class(lista)
 class(lista$a)
 class(lista$b)
 class(lista$c)
 
-## y de una longitud diferente
+## - Longitud
 
 length(lista)
 length(lista$a)
@@ -350,6 +359,7 @@ lista <- list(x = 1:10,
               y = seq(0, 10, 2),
               z = rnorm(30))
 lista
+
 lapply(lista, sum)
 lapply(lista, median)
 lapply(lista, foo)
@@ -363,18 +373,29 @@ df <- data.frame(x = 1:10,
 length(df)
 dim(df)
 
-## Podemos acceder a los elementos por su nombre
+## Podemos acceder a los elementos
+## - Por su nombre
 
 df$x
 df$y
 df$z
 
-## o por su índice
+## - Por su índice
 
 df
 df[1,]
 df[,1]
 df[,2]
+
+## La regla del reciclaje
+
+year <- 2011
+month <- 1:12
+class <- c('A', 'B', 'C')
+vals <- rnorm(12)
+
+dats <- data.frame(year, month, class, vals)
+dats
 
 ## La función =expand.grid=
 
@@ -396,23 +417,131 @@ circles <- function(object){
 df$result <- circles(df)
 head(df)
 
-## Base
-
-plot(df$x, df$y)
-
-## Lattice: =xyplot=
+## Una imagen vale más que mil palabras
 
 library(lattice)
+levelplot(result ~ x + y, data=df)
 
-xyplot(y ~ x, data=df)
-xyplot(y ~ x, data=df, type='l')
-xyplot(y ~ x, data=df, type='b')
-xyplot(y ~ x, data=df, type=c('b', 'g'))
-xyplot(y ~ x, data=df, type=c('b', 'r', 'g'))
+## Una variable numérica que nos servirá para el ejemplo
 
-help(xyplot)
+N <- 100
+edad <- sample(seq(18, 40, 1), N, replace=TRUE)
+summary(edad)
 
-## Lattice: =levelplot=
+## Una variable cualitativa se define con =factor=
+## - Ahora es un =character=
 
-levelplot(result ~ x * y, data=df)
-xyplot(result ~ x, data=df)
+sexo <- sample(c('H', 'M'), N, replace=TRUE)
+class(sexo)
+summary(sexo)
+
+## - Ahora es un =factor=
+
+sexo <- factor(sexo)
+class(sexo)
+summary(sexo)
+levels(sexo)
+nlevels(sexo)
+
+## Los =factor= sirven para agrupar
+
+## - Con la función =table=
+
+table(edad, sexo)
+table(edad > 30, sexo)
+table(edad %in% 20:30, sexo)
+
+## - Con =tapply= o =aggregate=
+
+tapply(edad,sexo, mean)
+aggregate(edad ~ sexo, FUN=median)
+
+## Los factores sirven para separar
+
+edadSexo <- split(edad, sexo)
+class(edadSexo)
+
+sapply(edadSexo, mean)
+
+## Los =factor= se pueden generar a partir de variables numéricas
+## - Por ejemplo, con =cut=
+
+gEdad <- cut(edad, breaks=4)
+class(gEdad)
+levels(gEdad)
+nlevels(gEdad)
+
+## - Nuevamente =table=
+
+table(gEdad)
+table(gEdad, sexo)
+
+## Bastan unas simples comillas
+
+cadena <- "Hola mundo"
+class(cadena)
+nchar(cadena)
+
+## - Y aquí, ¿qué pasa?
+
+length(cadena)
+cadena[1]
+cadena[2]
+
+## Un vector de =character=
+
+cadenaVec <- c("Hola mundo", "Hello world")
+nchar(cadenaVec)
+length(cadenaVec)
+
+## Para mostrarlos usamos =cat= o =print=
+
+a = 2
+b = 3
+
+cat('La suma de', a, 'y', b, 'es', a + b)
+
+cat('La suma de', a, 'y', b, 'es', a + b, fill=TRUE)
+
+cat('La suma de', a, 'y', b, 'es', a + b, '\n',
+    'La multiplicación de', a, 'por', b, 'es', a*b, '\n')
+
+cat('La suma de', a, 'y', b, 'es', a + b, '\n',
+    'La multiplicación de', a, 'por', b, 'es', a*b, fill=15)
+
+## Los =character= se pueden unir...
+## - Primero sencillo
+
+paste('Hello', 'World', sep='_')
+
+paste(cadenaVec)
+paste(cadenaVec, collapse='=')
+
+## - Y algo más complicado
+
+paste('X', 1:5, sep='.')
+paste(c('A', 'B'), 1:5, sep='.')
+
+paste(c('A', 'B'), 1:5, sep='.', collapse='|')
+
+## ... y también se pueden separar...
+
+strsplit(cadenaVec, split=' ')
+strsplit(cadenaVec, split='')
+
+chSep <- strsplit(cadenaVec, split=' ')
+class(chSep)
+length(chSep)
+sapply(chSep, length)
+sapply(chSep, nchar)
+
+## ... y, por supuesto, manipular
+
+sub('o', '0', 'Hola Mundo')
+gsub('o', '0', 'Hola Mundo')
+
+substring(cadena, 1) <- 'HOLA'
+cadena
+
+tolower(cadena)
+toupper(cadena)

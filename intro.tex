@@ -1,5 +1,5 @@
-% Created 2013-01-24 jue 22:26
-\documentclass[bigger]{beamer}
+% Created 2013-01-30 mié 00:51
+\documentclass{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{fixltx2e}
@@ -17,7 +17,7 @@
 \tolerance=1000
 \usepackage{color}
 \usepackage{listings}
-\AtBeginSection[]{\begin{frame}<beamer>\frametitle{Contenidos}\tableofcontents[currentsection]\end{frame}}
+\AtBeginSection[]{\begin{frame}[plain]\tableofcontents[currentsection]\end{frame}}
 \lstset{keywordstyle=\color{blue}, commentstyle=\color{gray!90}, basicstyle=\ttfamily\small, columns=fullflexible, breaklines=true,linewidth=\textwidth, backgroundcolor=\color{gray!23}, basewidth={0.5em,0.4em}, literate={á}{{\'a}}1 {ñ}{{\~n}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {º}{{\textordmasculine}}1}
 \usepackage{mathpazo}
 \setbeamercovered{transparent}
@@ -27,7 +27,7 @@
 
 \title{Introducción a R}
 \author{Oscar Perpiñán Lamigueiro}
-\date{24 de Enero de 2013}
+\date{30 de Enero de 2013}
 \hypersetup{
   pdfkeywords={},
   pdfsubject={},
@@ -39,9 +39,9 @@
 
 
 
-\section{Vectores}
+\section{Vectores y Matrices}
 \label{sec-1}
-\subsection{Vectores numéricos}
+\subsection{Vectores}
 \label{sec-1-1}
 \begin{frame}[fragile]
 \frametitle{Primeros pasos}
@@ -85,6 +85,9 @@ y <- 1:10
 x + y
 x * y
 x^2
+x^2 + y^3
+exp(x)
+log(x)
 \end{lstlisting}
 \end{frame}
 \begin{frame}[fragile]
@@ -190,6 +193,7 @@ x[x>20]
 \begin{lstlisting}
 x[x=10]
 \end{lstlisting}
+     
 \end{block}
 \end{frame}
 \begin{frame}[fragile]
@@ -250,12 +254,11 @@ length(x[cond])
 length(x[!cond])
 as.numeric(cond)
 \end{lstlisting}
+    
 \end{frame}
-\subsection{Operaciones con vectores numéricos}
-\label{sec-1-2}
 \begin{frame}[fragile]
 \frametitle{Aritmética sencilla}
-\label{sec-1-2-1}
+\label{sec-1-1-14}
 
 
 \lstset{language=R}
@@ -270,7 +273,7 @@ log(x)
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Funciones predefinidas}
-\label{sec-1-2-2}
+\label{sec-1-1-15}
 
 
 \lstset{language=R}
@@ -287,7 +290,7 @@ quantile(x)
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Funciones y condiciones}
-\label{sec-1-2-3}
+\label{sec-1-1-16}
 
 
 \lstset{language=R}
@@ -301,7 +304,7 @@ sum(x[1:5])
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{¿Y qué hago cuando necesito ayuda?}
-\label{sec-1-2-4}
+\label{sec-1-1-17}
 
 
 
@@ -312,61 +315,11 @@ help(sum)
 help(quantile)
 \end{lstlisting}
 \end{frame}
-\subsection{Valores ausentes}
-\label{sec-1-3}
-
-   
-\begin{frame}[fragile]
-\frametitle{¿Qué es \texttt{NA}?}
-\label{sec-1-3-1}
-
-
-\lstset{language=R}
-\begin{lstlisting}
-class(NA)
-seq_along(x)
-idx <- sample(seq_along(x), 10)
-idx
-x[idx]
-x2 <- x
-x2[idx] <- NA
-x2
-\end{lstlisting}
-\end{frame}
-\begin{frame}[fragile]
-\frametitle{\texttt{NA} en las funciones}
-\label{sec-1-3-2}
-
-
-
-\lstset{language=R}
-\begin{lstlisting}
-summary(x2)
-mean(x2)
-sum(x2)
-\end{lstlisting}
-\end{frame}
-\begin{frame}[fragile]
-\frametitle{\texttt{NA} en las funciones}
-\label{sec-1-3-3}
-
-
-
-\lstset{language=R}
-\begin{lstlisting}
-mean(x2, na.rm=TRUE)
-sum(x2, na.rm=TRUE)
-sd(x2, na.rm=TRUE)
-class(TRUE)
-\end{lstlisting}
-\end{frame}
-\section{Matrices}
-\label{sec-2}
-\subsection{Construcción de matrices}
-\label{sec-2-1}
+\subsection{Matrices}
+\label{sec-1-2}
 \begin{frame}[fragile]
 \frametitle{Construir una matriz}
-\label{sec-2-1-1}
+\label{sec-1-2-1}
 
 
 \lstset{language=R}
@@ -383,7 +336,7 @@ summary(M)
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Matrices a partir de vectores: \texttt{rbind} y \texttt{cbind}}
-\label{sec-2-1-2}
+\label{sec-1-2-2}
 
 
 \lstset{language=R}
@@ -404,7 +357,7 @@ cbind(M, M)
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Transponer una matriz}
-\label{sec-2-1-3}
+\label{sec-1-2-3}
 
 
 
@@ -415,11 +368,9 @@ class(t)
 dim(t(M))
 \end{lstlisting}
 \end{frame}
-\subsection{Operaciones con matrices}
-\label{sec-2-2}
 \begin{frame}[fragile]
 \frametitle{Operaciones con matrices}
-\label{sec-2-2-1}
+\label{sec-1-2-4}
 
 
 
@@ -434,7 +385,7 @@ help('%*%')
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Operaciones con matrices: funciones predefinidas}
-\label{sec-2-2-2}
+\label{sec-1-2-5}
 
 
 
@@ -449,7 +400,7 @@ colMeans(M)
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{La función \texttt{apply}}
-\label{sec-2-2-3}
+\label{sec-1-2-6}
 
 
 \lstset{language=R}
@@ -463,11 +414,9 @@ apply(M, 1, sd, na.rm=TRUE)
 apply(M, 2, sd)
 \end{lstlisting}
 \end{frame}
-\subsection{Indexado de matrices}
-\label{sec-2-3}
 \begin{frame}[fragile]
 \frametitle{Indexado de matrices}
-\label{sec-2-3-1}
+\label{sec-1-2-7}
 
 
 \lstset{language=R}
@@ -485,13 +434,65 @@ M[-c(1, 2),]
 \end{lstlisting}
     
 \end{frame}
+\subsection{Valores ausentes}
+\label{sec-1-3}
+
+   
+\begin{frame}[fragile]
+\frametitle{¿Qué es \texttt{NA}?}
+\label{sec-1-3-1}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+class(NA)
+x <- rnorm(100)
+idx <- sample(length(x), 10)
+idx
+x[idx]
+x2 <- x
+x2[idx] <- NA
+x2
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{\texttt{NA} en las funciones}
+\label{sec-1-3-2}
+
+
+
+\lstset{language=R}
+\begin{lstlisting}
+summary(x)
+mean(x)
+sum(x)
+
+summary(x2)
+mean(x2)
+sum(x2)
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{\texttt{NA} en las funciones}
+\label{sec-1-3-3}
+
+
+
+\lstset{language=R}
+\begin{lstlisting}
+mean(x2, na.rm=TRUE)
+sum(x2, na.rm=TRUE)
+sd(x2, na.rm=TRUE)
+class(TRUE)
+\end{lstlisting}
+\end{frame}
 \section{Funciones}
-\label{sec-3}
+\label{sec-2}
 \subsection{Definición de funciones}
-\label{sec-3-1}
+\label{sec-2-1}
 \begin{frame}[fragile]
 \frametitle{Para definir una función usamos la función \texttt{function}}
-\label{sec-3-1-1}
+\label{sec-2-1-1}
 
 
 \lstset{language=R}
@@ -503,7 +504,7 @@ class(myFun)
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Definir una función a partir de funciones}
-\label{sec-3-1-2}
+\label{sec-2-1-2}
 
 
 \lstset{language=R}
@@ -523,10 +524,10 @@ foo <- function(x, ...){c(mean(x, ...), median(x, ...), sd(x, ...))}
 \end{lstlisting}
 \end{frame}
 \subsection{Uso de funciones}
-\label{sec-3-2}
+\label{sec-2-2}
 \begin{frame}[fragile]
 \frametitle{Y ahora usamos la función con vectores}
-\label{sec-3-2-1}
+\label{sec-2-2-1}
 
 
 \lstset{language=R}
@@ -540,7 +541,7 @@ foo(rnorm(1e5))
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Y también funciona con matrices}
-\label{sec-3-2-2}
+\label{sec-2-2-2}
 
 
 \lstset{language=R}
@@ -553,7 +554,7 @@ apply(M, 2, foo)
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{La función \texttt{outer}}
-\label{sec-3-2-3}
+\label{sec-2-2-3}
 
 
 \lstset{language=R}
@@ -570,12 +571,12 @@ image(x, y, z)
 \end{lstlisting}
 \end{frame}
 \section{Listas y data.frame}
-\label{sec-4}
+\label{sec-3}
 \subsection{Listas}
-\label{sec-4-1}
+\label{sec-3-1}
 \begin{frame}[fragile]
 \frametitle{Para crear una lista usamos la función \texttt{list}}
-\label{sec-4-1-1}
+\label{sec-3-1-1}
 
 
 \lstset{language=R}
@@ -588,9 +589,12 @@ class(lista)
 \end{lstlisting}
 \end{frame}
 \begin{frame}[fragile]
-\frametitle{Podemos acceder a los elementos por su nombre}
-\label{sec-4-1-2}
+\frametitle{Podemos acceder a los elementos\ldots{}}
+\label{sec-3-1-2}
 
+\begin{itemize}
+\item Por su nombre
+\end{itemize}
 
 \lstset{language=R}
 \begin{lstlisting}
@@ -599,11 +603,10 @@ lista$a
 lista$b
 lista$c
 \end{lstlisting}
-\end{frame}
-\begin{frame}[fragile]
-\frametitle{o por su índice}
-\label{sec-4-1-3}
 
+\begin{itemize}
+\item o por su índice
+\end{itemize}
 
 \lstset{language=R}
 \begin{lstlisting}
@@ -621,9 +624,12 @@ class(lista[[2]])
 \end{lstlisting}
 \end{frame}
 \begin{frame}[fragile]
-\frametitle{Cada elemento es de una clase diferente}
-\label{sec-4-1-4}
+\frametitle{Cada elemento es diferente}
+\label{sec-3-1-3}
 
+\begin{itemize}
+\item Clase
+\end{itemize}
 
 \lstset{language=R}
 \begin{lstlisting}
@@ -632,11 +638,9 @@ class(lista$a)
 class(lista$b)
 class(lista$c)
 \end{lstlisting}
-\end{frame}
-\begin{frame}[fragile]
-\frametitle{y de una longitud diferente}
-\label{sec-4-1-5}
-
+\begin{itemize}
+\item Longitud
+\end{itemize}
 
 \lstset{language=R}
 \begin{lstlisting}
@@ -648,7 +652,7 @@ length(lista$c)
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Para matrices \texttt{apply}, para listas \texttt{lapply} y \texttt{sapply}}
-\label{sec-4-1-6}
+\label{sec-3-1-4}
 
 
 \lstset{language=R}
@@ -660,16 +664,17 @@ lista <- list(x = 1:10,
               y = seq(0, 10, 2),
               z = rnorm(30))
 lista
+
 lapply(lista, sum)
 lapply(lista, median)
 lapply(lista, foo)
 \end{lstlisting}
 \end{frame}
 \subsection{Data.frame}
-\label{sec-4-2}
+\label{sec-3-2}
 \begin{frame}[fragile]
 \frametitle{Para crear un \texttt{data.frame}...}
-\label{sec-4-2-1}
+\label{sec-3-2-1}
 
 
 \lstset{language=R}
@@ -683,9 +688,12 @@ dim(df)
 \end{lstlisting}
 \end{frame}
 \begin{frame}[fragile]
-\frametitle{Podemos acceder a los elementos por su nombre}
-\label{sec-4-2-2}
+\frametitle{Podemos acceder a los elementos}
+\label{sec-3-2-2}
 
+\begin{itemize}
+\item Por su nombre
+\end{itemize}
 
 \lstset{language=R}
 \begin{lstlisting}
@@ -693,11 +701,10 @@ df$x
 df$y
 df$z
 \end{lstlisting}
-\end{frame}
-\begin{frame}[fragile]
-\frametitle{o por su índice}
-\label{sec-4-2-3}
 
+\begin{itemize}
+\item Por su índice
+\end{itemize}
 
 \lstset{language=R}
 \begin{lstlisting}
@@ -708,8 +715,24 @@ df[,2]
 \end{lstlisting}
 \end{frame}
 \begin{frame}[fragile]
+\frametitle{La regla del reciclaje}
+\label{sec-3-2-3}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+year <- 2011
+month <- 1:12
+class <- c('A', 'B', 'C')
+vals <- rnorm(12)
+
+dats <- data.frame(year, month, class, vals)
+dats
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]
 \frametitle{La función \texttt{expand.grid}}
-\label{sec-4-2-4}
+\label{sec-3-2-4}
 
 
 
@@ -726,7 +749,7 @@ names(df)
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Funciones sobre \texttt{data.frame}}
-\label{sec-4-2-5}
+\label{sec-3-2-5}
 
 
 
@@ -741,49 +764,248 @@ df$result <- circles(df)
 head(df)
 \end{lstlisting}
 \end{frame}
-\section{Gráficos}
-\label{sec-5}
-\subsection{Base}
-\label{sec-5-1}
 \begin{frame}[fragile]
-\frametitle{Base}
-\label{sec-5-1-1}
-
-
-\lstset{language=R}
-\begin{lstlisting}
-plot(df$x, df$y)
-\end{lstlisting}
-\end{frame}
-\subsection{Grid}
-\label{sec-5-2}
-\begin{frame}[fragile]
-\frametitle{Lattice: \texttt{xyplot}}
-\label{sec-5-2-1}
+\frametitle{Una imagen vale más que mil palabras}
+\label{sec-3-2-6}
 
 
 \lstset{language=R}
 \begin{lstlisting}
 library(lattice)
-
-xyplot(y ~ x, data=df)
-xyplot(y ~ x, data=df, type='l')
-xyplot(y ~ x, data=df, type='b')
-xyplot(y ~ x, data=df, type=c('b', 'g'))
-xyplot(y ~ x, data=df, type=c('b', 'r', 'g'))
-
-help(xyplot)
+levelplot(result ~ x + y, data=df)
 \end{lstlisting}
 \end{frame}
+\section{Factores y Caracteres}
+\label{sec-4}
+\subsection{\texttt{factor}}
+\label{sec-4-1}
 \begin{frame}[fragile]
-\frametitle{Lattice: \texttt{levelplot}}
-\label{sec-5-2-2}
+\frametitle{Una variable numérica que nos servirá para el ejemplo}
+\label{sec-4-1-1}
 
 
 \lstset{language=R}
 \begin{lstlisting}
-levelplot(result ~ x * y, data=df)
-xyplot(result ~ x, data=df)
+N <- 100
+edad <- sample(seq(18, 40, 1), N, replace=TRUE)
+summary(edad)
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Una variable cualitativa se define con \texttt{factor}}
+\label{sec-4-1-2}
+
+\begin{itemize}
+\item Ahora es un \texttt{character}
+\end{itemize}
+
+\lstset{language=R}
+\begin{lstlisting}
+sexo <- sample(c('H', 'M'), N, replace=TRUE)
+class(sexo)
+summary(sexo)
+\end{lstlisting}
+\begin{itemize}
+\item Ahora es un \texttt{factor}
+\end{itemize}
+
+\lstset{language=R}
+\begin{lstlisting}
+sexo <- factor(sexo)
+class(sexo)
+summary(sexo)
+levels(sexo)
+nlevels(sexo)
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Los \texttt{factor} sirven para agrupar}
+\label{sec-4-1-3}
+
+
+\begin{itemize}
+\item Con la función \texttt{table}
+\end{itemize}
+
+\lstset{language=R}
+\begin{lstlisting}
+table(edad, sexo)
+table(edad > 30, sexo)
+table(edad %in% 20:30, sexo)
+\end{lstlisting}
+
+\begin{itemize}
+\item Con \texttt{tapply} o \texttt{aggregate}
+\end{itemize}
+
+\lstset{language=R}
+\begin{lstlisting}
+tapply(edad,sexo, mean)
+aggregate(edad ~ sexo, FUN=median)
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Los factores sirven para separar}
+\label{sec-4-1-4}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+edadSexo <- split(edad, sexo)
+class(edadSexo)
+
+sapply(edadSexo, mean)
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Los \texttt{factor} se pueden generar a partir de variables numéricas}
+\label{sec-4-1-5}
+
+\begin{itemize}
+\item Por ejemplo, con \texttt{cut}
+\end{itemize}
+
+\lstset{language=R}
+\begin{lstlisting}
+gEdad <- cut(edad, breaks=4)
+class(gEdad)
+levels(gEdad)
+nlevels(gEdad)
+\end{lstlisting}
+
+\begin{itemize}
+\item Nuevamente \texttt{table}
+\end{itemize}
+
+\lstset{language=R}
+\begin{lstlisting}
+table(gEdad)
+table(gEdad, sexo)
+\end{lstlisting}
+\end{frame}
+\subsection{Caracteres}
+\label{sec-4-2}
+\begin{frame}[fragile]
+\frametitle{Bastan unas simples comillas}
+\label{sec-4-2-1}
+
+
+
+\lstset{language=R}
+\begin{lstlisting}
+cadena <- "Hola mundo"
+class(cadena)
+nchar(cadena)
+\end{lstlisting}
+
+\begin{itemize}
+\item Y aquí, ¿qué pasa?
+\end{itemize}
+
+\lstset{language=R}
+\begin{lstlisting}
+length(cadena)
+cadena[1]
+cadena[2]
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Un vector de \texttt{character}}
+\label{sec-4-2-2}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+cadenaVec <- c("Hola mundo", "Hello world")
+nchar(cadenaVec)
+length(cadenaVec)
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Para mostrarlos usamos \texttt{cat} o \texttt{print}}
+\label{sec-4-2-3}
+
+
+
+\lstset{language=R}
+\begin{lstlisting}
+a = 2
+b = 3
+
+cat('La suma de', a, 'y', b, 'es', a + b)
+
+cat('La suma de', a, 'y', b, 'es', a + b, fill=TRUE)
+
+cat('La suma de', a, 'y', b, 'es', a + b, '\n',
+    'La multiplicación de', a, 'por', b, 'es', a*b, '\n')
+
+cat('La suma de', a, 'y', b, 'es', a + b, '\n',
+    'La multiplicación de', a, 'por', b, 'es', a*b, fill=15)
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Los \texttt{character} se pueden unir\ldots{}}
+\label{sec-4-2-4}
+
+\begin{itemize}
+\item Primero sencillo
+\end{itemize}
+
+\lstset{language=R}
+\begin{lstlisting}
+paste('Hello', 'World', sep='_')
+
+paste(cadenaVec)
+paste(cadenaVec, collapse='=')
+\end{lstlisting}
+\begin{itemize}
+\item Y algo más complicado
+\end{itemize}
+
+\lstset{language=R}
+\begin{lstlisting}
+paste('X', 1:5, sep='.')
+paste(c('A', 'B'), 1:5, sep='.')
+
+paste(c('A', 'B'), 1:5, sep='.', collapse='|')
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{\ldots{} y también se pueden separar\ldots{}}
+\label{sec-4-2-5}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+strsplit(cadenaVec, split=' ')
+strsplit(cadenaVec, split='')
+\end{lstlisting}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+chSep <- strsplit(cadenaVec, split=' ')
+class(chSep)
+length(chSep)
+sapply(chSep, length)
+sapply(chSep, nchar)
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{\ldots{} y, por supuesto, manipular}
+\label{sec-4-2-6}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+sub('o', '0', 'Hola Mundo')
+gsub('o', '0', 'Hola Mundo')
+
+substring(cadena, 1) <- 'HOLA'
+cadena
+
+tolower(cadena)
+toupper(cadena)
 \end{lstlisting}
 \end{frame}
 

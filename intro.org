@@ -1,7 +1,7 @@
 #+TITLE:     Introducción a R
 #+AUTHOR:    Oscar Perpiñán Lamigueiro
 #+EMAIL:     oscar.perpinan@gmail.com
-#+DATE:      24 de Enero de 2013
+#+DATE:      30 de Enero de 2013
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  es
@@ -15,9 +15,8 @@
 #+XSLT:
 #+startup: beamer
 #+LaTeX_CLASS: beamer
-#+LaTeX_CLASS_OPTIONS: [bigger]
 #+BEAMER_FRAME_LEVEL: 3
-#+LATEX_HEADER: \AtBeginSection[]{\begin{frame}<beamer>\frametitle{Contenidos}\tableofcontents[currentsection]\end{frame}}
+#+LATEX_HEADER: \AtBeginSection[]{\begin{frame}[plain]\tableofcontents[currentsection]\end{frame}}
 #+LATEX_HEADER: \lstset{keywordstyle=\color{blue}, commentstyle=\color{gray!90}, basicstyle=\ttfamily\small, columns=fullflexible, breaklines=true,linewidth=\textwidth, backgroundcolor=\color{gray!23}, basewidth={0.5em,0.4em}, literate={á}{{\'a}}1 {ñ}{{\~n}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {º}{{\textordmasculine}}1}
 #+LATEX_HEADER: \usepackage{mathpazo}
 #+LATEX_HEADER: \setbeamercovered{transparent}
@@ -27,10 +26,9 @@
 #+PROPERTY:  comments org
 
 
-* Vectores
+* Vectores y Matrices
 
-** Vectores numéricos
-
+** Vectores 
 *** Primeros pasos
 #+begin_src R 
 x <- 1
@@ -58,6 +56,9 @@ length
   x + y
   x * y
   x^2
+  x^2 + y^3
+  exp(x)
+  log(x)
 #+end_src
 
 *** Generar vectores con =seq=
@@ -132,9 +133,9 @@ help(rep)
      :END:
 
 #+begin_src R 
-x[x=10]
+  x[x=10]
 #+end_src
-
+     
 *** Indexado de vectores con =%in%=
 #+begin_src R 
 y <- seq(101, 200, 2)
@@ -174,9 +175,8 @@ length(x[cond])
 length(x[!cond])
 as.numeric(cond)
 #+end_src
+    
 
-
-** Operaciones con vectores numéricos
 *** Aritmética sencilla
 #+begin_src R 
 x + y
@@ -218,40 +218,7 @@ help(quantile)
 #+end_src
 
 
-** Valores ausentes
-   
-*** ¿Qué es =NA=?
-#+begin_src R 
-class(NA)
-seq_along(x)
-idx <- sample(seq_along(x), 10)
-idx
-x[idx]
-x2 <- x
-x2[idx] <- NA
-x2
-#+end_src
-
-*** =NA= en las funciones
-
-#+begin_src R 
-summary(x2)
-mean(x2)
-sum(x2)
-#+end_src
-
-*** =NA= en las funciones
-
-#+begin_src R 
-mean(x2, na.rm=TRUE)
-sum(x2, na.rm=TRUE)
-sd(x2, na.rm=TRUE)
-class(TRUE)
-#+end_src
-
-
-* Matrices
-** Construcción de matrices
+** Matrices
 *** Construir una matriz
 #+begin_src R 
 z <- 1:12
@@ -288,8 +255,6 @@ class(t)
 dim(t(M))
 #+end_src
 
-
-** Operaciones con matrices
 *** Operaciones con matrices
 
 #+begin_src R 
@@ -321,8 +286,6 @@ apply(M, 1, sd, na.rm=TRUE)
 apply(M, 2, sd)
 #+end_src
 
-
-** Indexado de matrices
 *** Indexado de matrices
 #+begin_src R 
 M
@@ -337,6 +300,41 @@ M[-1,]
 M[-c(1, 2),]
 #+end_src
     
+** Valores ausentes
+   
+*** ¿Qué es =NA=?
+#+begin_src R 
+  class(NA)
+  x <- rnorm(100)
+  idx <- sample(length(x), 10)
+  idx
+  x[idx]
+  x2 <- x
+  x2[idx] <- NA
+  x2
+#+end_src
+
+*** =NA= en las funciones
+
+#+begin_src R 
+  summary(x)
+  mean(x)
+  sum(x)
+  
+  summary(x2)
+  mean(x2)
+  sum(x2)
+#+end_src
+
+*** =NA= en las funciones
+
+#+begin_src R 
+mean(x2, na.rm=TRUE)
+sum(x2, na.rm=TRUE)
+sd(x2, na.rm=TRUE)
+class(TRUE)
+#+end_src
+
 
 * Funciones
 
@@ -407,7 +405,8 @@ image(x, y, z)
   class(lista)
 #+end_src
 
-*** Podemos acceder a los elementos por su nombre
+*** Podemos acceder a los elementos...
+- Por su nombre
 #+begin_src R 
 lista
 lista$a
@@ -415,7 +414,7 @@ lista$b
 lista$c
 #+end_src
 
-*** o por su índice
+- o por su índice
 #+begin_src R 
   lista[1]
   lista[[1]]
@@ -430,14 +429,15 @@ lista$c
   class(lista[[2]])
 #+end_src
 
-*** Cada elemento es de una clase diferente
+*** Cada elemento es diferente
+- Clase
 #+begin_src R 
 class(lista)
 class(lista$a)
 class(lista$b)
 class(lista$c)
 #+end_src
-*** y de una longitud diferente
+- Longitud
 #+begin_src R 
 length(lista)
 length(lista$a)
@@ -454,6 +454,7 @@ lista <- list(x = 1:10,
               y = seq(0, 10, 2),
               z = rnorm(30))
 lista
+
 lapply(lista, sum)
 lapply(lista, median)
 lapply(lista, foo)
@@ -463,21 +464,22 @@ lapply(lista, foo)
 ** Data.frame
 *** Para crear un =data.frame=...
 #+begin_src R 
-df <- data.frame(x = 1:10,
-                 y = rnorm(10),
-                 z = 0)
-
-length(df)
-dim(df)
+  df <- data.frame(x = 1:10,
+                   y = rnorm(10),
+                   z = 0)
+  
+  length(df)
+  dim(df)
 #+end_src
-*** Podemos acceder a los elementos por su nombre
+*** Podemos acceder a los elementos
+- Por su nombre
 #+begin_src R 
 df$x
 df$y
 df$z
 #+end_src
 
-*** o por su índice
+- Por su índice
 #+begin_src R 
 df
 df[1,]
@@ -485,53 +487,192 @@ df[,1]
 df[,2]
 #+end_src
 
+*** La regla del reciclaje
+#+begin_src R 
+  year <- 2011
+  month <- 1:12
+  class <- c('A', 'B', 'C')
+  vals <- rnorm(12)
+  
+  dats <- data.frame(year, month, class, vals)
+  dats
+#+end_src
 *** La función =expand.grid=
 
 #+begin_src R 
-x <- y <- seq(-4*pi, 4*pi, len=200)
-df <- expand.grid(x = x, y = y)
-head(df)
-tail(df)
-summary(df)
-dim(df)
-names(df)
+  x <- y <- seq(-4*pi, 4*pi, len=200)
+  df <- expand.grid(x = x, y = y)
+  head(df)
+  tail(df)
+  summary(df)
+  dim(df)
+  names(df)
 #+end_src
 
 *** Funciones sobre =data.frame=
 
 #+begin_src R 
-circles <- function(object){
-  r <- with(object, sqrt(x^2 + y^2))
-  res <- cos(r^2)*exp(-r/6)
-  res}
-
-df$result <- circles(df)
-head(df)
+  circles <- function(object){
+    r <- with(object, sqrt(x^2 + y^2))
+    res <- cos(r^2)*exp(-r/6)
+    res}
+  
+  df$result <- circles(df)
+  head(df)
 #+end_src
 
-
-* Gráficos
-** Base
-*** Base
+*** Una imagen vale más que mil palabras
 #+begin_src R 
-plot(df$x, df$y)
+  library(lattice)
+  levelplot(result ~ x + y, data=df)
 #+end_src
-** Grid
-*** Lattice: =xyplot=
+
+* Factores y Caracteres
+** =factor= 
+*** Una variable numérica que nos servirá para el ejemplo
 #+begin_src R 
-library(lattice)
-
-xyplot(y ~ x, data=df)
-xyplot(y ~ x, data=df, type='l')
-xyplot(y ~ x, data=df, type='b')
-xyplot(y ~ x, data=df, type=c('b', 'g'))
-xyplot(y ~ x, data=df, type=c('b', 'r', 'g'))
-
-help(xyplot)
+  N <- 100
+  edad <- sample(seq(18, 40, 1), N, replace=TRUE)
+  summary(edad)
 #+end_src
 
-*** Lattice: =levelplot=
+*** Una variable cualitativa se define con =factor=
+- Ahora es un =character=
 #+begin_src R 
-levelplot(result ~ x * y, data=df)
-xyplot(result ~ x, data=df)
+  sexo <- sample(c('H', 'M'), N, replace=TRUE)
+  class(sexo)
+  summary(sexo)
+#+end_src  
+- Ahora es un =factor=
+#+begin_src R 
+  sexo <- factor(sexo)
+  class(sexo)
+  summary(sexo)
+  levels(sexo)
+  nlevels(sexo)
 #+end_src
+
+*** Los =factor= sirven para agrupar
+
+- Con la función =table=
+#+begin_src R 
+  table(edad, sexo)
+  table(edad > 30, sexo)
+  table(edad %in% 20:30, sexo)
+#+end_src
+
+- Con =tapply= o =aggregate=
+#+begin_src R 
+tapply(edad,sexo, mean)
+aggregate(edad ~ sexo, FUN=median)
+#+end_src
+
+*** Los factores sirven para separar
+#+begin_src R 
+  edadSexo <- split(edad, sexo)
+  class(edadSexo)
+  
+  sapply(edadSexo, mean)
+#+end_src
+
+*** Los =factor= se pueden generar a partir de variables numéricas
+- Por ejemplo, con =cut=
+#+begin_src R 
+  gEdad <- cut(edad, breaks=4)
+  class(gEdad)
+  levels(gEdad)
+  nlevels(gEdad)
+#+end_src
+
+- Nuevamente =table=
+#+begin_src R 
+  table(gEdad)
+  table(gEdad, sexo)
+#+end_src
+
+
+** Caracteres
+
+*** Bastan unas simples comillas
+
+#+begin_src R 
+  cadena <- "Hola mundo"
+  class(cadena)
+  nchar(cadena)
+#+end_src
+
+- Y aquí, ¿qué pasa?
+#+begin_src R 
+length(cadena)
+cadena[1]
+cadena[2]
+#+end_src
+
+*** Un vector de =character=
+#+begin_src R 
+  cadenaVec <- c("Hola mundo", "Hello world")
+  nchar(cadenaVec)
+  length(cadenaVec)
+#+end_src
+
+*** Para mostrarlos usamos =cat= o =print=
+
+#+begin_src R 
+  a = 2
+  b = 3
+  
+  cat('La suma de', a, 'y', b, 'es', a + b)
+  
+  cat('La suma de', a, 'y', b, 'es', a + b, fill=TRUE)
+  
+  cat('La suma de', a, 'y', b, 'es', a + b, '\n',
+      'La multiplicación de', a, 'por', b, 'es', a*b, '\n')
+  
+  cat('La suma de', a, 'y', b, 'es', a + b, '\n',
+      'La multiplicación de', a, 'por', b, 'es', a*b, fill=15)
+#+end_src
+
+*** Los =character= se pueden unir...
+- Primero sencillo
+#+begin_src R 
+  paste('Hello', 'World', sep='_')
+  
+  paste(cadenaVec)
+  paste(cadenaVec, collapse='=')
+#+end_src
+- Y algo más complicado
+#+begin_src R 
+  paste('X', 1:5, sep='.')
+  paste(c('A', 'B'), 1:5, sep='.')
+  
+  paste(c('A', 'B'), 1:5, sep='.', collapse='|')
+#+end_src
+
+*** ... y también se pueden separar...
+#+begin_src R 
+  strsplit(cadenaVec, split=' ')
+  strsplit(cadenaVec, split='')
+#+end_src
+
+#+begin_src R 
+  chSep <- strsplit(cadenaVec, split=' ')
+  class(chSep)
+  length(chSep)
+  sapply(chSep, length)
+  sapply(chSep, nchar)
+#+end_src
+
+*** ... y, por supuesto, manipular
+#+begin_src R 
+  sub('o', '0', 'Hola Mundo')
+  gsub('o', '0', 'Hola Mundo')
+  
+  substring(cadena, 1) <- 'HOLA'
+  cadena
+  
+  tolower(cadena)
+  toupper(cadena)
+#+end_src
+
+
+
