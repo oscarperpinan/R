@@ -16,15 +16,61 @@
 #+startup: beamer
 #+LaTeX_CLASS: beamer
 #+BEAMER_FRAME_LEVEL: 3
+#+LATEX_CLASS_OPTIONS: [xcolor={usenames,svgnames,dvipsnames}]
 #+LATEX_HEADER: \AtBeginSection[]{\begin{frame}[plain]\tableofcontents[currentsection]\end{frame}}
-#+LATEX_HEADER: \lstset{keywordstyle=\color{blue}, commentstyle=\color{gray!90}, basicstyle=\ttfamily\small, columns=fullflexible, breaklines=true,linewidth=\textwidth, backgroundcolor=\color{gray!23}, basewidth={0.5em,0.4em}, literate={á}{{\'a}}1 {ñ}{{\~n}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {º}{{\textordmasculine}}1}
+#+LATEX_HEADER: \lstset{commentstyle=\color{gray!90}, basicstyle=\ttfamily\small, columns=fullflexible, breaklines=true,linewidth=\textwidth, backgroundcolor=\color{gray!23}, basewidth={0.5em,0.4em}, literate={á}{{\'a}}1 {ñ}{{\~n}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {º}{{\textordmasculine}}1}
 #+LATEX_HEADER: \usepackage{mathpazo}
 #+LATEX_HEADER: \setbeamercovered{transparent}
 #+LATEX_HEADER: \usefonttheme{serif} 
 #+LATEX_HEADER: \usetheme{Goettingen}
+#+LATEX_HEADER: \hypersetup{colorlinks=true, linkcolor=Blue, urlcolor=Blue}
 #+PROPERTY:  tangle yes
 #+PROPERTY:  comments org
 
+* R es software libre
+** ¿Qué es =R=?
+*** ¿Qué es =R=?						    :B_block:
+    :PROPERTIES:
+    :BEAMER_env: block
+    :END:
+¿Qué es [[http://procomun.wordpress.com/2011/02/23/que-es-r/][R]]?: es un lenguaje de programación principalmente
+orientado al análisis estadístico y visualización de información
+cuantitativa y cualitativa y publicado como software libre con
+licencia GNU-GPL.
+** R es un proyecto colaborativo
+*** R es un proyecto colaborativo
+- Una de las grandes riquezas de R es la cantidad de paquetes (más
+  de 4000 actualmente) que amplían sus funcionalidades.  
+- La lista completa está en http://cran.es.r-project.org/web/packages/.
+- Las CRAN Task Views agrupan por temáticas:
+  [[http://cran.r-project.org/web/views/]]
+
+*** Más de 4000 paquetes disponibles
+- Algunos vienen instalados y se cargan al empezar:
+#+begin_src R 
+  sessionInfo()
+#+end_src
+- Otros vienen instalados pero hay que cargarlos:
+#+begin_src R 
+  library(lattice)
+  packageVersion('lattice')
+  packageDescription('lattice')
+#+end_src
+- Otros hay que instalarlos y después cargarlos:
+#+begin_src R 
+  install.packages('zoo')
+  library('zoo')
+  packageDescription('zoo')
+#+end_src
+
+** R está muy bien documentado
+
+*** Fuentes de información
+- [[http://cran.r-project.org/doc/manuals/R-intro.html][Manual introductorio]]
+- [[http://cran.r-project.org/manuals.html][Manuales oficiales]]
+- [[http://cran.r-project.org/other-docs.html][Manuales externos]]
+- [[http://www.r-project.org/mail.html][Listas de correo]] (sin olvidar respetar [[http://www.r-project.org/posting-guide.html][estos consejos]]).
+- [[http://www.r-bloggers.com][R-bloggers]]
 
 * Vectores y Matrices
 

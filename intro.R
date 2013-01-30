@@ -1,4 +1,21 @@
 
+## Más de 4000 paquetes disponibles
+## - Algunos vienen instalados y se cargan al empezar:
+
+sessionInfo()
+
+## - Otros vienen instalados pero hay que cargarlos:
+
+library(lattice)
+packageVersion('lattice')
+packageDescription('lattice')
+
+## - Otros hay que instalarlos y después cargarlos:
+
+install.packages('zoo')
+library('zoo')
+packageDescription('zoo')
+
 ## Primeros pasos
 
 x <- 1
