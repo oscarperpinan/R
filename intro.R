@@ -493,6 +493,58 @@ nlevels(gEdad)
 table(gEdad)
 table(gEdad, sexo)
 
+## =Date=
+
+as.Date('2013-02-06')
+as.Date('2013/02/06')
+
+as.Date('06.02.2013')
+as.Date('06.02.2013', format='%d.%m.%Y')
+
+as.Date(37, origin='2013-01-01')
+
+## Secuencias temporales con =Date=
+
+seq(as.Date('2004-01-01'), by='day', length=10)
+seq(as.Date('2004-01-01'), by='month', length=10)
+seq(as.Date('2004-01-01'), by='10 day', length=10)
+
+## POSIXct
+
+as.POSIXct('2013-02-06')
+ISOdate(2013, 2, 7)
+
+hoy <- as.POSIXct('2013-02-06')
+
+help(format.POSIXct)
+format(hoy, '%Y')
+format(hoy, '%d')
+format(hoy, '%m')
+format(hoy, '%b')
+format(hoy, '%d de %B de %Y')
+
+hora <- Sys.time()
+hora
+
+format(hora, '%H:%M:%S')
+format(hora, '%H horas, %M minutos y %S segundos')
+
+## Secuencias temporales con =POSIXct=
+
+seq(as.POSIXct('2004-01-01'), by='month', length=10)
+seq(as.POSIXct('2004-01-01 10:00:00'), by='15 min', length=10)
+
+## Zonas horarias
+
+as.POSIXct('2013-02-06 15:30:00', tz='GMT')
+as.POSIXct('2013-02-06 15:30:00', tz='Europe/Madrid')
+
+hawaii <- as.POSIXct('2013-02-06 15:30:00', tz='HST')
+## Character
+format(hawaii, tz='GMT')
+## POSIXct
+as.POSIXct(format(hawaii, tz='GMT'), tz='GMT')
+
 ## Bastan unas simples comillas
 
 cadena <- "Hola mundo"

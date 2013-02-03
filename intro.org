@@ -17,7 +17,7 @@
 #+LaTeX_CLASS: beamer
 #+BEAMER_FRAME_LEVEL: 3
 #+LATEX_CLASS_OPTIONS: [xcolor={usenames,svgnames,dvipsnames}]
-#+LATEX_HEADER: \AtBeginSection[]{\begin{frame}[plain]\tableofcontents[currentsection]\end{frame}}
+#+LATEX_HEADER: \AtBeginSubsection[]{\begin{frame}[plain]\tableofcontents[currentsubsection]\end{frame}}
 #+LATEX_HEADER: \lstset{commentstyle=\color{gray!90}, basicstyle=\ttfamily\small, columns=fullflexible, breaklines=true,linewidth=\textwidth, backgroundcolor=\color{gray!23}, basewidth={0.5em,0.4em}, literate={á}{{\'a}}1 {ñ}{{\~n}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {º}{{\textordmasculine}}1}
 #+LATEX_HEADER: \usepackage{mathpazo}
 #+LATEX_HEADER: \setbeamercovered{transparent}
@@ -573,7 +573,7 @@ df[,2]
   levelplot(result ~ x + y, data=df)
 #+end_src
 
-* Factores y Caracteres
+* Factores, fechas y caracteres
 ** =factor= 
 *** Una variable numérica que nos servirá para el ejemplo
 #+begin_src R 
@@ -636,6 +636,71 @@ aggregate(edad ~ sexo, FUN=median)
   table(gEdad, sexo)
 #+end_src
 
+** Fechas
+
+*** =Date=
+#+begin_src R 
+  as.Date('2013-02-06')
+  as.Date('2013/02/06')
+  
+  as.Date('06.02.2013')
+  as.Date('06.02.2013', format='%d.%m.%Y')
+  
+  as.Date(37, origin='2013-01-01')
+#+end_src
+
+*** Secuencias temporales con =Date=
+#+begin_src R 
+  seq(as.Date('2004-01-01'), by='day', length=10)
+  seq(as.Date('2004-01-01'), by='month', length=10)
+  seq(as.Date('2004-01-01'), by='10 day', length=10)
+#+end_src
+
+*** POSIXct
+#+begin_src R 
+  as.POSIXct('2013-02-06')
+  ISOdate(2013, 2, 7)
+#+end_src
+
+#+begin_src R 
+hoy <- as.POSIXct('2013-02-06')
+
+help(format.POSIXct)
+format(hoy, '%Y')
+format(hoy, '%d')
+format(hoy, '%m')
+format(hoy, '%b')
+format(hoy, '%d de %B de %Y')
+#+end_src
+
+#+begin_src R 
+  hora <- Sys.time()
+  hora
+  
+  format(hora, '%H:%M:%S')
+  format(hora, '%H horas, %M minutos y %S segundos')
+#+end_src
+
+*** Secuencias temporales con =POSIXct=
+#+begin_src R 
+seq(as.POSIXct('2004-01-01'), by='month', length=10)
+seq(as.POSIXct('2004-01-01 10:00:00'), by='15 min', length=10)
+#+end_src
+
+*** Zonas horarias
+
+#+begin_src R 
+  as.POSIXct('2013-02-06 15:30:00', tz='GMT')
+  as.POSIXct('2013-02-06 15:30:00', tz='Europe/Madrid')
+#+end_src
+
+#+begin_src R 
+hawaii <- as.POSIXct('2013-02-06 15:30:00', tz='HST')
+## Character
+format(hawaii, tz='GMT')
+## POSIXct
+as.POSIXct(format(hawaii, tz='GMT'), tz='GMT')
+#+end_src
 
 ** Caracteres
 

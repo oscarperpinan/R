@@ -1,4 +1,4 @@
-% Created 2013-01-30 mié 11:50
+% Created 2013-02-03 dom 02:21
 \documentclass[xcolor={usenames,svgnames,dvipsnames}]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -17,7 +17,7 @@
 \tolerance=1000
 \usepackage{color}
 \usepackage{listings}
-\AtBeginSection[]{\begin{frame}[plain]\tableofcontents[currentsection]\end{frame}}
+\AtBeginSubsection[]{\begin{frame}[plain]\tableofcontents[currentsubsection]\end{frame}}
 \lstset{commentstyle=\color{gray!90}, basicstyle=\ttfamily\small, columns=fullflexible, breaklines=true,linewidth=\textwidth, backgroundcolor=\color{gray!23}, basewidth={0.5em,0.4em}, literate={á}{{\'a}}1 {ñ}{{\~n}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {º}{{\textordmasculine}}1}
 \usepackage{mathpazo}
 \setbeamercovered{transparent}
@@ -849,7 +849,7 @@ library(lattice)
 levelplot(result ~ x + y, data=df)
 \end{lstlisting}
 \end{frame}
-\section{Factores y Caracteres}
+\section{Factores, fechas y caracteres}
 \label{sec-5}
 \subsection{\texttt{factor}}
 \label{sec-5-1}
@@ -957,11 +957,108 @@ table(gEdad)
 table(gEdad, sexo)
 \end{lstlisting}
 \end{frame}
-\subsection{Caracteres}
+\subsection{Fechas}
 \label{sec-5-2}
 \begin{frame}[fragile]
-\frametitle{Bastan unas simples comillas}
+\frametitle{\texttt{Date}}
 \label{sec-5-2-1}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+as.Date('2013-02-06')
+as.Date('2013/02/06')
+
+as.Date('06.02.2013')
+as.Date('06.02.2013', format='%d.%m.%Y')
+
+as.Date(37, origin='2013-01-01')
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Secuencias temporales con \texttt{Date}}
+\label{sec-5-2-2}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+seq(as.Date('2004-01-01'), by='day', length=10)
+seq(as.Date('2004-01-01'), by='month', length=10)
+seq(as.Date('2004-01-01'), by='10 day', length=10)
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{POSIXct}
+\label{sec-5-2-3}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+as.POSIXct('2013-02-06')
+ISOdate(2013, 2, 7)
+\end{lstlisting}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+hoy <- as.POSIXct('2013-02-06')
+
+help(format.POSIXct)
+format(hoy, '%Y')
+format(hoy, '%d')
+format(hoy, '%m')
+format(hoy, '%b')
+format(hoy, '%d de %B de %Y')
+\end{lstlisting}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+hora <- Sys.time()
+hora
+
+format(hora, '%H:%M:%S')
+format(hora, '%H horas, %M minutos y %S segundos')
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Secuencias temporales con \texttt{POSIXct}}
+\label{sec-5-2-4}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+seq(as.POSIXct('2004-01-01'), by='month', length=10)
+seq(as.POSIXct('2004-01-01 10:00:00'), by='15 min', length=10)
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Zonas horarias}
+\label{sec-5-2-5}
+
+
+
+\lstset{language=R}
+\begin{lstlisting}
+as.POSIXct('2013-02-06 15:30:00', tz='GMT')
+as.POSIXct('2013-02-06 15:30:00', tz='Europe/Madrid')
+\end{lstlisting}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+hawaii <- as.POSIXct('2013-02-06 15:30:00', tz='HST')
+## Character
+format(hawaii, tz='GMT')
+## POSIXct
+as.POSIXct(format(hawaii, tz='GMT'), tz='GMT')
+\end{lstlisting}
+\end{frame}
+\subsection{Caracteres}
+\label{sec-5-3}
+\begin{frame}[fragile]
+\frametitle{Bastan unas simples comillas}
+\label{sec-5-3-1}
 
 
 
@@ -985,7 +1082,7 @@ cadena[2]
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Un vector de \texttt{character}}
-\label{sec-5-2-2}
+\label{sec-5-3-2}
 
 
 \lstset{language=R}
@@ -997,7 +1094,7 @@ length(cadenaVec)
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Para mostrarlos usamos \texttt{cat} o \texttt{print}}
-\label{sec-5-2-3}
+\label{sec-5-3-3}
 
 
 
@@ -1019,7 +1116,7 @@ cat('La suma de', a, 'y', b, 'es', a + b, '\n',
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Los \texttt{character} se pueden unir\ldots{}}
-\label{sec-5-2-4}
+\label{sec-5-3-4}
 
 \begin{itemize}
 \item Primero sencillo
@@ -1046,7 +1143,7 @@ paste(c('A', 'B'), 1:5, sep='.', collapse='|')
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{\ldots{} y también se pueden separar\ldots{}}
-\label{sec-5-2-5}
+\label{sec-5-3-5}
 
 
 \lstset{language=R}
@@ -1067,7 +1164,7 @@ sapply(chSep, nchar)
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{\ldots{} y, por supuesto, manipular}
-\label{sec-5-2-6}
+\label{sec-5-3-6}
 
 
 \lstset{language=R}

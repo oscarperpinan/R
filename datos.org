@@ -53,11 +53,6 @@ xyplot(Radiation ~ TempAvg + TempMax + TempMin,
 ####################
 library(zoo)
 
-seq(as.Date('2004-01-01'), by='day', length=10)
-seq(as.Date('2004-01-01'), by='month', length=10)
-seq(as.POSIXct('2004-01-01'), by='month', length=10)
-seq(as.POSIXct('2004-01-01 10:00:00'), by='15 min', length=10)
-
 fecha <- as.POSIXct(aranjuez[,1], format='%Y-%m-%d')
 head(fecha)
 
