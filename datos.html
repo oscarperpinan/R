@@ -1,0 +1,821 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
+<head>
+<title>Manejo de datos con R</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="title" content="Manejo de datos con R"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="25 de Enero de 2013"/>
+<meta name="author" content="Oscar Perpiñán Lamigueiro"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  html { font-family: Times, serif; font-size: 12pt; }
+  .title  { text-align: center; }
+  .todo   { color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #add8e6; font-weight:normal }
+  .target { }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  {margin-left:auto; margin-right:0px;  text-align:right;}
+  .left   {margin-left:0px;  margin-right:auto; text-align:left;}
+  .center {margin-left:auto; margin-right:auto; text-align:center;}
+  p.verse { margin-left: 3% }
+  pre {
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	padding: 5pt;
+	font-family: courier, monospace;
+        font-size: 90%;
+        overflow:auto;
+  }
+  table { border-collapse: collapse; }
+  td, th { vertical-align: top;  }
+  th.right  { text-align:center;  }
+  th.left   { text-align:center;   }
+  th.center { text-align:center; }
+  td.right  { text-align:right;  }
+  td.left   { text-align:left;   }
+  td.center { text-align:center; }
+  dt { font-weight: bold; }
+  div.figure { padding: 0.5em; }
+  div.figure p { text-align: center; }
+  div.inlinetask {
+    padding:10px;
+    border:2px solid gray;
+    margin:10px;
+    background: #ffffcc;
+  }
+  textarea { overflow-x: auto; }
+  .linenr { font-size:smaller }
+  .code-highlighted {background-color:#ffff00;}
+  .org-info-js_info-navigation { border-style:none; }
+  #org-info-js_console-label { font-size:10px; font-weight:bold;
+                               white-space:nowrap; }
+  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
+                                 font-weight:bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+
+</head>
+<body>
+
+<div id="preamble">
+
+</div>
+
+<div id="content">
+<h1 class="title">Manejo de datos con R</h1>
+
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> <code>read.table</code></h2>
+<div class="outline-text-2" id="text-1">
+
+
+</div>
+
+<div id="outline-container-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Working directory</h3>
+<div class="outline-text-3" id="text-1-1">
+
+
+</div>
+
+<div id="outline-container-1-1-1" class="outline-4">
+<h4 id="sec-1-1-1"><span class="section-number-4">1.1.1</span> Movernos por los directorios</h4>
+<div class="outline-text-4" id="text-1-1-1">
+
+
+
+
+<pre class="example">getwd()
+old &lt;- setwd("~/R/intro")
+dir()
+dir(pattern='.R')
+dir('data')
+</pre>
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Lectura de ficheros (sencillo)</h3>
+<div class="outline-text-3" id="text-1-2">
+
+
+</div>
+
+<div id="outline-container-1-2-1" class="outline-4">
+<h4 id="sec-1-2-1"><span class="section-number-4">1.2.1</span> Primer intento con SIAR</h4>
+<div class="outline-text-4" id="text-1-2-1">
+
+<ul>
+<li><a href="http://eportal.magrama.gob.es/websiar">http://eportal.magrama.gob.es/websiar</a>
+</li>
+<li>Seleccionamos 01/01/2004 a 31/12/2011
+</li>
+<li>Temperatura, Humedad, Viento, Lluvia, Radiación, ET
+</li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1-2-2" class="outline-4">
+<h4 id="sec-1-2-2"><span class="section-number-4">1.2.2</span> Lectura de datos con <code>read.table</code></h4>
+<div class="outline-text-4" id="text-1-2-2">
+
+<ul>
+<li>Primero lo intentamos con la versión final
+</li>
+</ul>
+
+
+
+
+<pre class="example">dats &lt;- read.table('data/aranjuez.csv')
+head(dats)
+
+dats &lt;- read.table('data/aranjuez.csv', sep=',')
+head(dats)
+
+dats &lt;- read.table('data/aranjuez.csv', sep=',', header=TRUE)
+head(dats)
+
+aranjuez &lt;- read.csv('data/aranjuez.csv')
+head(aranjuez)
+
+class(aranjuez)
+names(aranjuez)
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1-2-3" class="outline-4">
+<h4 id="sec-1-2-3"><span class="section-number-4">1.2.3</span> Visualización de datos</h4>
+<div class="outline-text-4" id="text-1-2-3">
+
+
+
+
+<pre class="example">library(lattice)
+xyplot(Radiation ~ TempAvg, data=aranjuez)
+
+xyplot(Radiation ~ TempAvg, data=aranjuez,
+       type=c('p', 'r'))
+
+xyplot(Radiation ~ TempAvg + TempMax + TempMin,
+       data = aranjuez, xlab='Temperature',
+       type=c('p', 'r'), auto.key=TRUE,
+       pch=16, alpha=0.5)
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1-2-4" class="outline-4">
+<h4 id="sec-1-2-4"><span class="section-number-4">1.2.4</span> Transformamos a serie temporal</h4>
+<div class="outline-text-4" id="text-1-2-4">
+
+
+
+
+
+<pre class="example">library(zoo)
+
+fecha &lt;- as.POSIXct(aranjuez[,1], format='%Y-%m-%d')
+head(fecha)
+
+aranjuez &lt;- zoo(aranjuez[, -1], fecha)
+class(aranjuez)
+head(aranjuez)
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1-2-5" class="outline-4">
+<h4 id="sec-1-2-5"><span class="section-number-4">1.2.5</span> Leemos directamente como serie temporal</h4>
+<div class="outline-text-4" id="text-1-2-5">
+
+
+
+
+<pre class="example">aranjuez &lt;- read.zoo('data/aranjuez.csv', sep=',', header=TRUE)
+</pre>
+
+
+
+<pre class="example">header(aranjuez)
+names(aranjuez)
+summary(index(aranjuez))
+</pre>
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Lectura de datos (real)</h3>
+<div class="outline-text-3" id="text-1-3">
+
+
+</div>
+
+<div id="outline-container-1-3-1" class="outline-4">
+<h4 id="sec-1-3-1"><span class="section-number-4">1.3.1</span> Ahora probamos con la versión original</h4>
+<div class="outline-text-4" id="text-1-3-1">
+
+<ul>
+<li>Primero descomprimimos en una carpeta temporal
+</li>
+</ul>
+
+
+
+
+<pre class="example">unzip('data/InformeDatos.zip', exdir='data')
+</pre>
+
+<ul>
+<li>Y ahora abrimos teniendo en cuenta codificación, separadores, etc.
+</li>
+</ul>
+
+
+
+
+<pre class="example">aranjuez &lt;- read.table("data/M03_Aranjuez_01_01_2004_31_12_2011.csv",
+                     fileEncoding = 'UTF-16LE',
+                     header = TRUE, fill = TRUE,
+                     sep = ';', dec = ",")
+
+head(aranjuez)
+summary(aranjuez)
+names(aranjuez)
+</pre>
+
+<ul>
+<li>Vemos el contenido
+</li>
+</ul>
+
+
+
+
+<pre class="example">summary(aranjuez)
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1-3-2" class="outline-4">
+<h4 id="sec-1-3-2"><span class="section-number-4">1.3.2</span> Convertimos a serie temporal</h4>
+<div class="outline-text-4" id="text-1-3-2">
+
+
+
+
+<pre class="example">tt &lt;- as.Date(aranjuez$Fecha, format='%d/%m/%Y')
+aranjuez &lt;- zoo(aranjuez[, c(6, 7, 9, 11, 12, 16, 17, 19, 20, 22)],
+                order.by=tt)
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1-3-3" class="outline-4">
+<h4 id="sec-1-3-3"><span class="section-number-4">1.3.3</span> Ajustamos los nombres (opcional)</h4>
+<div class="outline-text-4" id="text-1-3-3">
+
+
+
+
+<pre class="example">names(aranjuez) &lt;- c('TempAvg', 'TempMax', 'TempMin',
+                     'HumidAvg', 'HumidMax',
+                     'WindAvg', 'WindMax',
+                     'Radiation', 'Rain', 'ET')
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1-3-4" class="outline-4">
+<h4 id="sec-1-3-4"><span class="section-number-4">1.3.4</span> Nuevamente mostramos datos</h4>
+<div class="outline-text-4" id="text-1-3-4">
+
+<ul>
+<li>Método simple
+</li>
+</ul>
+
+
+
+
+<pre class="example">xyplot(aranjuez)
+</pre>
+
+<ul>
+<li>Seleccionamos variables y superponemos
+</li>
+</ul>
+
+
+
+
+<pre class="example">xyplot(aranjuez[,c("TempAvg", "TempMax", "TempMin")],
+       superpose=TRUE)
+</pre>
+
+<ul>
+<li>Para cruzar variables hay que convertir a <code>data.frame</code>
+</li>
+</ul>
+
+
+
+
+<pre class="example">xyplot(TempAvg ~ Radiation, data=as.data.frame(aranjuez))
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1-3-5" class="outline-4">
+<h4 id="sec-1-3-5"><span class="section-number-4">1.3.5</span> Limpieza de datos</h4>
+<div class="outline-text-4" id="text-1-3-5">
+
+<ul>
+<li>Conversión de Unidades (MJ -&gt; Wh)
+</li>
+</ul>
+
+
+
+
+<pre class="example">aranjuez$G0 &lt;- aranjuez$Radiation/3.6*1000
+xyplot(aranjuez$G0)
+</pre>
+
+<ul>
+<li>Filtrado de datos
+</li>
+</ul>
+
+
+
+
+<pre class="example">aranjuezClean &lt;- within(as.data.frame(aranjuez),{
+  TempMin[TempMin&gt;40] &lt;- NA
+  HumidMax[HumidMax&gt;100] &lt;- NA
+  WindAvg[WindAvg&gt;10] &lt;- NA
+  WindMax[WindMax&gt;10] &lt;- NA
+})
+
+aranjuez &lt;- zoo(aranjuezClean, index(aranjuez))
+</pre>
+
+
+</div>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Datos agregados</h2>
+<div class="outline-text-2" id="text-2">
+
+
+</div>
+
+<div id="outline-container-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> <code>aggregate</code></h3>
+<div class="outline-text-3" id="text-2-1">
+
+
+</div>
+
+<div id="outline-container-2-1-1" class="outline-4">
+<h4 id="sec-2-1-1"><span class="section-number-4">2.1.1</span> Media anual</h4>
+<div class="outline-text-4" id="text-2-1-1">
+
+<ul>
+<li>Primero definimos una función para extraer el año
+</li>
+</ul>
+
+
+
+
+<pre class="example">Year &lt;- function(x)as.numeric(format(x, "%Y"))
+
+Year(index(aranjuez))
+
+</pre>
+
+<ul>
+<li>Y la empleamos para agrupar con <code>aggregate</code>
+</li>
+</ul>
+
+
+
+
+<pre class="example">aranjuezY &lt;- aggregate(aranjuez$G0, by=Year, FUN=mean, na.rm=TRUE)
+aranjuezY
+class(aranjuezY)
+</pre>
+
+
+
+<pre class="example">G0y &lt;- aggregate(aranjuez$G0, by=Year, FUN=mean, na.rm=TRUE)
+G0y
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-2-1-2" class="outline-4">
+<h4 id="sec-2-1-2"><span class="section-number-4">2.1.2</span> Medias mensuales</h4>
+<div class="outline-text-4" id="text-2-1-2">
+
+<ul>
+<li>Meses como números
+</li>
+</ul>
+
+
+
+
+<pre class="example">Month &lt;- function(x)as.numeric(format(x, "%m"))
+
+Month(index(aranjuez))
+</pre>
+
+
+
+<pre class="example">G0m &lt;- aggregate(aranjuez$G0, by=Month, FUN=mean, na.rm=TRUE)
+G0m
+</pre>
+
+
+<ul>
+<li>Meses como etiquetas
+</li>
+</ul>
+
+
+
+
+<pre class="example">months(index(aranjuez))
+</pre>
+
+
+
+<pre class="example">G0m &lt;- aggregate(aranjuez$G0, by=months, FUN=mean, na.rm=TRUE)
+G0m
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2-1-3" class="outline-4">
+<h4 id="sec-2-1-3"><span class="section-number-4">2.1.3</span> Medias mensuales para cada año</h4>
+<div class="outline-text-4" id="text-2-1-3">
+
+<ul>
+<li>La función para agrupar es <code>as.yearmon</code>
+</li>
+</ul>
+
+
+
+
+<pre class="example">as.yearmon(index(aranjuez))
+</pre>
+
+
+
+<pre class="example">G0ym &lt;- aggregate(aranjuez$G0, by=as.yearmon, FUN=mean, na.rm=TRUE)
+G0ym
+</pre>
+
+
+
+</div>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Datos desde una URL</h2>
+<div class="outline-text-2" id="text-3">
+
+
+</div>
+
+<div id="outline-container-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> NREL</h3>
+<div class="outline-text-3" id="text-3-1">
+
+
+</div>
+
+<div id="outline-container-3-1-1" class="outline-4">
+<h4 id="sec-3-1-1"><span class="section-number-4">3.1.1</span> Ejemplo: Lanai-Hawaii</h4>
+<div class="outline-text-4" id="text-3-1-1">
+
+
+
+
+
+<pre class="example">URL &lt;- "http://www.nrel.gov/midc/apps/plot.pl?site=LANAI&amp;start=20090722&amp;edy=19&amp;emo=11&amp;eyr=2010&amp;zenloc=19&amp;year=2010&amp;month=11&amp;day=1&amp;endyear=2010&amp;endmonth=11&amp;endday=19&amp;time=1&amp;inst=3&amp;inst=4&amp;inst=5&amp;inst=10&amp;type=data&amp;first=3&amp;math=0&amp;second=-1&amp;value=0.0&amp;global=-1&amp;direct=-1&amp;diffuse=-1&amp;user=0&amp;axis=1"
+## URL &lt;- "data/NREL-Hawaii.csv"
+</pre>
+
+
+<p>
+DATE,HST,Global Horizontal [W/m<sup>2]</sup>,Direct Normal [W/m<sup>2]</sup>,Diffuse Horizontal [W/m<sup>2]</sup>,Air Temperature [deg C]
+11/1/2010,06:32,4.87621,0,4.87621,14.67
+11/1/2010,06:33,5.14142,0,5.14142,14.54
+11/1/2010,06:34,1.42216,0,1.42216,14.43
+11/1/2010,06:35,1.95135,0,1.95135,14.4
+11/1/2010,06:36,2.44687,0,2.44687,14.55
+11/1/2010,06:37,3.16990,0,3.16990,14.95
+11/1/2010,06:38,3.99677,0,3.99677,15.45
+11/1/2010,06:39,4.88811,0,4.88811,15.71
+11/1/2010,06:40,5.85428,0,5.85428,15.8
+11/1/2010,06:41,8.27598,0,8.27598,15.87
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-3-1-2" class="outline-4">
+<h4 id="sec-3-1-2"><span class="section-number-4">3.1.2</span> Leemos como serie temporal</h4>
+<div class="outline-text-4" id="text-3-1-2">
+
+<ul>
+<li>Leemos con <code>read.zoo</code>
+</li>
+</ul>
+
+
+
+
+<pre class="example">lat &lt;- 20.77
+lon &lt;- -156.9339
+hawaii &lt;- read.zoo(URL,
+                col.names = c("date", "hour", "G0", "B", "D0", "Ta"),
+                ## Dia en columna 1, Hora en columna 2
+                index = list(1, 2),
+                ## Obtiene índice temporal de estas dos columnas
+                FUN = function(d, h) as.POSIXct(paste(d, h),
+                  format = "%m/%d/%Y %H:%M", tz = "HST"), 
+                header=TRUE, sep=",")
+
+</pre>
+
+<ul>
+<li>Añadimos Directa en el plano Horizontal
+</li>
+</ul>
+
+
+
+
+<pre class="example">hawaii$B0 &lt;- with(hawaii, G0-D0)
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-3-1-3" class="outline-4">
+<h4 id="sec-3-1-3"><span class="section-number-4">3.1.3</span> Mostramos datos como serie temporal</h4>
+<div class="outline-text-4" id="text-3-1-3">
+
+
+
+
+<pre class="example">xyplot(hawaii)
+xyplot(hawaii[,c('G0', 'D0', 'B0')], superpose=TRUE)
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-3-1-4" class="outline-4">
+<h4 id="sec-3-1-4"><span class="section-number-4">3.1.4</span> Mostramos relaciones entre variables</h4>
+<div class="outline-text-4" id="text-3-1-4">
+
+
+
+
+<pre class="example">xyplot(Ta ~ G0 + D0 + B0, data=as.data.frame(hawaii), type=c('p', 'smooth'),
+       par.settings=custom.theme(alpha=.5, pch=16,
+         lwd=3, col.line='black'),
+       outer=TRUE, layout=c(3, 1),
+       scales=list(x=list(relation='free')))
+</pre>
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-3-2" class="outline-3">
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> Datos agregados</h3>
+<div class="outline-text-3" id="text-3-2">
+
+
+</div>
+
+<div id="outline-container-3-2-1" class="outline-4">
+<h4 id="sec-3-2-1"><span class="section-number-4">3.2.1</span> Irradiación horaria</h4>
+<div class="outline-text-4" id="text-3-2-1">
+
+<ul>
+<li>Primer intento
+</li>
+</ul>
+
+
+
+
+<pre class="example">hour &lt;- function(x)as.numeric(format(x, '%H'))
+</pre>
+
+
+
+<pre class="example">G0h &lt;- aggregate(hawaii$G0, by=hour, FUN=sum, na.rm=1)/1000
+G0h
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-3-2-2" class="outline-4">
+<h4 id="sec-3-2-2"><span class="section-number-4">3.2.2</span> Irradiación horaria</h4>
+<div class="outline-text-4" id="text-3-2-2">
+
+
+
+
+
+<pre class="example">hour &lt;- function(x)as.POSIXct(format(x, '%Y-%m-%d %H:00:00'))
+</pre>
+
+
+
+<pre class="example">G0h &lt;- aggregate(hawaii$G0, by=hour, FUN=sum, na.rm=1)/60
+G0h
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-3-2-3" class="outline-4">
+<h4 id="sec-3-2-3"><span class="section-number-4">3.2.3</span> Irradiación diaria</h4>
+<div class="outline-text-4" id="text-3-2-3">
+
+<ul>
+<li>A partir de la horaria
+</li>
+</ul>
+
+
+
+
+<pre class="example">G0d &lt;- aggregate(G0h, by=function(x)format(x, '%Y-%m-%d'), sum)/1000
+</pre>
+
+<ul>
+<li>A partir de la minutaria
+</li>
+</ul>
+
+
+
+
+<pre class="example">G0d &lt;- aggregate(hawaii$G0, by=function(x)format(x, '%Y-%m-%d'), sum)/60/1000
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-3-2-4" class="outline-4">
+<h4 id="sec-3-2-4"><span class="section-number-4">3.2.4</span> Más complicado: agrupar por 30 minutos</h4>
+<div class="outline-text-4" id="text-3-2-4">
+
+
+
+
+<pre class="example">halfHour &lt;- function(tt, delta=30){
+  tt &lt;- as.POSIXlt(tt)
+  gg &lt;- tt$min %/% delta
+  tt &lt;- modifyList(tt, list(min=gg*delta))
+  as.POSIXct(tt)
+}
+</pre>
+
+
+
+<pre class="example">hawaii30 &lt;- aggregate(hawaii, by=halfHour, FUN=sum)/60
+
+head(hawaii30)
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="postamble">
+<p class="date">Fecha: 25 de Enero de 2013</p>
+<p class="author">Autor: Oscar Perpiñán Lamigueiro</p>
+<p class="creator">Org version 7.8.11 with Emacs version 24</p>
+<a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
+
+</div>
+</body>
+</html>

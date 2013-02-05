@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="Introducción a R"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2013-01-24 jue"/>
+<meta name="generated" content="30 de Enero de 2013"/>
 <meta name="author" content="Oscar Perpiñán Lamigueiro"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -61,6 +61,30 @@
   /*]]>*/-->
 </style>
 <script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012  Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
 <!--/*--><![CDATA[/*><!--*/
  function CodeHighlightOn(elem, id)
  {
@@ -94,134 +118,167 @@
 <h1 class="title">Introducción a R</h1>
 
 
-<div id="table-of-contents">
-<h2>&Iacute;ndice</h2>
-<div id="text-table-of-contents">
-<ul>
-<li><a href="#sec-1">1 Vectores</a>
-<ul>
-<li><a href="#sec-1-1">1.1 Vectores numéricos</a>
-<ul>
-<li><a href="#sec-1-1-1">1.1.1 Primeros pasos</a></li>
-<li><a href="#sec-1-1-2">1.1.2 Primeras funciones</a></li>
-<li><a href="#sec-1-1-3">1.1.3 Operaciones sencillas con vectores</a></li>
-<li><a href="#sec-1-1-4">1.1.4 Generar vectores con <code>seq</code></a></li>
-<li><a href="#sec-1-1-5">1.1.5 Unir vectores con <code>c</code></a></li>
-<li><a href="#sec-1-1-6">1.1.6 Generar vectores con <code>rep</code></a></li>
-<li><a href="#sec-1-1-7">1.1.7 Indexado numérico de vectores</a></li>
-<li><a href="#sec-1-1-8">1.1.8 Indexado de vectores con condiciones lógicas</a></li>
-<li><a href="#sec-1-1-9">1.1.9 Indexado de vectores con condiciones lógicas</a></li>
-<li><a href="#sec-1-1-10">1.1.10 Indexado de vectores con <code>%in%</code></a></li>
-<li><a href="#sec-1-1-11">1.1.11 Indexado de vectores con condiciones múltiples</a></li>
-<li><a href="#sec-1-1-12">1.1.12 Indexado de vectores con condiciones múltiples</a></li>
-<li><a href="#sec-1-1-13">1.1.13 Con las condiciones se pueden hacer operaciones</a></li>
-</ul>
-</li>
-<li><a href="#sec-1-2">1.2 Operaciones con vectores numéricos</a>
-<ul>
-<li><a href="#sec-1-2-1">1.2.1 Aritmética sencilla</a></li>
-<li><a href="#sec-1-2-2">1.2.2 Funciones predefinidas</a></li>
-<li><a href="#sec-1-2-3">1.2.3 Funciones y condiciones</a></li>
-<li><a href="#sec-1-2-4">1.2.4 ¿Y qué hago cuando necesito ayuda?</a></li>
-</ul>
-</li>
-<li><a href="#sec-1-3">1.3 Valores ausentes: <code>NA</code></a>
-<ul>
-<li><a href="#sec-1-3-1">1.3.1 ¿Qué es <code>NA</code>?</a></li>
-<li><a href="#sec-1-3-2">1.3.2 <code>NA</code> en las funciones</a></li>
-<li><a href="#sec-1-3-3">1.3.3 <code>NA</code> en las funciones</a></li>
-</ul></li>
-</ul>
-</li>
-<li><a href="#sec-2">2 Matrices</a>
-<ul>
-<li>
-<ul>
-<li><a href="#sec-2-1">2.1 Construir una matriz</a></li>
-<li><a href="#sec-2-2">2.2 Matrices a partir de vectores: <code>rbind</code> y <code>cbind</code></a></li>
-<li><a href="#sec-2-3">2.3 Transponer una matriz</a></li>
-<li><a href="#sec-2-4">2.4 Operaciones con matrices</a></li>
-<li><a href="#sec-2-5">2.5 Operaciones con matrices: funciones predefinidas</a></li>
-<li><a href="#sec-2-6">2.6 La función <code>apply</code></a></li>
-<li><a href="#sec-2-7">2.7 Indexado de matrices</a></li>
-</ul></li>
-</ul>
-</li>
-<li><a href="#sec-3">3 Funciones</a>
-<ul>
-<li>
-<ul>
-<li><a href="#sec-3-1">3.1 Todo en R es un objeto</a></li>
-<li><a href="#sec-3-2">3.2 Para definir una función usamos la función <code>function</code></a></li>
-<li><a href="#sec-3-3">3.3 Definir una función a partir de funciones</a></li>
-<li><a href="#sec-3-4">3.4 Y ahora usamos la función con vectores</a></li>
-<li><a href="#sec-3-5">3.5 Y también funciona con matrices</a></li>
-<li><a href="#sec-3-6">3.6 La función <code>outer</code></a></li>
-</ul></li>
-</ul>
-</li>
-<li><a href="#sec-4">4 Listas y <code>data.frame</code></a>
-<ul>
-<li>
-<ul>
-<li><a href="#sec-4-1">4.1 Para crear una lista usamos la función <code>list</code></a></li>
-<li><a href="#sec-4-2">4.2 Podemos acceder a los elementos por su nombre</a></li>
-<li><a href="#sec-4-3">4.3 o por su índice</a></li>
-<li><a href="#sec-4-4">4.4 Cada elemento es de una clase diferente</a></li>
-<li><a href="#sec-4-5">4.5 y de una longitud diferente</a></li>
-<li><a href="#sec-4-6">4.6 Para matrices <code>apply</code>, para listas <code>lapply</code> y <code>sapply</code></a></li>
-<li><a href="#sec-4-7">4.7 Para crear un <code>data.frame</code>&hellip;</a></li>
-<li><a href="#sec-4-8">4.8 Podemos acceder a los elementos por su nombre</a></li>
-<li><a href="#sec-4-9">4.9 o por su índice</a></li>
-<li><a href="#sec-4-10">4.10 La función <code>expand.grid</code></a></li>
-<li><a href="#sec-4-11">4.11 Funciones sobre <code>data.frame</code></a></li>
-</ul></li>
-</ul>
-</li>
-<li><a href="#sec-5">5 Gráficos</a>
-<ul>
-<li>
-<ul>
-<li><a href="#sec-5-1">5.1 Base</a></li>
-<li><a href="#sec-5-2">5.2 Lattice: <code>xyplot</code></a></li>
-<li><a href="#sec-5-3">5.3 Lattice: <code>levelplot</code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</div>
-</div>
-
 <div id="outline-container-1" class="outline-2">
-<h2 id="sec-1"><span class="section-number-2">1</span> Vectores</h2>
+<h2 id="sec-1"><span class="section-number-2">1</span> R es software libre</h2>
 <div class="outline-text-2" id="text-1">
-
 
 
 </div>
 
 <div id="outline-container-1-1" class="outline-3">
-<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Vectores numéricos</h3>
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> ¿Qué es <code>R</code>?</h3>
 <div class="outline-text-3" id="text-1-1">
-
 
 
 </div>
 
 <div id="outline-container-1-1-1" class="outline-4">
-<h4 id="sec-1-1-1"><span class="section-number-4">1.1.1</span> Primeros pasos</h4>
+<h4 id="sec-1-1-1"><span class="section-number-4">1.1.1</span> ¿Qué es <code>R</code>? &nbsp;&nbsp;&nbsp;<span class="tag"><span class="B_block">B_block</span></span></h4>
 <div class="outline-text-4" id="text-1-1-1">
 
+<p>¿Qué es <a href="http://procomun.wordpress.com/2011/02/23/que-es-r/">R</a>?: es un lenguaje de programación principalmente
+orientado al análisis estadístico y visualización de información
+cuantitativa y cualitativa y publicado como software libre con
+licencia GNU-GPL.
+</p></div>
+</div>
+
+</div>
+
+<div id="outline-container-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> R es un proyecto colaborativo</h3>
+<div class="outline-text-3" id="text-1-2">
+
+
+</div>
+
+<div id="outline-container-1-2-1" class="outline-4">
+<h4 id="sec-1-2-1"><span class="section-number-4">1.2.1</span> R es un proyecto colaborativo</h4>
+<div class="outline-text-4" id="text-1-2-1">
+
+<ul>
+<li>Una de las grandes riquezas de R es la cantidad de paquetes (más
+  de 4000 actualmente) que amplían sus funcionalidades.  
+</li>
+<li>La lista completa está en <a href="http://cran.es.r-project.org/web/packages/">http://cran.es.r-project.org/web/packages/</a>.
+</li>
+<li>Las CRAN Task Views agrupan por temáticas:
+  <a href="http://cran.r-project.org/web/views/">http://cran.r-project.org/web/views/</a>
+</li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1-2-2" class="outline-4">
+<h4 id="sec-1-2-2"><span class="section-number-4">1.2.2</span> Más de 4000 paquetes disponibles</h4>
+<div class="outline-text-4" id="text-1-2-2">
+
+<ul>
+<li>Algunos vienen instalados y se cargan al empezar:
+</li>
+</ul>
 
 
 
-<pre class="src src-R">x <span class="org-constant">&lt;-</span> 1
+
+<pre class="example">sessionInfo()
+</pre>
+
+<ul>
+<li>Otros vienen instalados pero hay que cargarlos:
+</li>
+</ul>
+
+
+
+
+<pre class="example">library(lattice)
+packageVersion('lattice')
+packageDescription('lattice')
+</pre>
+
+<ul>
+<li>Otros hay que instalarlos y después cargarlos:
+</li>
+</ul>
+
+
+
+
+<pre class="example">install.packages('zoo')
+library('zoo')
+packageDescription('zoo')
+</pre>
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> R está muy bien documentado</h3>
+<div class="outline-text-3" id="text-1-3">
+
+
+
+</div>
+
+<div id="outline-container-1-3-1" class="outline-4">
+<h4 id="sec-1-3-1"><span class="section-number-4">1.3.1</span> Fuentes de información</h4>
+<div class="outline-text-4" id="text-1-3-1">
+
+<ul>
+<li><a href="http://cran.r-project.org/doc/manuals/R-intro.html">Manual introductorio</a>
+</li>
+<li><a href="http://cran.r-project.org/manuals.html">Manuales oficiales</a>
+</li>
+<li><a href="http://cran.r-project.org/other-docs.html">Manuales externos</a>
+</li>
+<li><a href="http://www.r-project.org/mail.html">Listas de correo</a> (sin olvidar respetar <a href="http://www.r-project.org/posting-guide.html">estos consejos</a>).
+</li>
+<li><a href="http://www.r-bloggers.com">R-bloggers</a>
+</li>
+</ul>
+
+
+</div>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Vectores y Matrices</h2>
+<div class="outline-text-2" id="text-2">
+
+
+
+</div>
+
+<div id="outline-container-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Vectores</h3>
+<div class="outline-text-3" id="text-2-1">
+
+
+</div>
+
+<div id="outline-container-2-1-1" class="outline-4">
+<h4 id="sec-2-1-1"><span class="section-number-4">2.1.1</span> Primeros pasos</h4>
+<div class="outline-text-4" id="text-2-1-1">
+
+
+
+
+<pre class="example">x &lt;- 1
 x
 length(x)
 class(x)
 
-x <span class="org-constant">&lt;-</span> c(1, 2, 3)
+x &lt;- c(1, 2, 3)
 x
 length(x)
 class(x)
@@ -232,14 +289,14 @@ class(x)
 
 </div>
 
-<div id="outline-container-1-1-2" class="outline-4">
-<h4 id="sec-1-1-2"><span class="section-number-4">1.1.2</span> Primeras funciones</h4>
-<div class="outline-text-4" id="text-1-1-2">
+<div id="outline-container-2-1-2" class="outline-4">
+<h4 id="sec-2-1-2"><span class="section-number-4">2.1.2</span> Primeras funciones</h4>
+<div class="outline-text-4" id="text-2-1-2">
 
 
 
 
-<pre class="src src-R">class(c)
+<pre class="example">class(c)
 class(length)
 length
 </pre>
@@ -249,18 +306,21 @@ length
 
 </div>
 
-<div id="outline-container-1-1-3" class="outline-4">
-<h4 id="sec-1-1-3"><span class="section-number-4">1.1.3</span> Operaciones sencillas con vectores</h4>
-<div class="outline-text-4" id="text-1-1-3">
+<div id="outline-container-2-1-3" class="outline-4">
+<h4 id="sec-2-1-3"><span class="section-number-4">2.1.3</span> Operaciones sencillas con vectores</h4>
+<div class="outline-text-4" id="text-2-1-3">
 
 
 
 
-<pre class="src src-R">x + 1
-y <span class="org-constant">&lt;-</span> 1:10
+<pre class="example">x + 1
+y &lt;- 1:10
 x + y
 x * y
 x^2
+x^2 + y^3
+exp(x)
+log(x)
 </pre>
 
 
@@ -268,14 +328,14 @@ x^2
 
 </div>
 
-<div id="outline-container-1-1-4" class="outline-4">
-<h4 id="sec-1-1-4"><span class="section-number-4">1.1.4</span> Generar vectores con <code>seq</code></h4>
-<div class="outline-text-4" id="text-1-1-4">
+<div id="outline-container-2-1-4" class="outline-4">
+<h4 id="sec-2-1-4"><span class="section-number-4">2.1.4</span> Generar vectores con <code>seq</code></h4>
+<div class="outline-text-4" id="text-2-1-4">
 
 
 
 
-<pre class="src src-R">x1 <span class="org-constant">&lt;-</span> seq(1, 100, by=2)
+<pre class="example">x1 &lt;- seq(1, 100, by=2)
 x1
 help(seq)
 
@@ -283,12 +343,12 @@ seq(1, 100, 10)
 seq(1, 100, length=10)
 seq(1, 1, 10)
 
-x <span class="org-constant">&lt;-</span> seq(1, 100, length=10)
+x &lt;- seq(1, 100, length=10)
 x
 length(x)
 
-x <span class="org-constant">&lt;-</span> seq(1, 100, length=10)
-y <span class="org-constant">&lt;-</span> seq(2, 100, length=50)
+x &lt;- seq(1, 100, length=10)
+y &lt;- seq(2, 100, length=50)
 </pre>
 
 
@@ -296,18 +356,18 @@ y <span class="org-constant">&lt;-</span> seq(2, 100, length=50)
 
 </div>
 
-<div id="outline-container-1-1-5" class="outline-4">
-<h4 id="sec-1-1-5"><span class="section-number-4">1.1.5</span> Unir vectores con <code>c</code></h4>
-<div class="outline-text-4" id="text-1-1-5">
+<div id="outline-container-2-1-5" class="outline-4">
+<h4 id="sec-2-1-5"><span class="section-number-4">2.1.5</span> Unir vectores con <code>c</code></h4>
+<div class="outline-text-4" id="text-2-1-5">
 
 
 
 
-<pre class="src src-R">z <span class="org-constant">&lt;-</span> c(x, y)
+<pre class="example">z &lt;- c(x, y)
 z
 z + c(1, 2)
 z + c(1, 2, 3, 4, 5, 6, 7)
-z <span class="org-constant">&lt;-</span> c(z, z, z, z)
+z &lt;- c(z, z, z, z)
 z
 </pre>
 
@@ -316,14 +376,14 @@ z
 
 </div>
 
-<div id="outline-container-1-1-6" class="outline-4">
-<h4 id="sec-1-1-6"><span class="section-number-4">1.1.6</span> Generar vectores con <code>rep</code></h4>
-<div class="outline-text-4" id="text-1-1-6">
+<div id="outline-container-2-1-6" class="outline-4">
+<h4 id="sec-2-1-6"><span class="section-number-4">2.1.6</span> Generar vectores con <code>rep</code></h4>
+<div class="outline-text-4" id="text-2-1-6">
 
 
 
 
-<pre class="src src-R">rep(1:10, 4)
+<pre class="example">rep(1:10, 4)
 
 length(z)
 
@@ -338,15 +398,15 @@ help(rep)
 
 </div>
 
-<div id="outline-container-1-1-7" class="outline-4">
-<h4 id="sec-1-1-7"><span class="section-number-4">1.1.7</span> Indexado numérico de vectores</h4>
-<div class="outline-text-4" id="text-1-1-7">
+<div id="outline-container-2-1-7" class="outline-4">
+<h4 id="sec-2-1-7"><span class="section-number-4">2.1.7</span> Indexado numérico de vectores</h4>
+<div class="outline-text-4" id="text-2-1-7">
 
 
 
 
 
-<pre class="src src-R">x <span class="org-constant">&lt;-</span> seq(1, 100, 2)
+<pre class="example">x &lt;- seq(1, 100, 2)
 1:5
 x[c(1, 2, 3, 4, 5)]
 x[1:5]
@@ -358,14 +418,14 @@ x[10:5]
 
 </div>
 
-<div id="outline-container-1-1-8" class="outline-4">
-<h4 id="sec-1-1-8"><span class="section-number-4">1.1.8</span> Indexado de vectores con condiciones lógicas</h4>
-<div class="outline-text-4" id="text-1-1-8">
+<div id="outline-container-2-1-8" class="outline-4">
+<h4 id="sec-2-1-8"><span class="section-number-4">2.1.8</span> Indexado de vectores con condiciones lógicas</h4>
+<div class="outline-text-4" id="text-2-1-8">
 
 
 
 
-<pre class="src src-R">condicion <span class="org-constant">&lt;-</span> (x&gt;30)
+<pre class="example">condicion &lt;- (x&gt;30)
 condicion
 class(condicion)
 </pre>
@@ -375,46 +435,48 @@ class(condicion)
 
 </div>
 
-<div id="outline-container-1-1-9" class="outline-4">
-<h4 id="sec-1-1-9"><span class="section-number-4">1.1.9</span> Indexado de vectores con condiciones lógicas</h4>
-<div class="outline-text-4" id="text-1-1-9">
+<div id="outline-container-2-1-9" class="outline-4">
+<h4 id="sec-2-1-9"><span class="section-number-4">2.1.9</span> Indexado de vectores con condiciones lógicas</h4>
+<div class="outline-text-4" id="text-2-1-9">
 
 
 
 
 
-<pre class="src src-R">x==37
+<pre class="example">x==37
 x[x==37]
 x[x!=9]
 x[x&gt;20]
 </pre>
 
 
-<p>
-Y aquí, ¿qué ocurre?
-</p>
+<ul>
+<li id="sec-2-1-9-1">Y aquí, ¿qué ocurre? &nbsp;&nbsp;&nbsp;<span class="tag"><span class="B_block">B_block</span></span><br/>
 
 
 
-<pre class="src src-R">x[x=10]
+
+<pre class="example">x[x=10]
 </pre>
 
 
+</li>
+</ul>
 </div>
 
 </div>
 
-<div id="outline-container-1-1-10" class="outline-4">
-<h4 id="sec-1-1-10"><span class="section-number-4">1.1.10</span> Indexado de vectores con <code>%in%</code></h4>
-<div class="outline-text-4" id="text-1-1-10">
+<div id="outline-container-2-1-10" class="outline-4">
+<h4 id="sec-2-1-10"><span class="section-number-4">2.1.10</span> Indexado de vectores con <code>%in%</code></h4>
+<div class="outline-text-4" id="text-2-1-10">
 
 
 
 
-<pre class="src src-R">y <span class="org-constant">&lt;-</span> seq(101, 200, 2)
-y %<span class="org-keyword">in</span>% c(101, 127, 141)
+<pre class="example">y &lt;- seq(101, 200, 2)
+y %in% c(101, 127, 141)
 y
-y[y %<span class="org-keyword">in</span>% c(101, 127, 141)]
+y[y %in% c(101, 127, 141)]
 </pre>
 
 
@@ -422,15 +484,15 @@ y[y %<span class="org-keyword">in</span>% c(101, 127, 141)]
 
 </div>
 
-<div id="outline-container-1-1-11" class="outline-4">
-<h4 id="sec-1-1-11"><span class="section-number-4">1.1.11</span> Indexado de vectores con condiciones múltiples</h4>
-<div class="outline-text-4" id="text-1-1-11">
+<div id="outline-container-2-1-11" class="outline-4">
+<h4 id="sec-2-1-11"><span class="section-number-4">2.1.11</span> Indexado de vectores con condiciones múltiples</h4>
+<div class="outline-text-4" id="text-2-1-11">
 
 
 
 
 
-<pre class="src src-R">z <span class="org-constant">&lt;-</span> c(x, y)
+<pre class="example">z &lt;- c(x, y)
 z
 z&gt;150
 z[z&gt;150]
@@ -444,16 +506,16 @@ z[c(1, 10, 40, 80)]
 
 </div>
 
-<div id="outline-container-1-1-12" class="outline-4">
-<h4 id="sec-1-1-12"><span class="section-number-4">1.1.12</span> Indexado de vectores con condiciones múltiples</h4>
-<div class="outline-text-4" id="text-1-1-12">
+<div id="outline-container-2-1-12" class="outline-4">
+<h4 id="sec-2-1-12"><span class="section-number-4">2.1.12</span> Indexado de vectores con condiciones múltiples</h4>
+<div class="outline-text-4" id="text-2-1-12">
 
 
 
 
-<pre class="src src-R">cond  <span class="org-constant">&lt;-</span>  (x&gt;10) &amp; (x&lt;50)
+<pre class="example">cond  &lt;-  (x&gt;10) &amp; (x&lt;50)
 cond
-cond  <span class="org-constant">&lt;-</span>  (x&gt;=10) &amp; (x&lt;=50)
+cond  &lt;-  (x&gt;=10) &amp; (x&lt;=50)
 cond
 x[cond]
 
@@ -464,14 +526,14 @@ x[cond]
 
 </div>
 
-<div id="outline-container-1-1-13" class="outline-4">
-<h4 id="sec-1-1-13"><span class="section-number-4">1.1.13</span> Con las condiciones se pueden hacer operaciones</h4>
-<div class="outline-text-4" id="text-1-1-13">
+<div id="outline-container-2-1-13" class="outline-4">
+<h4 id="sec-2-1-13"><span class="section-number-4">2.1.13</span> Con las condiciones se pueden hacer operaciones</h4>
+<div class="outline-text-4" id="text-2-1-13">
 
 
 
 
-<pre class="src src-R">sum(cond)
+<pre class="example">sum(cond)
 !cond
 sum(!cond)
 length(x[cond])
@@ -480,26 +542,19 @@ as.numeric(cond)
 </pre>
 
 
-</div>
-</div>
 
 </div>
 
-<div id="outline-container-1-2" class="outline-3">
-<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Operaciones con vectores numéricos</h3>
-<div class="outline-text-3" id="text-1-2">
-
-
 </div>
 
-<div id="outline-container-1-2-1" class="outline-4">
-<h4 id="sec-1-2-1"><span class="section-number-4">1.2.1</span> Aritmética sencilla</h4>
-<div class="outline-text-4" id="text-1-2-1">
+<div id="outline-container-2-1-14" class="outline-4">
+<h4 id="sec-2-1-14"><span class="section-number-4">2.1.14</span> Aritmética sencilla</h4>
+<div class="outline-text-4" id="text-2-1-14">
 
 
 
 
-<pre class="src src-R">x + y
+<pre class="example">x + y
 x - y
 x * y
 x^2 + y^3
@@ -512,14 +567,14 @@ log(x)
 
 </div>
 
-<div id="outline-container-1-2-2" class="outline-4">
-<h4 id="sec-1-2-2"><span class="section-number-4">1.2.2</span> Funciones predefinidas</h4>
-<div class="outline-text-4" id="text-1-2-2">
+<div id="outline-container-2-1-15" class="outline-4">
+<h4 id="sec-2-1-15"><span class="section-number-4">2.1.15</span> Funciones predefinidas</h4>
+<div class="outline-text-4" id="text-2-1-15">
 
 
 
 
-<pre class="src src-R">summary(x)
+<pre class="example">summary(x)
 mean(x)
 sd(x)
 median(x)
@@ -534,14 +589,14 @@ quantile(x)
 
 </div>
 
-<div id="outline-container-1-2-3" class="outline-4">
-<h4 id="sec-1-2-3"><span class="section-number-4">1.2.3</span> Funciones y condiciones</h4>
-<div class="outline-text-4" id="text-1-2-3">
+<div id="outline-container-2-1-16" class="outline-4">
+<h4 id="sec-2-1-16"><span class="section-number-4">2.1.16</span> Funciones y condiciones</h4>
+<div class="outline-text-4" id="text-2-1-16">
 
 
 
 
-<pre class="src src-R">sum(x)
+<pre class="example">sum(x)
 sum(x[cond])
 sum(x[(x&gt;=10) &amp; (x&lt;=50)])
 x[1] + x[2] + x[3] + x[4] + x[5]
@@ -554,112 +609,42 @@ sum(x[1:5])
 
 </div>
 
-<div id="outline-container-1-2-4" class="outline-4">
-<h4 id="sec-1-2-4"><span class="section-number-4">1.2.4</span> ¿Y qué hago cuando necesito ayuda?</h4>
-<div class="outline-text-4" id="text-1-2-4">
+<div id="outline-container-2-1-17" class="outline-4">
+<h4 id="sec-2-1-17"><span class="section-number-4">2.1.17</span> ¿Y qué hago cuando necesito ayuda?</h4>
+<div class="outline-text-4" id="text-2-1-17">
 
 
 
 
 
-<pre class="src src-R">help(exp)
+<pre class="example">help(exp)
 help(sum)
 help(quantile)
 </pre>
 
 
-</div>
-</div>
 
-</div>
-
-<div id="outline-container-1-3" class="outline-3">
-<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Valores ausentes: <code>NA</code></h3>
-<div class="outline-text-3" id="text-1-3">
-
-
-
-</div>
-
-<div id="outline-container-1-3-1" class="outline-4">
-<h4 id="sec-1-3-1"><span class="section-number-4">1.3.1</span> ¿Qué es <code>NA</code>?</h4>
-<div class="outline-text-4" id="text-1-3-1">
-
-
-
-
-<pre class="src src-R">class(<span class="org-type">NA</span>)
-seq_along(x)
-idx <span class="org-constant">&lt;-</span> sample(seq_along(x), 10)
-idx
-x[idx]
-x2 <span class="org-constant">&lt;-</span> x
-x2[idx] <span class="org-constant">&lt;-</span> <span class="org-type">NA</span>
-x2
-</pre>
-
-
-</div>
-
-</div>
-
-<div id="outline-container-1-3-2" class="outline-4">
-<h4 id="sec-1-3-2"><span class="section-number-4">1.3.2</span> <code>NA</code> en las funciones</h4>
-<div class="outline-text-4" id="text-1-3-2">
-
-
-
-
-
-<pre class="src src-R">summary(x2)
-mean(x2)
-sum(x2)
-</pre>
-
-
-</div>
-
-</div>
-
-<div id="outline-container-1-3-3" class="outline-4">
-<h4 id="sec-1-3-3"><span class="section-number-4">1.3.3</span> <code>NA</code> en las funciones</h4>
-<div class="outline-text-4" id="text-1-3-3">
-
-
-
-
-
-<pre class="src src-R">mean(x2, na.rm=<span class="org-type">TRUE</span>)
-sum(x2, na.rm=<span class="org-type">TRUE</span>)
-sd(x2, na.rm=<span class="org-type">TRUE</span>)
-class(<span class="org-type">TRUE</span>)
-</pre>
-
-
-
-</div>
 </div>
 </div>
 
 </div>
 
-<div id="outline-container-2" class="outline-2">
-<h2 id="sec-2"><span class="section-number-2">2</span> Matrices</h2>
-<div class="outline-text-2" id="text-2">
-
+<div id="outline-container-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Matrices</h3>
+<div class="outline-text-3" id="text-2-2">
 
 
 </div>
 
-<div id="outline-container-2-1" class="outline-4">
-<h4 id="sec-2-1"><span class="section-number-4">2.1</span> Construir una matriz</h4>
-<div class="outline-text-4" id="text-2-1">
+<div id="outline-container-2-2-1" class="outline-4">
+<h4 id="sec-2-2-1"><span class="section-number-4">2.2.1</span> Construir una matriz</h4>
+<div class="outline-text-4" id="text-2-2-1">
 
 
 
 
-<pre class="src src-R">z <span class="org-constant">&lt;-</span> 1:12
-M  <span class="org-constant">&lt;-</span>  matrix(z, nrow=3)
+<pre class="example">z &lt;- 1:12
+M  &lt;-  matrix(z, nrow=3)
 M
 z
 help(matrix)
@@ -673,21 +658,21 @@ summary(M)
 
 </div>
 
-<div id="outline-container-2-2" class="outline-4">
-<h4 id="sec-2-2"><span class="section-number-4">2.2</span> Matrices a partir de vectores: <code>rbind</code> y <code>cbind</code></h4>
-<div class="outline-text-4" id="text-2-2">
+<div id="outline-container-2-2-2" class="outline-4">
+<h4 id="sec-2-2-2"><span class="section-number-4">2.2.2</span> Matrices a partir de vectores: <code>rbind</code> y <code>cbind</code></h4>
+<div class="outline-text-4" id="text-2-2-2">
 
 
 
 
-<pre class="src src-R">x <span class="org-constant">&lt;-</span> 1:10
-y <span class="org-constant">&lt;-</span> 1:10
-z <span class="org-constant">&lt;-</span> 1:10
-z <span class="org-constant">&lt;-</span> y <span class="org-constant">&lt;-</span> x <span class="org-constant">&lt;-</span> 1:10
+<pre class="example">x &lt;- 1:10
+y &lt;- 1:10
+z &lt;- 1:10
+z &lt;- y &lt;- x &lt;- 1:10
 
-M <span class="org-constant">&lt;-</span> cbind(x, y, z)
+M &lt;- cbind(x, y, z)
 M
-M <span class="org-constant">&lt;-</span> rbind(x, y, z)
+M &lt;- rbind(x, y, z)
 M
 
 rbind(M, M)
@@ -699,15 +684,15 @@ cbind(M, M)
 
 </div>
 
-<div id="outline-container-2-3" class="outline-4">
-<h4 id="sec-2-3"><span class="section-number-4">2.3</span> Transponer una matriz</h4>
-<div class="outline-text-4" id="text-2-3">
+<div id="outline-container-2-2-3" class="outline-4">
+<h4 id="sec-2-2-3"><span class="section-number-4">2.2.3</span> Transponer una matriz</h4>
+<div class="outline-text-4" id="text-2-2-3">
 
 
 
 
 
-<pre class="src src-R">t(M)
+<pre class="example">t(M)
 class(t)
 dim(t(M))
 </pre>
@@ -717,19 +702,19 @@ dim(t(M))
 
 </div>
 
-<div id="outline-container-2-4" class="outline-4">
-<h4 id="sec-2-4"><span class="section-number-4">2.4</span> Operaciones con matrices</h4>
-<div class="outline-text-4" id="text-2-4">
+<div id="outline-container-2-2-4" class="outline-4">
+<h4 id="sec-2-2-4"><span class="section-number-4">2.2.4</span> Operaciones con matrices</h4>
+<div class="outline-text-4" id="text-2-2-4">
 
 
 
 
 
-<pre class="src src-R">M * M
+<pre class="example">M * M
 M ^ 2
 M %*% M
 M %*% t(M)
-help(<span class="org-string">'%*%'</span>)
+help('%*%')
 </pre>
 
 
@@ -737,15 +722,15 @@ help(<span class="org-string">'%*%'</span>)
 
 </div>
 
-<div id="outline-container-2-5" class="outline-4">
-<h4 id="sec-2-5"><span class="section-number-4">2.5</span> Operaciones con matrices: funciones predefinidas</h4>
-<div class="outline-text-4" id="text-2-5">
+<div id="outline-container-2-2-5" class="outline-4">
+<h4 id="sec-2-2-5"><span class="section-number-4">2.2.5</span> Operaciones con matrices: funciones predefinidas</h4>
+<div class="outline-text-4" id="text-2-2-5">
 
 
 
 
 
-<pre class="src src-R">sum(M)
+<pre class="example">sum(M)
 rowSums(M)
 colSums(M)
 rowMeans(M)
@@ -757,19 +742,19 @@ colMeans(M)
 
 </div>
 
-<div id="outline-container-2-6" class="outline-4">
-<h4 id="sec-2-6"><span class="section-number-4">2.6</span> La función <code>apply</code></h4>
-<div class="outline-text-4" id="text-2-6">
+<div id="outline-container-2-2-6" class="outline-4">
+<h4 id="sec-2-2-6"><span class="section-number-4">2.2.6</span> La función <code>apply</code></h4>
+<div class="outline-text-4" id="text-2-2-6">
 
 
 
 
-<pre class="src src-R">help(apply)
+<pre class="example">help(apply)
 apply(M, 1, sum)
 apply(M, 2, sum)
 apply(M, 1, mean)
 apply(M, 2, mean)
-apply(M, 1, sd, na.rm=<span class="org-type">TRUE</span>)
+apply(M, 1, sd, na.rm=TRUE)
 apply(M, 2, sd)
 </pre>
 
@@ -778,14 +763,14 @@ apply(M, 2, sd)
 
 </div>
 
-<div id="outline-container-2-7" class="outline-4">
-<h4 id="sec-2-7"><span class="section-number-4">2.7</span> Indexado de matrices</h4>
-<div class="outline-text-4" id="text-2-7">
+<div id="outline-container-2-2-7" class="outline-4">
+<h4 id="sec-2-2-7"><span class="section-number-4">2.2.7</span> Indexado de matrices</h4>
+<div class="outline-text-4" id="text-2-2-7">
 
 
 
 
-<pre class="src src-R">M
+<pre class="example">M
 M[]
 M[1, ]
 M[, 1]
@@ -798,7 +783,80 @@ M[-c(1, 2),]
 </pre>
 
 
+</div>
+</div>
 
+</div>
+
+<div id="outline-container-2-3" class="outline-3">
+<h3 id="sec-2-3"><span class="section-number-3">2.3</span> Valores ausentes</h3>
+<div class="outline-text-3" id="text-2-3">
+
+
+
+</div>
+
+<div id="outline-container-2-3-1" class="outline-4">
+<h4 id="sec-2-3-1"><span class="section-number-4">2.3.1</span> ¿Qué es <code>NA</code>?</h4>
+<div class="outline-text-4" id="text-2-3-1">
+
+
+
+
+<pre class="example">class(NA)
+x &lt;- rnorm(100)
+idx &lt;- sample(length(x), 10)
+idx
+x[idx]
+x2 &lt;- x
+x2[idx] &lt;- NA
+x2
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2-3-2" class="outline-4">
+<h4 id="sec-2-3-2"><span class="section-number-4">2.3.2</span> <code>NA</code> en las funciones</h4>
+<div class="outline-text-4" id="text-2-3-2">
+
+
+
+
+
+<pre class="example">summary(x)
+mean(x)
+sum(x)
+
+summary(x2)
+mean(x2)
+sum(x2)
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2-3-3" class="outline-4">
+<h4 id="sec-2-3-3"><span class="section-number-4">2.3.3</span> <code>NA</code> en las funciones</h4>
+<div class="outline-text-4" id="text-2-3-3">
+
+
+
+
+
+<pre class="example">mean(x2, na.rm=TRUE)
+sum(x2, na.rm=TRUE)
+sd(x2, na.rm=TRUE)
+class(TRUE)
+</pre>
+
+
+
+</div>
 </div>
 </div>
 
@@ -812,30 +870,21 @@ M[-c(1, 2),]
 
 </div>
 
-<div id="outline-container-3-1" class="outline-4">
-<h4 id="sec-3-1"><span class="section-number-4">3.1</span> Todo en R es un objeto</h4>
-<div class="outline-text-4" id="text-3-1">
-
-
-
-
-
-<pre class="src src-R">class(sum)
-</pre>
+<div id="outline-container-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> Definición de funciones</h3>
+<div class="outline-text-3" id="text-3-1">
 
 
 </div>
 
-</div>
-
-<div id="outline-container-3-2" class="outline-4">
-<h4 id="sec-3-2"><span class="section-number-4">3.2</span> Para definir una función usamos la función <code>function</code></h4>
-<div class="outline-text-4" id="text-3-2">
+<div id="outline-container-3-1-1" class="outline-4">
+<h4 id="sec-3-1-1"><span class="section-number-4">3.1.1</span> Para definir una función usamos la función <code>function</code></h4>
+<div class="outline-text-4" id="text-3-1-1">
 
 
 
 
-<pre class="src src-R"><span class="org-function-name">myFun</span> <span class="org-constant">&lt;-</span> <span class="org-keyword">function</span>(x, y) x + y
+<pre class="example">myFun &lt;- function(x, y) x + y
 myFun(3, 4)
 class(myFun)
 </pre>
@@ -845,17 +894,17 @@ class(myFun)
 
 </div>
 
-<div id="outline-container-3-3" class="outline-4">
-<h4 id="sec-3-3"><span class="section-number-4">3.3</span> Definir una función a partir de funciones</h4>
-<div class="outline-text-4" id="text-3-3">
+<div id="outline-container-3-1-2" class="outline-4">
+<h4 id="sec-3-1-2"><span class="section-number-4">3.1.2</span> Definir una función a partir de funciones</h4>
+<div class="outline-text-4" id="text-3-1-2">
 
 
 
 
-<pre class="src src-R"><span class="org-function-name">foo</span>  <span class="org-constant">&lt;-</span>  <span class="org-keyword">function</span>(x, ...){
-  mx <span class="org-constant">&lt;-</span> mean(x, ...)
-  medx <span class="org-constant">&lt;-</span> median(x, ...)
-  sdx <span class="org-constant">&lt;-</span> sd(x, ...)
+<pre class="example">foo  &lt;-  function(x, ...){
+  mx &lt;- mean(x, ...)
+  medx &lt;- median(x, ...)
+  sdx &lt;- sd(x, ...)
   c(mx, medx, sdx)
   }
 </pre>
@@ -865,22 +914,31 @@ O en forma resumida:
 </p>
 
 
-<pre class="src src-R"><span class="org-function-name">foo</span> <span class="org-constant">&lt;-</span> <span class="org-keyword">function</span>(x, ...){c(mean(x, ...), median(x, ...), sd(x, ...))}
+<pre class="example">foo &lt;- function(x, ...){c(mean(x, ...), median(x, ...), sd(x, ...))}
 </pre>
 
 
+
+</div>
 </div>
 
 </div>
 
-<div id="outline-container-3-4" class="outline-4">
-<h4 id="sec-3-4"><span class="section-number-4">3.4</span> Y ahora usamos la función con vectores</h4>
-<div class="outline-text-4" id="text-3-4">
+<div id="outline-container-3-2" class="outline-3">
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> Uso de funciones</h3>
+<div class="outline-text-3" id="text-3-2">
+
+
+</div>
+
+<div id="outline-container-3-2-1" class="outline-4">
+<h4 id="sec-3-2-1"><span class="section-number-4">3.2.1</span> Y ahora usamos la función con vectores</h4>
+<div class="outline-text-4" id="text-3-2-1">
 
 
 
 
-<pre class="src src-R">foo(1:10)
+<pre class="example">foo(1:10)
 
 rnorm(100)
 help(rnorm)
@@ -892,14 +950,14 @@ foo(rnorm(1e5))
 
 </div>
 
-<div id="outline-container-3-5" class="outline-4">
-<h4 id="sec-3-5"><span class="section-number-4">3.5</span> Y también funciona con matrices</h4>
-<div class="outline-text-4" id="text-3-5">
+<div id="outline-container-3-2-2" class="outline-4">
+<h4 id="sec-3-2-2"><span class="section-number-4">3.2.2</span> Y también funciona con matrices</h4>
+<div class="outline-text-4" id="text-3-2-2">
 
 
 
 
-<pre class="src src-R">rowMeans(M)
+<pre class="example">rowMeans(M)
 apply(M, 1, foo)
 colMeans(M)
 apply(M, 2, foo)
@@ -910,47 +968,56 @@ apply(M, 2, foo)
 
 </div>
 
-<div id="outline-container-3-6" class="outline-4">
-<h4 id="sec-3-6"><span class="section-number-4">3.6</span> La función <code>outer</code></h4>
-<div class="outline-text-4" id="text-3-6">
+<div id="outline-container-3-2-3" class="outline-4">
+<h4 id="sec-3-2-3"><span class="section-number-4">3.2.3</span> La función <code>outer</code></h4>
+<div class="outline-text-4" id="text-3-2-3">
 
 
 
 
-<pre class="src src-R"><span class="org-function-name">f</span> <span class="org-constant">&lt;-</span> <span class="org-keyword">function</span>(x, y)x^2+y^2
+<pre class="example">f &lt;- function(x, y)x^2+y^2
 f
 f(1, 2)
 x
 y
 
-z <span class="org-constant">&lt;-</span> outer(x, y, f)
+z &lt;- outer(x, y, f)
 z
 image(x, y, z)
 </pre>
 
 
+
+</div>
 </div>
 </div>
 
 </div>
 
 <div id="outline-container-4" class="outline-2">
-<h2 id="sec-4"><span class="section-number-2">4</span> Listas y <code>data.frame</code></h2>
+<h2 id="sec-4"><span class="section-number-2">4</span> Listas y data.frame</h2>
 <div class="outline-text-2" id="text-4">
 
 
 
 </div>
 
-<div id="outline-container-4-1" class="outline-4">
-<h4 id="sec-4-1"><span class="section-number-4">4.1</span> Para crear una lista usamos la función <code>list</code></h4>
-<div class="outline-text-4" id="text-4-1">
+<div id="outline-container-4-1" class="outline-3">
+<h3 id="sec-4-1"><span class="section-number-3">4.1</span> Listas</h3>
+<div class="outline-text-3" id="text-4-1">
+
+
+</div>
+
+<div id="outline-container-4-1-1" class="outline-4">
+<h4 id="sec-4-1-1"><span class="section-number-4">4.1.1</span> Para crear una lista usamos la función <code>list</code></h4>
+<div class="outline-text-4" id="text-4-1-1">
 
 
 
 
-<pre class="src src-R">lista <span class="org-constant">&lt;-</span> list(a=c(1,3,5),
-              b=c(<span class="org-string">'l'</span>, <span class="org-string">'p'</span>, <span class="org-string">'r'</span>, <span class="org-string">'s'</span>),
+<pre class="example">lista &lt;- list(a=c(1,3,5),
+              b=c('l', 'p', 'r', 's'),
               c=3)
 class(list)
 class(lista)
@@ -961,32 +1028,34 @@ class(lista)
 
 </div>
 
-<div id="outline-container-4-2" class="outline-4">
-<h4 id="sec-4-2"><span class="section-number-4">4.2</span> Podemos acceder a los elementos por su nombre</h4>
-<div class="outline-text-4" id="text-4-2">
+<div id="outline-container-4-1-2" class="outline-4">
+<h4 id="sec-4-1-2"><span class="section-number-4">4.1.2</span> Podemos acceder a los elementos&hellip;</h4>
+<div class="outline-text-4" id="text-4-1-2">
+
+<ul>
+<li>Por su nombre
+</li>
+</ul>
 
 
 
 
-<pre class="src src-R">lista
+<pre class="example">lista
 lista$a
 lista$b
 lista$c
 </pre>
 
 
-</div>
-
-</div>
-
-<div id="outline-container-4-3" class="outline-4">
-<h4 id="sec-4-3"><span class="section-number-4">4.3</span> o por su índice</h4>
-<div class="outline-text-4" id="text-4-3">
+<ul>
+<li>o por su índice
+</li>
+</ul>
 
 
 
 
-<pre class="src src-R">lista[1]
+<pre class="example">lista[1]
 lista[[1]]
 
 class(lista[1])
@@ -1004,31 +1073,33 @@ class(lista[[2]])
 
 </div>
 
-<div id="outline-container-4-4" class="outline-4">
-<h4 id="sec-4-4"><span class="section-number-4">4.4</span> Cada elemento es de una clase diferente</h4>
-<div class="outline-text-4" id="text-4-4">
+<div id="outline-container-4-1-3" class="outline-4">
+<h4 id="sec-4-1-3"><span class="section-number-4">4.1.3</span> Cada elemento es diferente</h4>
+<div class="outline-text-4" id="text-4-1-3">
+
+<ul>
+<li>Clase
+</li>
+</ul>
 
 
 
 
-<pre class="src src-R">class(lista)
+<pre class="example">class(lista)
 class(lista$a)
 class(lista$b)
 class(lista$c)
 </pre>
 
-</div>
-
-</div>
-
-<div id="outline-container-4-5" class="outline-4">
-<h4 id="sec-4-5"><span class="section-number-4">4.5</span> y de una longitud diferente</h4>
-<div class="outline-text-4" id="text-4-5">
+<ul>
+<li>Longitud
+</li>
+</ul>
 
 
 
 
-<pre class="src src-R">length(lista)
+<pre class="example">length(lista)
 length(lista$a)
 length(lista$b)
 length(lista$c)
@@ -1039,38 +1110,48 @@ length(lista$c)
 
 </div>
 
-<div id="outline-container-4-6" class="outline-4">
-<h4 id="sec-4-6"><span class="section-number-4">4.6</span> Para matrices <code>apply</code>, para listas <code>lapply</code> y <code>sapply</code></h4>
-<div class="outline-text-4" id="text-4-6">
+<div id="outline-container-4-1-4" class="outline-4">
+<h4 id="sec-4-1-4"><span class="section-number-4">4.1.4</span> Para matrices <code>apply</code>, para listas <code>lapply</code> y <code>sapply</code></h4>
+<div class="outline-text-4" id="text-4-1-4">
 
 
 
 
-<pre class="src src-R">lapply(lista, length)
+<pre class="example">lapply(lista, length)
 sapply(lista, length)
 
-lista <span class="org-constant">&lt;-</span> list(x = 1:10,
+lista &lt;- list(x = 1:10,
               y = seq(0, 10, 2),
               z = rnorm(30))
 lista
+
 lapply(lista, sum)
 lapply(lista, median)
 lapply(lista, foo)
 </pre>
 
 
+
+</div>
 </div>
 
 </div>
 
-<div id="outline-container-4-7" class="outline-4">
-<h4 id="sec-4-7"><span class="section-number-4">4.7</span> Para crear un <code>data.frame</code>&hellip;</h4>
-<div class="outline-text-4" id="text-4-7">
+<div id="outline-container-4-2" class="outline-3">
+<h3 id="sec-4-2"><span class="section-number-3">4.2</span> Data.frame</h3>
+<div class="outline-text-3" id="text-4-2">
+
+
+</div>
+
+<div id="outline-container-4-2-1" class="outline-4">
+<h4 id="sec-4-2-1"><span class="section-number-4">4.2.1</span> Para crear un <code>data.frame</code>&hellip;</h4>
+<div class="outline-text-4" id="text-4-2-1">
 
 
 
 
-<pre class="src src-R">df <span class="org-constant">&lt;-</span> data.frame(x = 1:10,
+<pre class="example">df &lt;- data.frame(x = 1:10,
                  y = rnorm(10),
                  z = 0)
 
@@ -1082,31 +1163,33 @@ dim(df)
 
 </div>
 
-<div id="outline-container-4-8" class="outline-4">
-<h4 id="sec-4-8"><span class="section-number-4">4.8</span> Podemos acceder a los elementos por su nombre</h4>
-<div class="outline-text-4" id="text-4-8">
+<div id="outline-container-4-2-2" class="outline-4">
+<h4 id="sec-4-2-2"><span class="section-number-4">4.2.2</span> Podemos acceder a los elementos</h4>
+<div class="outline-text-4" id="text-4-2-2">
+
+<ul>
+<li>Por su nombre
+</li>
+</ul>
 
 
 
 
-<pre class="src src-R">df$x
+<pre class="example">df$x
 df$y
 df$z
 </pre>
 
 
-</div>
-
-</div>
-
-<div id="outline-container-4-9" class="outline-4">
-<h4 id="sec-4-9"><span class="section-number-4">4.9</span> o por su índice</h4>
-<div class="outline-text-4" id="text-4-9">
+<ul>
+<li>Por su índice
+</li>
+</ul>
 
 
 
 
-<pre class="src src-R">df
+<pre class="example">df
 df[1,]
 df[,1]
 df[,2]
@@ -1117,16 +1200,36 @@ df[,2]
 
 </div>
 
-<div id="outline-container-4-10" class="outline-4">
-<h4 id="sec-4-10"><span class="section-number-4">4.10</span> La función <code>expand.grid</code></h4>
-<div class="outline-text-4" id="text-4-10">
+<div id="outline-container-4-2-3" class="outline-4">
+<h4 id="sec-4-2-3"><span class="section-number-4">4.2.3</span> La regla del reciclaje</h4>
+<div class="outline-text-4" id="text-4-2-3">
+
+
+
+
+<pre class="example">year &lt;- 2011
+month &lt;- 1:12
+class &lt;- c('A', 'B', 'C')
+vals &lt;- rnorm(12)
+
+dats &lt;- data.frame(year, month, class, vals)
+dats
+</pre>
+
+</div>
+
+</div>
+
+<div id="outline-container-4-2-4" class="outline-4">
+<h4 id="sec-4-2-4"><span class="section-number-4">4.2.4</span> La función <code>expand.grid</code></h4>
+<div class="outline-text-4" id="text-4-2-4">
 
 
 
 
 
-<pre class="src src-R">x <span class="org-constant">&lt;-</span> y <span class="org-constant">&lt;-</span> seq(-4*pi, 4*pi, len=200)
-df <span class="org-constant">&lt;-</span> expand.grid(x = x, y = y)
+<pre class="example">x &lt;- y &lt;- seq(-4*pi, 4*pi, len=200)
+df &lt;- expand.grid(x = x, y = y)
 head(df)
 tail(df)
 summary(df)
@@ -1139,45 +1242,70 @@ names(df)
 
 </div>
 
-<div id="outline-container-4-11" class="outline-4">
-<h4 id="sec-4-11"><span class="section-number-4">4.11</span> Funciones sobre <code>data.frame</code></h4>
-<div class="outline-text-4" id="text-4-11">
+<div id="outline-container-4-2-5" class="outline-4">
+<h4 id="sec-4-2-5"><span class="section-number-4">4.2.5</span> Funciones sobre <code>data.frame</code></h4>
+<div class="outline-text-4" id="text-4-2-5">
 
 
 
 
 
-<pre class="src src-R"><span class="org-function-name">circles</span> <span class="org-constant">&lt;-</span> <span class="org-keyword">function</span>(object){
-  r <span class="org-constant">&lt;-</span> with(object, sqrt(x^2 + y^2))
-  res <span class="org-constant">&lt;-</span> cos(r^2)*exp(-r/6)
+<pre class="example">circles &lt;- function(object){
+  r &lt;- with(object, sqrt(x^2 + y^2))
+  res &lt;- cos(r^2)*exp(-r/6)
   res}
 
-df$result <span class="org-constant">&lt;-</span> circles(df)
+df$result &lt;- circles(df)
 head(df)
 </pre>
 
 
+</div>
+
+</div>
+
+<div id="outline-container-4-2-6" class="outline-4">
+<h4 id="sec-4-2-6"><span class="section-number-4">4.2.6</span> Una imagen vale más que mil palabras</h4>
+<div class="outline-text-4" id="text-4-2-6">
+
+
+
+
+<pre class="example">library(lattice)
+levelplot(result ~ x + y, data=df)
+</pre>
+
+
+</div>
 </div>
 </div>
 
 </div>
 
 <div id="outline-container-5" class="outline-2">
-<h2 id="sec-5"><span class="section-number-2">5</span> Gráficos</h2>
+<h2 id="sec-5"><span class="section-number-2">5</span> Factores, fechas y caracteres</h2>
 <div class="outline-text-2" id="text-5">
 
 
+</div>
+
+<div id="outline-container-5-1" class="outline-3">
+<h3 id="sec-5-1"><span class="section-number-3">5.1</span> <code>factor</code></h3>
+<div class="outline-text-3" id="text-5-1">
+
 
 </div>
 
-<div id="outline-container-5-1" class="outline-4">
-<h4 id="sec-5-1"><span class="section-number-4">5.1</span> Base</h4>
-<div class="outline-text-4" id="text-5-1">
+<div id="outline-container-5-1-1" class="outline-4">
+<h4 id="sec-5-1-1"><span class="section-number-4">5.1.1</span> Una variable numérica que nos servirá para el ejemplo</h4>
+<div class="outline-text-4" id="text-5-1-1">
 
 
 
 
-<pre class="src src-R">plot(df$x, df$y)
+<pre class="example">N &lt;- 100
+edad &lt;- sample(seq(18, 40, 1), N, replace=TRUE)
+summary(edad)
 </pre>
 
 
@@ -1185,22 +1313,36 @@ head(df)
 
 </div>
 
-<div id="outline-container-5-2" class="outline-4">
-<h4 id="sec-5-2"><span class="section-number-4">5.2</span> Lattice: <code>xyplot</code></h4>
-<div class="outline-text-4" id="text-5-2">
+<div id="outline-container-5-1-2" class="outline-4">
+<h4 id="sec-5-1-2"><span class="section-number-4">5.1.2</span> Una variable cualitativa se define con <code>factor</code></h4>
+<div class="outline-text-4" id="text-5-1-2">
+
+<ul>
+<li>Ahora es un <code>character</code>
+</li>
+</ul>
 
 
 
 
-<pre class="src src-R"><span class="org-constant">library</span>(lattice)
+<pre class="example">sexo &lt;- sample(c('H', 'M'), N, replace=TRUE)
+class(sexo)
+summary(sexo)
+</pre>
 
-xyplot(y ~ x, data=df)
-xyplot(y ~ x, data=df, type=<span class="org-string">'l'</span>)
-xyplot(y ~ x, data=df, type=<span class="org-string">'b'</span>)
-xyplot(y ~ x, data=df, type=c(<span class="org-string">'b'</span>, <span class="org-string">'g'</span>))
-xyplot(y ~ x, data=df, type=c(<span class="org-string">'b'</span>, <span class="org-string">'r'</span>, <span class="org-string">'g'</span>))
+<ul>
+<li>Ahora es un <code>factor</code>
+</li>
+</ul>
 
-help(xyplot)
+
+
+
+<pre class="example">sexo &lt;- factor(sexo)
+class(sexo)
+summary(sexo)
+levels(sexo)
+nlevels(sexo)
 </pre>
 
 
@@ -1208,26 +1350,399 @@ help(xyplot)
 
 </div>
 
-<div id="outline-container-5-3" class="outline-4">
-<h4 id="sec-5-3"><span class="section-number-4">5.3</span> Lattice: <code>levelplot</code></h4>
-<div class="outline-text-4" id="text-5-3">
+<div id="outline-container-5-1-3" class="outline-4">
+<h4 id="sec-5-1-3"><span class="section-number-4">5.1.3</span> Los <code>factor</code> sirven para agrupar</h4>
+<div class="outline-text-4" id="text-5-1-3">
+
+
+<ul>
+<li>Con la función <code>table</code>
+</li>
+</ul>
 
 
 
 
-<pre class="src src-R">levelplot(result ~ x * y, data=df)
-xyplot(result ~ x, data=df)
+<pre class="example">table(edad, sexo)
+table(edad &gt; 30, sexo)
+table(edad %in% 20:30, sexo)
 </pre>
 
+
+<ul>
+<li>Con <code>tapply</code> o <code>aggregate</code>
+</li>
+</ul>
+
+
+
+
+<pre class="example">tapply(edad,sexo, mean)
+aggregate(edad ~ sexo, FUN=median)
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-5-1-4" class="outline-4">
+<h4 id="sec-5-1-4"><span class="section-number-4">5.1.4</span> Los factores sirven para separar</h4>
+<div class="outline-text-4" id="text-5-1-4">
+
+
+
+
+<pre class="example">edadSexo &lt;- split(edad, sexo)
+class(edadSexo)
+
+sapply(edadSexo, mean)
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-5-1-5" class="outline-4">
+<h4 id="sec-5-1-5"><span class="section-number-4">5.1.5</span> Los <code>factor</code> se pueden generar a partir de variables numéricas</h4>
+<div class="outline-text-4" id="text-5-1-5">
+
+<ul>
+<li>Por ejemplo, con <code>cut</code>
+</li>
+</ul>
+
+
+
+
+<pre class="example">gEdad &lt;- cut(edad, breaks=4)
+class(gEdad)
+levels(gEdad)
+nlevels(gEdad)
+</pre>
+
+
+<ul>
+<li>Nuevamente <code>table</code>
+</li>
+</ul>
+
+
+
+
+<pre class="example">table(gEdad)
+table(gEdad, sexo)
+</pre>
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-5-2" class="outline-3">
+<h3 id="sec-5-2"><span class="section-number-3">5.2</span> Fechas</h3>
+<div class="outline-text-3" id="text-5-2">
+
+
+
+</div>
+
+<div id="outline-container-5-2-1" class="outline-4">
+<h4 id="sec-5-2-1"><span class="section-number-4">5.2.1</span> <code>Date</code></h4>
+<div class="outline-text-4" id="text-5-2-1">
+
+
+
+
+<pre class="example">as.Date('2013-02-06')
+as.Date('2013/02/06')
+
+as.Date('06.02.2013')
+as.Date('06.02.2013', format='%d.%m.%Y')
+
+as.Date(37, origin='2013-01-01')
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-5-2-2" class="outline-4">
+<h4 id="sec-5-2-2"><span class="section-number-4">5.2.2</span> Secuencias temporales con <code>Date</code></h4>
+<div class="outline-text-4" id="text-5-2-2">
+
+
+
+
+<pre class="example">seq(as.Date('2004-01-01'), by='day', length=10)
+seq(as.Date('2004-01-01'), by='month', length=10)
+seq(as.Date('2004-01-01'), by='10 day', length=10)
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-5-2-3" class="outline-4">
+<h4 id="sec-5-2-3"><span class="section-number-4">5.2.3</span> POSIXct</h4>
+<div class="outline-text-4" id="text-5-2-3">
+
+
+
+
+<pre class="example">as.POSIXct('2013-02-06')
+ISOdate(2013, 2, 7)
+</pre>
+
+
+
+<pre class="example">hoy &lt;- as.POSIXct('2013-02-06')
+
+help(format.POSIXct)
+format(hoy, '%Y')
+format(hoy, '%d')
+format(hoy, '%m')
+format(hoy, '%b')
+format(hoy, '%d de %B de %Y')
+</pre>
+
+
+
+<pre class="example">hora &lt;- Sys.time()
+hora
+
+format(hora, '%H:%M:%S')
+format(hora, '%H horas, %M minutos y %S segundos')
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-5-2-4" class="outline-4">
+<h4 id="sec-5-2-4"><span class="section-number-4">5.2.4</span> Secuencias temporales con <code>POSIXct</code></h4>
+<div class="outline-text-4" id="text-5-2-4">
+
+
+
+
+<pre class="example">seq(as.POSIXct('2004-01-01'), by='month', length=10)
+seq(as.POSIXct('2004-01-01 10:00:00'), by='15 min', length=10)
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-5-2-5" class="outline-4">
+<h4 id="sec-5-2-5"><span class="section-number-4">5.2.5</span> Zonas horarias</h4>
+<div class="outline-text-4" id="text-5-2-5">
+
+
+
+
+
+<pre class="example">as.POSIXct('2013-02-06 15:30:00', tz='GMT')
+as.POSIXct('2013-02-06 15:30:00', tz='Europe/Madrid')
+</pre>
+
+
+
+<pre class="example">hawaii &lt;- as.POSIXct('2013-02-06 15:30:00', tz='HST')
+## Character
+format(hawaii, tz='GMT')
+## POSIXct
+as.POSIXct(format(hawaii, tz='GMT'), tz='GMT')
+</pre>
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-5-3" class="outline-3">
+<h3 id="sec-5-3"><span class="section-number-3">5.3</span> Caracteres</h3>
+<div class="outline-text-3" id="text-5-3">
+
+
+
+</div>
+
+<div id="outline-container-5-3-1" class="outline-4">
+<h4 id="sec-5-3-1"><span class="section-number-4">5.3.1</span> Bastan unas simples comillas</h4>
+<div class="outline-text-4" id="text-5-3-1">
+
+
+
+
+
+<pre class="example">cadena &lt;- "Hola mundo"
+class(cadena)
+nchar(cadena)
+</pre>
+
+
+<ul>
+<li>Y aquí, ¿qué pasa?
+</li>
+</ul>
+
+
+
+
+<pre class="example">length(cadena)
+cadena[1]
+cadena[2]
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-5-3-2" class="outline-4">
+<h4 id="sec-5-3-2"><span class="section-number-4">5.3.2</span> Un vector de <code>character</code></h4>
+<div class="outline-text-4" id="text-5-3-2">
+
+
+
+
+<pre class="example">cadenaVec &lt;- c("Hola mundo", "Hello world")
+nchar(cadenaVec)
+length(cadenaVec)
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-5-3-3" class="outline-4">
+<h4 id="sec-5-3-3"><span class="section-number-4">5.3.3</span> Para mostrarlos usamos <code>cat</code> o <code>print</code></h4>
+<div class="outline-text-4" id="text-5-3-3">
+
+
+
+
+
+<pre class="example">a = 2
+b = 3
+
+cat('La suma de', a, 'y', b, 'es', a + b)
+
+cat('La suma de', a, 'y', b, 'es', a + b, fill=TRUE)
+
+cat('La suma de', a, 'y', b, 'es', a + b, '\n',
+    'La multiplicación de', a, 'por', b, 'es', a*b, '\n')
+
+cat('La suma de', a, 'y', b, 'es', a + b, '\n',
+    'La multiplicación de', a, 'por', b, 'es', a*b, fill=15)
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-5-3-4" class="outline-4">
+<h4 id="sec-5-3-4"><span class="section-number-4">5.3.4</span> Los <code>character</code> se pueden unir&hellip;</h4>
+<div class="outline-text-4" id="text-5-3-4">
+
+<ul>
+<li>Primero sencillo
+</li>
+</ul>
+
+
+
+
+<pre class="example">paste('Hello', 'World', sep='_')
+
+paste(cadenaVec)
+paste(cadenaVec, collapse='=')
+</pre>
+
+<ul>
+<li>Y algo más complicado
+</li>
+</ul>
+
+
+
+
+<pre class="example">paste('X', 1:5, sep='.')
+paste(c('A', 'B'), 1:5, sep='.')
+
+paste(c('A', 'B'), 1:5, sep='.', collapse='|')
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-5-3-5" class="outline-4">
+<h4 id="sec-5-3-5"><span class="section-number-4">5.3.5</span> &hellip; y también se pueden separar&hellip;</h4>
+<div class="outline-text-4" id="text-5-3-5">
+
+
+
+
+<pre class="example">strsplit(cadenaVec, split=' ')
+strsplit(cadenaVec, split='')
+</pre>
+
+
+
+<pre class="example">chSep &lt;- strsplit(cadenaVec, split=' ')
+class(chSep)
+length(chSep)
+sapply(chSep, length)
+sapply(chSep, nchar)
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-5-3-6" class="outline-4">
+<h4 id="sec-5-3-6"><span class="section-number-4">5.3.6</span> &hellip; y, por supuesto, manipular</h4>
+<div class="outline-text-4" id="text-5-3-6">
+
+
+
+
+<pre class="example">sub('o', '0', 'Hola Mundo')
+gsub('o', '0', 'Hola Mundo')
+
+substring(cadena, 1) &lt;- 'HOLA'
+cadena
+
+tolower(cadena)
+toupper(cadena)
+</pre>
+
+
+
+
+</div>
 </div>
 </div>
 </div>
 </div>
 
 <div id="postamble">
-<p class="date">Fecha: 2013-01-24 jue</p>
+<p class="date">Fecha: 30 de Enero de 2013</p>
 <p class="author">Autor: Oscar Perpiñán Lamigueiro</p>
-<p class="creator">Org version 7.8.11 with Emacs version 24</p>
+<p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.2+ with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
 <a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
 
 </div>
