@@ -15,8 +15,7 @@
 #+XSLT:
 #+startup: beamer
 #+LaTeX_CLASS: beamer
-#+LaTeX_CLASS_OPTIONS: [bigger]
-#+BEAMER_FRAME_LEVEL: 3
+#+BEAMER_FRAME_LEVEL: 2
 #+LATEX_HEADER: \AtBeginSection[]{\begin{frame}<beamer>\frametitle{Contenidos}\tableofcontents[currentsection]\end{frame}}
 #+LATEX_HEADER: \lstset{keywordstyle=\color{blue}, commentstyle=\color{gray!90}, basicstyle=\ttfamily\small, columns=fullflexible, breaklines=true,linewidth=\textwidth, backgroundcolor=\color{gray!23}, basewidth={0.5em,0.4em}, literate={á}{{\'a}}1 {ñ}{{\~n}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {º}{{\textordmasculine}}1}
 #+LATEX_HEADER: \usepackage{mathpazo}
@@ -25,10 +24,12 @@
 #+LATEX_HEADER: \usetheme{Goettingen}
 #+PROPERTY:  tangle yes
 #+PROPERTY:  comments org
+#+LATEX_HEADER: \usepackage{fancyvrb}
+#+LATEX_HEADER: \DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\tiny, formatcom = {\color{black!70}}}
 
-* =read.table=
-** Working directory
-*** Movernos por los directorios
+
+* Working directory
+** =setwd=, =getwd=, =dir=
 #+begin_src R
   getwd()
   old <- setwd("~/R/intro")
@@ -37,13 +38,14 @@
   dir('data')
 #+end_src
 
-** Lectura de ficheros (sencillo)
-*** Primer intento con SIAR
+* Lectura de ficheros (sencillo)
+** Descargamos datos de SIAR
 - [[http://eportal.magrama.gob.es/websiar]]
-- Seleccionamos 01/01/2004 a 31/12/2011
-- Temperatura, Humedad, Viento, Lluvia, Radiación, ET
+- *Estación*: Aranjuez, Madrid
+- *Período*: 01/01/2004 a 31/12/2011
+- *Variables*: Temperatura, Humedad, Viento, Lluvia, Radiación, ET
 
-*** Lectura de datos con =read.table=
+** Lectura de datos con =read.table=
 - Primero lo intentamos con la versión final
 #+begin_src R
   dats <- read.table('data/aranjuez.csv')
@@ -62,9 +64,10 @@
   names(aranjuez)
 #+end_src
 
-*** Visualización de datos 
+** Visualización de datos 
 #+begin_src R 
   library(lattice)
+  
   xyplot(Radiation ~ TempAvg, data=aranjuez)
   
   xyplot(Radiation ~ TempAvg, data=aranjuez,
@@ -75,13 +78,31 @@
          type=c('p', 'r'), auto.key=TRUE,
          pch=16, alpha=0.5)
 #+end_src
-
-*** Transformamos a serie temporal
+  
+** Visualización de datos (advanced!)
+#+begin_src R 
+  library(RColorBrewer)
+  
+  humidClass <- cut(aranjuez$HumidAvg, 4)
+  myPal <- brewer.pal(n=4, 'GnBu')
+  
+  xyplot(Radiation ~ TempAvg + TempMax + TempMin,
+         groups=humidClass, outer=TRUE,
+         data = aranjuez, xlab='Temperature',
+         layout=c(3, 1),
+         scales=list(relation='free'),
+         auto.key=list(space='right'),
+         par.settings=custom.theme(pch=16,
+           alpha=0.8, col=myPal))
+  
+#+end_src 
+** Transformamos a serie temporal
 
 #+begin_src R
   library(zoo)
   
-  fecha <- as.POSIXct(aranjuez[,1], format='%Y-%m-%d')
+  fecha <- as.POSIXct(aranjuez[,1],
+                      format='%Y-%m-%d')
   head(fecha)
   
   aranjuez <- zoo(aranjuez[, -1], fecha)
@@ -89,9 +110,10 @@
   head(aranjuez)
 #+end_src
 
-*** Leemos directamente como serie temporal
+** Leemos directamente como serie temporal
 #+begin_src R
-  aranjuez <- read.zoo('data/aranjuez.csv', sep=',', header=TRUE)
+  aranjuez <- read.zoo('data/aranjuez.csv',
+                       sep=',', header=TRUE)
 #+end_src
 
 #+begin_src R
@@ -100,9 +122,9 @@ names(aranjuez)
 summary(index(aranjuez))
 #+end_src
 
-** Lectura de datos (real)
-*** Ahora probamos con la versión original
-- Primero descomprimimos en una carpeta temporal
+* Lectura de datos (real)
+** Ahora con la versión original
+- Primero descomprimimos el archivo
 #+begin_src R
   unzip('data/InformeDatos.zip', exdir='data')
 #+end_src
@@ -112,32 +134,33 @@ summary(index(aranjuez))
                        fileEncoding = 'UTF-16LE',
                        header = TRUE, fill = TRUE,
                        sep = ';', dec = ",")
-  
+#+end_src
+- Vemos el contenido
+#+begin_src R
   head(aranjuez)
   summary(aranjuez)
   names(aranjuez)
 #+end_src
-- Vemos el contenido
-#+begin_src R
-  summary(aranjuez)
-#+end_src
 
-*** Convertimos a serie temporal
+** Convertimos a serie temporal
+- Sólo nos interesan algunas variables (indexamos por columnas)
 #+begin_src R
   tt <- as.Date(aranjuez$Fecha, format='%d/%m/%Y')
-  aranjuez <- zoo(aranjuez[, c(6, 7, 9, 11, 12, 16, 17, 19, 20, 22)],
+  aranjuez <- zoo(aranjuez[, c(6, 7, 9, 11, 12, 16,
+                               17, 19, 20, 22)],
                   order.by=tt)
 #+end_src
 
-*** Ajustamos los nombres (opcional)
+** Ajustamos los nombres (opcional)
 #+begin_src R
-  names(aranjuez) <- c('TempAvg', 'TempMax', 'TempMin',
-                       'HumidAvg', 'HumidMax',
-                       'WindAvg', 'WindMax',
-                       'Radiation', 'Rain', 'ET')
+  names(aranjuez) <- c('TempAvg', 'TempMax',
+                       'TempMin', 'HumidAvg',
+                       'HumidMax','WindAvg',
+                       'WindMax', 'Radiation',
+                       'Rain', 'ET')
 #+end_src
 
-*** Nuevamente mostramos datos
+** Nuevamente mostramos datos
 - Método simple
 #+begin_src R
   xyplot(aranjuez)
@@ -149,10 +172,11 @@ xyplot(aranjuez[,c("TempAvg", "TempMax", "TempMin")],
 #+end_src
 - Para cruzar variables hay que convertir a =data.frame=
 #+begin_src R
-xyplot(TempAvg ~ Radiation, data=as.data.frame(aranjuez))
+  xyplot(TempAvg ~ Radiation,
+         data=as.data.frame(aranjuez))
 #+end_src
 
-*** Limpieza de datos
+** Limpieza de datos
 - Conversión de Unidades (MJ -> Wh)
 #+begin_src R
   aranjuez$G0 <- aranjuez$Radiation/3.6*1000
@@ -171,8 +195,7 @@ xyplot(TempAvg ~ Radiation, data=as.data.frame(aranjuez))
 #+end_src
 
 * Datos agregados
-** =aggregate=
-*** Media anual
+** Media anual
 - Primero definimos una función para extraer el año
 #+begin_src R
   Year <- function(x)as.numeric(format(x, "%Y"))
@@ -182,16 +205,18 @@ xyplot(TempAvg ~ Radiation, data=as.data.frame(aranjuez))
 #+end_src
 - Y la empleamos para agrupar con =aggregate=
 #+begin_src R
-  aranjuezY <- aggregate(aranjuez$G0, by=Year, FUN=mean, na.rm=TRUE)
+  aranjuezY <- aggregate(aranjuez$G0, by=Year,
+                         FUN=mean, na.rm=TRUE)
   aranjuezY
   class(aranjuezY)
 #+end_src
 
 #+begin_src R
-G0y <- aggregate(aranjuez$G0, by=Year, FUN=mean, na.rm=TRUE)
-G0y
+  G0y <- aggregate(aranjuez$G0, by=Year,
+                   FUN=mean, na.rm=TRUE)
+  G0y
 #+end_src
-*** Medias mensuales
+** Medias mensuales
 - Meses como números
 #+begin_src R
   Month <- function(x)as.numeric(format(x, "%m"))
@@ -200,45 +225,43 @@ G0y
 #+end_src
 
 #+begin_src R
-  G0m <- aggregate(aranjuez$G0, by=Month, FUN=mean, na.rm=TRUE)
+  G0m <- aggregate(aranjuez$G0, by=Month,
+                   FUN=mean, na.rm=TRUE)
   G0m
 #+end_src
 
 - Meses como etiquetas
 #+begin_src R
-months(index(aranjuez))
+  months(index(aranjuez))
 #+end_src
 
 #+begin_src R
-  G0m <- aggregate(aranjuez$G0, by=months, FUN=mean, na.rm=TRUE)
+  G0m <- aggregate(aranjuez$G0, by=months,
+                   FUN=mean, na.rm=TRUE)
   G0m
 #+end_src
 
-*** Medias mensuales para cada año
+** Medias mensuales para cada año
 - La función para agrupar es =as.yearmon=
 #+begin_src R
   as.yearmon(index(aranjuez))
 #+end_src
 
 #+begin_src R
-  G0ym <- aggregate(aranjuez$G0, by=as.yearmon, FUN=mean, na.rm=TRUE)
+  G0ym <- aggregate(aranjuez$G0, by=as.yearmon,
+                    FUN=mean, na.rm=TRUE)
   G0ym
 #+end_src
 
-
-##################################################################
-## Datos desde una URL
-##################################################################
 * Datos desde una URL
-** NREL
-*** Ejemplo: Lanai-Hawaii
+** Ejemplo: Lanai-Hawaii
 
 #+begin_src R
   URL <- "http://www.nrel.gov/midc/apps/plot.pl?site=LANAI&start=20090722&edy=19&emo=11&eyr=2010&zenloc=19&year=2010&month=11&day=1&endyear=2010&endmonth=11&endday=19&time=1&inst=3&inst=4&inst=5&inst=10&type=data&first=3&math=0&second=-1&value=0.0&global=-1&direct=-1&diffuse=-1&user=0&axis=1"
   ## URL <- "data/NREL-Hawaii.csv"
 #+end_src
 
-#+begin_verbatim
+#+begin_example
 DATE,HST,Global Horizontal [W/m^2],Direct Normal [W/m^2],Diffuse Horizontal [W/m^2],Air Temperature [deg C]
 11/1/2010,06:32,4.87621,0,4.87621,14.67
 11/1/2010,06:33,5.14142,0,5.14142,14.54
@@ -250,20 +273,23 @@ DATE,HST,Global Horizontal [W/m^2],Direct Normal [W/m^2],Diffuse Horizontal [W/m
 11/1/2010,06:39,4.88811,0,4.88811,15.71
 11/1/2010,06:40,5.85428,0,5.85428,15.8
 11/1/2010,06:41,8.27598,0,8.27598,15.87
-#+end_verbatim
+#+end_example
 
-*** Leemos como serie temporal
+** Leemos como serie temporal
 - Leemos con =read.zoo=
 #+begin_src R
   lat <- 20.77
   lon <- -156.9339
   hawaii <- read.zoo(URL,
-                  col.names = c("date", "hour", "G0", "B", "D0", "Ta"),
+                  col.names = c("date", "hour",
+                    "G0", "B", "D0", "Ta"),
                   ## Dia en columna 1, Hora en columna 2
                   index = list(1, 2),
-                  ## Obtiene índice temporal de estas dos columnas
-                  FUN = function(d, h) as.POSIXct(paste(d, h),
-                    format = "%m/%d/%Y %H:%M", tz = "HST"), 
+                  ## Obtiene escala temporal de estas dos columnas
+                  FUN = function(d, h) as.POSIXct(
+                    paste(d, h),
+                    format = "%m/%d/%Y %H:%M",
+                    tz = "HST"), 
                   header=TRUE, sep=",")
   
 #+end_src
@@ -272,56 +298,73 @@ DATE,HST,Global Horizontal [W/m^2],Direct Normal [W/m^2],Diffuse Horizontal [W/m
   hawaii$B0 <- with(hawaii, G0-D0)
 #+end_src
 
-*** Mostramos datos como serie temporal
+** Mostramos datos como serie temporal
 #+begin_src R
   xyplot(hawaii)
-  xyplot(hawaii[,c('G0', 'D0', 'B0')], superpose=TRUE)
+  xyplot(hawaii[,c('G0', 'D0', 'B0')],
+         superpose=TRUE)
 #+end_src
 
-*** Mostramos relaciones entre variables
+** Mostramos relaciones entre variables
 #+begin_src R
-  xyplot(Ta ~ G0 + D0 + B0, data=as.data.frame(hawaii), type=c('p', 'smooth'),
-         par.settings=custom.theme(alpha=.5, pch=16,
+  xyplot(Ta ~ G0 + D0 + B0,
+         data=as.data.frame(hawaii),
+         type=c('p', 'smooth'),
+         par.settings=custom.theme(
+           alpha=.5, pch=16,
            lwd=3, col.line='black'),
          outer=TRUE, layout=c(3, 1),
          scales=list(x=list(relation='free')))
 #+end_src
 
-** Datos agregados
-*** Irradiación horaria
+** Irradiación horaria
 - Primer intento
 #+begin_src R
   hour <- function(x)as.numeric(format(x, '%H'))
 #+end_src
 
 #+begin_src R
-  G0h <- aggregate(hawaii$G0, by=hour, FUN=sum, na.rm=1)/1000
+  G0h <- aggregate(hawaii$G0, by=hour,
+                   FUN=sum, na.rm=1)/1000
   G0h
 #+end_src
 
-*** Irradiación horaria
+** Irradiación horaria
 
+- Mejor así
 #+begin_src R
-  hour <- function(x)as.POSIXct(format(x, '%Y-%m-%d %H:00:00'))
+  hour <- function(x)as.POSIXct(format(x,
+                                       '%Y-%m-%d %H:00:00'))
 #+end_src
 
 #+begin_src R
-  G0h <- aggregate(hawaii$G0, by=hour, FUN=sum, na.rm=1)/60
+  G0h <- aggregate(hawaii$G0, by=hour,
+                   FUN=sum, na.rm=1)/60
   G0h
 #+end_src
 
-*** Irradiación diaria
+** Irradiación diaria
 - A partir de la horaria
 #+begin_src R
-G0d <- aggregate(G0h, by=function(x)format(x, '%Y-%m-%d'), sum)/1000
+  G0d <- aggregate(G0h,
+                   by=function(x)format(x, '%Y-%m-%d'),
+                   sum)/1000
 #+end_src
 - A partir de la minutaria
 #+begin_src R
-  G0d <- aggregate(hawaii$G0, by=function(x)format(x, '%Y-%m-%d'), sum)/60/1000
+  day <- function(x)format(x, '%Y-%m-%d')
+  G0d <- aggregate(hawaii$G0, by=day,
+                   sum)/60/1000
+  G0d
+  
+  truncDay <- function(x)as.POSIXct(trunc(x, units='day'))
+  G0d <- aggregate(hawaii$G0, by=truncDay,
+                   sum)/60/1000
+  G0d
 #+end_src
 
 
-*** Más complicado: agrupar por 30 minutos
+** Más complicado: agrupar por 30 minutos
 #+begin_src R
   halfHour <- function(tt, delta=30){
     tt <- as.POSIXlt(tt)
@@ -332,7 +375,8 @@ G0d <- aggregate(G0h, by=function(x)format(x, '%Y-%m-%d'), sum)/1000
 #+end_src
 
 #+begin_src R
-  hawaii30 <- aggregate(hawaii, by=halfHour, FUN=sum)/60
+  hawaii30 <- aggregate(hawaii, by=halfHour,
+                        FUN=sum)/60
   
   head(hawaii30)
 #+end_src

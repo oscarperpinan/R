@@ -1,5 +1,5 @@
-% Created 2013-02-05 mar 14:55
-\documentclass[bigger]{beamer}
+% Created 2013-02-05 mar 22:34
+\documentclass{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{fixltx2e}
@@ -23,6 +23,8 @@
 \setbeamercovered{transparent}
 \usefonttheme{serif} 
 \usetheme{Goettingen}
+\usepackage{fancyvrb}
+\DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\tiny, formatcom = {\color{black!70}}}
 \providecommand{\alert}[1]{\textbf{#1}}
 
 \title{Manejo de datos con R}
@@ -38,13 +40,12 @@
 \maketitle
 
 
-\section{\texttt{read.table}}
+
+\section{Working directory}
 \label{sec-1}
-\subsection{Working directory}
-\label{sec-1-1}
 \begin{frame}[fragile]
-\frametitle{Movernos por los directorios}
-\label{sec-1-1-1}
+\frametitle{\texttt{setwd}, \texttt{getwd}, \texttt{dir}}
+\label{sec-1-1}
 
 
 \lstset{language=R}
@@ -56,21 +57,22 @@ dir(pattern='.R')
 dir('data')
 \end{lstlisting}
 \end{frame}
-\subsection{Lectura de ficheros (sencillo)}
-\label{sec-1-2}
+\section{Lectura de ficheros (sencillo)}
+\label{sec-2}
 \begin{frame}
-\frametitle{Primer intento con SIAR}
-\label{sec-1-2-1}
+\frametitle{Descargamos datos de SIAR}
+\label{sec-2-1}
 
 \begin{itemize}
-\item \url{http://eportal.magrama.gob.es/websiar}
-\item Seleccionamos 01/01/2004 a 31/12/2011
-\item Temperatura, Humedad, Viento, Lluvia, Radiación, ET
+\item \href{http://eportal.magrama.gob.es/websiar}{http://eportal.magrama.gob.es/websiar}
+\item \textbf{Estación}: Aranjuez, Madrid
+\item \textbf{Período}: 01/01/2004 a 31/12/2011
+\item \textbf{Variables}: Temperatura, Humedad, Viento, Lluvia, Radiación, ET
 \end{itemize}
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Lectura de datos con \texttt{read.table}}
-\label{sec-1-2-2}
+\label{sec-2-2}
 
 \begin{itemize}
 \item Primero lo intentamos con la versión final
@@ -96,12 +98,13 @@ names(aranjuez)
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Visualización de datos}
-\label{sec-1-2-3}
+\label{sec-2-3}
 
 
 \lstset{language=R}
 \begin{lstlisting}
 library(lattice)
+
 xyplot(Radiation ~ TempAvg, data=aranjuez)
 
 xyplot(Radiation ~ TempAvg, data=aranjuez,
@@ -112,10 +115,33 @@ xyplot(Radiation ~ TempAvg + TempMax + TempMin,
        type=c('p', 'r'), auto.key=TRUE,
        pch=16, alpha=0.5)
 \end{lstlisting}
+  
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Visualización de datos (advanced!)}
+\label{sec-2-4}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+library(RColorBrewer)
+
+humidClass <- cut(aranjuez$HumidAvg, 4)
+myPal <- brewer.pal(n=4, 'GnBu')
+
+xyplot(Radiation ~ TempAvg + TempMax + TempMin,
+       groups=humidClass, outer=TRUE,
+       data = aranjuez, xlab='Temperature',
+       layout=c(3, 1),
+       scales=list(relation='free'),
+       auto.key=list(space='right'),
+       par.settings=custom.theme(pch=16,
+         alpha=0.8, col=myPal))
+\end{lstlisting}
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Transformamos a serie temporal}
-\label{sec-1-2-4}
+\label{sec-2-5}
 
 
 
@@ -123,7 +149,8 @@ xyplot(Radiation ~ TempAvg + TempMax + TempMin,
 \begin{lstlisting}
 library(zoo)
 
-fecha <- as.POSIXct(aranjuez[,1], format='%Y-%m-%d')
+fecha <- as.POSIXct(aranjuez[,1],
+                    format='%Y-%m-%d')
 head(fecha)
 
 aranjuez <- zoo(aranjuez[, -1], fecha)
@@ -133,12 +160,13 @@ head(aranjuez)
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Leemos directamente como serie temporal}
-\label{sec-1-2-5}
+\label{sec-2-6}
 
 
 \lstset{language=R}
 \begin{lstlisting}
-aranjuez <- read.zoo('data/aranjuez.csv', sep=',', header=TRUE)
+aranjuez <- read.zoo('data/aranjuez.csv',
+                     sep=',', header=TRUE)
 \end{lstlisting}
 
 
@@ -149,14 +177,14 @@ names(aranjuez)
 summary(index(aranjuez))
 \end{lstlisting}
 \end{frame}
-\subsection{Lectura de datos (real)}
-\label{sec-1-3}
+\section{Lectura de datos (real)}
+\label{sec-3}
 \begin{frame}[fragile]
-\frametitle{Ahora probamos con la versión original}
-\label{sec-1-3-1}
+\frametitle{Ahora con la versión original}
+\label{sec-3-1}
 
 \begin{itemize}
-\item Primero descomprimimos en una carpeta temporal
+\item Primero descomprimimos el archivo
 \end{itemize}
 
 \lstset{language=R}
@@ -173,10 +201,6 @@ aranjuez <- read.table("data/M03_Aranjuez_01_01_2004_31_12_2011.csv",
                      fileEncoding = 'UTF-16LE',
                      header = TRUE, fill = TRUE,
                      sep = ';', dec = ",")
-
-head(aranjuez)
-summary(aranjuez)
-names(aranjuez)
 \end{lstlisting}
 \begin{itemize}
 \item Vemos el contenido
@@ -184,37 +208,44 @@ names(aranjuez)
 
 \lstset{language=R}
 \begin{lstlisting}
+head(aranjuez)
 summary(aranjuez)
+names(aranjuez)
 \end{lstlisting}
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Convertimos a serie temporal}
-\label{sec-1-3-2}
+\label{sec-3-2}
 
+\begin{itemize}
+\item Sólo nos interesan algunas variables (indexamos por columnas)
+\end{itemize}
 
 \lstset{language=R}
 \begin{lstlisting}
 tt <- as.Date(aranjuez$Fecha, format='%d/%m/%Y')
-aranjuez <- zoo(aranjuez[, c(6, 7, 9, 11, 12, 16, 17, 19, 20, 22)],
+aranjuez <- zoo(aranjuez[, c(6, 7, 9, 11, 12, 16,
+                             17, 19, 20, 22)],
                 order.by=tt)
 \end{lstlisting}
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Ajustamos los nombres (opcional)}
-\label{sec-1-3-3}
+\label{sec-3-3}
 
 
 \lstset{language=R}
 \begin{lstlisting}
-names(aranjuez) <- c('TempAvg', 'TempMax', 'TempMin',
-                     'HumidAvg', 'HumidMax',
-                     'WindAvg', 'WindMax',
-                     'Radiation', 'Rain', 'ET')
+names(aranjuez) <- c('TempAvg', 'TempMax',
+                     'TempMin', 'HumidAvg',
+                     'HumidMax','WindAvg',
+                     'WindMax', 'Radiation',
+                     'Rain', 'ET')
 \end{lstlisting}
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Nuevamente mostramos datos}
-\label{sec-1-3-4}
+\label{sec-3-4}
 
 \begin{itemize}
 \item Método simple
@@ -239,12 +270,13 @@ xyplot(aranjuez[,c("TempAvg", "TempMax", "TempMin")],
 
 \lstset{language=R}
 \begin{lstlisting}
-xyplot(TempAvg ~ Radiation, data=as.data.frame(aranjuez))
+xyplot(TempAvg ~ Radiation,
+       data=as.data.frame(aranjuez))
 \end{lstlisting}
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Limpieza de datos}
-\label{sec-1-3-5}
+\label{sec-3-5}
 
 \begin{itemize}
 \item Conversión de Unidades (MJ -> Wh)
@@ -272,12 +304,10 @@ aranjuez <- zoo(aranjuezClean, index(aranjuez))
 \end{lstlisting}
 \end{frame}
 \section{Datos agregados}
-\label{sec-2}
-\subsection{\texttt{aggregate}}
-\label{sec-2-1}
+\label{sec-4}
 \begin{frame}[fragile]
 \frametitle{Media anual}
-\label{sec-2-1-1}
+\label{sec-4-1}
 
 \begin{itemize}
 \item Primero definimos una función para extraer el año
@@ -295,7 +325,8 @@ Year(index(aranjuez))
 
 \lstset{language=R}
 \begin{lstlisting}
-aranjuezY <- aggregate(aranjuez$G0, by=Year, FUN=mean, na.rm=TRUE)
+aranjuezY <- aggregate(aranjuez$G0, by=Year,
+                       FUN=mean, na.rm=TRUE)
 aranjuezY
 class(aranjuezY)
 \end{lstlisting}
@@ -303,13 +334,14 @@ class(aranjuezY)
 
 \lstset{language=R}
 \begin{lstlisting}
-G0y <- aggregate(aranjuez$G0, by=Year, FUN=mean, na.rm=TRUE)
+G0y <- aggregate(aranjuez$G0, by=Year,
+                 FUN=mean, na.rm=TRUE)
 G0y
 \end{lstlisting}
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Medias mensuales}
-\label{sec-2-1-2}
+\label{sec-4-2}
 
 \begin{itemize}
 \item Meses como números
@@ -325,7 +357,8 @@ Month(index(aranjuez))
 
 \lstset{language=R}
 \begin{lstlisting}
-G0m <- aggregate(aranjuez$G0, by=Month, FUN=mean, na.rm=TRUE)
+G0m <- aggregate(aranjuez$G0, by=Month,
+                 FUN=mean, na.rm=TRUE)
 G0m
 \end{lstlisting}
 
@@ -341,13 +374,14 @@ months(index(aranjuez))
 
 \lstset{language=R}
 \begin{lstlisting}
-G0m <- aggregate(aranjuez$G0, by=months, FUN=mean, na.rm=TRUE)
+G0m <- aggregate(aranjuez$G0, by=months,
+                 FUN=mean, na.rm=TRUE)
 G0m
 \end{lstlisting}
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Medias mensuales para cada año}
-\label{sec-2-1-3}
+\label{sec-4-3}
 
 \begin{itemize}
 \item La función para agrupar es \texttt{as.yearmon}
@@ -361,17 +395,16 @@ as.yearmon(index(aranjuez))
 
 \lstset{language=R}
 \begin{lstlisting}
-G0ym <- aggregate(aranjuez$G0, by=as.yearmon, FUN=mean, na.rm=TRUE)
+G0ym <- aggregate(aranjuez$G0, by=as.yearmon,
+                  FUN=mean, na.rm=TRUE)
 G0ym
 \end{lstlisting}
 \end{frame}
 \section{Datos desde una URL}
-\label{sec-3}
-\subsection{NREL}
-\label{sec-3-1}
+\label{sec-5}
 \begin{frame}[fragile]
 \frametitle{Ejemplo: Lanai-Hawaii}
-\label{sec-3-1-1}
+\label{sec-5-1}
 
 
 
@@ -381,7 +414,9 @@ URL <- "http://www.nrel.gov/midc/apps/plot.pl?site=LANAI&start=20090722&edy=19&e
 ## URL <- "data/NREL-Hawaii.csv"
 \end{lstlisting}
 
-DATE,HST,Global Horizontal [W/m$^2$],Direct Normal [W/m$^2$],Diffuse Horizontal [W/m$^2$],Air Temperature [deg C]
+
+\begin{verbatim}
+DATE,HST,Global Horizontal [W/m^2],Direct Normal [W/m^2],Diffuse Horizontal [W/m^2],Air Temperature [deg C]
 11/1/2010,06:32,4.87621,0,4.87621,14.67
 11/1/2010,06:33,5.14142,0,5.14142,14.54
 11/1/2010,06:34,1.42216,0,1.42216,14.43
@@ -392,10 +427,11 @@ DATE,HST,Global Horizontal [W/m$^2$],Direct Normal [W/m$^2$],Diffuse Horizontal 
 11/1/2010,06:39,4.88811,0,4.88811,15.71
 11/1/2010,06:40,5.85428,0,5.85428,15.8
 11/1/2010,06:41,8.27598,0,8.27598,15.87
+\end{verbatim}
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Leemos como serie temporal}
-\label{sec-3-1-2}
+\label{sec-5-2}
 
 \begin{itemize}
 \item Leemos con \texttt{read.zoo}
@@ -406,12 +442,15 @@ DATE,HST,Global Horizontal [W/m$^2$],Direct Normal [W/m$^2$],Diffuse Horizontal 
 lat <- 20.77
 lon <- -156.9339
 hawaii <- read.zoo(URL,
-                col.names = c("date", "hour", "G0", "B", "D0", "Ta"),
+                col.names = c("date", "hour",
+                  "G0", "B", "D0", "Ta"),
                 ## Dia en columna 1, Hora en columna 2
                 index = list(1, 2),
-                ## Obtiene índice temporal de estas dos columnas
-                FUN = function(d, h) as.POSIXct(paste(d, h),
-                  format = "%m/%d/%Y %H:%M", tz = "HST"), 
+                ## Obtiene escala temporal de estas dos columnas
+                FUN = function(d, h) as.POSIXct(
+                  paste(d, h),
+                  format = "%m/%d/%Y %H:%M",
+                  tz = "HST"), 
                 header=TRUE, sep=",")
 \end{lstlisting}
 \begin{itemize}
@@ -425,34 +464,36 @@ hawaii$B0 <- with(hawaii, G0-D0)
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Mostramos datos como serie temporal}
-\label{sec-3-1-3}
+\label{sec-5-3}
 
 
 \lstset{language=R}
 \begin{lstlisting}
 xyplot(hawaii)
-xyplot(hawaii[,c('G0', 'D0', 'B0')], superpose=TRUE)
+xyplot(hawaii[,c('G0', 'D0', 'B0')],
+       superpose=TRUE)
 \end{lstlisting}
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Mostramos relaciones entre variables}
-\label{sec-3-1-4}
+\label{sec-5-4}
 
 
 \lstset{language=R}
 \begin{lstlisting}
-xyplot(Ta ~ G0 + D0 + B0, data=as.data.frame(hawaii), type=c('p', 'smooth'),
-       par.settings=custom.theme(alpha=.5, pch=16,
+xyplot(Ta ~ G0 + D0 + B0,
+       data=as.data.frame(hawaii),
+       type=c('p', 'smooth'),
+       par.settings=custom.theme(
+         alpha=.5, pch=16,
          lwd=3, col.line='black'),
        outer=TRUE, layout=c(3, 1),
        scales=list(x=list(relation='free')))
 \end{lstlisting}
 \end{frame}
-\subsection{Datos agregados}
-\label{sec-3-2}
 \begin{frame}[fragile]
 \frametitle{Irradiación horaria}
-\label{sec-3-2-1}
+\label{sec-5-5}
 
 \begin{itemize}
 \item Primer intento
@@ -466,31 +507,37 @@ hour <- function(x)as.numeric(format(x, '%H'))
 
 \lstset{language=R}
 \begin{lstlisting}
-G0h <- aggregate(hawaii$G0, by=hour, FUN=sum, na.rm=1)/1000
+G0h <- aggregate(hawaii$G0, by=hour,
+                 FUN=sum, na.rm=1)/1000
 G0h
 \end{lstlisting}
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Irradiación horaria}
-\label{sec-3-2-2}
+\label{sec-5-6}
 
 
+\begin{itemize}
+\item Mejor así
+\end{itemize}
 
 \lstset{language=R}
 \begin{lstlisting}
-hour <- function(x)as.POSIXct(format(x, '%Y-%m-%d %H:00:00'))
+hour <- function(x)as.POSIXct(format(x,
+                                     '%Y-%m-%d %H:00:00'))
 \end{lstlisting}
 
 
 \lstset{language=R}
 \begin{lstlisting}
-G0h <- aggregate(hawaii$G0, by=hour, FUN=sum, na.rm=1)/60
+G0h <- aggregate(hawaii$G0, by=hour,
+                 FUN=sum, na.rm=1)/60
 G0h
 \end{lstlisting}
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Irradiación diaria}
-\label{sec-3-2-3}
+\label{sec-5-7}
 
 \begin{itemize}
 \item A partir de la horaria
@@ -498,7 +545,9 @@ G0h
 
 \lstset{language=R}
 \begin{lstlisting}
-G0d <- aggregate(G0h, by=function(x)format(x, '%Y-%m-%d'), sum)/1000
+G0d <- aggregate(G0h,
+                 by=function(x)format(x, '%Y-%m-%d'),
+                 sum)/1000
 \end{lstlisting}
 \begin{itemize}
 \item A partir de la minutaria
@@ -506,12 +555,20 @@ G0d <- aggregate(G0h, by=function(x)format(x, '%Y-%m-%d'), sum)/1000
 
 \lstset{language=R}
 \begin{lstlisting}
-G0d <- aggregate(hawaii$G0, by=function(x)format(x, '%Y-%m-%d'), sum)/60/1000
+day <- function(x)format(x, '%Y-%m-%d')
+G0d <- aggregate(hawaii$G0, by=day,
+                 sum)/60/1000
+G0d
+
+truncDay <- function(x)as.POSIXct(trunc(x, units='day'))
+G0d <- aggregate(hawaii$G0, by=truncDay,
+                 sum)/60/1000
+G0d
 \end{lstlisting}
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Más complicado: agrupar por 30 minutos}
-\label{sec-3-2-4}
+\label{sec-5-8}
 
 
 \lstset{language=R}
@@ -527,7 +584,8 @@ halfHour <- function(tt, delta=30){
 
 \lstset{language=R}
 \begin{lstlisting}
-hawaii30 <- aggregate(hawaii, by=halfHour, FUN=sum)/60
+hawaii30 <- aggregate(hawaii, by=halfHour,
+                      FUN=sum)/60
 
 head(hawaii30)
 \end{lstlisting}
