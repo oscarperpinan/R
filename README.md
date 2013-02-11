@@ -8,13 +8,11 @@ Para trabajar con la documentación de este repositorio es recomendable obtener 
 
 ¿Qué es R?
 ----
-¿Qué es [R](http://procomun.wordpress.com/2011/02/23/que-es-r/)? 
-Es un lenguaje de programación principalmente orientado al análisis estadístico y visualización de información cuantitativa y cualitativa y publicado como software libre con licencia GNU-GPL. 
+[R](http://procomun.wordpress.com/2011/02/23/que-es-r/)? es un lenguaje de programación principalmente orientado al análisis estadístico y visualización de información cuantitativa y cualitativa y publicado como software libre con licencia GNU-GPL. 
 Esta entrada de la lista de correo R-help ([How do I get my IT department to “bless” R?](http://tolstoy.newcastle.edu.au/R/e6/help/09/02/4456.html)) lo describe de forma muy interesante.
 
 Para instalar R
 ----
-
 * Si utilizáis Windows, podéis descargar el instalador desde aquí: http://cran.es.r-project.org/bin/windows/base/.
 * Si utilizáis Mac debéis ir a esta página: http://cran.es.r-project.org/bin/macosx/.
 * Y si utilizáis Linux, posiblemente lo tengáis disponible en vuestro gestor de aplicaciones. En todo caso, la página para Linux está aquí: http://cran.es.r-project.org/bin/linux/.
@@ -22,7 +20,8 @@ Para instalar R
 Documentación 
 ----
 Podéis consultar el [manual introductorio](http://cran.r-project.org/doc/manuals/R-intro.html), los [manuales oficiales](http://cran.r-project.org/manuals.html) y los [manuales externos](http://cran.r-project.org/other-docs.html). 
-Además, las [listas de correo ](http://www.r-project.org/mail.html) son una fuente excelente de información y un lugar privilegiado para solicitar ayuda (sin olvidar respetar [estos consejos](http://www.r-project.org/posting-guide.html)).
+Además, las [listas de correo](http://www.r-project.org/mail.html) son una fuente excelente de información y un lugar privilegiado para solicitar ayuda (sin olvidar respetar [estos consejos](http://www.r-project.org/posting-guide.html)).
+También es muy recomendable el agregador de blogs sobre R [R-bloggers](http://www.r-bloggers.com/)
 
 Interfaces para R
 ----
