@@ -25,3 +25,8 @@ Entre otros, emplearemos los siguientes:
 * [zoo](http://cran.es.r-project.org/web/packages/zoo/)
 * [sp](http://cran.r-project.org/web/packages/sp/)
 * [raster](http://cran.es.r-project.org/web/packages/raster/) y [rasterVis](http://rastervis.r-forge.r-project.org/)
+
+Cómo usar esta documentación
+====
+ 
+Para trabajar con la documentación de este repositorio es recomendable obtener una copia local. Puedes hacerlo descargando el repositorio en formato [ZIP](https://github.com/oscarperpinan/intro/archive/master.zip) o haciendo una copia del repositorio con git: `git://github.com/oscarperpinan/intro.git`
