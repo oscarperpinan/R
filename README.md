@@ -8,7 +8,7 @@ Para trabajar con la documentación de este repositorio es recomendable obtener 
 
 ¿Qué es R?
 ----
-[R](http://procomun.wordpress.com/2011/02/23/que-es-r/)? es un lenguaje de programación principalmente orientado al análisis estadístico y visualización de información cuantitativa y cualitativa y publicado como software libre con licencia GNU-GPL. 
+[R](http://procomun.wordpress.com/2011/02/23/que-es-r/) es un lenguaje de programación principalmente orientado al análisis estadístico y visualización de información cuantitativa y cualitativa y publicado como software libre con licencia GNU-GPL. 
 Esta entrada de la lista de correo R-help ([How do I get my IT department to “bless” R?](http://tolstoy.newcastle.edu.au/R/e6/help/09/02/4456.html)) lo describe de forma muy interesante.
 
 Para instalar R
