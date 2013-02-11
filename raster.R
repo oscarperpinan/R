@@ -14,6 +14,7 @@ library("latticeExtra")
 
 library("sp")
 
+library("ncdf")
 library("raster")
 library("rasterVis")
 

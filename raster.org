@@ -59,6 +59,7 @@
   
   library("sp")
   
+  library("ncdf")
   library("raster")
   library("rasterVis")
 #+end_src
