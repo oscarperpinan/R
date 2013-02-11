@@ -1,0 +1,232 @@
+#+TITLE:     Uso de datos raster
+#+AUTHOR:    Oscar Perpiñán Lamigueiro
+#+EMAIL:     oscar.perpinan@gmail.com
+#+DESCRIPTION:
+#+KEYWORDS:
+#+LANGUAGE:  es
+#+OPTIONS:   H:3 num:t toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+LINK_UP:   
+#+LINK_HOME: 
+#+XSLT:
+#+startup: beamer
+#+LaTeX_CLASS: beamer
+#+BEAMER_FRAME_LEVEL: 2
+#+LATEX_CLASS_OPTIONS: [xcolor={usenames,svgnames,dvipsnames}]
+#+LATEX_HEADER: \AtBeginSubsection[]{\begin{frame}[plain]\tableofcontents[currentsubsection]\end{frame}}
+#+LATEX_HEADER: \lstset{commentstyle=\color{gray!90}, basicstyle=\ttfamily\small, columns=fullflexible, breaklines=true,linewidth=\textwidth, backgroundcolor=\color{gray!23}, basewidth={0.5em,0.4em}, literate={á}{{\'a}}1 {ñ}{{\~n}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {º}{{\textordmasculine}}1}
+#+LATEX_HEADER: \usepackage{mathpazo}
+#+LATEX_HEADER: \setbeamercovered{transparent}
+#+LATEX_HEADER: \usefonttheme{serif} 
+#+LATEX_HEADER: \usetheme{Goettingen}
+#+LATEX_HEADER: \hypersetup{colorlinks=true, linkcolor=Blue, urlcolor=Blue}
+#+PROPERTY:  tangle yes
+#+PROPERTY:  comments org
+
+* Puesta en marcha
+
+** Descargar datos de CM~SAF
+- CM~SAF: http://www.cmsaf.eu/
+- Piden registro (gratuito) para descarga de datos masivos.
+- Está disponible en [[http://re.jrc.ec.europa.eu/pvgis/apps4/pvest.php][PV-GIS]] (sólo datos puntuales).
+- Hay que elegir el producto SIS (Surface incoming short-wave radiation).
+  - Para el ejemplo: medias mensuales del 2008 abarcando la Península Ibérica.
+  - /Operational product/
+  - Fuente Seviri/MSG2.
+  - Resolución: 0.03 x 0.03 grados.
+- El conjunto de ficheros estará disponible vía FTP transcurrido un tiempo.
+
+** Disponible en el material del curso
+- Como ZIP aislado del [[https://github.com/oscarperpinan/intro][repositorio github]]: [[https://github.com/oscarperpinan/intro/blob/master/data/SISmm2008_CMSAF.zip?raw%3Dtrue][SISmm2008_CMSAF.zip]]
+- Mejor y más fácil: [[https://github.com/oscarperpinan/intro/archive/master.zip][descargar todo el repositorio]] y descomprimir el ZIP en una carpeta (por ejemplo =C:/intro=).
+  - El ZIP de datos CM~SAF está dentro de la carpeta =data=.
+
+** Primeros pasos en R
+- Configuramos el directorio de trabajo
+#+begin_src R
+  ## Entre las comillas hay que indicar el directorio en el que está el
+  ## fichero SISmm2008_CMSAF.zip.
+  setwd('C:/intro/data')
+#+end_src
+- Cargo los paquetes que usaremos
+#+begin_src R
+  ## Si no están instalados hay que usar install.packages('Nombre_del_Paquete')
+  library("lattice")
+  library("latticeExtra")
+  
+  library("sp")
+  
+  library("raster")
+  library("rasterVis")
+#+end_src
+
+* Empiezan los cálculos
+  
+** Leo los ficheros CM~SAF
+#+begin_src R
+    unzip("SISmm2008_CMSAF.zip")
+    listFich <- dir(pattern=".nc")
+    stackSIS <- stack(listFich)
+    ## irradiancia (W/m2) a irradiacion Wh/m2
+    stackSIS <- stackSIS*24 
+#+end_src
+
+** Añado información temporal
+#+begin_src R
+  idx <- seq(as.Date("2008-01-15"),
+             as.Date("2008-12-15"),
+             "month")
+  
+  SISmm <- setZ(stackSIS, idx)
+#+end_src
+
+** Fijo la proyección de trabajo y nombres de capas
+#+begin_src R
+  proj <- CRS("+proj=longlat +ellps=WGS84")
+  projection(SISmm) <- proj
+  names(SISmm) <- month.abb
+#+end_src
+
+** Veamos la información  
+- Mapa clásico
+#+begin_src R
+  levelplot(SISmm)
+#+end_src
+- Densidad de probabilidad por capa (mes)
+#+begin_src R
+  densityplot(SISmm)
+#+end_src
+** Más sobre visualización
+- Gráfico Hovmoller (tiempo-latitud)
+#+begin_src R
+  hovmoller(SISmm, dirXY=y,
+            panel=panel.2dsmoother, n=1000)
+#+end_src
+- Gráfico Hovmoller (tiempo-longitud)
+#+begin_src R
+  hovmoller(SISmm, dirXY=x,
+            panel=panel.2dsmoother, n=1000)
+#+end_src
+
+** Calculamos el valor anual por celda
+- No del todo correcto (cada mes tiene un número diferente de días)
+#+begin_src R
+SISy <- mean(SISmm) * 365/1000
+#+end_src
+- Mejorado
+#+begin_src R
+  SISy <-  sum(SISmm *
+               c(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31))/1000
+  names(SISy) <- 'G0'
+#+end_src  
+** Veamos la radiación anual
+- Relación con la longitud y la latitud
+#+begin_src R
+  xyplot(G0 ~ y, data=SISy)
+  xyplot(G0 ~ x, data=SISy)
+#+end_src
+- Distribución de valores
+#+begin_src R
+  histogram(SISy)
+#+end_src
+
+
+* Combinación de un =Raster= con puntos (estaciones)
+
+** Extraemos información de un punto
+#+begin_src R
+  myPoint <- cbind(-3.6, 40.1)
+  extract(SISmm, myPoint)
+#+end_src  
+** Extraemos información de varios puntos
+#+begin_src R
+  myLocs <- cbind(-8, 38:43)
+  SISlocs <- extract(SISmm, myLocs)
+#+end_src  
+- Superponemos mapa global con la localización de los puntos
+#+begin_src R
+  levelplot(SISy) +
+    layer(sp.points(myLocs,
+                    pch=16, col='black')) 
+#+end_src
+** Extraemos información de una rejilla
+#+begin_src R
+  extent(SISmm)
+  myGrid <- expand.grid(long=-10:4, lat=36:44)
+  SISgrid <- extract(SISmm, myGrid)
+#+end_src  
+- Nuevamente superponemos mapa y rejilla
+#+begin_src R
+  levelplot(SISy) +
+    layer(sp.points(myGrid,
+                    pch=16, col='black')) 
+#+end_src  
+
+
+* Avanzado: CM~SAF y SIAR
+
+** Estaciones MAGRAMA-SIAR
+- Descargamos localización de las estaciones SIAR
+#+begin_src R
+  ## Si no hemos descargado el respositorio GitHub
+  SIAR <- read.csv("http://solar.r-forge.r-project.org/data/SIAR.csv")
+  ## Si ya lo hemos descargado está en data
+  SIAR <- read.csv("data/SIAR.csv")
+#+end_src  
+- Construimos un objeto espacial con la información y las coordenadas
+#+begin_src R
+  spSIAR <- SpatialPointsDataFrame(SIAR[, c(6, 7)],
+                                   SIAR[, -c(6, 7)],
+                                   proj4str=proj)
+  head(spSIAR)
+#+end_src
+- Mostramos el mapa de radiación anual con las estaciones SIAR
+#+begin_src R
+  levelplot(SISy, layers='Jun') +
+    layer(sp.points(spSIAR,
+                    pch=19, col='black', cex=0.6))
+#+end_src
+  
+** Extraemos información de CM~SAF 
+#+begin_src R
+  CMSAF.SIAR <- extract(SISmm, spSIAR)
+  CMSAF.SIAR <- zoo(t(CMSAF.SIAR), as.yearmon(idx))
+  names(CMSAF.SIAR) <- spSIAR$Estacion
+  summary(CMSAF.SIAR)
+#+end_src  
+
+** Particularizamos para una estación
+- Primero extraemos información para la estación de Madrid
+#+begin_src R
+  madridSIAR <- subset(SIAR, Provincia == "Madrid")
+  spMadrid <- SpatialPoints(
+                madridSIAR[, c('lon', 'lat')],
+                proj4str=proj)
+  CMSAFMadrid <- extract(SISmm, spMadrid)
+  CMSAFMadrid <- zoo(t(CMSAFMadrid), as.yearmon(idx))
+  names(CMSAFMadrid) <- madridSIAR$Estacion
+#+end_src
+- Mostramos la serie temporal correspondiente
+#+begin_src R
+  xyplot(CMSAFMadrid,
+         superpose=TRUE,
+         auto.key=list(space='right'))
+#+end_src
+
+** Para los muy interesados
+
+- Recientemente se ha publicado un artículo en la revista Renewable
+  and Sustainable Energy Reviews comparando CM~SAF y SIAR para
+  diferentes condiciones de trabajo:
+  - "Comparative assessment of global irradiation from a satellite
+    estimate model (CM SAF) and on-ground measurements (SIAR): a
+    Spanish case study", F. Antoñanzas, F. Cañizares, O. Perpiñán, Renewable
+    and Sustainable Energy Reviews, Volume 21, May 2013, Pages 248-261,
+    ISSN 1364-0321, http://dx.doi.org/10.1016/j.rser.2012.12.033.
+  - Se puede descargar el [[http://procomun.files.wordpress.com/2012/12/cmsaf_siar_rev1.pdf][preprint]], y el [[https://github.com/oscarperpinan/CMSAF-SIAR][código está disponible]] con
+    licencia libre.
+- AEMET ha publicado un [[http://www.aemet.es/es/noticias/2012/05/atlasradiacionsolar][Atlas de Radiación Solar]] basado en los datos
+  de CM~SAF.
