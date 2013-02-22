@@ -1,4 +1,4 @@
-% Created 2013-02-03 dom 02:21
+% Created 2013-02-21 jue 12:21
 \documentclass[xcolor={usenames,svgnames,dvipsnames}]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -489,8 +489,38 @@ apply(M, 2, sd)
 \end{lstlisting}
 \end{frame}
 \begin{frame}[fragile]
-\frametitle{Indexado de matrices}
+\frametitle{\texttt{sweep}}
 \label{sec-2-2-7}
+
+\begin{itemize}
+\item Usamos el conjunto de datos \texttt{state.x77}
+\end{itemize}
+
+\lstset{language=R}
+\begin{lstlisting}
+head(state.x77)
+\end{lstlisting}
+\begin{itemize}
+\item Calculamos el máximo por columna
+\end{itemize}
+
+\lstset{language=R}
+\begin{lstlisting}
+maxes <- apply(state.x77, 2, max)
+\end{lstlisting}
+\begin{itemize}
+\item Dividimos cada columna por su máximo
+\end{itemize}
+
+\lstset{language=R}
+\begin{lstlisting}
+stateNorm <- sweep(state.x77, 2, maxes, FUN="/")
+head(stateNorm)
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Indexado de matrices}
+\label{sec-2-2-8}
 
 
 \lstset{language=R}
@@ -847,6 +877,70 @@ head(df)
 \begin{lstlisting}
 library(lattice)
 levelplot(result ~ x + y, data=df)
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Unir dos \texttt{data.frame}}
+\label{sec-4-2-7}
+
+\begin{itemize}
+\item Primero construimos un \texttt{data.frame} de ejemplo
+\end{itemize}
+
+\lstset{language=R}
+\begin{lstlisting}
+USStates <- as.data.frame(state.x77)
+USStates$Name <- rownames(USStates)
+rownames(USStates) <- NULL
+\end{lstlisting}
+\begin{itemize}
+\item Lo partimos en estados ``fríos'' y estados ``grandes''
+\end{itemize}
+
+\lstset{language=R}
+\begin{lstlisting}
+coldStates <- USStates[USStates$Frost>150, c('Name', 'Frost')]
+largeStates <- USStates[USStates$Area>1e5, c('Name', 'Area')]
+\end{lstlisting}
+\begin{itemize}
+\item Unimos los dos conjuntos (estados ``fríos'' y ``grandes'')
+\end{itemize}
+
+\lstset{language=R}
+\begin{lstlisting}
+merge(coldStates, largeStates)
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{\texttt{merge} usa \texttt{match}}
+\label{sec-4-2-8}
+
+\begin{itemize}
+\item Estados grandes que también son fríos
+\end{itemize}
+
+\lstset{language=R}
+\begin{lstlisting}
+idxLarge <- match(largeStates$Name,
+                  coldStates$Name,
+                  nomatch=0)
+idxLarge
+
+largeStates[idxLarge,]
+\end{lstlisting}
+
+\begin{itemize}
+\item Estados frios que también son grandes
+\end{itemize}
+
+\lstset{language=R}
+\begin{lstlisting}
+idxCold <- match(coldStates$Name,
+                 largeStates$Name,
+                 nomatch=0)
+idxCold
+
+coldStates[idxCold,]
 \end{lstlisting}
 \end{frame}
 \section{Factores, fechas y caracteres}

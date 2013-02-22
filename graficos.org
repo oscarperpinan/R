@@ -15,40 +15,266 @@
 #+XSLT:
 #+startup: beamer
 #+LaTeX_CLASS: beamer
-#+LaTeX_CLASS_OPTIONS: [bigger]
 #+BEAMER_FRAME_LEVEL: 3
+#+LATEX_CLASS_OPTIONS: [xcolor={usenames,svgnames,dvipsnames}]
 #+LATEX_HEADER: \AtBeginSection[]{\begin{frame}<beamer>\frametitle{Contenidos}\tableofcontents[currentsection]\end{frame}}
 #+LATEX_HEADER: \lstset{keywordstyle=\color{blue}, commentstyle=\color{gray!90}, basicstyle=\ttfamily\small, columns=fullflexible, breaklines=true,linewidth=\textwidth, backgroundcolor=\color{gray!23}, basewidth={0.5em,0.4em}, literate={á}{{\'a}}1 {ñ}{{\~n}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {º}{{\textordmasculine}}1}
 #+LATEX_HEADER: \usepackage{mathpazo}
 #+LATEX_HEADER: \setbeamercovered{transparent}
 #+LATEX_HEADER: \usefonttheme{serif} 
 #+LATEX_HEADER: \usetheme{Goettingen}
+#+LATEX_HEADER: \hypersetup{colorlinks=true, linkcolor=Blue, urlcolor=Blue}
+#+LATEX_HEADER: \usepackage{fancyvrb}
+#+LATEX_HEADER: \DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\tiny, formatcom = {\color{black!70}}}
 #+PROPERTY:  tangle yes
 #+PROPERTY:  comments org
+#+PROPERTY:  session *R*
+#+PROPERTY: exports both 
+#+PROPERTY: results output graphics
+#+PROPERTY: session *R*
 
 
-* Gráficos
-** Base
-*** Base
+
+* Introducción
+** Base y grid
+*** Base y grid
+ En =R= existen dos formas de generar gráficos:
+- Base graphics
+- Grid graphics
+
+Dentro del conjunto =grid= existen dos grandes paquetes:
+- =lattice=
+- =ggplot2=
+
+*** Conjunto de datos de ejemplo
+- Leemos desde el archivo local 
 #+begin_src R 
-plot(df$x, df$y)
+  aranjuez <- read.csv('data/aranjuez.csv')
+
+  summary(aranjuez)
 #+end_src
-** Grid
-*** Lattice: =xyplot=
+
+*** Conjunto de datos de ejemplo
+- Añadimos algunas columnas
 #+begin_src R 
-library(lattice)
-
-xyplot(y ~ x, data=df)
-xyplot(y ~ x, data=df, type='l')
-xyplot(y ~ x, data=df, type='b')
-xyplot(y ~ x, data=df, type=c('b', 'g'))
-xyplot(y ~ x, data=df, type=c('b', 'r', 'g'))
-
-help(xyplot)
+  aranjuez$month <- as.numeric(format(as.Date(aranjuez$X), '%m'))
+  aranjuez$year <- as.numeric(format(as.Date(aranjuez$X), '%Y'))
+  aranjuez$day <- as.numeric(format(as.Date(aranjuez$X), '%j'))
+  aranjuez$jday <- julian(as.Date(aranjuez$X))
+  aranjuez$quarter <- quarters(as.Date(aranjuez$X))
 #+end_src
 
-*** Lattice: =levelplot=
+
+* Grid
+
+** Lattice
+
+*** Lattice
+
+- Documentación: [[http://lmdvr.r-forge.r-project.org/figures/figures.html][Código y Figuras del libro]]
+
 #+begin_src R 
-levelplot(result ~ x * y, data=df)
-xyplot(result ~ x, data=df)
+  library(lattice)
 #+end_src
+
+*** =xyplot=
+#+ATTR_LaTeX: width=0.7\textwidth
+#+begin_src R  :file xyplot.pdf
+xyplot(Radiation ~ TempAvg,
+       data=aranjuez)
+#+end_src
+
+*** =xyplot=
+#+ATTR_LaTeX: width=0.7\textwidth
+#+begin_src R :file xyplotPG.pdf
+xyplot(Radiation ~ TempAvg,
+       data=aranjuez, type=c('p', 'g'))
+#+end_src
+
+
+*** =xyplot=
+#+ATTR_LaTeX: width=0.7\textwidth
+#+begin_src R :file xyplotPRG.pdf
+xyplot(Radiation ~ TempAvg,
+       data=aranjuez, type=c('p', 'r', 'g'))
+#+end_src
+
+
+*** =xyplot=
+#+ATTR_LaTeX: width=0.7\textwidth
+#+begin_src R :file xyplotSmooth.pdf
+xyplot(Radiation ~ TempAvg,
+       data=aranjuez, type=c('p', 'smooth', 'g'))
+#+end_src
+
+
+*** Paneles
+#+ATTR_LaTeX: width=0.7\textwidth
+#+begin_src R :file xyplotYear.pdf
+  xyplot(Radiation ~ TempAvg|year, data=aranjuez)
+#+end_src
+
+*** Grupos
+#+ATTR_LaTeX: width=0.7\textwidth
+#+begin_src R :file xyplotQuarter.pdf
+  xyplot(Radiation ~ TempAvg, groups=quarter,
+         data=aranjuez, auto.key=list(space='right'))
+#+end_src
+
+*** Paneles y grupos
+#+ATTR_LaTeX: width=0.6\textwidth
+#+begin_src R :file xyplotQuarterYear.pdf
+  xyplot(Radiation ~ TempAvg|year,
+         groups=quarter,
+         data=aranjuez,
+         layout=c(4, 2),
+         auto.key=list(space='right'))
+#+end_src
+
+*** Paneles y grupos
+#+ATTR_LaTeX: width=0.6\textwidth
+#+begin_src R :file xyplotQuarterYearSmooth.pdf
+  xyplot(Radiation ~ TempAvg|year,
+         groups=quarter,
+         data=aranjuez,
+         layout=c(4, 2),
+         type=c('p', 'r'),
+         auto.key=list(space='right'))
+#+end_src
+
+*** Colores y tamaños
+#+ATTR_LaTeX: width=0.6\textwidth
+#+begin_src R :file xyplotColors.pdf
+  xyplot(Radiation ~ TempAvg,
+         type=c('p', 'r'),
+         cex=2, col='blue',
+         alpha=.5,
+         lwd=3, col.line='black',
+         data=aranjuez)
+#+end_src
+
+*** Colores con grupos
+#+ATTR_LaTeX: width=0.6\textwidth
+#+begin_src R :file xyplotColorGroups.pdf
+  xyplot(Radiation ~ TempAvg,
+         group=quarter,
+         col=c('red', 'blue', 'green', 'yellow'),
+         auto.key=list(space='right'),
+         data=aranjuez)
+#+end_src
+
+*** Colores con grupos: par.settings
+#+ATTR_LaTeX: width=0.45\textwidth
+#+begin_src R :file myTheme.pdf
+  myTheme <- custom.theme(symbol=c('red', 'blue',
+                          'green', 'yellow'),
+                          pch=19, alpha=.6)
+  xyplot(Radiation ~ TempAvg,
+         groups=quarter,
+         par.settings=myTheme,
+         auto.key=list(space='right'),
+         data=aranjuez)
+#+end_src
+
+*** Colores: brewer.pal
+#+ATTR_LaTeX: width=0.45\textwidth
+#+begin_src R :file brewer.pdf
+  library(RColorBrewer)
+  myTheme <- custom.theme(symbol=brewer.pal(n=4,
+                          'Dark2'),
+                          pch=19, alpha=.6)
+  xyplot(Radiation ~ TempAvg,
+         groups=quarter,
+         par.settings=myTheme,
+         auto.key=list(space='right'),
+         data=aranjuez)
+#+end_src
+
+
+*** =levelplot=
+#+ATTR_LaTeX: width=0.6\textwidth
+#+begin_src R :file levelplot.pdf
+  levelplot(TempAvg ~ year * day,
+            data=aranjuez)
+#+end_src
+
+*** =contourplot=
+#+ATTR_LaTeX: width=0.7\textwidth
+#+begin_src R :file contourplot.pdf
+  contourplot(Radiation ~ year * day,
+              lwd=.5, labels=FALSE,
+              region=TRUE, 
+              data=aranjuez)
+#+end_src
+
+*** Box-and-Whiskers
+#+ATTR_LaTeX: width=0.7\textwidth
+#+begin_src R :file bwplot.pdf
+  bwplot(Radiation ~ month, data=aranjuez,
+         horizontal=FALSE, pch='|')
+#+end_src
+
+*** Box-and-Whiskers
+#+ATTR_LaTeX: width=0.7\textwidth
+#+begin_src R :file violin.pdf
+  bwplot(Radiation ~ month, data=aranjuez,
+         horizontal=FALSE,
+         panel=panel.violin)
+#+end_src
+    
+*** Histogramas
+#+ATTR_LaTeX: width=0.7\textwidth
+#+begin_src R :file histogram.pdf
+  histogram(~Radiation|year, data=aranjuez,
+            strip=strip.custom(strip.levels=TRUE))
+#+end_src
+
+*** Gráficos de densidad
+#+ATTR_LaTeX: width=0.7\textwidth
+#+begin_src R :file density.pdf
+densityplot(~Radiation, groups=quarter,
+            data=aranjuez,
+            auto.key=list(space='right'))
+#+end_src
+
+*** =dotplot=
+#+begin_src R 
+  avRad <- aggregate(Radiation ~ month * year,
+                     data=aranjuez, FUN=mean)
+#+end_src
+#+ATTR_LaTeX: width=0.7\textwidth
+#+begin_src R :file dotplot.pdf
+  dotplot(month ~ Radiation|year, data=avRad)
+#+end_src
+
+
+*** Quantile-Quantile
+#+ATTR_LaTeX: width=0.7\textwidth
+#+begin_src R :file qqHalf.pdf
+  firstHalf <- aranjuez$quarter %in% c('Q1', 'Q2')
+  
+  qq(firstHalf ~ Radiation, data=aranjuez)
+#+end_src
+
+*** Quantile-quantile
+#+ATTR_LaTeX: width=0.7\textwidth
+#+begin_src R :file qqWinter.pdf
+  winter <- aranjuez$quarter %in% c('Q1', 'Q4')
+  
+  qq(winter ~ Radiation, data=aranjuez)
+#+end_src
+
+*** Quantile-Quantile
+#+ATTR_LaTeX: width=0.7\textwidth
+#+begin_src R :file qqNorm.pdf
+  qqmath(~TempAvg, data=aranjuez,
+         groups=year, distribution=qnorm)
+#+end_src
+
+** ggplot2
+
+*** ggplot2
+
+[[http://learnr.wordpress.com/2009/06/28/ggplot2-version-of-figures-in-lattice-multivariate-data-visualization-with-r-part-1/][ggplot2 desde lattice]] ([[http://learnr.files.wordpress.com/2009/08/latbook.pdf][PDF]])
+
+

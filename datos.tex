@@ -1,5 +1,5 @@
-% Created 2013-02-05 mar 22:34
-\documentclass{beamer}
+% Created 2013-02-21 jue 11:41
+\documentclass[xcolor={usenames,svgnames,dvipsnames}]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{fixltx2e}
@@ -23,6 +23,7 @@
 \setbeamercovered{transparent}
 \usefonttheme{serif} 
 \usetheme{Goettingen}
+\hypersetup{colorlinks=true, linkcolor=Blue, urlcolor=Blue}
 \usepackage{fancyvrb}
 \DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\tiny, formatcom = {\color{black!70}}}
 \providecommand{\alert}[1]{\textbf{#1}}
@@ -40,12 +41,23 @@
 \maketitle
 
 
-
-\section{Working directory}
+\section{Fuentes de datos}
 \label{sec-1}
+\begin{frame}
+\frametitle{Fuentes de datos}
+\label{sec-1-1}
+
+
+\begin{itemize}
+\item \href{http://stat.ethz.ch/R-manual/R-patched/library/datasets/html/00Index.html}{The R Datasets Package}
+\item \href{http://www.bibsonomy.org/user/procomun/data?resourcetype=bookmark}{Enlaces en Bibsonomy}
+\end{itemize}
+\end{frame}
+\section{Lectura de datos}
+\label{sec-2}
 \begin{frame}[fragile]
 \frametitle{\texttt{setwd}, \texttt{getwd}, \texttt{dir}}
-\label{sec-1-1}
+\label{sec-2-1}
 
 
 \lstset{language=R}
@@ -57,443 +69,247 @@ dir(pattern='.R')
 dir('data')
 \end{lstlisting}
 \end{frame}
-\section{Lectura de ficheros (sencillo)}
-\label{sec-2}
-\begin{frame}
-\frametitle{Descargamos datos de SIAR}
-\label{sec-2-1}
-
-\begin{itemize}
-\item \href{http://eportal.magrama.gob.es/websiar}{http://eportal.magrama.gob.es/websiar}
-\item \textbf{Estación}: Aranjuez, Madrid
-\item \textbf{Período}: 01/01/2004 a 31/12/2011
-\item \textbf{Variables}: Temperatura, Humedad, Viento, Lluvia, Radiación, ET
-\end{itemize}
-\end{frame}
 \begin{frame}[fragile]
-\frametitle{Lectura de datos con \texttt{read.table}}
+\frametitle{read.table}
 \label{sec-2-2}
 
 \begin{itemize}
-\item Primero lo intentamos con la versión final
+\item Con un fichero local
 \end{itemize}
 
 \lstset{language=R}
 \begin{lstlisting}
-dats <- read.table('data/aranjuez.csv')
-head(dats)
+download.file('http://oscarperpinan.github.com/spacetime-vis/data/CO2_GNI_BM.csv',
+              destfile='data/CO2_GNI_BM.csv')
 
-dats <- read.table('data/aranjuez.csv', sep=',')
-head(dats)
+CO2 <- read.table('data/CO2_GNI_BM.csv', header=TRUE, sep=',')
+head(CO2)
+\end{lstlisting}
+\begin{itemize}
+\item Directamente de un enlace URL
+\end{itemize}
 
-dats <- read.table('data/aranjuez.csv', sep=',', header=TRUE)
-head(dats)
-
-aranjuez <- read.csv('data/aranjuez.csv')
-head(aranjuez)
-
-class(aranjuez)
-names(aranjuez)
+\lstset{language=R}
+\begin{lstlisting}
+CO2 <- read.table('http://oscarperpinan.github.com/spacetime-vis/data/CO2_GNI_BM.csv',
+                header=TRUE, sep=',')
+head(CO2)
 \end{lstlisting}
 \end{frame}
 \begin{frame}[fragile]
-\frametitle{Visualización de datos}
+\frametitle{read.csv, read.csv2}
 \label{sec-2-3}
 
+\begin{itemize}
+\item \texttt{read.csv} y \texttt{read.csv2} son como \texttt{read.table} con valores
+  por defecto para encabezado y separadores
+\end{itemize}
+
 
 \lstset{language=R}
 \begin{lstlisting}
-library(lattice)
-
-xyplot(Radiation ~ TempAvg, data=aranjuez)
-
-xyplot(Radiation ~ TempAvg, data=aranjuez,
-       type=c('p', 'r'))
-
-xyplot(Radiation ~ TempAvg + TempMax + TempMin,
-       data = aranjuez, xlab='Temperature',
-       type=c('p', 'r'), auto.key=TRUE,
-       pch=16, alpha=0.5)
+CO2 <- read.csv('data/CO2_GNI_BM.csv')
 \end{lstlisting}
-  
-\end{frame}
-\begin{frame}[fragile]
-\frametitle{Visualización de datos (advanced!)}
-\label{sec-2-4}
 
 
 \lstset{language=R}
 \begin{lstlisting}
-library(RColorBrewer)
-
-humidClass <- cut(aranjuez$HumidAvg, 4)
-myPal <- brewer.pal(n=4, 'GnBu')
-
-xyplot(Radiation ~ TempAvg + TempMax + TempMin,
-       groups=humidClass, outer=TRUE,
-       data = aranjuez, xlab='Temperature',
-       layout=c(3, 1),
-       scales=list(relation='free'),
-       auto.key=list(space='right'),
-       par.settings=custom.theme(pch=16,
-         alpha=0.8, col=myPal))
+head(CO2)
+tail(CO2)
+summary(CO2)
+names(CO2)
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{Transformamos a serie temporal}
-\label{sec-2-5}
-
-
-
-\lstset{language=R}
-\begin{lstlisting}
-library(zoo)
-
-fecha <- as.POSIXct(aranjuez[,1],
-                    format='%Y-%m-%d')
-head(fecha)
-
-aranjuez <- zoo(aranjuez[, -1], fecha)
-class(aranjuez)
-head(aranjuez)
-\end{lstlisting}
-\end{frame}
-\begin{frame}[fragile]
-\frametitle{Leemos directamente como serie temporal}
-\label{sec-2-6}
-
-
-\lstset{language=R}
-\begin{lstlisting}
-aranjuez <- read.zoo('data/aranjuez.csv',
-                     sep=',', header=TRUE)
-\end{lstlisting}
-
-
-\lstset{language=R}
-\begin{lstlisting}
-header(aranjuez)
-names(aranjuez)
-summary(index(aranjuez))
-\end{lstlisting}
-\end{frame}
-\section{Lectura de datos (real)}
+\section{Datos agregados}
 \label{sec-3}
 \begin{frame}[fragile]
-\frametitle{Ahora con la versión original}
+\frametitle{table}
 \label{sec-3-1}
 
-\begin{itemize}
-\item Primero descomprimimos el archivo
-\end{itemize}
 
 \lstset{language=R}
 \begin{lstlisting}
-unzip('data/InformeDatos.zip', exdir='data')
+chromo <- data.frame(chromosome = gl(3,  10,
+                     labels = c('A',  'B',  'C')),
+                     probeset = gl(3,  10,
+                     labels = c('X',  'Y',  'Z')),
+                     ensg =  gl(3,  10,
+                     labels = c('E1',  'E2',  'E3')),
+                     symbol = gl(3,  10,
+                     labels = c('S1',  'S2',  'S3')),
+                     XXA_00 = rnorm(30),
+                     XXA_36 = rnorm(30),
+                     XXB_00 = rnorm(30))
 \end{lstlisting}
-\begin{itemize}
-\item Y ahora abrimos teniendo en cuenta codificación, separadores, etc.
-\end{itemize}
+
 
 \lstset{language=R}
 \begin{lstlisting}
-aranjuez <- read.table("data/M03_Aranjuez_01_01_2004_31_12_2011.csv",
-                     fileEncoding = 'UTF-16LE',
-                     header = TRUE, fill = TRUE,
-                     sep = ';', dec = ",")
-\end{lstlisting}
-\begin{itemize}
-\item Vemos el contenido
-\end{itemize}
-
-\lstset{language=R}
-\begin{lstlisting}
-head(aranjuez)
-summary(aranjuez)
-names(aranjuez)
+table(chromo$chromosome, df$XXA_00 > 0)
+table(chromo$probeset, df$XXA_00 > -1 & df$XXA_00 < 1)
 \end{lstlisting}
 \end{frame}
 \begin{frame}[fragile]
-\frametitle{Convertimos a serie temporal}
+\frametitle{xtabs}
 \label{sec-3-2}
 
-\begin{itemize}
-\item Sólo nos interesan algunas variables (indexamos por columnas)
-\end{itemize}
 
 \lstset{language=R}
 \begin{lstlisting}
-tt <- as.Date(aranjuez$Fecha, format='%d/%m/%Y')
-aranjuez <- zoo(aranjuez[, c(6, 7, 9, 11, 12, 16,
-                             17, 19, 20, 22)],
-                order.by=tt)
+xtabs(XXA_00 > 1 ~ chromosome + probeset,
+      data=chromo)
 \end{lstlisting}
 \end{frame}
 \begin{frame}[fragile]
-\frametitle{Ajustamos los nombres (opcional)}
+\frametitle{tapply}
 \label{sec-3-3}
 
 
 \lstset{language=R}
 \begin{lstlisting}
-names(aranjuez) <- c('TempAvg', 'TempMax',
-                     'TempMin', 'HumidAvg',
-                     'HumidMax','WindAvg',
-                     'WindMax', 'Radiation',
-                     'Rain', 'ET')
+tapply(CO2$X2000, CO2$Indicator.Name,
+       FUN=mean)
 \end{lstlisting}
+
+\begin{verbatim}
+           CO2 emissions (kg per PPP $ of GDP) 
+                                  4.777875e-01 
+        CO2 emissions (metric tons per capita) 
+                                  7.580861e+00 
+ GNI per capita, PPP (current international $) 
+                                  1.981000e+04 
+            GNI, PPP (current international $) 
+                                  2.078196e+12
+\end{verbatim}
 \end{frame}
 \begin{frame}[fragile]
-\frametitle{Nuevamente mostramos datos}
+\frametitle{tapply}
 \label{sec-3-4}
 
-\begin{itemize}
-\item Método simple
-\end{itemize}
 
 \lstset{language=R}
 \begin{lstlisting}
-xyplot(aranjuez)
-\end{lstlisting}
-\begin{itemize}
-\item Seleccionamos variables y superponemos
-\end{itemize}
-
-\lstset{language=R}
-\begin{lstlisting}
-xyplot(aranjuez[,c("TempAvg", "TempMax", "TempMin")],
-       superpose=TRUE)
-\end{lstlisting}
-\begin{itemize}
-\item Para cruzar variables hay que convertir a \texttt{data.frame}
-\end{itemize}
-
-\lstset{language=R}
-\begin{lstlisting}
-xyplot(TempAvg ~ Radiation,
-       data=as.data.frame(aranjuez))
-\end{lstlisting}
-\end{frame}
-\begin{frame}[fragile]
-\frametitle{Limpieza de datos}
-\label{sec-3-5}
-
-\begin{itemize}
-\item Conversión de Unidades (MJ -> Wh)
-\end{itemize}
-
-\lstset{language=R}
-\begin{lstlisting}
-aranjuez$G0 <- aranjuez$Radiation/3.6*1000
-xyplot(aranjuez$G0)
-\end{lstlisting}
-\begin{itemize}
-\item Filtrado de datos
-\end{itemize}
-
-\lstset{language=R}
-\begin{lstlisting}
-aranjuezClean <- within(as.data.frame(aranjuez),{
-  TempMin[TempMin>40] <- NA
-  HumidMax[HumidMax>100] <- NA
-  WindAvg[WindAvg>10] <- NA
-  WindMax[WindMax>10] <- NA
-})
-
-aranjuez <- zoo(aranjuezClean, index(aranjuez))
-\end{lstlisting}
-\end{frame}
-\section{Datos agregados}
-\label{sec-4}
-\begin{frame}[fragile]
-\frametitle{Media anual}
-\label{sec-4-1}
-
-\begin{itemize}
-\item Primero definimos una función para extraer el año
-\end{itemize}
-
-\lstset{language=R}
-\begin{lstlisting}
-Year <- function(x)as.numeric(format(x, "%Y"))
-
-Year(index(aranjuez))
-\end{lstlisting}
-\begin{itemize}
-\item Y la empleamos para agrupar con \texttt{aggregate}
-\end{itemize}
-
-\lstset{language=R}
-\begin{lstlisting}
-aranjuezY <- aggregate(aranjuez$G0, by=Year,
-                       FUN=mean, na.rm=TRUE)
-aranjuezY
-class(aranjuezY)
-\end{lstlisting}
-
-
-\lstset{language=R}
-\begin{lstlisting}
-G0y <- aggregate(aranjuez$G0, by=Year,
-                 FUN=mean, na.rm=TRUE)
-G0y
-\end{lstlisting}
-\end{frame}
-\begin{frame}[fragile]
-\frametitle{Medias mensuales}
-\label{sec-4-2}
-
-\begin{itemize}
-\item Meses como números
-\end{itemize}
-
-\lstset{language=R}
-\begin{lstlisting}
-Month <- function(x)as.numeric(format(x, "%m"))
-
-Month(index(aranjuez))
-\end{lstlisting}
-
-
-\lstset{language=R}
-\begin{lstlisting}
-G0m <- aggregate(aranjuez$G0, by=Month,
-                 FUN=mean, na.rm=TRUE)
-G0m
-\end{lstlisting}
-
-\begin{itemize}
-\item Meses como etiquetas
-\end{itemize}
-
-\lstset{language=R}
-\begin{lstlisting}
-months(index(aranjuez))
-\end{lstlisting}
-
-
-\lstset{language=R}
-\begin{lstlisting}
-G0m <- aggregate(aranjuez$G0, by=months,
-                 FUN=mean, na.rm=TRUE)
-G0m
-\end{lstlisting}
-\end{frame}
-\begin{frame}[fragile]
-\frametitle{Medias mensuales para cada año}
-\label{sec-4-3}
-
-\begin{itemize}
-\item La función para agrupar es \texttt{as.yearmon}
-\end{itemize}
-
-\lstset{language=R}
-\begin{lstlisting}
-as.yearmon(index(aranjuez))
-\end{lstlisting}
-
-
-\lstset{language=R}
-\begin{lstlisting}
-G0ym <- aggregate(aranjuez$G0, by=as.yearmon,
-                  FUN=mean, na.rm=TRUE)
-G0ym
-\end{lstlisting}
-\end{frame}
-\section{Datos desde una URL}
-\label{sec-5}
-\begin{frame}[fragile]
-\frametitle{Ejemplo: Lanai-Hawaii}
-\label{sec-5-1}
-
-
-
-\lstset{language=R}
-\begin{lstlisting}
-URL <- "http://www.nrel.gov/midc/apps/plot.pl?site=LANAI&start=20090722&edy=19&emo=11&eyr=2010&zenloc=19&year=2010&month=11&day=1&endyear=2010&endmonth=11&endday=19&time=1&inst=3&inst=4&inst=5&inst=10&type=data&first=3&math=0&second=-1&value=0.0&global=-1&direct=-1&diffuse=-1&user=0&axis=1"
-## URL <- "data/NREL-Hawaii.csv"
+tapply(CO2$X2000, CO2[,c("Indicator.Name", "Country.Name")],
+       FUN=mean)
 \end{lstlisting}
 
 
 \begin{verbatim}
-DATE,HST,Global Horizontal [W/m^2],Direct Normal [W/m^2],Diffuse Horizontal [W/m^2],Air Temperature [deg C]
-11/1/2010,06:32,4.87621,0,4.87621,14.67
-11/1/2010,06:33,5.14142,0,5.14142,14.54
-11/1/2010,06:34,1.42216,0,1.42216,14.43
-11/1/2010,06:35,1.95135,0,1.95135,14.4
-11/1/2010,06:36,2.44687,0,2.44687,14.55
-11/1/2010,06:37,3.16990,0,3.16990,14.95
-11/1/2010,06:38,3.99677,0,3.99677,15.45
-11/1/2010,06:39,4.88811,0,4.88811,15.71
-11/1/2010,06:40,5.85428,0,5.85428,15.8
-11/1/2010,06:41,8.27598,0,8.27598,15.87
+                                               Country.Name
+Indicator.Name                                        Brazil        China
+  CO2 emissions (kg per PPP $ of GDP)           2.699746e-01 1.140619e+00
+  CO2 emissions (metric tons per capita)        1.892645e+00 2.696862e+00
+  GNI per capita, PPP (current international $) 6.820000e+03 2.340000e+03
+  GNI, PPP (current international $)            1.188790e+12 2.948850e+12
+                                               Country.Name
+Indicator.Name                                       Finland       France
+  CO2 emissions (kg per PPP $ of GDP)           3.923481e-01 2.384221e-01
+  CO2 emissions (metric tons per capita)        1.007322e+01 6.016236e+00
+  GNI per capita, PPP (current international $) 2.548000e+04 2.566000e+04
+  GNI, PPP (current international $)            1.318800e+11 1.558990e+12
+                                               Country.Name
+Indicator.Name                                       Germany       Greece
+  CO2 emissions (kg per PPP $ of GDP)           3.929031e-01 4.598579e-01
+  CO2 emissions (metric tons per capita)        1.012147e+01 8.391709e+00
+  GNI per capita, PPP (current international $) 2.549000e+04 1.832000e+04
+  GNI, PPP (current international $)            2.095450e+12 2.000130e+11
+                                               Country.Name
+Indicator.Name                                         India       Norway
+  CO2 emissions (kg per PPP $ of GDP)           7.448517e-01 2.391275e-01
+  CO2 emissions (metric tons per capita)        1.125975e+00 8.641315e+00
+  GNI per capita, PPP (current international $) 1.500000e+03 3.565000e+04
+  GNI, PPP (current international $)            1.575930e+12 1.601000e+11
+                                               Country.Name
+Indicator.Name                                         Spain United States
+  CO2 emissions (kg per PPP $ of GDP)           3.428950e-01  5.568755e-01
+  CO2 emissions (metric tons per capita)        7.312922e+00  1.953626e+01
+  GNI per capita, PPP (current international $) 2.115000e+04  3.569000e+04
+  GNI, PPP (current international $)            8.514620e+11  1.007050e+13
 \end{verbatim}
 \end{frame}
 \begin{frame}[fragile]
-\frametitle{Leemos como serie temporal}
-\label{sec-5-2}
+\frametitle{aggregate}
+\label{sec-3-5}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+aggregate(X2000 ~ Indicator.Name,
+          data=CO2, FUN=mean)
+
+aggregate(cbind(X2000, X2001) ~ Indicator.Name,
+          data=CO2, FUN=mean)
+
+aggregate(X2000 ~ Indicator.Name + Country.Name,
+          data=CO2, FUN=mean)
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{aggregate}
+\label{sec-3-6}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+aggregate(cbind(X2000, X2001) ~
+          Indicator.Name + Country.Name,
+          data=CO2, FUN=mean)
+
+aggregate(cbind(X2000, X2001) ~
+          Indicator.Name + Country.Name,
+          data=CO2, FUN=mean)
+
+aggregate(cbind(X2000, X2001) ~
+          Indicator.Name + Country.Name,
+          subset=(Country.Name %in% c('United States', 'China')),
+                  data=CO2, FUN=mean)
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{aggregate}
+\label{sec-3-7}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+aggregate(cbind(XXA_00, XXA_36, XXB_00) ~
+          ensg + chromosome + symbol,
+          data = chromo,  FUN = mean)
+
+aggregate(cbind(XXA_00, XXA_36, XXB_00) ~ ensg ,
+          data = chromo,  FUN = mean)
+\end{lstlisting}
+\end{frame}
+\section{Cambio de formato}
+\label{sec-4}
+\begin{frame}[fragile]
+\frametitle{\texttt{stack}}
+\label{sec-4-1}
 
 \begin{itemize}
-\item Leemos con \texttt{read.zoo}
+\item Primero escogemos un subconjunto
 \end{itemize}
 
 \lstset{language=R}
 \begin{lstlisting}
-lat <- 20.77
-lon <- -156.9339
-hawaii <- read.zoo(URL,
-                col.names = c("date", "hour",
-                  "G0", "B", "D0", "Ta"),
-                ## Dia en columna 1, Hora en columna 2
-                index = list(1, 2),
-                ## Obtiene escala temporal de estas dos columnas
-                FUN = function(d, h) as.POSIXct(
-                  paste(d, h),
-                  format = "%m/%d/%Y %H:%M",
-                  tz = "HST"), 
-                header=TRUE, sep=",")
+CO2China <- subset(CO2,
+                   subset=(Country.Name=='China' &
+                           Indicator.Name=='CO2 emissions (kg per PPP $ of GDP)'),
+                   select=-c(Country.Name, Country.Code,
+                             Indicator.Name, Indicator.Code))
 \end{lstlisting}
 \begin{itemize}
-\item Añadimos Directa en el plano Horizontal
+\item Pasamos de formato \texttt{wide} a \texttt{long}
 \end{itemize}
 
 \lstset{language=R}
 \begin{lstlisting}
-hawaii$B0 <- with(hawaii, G0-D0)
+stack(CO2China)
 \end{lstlisting}
 \end{frame}
 \begin{frame}[fragile]
-\frametitle{Mostramos datos como serie temporal}
-\label{sec-5-3}
-
-
-\lstset{language=R}
-\begin{lstlisting}
-xyplot(hawaii)
-xyplot(hawaii[,c('G0', 'D0', 'B0')],
-       superpose=TRUE)
-\end{lstlisting}
-\end{frame}
-\begin{frame}[fragile]
-\frametitle{Mostramos relaciones entre variables}
-\label{sec-5-4}
-
-
-\lstset{language=R}
-\begin{lstlisting}
-xyplot(Ta ~ G0 + D0 + B0,
-       data=as.data.frame(hawaii),
-       type=c('p', 'smooth'),
-       par.settings=custom.theme(
-         alpha=.5, pch=16,
-         lwd=3, col.line='black'),
-       outer=TRUE, layout=c(3, 1),
-       scales=list(x=list(relation='free')))
-\end{lstlisting}
-\end{frame}
-\begin{frame}[fragile]
-\frametitle{Irradiación horaria}
-\label{sec-5-5}
+\frametitle{\texttt{reshape}: \texttt{wide} a \texttt{long}}
+\label{sec-4-2}
 
 \begin{itemize}
 \item Primer intento
@@ -501,100 +317,62 @@ xyplot(Ta ~ G0 + D0 + B0,
 
 \lstset{language=R}
 \begin{lstlisting}
-hour <- function(x)as.numeric(format(x, '%H'))
+CO2long <- reshape(CO2,
+                   varying=list(names(CO2)[5:16]),
+                   direction='long')
+head(CO2long)
 \end{lstlisting}
-
-
-\lstset{language=R}
-\begin{lstlisting}
-G0h <- aggregate(hawaii$G0, by=hour,
-                 FUN=sum, na.rm=1)/1000
-G0h
-\end{lstlisting}
-\end{frame}
-\begin{frame}[fragile]
-\frametitle{Irradiación horaria}
-\label{sec-5-6}
-
-
 \begin{itemize}
-\item Mejor así
+\item Añadimos argumentos
 \end{itemize}
 
 \lstset{language=R}
 \begin{lstlisting}
-hour <- function(x)as.POSIXct(format(x,
-                                     '%Y-%m-%d %H:00:00'))
-\end{lstlisting}
-
-
-\lstset{language=R}
-\begin{lstlisting}
-G0h <- aggregate(hawaii$G0, by=hour,
-                 FUN=sum, na.rm=1)/60
-G0h
+CO2long <- reshape(CO2,
+                   varying=list(names(CO2)[5:16]),
+                   timevar='Year', v.names='Value',
+                   times=2000:2011,
+                   direction='long')
+head(CO2long)
 \end{lstlisting}
 \end{frame}
 \begin{frame}[fragile]
-\frametitle{Irradiación diaria}
-\label{sec-5-7}
+\frametitle{\texttt{reshape}: \texttt{long} a \texttt{wide}}
+\label{sec-4-3}
 
 \begin{itemize}
-\item A partir de la horaria
+\item Primero escogemos las columnas de interés
 \end{itemize}
 
 \lstset{language=R}
 \begin{lstlisting}
-G0d <- aggregate(G0h,
-                 by=function(x)format(x, '%Y-%m-%d'),
-                 sum)/1000
+CO2subset <- CO2long[c("Country.Name",
+                       "Indicator.Name",
+                       "Year", "Value")]
 \end{lstlisting}
 \begin{itemize}
-\item A partir de la minutaria
+\item Ahora cambiamos formato
 \end{itemize}
 
 \lstset{language=R}
 \begin{lstlisting}
-day <- function(x)format(x, '%Y-%m-%d')
-G0d <- aggregate(hawaii$G0, by=day,
-                 sum)/60/1000
-G0d
-
-truncDay <- function(x)as.POSIXct(trunc(x, units='day'))
-G0d <- aggregate(hawaii$G0, by=truncDay,
-                 sum)/60/1000
-G0d
+CO2wide <- reshape(CO2subset,
+                   idvar=c('Country.Name','Year'),
+                   timevar='Indicator.Name',
+                   direction='wide')
 \end{lstlisting}
-\end{frame}
-\begin{frame}[fragile]
-\frametitle{Más complicado: agrupar por 30 minutos}
-\label{sec-5-8}
-
+\begin{itemize}
+\item Y ponemos nombres al gusto
+\end{itemize}
 
 \lstset{language=R}
 \begin{lstlisting}
-halfHour <- function(tt, delta=30){
-  tt <- as.POSIXlt(tt)
-  gg <- tt$min %/% delta
-  tt <- modifyList(tt, list(min=gg*delta))
-  as.POSIXct(tt)
-}
+names(CO2wide)[3:6] <- c('CO2.PPP', 'CO2.capita',
+                         'GNI.PPP', 'GNI.capita')
+
+head(CO2wide)
 \end{lstlisting}
 
-
-\lstset{language=R}
-\begin{lstlisting}
-hawaii30 <- aggregate(hawaii, by=halfHour,
-                      FUN=sum)/60
-
-head(hawaii30)
-\end{lstlisting}
-
-
-
-
-  
-  
   
   
   
