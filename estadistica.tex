@@ -1,5 +1,5 @@
-% Created 2013-02-25 lun 13:59
-\documentclass[bigger]{beamer}
+% Created 2013-02-26 mar 12:06
+\documentclass{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{fixltx2e}
@@ -18,7 +18,7 @@
 \usepackage{color}
 \usepackage{listings}
 \AtBeginSection[]{\begin{frame}<beamer>\frametitle{Contenidos}\tableofcontents[currentsection]\end{frame}}
-\lstset{keywordstyle=\color{blue}, commentstyle=\color{gray!90}, basicstyle=\ttfamily\small, columns=fullflexible, breaklines=true,linewidth=\textwidth, backgroundcolor=\color{gray!23}, basewidth={0.5em,0.4em}, literate={á}{{\'a}}1 {ñ}{{\~n}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {º}{{\textordmasculine}}1}
+\lstset{keywordstyle=\color{blue}, commentstyle=\color{gray!90}, basicstyle=\ttfamily\footnotesize, columns=fullflexible, breaklines=false,linewidth=\textwidth, backgroundcolor=\color{gray!23}, basewidth={0.5em,0.4em}, literate={á}{{\'a}}1 {ñ}{{\~n}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {º}{{\textordmasculine}}1}
 \usepackage{mathpazo}
 \setbeamercovered{transparent}
 \usefonttheme{serif} 
@@ -29,7 +29,7 @@
 
 \title{Estadística básica con R}
 \author{Oscar Perpiñán Lamigueiro}
-\date{25 de Enero de 2013}
+\date{\today}
 \hypersetup{
   pdfkeywords={},
   pdfsubject={},
@@ -106,10 +106,10 @@ splom(swiss, pscale=0, type=c('p', 'smooth'),
 
 \includegraphics[width=.9\linewidth]{splomSwiss.pdf}
 \end{frame}
-\section{Estadística básica}
+\section{Estadística Univariante}
 \label{sec-2}
 \begin{frame}[fragile]
-\frametitle{\texttt{summary}, \texttt{fivenum}}
+\frametitle{Resumir información}
 \label{sec-2-1}
 
 
@@ -135,6 +135,333 @@ Mean   : 41.144   Mean   :19.94
 3rd Qu.: 93.125   3rd Qu.:21.70   
 Max.   :100.000   Max.   :26.60
 \end{verbatim}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+mean(swiss$Fertility)
+\end{lstlisting}
+
+\begin{verbatim}
+ [1] 70.14255
+\end{verbatim}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+colMeans(swiss)
+\end{lstlisting}
+
+\begin{verbatim}
+        Fertility      Agriculture      Examination        Education 
+         70.14255         50.65957         16.48936         10.97872 
+         Catholic Infant.Mortality 
+         41.14383         19.94255
+\end{verbatim}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Resumir información}
+\label{sec-2-2}
+
+
+
+\lstset{language=R}
+\begin{lstlisting}
+sd(swiss$Fertility)
+\end{lstlisting}
+
+\begin{verbatim}
+ [1] 12.4917
+\end{verbatim}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+sapply(swiss, sd)
+\end{lstlisting}
+
+\begin{verbatim}
+        Fertility      Agriculture      Examination        Education 
+        12.491697        22.711218         7.977883         9.615407 
+         Catholic Infant.Mortality 
+        41.704850         2.912697
+\end{verbatim}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Generar datos aleatorios}
+\label{sec-2-3}
+
+
+
+\lstset{language=R}
+\begin{lstlisting}
+rnorm(10, mean=1, sd=.4)
+\end{lstlisting}
+
+\begin{verbatim}
+  [1] 1.4773674 1.3867686 1.4616831 0.2660399 1.0762471 1.7757136 1.2287755
+  [8] 0.9942296 0.9338062 1.2506691
+\end{verbatim}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+runif(10, min=-3, max=3)
+\end{lstlisting}
+
+\begin{verbatim}
+  [1] -0.4931618  0.2618546  1.1875716 -1.7761181 -2.5002714  2.2152122
+  [7]  0.8830398  2.6895999 -0.9841917 -2.8621449
+\end{verbatim}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+rweibull(n=10, shape=3, scale=2)
+\end{lstlisting}
+
+\begin{verbatim}
+  [1] 1.1046997 1.4038783 2.1482313 2.1802392 2.4728738 1.6614008 1.5393820
+  [8] 1.7977655 0.6410068 1.5485643
+\end{verbatim}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Generar datos aleatorios}
+\label{sec-2-4}
+
+
+
+\lstset{language=R}
+\begin{lstlisting}
+x <- seq(1, 100, length=15)
+x
+\end{lstlisting}
+
+\begin{verbatim}
+  [1]   1.000000   8.071429  15.142857  22.214286  29.285714  36.357143
+  [7]  43.428571  50.500000  57.571429  64.642857  71.714286  78.785714
+ [13]  85.857143  92.928571 100.000000
+\end{verbatim}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+sample(x)
+\end{lstlisting}
+
+\begin{verbatim}
+  [1]  22.214286  85.857143   8.071429  71.714286   1.000000 100.000000
+  [7]  29.285714  92.928571  50.500000  43.428571  64.642857  78.785714
+ [13]  36.357143  57.571429  15.142857
+\end{verbatim}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+sample(x, 5)
+\end{lstlisting}
+
+\begin{verbatim}
+ [1] 15.142857  8.071429 36.357143 78.785714  1.000000
+\end{verbatim}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+sample(x, 5, replace=TRUE)
+\end{lstlisting}
+
+\begin{verbatim}
+ [1] 22.214286 85.857143 43.428571 85.857143  8.071429
+\end{verbatim}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Tests}
+\label{sec-2-5}
+
+
+
+\lstset{language=R}
+\begin{lstlisting}
+t.test(swiss$Fertility, mu=70)
+\end{lstlisting}
+
+
+\begin{verbatim}
+
+        One Sample t-test
+
+data:  swiss$Fertility 
+t = 0.0782, df = 46, p-value = 0.938
+alternative hypothesis: true mean is not equal to 70 
+95 percent confidence interval:
+ 66.47485 73.81025 
+sample estimates:
+mean of x 
+ 70.14255
+\end{verbatim}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+wilcox.test(swiss$Fertility, mu=70)
+\end{lstlisting}
+
+
+\begin{verbatim}
+
+        Wilcoxon signed rank test with continuity correction
+
+data:  swiss$Fertility 
+V = 592.5, p-value = 0.767
+alternative hypothesis: true location is not equal to 70 
+
+Mensajes de aviso perdidos
+In wilcox.test.default(swiss$Fertility, mu = 70) :
+  cannot compute exact p-value with ties
+\end{verbatim}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Tests}
+\label{sec-2-6}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+A <- rnorm(1000)
+B <- rnorm(1000)
+C <- rnorm(1000, sd=3)
+\end{lstlisting}
+
+
+
+\lstset{language=R}
+\begin{lstlisting}
+t.test(A, B)
+\end{lstlisting}
+
+
+\begin{verbatim}
+
+        Welch Two Sample t-test
+
+data:  A and B 
+t = -0.856, df = 1995.848, p-value = 0.3921
+alternative hypothesis: true difference in means is not equal to 0 
+95 percent confidence interval:
+ -0.12706615  0.04984534 
+sample estimates:
+   mean of x    mean of y 
+-0.002826312  0.035784093
+\end{verbatim}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+wilcox.test(A, B)
+\end{lstlisting}
+
+\begin{verbatim}
+ 
+ 	Wilcoxon rank sum test with continuity correction
+ 
+ data:  A and B 
+ W = 492610, p-value = 0.5672
+ alternative hypothesis: true location shift is not equal to 0
+\end{verbatim}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Tests}
+\label{sec-2-7}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+t.test(A, C)
+\end{lstlisting}
+
+
+\begin{verbatim}
+
+        Welch Two Sample t-test
+
+data:  A and C 
+t = -0.037, df = 1214.266, p-value = 0.9705
+alternative hypothesis: true difference in means is not equal to 0 
+95 percent confidence interval:
+ -0.1999720  0.1925606 
+sample estimates:
+    mean of x     mean of y 
+-0.0028263121  0.0008794018
+\end{verbatim}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+wilcox.test(A, C)
+\end{lstlisting}
+
+\begin{verbatim}
+ 
+ 	Wilcoxon rank sum test with continuity correction
+ 
+ data:  A and C 
+ W = 509559, p-value = 0.4592
+ alternative hypothesis: true location shift is not equal to 0
+\end{verbatim}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Tests}
+\label{sec-2-8}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+Religion <- ifelse(swiss$Catholic > 50,
+                   'Catholic', 'Protestant')
+\end{lstlisting}
+
+
+
+\lstset{language=R}
+\begin{lstlisting}
+t.test(Fertility ~ Religion, data=swiss)
+\end{lstlisting}
+
+
+\begin{verbatim}
+
+        Welch Two Sample t-test
+
+data:  Fertility by Religion 
+t = 2.7004, df = 26.742, p-value = 0.01186
+alternative hypothesis: true difference in means is not equal to 0 
+95 percent confidence interval:
+  2.455904 18.024939 
+sample estimates:
+  mean in group Catholic mean in group Protestant 
+                76.46111                 66.22069
+\end{verbatim}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+wilcox.test(Fertility ~ Religion, data=swiss)
+\end{lstlisting}
+
+
+\begin{verbatim}
+
+        Wilcoxon rank sum test with continuity correction
+
+data:  Fertility by Religion 
+W = 409.5, p-value = 0.0012
+alternative hypothesis: true location shift is not equal to 0 
+
+Mensajes de aviso perdidos
+In wilcox.test.default(x = c(83.1, 92.5, 76.1, 83.8, 92.4, 82.4,  :
+  cannot compute exact p-value with ties
+\end{verbatim}
 \end{frame}
 \section{Regresión lineal}
 \label{sec-3}
@@ -145,7 +472,8 @@ Max.   :100.000   Max.   :26.60
 
 \lstset{language=R}
 \begin{lstlisting}
-lmFertEdu <- lm(Fertility ~ Education, data = swiss)
+lmFertEdu <- lm(Fertility ~ Education,
+                data = swiss)
 summary(lmFertEdu)
 \end{lstlisting}
 
@@ -245,7 +573,8 @@ Val de Ruz ValdeTravers V. De Geneve  Rive Droite  Rive Gauche
 
 \lstset{language=R}
 \begin{lstlisting}
-lmFertEduCat <- lm(Fertility ~ Education + Catholic, data = swiss)
+lmFertEduCat <- lm(Fertility ~ Education + Catholic,
+                   data = swiss)
 summary(lmFertEduCat)
 \end{lstlisting}
 
@@ -279,7 +608,8 @@ F-statistic:  29.7 on 2 and 44 DF,  p-value: 6.849e-09
 
 \lstset{language=R}
 \begin{lstlisting}
-lmFertEduCat <- update(lmFertEdu, . ~ . + Catholic, data = swiss)
+lmFertEduCat <- update(lmFertEdu, . ~ . + Catholic,
+                       data = swiss)
 summary(lmFertEduCat)
 \end{lstlisting}
 
@@ -313,7 +643,8 @@ F-statistic:  29.7 on 2 and 44 DF,  p-value: 6.849e-09
 
 \lstset{language=R}
 \begin{lstlisting}
-lmFertEduCatAgr <- lm(Fertility ~ Education + Catholic + Agriculture, data = swiss)
+lmFertEduCatAgr <- lm(Fertility ~ Education + Catholic + Agriculture,
+                      data = swiss)
 summary(lmFertEduCatAgr)
 \end{lstlisting}
 
@@ -349,7 +680,8 @@ F-statistic: 25.73 on 3 and 43 DF,  p-value: 1.089e-09
 
 \lstset{language=R}
 \begin{lstlisting}
-lmFertEduCatAgr <- update(lmFertEduCat, . ~ . + Agriculture, data = swiss)
+lmFertEduCatAgr <- update(lmFertEduCat, . ~ . + Agriculture,
+                          data = swiss)
 summary(lmFertEduCatAgr)
 \end{lstlisting}
 
@@ -385,7 +717,8 @@ F-statistic: 25.73 on 3 and 43 DF,  p-value: 1.089e-09
 
 \lstset{language=R}
 \begin{lstlisting}
-lmFertEduCatAgr <- update(lmFertEdu, . ~ . + Catholic + Agriculture, data = swiss)
+lmFertEduCatAgr <- update(lmFertEdu, . ~ . + Catholic + Agriculture,
+                          data = swiss)
 summary(lmFertEduCatAgr)
 \end{lstlisting}
 
