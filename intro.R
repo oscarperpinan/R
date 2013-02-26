@@ -235,6 +235,20 @@ apply(M, 2, mean)
 apply(M, 1, sd, na.rm=TRUE)
 apply(M, 2, sd)
 
+## =sweep=
+## - Usamos el conjunto de datos =state.x77=
+
+head(state.x77)
+
+## - Calculamos el máximo por columna
+
+maxes <- apply(state.x77, 2, max)
+
+## - Dividimos cada columna por su máximo
+
+stateNorm <- sweep(state.x77, 2, maxes, FUN="/")
+head(stateNorm)
+
 ## Indexado de matrices
 
 M
@@ -438,6 +452,41 @@ head(df)
 
 library(lattice)
 levelplot(result ~ x + y, data=df)
+
+## Unir dos =data.frame=
+## - Primero construimos un =data.frame= de ejemplo
+
+USStates <- as.data.frame(state.x77)
+USStates$Name <- rownames(USStates)
+rownames(USStates) <- NULL
+
+## - Lo partimos en estados "fríos" y estados "grandes"
+
+coldStates <- USStates[USStates$Frost>150, c('Name', 'Frost')]
+largeStates <- USStates[USStates$Area>1e5, c('Name', 'Area')]
+
+## - Unimos los dos conjuntos (estados "fríos" y "grandes")
+
+merge(coldStates, largeStates)
+
+## =merge= usa =match=
+## - Estados grandes que también son fríos
+
+idxLarge <- match(largeStates$Name,
+                  coldStates$Name,
+                  nomatch=0)
+idxLarge
+
+largeStates[idxLarge,]
+
+## - Estados frios que también son grandes
+
+idxCold <- match(coldStates$Name,
+                 largeStates$Name,
+                 nomatch=0)
+idxCold
+
+coldStates[idxCold,]
 
 ## Una variable numérica que nos servirá para el ejemplo
 

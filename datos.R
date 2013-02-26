@@ -7,279 +7,146 @@ dir()
 dir(pattern='.R')
 dir('data')
 
-## Lectura de datos con =read.table=
-## - Primero lo intentamos con la versión final
+## read.table
+## - Con un fichero local
 
-dats <- read.table('data/aranjuez.csv')
-head(dats)
+download.file('http://oscarperpinan.github.com/spacetime-vis/data/CO2_GNI_BM.csv',
+              destfile='data/CO2_GNI_BM.csv')
 
-dats <- read.table('data/aranjuez.csv', sep=',')
-head(dats)
+CO2 <- read.table('data/CO2_GNI_BM.csv', header=TRUE, sep=',')
+head(CO2)
 
-dats <- read.table('data/aranjuez.csv', sep=',', header=TRUE)
-head(dats)
+## - Directamente de un enlace URL
 
-aranjuez <- read.csv('data/aranjuez.csv')
-head(aranjuez)
+CO2 <- read.table('http://oscarperpinan.github.com/spacetime-vis/data/CO2_GNI_BM.csv',
+                header=TRUE, sep=',')
+head(CO2)
 
-class(aranjuez)
-names(aranjuez)
+## read.csv, read.csv2
+## - =read.csv= y =read.csv2= son como =read.table= con valores
+##   por defecto para encabezado y separadores
 
-## Visualización de datos
+CO2 <- read.csv('data/CO2_GNI_BM.csv')
 
-library(lattice)
+head(CO2)
+tail(CO2)
+summary(CO2)
+names(CO2)
 
-xyplot(Radiation ~ TempAvg, data=aranjuez)
+## table
 
-xyplot(Radiation ~ TempAvg, data=aranjuez,
-       type=c('p', 'r'))
+chromo <- data.frame(chromosome = gl(3,  10,
+                     labels = c('A',  'B',  'C')),
+                     probeset = gl(3,  10,
+                     labels = c('X',  'Y',  'Z')),
+                     ensg =  gl(3,  10,
+                     labels = c('E1',  'E2',  'E3')),
+                     symbol = gl(3,  10,
+                     labels = c('S1',  'S2',  'S3')),
+                     XXA_00 = rnorm(30),
+                     XXA_36 = rnorm(30),
+                     XXB_00 = rnorm(30))
 
-xyplot(Radiation ~ TempAvg + TempMax + TempMin,
-       data = aranjuez, xlab='Temperature',
-       type=c('p', 'r'), auto.key=TRUE,
-       pch=16, alpha=0.5)
+table(chromo$chromosome, df$XXA_00 > 0)
+table(chromo$probeset, df$XXA_00 > -1 & df$XXA_00 < 1)
 
-## Visualización de datos (advanced!)
+## xtabs
 
-library(RColorBrewer)
+xtabs(XXA_00 > 1 ~ chromosome + probeset,
+      data=chromo)
 
-humidClass <- cut(aranjuez$HumidAvg, 4)
-myPal <- brewer.pal(n=4, 'GnBu')
+## tapply
 
-xyplot(Radiation ~ TempAvg + TempMax + TempMin,
-       groups=humidClass, outer=TRUE,
-       data = aranjuez, xlab='Temperature',
-       layout=c(3, 1),
-       scales=list(relation='free'),
-       auto.key=list(space='right'),
-       par.settings=custom.theme(pch=16,
-         alpha=0.8, col=myPal))
+tapply(CO2$X2000, CO2$Indicator.Name,
+       FUN=mean)
 
-## Transformamos a serie temporal
+## tapply
 
-library(zoo)
+tapply(CO2$X2000, CO2[,c("Indicator.Name", "Country.Name")],
+       FUN=mean)
 
-fecha <- as.POSIXct(aranjuez[,1],
-                    format='%Y-%m-%d')
-head(fecha)
+## aggregate
 
-aranjuez <- zoo(aranjuez[, -1], fecha)
-class(aranjuez)
-head(aranjuez)
+aggregate(X2000 ~ Indicator.Name,
+          data=CO2, FUN=mean)
 
-## Leemos directamente como serie temporal
+aggregate(cbind(X2000, X2001) ~ Indicator.Name,
+          data=CO2, FUN=mean)
 
-aranjuez <- read.zoo('data/aranjuez.csv',
-                     sep=',', header=TRUE)
+aggregate(X2000 ~ Indicator.Name + Country.Name,
+          data=CO2, FUN=mean)
 
-header(aranjuez)
-names(aranjuez)
-summary(index(aranjuez))
+## aggregate
 
-## Ahora con la versión original
-## - Primero descomprimimos el archivo
+aggregate(cbind(X2000, X2001) ~
+          Indicator.Name + Country.Name,
+          data=CO2, FUN=mean)
 
-unzip('data/InformeDatos.zip', exdir='data')
+aggregate(cbind(X2000, X2001) ~
+          Indicator.Name + Country.Name,
+          data=CO2, FUN=mean)
 
-## - Y ahora abrimos teniendo en cuenta codificación, separadores, etc.
+aggregate(cbind(X2000, X2001) ~
+          Indicator.Name + Country.Name,
+          subset=(Country.Name %in% c('United States', 'China')),
+                  data=CO2, FUN=mean)
 
-aranjuez <- read.table("data/M03_Aranjuez_01_01_2004_31_12_2011.csv",
-                     fileEncoding = 'UTF-16LE',
-                     header = TRUE, fill = TRUE,
-                     sep = ';', dec = ",")
+## aggregate
 
-## - Vemos el contenido
+aggregate(cbind(XXA_00, XXA_36, XXB_00) ~
+          ensg + chromosome + symbol,
+          data = chromo,  FUN = mean)
 
-head(aranjuez)
-summary(aranjuez)
-names(aranjuez)
+aggregate(cbind(XXA_00, XXA_36, XXB_00) ~ ensg ,
+          data = chromo,  FUN = mean)
 
-## Convertimos a serie temporal
-## - Sólo nos interesan algunas variables (indexamos por columnas)
+## =stack=
+## - Primero escogemos un subconjunto
 
-tt <- as.Date(aranjuez$Fecha, format='%d/%m/%Y')
-aranjuez <- zoo(aranjuez[, c(6, 7, 9, 11, 12, 16,
-                             17, 19, 20, 22)],
-                order.by=tt)
+CO2China <- subset(CO2,
+                   subset=(Country.Name=='China' &
+                           Indicator.Name=='CO2 emissions (kg per PPP $ of GDP)'),
+                   select=-c(Country.Name, Country.Code,
+                             Indicator.Name, Indicator.Code))
 
-## Ajustamos los nombres (opcional)
+## - Pasamos de formato =wide= a =long=
 
-names(aranjuez) <- c('TempAvg', 'TempMax',
-                     'TempMin', 'HumidAvg',
-                     'HumidMax','WindAvg',
-                     'WindMax', 'Radiation',
-                     'Rain', 'ET')
+stack(CO2China)
 
-## Nuevamente mostramos datos
-## - Método simple
-
-xyplot(aranjuez)
-
-## - Seleccionamos variables y superponemos
-
-xyplot(aranjuez[,c("TempAvg", "TempMax", "TempMin")],
-       superpose=TRUE)
-
-## - Para cruzar variables hay que convertir a =data.frame=
-
-xyplot(TempAvg ~ Radiation,
-       data=as.data.frame(aranjuez))
-
-## Limpieza de datos
-## - Conversión de Unidades (MJ -> Wh)
-
-aranjuez$G0 <- aranjuez$Radiation/3.6*1000
-xyplot(aranjuez$G0)
-
-## - Filtrado de datos
-
-aranjuezClean <- within(as.data.frame(aranjuez),{
-  TempMin[TempMin>40] <- NA
-  HumidMax[HumidMax>100] <- NA
-  WindAvg[WindAvg>10] <- NA
-  WindMax[WindMax>10] <- NA
-})
-
-aranjuez <- zoo(aranjuezClean, index(aranjuez))
-
-## Media anual
-## - Primero definimos una función para extraer el año
-
-Year <- function(x)as.numeric(format(x, "%Y"))
-
-Year(index(aranjuez))
-
-## - Y la empleamos para agrupar con =aggregate=
-
-aranjuezY <- aggregate(aranjuez$G0, by=Year,
-                       FUN=mean, na.rm=TRUE)
-aranjuezY
-class(aranjuezY)
-
-G0y <- aggregate(aranjuez$G0, by=Year,
-                 FUN=mean, na.rm=TRUE)
-G0y
-
-## Medias mensuales
-## - Meses como números
-
-Month <- function(x)as.numeric(format(x, "%m"))
-
-Month(index(aranjuez))
-
-G0m <- aggregate(aranjuez$G0, by=Month,
-                 FUN=mean, na.rm=TRUE)
-G0m
-
-## - Meses como etiquetas
-
-months(index(aranjuez))
-
-G0m <- aggregate(aranjuez$G0, by=months,
-                 FUN=mean, na.rm=TRUE)
-G0m
-
-## Medias mensuales para cada año
-## - La función para agrupar es =as.yearmon=
-
-as.yearmon(index(aranjuez))
-
-G0ym <- aggregate(aranjuez$G0, by=as.yearmon,
-                  FUN=mean, na.rm=TRUE)
-G0ym
-
-## Ejemplo: Lanai-Hawaii
-
-URL <- "http://www.nrel.gov/midc/apps/plot.pl?site=LANAI&start=20090722&edy=19&emo=11&eyr=2010&zenloc=19&year=2010&month=11&day=1&endyear=2010&endmonth=11&endday=19&time=1&inst=3&inst=4&inst=5&inst=10&type=data&first=3&math=0&second=-1&value=0.0&global=-1&direct=-1&diffuse=-1&user=0&axis=1"
-## URL <- "data/NREL-Hawaii.csv"
-
-## Leemos como serie temporal
-## - Leemos con =read.zoo=
-
-lat <- 20.77
-lon <- -156.9339
-hawaii <- read.zoo(URL,
-                col.names = c("date", "hour",
-                  "G0", "B", "D0", "Ta"),
-                ## Dia en columna 1, Hora en columna 2
-                index = list(1, 2),
-                ## Obtiene escala temporal de estas dos columnas
-                FUN = function(d, h) as.POSIXct(
-                  paste(d, h),
-                  format = "%m/%d/%Y %H:%M",
-                  tz = "HST"), 
-                header=TRUE, sep=",")
-
-## - Añadimos Directa en el plano Horizontal
-
-hawaii$B0 <- with(hawaii, G0-D0)
-
-## Mostramos datos como serie temporal
-
-xyplot(hawaii)
-xyplot(hawaii[,c('G0', 'D0', 'B0')],
-       superpose=TRUE)
-
-## Mostramos relaciones entre variables
-
-xyplot(Ta ~ G0 + D0 + B0,
-       data=as.data.frame(hawaii),
-       type=c('p', 'smooth'),
-       par.settings=custom.theme(
-         alpha=.5, pch=16,
-         lwd=3, col.line='black'),
-       outer=TRUE, layout=c(3, 1),
-       scales=list(x=list(relation='free')))
-
-## Irradiación horaria
+## =reshape=: =wide= a =long=
 ## - Primer intento
 
-hour <- function(x)as.numeric(format(x, '%H'))
+CO2long <- reshape(CO2,
+                   varying=list(names(CO2)[5:16]),
+                   direction='long')
+head(CO2long)
 
-G0h <- aggregate(hawaii$G0, by=hour,
-                 FUN=sum, na.rm=1)/1000
-G0h
+## - Añadimos argumentos
 
-## Irradiación horaria
+CO2long <- reshape(CO2,
+                   varying=list(names(CO2)[5:16]),
+                   timevar='Year', v.names='Value',
+                   times=2000:2011,
+                   direction='long')
+head(CO2long)
 
-## - Mejor así
+## =reshape=: =long= a =wide=
+## - Primero escogemos las columnas de interés
 
-hour <- function(x)as.POSIXct(format(x,
-                                     '%Y-%m-%d %H:00:00'))
+CO2subset <- CO2long[c("Country.Name",
+                       "Indicator.Name",
+                       "Year", "Value")]
 
-G0h <- aggregate(hawaii$G0, by=hour,
-                 FUN=sum, na.rm=1)/60
-G0h
+## - Ahora cambiamos formato
 
-## Irradiación diaria
-## - A partir de la horaria
+CO2wide <- reshape(CO2subset,
+                   idvar=c('Country.Name','Year'),
+                   timevar='Indicator.Name',
+                   direction='wide')
 
-G0d <- aggregate(G0h,
-                 by=function(x)format(x, '%Y-%m-%d'),
-                 sum)/1000
+## - Y ponemos nombres al gusto
 
-## - A partir de la minutaria
+names(CO2wide)[3:6] <- c('CO2.PPP', 'CO2.capita',
+                         'GNI.PPP', 'GNI.capita')
 
-day <- function(x)format(x, '%Y-%m-%d')
-G0d <- aggregate(hawaii$G0, by=day,
-                 sum)/60/1000
-G0d
-
-truncDay <- function(x)as.POSIXct(trunc(x, units='day'))
-G0d <- aggregate(hawaii$G0, by=truncDay,
-                 sum)/60/1000
-G0d
-
-## Más complicado: agrupar por 30 minutos
-
-halfHour <- function(tt, delta=30){
-  tt <- as.POSIXlt(tt)
-  gg <- tt$min %/% delta
-  tt <- modifyList(tt, list(min=gg*delta))
-  as.POSIXct(tt)
-}
-
-hawaii30 <- aggregate(hawaii, by=halfHour,
-                      FUN=sum)/60
-
-head(hawaii30)
+head(CO2wide)
