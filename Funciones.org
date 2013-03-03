@@ -1,7 +1,6 @@
 #+TITLE:     Funciones
 #+AUTHOR:    Oscar Perpiñán Lamigueiro
 #+EMAIL:     oscar.perpinan@gmail.com
-#+DATE:      19 de Febrero de 2013
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  es
@@ -15,10 +14,10 @@
 #+XSLT:
 #+startup: beamer
 #+LaTeX_CLASS: beamer
-#+BEAMER_FRAME_LEVEL: 3
+#+BEAMER_FRAME_LEVEL: 2
 #+LATEX_CLASS_OPTIONS: [xcolor={usenames,svgnames,dvipsnames}]
-#+LATEX_HEADER: \AtBeginSubsection[]{\begin{frame}[plain]\tableofcontents[currentsubsection]\end{frame}}
-#+LATEX_HEADER: \lstset{commentstyle=\color{gray!90}, basicstyle=\ttfamily\small, columns=fullflexible, breaklines=true,linewidth=\textwidth, backgroundcolor=\color{gray!23}, basewidth={0.5em,0.4em}, literate={á}{{\'a}}1 {ñ}{{\~n}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {º}{{\textordmasculine}}1}
+#+LATEX_HEADER: \AtBeginSection[]{\begin{frame}<beamer>\frametitle{Contenidos}\tableofcontents[currentsection]\end{frame}}
+#+LATEX_HEADER: \lstset{keywordstyle=\color{blue}, commentstyle=\color{gray!90}, basicstyle=\ttfamily\footnotesize, columns=fullflexible, breaklines=false,linewidth=\textwidth, backgroundcolor=\color{gray!23}, basewidth={0.5em,0.4em}, literate={á}{{\'a}}1 {ñ}{{\~n}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {º}{{\textordmasculine}}1}
 #+LATEX_HEADER: \usepackage{mathpazo}
 #+LATEX_HEADER: \setbeamercovered{transparent}
 #+LATEX_HEADER: \usefonttheme{serif} 
@@ -26,3 +25,384 @@
 #+LATEX_HEADER: \hypersetup{colorlinks=true, linkcolor=Blue, urlcolor=Blue}
 #+PROPERTY:  tangle yes
 #+PROPERTY:  comments org
+#+PROPERTY: results output
+#+PROPERTY: session *R*
+#+PROPERTY: exports both
+#+LATEX_HEADER: \usepackage{fancyvrb}
+#+LATEX_HEADER: \DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\tiny, formatcom = {\color{black!70}}}
+
+#+begin_src R :exports none
+  setwd('~/R/intro')
+#+end_src
+
+* Conceptos Básicos
+** Fuentes de información
+- [[http://cran.r-project.org/doc/manuals/R-intro.html][R introduction]]
+- [[http://cran.r-project.org/doc/manuals/R-lang.html][R Language Definition]]
+- [[http://books.google.es/books/about/Software_for_Data_Analysis.html][Software for Data Analysis]]
+** Componentes de una función
+- Una función se define con =function=
+#+BEGIN_CENTER
+=name <- function(arg_1, arg_2, ...) expression=
+#+END_CENTER
+- Está compuesta por:
+  - Nombre de la función (=name=)
+  - Argumentos (=arg_1=, =arg_2=, =...=)
+  - Cuerpo (=expression=): emplea los argumentos para generar un resultado
+** Mi primera función
+- Definición
+#+begin_src R 
+myFun <- function(x, y){
+    x + y
+    }
+#+end_src
+- Argumentos
+#+begin_src R 
+formals(myFun)
+#+end_src
+- Cuerpo
+#+begin_src R 
+body(myFun)
+#+end_src
+
+** Mi primera función
+#+begin_src R 
+  myFun(1, 2)
+#+end_src
+#+begin_src R 
+  myFun(1:10, 21:30)
+#+end_src
+#+begin_src R 
+  myFun(1:10, 3)
+#+end_src
+
+** Argumentos: nombre y orden
+
+- Una función identifica sus argumentos por su nombre y por su orden (sin nombre)
+
+#+begin_src R 
+  power <- function(x, exp){
+      x^exp
+      }
+#+end_src
+
+#+begin_src R 
+  power(x=1:10, exp=2)
+#+end_src
+
+#+begin_src R 
+  power(1:10, exp=2)
+#+end_src
+
+#+begin_src R 
+  power(exp=2, x=1:10)
+#+end_src
+
+** Argumentos: valores por defecto
+- Se puede asignar un valor por defecto a los argumentos
+#+begin_src R 
+  power <- function(x, exp=2){
+      x ^ exp
+      }
+#+end_src
+#+begin_src R 
+  power(1:10)
+#+end_src
+#+begin_src R 
+power(1:10, 2)
+#+end_src
+
+** Funciones sin argumentos
+#+begin_src R 
+  hello <- function(){
+      print('Hello world!')
+      }
+#+end_src 
+#+begin_src R 
+hello()
+#+end_src
+
+** Argumentos sin nombre: =...=
+#+begin_src R 
+  pwrSum <- function(x, power, ...){
+      sum(x ^ power, ...)
+      }
+#+end_src
+#+begin_src R 
+  x <- 1:10
+  pwrSum(x, 2)
+#+end_src
+#+begin_src R 
+  x <- c(1:5, NA, 6:9, NA, 10)
+  pwrSum(x, 2)
+#+end_src
+#+begin_src R 
+  pwrSum(x, 2, na.rm=TRUE)
+#+end_src
+
+** Argumentos ausentes: =missing=
+#+begin_src R 
+  suma10 <- function(x, y){
+      if (missing(y)) y <- 10
+      x + y
+      }
+#+end_src
+#+begin_src R 
+  suma10(1:10)
+#+end_src
+
+** Control de errores: =stopifnot=
+#+begin_src R 
+  foo <- function(x, y){
+      stopifnot(is.numeric(x) & is.numeric(y))
+      x + y
+      }
+#+end_src
+
+#+begin_src R 
+  foo(1:10, 21:30)
+#+end_src
+
+#+begin_src R 
+  foo(1:10, 'a')
+#+end_src
+
+** Control de errores: =stop=
+#+begin_src R 
+  foo <- function(x, y){
+      if (!(is.numeric(x) & is.numeric(y))){
+          stop('arguments must be numeric.')
+          } else { x + y }
+      }
+  
+#+end_src
+#+begin_src R 
+  foo(2, 3)
+#+end_src
+#+begin_src R 
+  foo(2, 'a')
+#+end_src
+
+* Lexical scope
+
+** Clases de variables
+- Las variables que se emplean en el cuerpo de una función pueden
+  dividirse en:
+  - Parámetros formales (argumentos): =x=, =y=
+  - Variables locales (definiciones internas): =z=, =w=, =m=
+  - Variables libres: =a=, =b=
+#+begin_src R 
+  myFun <- function(x, y){
+      z <- x^2
+      w <- y^3
+      m <- a*z + b*w
+      m
+      }
+#+end_src
+#+begin_src R 
+  a <- 10
+  b <- 20
+  myFun(2, 3)
+#+end_src
+
+** Lexical scope
+
+- Las variables libres deben estar disponibles en el entorno
+  (=environment=) en el que la función ha sido creada.
+#+begin_src R 
+  environment(myFun) 
+#+end_src
+#+begin_src R 
+  ls()
+#+end_src
+
+** Lexical scope: funciones anidadas
+#+begin_src R 
+  anidada <- function(x, y){
+      xn <- 2
+      yn <- 3
+      interna <- function(x, y){
+          sum(x^xn, y^yn)
+          }
+      print(environment(interna))
+      interna(x, y)
+      }
+#+end_src
+
+#+begin_src R 
+  anidada(1:3, 2:4)
+#+end_src
+
+#+begin_src R 
+  sum((1:3)^2, (2:4)^3)
+#+end_src
+** Lexical scope: funciones anidadas
+#+begin_src R 
+  xn
+#+end_src
+
+#+begin_src R 
+  yn
+#+end_src
+
+#+begin_src R 
+  interna
+#+end_src
+
+** Funciones que devuelven funciones
+#+begin_src R 
+  constructor <- function(m, n){
+      function(x){
+          m*x + n
+          }
+      }
+#+end_src
+
+#+begin_src R 
+  myFoo <- constructor(10, 3)
+  myFoo
+#+end_src
+** Funciones que devuelven funciones
+#+begin_src R 
+  class(myFoo)
+#+end_src
+#+begin_src R 
+  environment(myFoo)
+#+end_src
+#+begin_src R 
+ls()
+#+end_src
+#+begin_src R 
+  ls(env=environment(myFoo))
+#+end_src
+#+begin_src R 
+  get('m', env=environment(myFoo))
+#+end_src
+#+begin_src R 
+get('n', env=environment(myFoo))
+#+end_src
+
+* Debug y profiling
+
+** =traceback=
+#+begin_src R 
+  sumSq <- function(x, ...){
+      sum(x ^ 2, ...)
+      }
+  
+  sumProd <- function(x, y, ...){
+      xs <- sumSq(x, ...)
+      ys <- sumSq(y, ...)
+      xs * ys
+      }
+#+end_src
+#+begin_src R 
+  sumProd(rnorm(10), runif(10))
+#+end_src
+#+begin_src R 
+  sumProd(rnorm(10), letters[1:10])
+#+end_src
+#+begin_src R 
+  traceback()
+#+end_src
+
+** Debugger
+
+** =system.time=
+#+begin_src R 
+  noise <- function(sd)rnorm(1000, mean=0, sd=sd)
+#+end_src
+#+begin_src R 
+  sumNoise <- function(nComponents){
+      vals <- sapply(seq_len(nComponents), noise)
+      rowSums(vals)
+      }
+#+end_src
+#+begin_src R 
+  system.time(sumNoise(1000))
+#+end_src
+** =Rprof=
+- Usaremos un fichero temporal
+#+begin_src R 
+  tmp <- tempfile()
+#+end_src
+- Activamos la toma de información
+#+begin_src R 
+  Rprof(tmp)
+#+end_src
+- Ejecutamos el código a analizar
+#+begin_src R 
+  zz <- sumNoise(1000)
+#+end_src
+
+** =Rprof=
+- Paramos el análisis
+#+begin_src R 
+  Rprof()
+#+end_src
+- Extraemos el resumen
+#+begin_src R 
+summaryRprof(tmp)
+#+end_src
+
+
+* Sofisticaciones
+** =do.call= 
+- Ejemplo: sumar los componentes de una lista
+#+begin_src R 
+  lista <- list(a=rnorm(100), b=runif(100), c=rexp(100))
+  with(lista, sum(a + b + c))
+#+end_src
+- En lugar de nombrar los componentes, creamos una llamada a una
+  función con =do.call=
+#+begin_src R 
+do.call(sum, lista)
+#+end_src
+** =do.call=
+
+- Se emplea frecuentemente con el resultado de =lapply=
+#+begin_src R 
+  x <- rnorm(5)
+  ll <- lapply(1:5, function(i)x^i)
+  do.call(rbind, ll)
+#+end_src
+- Este mismo ejemplo puede resolverse con =sapply=
+#+begin_src R 
+  sapply(1:5, function(i)x^i)
+#+end_src
+
+** =Reduce=
+- Combina sucesivamente los elementos de un objeto aplicando una
+  función binaria
+#+begin_src R 
+Reduce('+', 1:10)
+## equivalente a 
+## sum(1:10)
+#+end_src
+** =Reduce=
+#+begin_src R 
+  Reduce('/', 1:10)
+#+end_src
+#+begin_src R 
+Reduce(paste, LETTERS[1:5])
+#+end_src
+#+begin_src R 
+  foo <- function(u, v)u + 1 /v
+  Reduce(foo, c(3, 7, 15, 1, 292), right=TRUE)
+  ## equivalente a
+  ## foo(3, foo(7, foo(15, foo(1, 292))))
+#+end_src
+
+** Funciones recursivas
+- [[http://en.wikibooks.org/wiki/R_Programming/Working_with_functions#Functions_as_Objects][Serie de Fibonnaci]]
+#+begin_src R 
+  fib <- function(n){
+      if (n>2) {
+          c(fib(n-1),
+            sum(tail(fib(n-1),2)))
+      } else if (n>=0) rep(1,n)
+      }
+#+end_src
+#+begin_src R 
+fib(10)
+#+end_src

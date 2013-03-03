@@ -1,0 +1,982 @@
+% Created 2013-03-02 sáb 18:01
+\documentclass[xcolor={usenames,svgnames,dvipsnames}]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{soul}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{latexsym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\usepackage{color}
+\usepackage{listings}
+\AtBeginSection[]{\begin{frame}<beamer>\frametitle{Contenidos}\tableofcontents[currentsection]\end{frame}}
+\lstset{keywordstyle=\color{blue}, commentstyle=\color{gray!90}, basicstyle=\ttfamily\footnotesize, columns=fullflexible, breaklines=false,linewidth=\textwidth, backgroundcolor=\color{gray!23}, basewidth={0.5em,0.4em}, literate={á}{{\'a}}1 {ñ}{{\~n}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {º}{{\textordmasculine}}1}
+\usepackage{mathpazo}
+\setbeamercovered{transparent}
+\usefonttheme{serif} 
+\usetheme{Goettingen}
+\hypersetup{colorlinks=true, linkcolor=Blue, urlcolor=Blue}
+\usepackage{fancyvrb}
+\DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\tiny, formatcom = {\color{black!70}}}
+\providecommand{\alert}[1]{\textbf{#1}}
+
+\title{Funciones}
+\author{Oscar Perpiñán Lamigueiro}
+\date{19 de Febrero de 2013}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs Org-mode version 7.8.11}}
+
+\begin{document}
+
+\maketitle
+
+
+
+
+\section{Conceptos Básicos}
+\label{sec-1}
+\begin{frame}
+\frametitle{Fuentes de información}
+\label{sec-1-1}
+
+\begin{itemize}
+\item \href{http://cran.r-project.org/doc/manuals/R-intro.html}{R introduction}
+\item \href{http://cran.r-project.org/doc/manuals/R-lang.html}{R Language Definition}
+\item \href{http://books.google.es/books/about/Software_for_Data_Analysis.html}{Software for Data Analysis}
+\end{itemize}
+\end{frame}
+\begin{frame}
+\frametitle{Componentes de una función}
+\label{sec-1-2}
+
+\begin{itemize}
+\item Una función se define con \texttt{function}
+\end{itemize}
+\begin{center}
+\texttt{name <- function(arg\_1, arg\_2, ...) expression}
+\end{center}
+
+\begin{itemize}
+\item Está compuesta por:
+\begin{itemize}
+\item Nombre de la función (\texttt{name})
+\item Argumentos (\texttt{arg\_1}, \texttt{arg\_2}, \texttt{...})
+\item Cuerpo (\texttt{expression}): emplea los argumentos para generar un resultado
+\end{itemize}
+\end{itemize}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Mi primera función}
+\label{sec-1-3}
+
+\begin{itemize}
+\item Definición
+\end{itemize}
+
+\lstset{language=R}
+\begin{lstlisting}
+myFun <- function(x, y){
+    x + y
+    }
+\end{lstlisting}
+
+
+\begin{itemize}
+\item Argumentos
+\end{itemize}
+
+\lstset{language=R}
+\begin{lstlisting}
+formals(myFun)
+\end{lstlisting}
+
+\begin{verbatim}
+ $x
+ 
+ 
+ $y
+\end{verbatim}
+
+\begin{itemize}
+\item Cuerpo
+\end{itemize}
+
+\lstset{language=R}
+\begin{lstlisting}
+body(myFun)
+\end{lstlisting}
+
+\begin{verbatim}
+ {
+     x + y
+ }
+\end{verbatim}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Mi primera función}
+\label{sec-1-4}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+myFun(1, 2)
+\end{lstlisting}
+
+\begin{verbatim}
+ [1] 3
+\end{verbatim}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+myFun(1:10, 21:30)
+\end{lstlisting}
+
+\begin{verbatim}
+  [1] 22 24 26 28 30 32 34 36 38 40
+\end{verbatim}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+myFun(1:10, 3)
+\end{lstlisting}
+
+\begin{verbatim}
+  [1]  4  5  6  7  8  9 10 11 12 13
+\end{verbatim}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Argumentos: nombre y orden}
+\label{sec-1-5}
+
+
+\begin{itemize}
+\item Una función identifica sus argumentos por su nombre y por su orden (sin nombre)
+\end{itemize}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+power <- function(x, exp){
+    x^exp
+    }
+\end{lstlisting}
+
+
+
+\lstset{language=R}
+\begin{lstlisting}
+power(x=1:10, exp=2)
+\end{lstlisting}
+
+\begin{verbatim}
+  [1]   1   4   9  16  25  36  49  64  81 100
+\end{verbatim}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+power(1:10, exp=2)
+\end{lstlisting}
+
+\begin{verbatim}
+  [1]   1   4   9  16  25  36  49  64  81 100
+\end{verbatim}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+power(exp=2, x=1:10)
+\end{lstlisting}
+
+\begin{verbatim}
+  [1]   1   4   9  16  25  36  49  64  81 100
+\end{verbatim}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Argumentos: valores por defecto}
+\label{sec-1-6}
+
+\begin{itemize}
+\item Se puede asignar un valor por defecto a los argumentos
+\end{itemize}
+
+\lstset{language=R}
+\begin{lstlisting}
+power <- function(x, exp=2){
+    x ^ exp
+    }
+\end{lstlisting}
+
+
+
+\lstset{language=R}
+\begin{lstlisting}
+power(1:10)
+\end{lstlisting}
+
+\begin{verbatim}
+  [1]   1   4   9  16  25  36  49  64  81 100
+\end{verbatim}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+power(1:10, 2)
+\end{lstlisting}
+
+\begin{verbatim}
+  [1]   1   4   9  16  25  36  49  64  81 100
+\end{verbatim}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Funciones sin argumentos}
+\label{sec-1-7}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+hello <- function(){
+    print('Hello world!')
+    }
+\end{lstlisting}
+
+
+
+\lstset{language=R}
+\begin{lstlisting}
+hello()
+\end{lstlisting}
+
+\begin{verbatim}
+ [1] "Hello world!"
+\end{verbatim}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Argumentos sin nombre: \texttt{...}}
+\label{sec-1-8}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+pwrSum <- function(x, power, ...){
+    sum(x ^ power, ...)
+    }
+\end{lstlisting}
+
+
+
+\lstset{language=R}
+\begin{lstlisting}
+x <- 1:10
+pwrSum(x, 2)
+\end{lstlisting}
+
+\begin{verbatim}
+ [1] 385
+\end{verbatim}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+x <- c(1:5, NA, 6:9, NA, 10)
+pwrSum(x, 2)
+\end{lstlisting}
+
+\begin{verbatim}
+ [1] NA
+\end{verbatim}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+pwrSum(x, 2, na.rm=TRUE)
+\end{lstlisting}
+
+\begin{verbatim}
+ [1] 385
+\end{verbatim}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Argumentos ausentes: \texttt{missing}}
+\label{sec-1-9}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+suma10 <- function(x, y){
+    if (missing(y)) y <- 10
+    x + y
+    }
+\end{lstlisting}
+
+
+
+\lstset{language=R}
+\begin{lstlisting}
+suma10(1:10)
+\end{lstlisting}
+
+\begin{verbatim}
+  [1] 11 12 13 14 15 16 17 18 19 20
+\end{verbatim}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Control de errores: \texttt{stopifnot}}
+\label{sec-1-10}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+foo <- function(x, y){
+    stopifnot(is.numeric(x) & is.numeric(y))
+    x + y
+    }
+\end{lstlisting}
+
+
+
+\lstset{language=R}
+\begin{lstlisting}
+foo(1:10, 21:30)
+\end{lstlisting}
+
+\begin{verbatim}
+  [1] 22 24 26 28 30 32 34 36 38 40
+\end{verbatim}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+foo(1:10, 'a')
+\end{lstlisting}
+
+\begin{verbatim}
+ Error: is.numeric(x) & is.numeric(y) is not TRUE
+\end{verbatim}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Control de errores: \texttt{stop}}
+\label{sec-1-11}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+foo <- function(x, y){
+    if (!(is.numeric(x) & is.numeric(y))){
+        stop('arguments must be numeric.')
+        } else { x + y }
+    }
+\end{lstlisting}
+
+
+
+\lstset{language=R}
+\begin{lstlisting}
+foo(2, 3)
+\end{lstlisting}
+
+\begin{verbatim}
+ [1] 5
+\end{verbatim}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+foo(2, 'a')
+\end{lstlisting}
+
+\begin{verbatim}
+ Error en foo(2, "a") : arguments must be numeric.
+\end{verbatim}
+\end{frame}
+\section{Lexical scope}
+\label{sec-2}
+\begin{frame}[fragile]
+\frametitle{Clases de variables}
+\label{sec-2-1}
+
+\begin{itemize}
+\item Las variables que se emplean en el cuerpo de una función pueden
+  dividirse en:
+\begin{itemize}
+\item Parámetros formales (argumentos): \texttt{x}, \texttt{y}
+\item Variables locales (definiciones internas): \texttt{z}, \texttt{w}, \texttt{m}
+\item Variables libres: \texttt{a}, \texttt{b}
+\end{itemize}
+\end{itemize}
+
+\lstset{language=R}
+\begin{lstlisting}
+myFun <- function(x, y){
+    z <- x^2
+    w <- y^3
+    m <- a*z + b*w
+    m
+    }
+\end{lstlisting}
+
+
+
+\lstset{language=R}
+\begin{lstlisting}
+a <- 10
+b <- 20
+myFun(2, 3)
+\end{lstlisting}
+
+\begin{verbatim}
+ [1] 580
+\end{verbatim}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Lexical scope}
+\label{sec-2-2}
+
+
+\begin{itemize}
+\item Las variables libres deben estar disponibles en el entorno
+  (\texttt{environment}) en el que la función ha sido creada.
+\end{itemize}
+
+\lstset{language=R}
+\begin{lstlisting}
+environment(myFun)
+\end{lstlisting}
+
+\begin{verbatim}
+ <environment: R_GlobalEnv>
+\end{verbatim}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+ls()
+\end{lstlisting}
+
+\begin{verbatim}
+  [1] "a"           "add"         "anidada"     "b"           "constructor"
+  [6] "fib"         "foo"         "frac"        "hello"       "lista"      
+ [11] "ll"          "M"           "myFoo"       "myFooenv"    "myFun"      
+ [16] "noise"       "power"       "pwrSum"      "ruido"       "suma10"     
+ [21] "sumNoise"    "sumProd"     "sumSq"       "tmp"         "vals"       
+ [26] "x"           "zz"
+\end{verbatim}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Lexical scope: funciones anidadas}
+\label{sec-2-3}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+anidada <- function(x, y){
+    xn <- 2
+    yn <- 3
+    interna <- function(x, y){
+        sum(x^xn, y^yn)
+        }
+    print(environment(interna))
+    interna(x, y)
+    }
+\end{lstlisting}
+
+
+
+\lstset{language=R}
+\begin{lstlisting}
+anidada(1:3, 2:4)
+\end{lstlisting}
+
+\begin{verbatim}
+ <environment: 0xa645674>
+ [1] 113
+\end{verbatim}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+sum((1:3)^2, (2:4)^3)
+\end{lstlisting}
+
+\begin{verbatim}
+ [1] 113
+\end{verbatim}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Lexical scope: funciones anidadas}
+\label{sec-2-4}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+xn
+\end{lstlisting}
+
+\begin{verbatim}
+ Error: objeto 'xn' no encontrado
+\end{verbatim}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+yn
+\end{lstlisting}
+
+\begin{verbatim}
+ Error: objeto 'yn' no encontrado
+\end{verbatim}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+interna
+\end{lstlisting}
+
+\begin{verbatim}
+ Error: objeto 'interna' no encontrado
+\end{verbatim}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Funciones que devuelven funciones}
+\label{sec-2-5}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+constructor <- function(m, n){
+    function(x){
+        m*x + n
+        }
+    }
+\end{lstlisting}
+
+
+
+\lstset{language=R}
+\begin{lstlisting}
+myFoo <- constructor(10, 3)
+myFoo
+\end{lstlisting}
+
+\begin{verbatim}
+ function(x){
+         m*x + n
+         }
+ <environment: 0xa63e3b8>
+\end{verbatim}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Funciones que devuelven funciones}
+\label{sec-2-6}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+class(myFoo)
+\end{lstlisting}
+
+\begin{verbatim}
+ [1] "function"
+\end{verbatim}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+environment(myFoo)
+\end{lstlisting}
+
+\begin{verbatim}
+ <environment: 0xa63e3b8>
+\end{verbatim}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+ls()
+\end{lstlisting}
+
+\begin{verbatim}
+  [1] "a"           "add"         "anidada"     "b"           "constructor"
+  [6] "fib"         "foo"         "frac"        "hello"       "lista"      
+ [11] "ll"          "M"           "myFoo"       "myFooenv"    "myFun"      
+ [16] "noise"       "power"       "pwrSum"      "ruido"       "suma10"     
+ [21] "sumNoise"    "sumProd"     "sumSq"       "tmp"         "vals"       
+ [26] "x"           "zz"
+\end{verbatim}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+ls(env=environment(myFoo))
+\end{lstlisting}
+
+\begin{verbatim}
+ [1] "m" "n"
+\end{verbatim}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+get('m', env=environment(myFoo))
+\end{lstlisting}
+
+\begin{verbatim}
+ [1] 10
+\end{verbatim}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+get('n', env=environment(myFoo))
+\end{lstlisting}
+
+\begin{verbatim}
+ [1] 3
+\end{verbatim}
+\end{frame}
+\section{Debug y profiling}
+\label{sec-3}
+\begin{frame}[fragile]
+\frametitle{\texttt{traceback}}
+\label{sec-3-1}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+sumSq <- function(x, ...){
+    sum(x ^ 2, ...)
+    }
+
+sumProd <- function(x, y, ...){
+    xs <- sumSq(x, ...)
+    ys <- sumSq(y, ...)
+    xs * ys
+    }
+\end{lstlisting}
+
+
+
+\lstset{language=R}
+\begin{lstlisting}
+sumProd(rnorm(10), runif(10))
+\end{lstlisting}
+
+\begin{verbatim}
+ [1] 15.21856
+\end{verbatim}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+sumProd(rnorm(10), letters[1:10])
+\end{lstlisting}
+
+\begin{verbatim}
+ Error en x^2 : argumento no-numérico para operador binario
+\end{verbatim}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+traceback()
+\end{lstlisting}
+
+\begin{verbatim}
+ 3: x^2 at #2
+ 2: sumSq(y, ...) at #3
+ 1: sumProd(rnorm(10), letters[1:10])
+\end{verbatim}
+\end{frame}
+\begin{frame}
+\frametitle{Debugger}
+\label{sec-3-2}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{\texttt{system.time}}
+\label{sec-3-3}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+noise <- function(sd)rnorm(1000, mean=0, sd=sd)
+\end{lstlisting}
+
+
+
+\lstset{language=R}
+\begin{lstlisting}
+sumNoise <- function(nComponents){
+    vals <- sapply(seq_len(nComponents), noise)
+    rowSums(vals)
+    }
+\end{lstlisting}
+
+
+
+\lstset{language=R}
+\begin{lstlisting}
+system.time(sumNoise(1000))
+\end{lstlisting}
+
+\begin{verbatim}
+    user  system elapsed 
+   0.244   0.020   0.265
+\end{verbatim}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{\texttt{Rprof}}
+\label{sec-3-4}
+
+\begin{itemize}
+\item Usaremos un fichero temporal
+\end{itemize}
+
+\lstset{language=R}
+\begin{lstlisting}
+tmp <- tempfile()
+\end{lstlisting}
+
+
+\begin{itemize}
+\item Activamos la toma de información
+\end{itemize}
+
+\lstset{language=R}
+\begin{lstlisting}
+Rprof(tmp)
+\end{lstlisting}
+
+
+\begin{itemize}
+\item Ejecutamos el código a analizar
+\end{itemize}
+
+\lstset{language=R}
+\begin{lstlisting}
+zz <- sumNoise(1000)
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{\texttt{Rprof}}
+\label{sec-3-5}
+
+\begin{itemize}
+\item Paramos el análisis
+\end{itemize}
+
+\lstset{language=R}
+\begin{lstlisting}
+Rprof()
+\end{lstlisting}
+
+
+\begin{itemize}
+\item Extraemos el resumen
+\end{itemize}
+
+\lstset{language=R}
+\begin{lstlisting}
+summaryRprof(tmp)
+\end{lstlisting}
+
+
+\begin{verbatim}
+$by.self
+        self.time self.pct total.time total.pct
+"rnorm"      0.24       75       0.24        75
+"array"      0.08       25       0.08        25
+
+$by.total
+                 total.time total.pct self.time self.pct
+"sapply"               0.32       100      0.00        0
+"sumNoise"             0.32       100      0.00        0
+"rnorm"                0.24        75      0.24       75
+"FUN"                  0.24        75      0.00        0
+"lapply"               0.24        75      0.00        0
+"array"                0.08        25      0.08       25
+"simplify2array"       0.08        25      0.00        0
+
+$sample.interval
+[1] 0.02
+
+$sampling.time
+[1] 0.32
+\end{verbatim}
+\end{frame}
+\section{Sofisticaciones}
+\label{sec-4}
+\begin{frame}[fragile]
+\frametitle{\texttt{do.call}}
+\label{sec-4-1}
+
+\begin{itemize}
+\item Ejemplo: sumar los componentes de una lista
+\end{itemize}
+
+\lstset{language=R}
+\begin{lstlisting}
+lista <- list(a=rnorm(100), b=runif(100), c=rexp(100))
+with(lista, sum(a + b + c))
+\end{lstlisting}
+
+\begin{verbatim}
+ [1] 167.6913
+\end{verbatim}
+
+\begin{itemize}
+\item En lugar de nombrar los componentes, creamos una llamada a una
+  función con \texttt{do.call}
+\end{itemize}
+
+\lstset{language=R}
+\begin{lstlisting}
+do.call(sum, lista)
+\end{lstlisting}
+
+\begin{verbatim}
+ [1] 167.6913
+\end{verbatim}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{\texttt{do.call}}
+\label{sec-4-2}
+
+
+\begin{itemize}
+\item Se emplea frecuentemente con el resultado de \texttt{lapply}
+\end{itemize}
+
+\lstset{language=R}
+\begin{lstlisting}
+x <- rnorm(5)
+ll <- lapply(1:5, function(i)x^i)
+do.call(rbind, ll)
+\end{lstlisting}
+
+\begin{verbatim}
+           [,1]         [,2]      [,3]      [,4]        [,5]
+ [1,]  2.477327 -0.311525664 -1.342538  1.650633 0.365936506
+ [2,]  6.137148  0.097048239  1.802409  2.724589 0.133909527
+ [3,] 15.203720 -0.030233017 -2.419804  4.497296 0.049002384
+ [4,] 37.664581  0.009418361  3.248680  7.423385 0.017931761
+ [5,] 93.307473 -0.002934061 -4.361478 12.253284 0.006561886
+\end{verbatim}
+
+\begin{itemize}
+\item Este mismo ejemplo puede resolverse con \texttt{sapply}
+\end{itemize}
+
+\lstset{language=R}
+\begin{lstlisting}
+sapply(1:5, function(i)x^i)
+\end{lstlisting}
+
+\begin{verbatim}
+            [,1]       [,2]        [,3]         [,4]         [,5]
+ [1,]  2.4773267 6.13714765 15.20371982 37.664581254 93.307473313
+ [2,] -0.3115257 0.09704824 -0.03023302  0.009418361 -0.002934061
+ [3,] -1.3425384 1.80240946 -2.41980398  3.248679858 -4.361477583
+ [4,]  1.6506329 2.72458904  4.49729637  7.423385446 12.253284406
+ [5,]  0.3659365 0.13390953  0.04900238  0.017931761  0.006561886
+\end{verbatim}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{\texttt{Reduce}}
+\label{sec-4-3}
+
+\begin{itemize}
+\item Combina sucesivamente los elementos de un objeto aplicando una
+  función binaria
+\end{itemize}
+
+\lstset{language=R}
+\begin{lstlisting}
+Reduce('+', 1:10)
+## equivalente a 
+## sum(1:10)
+\end{lstlisting}
+
+\begin{verbatim}
+ [1] 55
+\end{verbatim}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{\texttt{Reduce}}
+\label{sec-4-4}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+Reduce('/', 1:10)
+\end{lstlisting}
+
+\begin{verbatim}
+ [1] 2.755732e-07
+\end{verbatim}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+Reduce(paste, LETTERS[1:5])
+\end{lstlisting}
+
+\begin{verbatim}
+ [1] "A B C D E"
+\end{verbatim}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+foo <- function(u, v)u + 1 /v
+Reduce(foo, c(3, 7, 15, 1, 292), right=TRUE)
+## equivalente a
+## foo(3, foo(7, foo(15, foo(1, 292))))
+\end{lstlisting}
+
+\begin{verbatim}
+ [1] 3.141593
+\end{verbatim}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Funciones recursivas}
+\label{sec-4-5}
+
+\begin{itemize}
+\item \href{http://en.wikibooks.org/wiki/R_Programming/Working_with_functions#Functions_as_Objects}{Serie de Fibonnaci}
+\end{itemize}
+
+\lstset{language=R}
+\begin{lstlisting}
+fib <- function(n){
+    if (n>2) {
+        c(fib(n-1),
+          sum(tail(fib(n-1),2)))
+    } else if (n>=0) rep(1,n)
+    }
+\end{lstlisting}
+
+
+
+\lstset{language=R}
+\begin{lstlisting}
+fib(10)
+\end{lstlisting}
+
+\begin{verbatim}
+  [1]  1  1  2  3  5  8 13 21 34 55
+\end{verbatim}
+\end{frame}
+
+\end{document}
