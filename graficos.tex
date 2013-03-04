@@ -1,4 +1,4 @@
-% Created 2013-02-21 jue 16:18
+% Created 2013-03-04 lun 22:54
 \documentclass[xcolor={usenames,svgnames,dvipsnames}]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -30,7 +30,7 @@
 
 \title{Gráficos con R}
 \author{Oscar Perpiñán Lamigueiro}
-\date{25 de Enero de 2013}
+\date{Febrero de 2013}
 \hypersetup{
   pdfkeywords={},
   pdfsubject={},
@@ -116,9 +116,12 @@ NA's   :4        NA's   :13       NA's   :18
 
 \lstset{language=R}
 \begin{lstlisting}
-aranjuez$month <- as.numeric(format(as.Date(aranjuez$X), '%m'))
-aranjuez$year <- as.numeric(format(as.Date(aranjuez$X), '%Y'))
-aranjuez$day <- as.numeric(format(as.Date(aranjuez$X), '%j'))
+aranjuez$month <- as.numeric(
+                  format(as.Date(aranjuez$X), '%m'))
+aranjuez$year <- as.numeric(
+                 format(as.Date(aranjuez$X), '%Y'))
+aranjuez$day <- as.numeric(
+                format(as.Date(aranjuez$X), '%j'))
 aranjuez$jday <- julian(as.Date(aranjuez$X))
 aranjuez$quarter <- quarters(as.Date(aranjuez$X))
 \end{lstlisting}
@@ -149,8 +152,7 @@ library(lattice)
 
 \lstset{language=R}
 \begin{lstlisting}
-xyplot(Radiation ~ TempAvg,
-       data=aranjuez)
+xyplot(Radiation ~ TempAvg, data=aranjuez)
 \end{lstlisting}
 
 \includegraphics[width=0.7\textwidth]{xyplot.pdf}
@@ -162,8 +164,8 @@ xyplot(Radiation ~ TempAvg,
 
 \lstset{language=R}
 \begin{lstlisting}
-xyplot(Radiation ~ TempAvg,
-       data=aranjuez, type=c('p', 'g'))
+xyplot(Radiation ~ TempAvg, data=aranjuez,
+       type=c('p', 'g'))
 \end{lstlisting}
 
 \includegraphics[width=0.7\textwidth]{xyplotPG.pdf}
@@ -175,8 +177,9 @@ xyplot(Radiation ~ TempAvg,
 
 \lstset{language=R}
 \begin{lstlisting}
-xyplot(Radiation ~ TempAvg,
-       data=aranjuez, type=c('p', 'r', 'g'))
+xyplot(Radiation ~ TempAvg, data=aranjuez,
+       type=c('p', 'r', 'g'),
+       lwd=2, col.line='black')
 \end{lstlisting}
 
 \includegraphics[width=0.7\textwidth]{xyplotPRG.pdf}
@@ -188,8 +191,9 @@ xyplot(Radiation ~ TempAvg,
 
 \lstset{language=R}
 \begin{lstlisting}
-xyplot(Radiation ~ TempAvg,
-       data=aranjuez, type=c('p', 'smooth', 'g'))
+xyplot(Radiation ~ TempAvg, data=aranjuez,
+       type=c('p', 'smooth', 'g'),
+       lwd=2, col.line='black')
 \end{lstlisting}
 
 \includegraphics[width=0.7\textwidth]{xyplotSmooth.pdf}
@@ -201,7 +205,8 @@ xyplot(Radiation ~ TempAvg,
 
 \lstset{language=R}
 \begin{lstlisting}
-xyplot(Radiation ~ TempAvg|year, data=aranjuez)
+xyplot(Radiation ~ TempAvg|factor(year),
+       data=aranjuez)
 \end{lstlisting}
 
 \includegraphics[width=0.7\textwidth]{xyplotYear.pdf}
@@ -226,7 +231,7 @@ xyplot(Radiation ~ TempAvg, groups=quarter,
 
 \lstset{language=R}
 \begin{lstlisting}
-xyplot(Radiation ~ TempAvg|year,
+xyplot(Radiation ~ TempAvg|factor(year),
        groups=quarter,
        data=aranjuez,
        layout=c(4, 2),
@@ -242,7 +247,7 @@ xyplot(Radiation ~ TempAvg|year,
 
 \lstset{language=R}
 \begin{lstlisting}
-xyplot(Radiation ~ TempAvg|year,
+xyplot(Radiation ~ TempAvg|factor(year),
        groups=quarter,
        data=aranjuez,
        layout=c(4, 2),
@@ -325,8 +330,60 @@ xyplot(Radiation ~ TempAvg,
 \includegraphics[width=0.45\textwidth]{brewer.pdf}
 \end{frame}
 \begin{frame}[fragile]
-\frametitle{\texttt{levelplot}}
+\frametitle{Paneles a medida}
 \label{sec-2-1-14}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+xyplot(Radiation ~ TempAvg, data=aranjuez,
+       panel=function(x, y, ...){
+           panel.xyplot(x, y, ...)
+           minIdx <- which.min(x)
+           maxIdx <- which.max(x)
+           panel.points(x[c(minIdx, maxIdx)],
+                        y[c(minIdx, maxIdx)],
+                        cex=2, col='red')
+           panel.text(x[minIdx], y[minIdx],
+                      'MIN', pos=1)
+           })
+\end{lstlisting}
+
+\includegraphics[width=0.3\textwidth]{panel.pdf}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Matriz de gráficos de dispersión}
+\label{sec-2-1-15}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+splom(aranjuez[,c("TempAvg", "HumidAvg", "WindAvg",
+                  "Rain", "Radiation", "ET")],
+      pscale=0, alpha=0.6, cex=0.3, pch=19)
+\end{lstlisting}
+
+\includegraphics[width=0.45\textwidth]{splom.png}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Matriz de gráficos de dispersión}
+\label{sec-2-1-16}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+splom(aranjuez[,c("TempAvg", "HumidAvg", "WindAvg",
+                  "Rain", "Radiation", "ET")],
+      groups=aranjuez$quarter,
+      auto.key=list(space='right'),
+      pscale=0, alpha=0.6, cex=0.3, pch=19)
+\end{lstlisting}
+
+\includegraphics[width=0.45\textwidth]{splomGroup.png}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{\texttt{levelplot}}
+\label{sec-2-1-17}
 
 
 \lstset{language=R}
@@ -339,7 +396,7 @@ levelplot(TempAvg ~ year * day,
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{\texttt{contourplot}}
-\label{sec-2-1-15}
+\label{sec-2-1-18}
 
 
 \lstset{language=R}
@@ -354,7 +411,7 @@ contourplot(Radiation ~ year * day,
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Box-and-Whiskers}
-\label{sec-2-1-16}
+\label{sec-2-1-19}
 
 
 \lstset{language=R}
@@ -367,7 +424,7 @@ bwplot(Radiation ~ month, data=aranjuez,
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Box-and-Whiskers}
-\label{sec-2-1-17}
+\label{sec-2-1-20}
 
 
 \lstset{language=R}
@@ -383,20 +440,19 @@ bwplot(Radiation ~ month, data=aranjuez,
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Histogramas}
-\label{sec-2-1-18}
+\label{sec-2-1-21}
 
 
 \lstset{language=R}
 \begin{lstlisting}
-histogram(~Radiation|year, data=aranjuez,
-          strip=strip.custom(strip.levels=TRUE))
+histogram(~Radiation|factor(year), data=aranjuez)
 \end{lstlisting}
 
 \includegraphics[width=0.7\textwidth]{histogram.pdf}
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Gráficos de densidad}
-\label{sec-2-1-19}
+\label{sec-2-1-22}
 
 
 \lstset{language=R}
@@ -410,7 +466,7 @@ densityplot(~Radiation, groups=quarter,
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{\texttt{dotplot}}
-\label{sec-2-1-20}
+\label{sec-2-1-23}
 
 
 \lstset{language=R}
@@ -423,14 +479,14 @@ avRad <- aggregate(Radiation ~ month * year,
 
 \lstset{language=R}
 \begin{lstlisting}
-dotplot(month ~ Radiation|year, data=avRad)
+dotplot(month ~ Radiation|factor(year), data=avRad)
 \end{lstlisting}
 
 \includegraphics[width=0.7\textwidth]{dotplot.pdf}
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Quantile-Quantile}
-\label{sec-2-1-21}
+\label{sec-2-1-24}
 
 
 \lstset{language=R}
@@ -444,7 +500,7 @@ qq(firstHalf ~ Radiation, data=aranjuez)
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Quantile-quantile}
-\label{sec-2-1-22}
+\label{sec-2-1-25}
 
 
 \lstset{language=R}
@@ -458,7 +514,7 @@ qq(winter ~ Radiation, data=aranjuez)
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Quantile-Quantile}
-\label{sec-2-1-23}
+\label{sec-2-1-26}
 
 
 \lstset{language=R}
@@ -475,8 +531,11 @@ qqmath(~TempAvg, data=aranjuez,
 \frametitle{ggplot2}
 \label{sec-2-2-1}
 
-
-\href{http://learnr.wordpress.com/2009/06/28/ggplot2-version-of-figures-in-lattice-multivariate-data-visualization-with-r-part-1/}{ggplot2 desde lattice} (\href{http://learnr.files.wordpress.com/2009/08/latbook.pdf}{PDF})
+\begin{itemize}
+\item \href{http://docs.ggplot2.org/current/}{Documentación de ggplot2}
+\item \href{http://ggplot2.org/book/}{Codigo del libro}
+\item \href{http://learnr.wordpress.com/2009/06/28/ggplot2-version-of-figures-in-lattice-multivariate-data-visualization-with-r-part-1/}{ggplot2 desde lattice} (\href{http://learnr.files.wordpress.com/2009/08/latbook.pdf}{PDF})
+\end{itemize}
 \end{frame}
 
 \end{document}

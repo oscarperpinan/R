@@ -1,7 +1,7 @@
 #+TITLE:     Manejo de datos con R
 #+AUTHOR:    Oscar Perpiñán Lamigueiro
 #+EMAIL:     oscar.perpinan@gmail.com
-#+DATE:      25 de Enero de 2013
+#+DATE:      Febrero de 2013
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  es
@@ -26,20 +26,25 @@
 #+LATEX_HEADER: \hypersetup{colorlinks=true, linkcolor=Blue, urlcolor=Blue}
 #+PROPERTY:  tangle yes
 #+PROPERTY:  comments org
-#+PROPERTY:  session *R*
+#+PROPERTY: results output
+#+PROPERTY: session *R*
+#+PROPERTY: exports both
 #+LATEX_HEADER: \usepackage{fancyvrb}
 #+LATEX_HEADER: \DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\tiny, formatcom = {\color{black!70}}}
+
 
 * Fuentes de datos
 ** Fuentes de datos
 
 - [[http://stat.ethz.ch/R-manual/R-patched/library/datasets/html/00Index.html][The R Datasets Package]]
 
-- [[http://www.bibsonomy.org/user/procomun/data?resourcetype%3Dbookmark][Enlaces en Bibsonomy]]
+- [[http://www.bibsonomy.org/user/procomun/data][Enlaces en Bibsonomy]]
+
+- ...
 
 * Lectura de datos
 ** =setwd=, =getwd=, =dir=
-#+begin_src R
+#+begin_src R :exports code
   getwd()
   old <- setwd("~/R/intro")
   dir()
@@ -72,33 +77,40 @@
   CO2 <- read.csv('data/CO2_GNI_BM.csv')
 #+end_src
 
-#+begin_src R 
+#+begin_src R :exports code
+  names(CO2)
   head(CO2)
   tail(CO2)
-  summary(CO2)
-  names(CO2)
 #+end_src
-
+#+begin_src R 
+  summary(CO2)
+#+end_src
 * Datos agregados
+** table \\ =data.frame= de ejemplo
+#+begin_src R 
+  chromosome <- gl(3,  10, labels = c('A',  'B',  'C'))
+  probeset <- gl(3,  10, labels = c('X',  'Y',  'Z'))
+  ensg <-  gl(3,  10, labels = c('E1',  'E2',  'E3'))
+  symbol <- gl(3,  10, labels = c('S1',  'S2',  'S3'))
+  XXA_00 <- rnorm(30)
+  XXA_36 <- rnorm(30)
+  XXB_00 <- rnorm(30)
+#+end_src
+#+begin_src R 
+chromo <- data.frame(chromosome, probeset, ensg, symbol,
+                     XXA_00, XXA_36, XXB_00)
+head(chromo)
+#+end_src
 ** table
 #+begin_src R 
-  chromo <- data.frame(chromosome = gl(3,  10,
-                       labels = c('A',  'B',  'C')),
-                       probeset = gl(3,  10,
-                       labels = c('X',  'Y',  'Z')),
-                       ensg =  gl(3,  10,
-                       labels = c('E1',  'E2',  'E3')),
-                       symbol = gl(3,  10,
-                       labels = c('S1',  'S2',  'S3')),
-                       XXA_00 = rnorm(30),
-                       XXA_36 = rnorm(30),
-                       XXB_00 = rnorm(30))
+table(chromo$chromosome, chromo$XXA_00 > 0)
 #+end_src
 
 #+begin_src R 
-table(chromo$chromosome, df$XXA_00 > 0)
-table(chromo$probeset, df$XXA_00 > -1 & df$XXA_00 < 1)
+table(chromo$probeset, chromo$XXA_00 > -1 & chromo$XXA_00 < 1)
 #+end_src
+
+
 ** xtabs
 #+begin_src R 
   xtabs(XXA_00 > 1 ~ chromosome + probeset,
@@ -119,27 +131,29 @@ table(chromo$probeset, df$XXA_00 > -1 & df$XXA_00 < 1)
 ** aggregate
 #+begin_src R 
   aggregate(X2000 ~ Indicator.Name,
-            data=CO2, FUN=mean)
-  
+            data=CO2, FUN=mean)  
+#+end_src
+#+begin_src R 
   aggregate(cbind(X2000, X2001) ~ Indicator.Name,
             data=CO2, FUN=mean)
   
+#+end_src
+#+begin_src R 
   aggregate(X2000 ~ Indicator.Name + Country.Name,
             data=CO2, FUN=mean)
-  
-  
 #+end_src
-
 ** aggregate
 #+begin_src R 
   aggregate(cbind(X2000, X2001) ~
             Indicator.Name + Country.Name,
             data=CO2, FUN=mean)
-  
+#+end_src
+#+begin_src R 
   aggregate(cbind(X2000, X2001) ~
             Indicator.Name + Country.Name,
             data=CO2, FUN=mean)
-  
+#+end_src
+#+begin_src R 
   aggregate(cbind(X2000, X2001) ~
             Indicator.Name + Country.Name,
             subset=(Country.Name %in% c('United States', 'China')),
@@ -150,11 +164,11 @@ table(chromo$probeset, df$XXA_00 > -1 & df$XXA_00 < 1)
   aggregate(cbind(XXA_00, XXA_36, XXB_00) ~
             ensg + chromosome + symbol,
             data = chromo,  FUN = mean)
-  
+#+end_src   
+#+begin_src R 
   aggregate(cbind(XXA_00, XXA_36, XXB_00) ~ ensg ,
             data = chromo,  FUN = mean)
-#+end_src   
-
+#+end_src
 * Cambio de formato
 ** =stack=
 - Primero escogemos un subconjunto
@@ -164,7 +178,10 @@ table(chromo$probeset, df$XXA_00 > -1 & df$XXA_00 < 1)
                              Indicator.Name=='CO2 emissions (kg per PPP $ of GDP)'),
                      select=-c(Country.Name, Country.Code,
                                Indicator.Name, Indicator.Code))
+  head(CO2China)
 #+end_src
+
+** =stack=
 - Pasamos de formato =wide= a =long=
 #+begin_src R 
   stack(CO2China)
@@ -178,6 +195,7 @@ table(chromo$probeset, df$XXA_00 > -1 & df$XXA_00 < 1)
                      direction='long')
   head(CO2long)
 #+end_src
+** =reshape=: =wide= a =long=
 - Añadimos argumentos
 #+begin_src R 
   CO2long <- reshape(CO2,
@@ -193,15 +211,18 @@ table(chromo$probeset, df$XXA_00 > -1 & df$XXA_00 < 1)
   CO2subset <- CO2long[c("Country.Name",
                          "Indicator.Name",
                          "Year", "Value")]
+  head(CO2subset)
 #+end_src
+** =reshape=: =long= a =wide=
 - Ahora cambiamos formato
 #+begin_src R 
   CO2wide <- reshape(CO2subset,
                      idvar=c('Country.Name','Year'),
                      timevar='Indicator.Name',
                      direction='wide')
-  
+  head(CO2wide)
 #+end_src
+** =reshape=: =long= a =wide=
 - Y ponemos nombres al gusto
 #+begin_src R 
   names(CO2wide)[3:6] <- c('CO2.PPP', 'CO2.capita',

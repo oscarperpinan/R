@@ -1,7 +1,7 @@
 #+TITLE:     Gráficos con R
 #+AUTHOR:    Oscar Perpiñán Lamigueiro
 #+EMAIL:     oscar.perpinan@gmail.com
-#+DATE:      25 de Enero de 2013
+#+DATE: Febrero de 2013
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  es
@@ -57,11 +57,15 @@ Dentro del conjunto =grid= existen dos grandes paquetes:
 *** Conjunto de datos de ejemplo
 - Añadimos algunas columnas
 #+begin_src R 
-  aranjuez$month <- as.numeric(format(as.Date(aranjuez$X), '%m'))
-  aranjuez$year <- as.numeric(format(as.Date(aranjuez$X), '%Y'))
-  aranjuez$day <- as.numeric(format(as.Date(aranjuez$X), '%j'))
+  aranjuez$month <- as.numeric(
+                    format(as.Date(aranjuez$X), '%m'))
+  aranjuez$year <- as.numeric(
+                   format(as.Date(aranjuez$X), '%Y'))
+  aranjuez$day <- as.numeric(
+                  format(as.Date(aranjuez$X), '%j'))
   aranjuez$jday <- julian(as.Date(aranjuez$X))
   aranjuez$quarter <- quarters(as.Date(aranjuez$X))
+  
 #+end_src
 
 
@@ -80,38 +84,41 @@ Dentro del conjunto =grid= existen dos grandes paquetes:
 *** =xyplot=
 #+ATTR_LaTeX: width=0.7\textwidth
 #+begin_src R  :file xyplot.pdf
-xyplot(Radiation ~ TempAvg,
-       data=aranjuez)
+xyplot(Radiation ~ TempAvg, data=aranjuez)
 #+end_src
 
 *** =xyplot=
 #+ATTR_LaTeX: width=0.7\textwidth
 #+begin_src R :file xyplotPG.pdf
-xyplot(Radiation ~ TempAvg,
-       data=aranjuez, type=c('p', 'g'))
+  xyplot(Radiation ~ TempAvg, data=aranjuez,
+         type=c('p', 'g'))
 #+end_src
 
 
 *** =xyplot=
 #+ATTR_LaTeX: width=0.7\textwidth
 #+begin_src R :file xyplotPRG.pdf
-xyplot(Radiation ~ TempAvg,
-       data=aranjuez, type=c('p', 'r', 'g'))
+  xyplot(Radiation ~ TempAvg, data=aranjuez,
+         type=c('p', 'r', 'g'),
+         lwd=2, col.line='black')
+  
 #+end_src
 
 
 *** =xyplot=
 #+ATTR_LaTeX: width=0.7\textwidth
 #+begin_src R :file xyplotSmooth.pdf
-xyplot(Radiation ~ TempAvg,
-       data=aranjuez, type=c('p', 'smooth', 'g'))
+  xyplot(Radiation ~ TempAvg, data=aranjuez,
+         type=c('p', 'smooth', 'g'),
+         lwd=2, col.line='black')
 #+end_src
 
 
 *** Paneles
 #+ATTR_LaTeX: width=0.7\textwidth
 #+begin_src R :file xyplotYear.pdf
-  xyplot(Radiation ~ TempAvg|year, data=aranjuez)
+  xyplot(Radiation ~ TempAvg|factor(year),
+         data=aranjuez)
 #+end_src
 
 *** Grupos
@@ -124,7 +131,7 @@ xyplot(Radiation ~ TempAvg,
 *** Paneles y grupos
 #+ATTR_LaTeX: width=0.6\textwidth
 #+begin_src R :file xyplotQuarterYear.pdf
-  xyplot(Radiation ~ TempAvg|year,
+  xyplot(Radiation ~ TempAvg|factor(year),
          groups=quarter,
          data=aranjuez,
          layout=c(4, 2),
@@ -134,7 +141,7 @@ xyplot(Radiation ~ TempAvg,
 *** Paneles y grupos
 #+ATTR_LaTeX: width=0.6\textwidth
 #+begin_src R :file xyplotQuarterYearSmooth.pdf
-  xyplot(Radiation ~ TempAvg|year,
+  xyplot(Radiation ~ TempAvg|factor(year),
          groups=quarter,
          data=aranjuez,
          layout=c(4, 2),
@@ -189,8 +196,38 @@ xyplot(Radiation ~ TempAvg,
          auto.key=list(space='right'),
          data=aranjuez)
 #+end_src
+*** Paneles a medida
+#+ATTR_LaTeX: width=0.3\textwidth
+#+begin_src R :file panel.pdf
+  xyplot(Radiation ~ TempAvg, data=aranjuez,
+         panel=function(x, y, ...){
+             panel.xyplot(x, y, ...)
+             minIdx <- which.min(x)
+             maxIdx <- which.max(x)
+             panel.points(x[c(minIdx, maxIdx)],
+                          y[c(minIdx, maxIdx)],
+                          cex=2, col='red')
+             panel.text(x[minIdx], y[minIdx],
+                        'MIN', pos=1)
+             })
+#+end_src
 
-
+*** Matriz de gráficos de dispersión
+#+ATTR_LaTeX: width=0.45\textwidth
+#+begin_src R :file splom.png
+  splom(aranjuez[,c("TempAvg", "HumidAvg", "WindAvg",
+                    "Rain", "Radiation", "ET")],
+        pscale=0, alpha=0.6, cex=0.3, pch=19)
+#+end_src
+*** Matriz de gráficos de dispersión
+#+ATTR_LaTeX: width=0.45\textwidth
+#+begin_src R :file splomGroup.png
+  splom(aranjuez[,c("TempAvg", "HumidAvg", "WindAvg",
+                    "Rain", "Radiation", "ET")],
+        groups=aranjuez$quarter,
+        auto.key=list(space='right'),
+        pscale=0, alpha=0.6, cex=0.3, pch=19)
+#+end_src
 *** =levelplot=
 #+ATTR_LaTeX: width=0.6\textwidth
 #+begin_src R :file levelplot.pdf
@@ -225,8 +262,7 @@ xyplot(Radiation ~ TempAvg,
 *** Histogramas
 #+ATTR_LaTeX: width=0.7\textwidth
 #+begin_src R :file histogram.pdf
-  histogram(~Radiation|year, data=aranjuez,
-            strip=strip.custom(strip.levels=TRUE))
+  histogram(~Radiation|factor(year), data=aranjuez)
 #+end_src
 
 *** Gráficos de densidad
@@ -244,7 +280,7 @@ densityplot(~Radiation, groups=quarter,
 #+end_src
 #+ATTR_LaTeX: width=0.7\textwidth
 #+begin_src R :file dotplot.pdf
-  dotplot(month ~ Radiation|year, data=avRad)
+  dotplot(month ~ Radiation|factor(year), data=avRad)
 #+end_src
 
 
@@ -274,7 +310,8 @@ densityplot(~Radiation, groups=quarter,
 ** ggplot2
 
 *** ggplot2
-
-[[http://learnr.wordpress.com/2009/06/28/ggplot2-version-of-figures-in-lattice-multivariate-data-visualization-with-r-part-1/][ggplot2 desde lattice]] ([[http://learnr.files.wordpress.com/2009/08/latbook.pdf][PDF]])
+- [[http://docs.ggplot2.org/current/][Documentación de ggplot2]]
+- [[http://ggplot2.org/book/][Codigo del libro]]
+- [[http://learnr.wordpress.com/2009/06/28/ggplot2-version-of-figures-in-lattice-multivariate-data-visualization-with-r-part-1/][ggplot2 desde lattice]] ([[http://learnr.files.wordpress.com/2009/08/latbook.pdf][PDF]])
 
 

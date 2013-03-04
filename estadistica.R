@@ -2,6 +2,7 @@
 ## #+TITLE:     Estadística básica con R
 ## #+AUTHOR:    Oscar Perpiñán Lamigueiro
 ## #+EMAIL:     oscar.perpinan@gmail.com
+## #+DATE: Febrero de 2013
 ## #+DESCRIPTION:
 ## #+KEYWORDS:
 ## #+LANGUAGE:  es
@@ -39,6 +40,7 @@ data(swiss)
 summary(swiss)
 
 ## **
+## #+ATTR_LATEX: width=0.6\textwidth
 
 pdf(file="splomSwiss.pdf")
 splom(swiss, pscale=0, type=c('p', 'smooth'),
@@ -69,7 +71,7 @@ rweibull(n=10, shape=3, scale=2)
 
 ## Generar datos aleatorios
 
-x <- seq(1, 100, length=15)
+x <- seq(1, 100, length=10)
 x
 
 sample(x)
@@ -111,8 +113,7 @@ wilcox.test(Fertility ~ Religion, data=swiss)
 
 ## Fertilidad y educación
 
-lmFertEdu <- lm(Fertility ~ Education,
-                data = swiss)
+lmFertEdu <- lm(Fertility ~ Education, data = swiss)
 summary(lmFertEdu)
 
 ## Fertilidad y educación
@@ -170,6 +171,9 @@ anova(lmFert)
 ## Elegir un modelo
 
 stepFert <- step(lmFert)
+
+## Elegir un modelo
+
 summary(stepFert)
 
 ## Elegir un modelo

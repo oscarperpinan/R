@@ -1,4 +1,4 @@
-% Created 2013-02-21 jue 11:41
+% Created 2013-03-04 lun 23:49
 \documentclass[xcolor={usenames,svgnames,dvipsnames}]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -30,7 +30,7 @@
 
 \title{Manejo de datos con R}
 \author{Oscar Perpiñán Lamigueiro}
-\date{25 de Enero de 2013}
+\date{Febrero de 2013}
 \hypersetup{
   pdfkeywords={},
   pdfsubject={},
@@ -39,6 +39,7 @@
 \begin{document}
 
 \maketitle
+
 
 
 \section{Fuentes de datos}
@@ -50,7 +51,8 @@
 
 \begin{itemize}
 \item \href{http://stat.ethz.ch/R-manual/R-patched/library/datasets/html/00Index.html}{The R Datasets Package}
-\item \href{http://www.bibsonomy.org/user/procomun/data?resourcetype=bookmark}{Enlaces en Bibsonomy}
+\item \href{http://www.bibsonomy.org/user/procomun/data}{Enlaces en Bibsonomy}
+\item \ldots{}
 \end{itemize}
 \end{frame}
 \section{Lectura de datos}
@@ -85,6 +87,44 @@ download.file('http://oscarperpinan.github.com/spacetime-vis/data/CO2_GNI_BM.csv
 CO2 <- read.table('data/CO2_GNI_BM.csv', header=TRUE, sep=',')
 head(CO2)
 \end{lstlisting}
+
+
+\begin{verbatim}
+probando la URL 'http://oscarperpinan.github.com/spacetime-vis/data/CO2_GNI_BM.csv'
+Content type 'application/octet-stream' length 7510 bytes
+URL abierta
+==================================================
+downloaded 7510 bytes
+  Country.Name Country.Code                                Indicator.Name
+1      Finland          FIN           CO2 emissions (kg per PPP $ of GDP)
+2      Finland          FIN        CO2 emissions (metric tons per capita)
+3      Finland          FIN            GNI, PPP (current international $)
+4      Finland          FIN GNI per capita, PPP (current international $)
+5       France          FRA           CO2 emissions (kg per PPP $ of GDP)
+6       France          FRA        CO2 emissions (metric tons per capita)
+     Indicator.Code        X2000        X2001        X2002        X2003
+1 EN.ATM.CO2E.PP.GD 3.923481e-01 4.099378e-01 4.265803e-01 4.785172e-01
+2    EN.ATM.CO2E.PC 1.007322e+01 1.087588e+01 1.174433e+01 1.321467e+01
+3 NY.GNP.MKTP.PP.CD 1.318800e+11 1.374500e+11 1.434180e+11 1.428710e+11
+4 NY.GNP.PCAP.PP.CD 2.548000e+04 2.649000e+04 2.758000e+04 2.741000e+04
+5 EN.ATM.CO2E.PP.GD 2.384221e-01 2.370408e-01 2.231432e-01 2.287341e-01
+6    EN.ATM.CO2E.PC 6.016236e+00 6.303892e+00 6.171683e+00 6.236447e+00
+         X2004        X2005        X2006        X2007        X2008       X2009
+1 4.289469e-01 3.389595e-01 3.786006e-01 3.341890e-01 2.792975e-01          NA
+2 1.280953e+01 1.040875e+01 1.254696e+01 1.208669e+01 1.063578e+01          NA
+3 1.573070e+11 1.618390e+11 1.761810e+11 1.913600e+11 2.033820e+11 1.93598e+11
+4 3.009000e+04 3.085000e+04 3.345000e+04 3.618000e+04 3.828000e+04 3.62600e+04
+5 2.212615e-01 2.105801e-01 1.918882e-01 1.770519e-01 1.720425e-01          NA
+6 6.232062e+00 6.219341e+00 6.026120e+00 5.864109e+00 5.873142e+00          NA
+        X2010 X2011
+1          NA    NA
+2          NA    NA
+3 1.98866e+11    NA
+4 3.70700e+04    NA
+5          NA    NA
+6          NA    NA
+\end{verbatim}
+
 \begin{itemize}
 \item Directamente de un enlace URL
 \end{itemize}
@@ -95,6 +135,38 @@ CO2 <- read.table('http://oscarperpinan.github.com/spacetime-vis/data/CO2_GNI_BM
                 header=TRUE, sep=',')
 head(CO2)
 \end{lstlisting}
+
+
+\begin{verbatim}
+  Country.Name Country.Code                                Indicator.Name
+1      Finland          FIN           CO2 emissions (kg per PPP $ of GDP)
+2      Finland          FIN        CO2 emissions (metric tons per capita)
+3      Finland          FIN            GNI, PPP (current international $)
+4      Finland          FIN GNI per capita, PPP (current international $)
+5       France          FRA           CO2 emissions (kg per PPP $ of GDP)
+6       France          FRA        CO2 emissions (metric tons per capita)
+     Indicator.Code        X2000        X2001        X2002        X2003
+1 EN.ATM.CO2E.PP.GD 3.923481e-01 4.099378e-01 4.265803e-01 4.785172e-01
+2    EN.ATM.CO2E.PC 1.007322e+01 1.087588e+01 1.174433e+01 1.321467e+01
+3 NY.GNP.MKTP.PP.CD 1.318800e+11 1.374500e+11 1.434180e+11 1.428710e+11
+4 NY.GNP.PCAP.PP.CD 2.548000e+04 2.649000e+04 2.758000e+04 2.741000e+04
+5 EN.ATM.CO2E.PP.GD 2.384221e-01 2.370408e-01 2.231432e-01 2.287341e-01
+6    EN.ATM.CO2E.PC 6.016236e+00 6.303892e+00 6.171683e+00 6.236447e+00
+         X2004        X2005        X2006        X2007        X2008       X2009
+1 4.289469e-01 3.389595e-01 3.786006e-01 3.341890e-01 2.792975e-01          NA
+2 1.280953e+01 1.040875e+01 1.254696e+01 1.208669e+01 1.063578e+01          NA
+3 1.573070e+11 1.618390e+11 1.761810e+11 1.913600e+11 2.033820e+11 1.93598e+11
+4 3.009000e+04 3.085000e+04 3.345000e+04 3.618000e+04 3.828000e+04 3.62600e+04
+5 2.212615e-01 2.105801e-01 1.918882e-01 1.770519e-01 1.720425e-01          NA
+6 6.232062e+00 6.219341e+00 6.026120e+00 5.864109e+00 5.873142e+00          NA
+        X2010 X2011
+1          NA    NA
+2          NA    NA
+3 1.98866e+11    NA
+4 3.70700e+04    NA
+5          NA    NA
+6          NA    NA
+\end{verbatim}
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{read.csv, read.csv2}
@@ -112,46 +184,144 @@ CO2 <- read.csv('data/CO2_GNI_BM.csv')
 \end{lstlisting}
 
 
+
 \lstset{language=R}
 \begin{lstlisting}
+names(CO2)
 head(CO2)
 tail(CO2)
-summary(CO2)
-names(CO2)
 \end{lstlisting}
+
+\lstset{language=R}
+\begin{lstlisting}
+summary(CO2)
+\end{lstlisting}
+
+
+\begin{verbatim}
+ Country.Name  Country.Code
+Brazil : 4    BRA    : 4   
+China  : 4    CHN    : 4   
+Finland: 4    DEU    : 4   
+France : 4    ESP    : 4   
+Germany: 4    FIN    : 4   
+Greece : 4    FRA    : 4   
+(Other):16    (Other):16   
+                                      Indicator.Name           Indicator.Code
+CO2 emissions (kg per PPP $ of GDP)          :10     EN.ATM.CO2E.PC   :10    
+CO2 emissions (metric tons per capita)       :10     EN.ATM.CO2E.PP.GD:10    
+GNI per capita, PPP (current international $):10     NY.GNP.MKTP.PP.CD:10    
+GNI, PPP (current international $)           :10     NY.GNP.PCAP.PP.CD:10    
+                                                                             
+                                                                             
+                                                                             
+    X2000               X2001               X2002          
+Min.   :0.000e+00   Min.   :0.000e+00   Min.   :0.000e+00  
+1st Qu.:1.000e+00   1st Qu.:1.000e+00   1st Qu.:1.000e+00  
+Median :7.600e+02   Median :8.040e+02   Median :8.340e+02  
+Mean   :5.195e+11   Mean   :5.456e+11   Mean   :5.709e+11  
+3rd Qu.:3.297e+10   3rd Qu.:3.436e+10   3rd Qu.:3.585e+10  
+Max.   :1.007e+13   Max.   :1.039e+13   Max.   :1.066e+13  
+                                                           
+    X2003               X2004               X2005          
+Min.   :0.000e+00   Min.   :0.000e+00   Min.   :0.000e+00  
+1st Qu.:1.000e+00   1st Qu.:1.000e+00   1st Qu.:1.000e+00  
+Median :9.090e+02   Median :9.950e+02   Median :1.104e+03  
+Mean   :6.043e+11   Mean   :6.545e+11   Mean   :7.106e+11  
+3rd Qu.:3.572e+10   3rd Qu.:3.933e+10   3rd Qu.:4.046e+10  
+Max.   :1.114e+13   Max.   :1.191e+13   Max.   :1.276e+13  
+                                                           
+    X2006               X2007               X2008          
+Min.   :0.000e+00   Min.   :0.000e+00   Min.   :0.000e+00  
+1st Qu.:1.000e+00   1st Qu.:1.000e+00   1st Qu.:1.000e+00  
+Median :1.229e+03   Median :1.369e+03   Median :1.444e+03  
+Mean   :7.804e+11   Mean   :8.440e+11   Mean   :8.903e+11  
+3rd Qu.:4.405e+10   3rd Qu.:4.784e+10   3rd Qu.:5.085e+10  
+Max.   :1.363e+13   Max.   :1.410e+13   Max.   :1.439e+13  
+                                                           
+    X2009               X2010            X2011        
+Min.   :3.150e+03   Min.   :3.400e+03   Mode:logical  
+1st Qu.:3.357e+04   1st Qu.:3.401e+04   NA's:40       
+Median :9.680e+10   Median :9.943e+10                 
+Mean   :1.816e+12   Mean   :1.940e+12                 
+3rd Qu.:2.034e+12   3rd Qu.:2.172e+12                 
+Max.   :1.394e+13   Max.   :1.464e+13                 
+NA's   :20          NA's   :20
+\end{verbatim}
 \end{frame}
 \section{Datos agregados}
 \label{sec-3}
 \begin{frame}[fragile]
 \frametitle{table}
+\framesubtitle{\texttt{data.frame} de ejemplo}
 \label{sec-3-1}
 
 
 \lstset{language=R}
 \begin{lstlisting}
-chromo <- data.frame(chromosome = gl(3,  10,
-                     labels = c('A',  'B',  'C')),
-                     probeset = gl(3,  10,
-                     labels = c('X',  'Y',  'Z')),
-                     ensg =  gl(3,  10,
-                     labels = c('E1',  'E2',  'E3')),
-                     symbol = gl(3,  10,
-                     labels = c('S1',  'S2',  'S3')),
-                     XXA_00 = rnorm(30),
-                     XXA_36 = rnorm(30),
-                     XXB_00 = rnorm(30))
+chromosome <- gl(3,  10, labels = c('A',  'B',  'C'))
+probeset <- gl(3,  10, labels = c('X',  'Y',  'Z'))
+ensg <-  gl(3,  10, labels = c('E1',  'E2',  'E3'))
+symbol <- gl(3,  10, labels = c('S1',  'S2',  'S3'))
+XXA_00 <- rnorm(30)
+XXA_36 <- rnorm(30)
+XXB_00 <- rnorm(30)
 \end{lstlisting}
+
 
 
 \lstset{language=R}
 \begin{lstlisting}
-table(chromo$chromosome, df$XXA_00 > 0)
-table(chromo$probeset, df$XXA_00 > -1 & df$XXA_00 < 1)
+chromo <- data.frame(chromosome, probeset, ensg, symbol,
+                     XXA_00, XXA_36, XXB_00)
+head(chromo)
 \end{lstlisting}
+
+\begin{verbatim}
+   chromosome probeset ensg symbol     XXA_00      XXA_36      XXB_00
+ 1          A        X   E1     S1  1.0020011 -1.77756910  0.03912242
+ 2          A        X   E1     S1 -1.0703017 -0.01216606  0.81720803
+ 3          A        X   E1     S1 -0.8932751  2.07963254 -0.31311361
+ 4          A        X   E1     S1  0.2701942 -2.19270474 -0.75812359
+ 5          A        X   E1     S1  0.4600293  1.99862324  0.69388440
+ 6          A        X   E1     S1 -1.6435497  0.90997622 -0.31843964
+\end{verbatim}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{table}
+\label{sec-3-2}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+table(chromo$chromosome, chromo$XXA_00 > 0)
+\end{lstlisting}
+
+\begin{verbatim}
+    
+     FALSE TRUE
+   A     6    4
+   B     7    3
+   C     6    4
+\end{verbatim}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+table(chromo$probeset, chromo$XXA_00 > -1 & chromo$XXA_00 < 1)
+\end{lstlisting}
+
+\begin{verbatim}
+    
+     FALSE TRUE
+   X     4    6
+   Y     4    6
+   Z     4    6
+\end{verbatim}
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{xtabs}
-\label{sec-3-2}
+\label{sec-3-3}
 
 
 \lstset{language=R}
@@ -159,10 +329,18 @@ table(chromo$probeset, df$XXA_00 > -1 & df$XXA_00 < 1)
 xtabs(XXA_00 > 1 ~ chromosome + probeset,
       data=chromo)
 \end{lstlisting}
+
+\begin{verbatim}
+           probeset
+ chromosome X Y Z
+          A 2 0 0
+          B 0 1 0
+          C 0 0 1
+\end{verbatim}
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{tapply}
-\label{sec-3-3}
+\label{sec-3-4}
 
 
 \lstset{language=R}
@@ -184,7 +362,7 @@ tapply(CO2$X2000, CO2$Indicator.Name,
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{tapply}
-\label{sec-3-4}
+\label{sec-3-5}
 
 
 \lstset{language=R}
@@ -229,41 +407,89 @@ Indicator.Name                                         Spain United States
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{aggregate}
-\label{sec-3-5}
+\label{sec-3-6}
 
 
 \lstset{language=R}
 \begin{lstlisting}
 aggregate(X2000 ~ Indicator.Name,
           data=CO2, FUN=mean)
-
-aggregate(cbind(X2000, X2001) ~ Indicator.Name,
-          data=CO2, FUN=mean)
-
-aggregate(X2000 ~ Indicator.Name + Country.Name,
-          data=CO2, FUN=mean)
 \end{lstlisting}
-\end{frame}
-\begin{frame}[fragile]
-\frametitle{aggregate}
-\label{sec-3-6}
+
+\begin{verbatim}
+                                  Indicator.Name        X2000
+ 1           CO2 emissions (kg per PPP $ of GDP) 4.777875e-01
+ 2        CO2 emissions (metric tons per capita) 7.580861e+00
+ 3 GNI per capita, PPP (current international $) 1.981000e+04
+ 4            GNI, PPP (current international $) 2.078196e+12
+\end{verbatim}
 
 
 \lstset{language=R}
 \begin{lstlisting}
-aggregate(cbind(X2000, X2001) ~
-          Indicator.Name + Country.Name,
+aggregate(cbind(X2000, X2001) ~ Indicator.Name,
           data=CO2, FUN=mean)
-
-aggregate(cbind(X2000, X2001) ~
-          Indicator.Name + Country.Name,
-          data=CO2, FUN=mean)
-
-aggregate(cbind(X2000, X2001) ~
-          Indicator.Name + Country.Name,
-          subset=(Country.Name %in% c('United States', 'China')),
-                  data=CO2, FUN=mean)
 \end{lstlisting}
+
+\begin{verbatim}
+                                  Indicator.Name        X2000        X2001
+ 1           CO2 emissions (kg per PPP $ of GDP) 4.777875e-01 4.591328e-01
+ 2        CO2 emissions (metric tons per capita) 7.580861e+00 7.725765e+00
+ 3 GNI per capita, PPP (current international $) 1.981000e+04 2.066300e+04
+ 4            GNI, PPP (current international $) 2.078196e+12 2.182390e+12
+\end{verbatim}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+aggregate(X2000 ~ Indicator.Name + Country.Name,
+          data=CO2, FUN=mean)
+\end{lstlisting}
+
+
+\begin{verbatim}
+                                  Indicator.Name  Country.Name        X2000
+1            CO2 emissions (kg per PPP $ of GDP)        Brazil 2.699746e-01
+2         CO2 emissions (metric tons per capita)        Brazil 1.892645e+00
+3  GNI per capita, PPP (current international $)        Brazil 6.820000e+03
+4             GNI, PPP (current international $)        Brazil 1.188790e+12
+5            CO2 emissions (kg per PPP $ of GDP)         China 1.140619e+00
+6         CO2 emissions (metric tons per capita)         China 2.696862e+00
+7  GNI per capita, PPP (current international $)         China 2.340000e+03
+8             GNI, PPP (current international $)         China 2.948850e+12
+9            CO2 emissions (kg per PPP $ of GDP)       Finland 3.923481e-01
+10        CO2 emissions (metric tons per capita)       Finland 1.007322e+01
+11 GNI per capita, PPP (current international $)       Finland 2.548000e+04
+12            GNI, PPP (current international $)       Finland 1.318800e+11
+13           CO2 emissions (kg per PPP $ of GDP)        France 2.384221e-01
+14        CO2 emissions (metric tons per capita)        France 6.016236e+00
+15 GNI per capita, PPP (current international $)        France 2.566000e+04
+16            GNI, PPP (current international $)        France 1.558990e+12
+17           CO2 emissions (kg per PPP $ of GDP)       Germany 3.929031e-01
+18        CO2 emissions (metric tons per capita)       Germany 1.012147e+01
+19 GNI per capita, PPP (current international $)       Germany 2.549000e+04
+20            GNI, PPP (current international $)       Germany 2.095450e+12
+21           CO2 emissions (kg per PPP $ of GDP)        Greece 4.598579e-01
+22        CO2 emissions (metric tons per capita)        Greece 8.391709e+00
+23 GNI per capita, PPP (current international $)        Greece 1.832000e+04
+24            GNI, PPP (current international $)        Greece 2.000130e+11
+25           CO2 emissions (kg per PPP $ of GDP)         India 7.448517e-01
+26        CO2 emissions (metric tons per capita)         India 1.125975e+00
+27 GNI per capita, PPP (current international $)         India 1.500000e+03
+28            GNI, PPP (current international $)         India 1.575930e+12
+29           CO2 emissions (kg per PPP $ of GDP)        Norway 2.391275e-01
+30        CO2 emissions (metric tons per capita)        Norway 8.641315e+00
+31 GNI per capita, PPP (current international $)        Norway 3.565000e+04
+32            GNI, PPP (current international $)        Norway 1.601000e+11
+33           CO2 emissions (kg per PPP $ of GDP)         Spain 3.428950e-01
+34        CO2 emissions (metric tons per capita)         Spain 7.312922e+00
+35 GNI per capita, PPP (current international $)         Spain 2.115000e+04
+36            GNI, PPP (current international $)         Spain 8.514620e+11
+37           CO2 emissions (kg per PPP $ of GDP) United States 5.568755e-01
+38        CO2 emissions (metric tons per capita) United States 1.953626e+01
+39 GNI per capita, PPP (current international $) United States 3.569000e+04
+40            GNI, PPP (current international $) United States 1.007050e+13
+\end{verbatim}
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{aggregate}
@@ -272,13 +498,254 @@ aggregate(cbind(X2000, X2001) ~
 
 \lstset{language=R}
 \begin{lstlisting}
+aggregate(cbind(X2000, X2001) ~
+          Indicator.Name + Country.Name,
+          data=CO2, FUN=mean)
+\end{lstlisting}
+
+
+\begin{verbatim}
+                                  Indicator.Name  Country.Name        X2000
+1            CO2 emissions (kg per PPP $ of GDP)        Brazil 2.699746e-01
+2         CO2 emissions (metric tons per capita)        Brazil 1.892645e+00
+3  GNI per capita, PPP (current international $)        Brazil 6.820000e+03
+4             GNI, PPP (current international $)        Brazil 1.188790e+12
+5            CO2 emissions (kg per PPP $ of GDP)         China 1.140619e+00
+6         CO2 emissions (metric tons per capita)         China 2.696862e+00
+7  GNI per capita, PPP (current international $)         China 2.340000e+03
+8             GNI, PPP (current international $)         China 2.948850e+12
+9            CO2 emissions (kg per PPP $ of GDP)       Finland 3.923481e-01
+10        CO2 emissions (metric tons per capita)       Finland 1.007322e+01
+11 GNI per capita, PPP (current international $)       Finland 2.548000e+04
+12            GNI, PPP (current international $)       Finland 1.318800e+11
+13           CO2 emissions (kg per PPP $ of GDP)        France 2.384221e-01
+14        CO2 emissions (metric tons per capita)        France 6.016236e+00
+15 GNI per capita, PPP (current international $)        France 2.566000e+04
+16            GNI, PPP (current international $)        France 1.558990e+12
+17           CO2 emissions (kg per PPP $ of GDP)       Germany 3.929031e-01
+18        CO2 emissions (metric tons per capita)       Germany 1.012147e+01
+19 GNI per capita, PPP (current international $)       Germany 2.549000e+04
+20            GNI, PPP (current international $)       Germany 2.095450e+12
+21           CO2 emissions (kg per PPP $ of GDP)        Greece 4.598579e-01
+22        CO2 emissions (metric tons per capita)        Greece 8.391709e+00
+23 GNI per capita, PPP (current international $)        Greece 1.832000e+04
+24            GNI, PPP (current international $)        Greece 2.000130e+11
+25           CO2 emissions (kg per PPP $ of GDP)         India 7.448517e-01
+26        CO2 emissions (metric tons per capita)         India 1.125975e+00
+27 GNI per capita, PPP (current international $)         India 1.500000e+03
+28            GNI, PPP (current international $)         India 1.575930e+12
+29           CO2 emissions (kg per PPP $ of GDP)        Norway 2.391275e-01
+30        CO2 emissions (metric tons per capita)        Norway 8.641315e+00
+31 GNI per capita, PPP (current international $)        Norway 3.565000e+04
+32            GNI, PPP (current international $)        Norway 1.601000e+11
+33           CO2 emissions (kg per PPP $ of GDP)         Spain 3.428950e-01
+34        CO2 emissions (metric tons per capita)         Spain 7.312922e+00
+35 GNI per capita, PPP (current international $)         Spain 2.115000e+04
+36            GNI, PPP (current international $)         Spain 8.514620e+11
+37           CO2 emissions (kg per PPP $ of GDP) United States 5.568755e-01
+38        CO2 emissions (metric tons per capita) United States 1.953626e+01
+39 GNI per capita, PPP (current international $) United States 3.569000e+04
+40            GNI, PPP (current international $) United States 1.007050e+13
+          X2001
+1  2.682859e-01
+2  1.921640e+00
+3  6.910000e+03
+4  1.222640e+12
+5  1.054772e+00
+6  2.742121e+00
+7  2.560000e+03
+8  3.258610e+12
+9  4.099378e-01
+10 1.087588e+01
+11 2.649000e+04
+12 1.374500e+11
+13 2.370408e-01
+14 6.303892e+00
+15 2.700000e+04
+16 1.652430e+12
+17 3.891454e-01
+18 1.039171e+01
+19 2.640000e+04
+20 2.174210e+12
+21 4.338897e-01
+22 8.566748e+00
+23 1.989000e+04
+24 2.178350e+11
+25 7.022482e-01
+26 1.123644e+00
+27 1.590000e+03
+28 1.699170e+12
+29 2.455266e-01
+30 9.103826e+00
+31 3.711000e+04
+32 1.675140e+11
+33 3.238080e-01
+34 7.314101e+00
+35 2.222000e+04
+36 9.049450e+11
+37 5.266740e-01
+38 1.891409e+01
+39 3.646000e+04
+40 1.038910e+13
+\end{verbatim}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+aggregate(cbind(X2000, X2001) ~
+          Indicator.Name + Country.Name,
+          data=CO2, FUN=mean)
+\end{lstlisting}
+
+
+\begin{verbatim}
+                                  Indicator.Name  Country.Name        X2000
+1            CO2 emissions (kg per PPP $ of GDP)        Brazil 2.699746e-01
+2         CO2 emissions (metric tons per capita)        Brazil 1.892645e+00
+3  GNI per capita, PPP (current international $)        Brazil 6.820000e+03
+4             GNI, PPP (current international $)        Brazil 1.188790e+12
+5            CO2 emissions (kg per PPP $ of GDP)         China 1.140619e+00
+6         CO2 emissions (metric tons per capita)         China 2.696862e+00
+7  GNI per capita, PPP (current international $)         China 2.340000e+03
+8             GNI, PPP (current international $)         China 2.948850e+12
+9            CO2 emissions (kg per PPP $ of GDP)       Finland 3.923481e-01
+10        CO2 emissions (metric tons per capita)       Finland 1.007322e+01
+11 GNI per capita, PPP (current international $)       Finland 2.548000e+04
+12            GNI, PPP (current international $)       Finland 1.318800e+11
+13           CO2 emissions (kg per PPP $ of GDP)        France 2.384221e-01
+14        CO2 emissions (metric tons per capita)        France 6.016236e+00
+15 GNI per capita, PPP (current international $)        France 2.566000e+04
+16            GNI, PPP (current international $)        France 1.558990e+12
+17           CO2 emissions (kg per PPP $ of GDP)       Germany 3.929031e-01
+18        CO2 emissions (metric tons per capita)       Germany 1.012147e+01
+19 GNI per capita, PPP (current international $)       Germany 2.549000e+04
+20            GNI, PPP (current international $)       Germany 2.095450e+12
+21           CO2 emissions (kg per PPP $ of GDP)        Greece 4.598579e-01
+22        CO2 emissions (metric tons per capita)        Greece 8.391709e+00
+23 GNI per capita, PPP (current international $)        Greece 1.832000e+04
+24            GNI, PPP (current international $)        Greece 2.000130e+11
+25           CO2 emissions (kg per PPP $ of GDP)         India 7.448517e-01
+26        CO2 emissions (metric tons per capita)         India 1.125975e+00
+27 GNI per capita, PPP (current international $)         India 1.500000e+03
+28            GNI, PPP (current international $)         India 1.575930e+12
+29           CO2 emissions (kg per PPP $ of GDP)        Norway 2.391275e-01
+30        CO2 emissions (metric tons per capita)        Norway 8.641315e+00
+31 GNI per capita, PPP (current international $)        Norway 3.565000e+04
+32            GNI, PPP (current international $)        Norway 1.601000e+11
+33           CO2 emissions (kg per PPP $ of GDP)         Spain 3.428950e-01
+34        CO2 emissions (metric tons per capita)         Spain 7.312922e+00
+35 GNI per capita, PPP (current international $)         Spain 2.115000e+04
+36            GNI, PPP (current international $)         Spain 8.514620e+11
+37           CO2 emissions (kg per PPP $ of GDP) United States 5.568755e-01
+38        CO2 emissions (metric tons per capita) United States 1.953626e+01
+39 GNI per capita, PPP (current international $) United States 3.569000e+04
+40            GNI, PPP (current international $) United States 1.007050e+13
+          X2001
+1  2.682859e-01
+2  1.921640e+00
+3  6.910000e+03
+4  1.222640e+12
+5  1.054772e+00
+6  2.742121e+00
+7  2.560000e+03
+8  3.258610e+12
+9  4.099378e-01
+10 1.087588e+01
+11 2.649000e+04
+12 1.374500e+11
+13 2.370408e-01
+14 6.303892e+00
+15 2.700000e+04
+16 1.652430e+12
+17 3.891454e-01
+18 1.039171e+01
+19 2.640000e+04
+20 2.174210e+12
+21 4.338897e-01
+22 8.566748e+00
+23 1.989000e+04
+24 2.178350e+11
+25 7.022482e-01
+26 1.123644e+00
+27 1.590000e+03
+28 1.699170e+12
+29 2.455266e-01
+30 9.103826e+00
+31 3.711000e+04
+32 1.675140e+11
+33 3.238080e-01
+34 7.314101e+00
+35 2.222000e+04
+36 9.049450e+11
+37 5.266740e-01
+38 1.891409e+01
+39 3.646000e+04
+40 1.038910e+13
+\end{verbatim}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+aggregate(cbind(X2000, X2001) ~
+          Indicator.Name + Country.Name,
+          subset=(Country.Name %in% c('United States', 'China')),
+                  data=CO2, FUN=mean)
+\end{lstlisting}
+
+
+\begin{verbatim}
+                                 Indicator.Name  Country.Name        X2000
+1           CO2 emissions (kg per PPP $ of GDP)         China 1.140619e+00
+2        CO2 emissions (metric tons per capita)         China 2.696862e+00
+3 GNI per capita, PPP (current international $)         China 2.340000e+03
+4            GNI, PPP (current international $)         China 2.948850e+12
+5           CO2 emissions (kg per PPP $ of GDP) United States 5.568755e-01
+6        CO2 emissions (metric tons per capita) United States 1.953626e+01
+7 GNI per capita, PPP (current international $) United States 3.569000e+04
+8            GNI, PPP (current international $) United States 1.007050e+13
+         X2001
+1 1.054772e+00
+2 2.742121e+00
+3 2.560000e+03
+4 3.258610e+12
+5 5.266740e-01
+6 1.891409e+01
+7 3.646000e+04
+8 1.038910e+13
+\end{verbatim}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{aggregate}
+\label{sec-3-8}
+
+
+\lstset{language=R}
+\begin{lstlisting}
 aggregate(cbind(XXA_00, XXA_36, XXB_00) ~
           ensg + chromosome + symbol,
           data = chromo,  FUN = mean)
+\end{lstlisting}
 
+\begin{verbatim}
+   ensg chromosome symbol     XXA_00      XXA_36      XXB_00
+ 1   E1          A     S1 -0.2595536  0.00192942 -0.10836948
+ 2   E2          B     S2 -0.3446025 -0.47006844  0.32477202
+ 3   E3          C     S3 -0.1462764  0.40911859 -0.06733134
+\end{verbatim}
+
+
+\lstset{language=R}
+\begin{lstlisting}
 aggregate(cbind(XXA_00, XXA_36, XXB_00) ~ ensg ,
           data = chromo,  FUN = mean)
 \end{lstlisting}
+
+\begin{verbatim}
+   ensg     XXA_00      XXA_36      XXB_00
+ 1   E1 -0.2595536  0.00192942 -0.10836948
+ 2   E2 -0.3446025 -0.47006844  0.32477202
+ 3   E3 -0.1462764  0.40911859 -0.06733134
+\end{verbatim}
 \end{frame}
 \section{Cambio de formato}
 \label{sec-4}
@@ -297,7 +764,20 @@ CO2China <- subset(CO2,
                            Indicator.Name=='CO2 emissions (kg per PPP $ of GDP)'),
                    select=-c(Country.Name, Country.Code,
                              Indicator.Name, Indicator.Code))
+head(CO2China)
 \end{lstlisting}
+
+\begin{verbatim}
+       X2000    X2001    X2002    X2003    X2004    X2005    X2006     X2007
+ 29 1.140619 1.054772 1.007715 1.098485 1.133811 1.079371 1.027606 0.9255433
+        X2008 X2009 X2010 X2011
+ 29 0.8556903    NA    NA    NA
+\end{verbatim}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{\texttt{stack}}
+\label{sec-4-2}
+
 \begin{itemize}
 \item Pasamos de formato \texttt{wide} a \texttt{long}
 \end{itemize}
@@ -306,10 +786,27 @@ CO2China <- subset(CO2,
 \begin{lstlisting}
 stack(CO2China)
 \end{lstlisting}
+
+
+\begin{verbatim}
+      values   ind
+1  1.1406188 X2000
+2  1.0547715 X2001
+3  1.0077152 X2002
+4  1.0984850 X2003
+5  1.1338112 X2004
+6  1.0793710 X2005
+7  1.0276060 X2006
+8  0.9255433 X2007
+9  0.8556903 X2008
+10        NA X2009
+11        NA X2010
+12        NA X2011
+\end{verbatim}
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{\texttt{reshape}: \texttt{wide} a \texttt{long}}
-\label{sec-4-2}
+\label{sec-4-3}
 
 \begin{itemize}
 \item Primer intento
@@ -322,6 +819,29 @@ CO2long <- reshape(CO2,
                    direction='long')
 head(CO2long)
 \end{lstlisting}
+
+
+\begin{verbatim}
+    Country.Name Country.Code                                Indicator.Name
+1.1      Finland          FIN           CO2 emissions (kg per PPP $ of GDP)
+2.1      Finland          FIN        CO2 emissions (metric tons per capita)
+3.1      Finland          FIN            GNI, PPP (current international $)
+4.1      Finland          FIN GNI per capita, PPP (current international $)
+5.1       France          FRA           CO2 emissions (kg per PPP $ of GDP)
+6.1       France          FRA        CO2 emissions (metric tons per capita)
+       Indicator.Code time        X2000 id
+1.1 EN.ATM.CO2E.PP.GD    1 3.923481e-01  1
+2.1    EN.ATM.CO2E.PC    1 1.007322e+01  2
+3.1 NY.GNP.MKTP.PP.CD    1 1.318800e+11  3
+4.1 NY.GNP.PCAP.PP.CD    1 2.548000e+04  4
+5.1 EN.ATM.CO2E.PP.GD    1 2.384221e-01  5
+6.1    EN.ATM.CO2E.PC    1 6.016236e+00  6
+\end{verbatim}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{\texttt{reshape}: \texttt{wide} a \texttt{long}}
+\label{sec-4-4}
+
 \begin{itemize}
 \item Añadimos argumentos
 \end{itemize}
@@ -335,10 +855,28 @@ CO2long <- reshape(CO2,
                    direction='long')
 head(CO2long)
 \end{lstlisting}
+
+
+\begin{verbatim}
+       Country.Name Country.Code                                Indicator.Name
+1.2000      Finland          FIN           CO2 emissions (kg per PPP $ of GDP)
+2.2000      Finland          FIN        CO2 emissions (metric tons per capita)
+3.2000      Finland          FIN            GNI, PPP (current international $)
+4.2000      Finland          FIN GNI per capita, PPP (current international $)
+5.2000       France          FRA           CO2 emissions (kg per PPP $ of GDP)
+6.2000       France          FRA        CO2 emissions (metric tons per capita)
+          Indicator.Code Year        Value id
+1.2000 EN.ATM.CO2E.PP.GD 2000 3.923481e-01  1
+2.2000    EN.ATM.CO2E.PC 2000 1.007322e+01  2
+3.2000 NY.GNP.MKTP.PP.CD 2000 1.318800e+11  3
+4.2000 NY.GNP.PCAP.PP.CD 2000 2.548000e+04  4
+5.2000 EN.ATM.CO2E.PP.GD 2000 2.384221e-01  5
+6.2000    EN.ATM.CO2E.PC 2000 6.016236e+00  6
+\end{verbatim}
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{\texttt{reshape}: \texttt{long} a \texttt{wide}}
-\label{sec-4-3}
+\label{sec-4-5}
 
 \begin{itemize}
 \item Primero escogemos las columnas de interés
@@ -349,7 +887,31 @@ head(CO2long)
 CO2subset <- CO2long[c("Country.Name",
                        "Indicator.Name",
                        "Year", "Value")]
+head(CO2subset)
 \end{lstlisting}
+
+
+\begin{verbatim}
+       Country.Name                                Indicator.Name Year
+1.2000      Finland           CO2 emissions (kg per PPP $ of GDP) 2000
+2.2000      Finland        CO2 emissions (metric tons per capita) 2000
+3.2000      Finland            GNI, PPP (current international $) 2000
+4.2000      Finland GNI per capita, PPP (current international $) 2000
+5.2000       France           CO2 emissions (kg per PPP $ of GDP) 2000
+6.2000       France        CO2 emissions (metric tons per capita) 2000
+              Value
+1.2000 3.923481e-01
+2.2000 1.007322e+01
+3.2000 1.318800e+11
+4.2000 2.548000e+04
+5.2000 2.384221e-01
+6.2000 6.016236e+00
+\end{verbatim}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{\texttt{reshape}: \texttt{long} a \texttt{wide}}
+\label{sec-4-6}
+
 \begin{itemize}
 \item Ahora cambiamos formato
 \end{itemize}
@@ -360,7 +922,45 @@ CO2wide <- reshape(CO2subset,
                    idvar=c('Country.Name','Year'),
                    timevar='Indicator.Name',
                    direction='wide')
+head(CO2wide)
 \end{lstlisting}
+
+
+\begin{verbatim}
+        Country.Name Year Value.CO2 emissions (kg per PPP $ of GDP)
+1.2000       Finland 2000                                 0.3923481
+5.2000        France 2000                                 0.2384221
+9.2000       Germany 2000                                 0.3929031
+13.2000       Greece 2000                                 0.4598579
+17.2000       Norway 2000                                 0.2391275
+21.2000        Spain 2000                                 0.3428950
+        Value.CO2 emissions (metric tons per capita)
+1.2000                                     10.073216
+5.2000                                      6.016236
+9.2000                                     10.121466
+13.2000                                     8.391709
+17.2000                                     8.641315
+21.2000                                     7.312922
+        Value.GNI, PPP (current international $)
+1.2000                               1.31880e+11
+5.2000                               1.55899e+12
+9.2000                               2.09545e+12
+13.2000                              2.00013e+11
+17.2000                              1.60100e+11
+21.2000                              8.51462e+11
+        Value.GNI per capita, PPP (current international $)
+1.2000                                                25480
+5.2000                                                25660
+9.2000                                                25490
+13.2000                                               18320
+17.2000                                               35650
+21.2000                                               21150
+\end{verbatim}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{\texttt{reshape}: \texttt{long} a \texttt{wide}}
+\label{sec-4-7}
+
 \begin{itemize}
 \item Y ponemos nombres al gusto
 \end{itemize}
@@ -372,6 +972,16 @@ names(CO2wide)[3:6] <- c('CO2.PPP', 'CO2.capita',
 
 head(CO2wide)
 \end{lstlisting}
+
+\begin{verbatim}
+         Country.Name Year   CO2.PPP CO2.capita     GNI.PPP GNI.capita
+ 1.2000       Finland 2000 0.3923481  10.073216 1.31880e+11      25480
+ 5.2000        France 2000 0.2384221   6.016236 1.55899e+12      25660
+ 9.2000       Germany 2000 0.3929031  10.121466 2.09545e+12      25490
+ 13.2000       Greece 2000 0.4598579   8.391709 2.00013e+11      18320
+ 17.2000       Norway 2000 0.2391275   8.641315 1.60100e+11      35650
+ 21.2000        Spain 2000 0.3428950   7.312922 8.51462e+11      21150
+\end{verbatim}
 
   
   

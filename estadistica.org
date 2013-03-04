@@ -1,6 +1,7 @@
 #+TITLE:     Estadística básica con R
 #+AUTHOR:    Oscar Perpiñán Lamigueiro
 #+EMAIL:     oscar.perpinan@gmail.com
+#+DATE: Febrero de 2013
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  es
@@ -36,20 +37,17 @@
 * Conjunto de datos
 
 ** Conjunto de datos: swiss
-Standardized fertility measure and socio-economic indicators for each
-of 47 French-speaking provinces of Switzerland at about 1888. 6 variables in percent [0, 100]:
+Standardized fertility measure and socio-economic indicators for
+each of 47 French-speaking provinces of Switzerland at
+about 1888. 6 variables in percent [0, 100]:
 
-- Fertility:         Ig, ‘common standardizedfertility measure’      
-- Agriculture:       % of males involved in agriculture 
-                               as occupation 
-- Examination:       % draftees receiving highest mark 
-   on army examination 
-- Education:         % education beyond primary school for draftees. 
-- Catholic:          % ‘catholic’ (as opposed to ‘protestant’).      
-- Infant.Mortality:  live births who live less than 1year.           
+- *Fertility*:         Ig, ‘common standardized fertility measure’      
+- *Agriculture*:       % of males involved in agriculture as occupation 
+- *Examination*:       % draftees receiving highest mark on army examination 
+- *Education*:         % education beyond primary school for draftees. 
+- *Catholic*:          % ‘catholic’ (as opposed to ‘protestant’).      
+- *Infant.Mortality*:  live births who live less than 1year.           
       
-     All variables but ‘Fertility’ give proportions of the population.
-
 ** Conjunto de datos: swiss
 
 #+begin_src R
@@ -59,6 +57,7 @@ of 47 French-speaking provinces of Switzerland at about 1888. 6 variables in per
 #+end_src
 
 **
+#+ATTR_LATEX: width=0.6\textwidth
 #+begin_src R :results ouput graphics :file splomSwiss.pdf
   splom(swiss, pscale=0, type=c('p', 'smooth'),
         groups=swiss$Catholic > 50, xlab='')
@@ -109,7 +108,7 @@ colMeans(swiss)
 ** Generar datos aleatorios
 
 #+begin_src R 
-  x <- seq(1, 100, length=15)
+  x <- seq(1, 100, length=10)
   x
 #+end_src
 #+begin_src R 
@@ -174,9 +173,9 @@ t.test(A, B)
 
 ** Fertilidad y educación
 #+begin_src R
-  lmFertEdu <- lm(Fertility ~ Education,
-                  data = swiss)
+  lmFertEdu <- lm(Fertility ~ Education, data = swiss)
   summary(lmFertEdu)
+  
 #+end_src
 
 ** Fertilidad y educación
@@ -192,18 +191,13 @@ residuals(lmFertEdu)
 fitted.values(lmFertEdu)
 #+end_src
 
-# ** 
-# #+begin_src R :results output :file lmFertEdu.pdf
-# plot(lmFertEdu)
-# #+end_src
-
 ** Fertilidad, educación y religión
 #+begin_src R
   lmFertEduCat <- lm(Fertility ~ Education + Catholic,
                      data = swiss)
   summary(lmFertEduCat)
 #+end_src
-
+   
 ** Lo mismo con =update=
 #+begin_src R
   lmFertEduCat <- update(lmFertEdu, . ~ . + Catholic,
@@ -254,6 +248,9 @@ fitted.values(lmFertEdu)
 ** Elegir un modelo
 #+begin_src R
   stepFert <- step(lmFert)
+#+end_src
+** Elegir un modelo
+#+begin_src R 
   summary(stepFert)
 #+end_src
 

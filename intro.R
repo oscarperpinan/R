@@ -663,3 +663,24 @@ cadena
 
 tolower(cadena)
 toupper(cadena)
+
+## =for=
+
+for(n in c(2,5,10,20,50)) {
+    x <- rnorm(n)
+    cat(n,":", sum(x^2),"\n")
+}
+
+## =if=
+
+x <- rnorm(10)
+x2 <- numeric(length(x))
+for (i in seq_along(x2)){
+    if (x[i]<0) x2[i] <- 0 else x2[i] <- 1
+    }
+cbind(x, x2)
+
+## =ifelse=
+
+x <- rnorm(10)
+ifelse(x>0, 1, 0)

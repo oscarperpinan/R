@@ -9,9 +9,12 @@ summary(aranjuez)
 ## Conjunto de datos de ejemplo
 ## - Añadimos algunas columnas
 
-aranjuez$month <- as.numeric(format(as.Date(aranjuez$X), '%m'))
-aranjuez$year <- as.numeric(format(as.Date(aranjuez$X), '%Y'))
-aranjuez$day <- as.numeric(format(as.Date(aranjuez$X), '%j'))
+aranjuez$month <- as.numeric(
+                  format(as.Date(aranjuez$X), '%m'))
+aranjuez$year <- as.numeric(
+                 format(as.Date(aranjuez$X), '%Y'))
+aranjuez$day <- as.numeric(
+                format(as.Date(aranjuez$X), '%j'))
 aranjuez$jday <- julian(as.Date(aranjuez$X))
 aranjuez$quarter <- quarters(as.Date(aranjuez$X))
 
@@ -25,39 +28,42 @@ library(lattice)
 ## #+ATTR_LaTeX: width=0.7\textwidth
 
 pdf(file="xyplot.pdf")
-xyplot(Radiation ~ TempAvg,
-       data=aranjuez)
+xyplot(Radiation ~ TempAvg, data=aranjuez)
 dev.off()
 
 ## =xyplot=
 ## #+ATTR_LaTeX: width=0.7\textwidth
 
 pdf(file="xyplotPG.pdf")
-xyplot(Radiation ~ TempAvg,
-       data=aranjuez, type=c('p', 'g'))
+xyplot(Radiation ~ TempAvg, data=aranjuez,
+       type=c('p', 'g'))
 dev.off()
 
 ## =xyplot=
 ## #+ATTR_LaTeX: width=0.7\textwidth
 
 pdf(file="xyplotPRG.pdf")
-xyplot(Radiation ~ TempAvg,
-       data=aranjuez, type=c('p', 'r', 'g'))
+xyplot(Radiation ~ TempAvg, data=aranjuez,
+       type=c('p', 'r', 'g'),
+       lwd=2, col.line='black')
+
 dev.off()
 
 ## =xyplot=
 ## #+ATTR_LaTeX: width=0.7\textwidth
 
 pdf(file="xyplotSmooth.pdf")
-xyplot(Radiation ~ TempAvg,
-       data=aranjuez, type=c('p', 'smooth', 'g'))
+xyplot(Radiation ~ TempAvg, data=aranjuez,
+       type=c('p', 'smooth', 'g'),
+       lwd=2, col.line='black')
 dev.off()
 
 ## Paneles
 ## #+ATTR_LaTeX: width=0.7\textwidth
 
 pdf(file="xyplotYear.pdf")
-xyplot(Radiation ~ TempAvg|year, data=aranjuez)
+xyplot(Radiation ~ TempAvg|factor(year),
+       data=aranjuez)
 dev.off()
 
 ## Grupos
@@ -72,7 +78,7 @@ dev.off()
 ## #+ATTR_LaTeX: width=0.6\textwidth
 
 pdf(file="xyplotQuarterYear.pdf")
-xyplot(Radiation ~ TempAvg|year,
+xyplot(Radiation ~ TempAvg|factor(year),
        groups=quarter,
        data=aranjuez,
        layout=c(4, 2),
@@ -83,7 +89,7 @@ dev.off()
 ## #+ATTR_LaTeX: width=0.6\textwidth
 
 pdf(file="xyplotQuarterYearSmooth.pdf")
-xyplot(Radiation ~ TempAvg|year,
+xyplot(Radiation ~ TempAvg|factor(year),
        groups=quarter,
        data=aranjuez,
        layout=c(4, 2),
@@ -143,6 +149,43 @@ xyplot(Radiation ~ TempAvg,
        data=aranjuez)
 dev.off()
 
+## Paneles a medida
+## #+ATTR_LaTeX: width=0.3\textwidth
+
+pdf(file="panel.pdf")
+xyplot(Radiation ~ TempAvg, data=aranjuez,
+       panel=function(x, y, ...){
+           panel.xyplot(x, y, ...)
+           minIdx <- which.min(x)
+           maxIdx <- which.max(x)
+           panel.points(x[c(minIdx, maxIdx)],
+                        y[c(minIdx, maxIdx)],
+                        cex=2, col='red')
+           panel.text(x[minIdx], y[minIdx],
+                      'MIN', pos=1)
+           })
+dev.off()
+
+## Matriz de gráficos de dispersión
+## #+ATTR_LaTeX: width=0.45\textwidth
+
+png(filename="splom.png")
+splom(aranjuez[,c("TempAvg", "HumidAvg", "WindAvg",
+                  "Rain", "Radiation", "ET")],
+      pscale=0, alpha=0.6, cex=0.3, pch=19)
+dev.off()
+
+## Matriz de gráficos de dispersión
+## #+ATTR_LaTeX: width=0.45\textwidth
+
+png(filename="splomGroup.png")
+splom(aranjuez[,c("TempAvg", "HumidAvg", "WindAvg",
+                  "Rain", "Radiation", "ET")],
+      groups=aranjuez$quarter,
+      auto.key=list(space='right'),
+      pscale=0, alpha=0.6, cex=0.3, pch=19)
+dev.off()
+
 ## =levelplot=
 ## #+ATTR_LaTeX: width=0.6\textwidth
 
@@ -182,8 +225,7 @@ dev.off()
 ## #+ATTR_LaTeX: width=0.7\textwidth
 
 pdf(file="histogram.pdf")
-histogram(~Radiation|year, data=aranjuez,
-          strip=strip.custom(strip.levels=TRUE))
+histogram(~Radiation|factor(year), data=aranjuez)
 dev.off()
 
 ## Gráficos de densidad
@@ -203,7 +245,7 @@ avRad <- aggregate(Radiation ~ month * year,
 ## #+ATTR_LaTeX: width=0.7\textwidth
 
 pdf(file="dotplot.pdf")
-dotplot(month ~ Radiation|year, data=avRad)
+dotplot(month ~ Radiation|factor(year), data=avRad)
 dev.off()
 
 ## Quantile-Quantile

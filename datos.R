@@ -28,27 +28,31 @@ head(CO2)
 
 CO2 <- read.csv('data/CO2_GNI_BM.csv')
 
+names(CO2)
 head(CO2)
 tail(CO2)
+
 summary(CO2)
-names(CO2)
+
+## table \\ =data.frame= de ejemplo
+
+chromosome <- gl(3,  10, labels = c('A',  'B',  'C'))
+probeset <- gl(3,  10, labels = c('X',  'Y',  'Z'))
+ensg <-  gl(3,  10, labels = c('E1',  'E2',  'E3'))
+symbol <- gl(3,  10, labels = c('S1',  'S2',  'S3'))
+XXA_00 <- rnorm(30)
+XXA_36 <- rnorm(30)
+XXB_00 <- rnorm(30)
+
+chromo <- data.frame(chromosome, probeset, ensg, symbol,
+                     XXA_00, XXA_36, XXB_00)
+head(chromo)
 
 ## table
 
-chromo <- data.frame(chromosome = gl(3,  10,
-                     labels = c('A',  'B',  'C')),
-                     probeset = gl(3,  10,
-                     labels = c('X',  'Y',  'Z')),
-                     ensg =  gl(3,  10,
-                     labels = c('E1',  'E2',  'E3')),
-                     symbol = gl(3,  10,
-                     labels = c('S1',  'S2',  'S3')),
-                     XXA_00 = rnorm(30),
-                     XXA_36 = rnorm(30),
-                     XXB_00 = rnorm(30))
+table(chromo$chromosome, chromo$XXA_00 > 0)
 
-table(chromo$chromosome, df$XXA_00 > 0)
-table(chromo$probeset, df$XXA_00 > -1 & df$XXA_00 < 1)
+table(chromo$probeset, chromo$XXA_00 > -1 & chromo$XXA_00 < 1)
 
 ## xtabs
 
@@ -108,7 +112,9 @@ CO2China <- subset(CO2,
                            Indicator.Name=='CO2 emissions (kg per PPP $ of GDP)'),
                    select=-c(Country.Name, Country.Code,
                              Indicator.Name, Indicator.Code))
+head(CO2China)
 
+## =stack=
 ## - Pasamos de formato =wide= a =long=
 
 stack(CO2China)
@@ -121,6 +127,7 @@ CO2long <- reshape(CO2,
                    direction='long')
 head(CO2long)
 
+## =reshape=: =wide= a =long=
 ## - Añadimos argumentos
 
 CO2long <- reshape(CO2,
@@ -136,14 +143,18 @@ head(CO2long)
 CO2subset <- CO2long[c("Country.Name",
                        "Indicator.Name",
                        "Year", "Value")]
+head(CO2subset)
 
+## =reshape=: =long= a =wide=
 ## - Ahora cambiamos formato
 
 CO2wide <- reshape(CO2subset,
                    idvar=c('Country.Name','Year'),
                    timevar='Indicator.Name',
                    direction='wide')
+head(CO2wide)
 
+## =reshape=: =long= a =wide=
 ## - Y ponemos nombres al gusto
 
 names(CO2wide)[3:6] <- c('CO2.PPP', 'CO2.capita',

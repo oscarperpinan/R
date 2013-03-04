@@ -1,4 +1,4 @@
-% Created 2013-02-26 mar 12:06
+% Created 2013-03-05 mar 00:24
 \documentclass{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -29,7 +29,7 @@
 
 \title{Estadística básica con R}
 \author{Oscar Perpiñán Lamigueiro}
-\date{\today}
+\date{Febrero de 2013}
 \hypersetup{
   pdfkeywords={},
   pdfsubject={},
@@ -48,21 +48,19 @@
 \frametitle{Conjunto de datos: swiss}
 \label{sec-1-1}
 
-Standardized fertility measure and socio-economic indicators for each
-of 47 French-speaking provinces of Switzerland at about 1888. 6 variables in percent [0, 100]:
+Standardized fertility measure and socio-economic indicators for
+each of 47 French-speaking provinces of Switzerland at
+about 1888. 6 variables in percent [0, 100]:
 
 \begin{itemize}
-\item Fertility:         Ig, ‘common standardizedfertility measure’
-\item Agriculture:       \% of males involved in agriculture 
-                               as occupation
-\item Examination:       \% draftees receiving highest mark 
-   on army examination
-\item Education:         \% education beyond primary school for draftees.
-\item Catholic:          \% ‘catholic’ (as opposed to ‘protestant’).
-\item Infant.Mortality:  live births who live less than 1year.           
-      
-     All variables but ‘Fertility’ give proportions of the population.
+\item \textbf{Fertility}:         Ig, ‘common standardized fertility measure’
+\item \textbf{Agriculture}:       \% of males involved in agriculture as occupation
+\item \textbf{Examination}:       \% draftees receiving highest mark on army examination
+\item \textbf{Education}:         \% education beyond primary school for draftees.
+\item \textbf{Catholic}:          \% ‘catholic’ (as opposed to ‘protestant’).
+\item \textbf{Infant.Mortality}:  live births who live less than 1year.
 \end{itemize}
+      
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Conjunto de datos: swiss}
@@ -104,7 +102,7 @@ splom(swiss, pscale=0, type=c('p', 'smooth'),
       groups=swiss$Catholic > 50, xlab='')
 \end{lstlisting}
 
-\includegraphics[width=.9\linewidth]{splomSwiss.pdf}
+\includegraphics[width=0.6\textwidth]{splomSwiss.pdf}
 \end{frame}
 \section{Estadística Univariante}
 \label{sec-2}
@@ -199,8 +197,8 @@ rnorm(10, mean=1, sd=.4)
 \end{lstlisting}
 
 \begin{verbatim}
-  [1] 1.4773674 1.3867686 1.4616831 0.2660399 1.0762471 1.7757136 1.2287755
-  [8] 0.9942296 0.9338062 1.2506691
+  [1] 0.2918322 1.0372751 0.3918230 1.1675334 0.9945630 1.0776891 1.3972002
+  [8] 0.7482031 0.8904608 1.3278775
 \end{verbatim}
 
 
@@ -210,8 +208,8 @@ runif(10, min=-3, max=3)
 \end{lstlisting}
 
 \begin{verbatim}
-  [1] -0.4931618  0.2618546  1.1875716 -1.7761181 -2.5002714  2.2152122
-  [7]  0.8830398  2.6895999 -0.9841917 -2.8621449
+  [1]  2.1388539  0.3854089 -2.3068330  0.1370125 -1.1201510  1.2801852
+  [7]  2.3369678 -1.5790268 -2.7583550 -1.5791942
 \end{verbatim}
 
 
@@ -221,8 +219,8 @@ rweibull(n=10, shape=3, scale=2)
 \end{lstlisting}
 
 \begin{verbatim}
-  [1] 1.1046997 1.4038783 2.1482313 2.1802392 2.4728738 1.6614008 1.5393820
-  [8] 1.7977655 0.6410068 1.5485643
+  [1] 1.8992689 3.2492511 0.8260776 1.9713057 1.9033416 1.7986622 0.5227134
+  [8] 1.6032356 3.0023150 2.0648336
 \end{verbatim}
 \end{frame}
 \begin{frame}[fragile]
@@ -233,14 +231,12 @@ rweibull(n=10, shape=3, scale=2)
 
 \lstset{language=R}
 \begin{lstlisting}
-x <- seq(1, 100, length=15)
+x <- seq(1, 100, length=10)
 x
 \end{lstlisting}
 
 \begin{verbatim}
-  [1]   1.000000   8.071429  15.142857  22.214286  29.285714  36.357143
-  [7]  43.428571  50.500000  57.571429  64.642857  71.714286  78.785714
- [13]  85.857143  92.928571 100.000000
+  [1]   1  12  23  34  45  56  67  78  89 100
 \end{verbatim}
 
 
@@ -250,9 +246,7 @@ sample(x)
 \end{lstlisting}
 
 \begin{verbatim}
-  [1]  22.214286  85.857143   8.071429  71.714286   1.000000 100.000000
-  [7]  29.285714  92.928571  50.500000  43.428571  64.642857  78.785714
- [13]  36.357143  57.571429  15.142857
+  [1]  12  56  34  89  45   1  78  23  67 100
 \end{verbatim}
 
 
@@ -262,7 +256,7 @@ sample(x, 5)
 \end{lstlisting}
 
 \begin{verbatim}
- [1] 15.142857  8.071429 36.357143 78.785714  1.000000
+ [1]  12 100  67  56  78
 \end{verbatim}
 
 
@@ -272,7 +266,7 @@ sample(x, 5, replace=TRUE)
 \end{lstlisting}
 
 \begin{verbatim}
- [1] 22.214286 85.857143 43.428571 85.857143  8.071429
+ [1]  56 100  34 100  78
 \end{verbatim}
 \end{frame}
 \begin{frame}[fragile]
@@ -346,13 +340,13 @@ t.test(A, B)
         Welch Two Sample t-test
 
 data:  A and B 
-t = -0.856, df = 1995.848, p-value = 0.3921
+t = 0.4153, df = 1997.851, p-value = 0.678
 alternative hypothesis: true difference in means is not equal to 0 
 95 percent confidence interval:
- -0.12706615  0.04984534 
+ -0.06943896  0.10674593 
 sample estimates:
-   mean of x    mean of y 
--0.002826312  0.035784093
+  mean of x   mean of y 
+0.024122622 0.005469137
 \end{verbatim}
 
 
@@ -366,7 +360,7 @@ wilcox.test(A, B)
  	Wilcoxon rank sum test with continuity correction
  
  data:  A and B 
- W = 492610, p-value = 0.5672
+ W = 505547, p-value = 0.6675
  alternative hypothesis: true location shift is not equal to 0
 \end{verbatim}
 \end{frame}
@@ -386,13 +380,13 @@ t.test(A, C)
         Welch Two Sample t-test
 
 data:  A and C 
-t = -0.037, df = 1214.266, p-value = 0.9705
+t = 0.7815, df = 1212.453, p-value = 0.4347
 alternative hypothesis: true difference in means is not equal to 0 
 95 percent confidence interval:
- -0.1999720  0.1925606 
+ -0.1205697  0.2802090 
 sample estimates:
-    mean of x     mean of y 
--0.0028263121  0.0008794018
+  mean of x   mean of y 
+ 0.02412262 -0.05569702
 \end{verbatim}
 
 
@@ -406,7 +400,7 @@ wilcox.test(A, C)
  	Wilcoxon rank sum test with continuity correction
  
  data:  A and C 
- W = 509559, p-value = 0.4592
+ W = 509982, p-value = 0.4395
  alternative hypothesis: true location shift is not equal to 0
 \end{verbatim}
 \end{frame}
@@ -472,8 +466,7 @@ In wilcox.test.default(x = c(83.1, 92.5, 76.1, 83.8, 92.4, 82.4,  :
 
 \lstset{language=R}
 \begin{lstlisting}
-lmFertEdu <- lm(Fertility ~ Education,
-                data = swiss)
+lmFertEdu <- lm(Fertility ~ Education, data = swiss)
 summary(lmFertEdu)
 \end{lstlisting}
 
@@ -600,6 +593,8 @@ Residual standard error: 8.331 on 44 degrees of freedom
 Multiple R-squared: 0.5745,     Adjusted R-squared: 0.5552 
 F-statistic:  29.7 on 2 and 44 DF,  p-value: 6.849e-09
 \end{verbatim}
+
+   
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Lo mismo con \texttt{update}}
@@ -844,7 +839,6 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 \lstset{language=R}
 \begin{lstlisting}
 stepFert <- step(lmFert)
-summary(stepFert)
 \end{lstlisting}
 
 
@@ -870,6 +864,20 @@ Fertility ~ Agriculture + Education + Catholic + Infant.Mortality
 - Infant.Mortality  1    409.81 2567.9 196.03
 - Catholic          1    956.57 3114.6 205.10
 - Education         1   2249.97 4408.0 221.43
+\end{verbatim}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Elegir un modelo}
+\label{sec-3-12}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+summary(stepFert)
+\end{lstlisting}
+
+
+\begin{verbatim}
 
 Call:
 lm(formula = Fertility ~ Agriculture + Education + Catholic + 
@@ -896,7 +904,7 @@ F-statistic: 24.42 on 4 and 42 DF,  p-value: 1.717e-10
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Elegir un modelo}
-\label{sec-3-12}
+\label{sec-3-13}
 
 
 \lstset{language=R}
