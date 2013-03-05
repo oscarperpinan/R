@@ -1,4 +1,4 @@
-% Created 2013-03-04 lun 23:22
+% Created 2013-03-05 mar 22:27
 \documentclass[xcolor={usenames,svgnames,dvipsnames}]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -20,8 +20,8 @@
 \AtBeginSection[]{\begin{frame}[plain]\tableofcontents[currentsection,hideallsubsections]\end{frame}}
 \lstset{keywordstyle=\color{blue}, commentstyle=\color{gray!90}, basicstyle=\ttfamily\small, columns=fullflexible, breaklines=true,linewidth=\textwidth, backgroundcolor=\color{gray!23}, basewidth={0.5em,0.4em}, literate={á}{{\'a}}1 {ñ}{{\~n}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {º}{{\textordmasculine}}1}
 \usepackage{mathpazo}
-\setbeamercovered{transparent}
-\usefonttheme{serif} 
+\usefonttheme{serif}
+\usecolortheme{rose}  
 \usetheme{Goettingen}
 \hypersetup{colorlinks=true, linkcolor=Blue, urlcolor=Blue}
 \providecommand{\alert}[1]{\textbf{#1}}
@@ -46,11 +46,41 @@
 \begin{frame}
 \frametitle{¿Qué es \texttt{R}?}
 \label{sec-1-1-1}
+\begin{block}{¿Qué es \href{http://procomun.wordpress.com/2011/02/23/que-es-r/}{R}?}
+\label{sec-1-1-1-1}
 
-¿Qué es \href{http://procomun.wordpress.com/2011/02/23/que-es-r/}{R}?: es un lenguaje de programación principalmente
-orientado al análisis estadístico y visualización de información
-cuantitativa y cualitativa y publicado como software libre con
-licencia GNU-GPL.
+Es un lenguaje de programación principalmente orientado al
+análisis estadístico y visualización de información cuantitativa y
+cualitativa y publicado como software libre con licencia GNU-GPL.
+\begin{center}
+\href{http://www.R-project.org}{http://www.R-project.org} 
+\end{center}
+\end{block}
+\end{frame}
+\begin{frame}
+\frametitle{Para instalar \texttt{R}}
+\label{sec-1-1-2}
+
+
+\begin{itemize}
+\item Windows: \href{http://cran.es.r-project.org/bin/windows/base/}{http://cran.es.r-project.org/bin/windows/base/}
+\item Mac: \href{http://cran.es.r-project.org/bin/macosx/}{http://cran.es.r-project.org/bin/macosx/}
+\item Linux: \href{http://cran.es.r-project.org/bin/linux/}{http://cran.es.r-project.org/bin/linux/}
+\end{itemize}
+\end{frame}
+\begin{frame}
+\frametitle{Interfaces para R}
+\label{sec-1-1-3}
+
+
+\begin{itemize}
+\item En mi opinión, la mejor interfaz para R es \href{http://ess.r-project.org/}{ESS} con \href{http://www.gnu.org/software/emacs/}{Emacs}.
+\item Para los que prefieren una interfaz gráfica es recomendable \href{http://www.rstudio.com/ide/}{RStudio}:
+\begin{itemize}
+\item Instalador: \href{http://www.rstudio.com/ide/download/desktop}{http://www.rstudio.com/ide/download/desktop}
+\item Introducción: \href{http://www.rstudio.com/ide/docs/using/source}{http://www.rstudio.com/ide/docs/using/source}
+\end{itemize}
+\end{itemize}
 \end{frame}
 \subsection{R es un proyecto colaborativo}
 \label{sec-1-2}
@@ -165,8 +195,20 @@ log(x)
 \end{lstlisting}
 \end{frame}
 \begin{frame}[fragile]
-\frametitle{Generar vectores con \texttt{seq}}
+\frametitle{¿Y qué hago cuando necesito ayuda?}
 \label{sec-2-1-4}
+
+
+
+\lstset{language=R}
+\begin{lstlisting}
+help(exp)
+help(log)
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Generar vectores con \texttt{seq}}
+\label{sec-2-1-5}
 
 
 \lstset{language=R}
@@ -189,7 +231,7 @@ y <- seq(2, 100, length=50)
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Unir vectores con \texttt{c}}
-\label{sec-2-1-5}
+\label{sec-2-1-6}
 
 
 \lstset{language=R}
@@ -204,7 +246,7 @@ z
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Generar vectores con \texttt{rep}}
-\label{sec-2-1-6}
+\label{sec-2-1-7}
 
 
 \lstset{language=R}
@@ -220,7 +262,7 @@ help(rep)
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Indexado numérico de vectores}
-\label{sec-2-1-7}
+\label{sec-2-1-8}
 
 
 
@@ -235,7 +277,7 @@ x[10:5]
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Indexado de vectores con condiciones lógicas}
-\label{sec-2-1-8}
+\label{sec-2-1-9}
 
 
 \lstset{language=R}
@@ -247,7 +289,7 @@ class(condicion)
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Indexado de vectores con condiciones lógicas}
-\label{sec-2-1-9}
+\label{sec-2-1-10}
 
 
 
@@ -258,21 +300,20 @@ x[x==37]
 x[x!=9]
 x[x>20]
 \end{lstlisting}
-\begin{block}{Y aquí, ¿qué ocurre?}
-\label{sec-2-1-9-1}
 
-
+\begin{itemize}
+\item Y aquí ¿qué ocurre?
+\end{itemize}
 
 \lstset{language=R}
 \begin{lstlisting}
 x[x=10]
 \end{lstlisting}
      
-\end{block}
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Indexado de vectores con \texttt{\%in\%}}
-\label{sec-2-1-10}
+\label{sec-2-1-11}
 
 
 \lstset{language=R}
@@ -285,7 +326,7 @@ y[y %in% c(101, 127, 141)]
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Indexado de vectores con condiciones múltiples}
-\label{sec-2-1-11}
+\label{sec-2-1-12}
 
 
 
@@ -302,7 +343,7 @@ z[c(1, 10, 40, 80)]
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Indexado de vectores con condiciones múltiples}
-\label{sec-2-1-12}
+\label{sec-2-1-13}
 
 
 \lstset{language=R}
@@ -316,7 +357,7 @@ x[cond]
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Con las condiciones se pueden hacer operaciones}
-\label{sec-2-1-13}
+\label{sec-2-1-14}
 
 
 \lstset{language=R}
@@ -329,21 +370,6 @@ length(x[!cond])
 as.numeric(cond)
 \end{lstlisting}
     
-\end{frame}
-\begin{frame}[fragile]
-\frametitle{Aritmética sencilla}
-\label{sec-2-1-14}
-
-
-\lstset{language=R}
-\begin{lstlisting}
-x + y
-x - y
-x * y
-x^2 + y^3
-exp(x)
-log(x)
-\end{lstlisting}
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Funciones predefinidas}
@@ -360,33 +386,6 @@ max(x)
 min(x)
 range(x)
 quantile(x)
-\end{lstlisting}
-\end{frame}
-\begin{frame}[fragile]
-\frametitle{Funciones y condiciones}
-\label{sec-2-1-16}
-
-
-\lstset{language=R}
-\begin{lstlisting}
-sum(x)
-sum(x[cond])
-sum(x[(x>=10) & (x<=50)])
-x[1] + x[2] + x[3] + x[4] + x[5]
-sum(x[1:5])
-\end{lstlisting}
-\end{frame}
-\begin{frame}[fragile]
-\frametitle{¿Y qué hago cuando necesito ayuda?}
-\label{sec-2-1-17}
-
-
-
-\lstset{language=R}
-\begin{lstlisting}
-help(exp)
-help(sum)
-help(quantile)
 \end{lstlisting}
 \end{frame}
 \subsection{Matrices}

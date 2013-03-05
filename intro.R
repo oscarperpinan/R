@@ -398,7 +398,7 @@ lapply(lista, foo)
 ## Para crear un =data.frame=...
 
 df <- data.frame(x = 1:10,
-                 y = rnorm(10),
+                 y = rnorm(2),#rnorm(10),
                  z = 0)
 
 length(df)

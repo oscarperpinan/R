@@ -20,8 +20,8 @@
 #+LATEX_HEADER: \AtBeginSection[]{\begin{frame}[plain]\tableofcontents[currentsection,hideallsubsections]\end{frame}}
 #+LATEX_HEADER: \lstset{keywordstyle=\color{blue}, commentstyle=\color{gray!90}, basicstyle=\ttfamily\small, columns=fullflexible, breaklines=true,linewidth=\textwidth, backgroundcolor=\color{gray!23}, basewidth={0.5em,0.4em}, literate={á}{{\'a}}1 {ñ}{{\~n}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {º}{{\textordmasculine}}1}
 #+LATEX_HEADER: \usepackage{mathpazo}
-#+LATEX_HEADER: \setbeamercovered{transparent}
-#+LATEX_HEADER: \usefonttheme{serif} 
+#+LATEX_HEADER: \usefonttheme{serif}
+#+LATEX_HEADER: \usecolortheme{rose}  
 #+LATEX_HEADER: \usetheme{Goettingen}
 #+LATEX_HEADER: \hypersetup{colorlinks=true, linkcolor=Blue, urlcolor=Blue}
 #+PROPERTY:  tangle yes
@@ -29,14 +29,31 @@
 
 * R es software libre
 ** ¿Qué es =R=?
-*** ¿Qué es =R=?						    :B_block:
-    :PROPERTIES:
-    :BEAMER_env: block
-    :END:
-¿Qué es [[http://procomun.wordpress.com/2011/02/23/que-es-r/][R]]?: es un lenguaje de programación principalmente
-orientado al análisis estadístico y visualización de información
-cuantitativa y cualitativa y publicado como software libre con
-licencia GNU-GPL.
+*** ¿Qué es =R=?						    
+**** ¿Qué es [[http://procomun.wordpress.com/2011/02/23/que-es-r/][R]]?			    :B_block:
+     :PROPERTIES:
+     :BEAMER_env: block
+     :END:
+Es un lenguaje de programación principalmente orientado al
+análisis estadístico y visualización de información cuantitativa y
+cualitativa y publicado como software libre con licencia GNU-GPL.
+#+BEGIN_CENTER
+ [[http://www.R-project.org]] 
+#+END_CENTER
+
+*** Para instalar =R=
+
+- Windows: http://cran.es.r-project.org/bin/windows/base/
+- Mac: http://cran.es.r-project.org/bin/macosx/
+- Linux: http://cran.es.r-project.org/bin/linux/
+
+*** Interfaces para R
+
+- En mi opinión, la mejor interfaz para R es [[http://ess.r-project.org/][ESS]] con [[http://www.gnu.org/software/emacs/][Emacs]]. 
+- Para los que prefieren una interfaz gráfica es recomendable [[http://www.rstudio.com/ide/][RStudio]]:
+  - Instalador: http://www.rstudio.com/ide/download/desktop
+  - Introducción: http://www.rstudio.com/ide/docs/using/source
+
 ** R es un proyecto colaborativo
 *** R es un proyecto colaborativo
 - Una de las grandes riquezas de R es la cantidad de paquetes (más
@@ -108,6 +125,13 @@ length
   log(x)
 #+end_src
 
+*** ¿Y qué hago cuando necesito ayuda?
+
+#+begin_src R 
+help(exp)
+help(log)
+#+end_src
+
 *** Generar vectores con =seq=
 #+begin_src R 
 x1 <- seq(1, 100, by=2)
@@ -174,11 +198,7 @@ help(rep)
   x[x>20]
 #+end_src
 
-**** Y aquí, ¿qué ocurre?					    :B_block:
-     :PROPERTIES:
-     :BEAMER_env: block
-     :END:
-
+- Y aquí ¿qué ocurre?
 #+begin_src R 
   x[x=10]
 #+end_src
@@ -224,16 +244,6 @@ as.numeric(cond)
 #+end_src
     
 
-*** Aritmética sencilla
-#+begin_src R 
-x + y
-x - y
-x * y
-x^2 + y^3
-exp(x)
-log(x)
-#+end_src
-
 *** Funciones predefinidas
 #+begin_src R 
 summary(x)
@@ -246,23 +256,6 @@ range(x)
 quantile(x)
 #+end_src
 
-*** Funciones y condiciones
-#+begin_src R 
-sum(x)
-sum(x[cond])
-sum(x[(x>=10) & (x<=50)])
-x[1] + x[2] + x[3] + x[4] + x[5]
-sum(x[1:5])
-#+end_src
-
-
-*** ¿Y qué hago cuando necesito ayuda?
-
-#+begin_src R 
-help(exp)
-help(sum)
-help(quantile)
-#+end_src
 
 
 ** Matrices
