@@ -608,7 +608,7 @@ df[,2]
                     nomatch=0)
   idxLarge
   
-  largeStates[idxLarge,]
+  coldStates[idxLarge,]
 #+end_src
 
 - Estados frios que también son grandes
@@ -618,7 +618,7 @@ df[,2]
                    nomatch=0)
   idxCold
   
-  coldStates[idxCold,]
+  largeStates[idxCold,]
 #+end_src
 
 * Factores, fechas y caracteres

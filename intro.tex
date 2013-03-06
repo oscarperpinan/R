@@ -1,4 +1,4 @@
-% Created 2013-03-05 mar 22:27
+% Created 2013-03-06 mié 07:25
 \documentclass[xcolor={usenames,svgnames,dvipsnames}]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -925,7 +925,7 @@ idxLarge <- match(largeStates$Name,
                   nomatch=0)
 idxLarge
 
-largeStates[idxLarge,]
+coldStates[idxLarge,]
 \end{lstlisting}
 
 \begin{itemize}
@@ -939,7 +939,7 @@ idxCold <- match(coldStates$Name,
                  nomatch=0)
 idxCold
 
-coldStates[idxCold,]
+largeStates[idxCold,]
 \end{lstlisting}
 \end{frame}
 \section{Factores, fechas y caracteres}

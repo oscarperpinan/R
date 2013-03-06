@@ -45,6 +45,11 @@ x^2 + y^3
 exp(x)
 log(x)
 
+## ¿Y qué hago cuando necesito ayuda?
+
+help(exp)
+help(log)
+
 ## Generar vectores con =seq=
 
 x1 <- seq(1, 100, by=2)
@@ -102,10 +107,7 @@ x[x==37]
 x[x!=9]
 x[x>20]
 
-## Y aquí, ¿qué ocurre?					    :B_block:
-##      :PROPERTIES:
-##      :BEAMER_env: block
-##      :END:
+## - Y aquí ¿qué ocurre?
 
 x[x=10]
 
@@ -143,15 +145,6 @@ length(x[cond])
 length(x[!cond])
 as.numeric(cond)
 
-## Aritmética sencilla
-
-x + y
-x - y
-x * y
-x^2 + y^3
-exp(x)
-log(x)
-
 ## Funciones predefinidas
 
 summary(x)
@@ -162,20 +155,6 @@ max(x)
 min(x)
 range(x)
 quantile(x)
-
-## Funciones y condiciones
-
-sum(x)
-sum(x[cond])
-sum(x[(x>=10) & (x<=50)])
-x[1] + x[2] + x[3] + x[4] + x[5]
-sum(x[1:5])
-
-## ¿Y qué hago cuando necesito ayuda?
-
-help(exp)
-help(sum)
-help(quantile)
 
 ## Construir una matriz
 
@@ -398,7 +377,7 @@ lapply(lista, foo)
 ## Para crear un =data.frame=...
 
 df <- data.frame(x = 1:10,
-                 y = rnorm(2),#rnorm(10),
+                 y = rnorm(10),
                  z = 0)
 
 length(df)
@@ -477,7 +456,7 @@ idxLarge <- match(largeStates$Name,
                   nomatch=0)
 idxLarge
 
-largeStates[idxLarge,]
+coldStates[idxLarge,]
 
 ## - Estados frios que también son grandes
 
@@ -486,7 +465,7 @@ idxCold <- match(coldStates$Name,
                  nomatch=0)
 idxCold
 
-coldStates[idxCold,]
+largeStates[idxCold,]
 
 ## Una variable numérica que nos servirá para el ejemplo
 
