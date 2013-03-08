@@ -1,39 +1,4 @@
 
-## #+TITLE:     Funciones
-## #+AUTHOR:    Oscar Perpiñán Lamigueiro
-## #+EMAIL:     oscar.perpinan@gmail.com
-## #+DESCRIPTION:
-## #+KEYWORDS:
-## #+LANGUAGE:  es
-## #+OPTIONS:   H:3 num:t toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
-## #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
-## #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
-## #+EXPORT_SELECT_TAGS: export
-## #+EXPORT_EXCLUDE_TAGS: noexport
-## #+LINK_UP:   
-## #+LINK_HOME: 
-## #+XSLT:
-## #+startup: beamer
-## #+LaTeX_CLASS: beamer
-## #+BEAMER_FRAME_LEVEL: 2
-## #+LATEX_CLASS_OPTIONS: [xcolor={usenames,svgnames,dvipsnames}]
-## #+LATEX_HEADER: \AtBeginSection[]{\begin{frame}<beamer>\frametitle{Contenidos}\tableofcontents[currentsection]\end{frame}}
-## #+LATEX_HEADER: \lstset{keywordstyle=\color{blue}, commentstyle=\color{gray!90}, basicstyle=\ttfamily\footnotesize, columns=fullflexible, breaklines=false,linewidth=\textwidth, backgroundcolor=\color{gray!23}, basewidth={0.5em,0.4em}, literate={á}{{\'a}}1 {ñ}{{\~n}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {º}{{\textordmasculine}}1}
-## #+LATEX_HEADER: \usepackage{mathpazo}
-## #+LATEX_HEADER: \setbeamercovered{transparent}
-## #+LATEX_HEADER: \usefonttheme{serif} 
-## #+LATEX_HEADER: \usetheme{Goettingen}
-## #+LATEX_HEADER: \hypersetup{colorlinks=true, linkcolor=Blue, urlcolor=Blue}
-## #+PROPERTY:  tangle yes
-## #+PROPERTY:  comments org
-## #+PROPERTY: results output
-## #+PROPERTY: session *R*
-## #+PROPERTY: exports both
-## #+LATEX_HEADER: \usepackage{fancyvrb}
-## #+LATEX_HEADER: \DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\tiny, formatcom = {\color{black!70}}}
-
-setwd('~/R/intro')
-
 ## Mi primera función
 ## - Definición
 
@@ -212,7 +177,7 @@ get('m', env=environment(myFoo))
 
 get('n', env=environment(myFoo))
 
-## =traceback=
+## Post-mortem: =traceback=
 
 sumSq <- function(x, ...){
     sum(x ^ 2, ...)
@@ -230,7 +195,43 @@ sumProd(rnorm(10), letters[1:10])
 
 traceback()
 
-## =system.time=
+## Analizar antes de que ocurra: =debug=
+## - Activa la ejecución paso a paso de una función
+
+debug(sumProd)
+
+## - Cada vez que se llame a la función, su cuerpo se ejecuta línea a línea y los resultados de cada paso pueden ser inspeccionados.
+## - Los comandos disponibles son:
+##   - =n= o intro: avanzar un paso.
+##   - =c=: continua hasta el final del contexto actual (por ejemplo,
+##     terminar un bucle).
+##   - =where=: entrega la lista de todas las llamadas activas.
+##   - =Q=: termina la inspección y vuelve al nivel superior.
+## - Para desactivar el análisis:
+
+undebug(sumProd)
+
+## Analizar antes de que ocurra: =trace=
+## - =trace= permite mayor control que =debug=
+
+trace(sumProd, tracer=browser, exit=browser)
+
+## - La función queda modificada
+
+sumProd
+
+body(sumProd)
+
+## Analizar antes de que ocurra: =trace=
+## - Los comandos =n= y =c= cambian respecto a =debug=:
+##   - =c= o intro: avanzar un paso.
+##   - =n=: continua hasta el final del contexto actual (por ejemplo,
+##     terminar un bucle).
+## - Para desactivar
+
+untrace(sumProd)
+
+## ¿Cuánto tarda mi función? =system.time=
 
 noise <- function(sd)rnorm(1000, mean=0, sd=sd)
 
@@ -241,7 +242,7 @@ sumNoise <- function(nComponents){
 
 system.time(sumNoise(1000))
 
-## =Rprof=
+## ¿Cuánto tarda cada parte de mi función?: =Rprof=
 ## - Usaremos un fichero temporal
 
 tmp <- tempfile()
@@ -254,7 +255,7 @@ Rprof(tmp)
 
 zz <- sumNoise(1000)
 
-## =Rprof=
+## ¿Cuánto tarda cada parte de mi función?: =Rprof=
 ## - Paramos el análisis
 
 Rprof()

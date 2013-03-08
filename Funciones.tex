@@ -1,4 +1,4 @@
-% Created 2013-03-02 sáb 18:01
+% Created 2013-03-08 vie 12:16
 \documentclass[xcolor={usenames,svgnames,dvipsnames}]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -30,7 +30,7 @@
 
 \title{Funciones}
 \author{Oscar Perpiñán Lamigueiro}
-\date{19 de Febrero de 2013}
+\date{Marzo de 2013}
 \hypersetup{
   pdfkeywords={},
   pdfsubject={},
@@ -39,7 +39,6 @@
 \begin{document}
 
 \maketitle
-
 
 
 
@@ -466,12 +465,11 @@ ls()
 \end{lstlisting}
 
 \begin{verbatim}
-  [1] "a"           "add"         "anidada"     "b"           "constructor"
-  [6] "fib"         "foo"         "frac"        "hello"       "lista"      
- [11] "ll"          "M"           "myFoo"       "myFooenv"    "myFun"      
- [16] "noise"       "power"       "pwrSum"      "ruido"       "suma10"     
- [21] "sumNoise"    "sumProd"     "sumSq"       "tmp"         "vals"       
- [26] "x"           "zz"
+  [1] "a"           "anidada"     "b"           "constructor" "f"          
+  [6] "fib"         "foo"         "hello"       "lista"       "ll"         
+ [11] "myFoo"       "myFun"       "noise"       "power"       "pwrSum"     
+ [16] "suma10"      "sumNoise"    "sumProd"     "sumSq"       "tmp"        
+ [21] "x"           "zz"
 \end{verbatim}
 \end{frame}
 \begin{frame}[fragile]
@@ -500,7 +498,7 @@ anidada(1:3, 2:4)
 \end{lstlisting}
 
 \begin{verbatim}
- <environment: 0xa645674>
+ <environment: 0xb6f6f4c>
  [1] 113
 \end{verbatim}
 
@@ -574,7 +572,7 @@ myFoo
  function(x){
          m*x + n
          }
- <environment: 0xa63e3b8>
+ <environment: 0xb6eaf4c>
 \end{verbatim}
 \end{frame}
 \begin{frame}[fragile]
@@ -598,7 +596,7 @@ environment(myFoo)
 \end{lstlisting}
 
 \begin{verbatim}
- <environment: 0xa63e3b8>
+ <environment: 0xb6eaf4c>
 \end{verbatim}
 
 
@@ -608,12 +606,11 @@ ls()
 \end{lstlisting}
 
 \begin{verbatim}
-  [1] "a"           "add"         "anidada"     "b"           "constructor"
-  [6] "fib"         "foo"         "frac"        "hello"       "lista"      
- [11] "ll"          "M"           "myFoo"       "myFooenv"    "myFun"      
- [16] "noise"       "power"       "pwrSum"      "ruido"       "suma10"     
- [21] "sumNoise"    "sumProd"     "sumSq"       "tmp"         "vals"       
- [26] "x"           "zz"
+  [1] "a"           "anidada"     "b"           "constructor" "f"          
+  [6] "fib"         "foo"         "hello"       "lista"       "ll"         
+ [11] "myFoo"       "myFun"       "noise"       "power"       "pwrSum"     
+ [16] "suma10"      "sumNoise"    "sumProd"     "sumSq"       "tmp"        
+ [21] "x"           "zz"
 \end{verbatim}
 
 
@@ -649,7 +646,7 @@ get('n', env=environment(myFoo))
 \section{Debug y profiling}
 \label{sec-3}
 \begin{frame}[fragile]
-\frametitle{\texttt{traceback}}
+\frametitle{Post-mortem: \texttt{traceback}}
 \label{sec-3-1}
 
 
@@ -674,7 +671,7 @@ sumProd(rnorm(10), runif(10))
 \end{lstlisting}
 
 \begin{verbatim}
- [1] 15.21856
+ [1] 88.97738
 \end{verbatim}
 
 
@@ -699,13 +696,120 @@ traceback()
  1: sumProd(rnorm(10), letters[1:10])
 \end{verbatim}
 \end{frame}
-\begin{frame}
-\frametitle{Debugger}
+\begin{frame}[fragile]
+\frametitle{Analizar antes de que ocurra: \texttt{debug}}
 \label{sec-3-2}
+
+\begin{itemize}
+\item Activa la ejecución paso a paso de una función
+\end{itemize}
+
+\lstset{language=R}
+\begin{lstlisting}
+debug(sumProd)
+\end{lstlisting}
+
+
+\begin{itemize}
+\item Cada vez que se llame a la función, su cuerpo se ejecuta línea a línea y los resultados de cada paso pueden ser inspeccionados.
+\item Los comandos disponibles son:
+\begin{itemize}
+\item \texttt{n} o intro: avanzar un paso.
+\item \texttt{c}: continua hasta el final del contexto actual (por ejemplo,
+    terminar un bucle).
+\item \texttt{where}: entrega la lista de todas las llamadas activas.
+\item \texttt{Q}: termina la inspección y vuelve al nivel superior.
+\end{itemize}
+\item Para desactivar el análisis:
+\end{itemize}
+
+\lstset{language=R}
+\begin{lstlisting}
+undebug(sumProd)
+\end{lstlisting}
 \end{frame}
 \begin{frame}[fragile]
-\frametitle{\texttt{system.time}}
+\frametitle{Analizar antes de que ocurra: \texttt{trace}}
 \label{sec-3-3}
+
+\begin{itemize}
+\item \texttt{trace} permite mayor control que \texttt{debug}
+\end{itemize}
+
+\lstset{language=R}
+\begin{lstlisting}
+trace(sumProd, tracer=browser, exit=browser)
+\end{lstlisting}
+
+\begin{verbatim}
+ [1] "sumProd"
+\end{verbatim}
+
+\begin{itemize}
+\item La función queda modificada
+\end{itemize}
+
+\lstset{language=R}
+\begin{lstlisting}
+sumProd
+\end{lstlisting}
+
+\begin{verbatim}
+ Object with tracing code, class "functionWithTrace"
+ Original definition: 
+ function(x, y, ...){
+     xs <- sumSq(x, ...)
+     ys <- sumSq(y, ...)
+     xs * ys
+     }
+ 
+ ## (to see the tracing code, look at body(object))
+\end{verbatim}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+body(sumProd)
+\end{lstlisting}
+
+
+\begin{verbatim}
+{
+    on.exit(.doTrace(browser(), "on exit"))
+    {
+        .doTrace(browser(), "on entry")
+        {
+            xs <- sumSq(x, ...)
+            ys <- sumSq(y, ...)
+            xs * ys
+        }
+    }
+}
+\end{verbatim}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Analizar antes de que ocurra: \texttt{trace}}
+\label{sec-3-4}
+
+\begin{itemize}
+\item Los comandos \texttt{n} y \texttt{c} cambian respecto a \texttt{debug}:
+\begin{itemize}
+\item \texttt{c} o intro: avanzar un paso.
+\item \texttt{n}: continua hasta el final del contexto actual (por ejemplo,
+    terminar un bucle).
+\end{itemize}
+\item Para desactivar
+\end{itemize}
+
+\lstset{language=R}
+\begin{lstlisting}
+untrace(sumProd)
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{¿Cuánto tarda mi función? \texttt{system.time}}
+\label{sec-3-5}
+
 
 
 \lstset{language=R}
@@ -732,12 +836,12 @@ system.time(sumNoise(1000))
 
 \begin{verbatim}
     user  system elapsed 
-   0.244   0.020   0.265
+   0.188   0.004   0.191
 \end{verbatim}
 \end{frame}
 \begin{frame}[fragile]
-\frametitle{\texttt{Rprof}}
-\label{sec-3-4}
+\frametitle{¿Cuánto tarda cada parte de mi función?: \texttt{Rprof}}
+\label{sec-3-6}
 
 \begin{itemize}
 \item Usaremos un fichero temporal
@@ -767,10 +871,13 @@ Rprof(tmp)
 \begin{lstlisting}
 zz <- sumNoise(1000)
 \end{lstlisting}
+
+
+   
 \end{frame}
 \begin{frame}[fragile]
-\frametitle{\texttt{Rprof}}
-\label{sec-3-5}
+\frametitle{¿Cuánto tarda cada parte de mi función?: \texttt{Rprof}}
+\label{sec-3-7}
 
 \begin{itemize}
 \item Paramos el análisis
@@ -794,28 +901,31 @@ summaryRprof(tmp)
 
 \begin{verbatim}
 $by.self
-        self.time self.pct total.time total.pct
-"rnorm"      0.24       75       0.24        75
-"array"      0.08       25       0.08        25
+         self.time self.pct total.time total.pct
+"rnorm"       0.16    66.67       0.16     66.67
+"array"       0.06    25.00       0.06     25.00
+"unlist"      0.02     8.33       0.02      8.33
 
 $by.total
                  total.time total.pct self.time self.pct
-"sapply"               0.32       100      0.00        0
-"sumNoise"             0.32       100      0.00        0
-"rnorm"                0.24        75      0.24       75
-"FUN"                  0.24        75      0.00        0
-"lapply"               0.24        75      0.00        0
-"array"                0.08        25      0.08       25
-"simplify2array"       0.08        25      0.00        0
+"sapply"               0.24    100.00      0.00     0.00
+"sumNoise"             0.24    100.00      0.00     0.00
+"rnorm"                0.16     66.67      0.16    66.67
+"FUN"                  0.16     66.67      0.00     0.00
+"lapply"               0.16     66.67      0.00     0.00
+"simplify2array"       0.08     33.33      0.00     0.00
+"array"                0.06     25.00      0.06    25.00
+"unlist"               0.02      8.33      0.02     8.33
+"as.vector"            0.02      8.33      0.00     0.00
 
 $sample.interval
 [1] 0.02
 
 $sampling.time
-[1] 0.32
+[1] 0.24
 \end{verbatim}
 \end{frame}
-\section{Sofisticaciones}
+\section{Miscelánea}
 \label{sec-4}
 \begin{frame}[fragile]
 \frametitle{\texttt{do.call}}
@@ -832,7 +942,7 @@ with(lista, sum(a + b + c))
 \end{lstlisting}
 
 \begin{verbatim}
- [1] 167.6913
+ [1] 146.6529
 \end{verbatim}
 
 \begin{itemize}
@@ -846,7 +956,7 @@ do.call(sum, lista)
 \end{lstlisting}
 
 \begin{verbatim}
- [1] 167.6913
+ [1] 146.6529
 \end{verbatim}
 \end{frame}
 \begin{frame}[fragile]
@@ -866,12 +976,12 @@ do.call(rbind, ll)
 \end{lstlisting}
 
 \begin{verbatim}
-           [,1]         [,2]      [,3]      [,4]        [,5]
- [1,]  2.477327 -0.311525664 -1.342538  1.650633 0.365936506
- [2,]  6.137148  0.097048239  1.802409  2.724589 0.133909527
- [3,] 15.203720 -0.030233017 -2.419804  4.497296 0.049002384
- [4,] 37.664581  0.009418361  3.248680  7.423385 0.017931761
- [5,] 93.307473 -0.002934061 -4.361478 12.253284 0.006561886
+           [,1]       [,2]         [,3]      [,4]     [,5]
+ [1,]  2.131384 -0.6716343 0.1708127647 0.8274226 1.451193
+ [2,]  4.542797  0.4510926 0.0291770006 0.6846281 2.105961
+ [3,]  9.682445 -0.3029693 0.0049838041 0.5664768 3.056156
+ [4,] 20.637007  0.2034846 0.0008512974 0.4687157 4.435072
+ [5,] 43.985385 -0.1366672 0.0001454125 0.3878259 6.436146
 \end{verbatim}
 
 \begin{itemize}
@@ -884,12 +994,12 @@ sapply(1:5, function(i)x^i)
 \end{lstlisting}
 
 \begin{verbatim}
-            [,1]       [,2]        [,3]         [,4]         [,5]
- [1,]  2.4773267 6.13714765 15.20371982 37.664581254 93.307473313
- [2,] -0.3115257 0.09704824 -0.03023302  0.009418361 -0.002934061
- [3,] -1.3425384 1.80240946 -2.41980398  3.248679858 -4.361477583
- [4,]  1.6506329 2.72458904  4.49729637  7.423385446 12.253284406
- [5,]  0.3659365 0.13390953  0.04900238  0.017931761  0.006561886
+            [,1]      [,2]         [,3]         [,4]          [,5]
+ [1,]  2.1313839 4.5427973  9.682444959 2.063701e+01 43.9853847104
+ [2,] -0.6716343 0.4510926 -0.302969290 2.034846e-01 -0.1366672164
+ [3,]  0.1708128 0.0291770  0.004983804 8.512974e-04  0.0001454125
+ [4,]  0.8274226 0.6846281  0.566476774 4.687157e-01  0.3878259343
+ [5,]  1.4511930 2.1059611  3.056156073 4.435072e+00  6.4361459209
 \end{verbatim}
 \end{frame}
 \begin{frame}[fragile]

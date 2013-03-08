@@ -1,6 +1,7 @@
 #+TITLE:     Funciones
 #+AUTHOR:    Oscar Perpiñán Lamigueiro
 #+EMAIL:     oscar.perpinan@gmail.com
+#+DATE: Marzo de 2013
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  es
@@ -31,11 +32,9 @@
 #+LATEX_HEADER: \usepackage{fancyvrb}
 #+LATEX_HEADER: \DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\tiny, formatcom = {\color{black!70}}}
 
-#+begin_src R :exports none
-  setwd('~/R/intro')
-#+end_src
 
 * Conceptos Básicos
+
 ** Fuentes de información
 - [[http://cran.r-project.org/doc/manuals/R-intro.html][R introduction]]
 - [[http://cran.r-project.org/doc/manuals/R-lang.html][R Language Definition]]
@@ -284,7 +283,7 @@ get('n', env=environment(myFoo))
 
 * Debug y profiling
 
-** =traceback=
+** Post-mortem: =traceback=
 #+begin_src R 
   sumSq <- function(x, ...){
       sum(x ^ 2, ...)
@@ -306,9 +305,47 @@ get('n', env=environment(myFoo))
   traceback()
 #+end_src
 
-** Debugger
+** Analizar antes de que ocurra: =debug=
+- Activa la ejecución paso a paso de una función
+#+begin_src R
+  debug(sumProd)
+#+end_src
+- Cada vez que se llame a la función, su cuerpo se ejecuta línea a línea y los resultados de cada paso pueden ser inspeccionados.
+- Los comandos disponibles son:
+  - =n= o intro: avanzar un paso.
+  - =c=: continua hasta el final del contexto actual (por ejemplo,
+    terminar un bucle).
+  - =where=: entrega la lista de todas las llamadas activas.
+  - =Q=: termina la inspección y vuelve al nivel superior.
+- Para desactivar el análisis:
+#+begin_src R
+undebug(sumProd)
+#+end_src
+** Analizar antes de que ocurra: =trace=
+- =trace= permite mayor control que =debug=
+#+begin_src R
+  trace(sumProd, tracer=browser, exit=browser)
+#+end_src
+- La función queda modificada
+#+begin_src R
+  sumProd
+#+end_src
+#+begin_src R
+body(sumProd)
+#+end_src
 
-** =system.time=
+** Analizar antes de que ocurra: =trace=
+- Los comandos =n= y =c= cambian respecto a =debug=:
+  - =c= o intro: avanzar un paso.
+  - =n=: continua hasta el final del contexto actual (por ejemplo,
+    terminar un bucle).
+- Para desactivar
+#+begin_src R
+untrace(sumProd)
+#+end_src
+
+** ¿Cuánto tarda mi función? =system.time=
+
 #+begin_src R 
   noise <- function(sd)rnorm(1000, mean=0, sd=sd)
 #+end_src
@@ -321,7 +358,7 @@ get('n', env=environment(myFoo))
 #+begin_src R 
   system.time(sumNoise(1000))
 #+end_src
-** =Rprof=
+** ¿Cuánto tarda cada parte de mi función?: =Rprof=
 - Usaremos un fichero temporal
 #+begin_src R 
   tmp <- tempfile()
@@ -334,8 +371,8 @@ get('n', env=environment(myFoo))
 #+begin_src R 
   zz <- sumNoise(1000)
 #+end_src
-
-** =Rprof=
+   
+** ¿Cuánto tarda cada parte de mi función?: =Rprof=
 - Paramos el análisis
 #+begin_src R 
   Rprof()
@@ -346,7 +383,7 @@ summaryRprof(tmp)
 #+end_src
 
 
-* Sofisticaciones
+* Miscelánea
 ** =do.call= 
 - Ejemplo: sumar los componentes de una lista
 #+begin_src R 
