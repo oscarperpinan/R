@@ -171,6 +171,14 @@ xyplot(Radiation ~ TempAvg, data=aranjuez)
 #+end_src
 
 *** Colores con grupos: par.settings
+- (Sólo si no está instalado previamente)
+#+begin_src R 
+install.packages('latticeExtra')
+#+end_src
+- Cargamos =latticeExtra= para usar =custom.theme=
+#+begin_src R 
+library(latticeExtra)
+#+end_src
 #+ATTR_LaTeX: width=0.45\textwidth
 #+begin_src R :file myTheme.pdf
   myTheme <- custom.theme(symbol=c('red', 'blue',
