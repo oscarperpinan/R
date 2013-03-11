@@ -15,12 +15,12 @@
 #+XSLT:
 #+startup: beamer
 #+LaTeX_CLASS: beamer
-#+BEAMER_FRAME_LEVEL: 2
+#+BEAMER_FRAME_LEVEL: 3
 #+LATEX_CLASS_OPTIONS: [xcolor={usenames,svgnames,dvipsnames}]
 #+LATEX_HEADER: \AtBeginSection[]{\begin{frame}<beamer>\frametitle{Contenidos}\tableofcontents[currentsection]\end{frame}}
 #+LATEX_HEADER: \lstset{keywordstyle=\color{blue}, commentstyle=\color{gray!90}, basicstyle=\ttfamily\footnotesize, columns=fullflexible, breaklines=false,linewidth=\textwidth, backgroundcolor=\color{gray!23}, basewidth={0.5em,0.4em}, literate={á}{{\'a}}1 {ñ}{{\~n}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {º}{{\textordmasculine}}1}
 #+LATEX_HEADER: \usepackage{mathpazo}
-#+LATEX_HEADER: \setbeamercovered{transparent}
+#+LATEX_HEADER: \usecolortheme{rose}  
 #+LATEX_HEADER: \usefonttheme{serif} 
 #+LATEX_HEADER: \usetheme{Goettingen}
 #+LATEX_HEADER: \hypersetup{colorlinks=true, linkcolor=Blue, urlcolor=Blue}
@@ -33,8 +33,10 @@
 #+LATEX_HEADER: \DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\tiny, formatcom = {\color{black!70}}}
 
 
-* OOP
+* OOP en R
 ** Programación Orientada a Objetos (OOP)
+
+*** Programación Orientada a Objetos (OOP)
 - Características básicas del paradigma OOP:
   - Los objectos encapsulan información y control de su comportamiento (/objects/).
   - Las clases describen propiedades de un grupo de objetos (/class/).
@@ -44,10 +46,23 @@
 - En =R= coexisten dos implementaciones de la OOP:
   - =S3=: elaboración informal con enfasis en las funciones genéricas y el polimorfismo.
   - =S4=: elaboración formal de clases y métodos.
+*** OOP en R
+**** Referencias 						    :B_block:
+     :PROPERTIES:
+     :BEAMER_env: block
+     :END:
+#+BEGIN_CENTER
+- [[http://books.google.es/books/about/Software_for_Data_Analysis.html][Software for Data Analysis]] 
+- [[http://developer.r-project.org/howMethodsWork.pdf][How Methods Work]]
+- [[http://www.stat.auckland.ac.nz/S-Workshop/Gentleman/S4Objects.pdf][S4 classes in 15 pages]]
+- [[http://bioconductor.org/help/publications/books/r-programming-for-bioinformatics/][R Programming for Bioinformatics ]]
+- [[http://bioconductor.org/help/course-materials/2010/AdvancedR/S4InBioconductor.pdf][S4 System Development in Bioconductor]]
+#+END_CENTER
 
 * Clases y métodos S3
 
 ** Clases
+*** Clases
 - Los objetos básicos en =R= tienen una clase implícita definida en =S3=. Es accesible con =class=.
 #+begin_src R
   x <- rnorm(10)
@@ -62,7 +77,7 @@ is.object(x)
 #+end_src
 
 
-** Clases
+*** Clases
 - Se puede redefinir la clase de un objecto =S3= con =class=
 #+begin_src R
   class(x) <- 'myNumeric'
@@ -80,31 +95,31 @@ is.object(x)
   mode(x)
 #+end_src
 
-** Definición de Clases 
+*** Definición de Clases 
 #+begin_src R
   task1 <- list(what='Write an email',
                 when=as.Date('2013-01-01'),
                 priority='Low')
-  class(task1) <- 'myTask'
+  class(task1) <- 'task3'
   task1
 #+end_src
 #+begin_src R
   task2 <- list(what='Find and fix bugs',
                 when=as.Date('2013-03-15'),
                 priority='High')
-  class(task2) <- 'myTask'
+  class(task2) <- 'task3'
 #+end_src
 
-** Definición de clases
+*** Definición de Clases
 #+begin_src R
   myToDo <- list(task1, task2)
-  class(myToDo) <- c('ToDo')
+  class(myToDo) <- c('ToDo3')
   myToDo
 #+end_src
 
 # ** Herencia entre clases
 # #+begin_src R
-#   inherits(myToDo, 'myTask')
+#   inherits(myToDo, 'task3')
 # #+end_src
 
 # - Atención: cuando un vector se transforma en matriz no hereda =numeric=:
@@ -114,9 +129,11 @@ is.object(x)
 #   inherits(x, 'numeric')
 # #+end_src
 
-** Métodos con =S3=: =NextMethod=
+** Métodos con =S3=
+
+*** Métodos con =S3=: =NextMethod=
 #+begin_src R
-  print.myTask <- function(x, ...){
+  print.task3 <- function(x, ...){
     cat('Task:\n')
     NextMethod(x, ...)
   }
@@ -125,9 +142,9 @@ is.object(x)
   print(task1)
 #+end_src
 
-** Métodos con =S3=: =NextMethod=
+*** Métodos con =S3=: =NextMethod=
 #+begin_src R
-  print.ToDo <- function(x, ...){
+  print.ToDo3 <- function(x, ...){
     cat('This is my ToDo list:\n')
     NextMethod(x, ...)
     cat('--------------------\n')
@@ -138,10 +155,10 @@ print(myToDo)
 #+end_src
 
 
-** Métodos con =S3=
+*** Definición de un método =S3= para =ToDo3=
 
 #+begin_src R
-  print.ToDo <- function(x, ...){
+  print.ToDo3 <- function(x, ...){
     cat('This is my ToDo list:\n')
     for (i in seq_along(x)){
       cat('Task no.', i,':\n')
@@ -157,9 +174,9 @@ print(myToDo)
   print(myToDo)
 #+end_src
 
-** Métodos con =S3=
+*** Definición de un método =S3= para =task3=
 #+begin_src R
-  print.myTask <- function(x, number,...){
+  print.task3 <- function(x, number,...){
     if (!missing(number)) cat('Task no.', number,':\n')
     cat('What: ', x$what,
         '- When:', as.character(x$when),
@@ -174,9 +191,10 @@ print(task1)
 #+begin_src R
 print(myToDo[[2]])
 #+end_src
-** Métodos con =S3=
+
+*** Redefinición del método para =ToDo3=
 #+begin_src R
-  print.ToDo <- function(x, ...){
+  print.ToDo3 <- function(x, ...){
     cat('This is my ToDo list:\n')
     for (i in seq_along(x)) print(x[[i]], i)
       cat('--------------------\n')
@@ -186,7 +204,8 @@ print(myToDo[[2]])
 print(myToDo)
 #+end_src
 
-** Métodos genéricos con =S3=: =UseMethod=
+** Métodos genéricos con =S3=
+*** Métodos genéricos con =S3=: =UseMethod=
 #+begin_src R
   myFun <- function(x, ...)UseMethod('myFun')
   myFun.default <- function(x, ...){
@@ -202,7 +221,7 @@ myFun(x)
 myFun(task1)
 #+end_src
 
-** Métodos genéricos con =S3=: =UseMethod=
+*** =methods=
 - Con =methods= podemos averiguar los métodos que hay definidos para una función particular:
 #+begin_src R
   methods('myFun')
@@ -211,9 +230,9 @@ myFun(task1)
   head(methods('print'))
 #+end_src
 
-** Métodos genéricos con =S3=: =UseMethod=
+*** Definición del método para =task3= con =UseMethod=
 #+begin_src R
-  myFun.myTask <- function(x, number,...){
+  myFun.task3 <- function(x, number,...){
     if (!missing(number)) cat('Task no.', number,':\n')
     cat('What: ', x$what,
         '- When:', as.character(x$when),
@@ -228,12 +247,13 @@ myFun(task1)
 methods(myFun)
 #+end_src
 #+begin_src R
-  methods(class='myTask')
+  methods(class='task3')
 #+end_src
 
 * Clases y métodos S4
 
 ** Clases en =S4=
+*** Clases en =S4=
 - Se construyen con =setClass=, que acepta varios argumentos
   - =Class=: nombre de la clase.
   - =representation=: una lista con las clases de cada componente. Los nombres de este vector corresponden a los nombres de los componentes (=slot=).
@@ -242,7 +262,8 @@ methods(myFun)
   - =validity=: a función que comprueba la validez de la clase creada con la información suministrada.
 - Una vez que la clase ha sido definida con =setClass=, se puede crear
   un objeto nuevo con =new=.
-** Definición de una nueva clase
+
+*** Definición de una nueva clase
 #+begin_src R
   setClass('task',
            representation=list(what='character',
@@ -251,7 +272,7 @@ methods(myFun)
            )
 #+end_src
 #+begin_src R
-  getClass(task)
+  getClass('task')
 #+end_src
 #+begin_src R
   getSlots('task')
@@ -260,7 +281,7 @@ methods(myFun)
   slotNames('task')
 #+end_src
 
-** Creación de un objeto con la clase definida
+*** Creación de un objeto con la clase definida: =new=
 
 #+begin_src R
   task1 <- new('task', what='Find and fix bugs',
@@ -271,30 +292,36 @@ methods(myFun)
 task1
 #+end_src
 
-** Creación de un objeto con la clase definida
-
+*** Funciones para crear objetos
+- Es habitual definir funciones que construyen y modifican objetos
+  para evitar el uso de =new=:
 #+begin_src R
   createTask <- function(what, when, priority){
     new('task', what=what, when=when, priority=priority)
     }  
 #+end_src
 #+begin_src R
-  task2 <-createTask(what='Find and fix bugs',
-                  when=as.Date('2013-03-15'),
-                  priority='High')
+  task2 <-createTask(what='Write an email',
+                  when=as.Date('2013-01-01'),
+                  priority='Low')
+  
 #+end_src
 
 #+begin_src R
   createTask('Oops', 'Hoy', 3)
 #+end_src
 
-** Clases en =S4=
+*** Definición de la clase =ToDo=
 #+begin_src R
   setClass('ToDo',
            representation=list(tasks='list')
            )
 #+end_src
+#+begin_src R
+  myList <- new('ToDo', tasks=list(task1, task2))
+#+end_src   
 
+*** Funciones para crear objetos
 #+begin_src R
   createToDo <- function(){
     new('ToDo')
@@ -309,12 +336,134 @@ task1
     }
 #+end_src
 
-** validez
+*** Problema con los slots definidos como =list=
+- Dado que el slot =tasks= es una =list=, podemos añadir cualquier
+  cosa. 
 #+begin_src R
-function (object) 
-{
-    if (any(sapply(object@Lines, function(x) !is(x, "Line")))) 
-        stop("not a list of Line objects")
+  myListOops <- new('ToDo',
+                    tasks=list(t1='Tarea1',
+                      task1, task2))
+#+end_src
+
+*** Validación
+- Para obligar a que sus elementos sean de clase =task= debemos añadir
+  una función de validación.
+#+begin_src R
+  valida <- function (object) {
+    if (any(sapply(object@tasks, function(x) !is(x, "task")))) 
+      stop("not a list of task objects")
     return(TRUE)
-}
+  }
+  
+  setClass('ToDo',
+           representation=list(tasks='list'),
+           validity=valida
+           )
+#+end_src
+
+#+begin_src R
+  myListOops <- new('ToDo',
+                    tasks=list(t1='Tarea1',
+                      task1, task2))
+#+end_src
+
+
+** Métodos en =S4=
+
+*** Métodos en =S4=
+- Normalmente se definen con =setMethod=.
+- Hay que definir:
+  - la =signature= (clase de los argumentos para /esta/ definición del
+    método)
+  - la función a ejecutar (=definition=).
+- Es necesario que exista un método genérico ya definido. Si no
+  existe, se define con =setGeneric=.
+#+begin_src R
+  isGeneric('print')
+#+end_src
+
+- Si ya existe un método genérico, la función =definition= debe tener
+  todos los argumentos de la función genérica y en el mismo orden.
+#+begin_src R
+getGeneric('print')
+#+end_src
+
+*** Definición de un método =print= para =task=
+#+begin_src R
+  setMethod('print', signature='task',
+            definition=function(x,...){
+              cat('What: ', x@what,
+                  '- When:', as.character(x@when),
+                  '- Priority:', x@priority,
+                  '\n')
+            })
+  
+#+end_src
+
+
+#+begin_src R
+  print(task1)
+#+end_src
+
+*** Definición de un método =print= para =task=
+#+begin_src R
+  setMethod('print', signature='ToDo',
+              definition=function(x,...){
+                cat('This is my ToDo list:\n')
+                tasksList <- x@tasks
+                for (i in seq_along(tasksList)) {
+                  cat('No.', i, ':')
+                  print(tasksList[[i]])
+                  }
+                cat('--------------------\n')
+              })
+  
+#+end_src
+
+#+begin_src R
+  print(myList)
+#+end_src
+
+** Clases =S3= con clases y métodos =S4=
+
+*** Clases =S3= con clases y métodos =S4=
+- Para usar objetos de clase =S3= en =signatures= de métodos =S4= o
+  como contenido de =slots= de una clase =S4= hay que registrarlos con
+  =setOldClass=:
+#+begin_src R
+setOldClass('lm')
+#+end_src
+
+- Definimos un método genérico para =xyplot=
+#+begin_src R
+setGeneric('xyplot')
+#+end_src
+- Definimos un método para la clase =lm= usando =xyplot=.
+#+begin_src R
+  setMethod('xyplot',
+            signature=c(x='lm', data='missing'),
+            definition=function(x, data,
+              ...){
+              fitted <- fitted(x)
+              residuals <- residuals(x)
+              xyplot(residuals ~ fitted,...)
+              })
+  
+#+end_src
+
+*** Ejemplo con =lm= y =xyplot=
+- Recuperamos la regresión que empleamos en el apartado de Estadística:
+#+begin_src R
+lmFertEdu <- lm(Fertility ~ Education, data = swiss)
+#+end_src
+
+#+ATTR_LaTeX: width=0.4\textwidth
+#+begin_src R :exports both :results output graphics :file xyplotS4.pdf
+xyplot(lmFertEdu, col='red', pch=19, type=c('p', 'g'))
+#+end_src
+
+#+begin_src R :exports none :tangle no
+  remove(print.task3, print.ToDo3)
+  removeMethod(print, 'task')
+  removeMethod(print, 'ToDo')
 #+end_src
