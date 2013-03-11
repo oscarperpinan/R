@@ -1,4 +1,4 @@
-% Created 2013-03-11 lun 00:46
+% Created 2013-03-11 lun 13:58
 \documentclass[xcolor={usenames,svgnames,dvipsnames}]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -25,7 +25,7 @@
 \usetheme{Goettingen}
 \hypersetup{colorlinks=true, linkcolor=Blue, urlcolor=Blue}
 \usepackage{fancyvrb}
-\DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\footnotesize, formatcom = {\color{black!70}}}
+\DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\tiny, formatcom = {\color{black!70}}}
 \providecommand{\alert}[1]{\textbf{#1}}
 
 \title{Crear paquetes en R}
@@ -45,10 +45,9 @@
 \label{sec-1}
 \begin{frame}
 \frametitle{Definiciones previas}
+\framesubtitle{\href{http://cran.r-project.org/doc/contrib/Leisch-CreatingPackages.pdf}{Creating R Packages: a tutorial}}
 \label{sec-1-1}
 
-
-Definiciones extraídas de \href{http://cran.r-project.org/doc/contrib/Leisch-CreatingPackages.pdf}{Creating R Packages: a tutorial}
 \begin{itemize}
 \item \textbf{Package}: An extension of the R base system with code, data and
   documentation in standardized format.
@@ -105,14 +104,14 @@ Extraído de \href{http://arxiv.org/abs/1210.0530}{Best Practices for Scientific
 \end{itemize}
 \end{frame}
 \begin{frame}
-\frametitle{Fuentes de Información}
-\label{sec-1-4}
-
+\begin{block}{Referencias}
+\label{sec-1-4-1}
 
 \begin{itemize}
 \item \href{http://cran.r-project.org/doc/manuals/r-release/R-exts.html}{Writing R Extensions}
 \item \href{http://cran.r-project.org/doc/contrib/Leisch-CreatingPackages.pdf}{Creating R Packages: a tutorial}
 \end{itemize}
+\end{block}
 \end{frame}
 \section{Crear un paquete en R}
 \label{sec-2}
@@ -280,10 +279,10 @@ importMethodsFrom(package, ...)
 \item Es aconsejable seguir estas orientaciones: \href{http://developer.r-project.org/Rds.html}{Guidelines for Rd files}
 \item Para generar el esqueleto de un fichero Rd es aconsejable usar:
 \begin{itemize}
-\item \texttt{prompt}: \href{http://cran.r-project.org/doc/manuals/r-release/R-exts.html#Documenting-functions}{genérica}
-\item \texttt{promptClass} y \texttt{promptMethods}: \href{http://cran.r-project.org/doc/manuals/r-release/R-exts.html#Documenting-S4-classes-and-methods}{clases y métodos}.
-\item \texttt{promptPackage}: \href{http://cran.r-project.org/doc/manuals/r-release/R-exts.html#Documenting-packages}{paquete}
-\item \texttt{promptData}: \href{http://cran.r-project.org/doc/manuals/r-release/R-exts.html#Documenting-data-sets}{datos}
+\item \texttt{prompt}: \href{http://cran.r-project.org/doc/manuals/r-release/R-exts.html\#Documenting-functions}{genérica}
+\item \texttt{promptClass} y \texttt{promptMethods}: \href{http://cran.r-project.org/doc/manuals/r-release/R-exts.html\#Documenting-S4-classes-and-methods}{clases y métodos}.
+\item \texttt{promptPackage}: \href{http://cran.r-project.org/doc/manuals/r-release/R-exts.html\#Documenting-packages}{paquete}
+\item \texttt{promptData}: \href{http://cran.r-project.org/doc/manuals/r-release/R-exts.html\#Documenting-data-sets}{datos}
 \end{itemize}
 \item Todos los comandos disponibles están en el documento \href{http://developer.r-project.org/parseRd.pdf}{Parsing Rd files}.
 \end{itemize}
@@ -444,7 +443,7 @@ install.packages(myPackage.tar.gz, type='source')
 \item Es imprescindible haber comprobado el fichero con \texttt{R CMD check     -{}-as-cran} antes de subirlo al servidor FTP. El resultado de
     esta comprobación \textbf{no} debe contener errores ni advertencias
     (\texttt{warnings}).
-\item Más detalle en el apartado Submission de las \href{http://cran.r-project.org/web/packages/policies.html}{condiciones de CRAN} y en el manual \href{http://cran.r-project.org/doc/manuals/R-exts.html#Submitting-a-package-to-CRAN}{R Extensions}.
+\item Más detalle en el apartado Submission de las \href{http://cran.r-project.org/web/packages/policies.html}{condiciones de CRAN} y en el manual \href{http://cran.r-project.org/doc/manuals/R-exts.html\#Submitting-a-package-to-CRAN}{R Extensions}.
 \end{itemize}
 \end{itemize}
 \end{frame}

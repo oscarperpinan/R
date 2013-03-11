@@ -25,13 +25,11 @@
 #+LATEX_HEADER: \usetheme{Goettingen}
 #+LATEX_HEADER: \hypersetup{colorlinks=true, linkcolor=Blue, urlcolor=Blue}
 #+LATEX_HEADER: \usepackage{fancyvrb}
-#+LATEX_HEADER: \DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\footnotesize, formatcom = {\color{black!70}}}
+#+LATEX_HEADER: \DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\tiny, formatcom = {\color{black!70}}}
 
 * Introducción
 
-** Definiciones previas
-
-Definiciones extraídas de [[http://cran.r-project.org/doc/contrib/Leisch-CreatingPackages.pdf][Creating R Packages: a tutorial]]
+** Definiciones previas \\ [[http://cran.r-project.org/doc/contrib/Leisch-CreatingPackages.pdf][Creating R Packages: a tutorial]]
 - *Package*: An extension of the R base system with code, data and
   documentation in standardized format.
 - *Library*: A directory containing installed packages.
@@ -75,8 +73,11 @@ Extraído de [[http://arxiv.org/abs/1210.0530][Best Practices for Scientific Com
 - Document design and purpose, not mechanics
 - Collaborate
 
-** Fuentes de Información
-
+** 
+*** Referencias							    :B_block:
+    :PROPERTIES:
+    :BEAMER_env: block
+    :END:
 - [[http://cran.r-project.org/doc/manuals/r-release/R-exts.html][Writing R Extensions]]
 - [[http://cran.r-project.org/doc/contrib/Leisch-CreatingPackages.pdf][Creating R Packages: a tutorial]]
 
@@ -174,10 +175,10 @@ importMethodsFrom(package, ...)
   formato “R documentation” (Rd), un lenguaje similar a LaTeX.
 - Es aconsejable seguir estas orientaciones: [[http://developer.r-project.org/Rds.html][Guidelines for Rd files]]
 - Para generar el esqueleto de un fichero Rd es aconsejable usar:
-  - =prompt=: [[http://cran.r-project.org/doc/manuals/r-release/R-exts.html#Documenting-functions][genérica]]
-  - =promptClass= y =promptMethods=: [[http://cran.r-project.org/doc/manuals/r-release/R-exts.html#Documenting-S4-classes-and-methods][clases y métodos]].
-  - =promptPackage=: [[http://cran.r-project.org/doc/manuals/r-release/R-exts.html#Documenting-packages][paquete]]
-  - =promptData=: [[http://cran.r-project.org/doc/manuals/r-release/R-exts.html#Documenting-data-sets][datos]]
+  - =prompt=: [[http://cran.r-project.org/doc/manuals/r-release/R-exts.html\#Documenting-functions][genérica]]
+  - =promptClass= y =promptMethods=: [[http://cran.r-project.org/doc/manuals/r-release/R-exts.html\#Documenting-S4-classes-and-methods][clases y métodos]].
+  - =promptPackage=: [[http://cran.r-project.org/doc/manuals/r-release/R-exts.html\#Documenting-packages][paquete]]
+  - =promptData=: [[http://cran.r-project.org/doc/manuals/r-release/R-exts.html\#Documenting-data-sets][datos]]
 - Todos los comandos disponibles están en el documento [[http://developer.r-project.org/parseRd.pdf][Parsing Rd
   files]].
 
@@ -291,7 +292,7 @@ install.packages(myPackage.tar.gz, type='source')
     esta comprobación *no* debe contener errores ni advertencias
     (=warnings=).
   - Más detalle en el apartado Submission de las [[http://cran.r-project.org/web/packages/policies.html][condiciones de
-    CRAN]] y en el manual [[http://cran.r-project.org/doc/manuals/R-exts.html#Submitting-a-package-to-CRAN][R Extensions]].
+    CRAN]] y en el manual [[http://cran.r-project.org/doc/manuals/R-exts.html\#Submitting-a-package-to-CRAN][R Extensions]].
 
 ** Repositorios
 
