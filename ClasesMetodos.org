@@ -1,7 +1,7 @@
 #+TITLE:     Clases y Métodos
 #+AUTHOR:    Oscar Perpiñán Lamigueiro
 #+EMAIL:     oscar.perpinan@gmail.com
-#+DATE:      19 de Febrero de 2013
+#+DATE:      Marzo de 2013
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  es
@@ -15,10 +15,10 @@
 #+XSLT:
 #+startup: beamer
 #+LaTeX_CLASS: beamer
-#+BEAMER_FRAME_LEVEL: 3
+#+BEAMER_FRAME_LEVEL: 2
 #+LATEX_CLASS_OPTIONS: [xcolor={usenames,svgnames,dvipsnames}]
-#+LATEX_HEADER: \AtBeginSubsection[]{\begin{frame}[plain]\tableofcontents[currentsubsection]\end{frame}}
-#+LATEX_HEADER: \lstset{commentstyle=\color{gray!90}, basicstyle=\ttfamily\small, columns=fullflexible, breaklines=true,linewidth=\textwidth, backgroundcolor=\color{gray!23}, basewidth={0.5em,0.4em}, literate={á}{{\'a}}1 {ñ}{{\~n}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {º}{{\textordmasculine}}1}
+#+LATEX_HEADER: \AtBeginSection[]{\begin{frame}<beamer>\frametitle{Contenidos}\tableofcontents[currentsection]\end{frame}}
+#+LATEX_HEADER: \lstset{keywordstyle=\color{blue}, commentstyle=\color{gray!90}, basicstyle=\ttfamily\footnotesize, columns=fullflexible, breaklines=false,linewidth=\textwidth, backgroundcolor=\color{gray!23}, basewidth={0.5em,0.4em}, literate={á}{{\'a}}1 {ñ}{{\~n}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {º}{{\textordmasculine}}1}
 #+LATEX_HEADER: \usepackage{mathpazo}
 #+LATEX_HEADER: \setbeamercovered{transparent}
 #+LATEX_HEADER: \usefonttheme{serif} 
@@ -26,7 +26,295 @@
 #+LATEX_HEADER: \hypersetup{colorlinks=true, linkcolor=Blue, urlcolor=Blue}
 #+PROPERTY:  tangle yes
 #+PROPERTY:  comments org
+#+PROPERTY: results output
+#+PROPERTY: session *R*
+#+PROPERTY: exports both
+#+LATEX_HEADER: \usepackage{fancyvrb}
+#+LATEX_HEADER: \DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\tiny, formatcom = {\color{black!70}}}
+
+
+* OOP
+** Programación Orientada a Objetos (OOP)
+- Características básicas del paradigma OOP:
+  - Los objectos encapsulan información y control de su comportamiento (/objects/).
+  - Las clases describen propiedades de un grupo de objetos (/class/).
+  - Se pueden definir clases a partir de otras (/inheritance/).
+  - Una función genérica se comporta de forma diferente atendiendo a la
+    clase de uno (o varios) de sus argumentos (/polymorphism/).
+- En =R= coexisten dos implementaciones de la OOP:
+  - =S3=: elaboración informal con enfasis en las funciones genéricas y el polimorfismo.
+  - =S4=: elaboración formal de clases y métodos.
 
 * Clases y métodos S3
 
+** Clases
+- Los objetos básicos en =R= tienen una clase implícita definida en =S3=. Es accesible con =class=.
+#+begin_src R
+  x <- rnorm(10)
+  class(x)
+#+end_src
+- Pero no tienen atributo ni se consideran formalmente objetos:
+#+begin_src R
+attr(x, 'class')
+#+end_src
+#+begin_src R
+is.object(x)
+#+end_src
+
+
+** Clases
+- Se puede redefinir la clase de un objecto =S3= con =class=
+#+begin_src R
+  class(x) <- 'myNumeric'
+  class(x)
+#+end_src
+- Ahora sí es un objeto y su atributo está definido:
+#+begin_src R
+attr(x, 'class')
+#+end_src
+#+begin_src R
+is.object(x)
+#+end_src
+- Sin embargo, su modo de almacenamiento (clase intrínseca) no cambia:
+#+begin_src R
+  mode(x)
+#+end_src
+
+** Definición de Clases 
+#+begin_src R
+  task1 <- list(what='Write an email',
+                when=as.Date('2013-01-01'),
+                priority='Low')
+  class(task1) <- 'myTask'
+  task1
+#+end_src
+#+begin_src R
+  task2 <- list(what='Find and fix bugs',
+                when=as.Date('2013-03-15'),
+                priority='High')
+  class(task2) <- 'myTask'
+#+end_src
+
+** Definición de clases
+#+begin_src R
+  myToDo <- list(task1, task2)
+  class(myToDo) <- c('ToDo')
+  myToDo
+#+end_src
+
+# ** Herencia entre clases
+# #+begin_src R
+#   inherits(myToDo, 'myTask')
+# #+end_src
+
+# - Atención: cuando un vector se transforma en matriz no hereda =numeric=:
+# #+begin_src R
+#   x <- rnorm(10)
+#   x <- matrix(x, nrow=2)
+#   inherits(x, 'numeric')
+# #+end_src
+
+** Métodos con =S3=: =NextMethod=
+#+begin_src R
+  print.myTask <- function(x, ...){
+    cat('Task:\n')
+    NextMethod(x, ...)
+  }
+#+end_src
+#+begin_src R
+  print(task1)
+#+end_src
+
+** Métodos con =S3=: =NextMethod=
+#+begin_src R
+  print.ToDo <- function(x, ...){
+    cat('This is my ToDo list:\n')
+    NextMethod(x, ...)
+    cat('--------------------\n')
+  }
+#+end_src
+#+begin_src R
+print(myToDo)
+#+end_src
+
+
+** Métodos con =S3=
+
+#+begin_src R
+  print.ToDo <- function(x, ...){
+    cat('This is my ToDo list:\n')
+    for (i in seq_along(x)){
+      cat('Task no.', i,':\n')
+      cat('What: ', x[[i]]$what,
+          '- When:', as.character(x[[i]]$when),
+          '- Priority:', x[[i]]$priority,
+          '\n')
+      }
+    cat('--------------------\n')
+  }
+#+end_src
+#+begin_src R
+  print(myToDo)
+#+end_src
+
+** Métodos con =S3=
+#+begin_src R
+  print.myTask <- function(x, number,...){
+    if (!missing(number)) cat('Task no.', number,':\n')
+    cat('What: ', x$what,
+        '- When:', as.character(x$when),
+        '- Priority:', x$priority,
+        '\n')
+  }
+ 
+#+end_src
+#+begin_src R
+print(task1)
+#+end_src
+#+begin_src R
+print(myToDo[[2]])
+#+end_src
+** Métodos con =S3=
+#+begin_src R
+  print.ToDo <- function(x, ...){
+    cat('This is my ToDo list:\n')
+    for (i in seq_along(x)) print(x[[i]], i)
+      cat('--------------------\n')
+  }
+#+end_src
+#+begin_src R
+print(myToDo)
+#+end_src
+
+** Métodos genéricos con =S3=: =UseMethod=
+#+begin_src R
+  myFun <- function(x, ...)UseMethod('myFun')
+  myFun.default <- function(x, ...){
+    cat('Funcion genérica\n')
+    print(x)
+    }
+#+end_src
+
+#+begin_src R
+myFun(x)
+#+end_src
+#+begin_src R
+myFun(task1)
+#+end_src
+
+** Métodos genéricos con =S3=: =UseMethod=
+- Con =methods= podemos averiguar los métodos que hay definidos para una función particular:
+#+begin_src R
+  methods('myFun')
+#+end_src
+#+begin_src R
+  head(methods('print'))
+#+end_src
+
+** Métodos genéricos con =S3=: =UseMethod=
+#+begin_src R
+  myFun.myTask <- function(x, number,...){
+    if (!missing(number)) cat('Task no.', number,':\n')
+    cat('What: ', x$what,
+        '- When:', as.character(x$when),
+        '- Priority:', x$priority,
+        '\n')
+  }
+#+end_src
+#+begin_src R
+myFun(task1)
+#+end_src
+#+begin_src R
+methods(myFun)
+#+end_src
+#+begin_src R
+  methods(class='myTask')
+#+end_src
+
 * Clases y métodos S4
+
+** Clases en =S4=
+- Se construyen con =setClass=, que acepta varios argumentos
+  - =Class=: nombre de la clase.
+  - =representation=: una lista con las clases de cada componente. Los nombres de este vector corresponden a los nombres de los componentes (=slot=).
+  - =contains=: un vector con las clases que esta nueva clase extiende.
+  - =prototype=: un objeto proporcionando el contenido por defecto para los componentes definidos en =representation=.
+  - =validity=: a función que comprueba la validez de la clase creada con la información suministrada.
+- Una vez que la clase ha sido definida con =setClass=, se puede crear
+  un objeto nuevo con =new=.
+** Definición de una nueva clase
+#+begin_src R
+  setClass('task',
+           representation=list(what='character',
+             when='Date',
+             priority='character')
+           )
+#+end_src
+#+begin_src R
+  getClass(task)
+#+end_src
+#+begin_src R
+  getSlots('task')
+#+end_src
+#+begin_src R
+  slotNames('task')
+#+end_src
+
+** Creación de un objeto con la clase definida
+
+#+begin_src R
+  task1 <- new('task', what='Find and fix bugs',
+                  when=as.Date('2013-03-15'),
+                  priority='High')
+#+end_src
+#+begin_src R
+task1
+#+end_src
+
+** Creación de un objeto con la clase definida
+
+#+begin_src R
+  createTask <- function(what, when, priority){
+    new('task', what=what, when=when, priority=priority)
+    }  
+#+end_src
+#+begin_src R
+  task2 <-createTask(what='Find and fix bugs',
+                  when=as.Date('2013-03-15'),
+                  priority='High')
+#+end_src
+
+#+begin_src R
+  createTask('Oops', 'Hoy', 3)
+#+end_src
+
+** Clases en =S4=
+#+begin_src R
+  setClass('ToDo',
+           representation=list(tasks='list')
+           )
+#+end_src
+
+#+begin_src R
+  createToDo <- function(){
+    new('ToDo')
+    }
+#+end_src
+
+#+begin_src R
+  addTask <- function(object, task){
+    stopifnot(is(task,'task'))
+    object@tasks <- c(object@tasks, task)
+    object
+    }
+#+end_src
+
+** validez
+#+begin_src R
+function (object) 
+{
+    if (any(sapply(object@Lines, function(x) !is(x, "Line")))) 
+        stop("not a list of Line objects")
+    return(TRUE)
+}
+#+end_src
