@@ -1,0 +1,35 @@
+#+AUTHOR:    Oscar Perpiñán Lamigueiro
+#+EMAIL:     oscar.perpinan@gmail.com
+#+TITLE:     Introducción a R
+#+LANGUAGE:  es
+#+OPTIONS:   H:3 num:nil toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t TeX:t LaTeX:nil skip:nil d:t tags:not-in-toc
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+LINK_UP:
+#+LINK_HOME:
+#+STYLE:    <link rel="stylesheet" type="text/css" href="stylesheets/stylesMain.css" />
+
+#+BEGIN_CENTER
+Este proyecto está desarrollado por [[http://procomun.wordpress.com/][Oscar Perpiñán]] empleando [[http://orgmode.org/][org-mode]] y [[http://ess.r-project.org/][ESS]] sobre [[http://www.gnu.org/software/emacs/][Emacs]].
+Puedes [[https://github.com/oscarperpinan/intro][visitar el proyecto en GitHub]] y descargarlo completo en un [[https://github.com/oscarperpinan/intro/archive/master.zip][ZIP]].
+
+#+END_CENTER
+
+* Introducción
+En este apartado agrupo el material apropiado para trabajar con R desde el rol de usuario.
+- Introducción: [[https://github.com/oscarperpinan/intro/blob/master/intro.pdf?raw%3Dtrue][pdf]], [[https://github.com/oscarperpinan/intro/blob/master/intro.R][código]].
+- Manejo de datos: [[https://github.com/oscarperpinan/intro/blob/master/datos.pdf?raw%3Dtrue][pdf]], [[https://github.com/oscarperpinan/intro/blob/master/datos.R][código]].
+- Gráficos: [[https://github.com/oscarperpinan/intro/blob/master/graficos.pdf?raw%3Dtrue][pdf]], [[https://github.com/oscarperpinan/intro/blob/master/graficos.R][código]].
+- Estadística: [[https://github.com/oscarperpinan/intro/blob/master/estadistica.pdf?raw%3Dtrue][pdf]], [[https://github.com/oscarperpinan/intro/blob/master/estadistica.R][código]].
+
+* Avanzado
+En este apartado agrupo el material apropiado para trabajar con R desde el rol de desarrollador.
+- Funciones: [[https://github.com/oscarperpinan/intro/blob/master/Funciones.pdf?raw%3Dtrue][pdf]], [[https://github.com/oscarperpinan/intro/blob/master/Funciones.R][código]].
+- Clases y métodos: [[https://github.com/oscarperpinan/intro/blob/master/ClasesMetodos.pdf?raw%3Dtrue][pdf]], [[https://github.com/oscarperpinan/intro/blob/master/ClasesMetodos.R][código]].
+- Paquetes: [[https://github.com/oscarperpinan/intro/blob/master/Paquetes.pdf?raw%3Dtrue][pdf]].
+
+* Miscelánea
+En este apartado agrupo material sobre series temporales y datos espaciales:
+- Series temporales: [[https://github.com/oscarperpinan/intro/blob/master/zoo.pdf?raw%3Dtrue][pdf]], [[https://github.com/oscarperpinan/intro/blob/master/zoo.R][código]].
+- Datos espaciales: [[https://github.com/oscarperpinan/intro/blob/master/raster.pdf?raw%3Dtrue][pdf]], [[https://github.com/oscarperpinan/intro/blob/master/raster.R][código]].
+
+------
