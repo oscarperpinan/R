@@ -30,10 +30,6 @@
 #+LATEX_HEADER: \usepackage{fancyvrb}
 #+LATEX_HEADER: \DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\tiny, formatcom = {\color{black!70}}}
 
-#+begin_src R :exports none
-  setwd('~/R/intro')
-#+end_src
-
 * Conjunto de datos
 
 ** Conjunto de datos: swiss
