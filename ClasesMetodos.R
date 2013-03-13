@@ -182,19 +182,24 @@ setClass('ToDo',
          representation=list(tasks='list')
          )
 
-myList <- new('ToDo', tasks=list(task1, task2))
+myList <- new('ToDo',
+              tasks=list(t1=task1, t2=task2))
 
-## Funciones para crear objetos
+## Acceso a los slots
+## - Para extraer información de los /slots/ hay que emplear =@= (a
+##   diferencia de =$= en listas y =data.frame=)
 
-createToDo <- function(){
-  new('ToDo')
-  }
+myList@tasks
 
-addTask <- function(object, task){
-  stopifnot(is(task,'task'))
-  object@tasks <- c(object@tasks, task)
-  object
-  }
+## Acceso a los slots
+## - El /slot/ =tasks= es una lista: empleamos =$= para acceder a sus elementos
+
+myList@tasks$t1
+
+## - Cada elemento de =tasks= es un objeto de clase =task=: empleamos
+##   =@= para extraer sus /slots/.
+
+myList@tasks$t1@what
 
 ## Problema con los slots definidos como =list=
 ## - Dado que el slot =tasks= es una =list=, podemos añadir cualquier
@@ -223,17 +228,26 @@ myListOops <- new('ToDo',
                   tasks=list(t1='Tarea1',
                     task1, task2))
 
-## Métodos en =S4=
-## - Normalmente se definen con =setMethod=.
-## - Hay que definir:
-##   - la =signature= (clase de los argumentos para /esta/ definición del
-##     método)
-##   - la función a ejecutar (=definition=).
-## - Es necesario que exista un método genérico ya definido. Si no
-##   existe, se define con =setGeneric=.
+## Funciones para crear objetos
+
+createToDo <- function(){
+  new('ToDo')
+  }
+
+addTask <- function(object, task){
+    ## La siguiente comprobación sólo es necesaria si la
+    ## definición de la clase *no* incorpora una función 
+    ## validity
+    stopifnot(is(task,'task'))
+    object@tasks <- c(object@tasks, task)
+    object
+  }
 
 isGeneric('print')
 
+setGeneric('print')
+
+## Métodos en =S4= \\ =setGeneric= y =getGeneric=
 ## - Si ya existe un método genérico, la función =definition= debe tener
 ##   todos los argumentos de la función genérica y en el mismo orden.
 
@@ -273,8 +287,12 @@ print(myList)
 
 setOldClass('lm')
 
+getClass('lm')
+
+## Ejemplo con =lm= y =xyplot=
 ## - Definimos un método genérico para =xyplot=
 
+library(lattice)
 setGeneric('xyplot')
 
 ## - Definimos un método para la clase =lm= usando =xyplot=.
@@ -295,6 +313,6 @@ lmFertEdu <- lm(Fertility ~ Education, data = swiss)
 
 ## #+ATTR_LaTeX: width=0.4\textwidth
 
-pdf(file="xyplotS4.pdf")
+pdf(file="/home/oscar/R/intro/xyplotS4.pdf")
 xyplot(lmFertEdu, col='red', pch=19, type=c('p', 'g'))
 dev.off()

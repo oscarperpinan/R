@@ -318,22 +318,25 @@ task1
            )
 #+end_src
 #+begin_src R
-  myList <- new('ToDo', tasks=list(task1, task2))
+  myList <- new('ToDo',
+                tasks=list(t1=task1, t2=task2))
 #+end_src   
 
-*** Funciones para crear objetos
-#+begin_src R
-  createToDo <- function(){
-    new('ToDo')
-    }
+*** Acceso a los slots
+- Para extraer información de los /slots/ hay que emplear =@= (a
+  diferencia de =$= en listas y =data.frame=)
+#+begin_src R 
+myList@tasks
 #+end_src
-
-#+begin_src R
-  addTask <- function(object, task){
-    stopifnot(is(task,'task'))
-    object@tasks <- c(object@tasks, task)
-    object
-    }
+*** Acceso a los slots
+- El /slot/ =tasks= es una lista: empleamos =$= para acceder a sus elementos
+#+begin_src R 
+myList@tasks$t1
+#+end_src
+- Cada elemento de =tasks= es un objeto de clase =task=: empleamos
+  =@= para extraer sus /slots/.
+#+begin_src R 
+myList@tasks$t1@what
 #+end_src
 
 *** Problema con los slots definidos como =list=
@@ -367,10 +370,29 @@ task1
                       task1, task2))
 #+end_src
 
+*** Funciones para crear objetos
+#+begin_src R
+  createToDo <- function(){
+    new('ToDo')
+    }
+#+end_src
+
+#+begin_src R
+  addTask <- function(object, task){
+      ## La siguiente comprobación sólo es necesaria si la
+      ## definición de la clase *no* incorpora una función 
+      ## validity
+      stopifnot(is(task,'task'))
+      object@tasks <- c(object@tasks, task)
+      object
+    }
+  
+#+end_src
+
 
 ** Métodos en =S4=
 
-*** Métodos en =S4=
+*** Métodos en =S4= \\ =setMethod=
 - Normalmente se definen con =setMethod=.
 - Hay que definir:
   - la =signature= (clase de los argumentos para /esta/ definición del
@@ -378,14 +400,24 @@ task1
   - la función a ejecutar (=definition=).
 - Es necesario que exista un método genérico ya definido. Si no
   existe, se define con =setGeneric=.
+#+begin_src R :tangle no :exports none
+  ## print NO tiene generico en R --vanilla
+  if (isGeneric('print')) removeGeneric('print')
+#+end_src
+
 #+begin_src R
   isGeneric('print')
 #+end_src
 
+#+begin_src R 
+  setGeneric('print')
+#+end_src
+
+*** Métodos en =S4= \\ =setGeneric= y =getGeneric=
 - Si ya existe un método genérico, la función =definition= debe tener
   todos los argumentos de la función genérica y en el mismo orden.
 #+begin_src R
-getGeneric('print')
+  getGeneric('print')
 #+end_src
 
 *** Definición de un método =print= para =task=
@@ -434,8 +466,14 @@ getGeneric('print')
 setOldClass('lm')
 #+end_src
 
+#+begin_src R 
+getClass('lm')
+#+end_src
+
+*** Ejemplo con =lm= y =xyplot=
 - Definimos un método genérico para =xyplot=
 #+begin_src R
+library(lattice)
 setGeneric('xyplot')
 #+end_src
 - Definimos un método para la clase =lm= usando =xyplot=.
@@ -450,20 +488,19 @@ setGeneric('xyplot')
               })
   
 #+end_src
-
 *** Ejemplo con =lm= y =xyplot=
 - Recuperamos la regresión que empleamos en el apartado de Estadística:
 #+begin_src R
-lmFertEdu <- lm(Fertility ~ Education, data = swiss)
+  lmFertEdu <- lm(Fertility ~ Education, data = swiss)
 #+end_src
 
 #+ATTR_LaTeX: width=0.4\textwidth
-#+begin_src R :exports both :results output graphics :file xyplotS4.pdf
-xyplot(lmFertEdu, col='red', pch=19, type=c('p', 'g'))
+#+begin_src R :exports both :results output graphics :file /home/oscar/R/intro/xyplotS4.pdf
+  xyplot(lmFertEdu, col='red', pch=19, type=c('p', 'g'))
 #+end_src
 
 #+begin_src R :exports none :tangle no
-  remove(print.task3, print.ToDo3)
+  remove(print.task3, print.ToDo3, myFun, myFun.default, myFun.task3)
   removeMethod(print, 'task')
   removeMethod(print, 'ToDo')
 #+end_src

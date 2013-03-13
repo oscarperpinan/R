@@ -1,4 +1,4 @@
-% Created 2013-03-11 lun 13:28
+% Created 2013-03-13 mié 19:54
 \documentclass[xcolor={usenames,svgnames,dvipsnames}]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -489,8 +489,8 @@ myFun(x)
 
 \begin{verbatim}
  Funcion genérica
-  [1]  0.9999021  0.7701458 -1.1414183 -0.7296333  0.6176794 -0.8534673
-  [7]  0.2304325  0.3848272  1.0438842 -0.5581884
+  [1] -0.39484076  2.21074205 -0.64091221 -0.05641557 -0.14250639 -0.18411444
+  [7]  0.68454569 -1.04399502  1.93722418  0.25968071
  attr(,"class")
  [1] "myNumeric"
 \end{verbatim}
@@ -502,6 +502,7 @@ myFun(task1)
 \end{lstlisting}
 
 \begin{verbatim}
+ Funcion genérica
  What:  Write an email - When: 2013-01-01 - Priority: Low
 \end{verbatim}
 \end{frame}
@@ -519,7 +520,7 @@ methods('myFun')
 \end{lstlisting}
 
 \begin{verbatim}
- [1] myFun.default myFun.task3
+ [1] myFun.default
 \end{verbatim}
 
 
@@ -738,35 +739,92 @@ setClass('ToDo',
 
 \lstset{language=R}
 \begin{lstlisting}
-myList <- new('ToDo', tasks=list(task1, task2))
+myList <- new('ToDo',
+              tasks=list(t1=task1, t2=task2))
 \end{lstlisting}
 \end{frame}
 \begin{frame}[fragile]
-\frametitle{Funciones para crear objetos}
+\frametitle{Acceso a los slots}
 \label{sec-3-1-6}
 
+\begin{itemize}
+\item Para extraer información de los \emph{slots} hay que emplear \texttt{@} (a
+  diferencia de \texttt{\$} en listas y \texttt{data.frame})
+\end{itemize}
 
 \lstset{language=R}
 \begin{lstlisting}
-createToDo <- function(){
-  new('ToDo')
-  }
+myList@tasks
 \end{lstlisting}
 
 
+\begin{verbatim}
+$t1
+An object of class "task"
+Slot "what":
+[1] "Find and fix bugs"
+
+Slot "when":
+[1] "2013-03-15"
+
+Slot "priority":
+[1] "High"
+
+
+$t2
+An object of class "task"
+Slot "what":
+[1] "Write an email"
+
+Slot "when":
+[1] "2013-01-01"
+
+Slot "priority":
+[1] "Low"
+\end{verbatim}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Acceso a los slots}
+\label{sec-3-1-7}
+
+\begin{itemize}
+\item El \emph{slot} \texttt{tasks} es una lista: empleamos \texttt{\$} para acceder a sus elementos
+\end{itemize}
 
 \lstset{language=R}
 \begin{lstlisting}
-addTask <- function(object, task){
-  stopifnot(is(task,'task'))
-  object@tasks <- c(object@tasks, task)
-  object
-  }
+myList@tasks$t1
 \end{lstlisting}
+
+\begin{verbatim}
+ An object of class "task"
+ Slot "what":
+ [1] "Find and fix bugs"
+ 
+ Slot "when":
+ [1] "2013-03-15"
+ 
+ Slot "priority":
+ [1] "High"
+\end{verbatim}
+
+\begin{itemize}
+\item Cada elemento de \texttt{tasks} es un objeto de clase \texttt{task}: empleamos
+  \texttt{@} para extraer sus \emph{slots}.
+\end{itemize}
+
+\lstset{language=R}
+\begin{lstlisting}
+myList@tasks$t1@what
+\end{lstlisting}
+
+\begin{verbatim}
+ [1] "Find and fix bugs"
+\end{verbatim}
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Problema con los slots definidos como \texttt{list}}
-\label{sec-3-1-7}
+\label{sec-3-1-8}
 
 \begin{itemize}
 \item Dado que el slot \texttt{tasks} es una \texttt{list}, podemos añadir cualquier
@@ -782,7 +840,7 @@ myListOops <- new('ToDo',
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Validación}
-\label{sec-3-1-8}
+\label{sec-3-1-9}
 
 \begin{itemize}
 \item Para obligar a que sus elementos sean de clase \texttt{task} debemos añadir
@@ -816,10 +874,37 @@ myListOops <- new('ToDo',
  Error en validityMethod(object) : not a list of task objects
 \end{verbatim}
 \end{frame}
+\begin{frame}[fragile]
+\frametitle{Funciones para crear objetos}
+\label{sec-3-1-10}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+createToDo <- function(){
+  new('ToDo')
+  }
+\end{lstlisting}
+
+
+
+\lstset{language=R}
+\begin{lstlisting}
+addTask <- function(object, task){
+    ## La siguiente comprobación sólo es necesaria si la
+    ## definición de la clase *no* incorpora una función 
+    ## validity
+    stopifnot(is(task,'task'))
+    object@tasks <- c(object@tasks, task)
+    object
+  }
+\end{lstlisting}
+\end{frame}
 \subsection{Métodos en \texttt{S4}}
 \label{sec-3-2}
 \begin{frame}[fragile]
 \frametitle{Métodos en \texttt{S4}}
+\framesubtitle{\texttt{setMethod}}
 \label{sec-3-2-1}
 
 \begin{itemize}
@@ -834,14 +919,31 @@ myListOops <- new('ToDo',
   existe, se define con \texttt{setGeneric}.
 \end{itemize}
 
+
+
 \lstset{language=R}
 \begin{lstlisting}
 isGeneric('print')
 \end{lstlisting}
 
 \begin{verbatim}
- [1] TRUE
+ [1] FALSE
 \end{verbatim}
+
+
+\lstset{language=R}
+\begin{lstlisting}
+setGeneric('print')
+\end{lstlisting}
+
+\begin{verbatim}
+ [1] "print"
+\end{verbatim}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Métodos en \texttt{S4}}
+\framesubtitle{\texttt{setGeneric} y \texttt{getGeneric}}
+\label{sec-3-2-2}
 
 \begin{itemize}
 \item Si ya existe un método genérico, la función \texttt{definition} debe tener
@@ -858,14 +960,14 @@ getGeneric('print')
  
  function (x, ...) 
  standardGeneric("print")
- <environment: 0xa937894>
+ <environment: 0x9f90bfc>
  Methods may be defined for arguments: x
  Use  showMethods("print")  for currently available ones.
 \end{verbatim}
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Definición de un método \texttt{print} para \texttt{task}}
-\label{sec-3-2-2}
+\label{sec-3-2-3}
 
 
 \lstset{language=R}
@@ -896,7 +998,7 @@ print(task1)
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Definición de un método \texttt{print} para \texttt{task}}
-\label{sec-3-2-3}
+\label{sec-3-2-4}
 
 
 \lstset{language=R}
@@ -948,12 +1050,42 @@ setOldClass('lm')
 \end{lstlisting}
 
 
+
+\lstset{language=R}
+\begin{lstlisting}
+getClass('lm')
+\end{lstlisting}
+
+
+\begin{verbatim}
+Virtual Class "lm" [package "methods"]
+
+Slots:
+                
+Name:   .S3Class
+Class: character
+
+Extends: "oldClass"
+
+Known Subclasses: 
+Class "mlm", directly
+Class "aov", directly
+Class "glm", directly
+Class "maov", by class "mlm", distance 2
+Class "glm.null", by class "glm", distance 2
+\end{verbatim}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Ejemplo con \texttt{lm} y \texttt{xyplot}}
+\label{sec-3-3-2}
+
 \begin{itemize}
 \item Definimos un método genérico para \texttt{xyplot}
 \end{itemize}
 
 \lstset{language=R}
 \begin{lstlisting}
+library(lattice)
 setGeneric('xyplot')
 \end{lstlisting}
 
@@ -983,7 +1115,7 @@ setMethod('xyplot',
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Ejemplo con \texttt{lm} y \texttt{xyplot}}
-\label{sec-3-3-2}
+\label{sec-3-3-3}
 
 \begin{itemize}
 \item Recuperamos la regresión que empleamos en el apartado de Estadística:
@@ -1001,7 +1133,7 @@ lmFertEdu <- lm(Fertility ~ Education, data = swiss)
 xyplot(lmFertEdu, col='red', pch=19, type=c('p', 'g'))
 \end{lstlisting}
 
-\includegraphics[width=0.4\textwidth]{xyplotS4.pdf}
+\includegraphics[width=0.4\textwidth]{/home/oscar/R/intro/xyplotS4.pdf}
 \end{frame}
 
 \end{document}
