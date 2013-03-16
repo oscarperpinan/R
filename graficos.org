@@ -1,7 +1,7 @@
 #+TITLE:     Gráficos con R
 #+AUTHOR:    Oscar Perpiñán Lamigueiro
 #+EMAIL:     oscar.perpinan@gmail.com
-#+DATE: Febrero de 2013
+#+DATE: Marzo de 2013
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  es
@@ -31,11 +31,34 @@
 #+PROPERTY:  session *R*
 #+PROPERTY: exports both 
 #+PROPERTY: results output graphics
-#+PROPERTY: session *R*
 
 
 
 * Introducción
+#+NAME: latticeOptions
+#+begin_src R :exports none :tangle no 
+  library(latticeExtra)
+  myTheme=custom.theme.2(pch=19, cex=0.7,
+                         region=rev(brewer.pal(9, 'YlOrRd')),
+                         symbol = brewer.pal(n=8, name = "Dark2"))
+  myTheme$strip.background$col='transparent'
+  myTheme$strip.shingle$col='transparent'
+  myTheme$strip.border$col='transparent'
+  xscale.components.custom <- function(...){
+      ans <- xscale.components.default(...)
+      ans$top=FALSE
+      ans}
+  yscale.components.custom <- function(...){
+      ans <- yscale.components.default(...)
+      ans$right=FALSE
+      ans}
+  myArgs <- list(as.table=TRUE,
+                 between=list(x=0.5, y=0.2),
+                 xscale.components = xscale.components.custom,
+                 yscale.components = yscale.components.custom)
+  defaultArgs <- lattice.options()$default.args
+  lattice.options(default.theme = myTheme, default.args = modifyList(defaultArgs, myArgs))
+#+end_src
 ** Base y grid
 *** Base y grid
  En =R= existen dos formas de generar gráficos:
@@ -84,9 +107,9 @@ Dentro del conjunto =grid= existen dos grandes paquetes:
 *** =xyplot=
 #+ATTR_LaTeX: width=0.7\textwidth
 #+begin_src R  :file xyplot.pdf
-xyplot(Radiation ~ TempAvg, data=aranjuez)
+  xyplot(Radiation ~ TempAvg, data=aranjuez)
 #+end_src
-
+    
 *** =xyplot=
 #+ATTR_LaTeX: width=0.7\textwidth
 #+begin_src R :file xyplotPG.pdf
@@ -155,7 +178,7 @@ xyplot(Radiation ~ TempAvg, data=aranjuez)
   xyplot(Radiation ~ TempAvg,
          type=c('p', 'r'),
          cex=2, col='blue',
-         alpha=.5,
+         alpha=.5, pch=19,
          lwd=3, col.line='black',
          data=aranjuez)
 #+end_src
@@ -166,24 +189,23 @@ xyplot(Radiation ~ TempAvg, data=aranjuez)
   xyplot(Radiation ~ TempAvg,
          group=quarter,
          col=c('red', 'blue', 'green', 'yellow'),
+         pch=19,
          auto.key=list(space='right'),
          data=aranjuez)
 #+end_src
 
-*** Colores con grupos: par.settings
-- (Sólo si no está instalado previamente)
+*** Colores con grupos: =par.settings= y =simpleTheme=
+- Primero definimos el tema con =simpleTheme=
 #+begin_src R 
-install.packages('latticeExtra')
-#+end_src
-- Cargamos =latticeExtra= para usar =custom.theme=
-#+begin_src R 
-library(latticeExtra)
-#+end_src
-#+ATTR_LaTeX: width=0.45\textwidth
-#+begin_src R :file myTheme.pdf
-  myTheme <- custom.theme(symbol=c('red', 'blue',
+  myTheme <- simpleTheme(col=c('red', 'blue',
                           'green', 'yellow'),
                           pch=19, alpha=.6)
+#+end_src
+
+*** Colores con grupos: =par.settings= y =simpleTheme=
+- Aplicamos el resultado en =par.settings=
+#+ATTR_LaTeX: width=0.45\textwidth
+#+begin_src R :file myTheme.pdf
   xyplot(Radiation ~ TempAvg,
          groups=quarter,
          par.settings=myTheme,
@@ -315,11 +337,20 @@ densityplot(~Radiation, groups=quarter,
          groups=year, distribution=qnorm)
 #+end_src
 
+*** Opciones de lattice
+Todas las figuras han sido generadas con unas opciones previamente
+definidas en =lattice.options=. Es necesario instalar el paquete
+=latticeExtra=.
+#+begin_src R :noweb yes :eval no
+<<latticeOptions>>
+#+end_src
+
 ** ggplot2
 
 *** ggplot2
 - [[http://docs.ggplot2.org/current/][Documentación de ggplot2]]
 - [[http://ggplot2.org/book/][Codigo del libro]]
 - [[http://learnr.wordpress.com/2009/06/28/ggplot2-version-of-figures-in-lattice-multivariate-data-visualization-with-r-part-1/][ggplot2 desde lattice]] ([[http://learnr.files.wordpress.com/2009/08/latbook.pdf][PDF]])
+
 
 

@@ -1,4 +1,4 @@
-% Created 2013-03-04 lun 22:54
+% Created 2013-03-16 sáb 15:58
 \documentclass[xcolor={usenames,svgnames,dvipsnames}]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -30,7 +30,7 @@
 
 \title{Gráficos con R}
 \author{Oscar Perpiñán Lamigueiro}
-\date{Febrero de 2013}
+\date{Marzo de 2013}
 \hypersetup{
   pdfkeywords={},
   pdfsubject={},
@@ -156,6 +156,8 @@ xyplot(Radiation ~ TempAvg, data=aranjuez)
 \end{lstlisting}
 
 \includegraphics[width=0.7\textwidth]{xyplot.pdf}
+
+    
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{\texttt{xyplot}}
@@ -267,7 +269,7 @@ xyplot(Radiation ~ TempAvg|factor(year),
 xyplot(Radiation ~ TempAvg,
        type=c('p', 'r'),
        cex=2, col='blue',
-       alpha=.5,
+       alpha=.5, pch=19,
        lwd=3, col.line='black',
        data=aranjuez)
 \end{lstlisting}
@@ -284,6 +286,7 @@ xyplot(Radiation ~ TempAvg,
 xyplot(Radiation ~ TempAvg,
        group=quarter,
        col=c('red', 'blue', 'green', 'yellow'),
+       pch=19,
        auto.key=list(space='right'),
        data=aranjuez)
 \end{lstlisting}
@@ -291,15 +294,30 @@ xyplot(Radiation ~ TempAvg,
 \includegraphics[width=0.6\textwidth]{xyplotColorGroups.pdf}
 \end{frame}
 \begin{frame}[fragile]
-\frametitle{Colores con grupos: par.settings}
+\frametitle{Colores con grupos: \texttt{par.settings} y \texttt{simpleTheme}}
 \label{sec-2-1-12}
 
+\begin{itemize}
+\item Primero definimos el tema con \texttt{simpleTheme}
+\end{itemize}
 
 \lstset{language=R}
 \begin{lstlisting}
-myTheme <- custom.theme(symbol=c('red', 'blue',
+myTheme <- simpleTheme(col=c('red', 'blue',
                         'green', 'yellow'),
                         pch=19, alpha=.6)
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Colores con grupos: \texttt{par.settings} y \texttt{simpleTheme}}
+\label{sec-2-1-13}
+
+\begin{itemize}
+\item Aplicamos el resultado en \texttt{par.settings}
+\end{itemize}
+
+\lstset{language=R}
+\begin{lstlisting}
 xyplot(Radiation ~ TempAvg,
        groups=quarter,
        par.settings=myTheme,
@@ -311,7 +329,7 @@ xyplot(Radiation ~ TempAvg,
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Colores: brewer.pal}
-\label{sec-2-1-13}
+\label{sec-2-1-14}
 
 
 \lstset{language=R}
@@ -331,7 +349,7 @@ xyplot(Radiation ~ TempAvg,
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Paneles a medida}
-\label{sec-2-1-14}
+\label{sec-2-1-15}
 
 
 \lstset{language=R}
@@ -353,7 +371,7 @@ xyplot(Radiation ~ TempAvg, data=aranjuez,
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Matriz de gráficos de dispersión}
-\label{sec-2-1-15}
+\label{sec-2-1-16}
 
 
 \lstset{language=R}
@@ -367,7 +385,7 @@ splom(aranjuez[,c("TempAvg", "HumidAvg", "WindAvg",
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Matriz de gráficos de dispersión}
-\label{sec-2-1-16}
+\label{sec-2-1-17}
 
 
 \lstset{language=R}
@@ -383,7 +401,7 @@ splom(aranjuez[,c("TempAvg", "HumidAvg", "WindAvg",
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{\texttt{levelplot}}
-\label{sec-2-1-17}
+\label{sec-2-1-18}
 
 
 \lstset{language=R}
@@ -396,7 +414,7 @@ levelplot(TempAvg ~ year * day,
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{\texttt{contourplot}}
-\label{sec-2-1-18}
+\label{sec-2-1-19}
 
 
 \lstset{language=R}
@@ -411,7 +429,7 @@ contourplot(Radiation ~ year * day,
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Box-and-Whiskers}
-\label{sec-2-1-19}
+\label{sec-2-1-20}
 
 
 \lstset{language=R}
@@ -424,7 +442,7 @@ bwplot(Radiation ~ month, data=aranjuez,
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Box-and-Whiskers}
-\label{sec-2-1-20}
+\label{sec-2-1-21}
 
 
 \lstset{language=R}
@@ -440,7 +458,7 @@ bwplot(Radiation ~ month, data=aranjuez,
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Histogramas}
-\label{sec-2-1-21}
+\label{sec-2-1-22}
 
 
 \lstset{language=R}
@@ -452,7 +470,7 @@ histogram(~Radiation|factor(year), data=aranjuez)
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Gráficos de densidad}
-\label{sec-2-1-22}
+\label{sec-2-1-23}
 
 
 \lstset{language=R}
@@ -466,7 +484,7 @@ densityplot(~Radiation, groups=quarter,
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{\texttt{dotplot}}
-\label{sec-2-1-23}
+\label{sec-2-1-24}
 
 
 \lstset{language=R}
@@ -486,7 +504,7 @@ dotplot(month ~ Radiation|factor(year), data=avRad)
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Quantile-Quantile}
-\label{sec-2-1-24}
+\label{sec-2-1-25}
 
 
 \lstset{language=R}
@@ -500,7 +518,7 @@ qq(firstHalf ~ Radiation, data=aranjuez)
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Quantile-quantile}
-\label{sec-2-1-25}
+\label{sec-2-1-26}
 
 
 \lstset{language=R}
@@ -514,7 +532,7 @@ qq(winter ~ Radiation, data=aranjuez)
 \end{frame}
 \begin{frame}[fragile]
 \frametitle{Quantile-Quantile}
-\label{sec-2-1-26}
+\label{sec-2-1-27}
 
 
 \lstset{language=R}
@@ -524,6 +542,39 @@ qqmath(~TempAvg, data=aranjuez,
 \end{lstlisting}
 
 \includegraphics[width=0.7\textwidth]{qqNorm.pdf}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Opciones de lattice}
+\label{sec-2-1-28}
+
+Todas las figuras han sido generadas con unas opciones previamente
+definidas en \texttt{lattice.options}. Es necesario instalar el paquete
+\texttt{latticeExtra}.
+
+\lstset{language=R}
+\begin{lstlisting}
+library(latticeExtra)
+myTheme=custom.theme.2(pch=19, cex=0.7,
+                       region=rev(brewer.pal(9, 'YlOrRd')),
+                       symbol = brewer.pal(n=8, name = "Dark2"))
+myTheme$strip.background$col='transparent'
+myTheme$strip.shingle$col='transparent'
+myTheme$strip.border$col='transparent'
+xscale.components.custom <- function(...){
+    ans <- xscale.components.default(...)
+    ans$top=FALSE
+    ans}
+yscale.components.custom <- function(...){
+    ans <- yscale.components.default(...)
+    ans$right=FALSE
+    ans}
+myArgs <- list(as.table=TRUE,
+               between=list(x=0.5, y=0.2),
+               xscale.components = xscale.components.custom,
+               yscale.components = yscale.components.custom)
+defaultArgs <- lattice.options()$default.args
+lattice.options(default.theme = myTheme, default.args = modifyList(defaultArgs, myArgs))
+\end{lstlisting}
 \end{frame}
 \subsection{ggplot2}
 \label{sec-2-2}

@@ -104,7 +104,7 @@ pdf(file="xyplotColors.pdf")
 xyplot(Radiation ~ TempAvg,
        type=c('p', 'r'),
        cex=2, col='blue',
-       alpha=.5,
+       alpha=.5, pch=19,
        lwd=3, col.line='black',
        data=aranjuez)
 dev.off()
@@ -116,17 +116,23 @@ pdf(file="xyplotColorGroups.pdf")
 xyplot(Radiation ~ TempAvg,
        group=quarter,
        col=c('red', 'blue', 'green', 'yellow'),
+       pch=19,
        auto.key=list(space='right'),
        data=aranjuez)
 dev.off()
 
-## Colores con grupos: par.settings
+## Colores con grupos: =par.settings= y =simpleTheme=
+## - Primero definimos el tema con =simpleTheme=
+
+myTheme <- simpleTheme(col=c('red', 'blue',
+                        'green', 'yellow'),
+                        pch=19, alpha=.6)
+
+## Colores con grupos: =par.settings= y =simpleTheme=
+## - Aplicamos el resultado en =par.settings=
 ## #+ATTR_LaTeX: width=0.45\textwidth
 
 pdf(file="myTheme.pdf")
-myTheme <- custom.theme(symbol=c('red', 'blue',
-                        'green', 'yellow'),
-                        pch=19, alpha=.6)
 xyplot(Radiation ~ TempAvg,
        groups=quarter,
        par.settings=myTheme,
@@ -273,3 +279,30 @@ pdf(file="qqNorm.pdf")
 qqmath(~TempAvg, data=aranjuez,
        groups=year, distribution=qnorm)
 dev.off()
+
+## Opciones de lattice
+## Todas las figuras han sido generadas con unas opciones previamente
+## definidas en =lattice.options=. Es necesario instalar el paquete
+## =latticeExtra=.
+
+library(latticeExtra)
+myTheme=custom.theme.2(pch=19, cex=0.7,
+                       region=rev(brewer.pal(9, 'YlOrRd')),
+                       symbol = brewer.pal(n=8, name = "Dark2"))
+myTheme$strip.background$col='transparent'
+myTheme$strip.shingle$col='transparent'
+myTheme$strip.border$col='transparent'
+xscale.components.custom <- function(...){
+    ans <- xscale.components.default(...)
+    ans$top=FALSE
+    ans}
+yscale.components.custom <- function(...){
+    ans <- yscale.components.default(...)
+    ans$right=FALSE
+    ans}
+myArgs <- list(as.table=TRUE,
+               between=list(x=0.5, y=0.2),
+               xscale.components = xscale.components.custom,
+               yscale.components = yscale.components.custom)
+defaultArgs <- lattice.options()$default.args
+lattice.options(default.theme = myTheme, default.args = modifyList(defaultArgs, myArgs))
