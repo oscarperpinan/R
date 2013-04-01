@@ -207,6 +207,13 @@ xyplot(aranjuez[,c("TempAvg", "TempMax", "TempMin")],
                    FUN=mean, na.rm=TRUE)
   G0y
 #+end_src
+
+** Medias anuales usando =cut=
+#+begin_src R 
+  aggregate(aranjuez$G0, by=function(tt)cut(tt, 'year'),
+            FUN=mean, na.rm=TRUE)
+#+end_src
+
 ** Medias mensuales
 - Meses como números
 #+begin_src R
