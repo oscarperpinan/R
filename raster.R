@@ -110,12 +110,7 @@ levelplot(SISy) +
                   pch=16, col='black'))
 
 ## Estaciones MAGRAMA-SIAR
-## - Descargamos localización de las estaciones SIAR
-
-## Si no hemos descargado el respositorio GitHub
-SIAR <- read.csv("http://solar.r-forge.r-project.org/data/SIAR.csv")
-## Si ya lo hemos descargado está en data
-SIAR <- read.csv("data/SIAR.csv")
+SIAR <- read.csv("SIAR.csv")
 
 ## - Construimos un objeto espacial con la información y las coordenadas
 
