@@ -48,8 +48,8 @@
 - Configuramos el directorio de trabajo
 #+begin_src R
   ## Entre las comillas hay que indicar el directorio en el que está el
-  ## fichero SISmm2008_CMSAF.zip.
-  setwd('C:/intro/data')
+  ## repositorio (será visible la carpeta data/)
+  setwd('~/R/intro/')
 #+end_src
 - Cargo los paquetes que usaremos
 #+begin_src R
@@ -170,11 +170,8 @@ SISy <- mean(SISmm) * 365/1000
 * Avanzado: CM~SAF y SIAR
 
 ** Estaciones MAGRAMA-SIAR
-- Descargamos localización de las estaciones SIAR
+- Localización de las estaciones SIAR
 #+begin_src R
-  ## Si no hemos descargado el respositorio GitHub
-  SIAR <- read.csv("http://solar.r-forge.r-project.org/data/SIAR.csv")
-  ## Si ya lo hemos descargado está en data
   SIAR <- read.csv("data/SIAR.csv")
 #+end_src  
 - Construimos un objeto espacial con la información y las coordenadas
