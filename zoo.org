@@ -1,11 +1,10 @@
 #+TITLE:     Series temporales con zoo
 #+AUTHOR:    Oscar Perpiñán Lamigueiro
 #+EMAIL:     oscar.perpinan@gmail.com
-#+DATE:      19 de Febrero de 2013
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  es
-#+OPTIONS:   H:3 num:t toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   H:2 num:t toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
 #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
 #+EXPORT_SELECT_TAGS: export
@@ -15,23 +14,23 @@
 #+XSLT:
 #+startup: beamer
 #+LaTeX_CLASS: beamer
-#+BEAMER_FRAME_LEVEL: 2
+#+BEAMER_FONT_THEME: serif 
+#+BEAMER_THEME: Goettingen
 #+LATEX_CLASS_OPTIONS: [xcolor={usenames,svgnames,dvipsnames}]
 #+LATEX_HEADER: \AtBeginSection[]{\begin{frame}<beamer>\frametitle{Contenidos}\tableofcontents[currentsection]\end{frame}}
 #+LATEX_HEADER: \lstset{keywordstyle=\color{blue}, commentstyle=\color{gray!90}, basicstyle=\ttfamily\small, columns=fullflexible, breaklines=true,linewidth=\textwidth, backgroundcolor=\color{gray!23}, basewidth={0.5em,0.4em}, literate={á}{{\'a}}1 {ñ}{{\~n}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {º}{{\textordmasculine}}1}
 #+LATEX_HEADER: \usepackage{mathpazo}
 #+LATEX_HEADER: \setbeamercovered{transparent}
-#+LATEX_HEADER: \usefonttheme{serif} 
-#+LATEX_HEADER: \usetheme{Goettingen}
+#+LATEX_HEADER: \usepackage[spanish]{babel}
 #+LATEX_HEADER: \hypersetup{colorlinks=true, linkcolor=Blue, urlcolor=Blue}
-#+PROPERTY:  tangle yes
-#+PROPERTY:  comments org
+#+PROPERTY:  :tangle yes
+#+PROPERTY:  :comments org
 #+LATEX_HEADER: \usepackage{fancyvrb}
 #+LATEX_HEADER: \DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\tiny, formatcom = {\color{black!70}}}
 
 * Lectura de ficheros (sencillo)
 ** Descargamos datos de SIAR
-- [[http://eportal.magrama.gob.es/websiar]]
+- [[http://eportal.magrama.gob.es/websiar/Inicio.aspx]]
 - *Estación*: Aranjuez, Madrid
 - *Período*: 01/01/2004 a 31/12/2011
 - *Variables*: Temperatura, Humedad, Viento, Lluvia, Radiación, ET
@@ -380,10 +379,10 @@ DATE,HST,Global Horizontal [W/m^2],Direct Normal [W/m^2],Diffuse Horizontal [W/m
 #+end_src
 
 
-########################################
-## Una estación completa
-## http://procomun.wordpress.com/2012/10/31/aemet-web-scraping-con-r/
-########################################
+# ######################################
+# Una estación completa
+# http://procomun.wordpress.com/2012/10/31/aemet-web-scraping-con-r/
+# ######################################
 # arenosillo <- read.csv2('data/El.Arenosillo.txt')
 # tt <- as.POSIXct(arenosillo$Index)
 # arenosillo <- zoo(arenosillo[, -1], tt) * 3.6

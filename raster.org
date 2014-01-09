@@ -4,7 +4,7 @@
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  es
-#+OPTIONS:   H:3 num:t toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   H:2 num:t toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
 #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
 #+EXPORT_SELECT_TAGS: export
@@ -14,22 +14,22 @@
 #+XSLT:
 #+startup: beamer
 #+LaTeX_CLASS: beamer
-#+BEAMER_FRAME_LEVEL: 2
+#+BEAMER_FONT_THEME: serif 
+#+BEAMER_THEME: Goettingen
 #+LATEX_CLASS_OPTIONS: [xcolor={usenames,svgnames,dvipsnames}]
-#+LATEX_HEADER: \AtBeginSubsection[]{\begin{frame}[plain]\tableofcontents[currentsubsection]\end{frame}}
+#+LATEX_HEADER: \AtBeginSection[]{\begin{frame}[plain]\tableofcontents[currentSection]\end{frame}}
 #+LATEX_HEADER: \lstset{commentstyle=\color{gray!90}, basicstyle=\ttfamily\small, columns=fullflexible, breaklines=true,linewidth=\textwidth, backgroundcolor=\color{gray!23}, basewidth={0.5em,0.4em}, literate={á}{{\'a}}1 {ñ}{{\~n}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {º}{{\textordmasculine}}1}
 #+LATEX_HEADER: \usepackage{mathpazo}
 #+LATEX_HEADER: \setbeamercovered{transparent}
-#+LATEX_HEADER: \usefonttheme{serif} 
-#+LATEX_HEADER: \usetheme{Goettingen}
+#+LATEX_HEADER: \usepackage[spanish]{babel}
 #+LATEX_HEADER: \hypersetup{colorlinks=true, linkcolor=Blue, urlcolor=Blue}
-#+PROPERTY:  tangle yes
-#+PROPERTY:  comments org
+#+PROPERTY: :tangle yes :comments org
+
 
 * Puesta en marcha
 
-** Descargar datos de CM~SAF
-- CM~SAF: http://www.cmsaf.eu/
+** Descargar datos de CMSAF
+- CMSAF: http://www.cmsaf.eu/
 - Piden registro (gratuito) para descarga de datos masivos.
 - Está disponible en [[http://re.jrc.ec.europa.eu/pvgis/apps4/pvest.php][PV-GIS]] (sólo datos puntuales).
 - Hay que elegir el producto SIS (Surface incoming short-wave radiation).
@@ -40,9 +40,9 @@
 - El conjunto de ficheros estará disponible vía FTP transcurrido un tiempo.
 
 ** Disponible en el material del curso
-- Como ZIP aislado del [[https://github.com/oscarperpinan/intro][repositorio github]]: [[https://github.com/oscarperpinan/intro/blob/master/data/SISmm2008_CMSAF.zip?raw%3Dtrue][SISmm2008_CMSAF.zip]]
+- Como ZIP aislado del [[https://github.com/oscarperpinan/intro][repositorio github]]: [[https://github.com/oscarperpinan/intro/blob/master/data/SISmm2008_CMSAF.zip][SISmm2008_CMSAF.zip]]
 - Mejor y más fácil: [[https://github.com/oscarperpinan/intro/archive/master.zip][descargar todo el repositorio]] y descomprimir el ZIP en una carpeta (por ejemplo =C:/intro=).
-  - El ZIP de datos CM~SAF está dentro de la carpeta =data=.
+  - El ZIP de datos CMSAF está dentro de la carpeta =data=.
 
 ** Primeros pasos en R
 - Configuramos el directorio de trabajo
@@ -54,19 +54,21 @@
 - Cargo los paquetes que usaremos
 #+begin_src R
   ## Si no están instalados hay que usar install.packages('Nombre_del_Paquete')
-  library("lattice")
-  library("latticeExtra")
-  
+  ## Clases y métodos para datos espaciales
   library("sp")
-  
   library("ncdf")
   library("raster")
+  ## Series temporales
+  library("zoo")
+  ## Gráficos
+  library("lattice")
+  library("latticeExtra")
   library("rasterVis")
 #+end_src
 
 * Empiezan los cálculos
   
-** Leo los ficheros CM~SAF
+** Leo los ficheros CMSAF
 #+begin_src R
     unzip("SISmm2008_CMSAF.zip")
     listFich <- dir(pattern=".nc")
@@ -167,10 +169,10 @@ SISy <- mean(SISmm) * 365/1000
 #+end_src  
 
 
-* Avanzado: CM~SAF y SIAR
-
+* Avanzado: CMSAF y SIAR
+  
 ** Estaciones MAGRAMA-SIAR
-- Localización de las estaciones SIAR
+- Localización de las [[https://raw.github.com/oscarperpinan/intro/master/data/SIAR.csv][estaciones SIAR]]
 #+begin_src R
   SIAR <- read.csv("data/SIAR.csv")
 #+end_src  
@@ -188,14 +190,14 @@ SISy <- mean(SISmm) * 365/1000
                     pch=19, col='black', cex=0.6))
 #+end_src
   
-** Extraemos información de CM~SAF 
+** Extraemos información de CMSAF 
 #+begin_src R
   CMSAF.SIAR <- extract(SISmm, spSIAR)
   CMSAF.SIAR <- zoo(t(CMSAF.SIAR), as.yearmon(idx))
   names(CMSAF.SIAR) <- spSIAR$Estacion
   summary(CMSAF.SIAR)
 #+end_src  
-
+   
 ** Particularizamos para una estación
 - Primero extraemos información para la estación de Madrid
 #+begin_src R
@@ -216,15 +218,14 @@ SISy <- mean(SISmm) * 365/1000
 
 ** Para los muy interesados
 
-- Recientemente se ha publicado un artículo en la revista Renewable
-  and Sustainable Energy Reviews comparando CM~SAF y SIAR para
-  diferentes condiciones de trabajo:
-  - "Comparative assessment of global irradiation from a satellite
+- Artículo en la revista Renewable and Sustainable Energy Reviews
+  comparando CMSAF y SIAR para diferentes condiciones de trabajo:
+  - Comparative assessment of global irradiation from a satellite
     estimate model (CM SAF) and on-ground measurements (SIAR): a
-    Spanish case study", F. Antoñanzas, F. Cañizares, O. Perpiñán, Renewable
+    Spanish case study, F. Antoñanzas, F. Cañizares, O. Perpiñán, Renewable
     and Sustainable Energy Reviews, Volume 21, May 2013, Pages 248-261,
     ISSN 1364-0321, http://dx.doi.org/10.1016/j.rser.2012.12.033.
   - Se puede descargar el [[http://procomun.files.wordpress.com/2012/12/cmsaf_siar_rev1.pdf][preprint]], y el [[https://github.com/oscarperpinan/CMSAF-SIAR][código está disponible]] con
     licencia libre.
 - AEMET ha publicado un [[http://www.aemet.es/es/noticias/2012/05/atlasradiacionsolar][Atlas de Radiación Solar]] basado en los datos
-  de CM~SAF.
+  de CMSAF.
