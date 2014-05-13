@@ -6,10 +6,10 @@
 #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
 #+LINK_UP:
 #+LINK_HOME:
-#+STYLE:    <link rel="stylesheet" type="text/css" href="stylesheets/stylesMain.css" />
+#+HTML_HEAD:    <link rel="stylesheet" type="text/css" href="stylesheets/stylesMain.css" />
 
 #+BEGIN_CENTER
-Este proyecto está desarrollado por [[http://procomun.wordpress.com/][Oscar Perpiñán]] empleando [[http://orgmode.org/][org-mode]] y [[http://ess.r-project.org/][ESS]] sobre [[http://www.gnu.org/software/emacs/][Emacs]].
+Este proyecto está desarrollado por [[http://oscarperpinan.github.io][Oscar Perpiñán Lamigueiro]] empleando [[http://orgmode.org/][org-mode]] y [[http://ess.r-project.org/][ESS]] sobre [[http://www.gnu.org/software/emacs/][Emacs]].
 Puedes [[https://github.com/oscarperpinan/intro][visitar el proyecto en GitHub]] y descargarlo completo en un [[https://github.com/oscarperpinan/intro/archive/master.zip][ZIP]].
 
 #+END_CENTER
@@ -31,5 +31,5 @@ En este apartado agrupo el material apropiado para trabajar con R desde el rol d
 En este apartado agrupo material sobre series temporales y datos espaciales:
 - Series temporales: [[https://github.com/oscarperpinan/intro/blob/master/zoo.pdf?raw%3Dtrue][pdf]], [[https://github.com/oscarperpinan/intro/blob/master/zoo.R][código]].
 - Datos espaciales: [[https://github.com/oscarperpinan/intro/blob/master/raster.pdf?raw%3Dtrue][pdf]], [[https://github.com/oscarperpinan/intro/blob/master/raster.R][código]].
-
+Si trabajas con series temporales y datos espaciales te puede interesar mi libro "[[http://oscarperpinan.github.io/spacetime-vis/][Displaying time series, spatial and space-time data with R]]".
 ------
