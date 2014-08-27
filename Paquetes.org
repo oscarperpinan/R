@@ -1,35 +1,11 @@
 #+TITLE:     Crear paquetes en R
-#+AUTHOR:    Oscar Perpiñán Lamigueiro
-#+EMAIL:     oscar.perpinan@gmail.com
-#+DATE:      Marzo de 2013
-#+DESCRIPTION:
-#+KEYWORDS:
-#+LANGUAGE:  es
-#+OPTIONS:   H:3 num:t toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
-#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
-#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
-#+EXPORT_SELECT_TAGS: export
-#+EXPORT_EXCLUDE_TAGS: noexport
-#+LINK_UP:   
-#+LINK_HOME: 
-#+XSLT:
-#+startup: beamer
-#+LaTeX_CLASS: beamer
-#+BEAMER_FRAME_LEVEL: 2
-#+LATEX_CLASS_OPTIONS: [xcolor={usenames,svgnames,dvipsnames}]
-#+LATEX_HEADER: \AtBeginSection[]{\begin{frame}[plain]\tableofcontents[currentsection,hideallsubsections]\end{frame}}
-#+LATEX_HEADER: \lstset{keywordstyle=\color{blue}, commentstyle=\color{gray!90}, basicstyle=\ttfamily\small, columns=fullflexible, breaklines=true,linewidth=\textwidth, backgroundcolor=\color{gray!23}, basewidth={0.5em,0.4em}, literate={á}{{\'a}}1 {ñ}{{\~n}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {º}{{\textordmasculine}}1}
-#+LATEX_HEADER: \usepackage{mathpazo}
-#+LATEX_HEADER: \usefonttheme{serif}
-#+LATEX_HEADER: \usecolortheme{rose}  
-#+LATEX_HEADER: \usetheme{Goettingen}
-#+LATEX_HEADER: \hypersetup{colorlinks=true, linkcolor=Blue, urlcolor=Blue}
-#+LATEX_HEADER: \usepackage{fancyvrb}
-#+LATEX_HEADER: \DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\tiny, formatcom = {\color{black!70}}}
+
+#+SETUPFILE: config.org
+#+OPTIONS: H:2
 
 * Introducción
 
-** Definiciones previas \\ [[http://cran.r-project.org/doc/contrib/Leisch-CreatingPackages.pdf][Creating R Packages: a tutorial]]
+** Definiciones previas ([[http://cran.r-project.org/doc/contrib/Leisch-CreatingPackages.pdf][Creating R Packages: a tutorial]])
 - *Package*: An extension of the R base system with code, data and
   documentation in standardized format.
 - *Library*: A directory containing installed packages.

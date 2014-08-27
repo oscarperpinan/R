@@ -1,4 +1,4 @@
-% Created 2014-01-09 jue 10:18
+% Created 2014-08-27 mié 09:19
 \documentclass[xcolor={usenames,svgnames,dvipsnames}]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -18,16 +18,17 @@
 \tolerance=1000
 \usepackage{color}
 \usepackage{listings}
-\AtBeginSection[]{\begin{frame}[plain]\tableofcontents[currentSection]\end{frame}}
-\lstset{commentstyle=\color{gray!90}, basicstyle=\ttfamily\small, columns=fullflexible, breaklines=true,linewidth=\textwidth, backgroundcolor=\color{gray!23}, basewidth={0.5em,0.4em}, literate={á}{{\'a}}1 {ñ}{{\~n}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {º}{{\textordmasculine}}1}
+\AtBeginSection[]{\begin{frame}[plain]\tableofcontents[currentsection,hideallsubsections]\end{frame}}
+\lstset{keywordstyle=\color{blue}, commentstyle=\color{gray!90}, basicstyle=\ttfamily\small, columns=fullflexible, breaklines=true,linewidth=\textwidth, backgroundcolor=\color{gray!23}, basewidth={0.5em,0.4em}, literate={á}{{\'a}}1 {ñ}{{\~n}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {º}{{\textordmasculine}}1}
 \usepackage{mathpazo}
-\setbeamercovered{transparent}
-\usepackage[spanish]{babel}
 \hypersetup{colorlinks=true, linkcolor=Blue, urlcolor=Blue}
+\usepackage{fancyvrb}
+\DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\tiny, formatcom = {\color{black!70}}}
 \usetheme{Goettingen}
+\usecolortheme{rose}
 \usefonttheme{serif}
-\author{Oscar Perpiñán Lamigueiro}
-\date{\today}
+\author{Oscar Perpiñán Lamigueiro \\ \url{http://oscarperpinan.github.io}}
+\date{}
 \title{Uso de datos raster}
 \hypersetup{
   pdfkeywords={},
@@ -36,6 +37,7 @@
 \begin{document}
 
 \maketitle
+
 
 \section{Puesta en marcha}
 \label{sec-1}

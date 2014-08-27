@@ -1,29 +1,10 @@
 #+TITLE:     Uso de datos raster
-#+AUTHOR:    Oscar Perpiñán Lamigueiro
-#+EMAIL:     oscar.perpinan@gmail.com
-#+DESCRIPTION:
-#+KEYWORDS:
-#+LANGUAGE:  es
-#+OPTIONS:   H:2 num:t toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
-#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
-#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
-#+EXPORT_SELECT_TAGS: export
-#+EXPORT_EXCLUDE_TAGS: noexport
-#+LINK_UP:   
-#+LINK_HOME: 
-#+XSLT:
-#+startup: beamer
-#+LaTeX_CLASS: beamer
-#+BEAMER_FONT_THEME: serif 
-#+BEAMER_THEME: Goettingen
-#+LATEX_CLASS_OPTIONS: [xcolor={usenames,svgnames,dvipsnames}]
-#+LATEX_HEADER: \AtBeginSection[]{\begin{frame}[plain]\tableofcontents[currentSection]\end{frame}}
-#+LATEX_HEADER: \lstset{commentstyle=\color{gray!90}, basicstyle=\ttfamily\small, columns=fullflexible, breaklines=true,linewidth=\textwidth, backgroundcolor=\color{gray!23}, basewidth={0.5em,0.4em}, literate={á}{{\'a}}1 {ñ}{{\~n}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {º}{{\textordmasculine}}1}
-#+LATEX_HEADER: \usepackage{mathpazo}
-#+LATEX_HEADER: \setbeamercovered{transparent}
-#+LATEX_HEADER: \usepackage[spanish]{babel}
-#+LATEX_HEADER: \hypersetup{colorlinks=true, linkcolor=Blue, urlcolor=Blue}
-#+PROPERTY: :tangle yes :comments org
+
+#+SETUPFILE: config.org
+
+#+OPTIONS: H:2
+#+PROPERTY: eval no
+#+PROPERTY: exports code
 
 
 * Puesta en marcha

@@ -1,4 +1,4 @@
-% Created 2013-03-04 lun 23:49
+% Created 2014-08-27 mié 00:28
 \documentclass[xcolor={usenames,svgnames,dvipsnames}]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -7,135 +7,67 @@
 \usepackage{longtable}
 \usepackage{float}
 \usepackage{wrapfig}
-\usepackage{soul}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
 \usepackage{textcomp}
 \usepackage{marvosym}
 \usepackage{wasysym}
-\usepackage{latexsym}
 \usepackage{amssymb}
 \usepackage{hyperref}
 \tolerance=1000
 \usepackage{color}
 \usepackage{listings}
-\AtBeginSection[]{\begin{frame}<beamer>\frametitle{Contenidos}\tableofcontents[currentsection]\end{frame}}
+\AtBeginSection[]{\begin{frame}[plain]\tableofcontents[currentsection,hideallsubsections]\end{frame}}
 \lstset{keywordstyle=\color{blue}, commentstyle=\color{gray!90}, basicstyle=\ttfamily\small, columns=fullflexible, breaklines=true,linewidth=\textwidth, backgroundcolor=\color{gray!23}, basewidth={0.5em,0.4em}, literate={á}{{\'a}}1 {ñ}{{\~n}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {º}{{\textordmasculine}}1}
 \usepackage{mathpazo}
-\setbeamercovered{transparent}
-\usefonttheme{serif} 
-\usetheme{Goettingen}
 \hypersetup{colorlinks=true, linkcolor=Blue, urlcolor=Blue}
 \usepackage{fancyvrb}
 \DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\tiny, formatcom = {\color{black!70}}}
-\providecommand{\alert}[1]{\textbf{#1}}
-
+\usetheme{Goettingen}
+\usecolortheme{rose}
+\usefonttheme{serif}
+\author{Oscar Perpiñán Lamigueiro \\ \url{http://oscarperpinan.github.io}}
+\date{}
 \title{Manejo de datos con R}
-\author{Oscar Perpiñán Lamigueiro}
-\date{Febrero de 2013}
 \hypersetup{
   pdfkeywords={},
   pdfsubject={},
-  pdfcreator={Emacs Org-mode version 7.8.11}}
-
+  pdfcreator={Emacs 24.3.1 (Org mode 8.2.1)}}
 \begin{document}
 
 \maketitle
 
 
-
 \section{Fuentes de datos}
 \label{sec-1}
-\begin{frame}
-\frametitle{Fuentes de datos}
-\label{sec-1-1}
-
-
+\begin{frame}[label=sec-1-1]{Fuentes de datos}
 \begin{itemize}
 \item \href{http://stat.ethz.ch/R-manual/R-patched/library/datasets/html/00Index.html}{The R Datasets Package}
+
 \item \href{http://www.bibsonomy.org/user/procomun/data}{Enlaces en Bibsonomy}
+
 \item \ldots{}
 \end{itemize}
 \end{frame}
 \section{Lectura de datos}
 \label{sec-2}
-\begin{frame}[fragile]
-\frametitle{\texttt{setwd}, \texttt{getwd}, \texttt{dir}}
-\label{sec-2-1}
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-2-1]{\texttt{setwd}, \texttt{getwd}, \texttt{dir}}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 getwd()
-old <- setwd("~/R/intro")
+old <- setwd("~/github/intro")
 dir()
 dir(pattern='.R')
 dir('data')
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{read.table}
-\label{sec-2-2}
-
-\begin{itemize}
-\item Con un fichero local
-\end{itemize}
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-2-2]{read.table}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
-download.file('http://oscarperpinan.github.com/spacetime-vis/data/CO2_GNI_BM.csv',
-              destfile='data/CO2_GNI_BM.csv')
-
 CO2 <- read.table('data/CO2_GNI_BM.csv', header=TRUE, sep=',')
 head(CO2)
 \end{lstlisting}
-
-
-\begin{verbatim}
-probando la URL 'http://oscarperpinan.github.com/spacetime-vis/data/CO2_GNI_BM.csv'
-Content type 'application/octet-stream' length 7510 bytes
-URL abierta
-==================================================
-downloaded 7510 bytes
-  Country.Name Country.Code                                Indicator.Name
-1      Finland          FIN           CO2 emissions (kg per PPP $ of GDP)
-2      Finland          FIN        CO2 emissions (metric tons per capita)
-3      Finland          FIN            GNI, PPP (current international $)
-4      Finland          FIN GNI per capita, PPP (current international $)
-5       France          FRA           CO2 emissions (kg per PPP $ of GDP)
-6       France          FRA        CO2 emissions (metric tons per capita)
-     Indicator.Code        X2000        X2001        X2002        X2003
-1 EN.ATM.CO2E.PP.GD 3.923481e-01 4.099378e-01 4.265803e-01 4.785172e-01
-2    EN.ATM.CO2E.PC 1.007322e+01 1.087588e+01 1.174433e+01 1.321467e+01
-3 NY.GNP.MKTP.PP.CD 1.318800e+11 1.374500e+11 1.434180e+11 1.428710e+11
-4 NY.GNP.PCAP.PP.CD 2.548000e+04 2.649000e+04 2.758000e+04 2.741000e+04
-5 EN.ATM.CO2E.PP.GD 2.384221e-01 2.370408e-01 2.231432e-01 2.287341e-01
-6    EN.ATM.CO2E.PC 6.016236e+00 6.303892e+00 6.171683e+00 6.236447e+00
-         X2004        X2005        X2006        X2007        X2008       X2009
-1 4.289469e-01 3.389595e-01 3.786006e-01 3.341890e-01 2.792975e-01          NA
-2 1.280953e+01 1.040875e+01 1.254696e+01 1.208669e+01 1.063578e+01          NA
-3 1.573070e+11 1.618390e+11 1.761810e+11 1.913600e+11 2.033820e+11 1.93598e+11
-4 3.009000e+04 3.085000e+04 3.345000e+04 3.618000e+04 3.828000e+04 3.62600e+04
-5 2.212615e-01 2.105801e-01 1.918882e-01 1.770519e-01 1.720425e-01          NA
-6 6.232062e+00 6.219341e+00 6.026120e+00 5.864109e+00 5.873142e+00          NA
-        X2010 X2011
-1          NA    NA
-2          NA    NA
-3 1.98866e+11    NA
-4 3.70700e+04    NA
-5          NA    NA
-6          NA    NA
-\end{verbatim}
-
-\begin{itemize}
-\item Directamente de un enlace URL
-\end{itemize}
-
-\lstset{language=R}
-\begin{lstlisting}
-CO2 <- read.table('http://oscarperpinan.github.com/spacetime-vis/data/CO2_GNI_BM.csv',
-                header=TRUE, sep=',')
-head(CO2)
-\end{lstlisting}
-
 
 \begin{verbatim}
   Country.Name Country.Code                                Indicator.Name
@@ -168,35 +100,27 @@ head(CO2)
 6          NA    NA
 \end{verbatim}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{read.csv, read.csv2}
-\label{sec-2-3}
-
-\begin{itemize}
+\begin{frame}[fragile,label=sec-2-3]{read.csv, read.csv2}
+ \begin{itemize}
 \item \texttt{read.csv} y \texttt{read.csv2} son como \texttt{read.table} con valores
-  por defecto para encabezado y separadores
+por defecto para encabezado y separadores
 \end{itemize}
 
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 CO2 <- read.csv('data/CO2_GNI_BM.csv')
 \end{lstlisting}
 
-
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 names(CO2)
 head(CO2)
 tail(CO2)
 \end{lstlisting}
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 summary(CO2)
 \end{lstlisting}
-
 
 \begin{verbatim}
  Country.Name  Country.Code
@@ -212,9 +136,9 @@ CO2 emissions (kg per PPP $ of GDP)          :10     EN.ATM.CO2E.PC   :10
 CO2 emissions (metric tons per capita)       :10     EN.ATM.CO2E.PP.GD:10    
 GNI per capita, PPP (current international $):10     NY.GNP.MKTP.PP.CD:10    
 GNI, PPP (current international $)           :10     NY.GNP.PCAP.PP.CD:10    
-                                                                             
-                                                                             
-                                                                             
+
+
+
     X2000               X2001               X2002          
 Min.   :0.000e+00   Min.   :0.000e+00   Min.   :0.000e+00  
 1st Qu.:1.000e+00   1st Qu.:1.000e+00   1st Qu.:1.000e+00  
@@ -222,7 +146,7 @@ Median :7.600e+02   Median :8.040e+02   Median :8.340e+02
 Mean   :5.195e+11   Mean   :5.456e+11   Mean   :5.709e+11  
 3rd Qu.:3.297e+10   3rd Qu.:3.436e+10   3rd Qu.:3.585e+10  
 Max.   :1.007e+13   Max.   :1.039e+13   Max.   :1.066e+13  
-                                                           
+
     X2003               X2004               X2005          
 Min.   :0.000e+00   Min.   :0.000e+00   Min.   :0.000e+00  
 1st Qu.:1.000e+00   1st Qu.:1.000e+00   1st Qu.:1.000e+00  
@@ -230,7 +154,7 @@ Median :9.090e+02   Median :9.950e+02   Median :1.104e+03
 Mean   :6.043e+11   Mean   :6.545e+11   Mean   :7.106e+11  
 3rd Qu.:3.572e+10   3rd Qu.:3.933e+10   3rd Qu.:4.046e+10  
 Max.   :1.114e+13   Max.   :1.191e+13   Max.   :1.276e+13  
-                                                           
+
     X2006               X2007               X2008          
 Min.   :0.000e+00   Min.   :0.000e+00   Min.   :0.000e+00  
 1st Qu.:1.000e+00   1st Qu.:1.000e+00   1st Qu.:1.000e+00  
@@ -238,7 +162,7 @@ Median :1.229e+03   Median :1.369e+03   Median :1.444e+03
 Mean   :7.804e+11   Mean   :8.440e+11   Mean   :8.903e+11  
 3rd Qu.:4.405e+10   3rd Qu.:4.784e+10   3rd Qu.:5.085e+10  
 Max.   :1.363e+13   Max.   :1.410e+13   Max.   :1.439e+13  
-                                                           
+
     X2009               X2010            X2011        
 Min.   :3.150e+03   Min.   :3.400e+03   Mode:logical  
 1st Qu.:3.357e+04   1st Qu.:3.401e+04   NA's:40       
@@ -251,13 +175,8 @@ NA's   :20          NA's   :20
 \end{frame}
 \section{Datos agregados}
 \label{sec-3}
-\begin{frame}[fragile]
-\frametitle{table}
-\framesubtitle{\texttt{data.frame} de ejemplo}
-\label{sec-3-1}
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-3-1]{table, \texttt{data.frame} de ejemplo}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 chromosome <- gl(3,  10, labels = c('A',  'B',  'C'))
 probeset <- gl(3,  10, labels = c('X',  'Y',  'Z'))
@@ -268,109 +187,90 @@ XXA_36 <- rnorm(30)
 XXB_00 <- rnorm(30)
 \end{lstlisting}
 
-
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 chromo <- data.frame(chromosome, probeset, ensg, symbol,
-                     XXA_00, XXA_36, XXB_00)
+		     XXA_00, XXA_36, XXB_00)
 head(chromo)
 \end{lstlisting}
 
 \begin{verbatim}
-   chromosome probeset ensg symbol     XXA_00      XXA_36      XXB_00
- 1          A        X   E1     S1  1.0020011 -1.77756910  0.03912242
- 2          A        X   E1     S1 -1.0703017 -0.01216606  0.81720803
- 3          A        X   E1     S1 -0.8932751  2.07963254 -0.31311361
- 4          A        X   E1     S1  0.2701942 -2.19270474 -0.75812359
- 5          A        X   E1     S1  0.4600293  1.99862324  0.69388440
- 6          A        X   E1     S1 -1.6435497  0.90997622 -0.31843964
+  chromosome probeset ensg symbol     XXA_00      XXA_36     XXB_00
+1          A        X   E1     S1 -0.9055000  0.39414564 -0.6600499
+2          A        X   E1     S1 -0.7349505  0.50905638 -1.2176382
+3          A        X   E1     S1 -0.3175336 -0.78622185 -2.0760214
+4          A        X   E1     S1 -0.6429121 -0.05785827  1.1762978
+5          A        X   E1     S1  0.3393823 -0.22097023 -0.5870772
+6          A        X   E1     S1 -0.8632702 -0.13718955  0.3643206
 \end{verbatim}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{table}
-\label{sec-3-2}
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-3-2]{table}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 table(chromo$chromosome, chromo$XXA_00 > 0)
 \end{lstlisting}
 
 \begin{verbatim}
-    
-     FALSE TRUE
-   A     6    4
-   B     7    3
-   C     6    4
+ 
+  FALSE TRUE
+A     6    4
+B     5    5
+C     4    6
 \end{verbatim}
 
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 table(chromo$probeset, chromo$XXA_00 > -1 & chromo$XXA_00 < 1)
 \end{lstlisting}
 
 \begin{verbatim}
-    
-     FALSE TRUE
-   X     4    6
-   Y     4    6
-   Z     4    6
+ 
+  FALSE TRUE
+X     1    9
+Y     6    4
+Z     4    6
 \end{verbatim}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{xtabs}
-\label{sec-3-3}
 
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-3-3]{xtabs}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 xtabs(XXA_00 > 1 ~ chromosome + probeset,
       data=chromo)
 \end{lstlisting}
 
 \begin{verbatim}
-           probeset
- chromosome X Y Z
-          A 2 0 0
-          B 0 1 0
-          C 0 0 1
+          probeset
+chromosome X Y Z
+         A 1 0 0
+         B 0 4 0
+         C 0 0 2
 \end{verbatim}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{tapply}
-\label{sec-3-4}
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-3-4]{tapply}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 tapply(CO2$X2000, CO2$Indicator.Name,
        FUN=mean)
 \end{lstlisting}
 
 \begin{verbatim}
-           CO2 emissions (kg per PPP $ of GDP) 
-                                  4.777875e-01 
-        CO2 emissions (metric tons per capita) 
-                                  7.580861e+00 
- GNI per capita, PPP (current international $) 
-                                  1.981000e+04 
-            GNI, PPP (current international $) 
-                                  2.078196e+12
+          CO2 emissions (kg per PPP $ of GDP) 
+                                 4.777875e-01 
+       CO2 emissions (metric tons per capita) 
+                                 7.580861e+00 
+GNI per capita, PPP (current international $) 
+                                 1.981000e+04 
+           GNI, PPP (current international $) 
+                                 2.078196e+12
 \end{verbatim}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{tapply}
-\label{sec-3-5}
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-3-5]{tapply}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 tapply(CO2$X2000, CO2[,c("Indicator.Name", "Country.Name")],
        FUN=mean)
 \end{lstlisting}
-
 
 \begin{verbatim}
                                                Country.Name
@@ -405,47 +305,40 @@ Indicator.Name                                         Spain United States
   GNI, PPP (current international $)            8.514620e+11  1.007050e+13
 \end{verbatim}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{aggregate}
-\label{sec-3-6}
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-3-6]{aggregate}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 aggregate(X2000 ~ Indicator.Name,
-          data=CO2, FUN=mean)
+	  data=CO2, FUN=mean)
 \end{lstlisting}
 
 \begin{verbatim}
-                                  Indicator.Name        X2000
- 1           CO2 emissions (kg per PPP $ of GDP) 4.777875e-01
- 2        CO2 emissions (metric tons per capita) 7.580861e+00
- 3 GNI per capita, PPP (current international $) 1.981000e+04
- 4            GNI, PPP (current international $) 2.078196e+12
+                                 Indicator.Name        X2000
+1           CO2 emissions (kg per PPP $ of GDP) 4.777875e-01
+2        CO2 emissions (metric tons per capita) 7.580861e+00
+3 GNI per capita, PPP (current international $) 1.981000e+04
+4            GNI, PPP (current international $) 2.078196e+12
 \end{verbatim}
 
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 aggregate(cbind(X2000, X2001) ~ Indicator.Name,
-          data=CO2, FUN=mean)
+	  data=CO2, FUN=mean)
 \end{lstlisting}
 
 \begin{verbatim}
-                                  Indicator.Name        X2000        X2001
- 1           CO2 emissions (kg per PPP $ of GDP) 4.777875e-01 4.591328e-01
- 2        CO2 emissions (metric tons per capita) 7.580861e+00 7.725765e+00
- 3 GNI per capita, PPP (current international $) 1.981000e+04 2.066300e+04
- 4            GNI, PPP (current international $) 2.078196e+12 2.182390e+12
+                                 Indicator.Name        X2000        X2001
+1           CO2 emissions (kg per PPP $ of GDP) 4.777875e-01 4.591328e-01
+2        CO2 emissions (metric tons per capita) 7.580861e+00 7.725765e+00
+3 GNI per capita, PPP (current international $) 1.981000e+04 2.066300e+04
+4            GNI, PPP (current international $) 2.078196e+12 2.182390e+12
 \end{verbatim}
 
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 aggregate(X2000 ~ Indicator.Name + Country.Name,
-          data=CO2, FUN=mean)
+	  data=CO2, FUN=mean)
 \end{lstlisting}
-
 
 \begin{verbatim}
                                   Indicator.Name  Country.Name        X2000
@@ -491,18 +384,13 @@ aggregate(X2000 ~ Indicator.Name + Country.Name,
 40            GNI, PPP (current international $) United States 1.007050e+13
 \end{verbatim}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{aggregate}
-\label{sec-3-7}
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-3-7]{aggregate}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 aggregate(cbind(X2000, X2001) ~
-          Indicator.Name + Country.Name,
-          data=CO2, FUN=mean)
+	  Indicator.Name + Country.Name,
+	  data=CO2, FUN=mean)
 \end{lstlisting}
-
 
 \begin{verbatim}
                                   Indicator.Name  Country.Name        X2000
@@ -589,14 +477,12 @@ aggregate(cbind(X2000, X2001) ~
 40 1.038910e+13
 \end{verbatim}
 
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 aggregate(cbind(X2000, X2001) ~
-          Indicator.Name + Country.Name,
-          data=CO2, FUN=mean)
+	  Indicator.Name + Country.Name,
+	  data=CO2, FUN=mean)
 \end{lstlisting}
-
 
 \begin{verbatim}
                                   Indicator.Name  Country.Name        X2000
@@ -683,15 +569,13 @@ aggregate(cbind(X2000, X2001) ~
 40 1.038910e+13
 \end{verbatim}
 
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 aggregate(cbind(X2000, X2001) ~
-          Indicator.Name + Country.Name,
-          subset=(Country.Name %in% c('United States', 'China')),
-                  data=CO2, FUN=mean)
+	  Indicator.Name + Country.Name,
+	  subset=(Country.Name %in% c('United States', 'China')),
+		  data=CO2, FUN=mean)
 \end{lstlisting}
-
 
 \begin{verbatim}
                                  Indicator.Name  Country.Name        X2000
@@ -714,79 +598,65 @@ aggregate(cbind(X2000, X2001) ~
 8 1.038910e+13
 \end{verbatim}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{aggregate}
-\label{sec-3-8}
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-3-8]{aggregate}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 aggregate(cbind(XXA_00, XXA_36, XXB_00) ~
-          ensg + chromosome + symbol,
-          data = chromo,  FUN = mean)
+	  ensg + chromosome + symbol,
+	  data = chromo,  FUN = mean)
 \end{lstlisting}
 
 \begin{verbatim}
-   ensg chromosome symbol     XXA_00      XXA_36      XXB_00
- 1   E1          A     S1 -0.2595536  0.00192942 -0.10836948
- 2   E2          B     S2 -0.3446025 -0.47006844  0.32477202
- 3   E3          C     S3 -0.1462764  0.40911859 -0.06733134
+  ensg chromosome symbol      XXA_00     XXA_36      XXB_00
+1   E1          A     S1 -0.04095755 -0.2906532 -0.54415660
+2   E2          B     S2  0.32532301 -0.2300200 -0.05928762
+3   E3          C     S3  0.17182752 -0.2650071 -0.10832663
 \end{verbatim}
 
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 aggregate(cbind(XXA_00, XXA_36, XXB_00) ~ ensg ,
-          data = chromo,  FUN = mean)
+	  data = chromo,  FUN = mean)
 \end{lstlisting}
 
 \begin{verbatim}
-   ensg     XXA_00      XXA_36      XXB_00
- 1   E1 -0.2595536  0.00192942 -0.10836948
- 2   E2 -0.3446025 -0.47006844  0.32477202
- 3   E3 -0.1462764  0.40911859 -0.06733134
+  ensg      XXA_00     XXA_36      XXB_00
+1   E1 -0.04095755 -0.2906532 -0.54415660
+2   E2  0.32532301 -0.2300200 -0.05928762
+3   E3  0.17182752 -0.2650071 -0.10832663
 \end{verbatim}
 \end{frame}
 \section{Cambio de formato}
 \label{sec-4}
-\begin{frame}[fragile]
-\frametitle{\texttt{stack}}
-\label{sec-4-1}
-
-\begin{itemize}
+\begin{frame}[fragile,label=sec-4-1]{\texttt{stack}}
+ \begin{itemize}
 \item Primero escogemos un subconjunto
 \end{itemize}
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 CO2China <- subset(CO2,
-                   subset=(Country.Name=='China' &
-                           Indicator.Name=='CO2 emissions (kg per PPP $ of GDP)'),
-                   select=-c(Country.Name, Country.Code,
-                             Indicator.Name, Indicator.Code))
+		   subset=(Country.Name=='China' &
+			   Indicator.Name=='CO2 emissions (kg per PPP $ of GDP)'),
+		   select=-c(Country.Name, Country.Code,
+			     Indicator.Name, Indicator.Code))
 head(CO2China)
 \end{lstlisting}
 
 \begin{verbatim}
-       X2000    X2001    X2002    X2003    X2004    X2005    X2006     X2007
- 29 1.140619 1.054772 1.007715 1.098485 1.133811 1.079371 1.027606 0.9255433
-        X2008 X2009 X2010 X2011
- 29 0.8556903    NA    NA    NA
+      X2000    X2001    X2002    X2003    X2004    X2005    X2006     X2007
+29 1.140619 1.054772 1.007715 1.098485 1.133811 1.079371 1.027606 0.9255433
+       X2008 X2009 X2010 X2011
+29 0.8556903    NA    NA    NA
 \end{verbatim}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{\texttt{stack}}
-\label{sec-4-2}
-
-\begin{itemize}
+\begin{frame}[fragile,label=sec-4-2]{\texttt{stack}}
+ \begin{itemize}
 \item Pasamos de formato \texttt{wide} a \texttt{long}
 \end{itemize}
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 stack(CO2China)
 \end{lstlisting}
-
 
 \begin{verbatim}
       values   ind
@@ -804,22 +674,17 @@ stack(CO2China)
 12        NA X2011
 \end{verbatim}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{\texttt{reshape}: \texttt{wide} a \texttt{long}}
-\label{sec-4-3}
-
-\begin{itemize}
+\begin{frame}[fragile,label=sec-4-3]{\texttt{reshape}: \texttt{wide} a \texttt{long}}
+ \begin{itemize}
 \item Primer intento
 \end{itemize}
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 CO2long <- reshape(CO2,
-                   varying=list(names(CO2)[5:16]),
-                   direction='long')
+		   varying=list(names(CO2)[5:16]),
+		   direction='long')
 head(CO2long)
 \end{lstlisting}
-
 
 \begin{verbatim}
     Country.Name Country.Code                                Indicator.Name
@@ -838,24 +703,19 @@ head(CO2long)
 6.1    EN.ATM.CO2E.PC    1 6.016236e+00  6
 \end{verbatim}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{\texttt{reshape}: \texttt{wide} a \texttt{long}}
-\label{sec-4-4}
-
-\begin{itemize}
+\begin{frame}[fragile,label=sec-4-4]{\texttt{reshape}: \texttt{wide} a \texttt{long}}
+ \begin{itemize}
 \item Añadimos argumentos
 \end{itemize}
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 CO2long <- reshape(CO2,
-                   varying=list(names(CO2)[5:16]),
-                   timevar='Year', v.names='Value',
-                   times=2000:2011,
-                   direction='long')
+		   varying=list(names(CO2)[5:16]),
+		   timevar='Year', v.names='Value',
+		   times=2000:2011,
+		   direction='long')
 head(CO2long)
 \end{lstlisting}
-
 
 \begin{verbatim}
        Country.Name Country.Code                                Indicator.Name
@@ -874,22 +734,17 @@ head(CO2long)
 6.2000    EN.ATM.CO2E.PC 2000 6.016236e+00  6
 \end{verbatim}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{\texttt{reshape}: \texttt{long} a \texttt{wide}}
-\label{sec-4-5}
-
-\begin{itemize}
+\begin{frame}[fragile,label=sec-4-5]{\texttt{reshape}: \texttt{long} a \texttt{wide}}
+ \begin{itemize}
 \item Primero escogemos las columnas de interés
 \end{itemize}
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 CO2subset <- CO2long[c("Country.Name",
-                       "Indicator.Name",
-                       "Year", "Value")]
+		       "Indicator.Name",
+		       "Year", "Value")]
 head(CO2subset)
 \end{lstlisting}
-
 
 \begin{verbatim}
        Country.Name                                Indicator.Name Year
@@ -908,23 +763,18 @@ head(CO2subset)
 6.2000 6.016236e+00
 \end{verbatim}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{\texttt{reshape}: \texttt{long} a \texttt{wide}}
-\label{sec-4-6}
-
-\begin{itemize}
+\begin{frame}[fragile,label=sec-4-6]{\texttt{reshape}: \texttt{long} a \texttt{wide}}
+ \begin{itemize}
 \item Ahora cambiamos formato
 \end{itemize}
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 CO2wide <- reshape(CO2subset,
-                   idvar=c('Country.Name','Year'),
-                   timevar='Indicator.Name',
-                   direction='wide')
+		   idvar=c('Country.Name','Year'),
+		   timevar='Indicator.Name',
+		   direction='wide')
 head(CO2wide)
 \end{lstlisting}
-
 
 \begin{verbatim}
         Country.Name Year Value.CO2 emissions (kg per PPP $ of GDP)
@@ -957,39 +807,27 @@ head(CO2wide)
 21.2000                                               21150
 \end{verbatim}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{\texttt{reshape}: \texttt{long} a \texttt{wide}}
-\label{sec-4-7}
-
-\begin{itemize}
+\begin{frame}[fragile,label=sec-4-7]{\texttt{reshape}: \texttt{long} a \texttt{wide}}
+ \begin{itemize}
 \item Y ponemos nombres al gusto
 \end{itemize}
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 names(CO2wide)[3:6] <- c('CO2.PPP', 'CO2.capita',
-                         'GNI.PPP', 'GNI.capita')
+			 'GNI.PPP', 'GNI.capita')
 
 head(CO2wide)
 \end{lstlisting}
 
 \begin{verbatim}
-         Country.Name Year   CO2.PPP CO2.capita     GNI.PPP GNI.capita
- 1.2000       Finland 2000 0.3923481  10.073216 1.31880e+11      25480
- 5.2000        France 2000 0.2384221   6.016236 1.55899e+12      25660
- 9.2000       Germany 2000 0.3929031  10.121466 2.09545e+12      25490
- 13.2000       Greece 2000 0.4598579   8.391709 2.00013e+11      18320
- 17.2000       Norway 2000 0.2391275   8.641315 1.60100e+11      35650
- 21.2000        Spain 2000 0.3428950   7.312922 8.51462e+11      21150
+        Country.Name Year   CO2.PPP CO2.capita     GNI.PPP GNI.capita
+1.2000       Finland 2000 0.3923481  10.073216 1.31880e+11      25480
+5.2000        France 2000 0.2384221   6.016236 1.55899e+12      25660
+9.2000       Germany 2000 0.3929031  10.121466 2.09545e+12      25490
+13.2000       Greece 2000 0.4598579   8.391709 2.00013e+11      18320
+17.2000       Norway 2000 0.2391275   8.641315 1.60100e+11      35650
+21.2000        Spain 2000 0.3428950   7.312922 8.51462e+11      21150
 \end{verbatim}
-
-  
-  
-  
-  
-  
-  
-  
 \end{frame}
-
+% Emacs 24.3.1 (Org mode 8.2.1)
 \end{document}

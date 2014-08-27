@@ -1,4 +1,4 @@
-% Created 2013-03-06 mié 07:25
+% Created 2014-08-27 mié 09:17
 \documentclass[xcolor={usenames,svgnames,dvipsnames}]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -7,11 +7,12 @@
 \usepackage{longtable}
 \usepackage{float}
 \usepackage{wrapfig}
-\usepackage{soul}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
 \usepackage{textcomp}
 \usepackage{marvosym}
 \usepackage{wasysym}
-\usepackage{latexsym}
 \usepackage{amssymb}
 \usepackage{hyperref}
 \tolerance=1000
@@ -20,20 +21,19 @@
 \AtBeginSection[]{\begin{frame}[plain]\tableofcontents[currentsection,hideallsubsections]\end{frame}}
 \lstset{keywordstyle=\color{blue}, commentstyle=\color{gray!90}, basicstyle=\ttfamily\small, columns=fullflexible, breaklines=true,linewidth=\textwidth, backgroundcolor=\color{gray!23}, basewidth={0.5em,0.4em}, literate={á}{{\'a}}1 {ñ}{{\~n}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {º}{{\textordmasculine}}1}
 \usepackage{mathpazo}
-\usefonttheme{serif}
-\usecolortheme{rose}  
-\usetheme{Goettingen}
 \hypersetup{colorlinks=true, linkcolor=Blue, urlcolor=Blue}
-\providecommand{\alert}[1]{\textbf{#1}}
-
+\usepackage{fancyvrb}
+\DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\tiny, formatcom = {\color{black!70}}}
+\usetheme{Goettingen}
+\usecolortheme{rose}
+\usefonttheme{serif}
+\author{Oscar Perpiñán Lamigueiro \\ \url{http://oscarperpinan.github.io}}
+\date{}
 \title{Introducción a R}
-\author{Oscar Perpiñán Lamigueiro}
-\date{Febrero de 2013}
 \hypersetup{
   pdfkeywords={},
   pdfsubject={},
-  pdfcreator={Emacs Org-mode version 7.8.11}}
-
+  pdfcreator={Emacs 24.3.1 (Org mode 8.2.1)}}
 \begin{document}
 
 \maketitle
@@ -43,76 +43,56 @@
 \label{sec-1}
 \subsection{¿Qué es \texttt{R}?}
 \label{sec-1-1}
-\begin{frame}
-\frametitle{¿Qué es \texttt{R}?}
-\label{sec-1-1-1}
-\begin{block}{¿Qué es \href{http://procomun.wordpress.com/2011/02/23/que-es-r/}{R}?}
-\label{sec-1-1-1-1}
-
+\begin{frame}[fragile,label=sec-1-1-1]{¿Qué es \texttt{R}?}
+ \begin{block}{¿Qué es \href{http://procomun.wordpress.com/2011/02/23/que-es-r/}{R}?}
 Es un lenguaje de programación principalmente orientado al
 análisis estadístico y visualización de información cuantitativa y
 cualitativa y publicado como software libre con licencia GNU-GPL.
 \begin{center}
-\href{http://www.R-project.org}{http://www.R-project.org} 
+\url{http://www.R-project.org} 
 \end{center}
 \end{block}
 \end{frame}
-\begin{frame}
-\frametitle{Para instalar \texttt{R}}
-\label{sec-1-1-2}
-
-
-\begin{itemize}
-\item Windows: \href{http://cran.es.r-project.org/bin/windows/base/}{http://cran.es.r-project.org/bin/windows/base/}
-\item Mac: \href{http://cran.es.r-project.org/bin/macosx/}{http://cran.es.r-project.org/bin/macosx/}
-\item Linux: \href{http://cran.es.r-project.org/bin/linux/}{http://cran.es.r-project.org/bin/linux/}
+\begin{frame}[fragile,label=sec-1-1-2]{Para instalar \texttt{R}}
+ \begin{itemize}
+\item Windows: \url{http://cran.es.r-project.org/bin/windows/base/}
+\item Mac: \url{http://cran.es.r-project.org/bin/macosx/}
+\item Linux: \url{http://cran.es.r-project.org/bin/linux/}
 \end{itemize}
 \end{frame}
-\begin{frame}
-\frametitle{Interfaces para R}
-\label{sec-1-1-3}
-
-
+\begin{frame}[label=sec-1-1-3]{Interfaces para R}
 \begin{itemize}
 \item En mi opinión, la mejor interfaz para R es \href{http://ess.r-project.org/}{ESS} con \href{http://www.gnu.org/software/emacs/}{Emacs}.
 \item Para los que prefieren una interfaz gráfica es recomendable \href{http://www.rstudio.com/ide/}{RStudio}:
 \begin{itemize}
-\item Instalador: \href{http://www.rstudio.com/ide/download/desktop}{http://www.rstudio.com/ide/download/desktop}
-\item Introducción: \href{http://www.rstudio.com/ide/docs/using/source}{http://www.rstudio.com/ide/docs/using/source}
+\item Instalador: \url{http://www.rstudio.com/ide/download/desktop}
+\item Introducción: \url{http://www.rstudio.com/ide/docs/using/source}
 \end{itemize}
 \end{itemize}
 \end{frame}
 \subsection{R es un proyecto colaborativo}
 \label{sec-1-2}
-\begin{frame}
-\frametitle{R es un proyecto colaborativo}
-\label{sec-1-2-1}
-
+\begin{frame}[label=sec-1-2-1]{R es un proyecto colaborativo}
 \begin{itemize}
 \item Una de las grandes riquezas de R es la cantidad de paquetes (más
-  de 4000 actualmente) que amplían sus funcionalidades.
-\item La lista completa está en \href{http://cran.es.r-project.org/web/packages/}{http://cran.es.r-project.org/web/packages/}.
+de 4000 actualmente) que amplían sus funcionalidades.
+\item La lista completa está en \url{http://cran.es.r-project.org/web/packages/}.
 \item Las CRAN Task Views agrupan por temáticas:
-  \href{http://cran.r-project.org/web/views/}{http://cran.r-project.org/web/views/}
+  \url{http://cran.r-project.org/web/views/}
 \end{itemize}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{Más de 4000 paquetes disponibles}
-\label{sec-1-2-2}
-
-\begin{itemize}
+\begin{frame}[fragile,label=sec-1-2-2]{Más de 4000 paquetes disponibles}
+ \begin{itemize}
 \item Algunos vienen instalados y se cargan al empezar:
 \end{itemize}
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 sessionInfo()
 \end{lstlisting}
 \begin{itemize}
 \item Otros vienen instalados pero hay que cargarlos:
 \end{itemize}
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 library(lattice)
 packageVersion('lattice')
@@ -121,8 +101,7 @@ packageDescription('lattice')
 \begin{itemize}
 \item Otros hay que instalarlos y después cargarlos:
 \end{itemize}
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 install.packages('zoo')
 library('zoo')
@@ -131,10 +110,8 @@ packageDescription('zoo')
 \end{frame}
 \subsection{R está muy bien documentado}
 \label{sec-1-3}
-\begin{frame}
-\frametitle{Fuentes de información}
-\label{sec-1-3-1}
 
+\begin{frame}[label=sec-1-3-1]{Fuentes de información}
 \begin{itemize}
 \item \href{http://cran.r-project.org/doc/manuals/R-intro.html}{Manual introductorio}
 \item \href{http://cran.r-project.org/manuals.html}{Manuales oficiales}
@@ -143,16 +120,14 @@ packageDescription('zoo')
 \item \href{http://www.r-bloggers.com}{R-bloggers}
 \end{itemize}
 \end{frame}
+
 \section{Vectores y Matrices}
 \label{sec-2}
+
 \subsection{Vectores}
 \label{sec-2-1}
-\begin{frame}[fragile]
-\frametitle{Primeros pasos}
-\label{sec-2-1-1}
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-2-1-1]{Primeros pasos}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 x <- 1
 x
@@ -165,24 +140,16 @@ length(x)
 class(x)
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{Primeras funciones}
-\label{sec-2-1-2}
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-2-1-2]{Primeras funciones}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 class(c)
 class(length)
 length
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{Operaciones sencillas con vectores}
-\label{sec-2-1-3}
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-2-1-3]{Operaciones sencillas con vectores}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 x + 1
 y <- 1:10
@@ -194,24 +161,15 @@ exp(x)
 log(x)
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{¿Y qué hago cuando necesito ayuda?}
-\label{sec-2-1-4}
-
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-2-1-4]{¿Y qué hago cuando necesito ayuda?}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 help(exp)
 help(log)
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{Generar vectores con \texttt{seq}}
-\label{sec-2-1-5}
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-2-1-5]{Generar vectores con \texttt{seq}}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 x1 <- seq(1, 100, by=2)
 x1
@@ -229,12 +187,8 @@ x <- seq(1, 100, length=10)
 y <- seq(2, 100, length=50)
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{Unir vectores con \texttt{c}}
-\label{sec-2-1-6}
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-2-1-6]{Unir vectores con \texttt{c}}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 z <- c(x, y)
 z
@@ -244,12 +198,8 @@ z <- c(z, z, z, z)
 z
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{Generar vectores con \texttt{rep}}
-\label{sec-2-1-7}
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-2-1-7]{Generar vectores con \texttt{rep}}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 rep(1:10, 4)
 
@@ -260,13 +210,9 @@ rep(c(1, 2, 3), each=10)
 help(rep)
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{Indexado numérico de vectores}
-\label{sec-2-1-8}
 
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-2-1-8]{Indexado numérico de vectores}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 x <- seq(1, 100, 2)
 1:5
@@ -275,25 +221,16 @@ x[1:5]
 x[10:5]
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{Indexado de vectores con condiciones lógicas}
-\label{sec-2-1-9}
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-2-1-9]{Indexado de vectores con condiciones lógicas}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 condicion <- (x>30)
 condicion
 class(condicion)
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{Indexado de vectores con condiciones lógicas}
-\label{sec-2-1-10}
-
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-2-1-10]{Indexado de vectores con condiciones lógicas}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 x==37
 x[x==37]
@@ -304,19 +241,13 @@ x[x>20]
 \begin{itemize}
 \item Y aquí ¿qué ocurre?
 \end{itemize}
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 x[x=10]
 \end{lstlisting}
-     
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{Indexado de vectores con \texttt{\%in\%}}
-\label{sec-2-1-11}
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-2-1-11]{Indexado de vectores con \texttt{\%in\%}}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 y <- seq(101, 200, 2)
 y %in% c(101, 127, 141)
@@ -324,13 +255,8 @@ y
 y[y %in% c(101, 127, 141)]
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{Indexado de vectores con condiciones múltiples}
-\label{sec-2-1-12}
-
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-2-1-12]{Indexado de vectores con condiciones múltiples}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 z <- c(x, y)
 z
@@ -341,12 +267,8 @@ z[z>=30 & z<=150]
 z[c(1, 10, 40, 80)]
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{Indexado de vectores con condiciones múltiples}
-\label{sec-2-1-13}
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-2-1-13]{Indexado de vectores con condiciones múltiples}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 cond  <-  (x>10) & (x<50)
 cond
@@ -355,12 +277,8 @@ cond
 x[cond]
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{Con las condiciones se pueden hacer operaciones}
-\label{sec-2-1-14}
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-2-1-14]{Con las condiciones se pueden hacer operaciones}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 sum(cond)
 !cond
@@ -369,14 +287,10 @@ length(x[cond])
 length(x[!cond])
 as.numeric(cond)
 \end{lstlisting}
-    
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{Funciones predefinidas}
-\label{sec-2-1-15}
 
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-2-1-15]{Funciones predefinidas}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 summary(x)
 mean(x)
@@ -388,14 +302,12 @@ range(x)
 quantile(x)
 \end{lstlisting}
 \end{frame}
+
+
 \subsection{Matrices}
 \label{sec-2-2}
-\begin{frame}[fragile]
-\frametitle{Construir una matriz}
-\label{sec-2-2-1}
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-2-2-1]{Construir una matriz}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 z <- 1:12
 M  <-  matrix(z, nrow=3)
@@ -407,12 +319,8 @@ dim(M)
 summary(M)
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{Matrices a partir de vectores: \texttt{rbind} y \texttt{cbind}}
-\label{sec-2-2-2}
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-2-2-2]{Matrices a partir de vectores: \texttt{rbind} y \texttt{cbind}}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 x <- 1:10
 y <- 1:10
@@ -428,26 +336,16 @@ rbind(M, M)
 cbind(M, M)
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{Transponer una matriz}
-\label{sec-2-2-3}
-
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-2-2-3]{Transponer una matriz}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 t(M)
 class(t)
 dim(t(M))
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{Operaciones con matrices}
-\label{sec-2-2-4}
-
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-2-2-4]{Operaciones con matrices}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 M * M
 M ^ 2
@@ -456,13 +354,8 @@ M %*% t(M)
 help('%*%')
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{Operaciones con matrices: funciones predefinidas}
-\label{sec-2-2-5}
-
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-2-2-5]{Operaciones con matrices: funciones predefinidas}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 sum(M)
 rowSums(M)
@@ -471,12 +364,8 @@ rowMeans(M)
 colMeans(M)
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{La función \texttt{apply}}
-\label{sec-2-2-6}
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-2-2-6]{La función \texttt{apply}}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 help(apply)
 apply(M, 1, sum)
@@ -487,42 +376,32 @@ apply(M, 1, sd, na.rm=TRUE)
 apply(M, 2, sd)
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{\texttt{sweep}}
-\label{sec-2-2-7}
-
-\begin{itemize}
+\begin{frame}[fragile,label=sec-2-2-7]{\texttt{sweep}}
+ \begin{itemize}
 \item Usamos el conjunto de datos \texttt{state.x77}
 \end{itemize}
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 head(state.x77)
 \end{lstlisting}
 \begin{itemize}
 \item Calculamos el máximo por columna
 \end{itemize}
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 maxes <- apply(state.x77, 2, max)
 \end{lstlisting}
 \begin{itemize}
 \item Dividimos cada columna por su máximo
 \end{itemize}
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 stateNorm <- sweep(state.x77, 2, maxes, FUN="/")
 head(stateNorm)
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{Indexado de matrices}
-\label{sec-2-2-8}
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-2-2-8]{Indexado de matrices}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 M
 M[]
@@ -535,18 +414,13 @@ M[1, c(1, 4)]
 M[-1,]
 M[-c(1, 2),]
 \end{lstlisting}
-    
 \end{frame}
+
 \subsection{Valores ausentes}
 \label{sec-2-3}
 
-   
-\begin{frame}[fragile]
-\frametitle{¿Qué es \texttt{NA}?}
-\label{sec-2-3-1}
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-2-3-1]{¿Qué es \texttt{NA}?}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 class(NA)
 x <- rnorm(100)
@@ -558,13 +432,8 @@ x2[idx] <- NA
 x2
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{\texttt{NA} en las funciones}
-\label{sec-2-3-2}
-
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-2-3-2]{\texttt{NA} en las funciones}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 summary(x)
 mean(x)
@@ -575,13 +444,8 @@ mean(x2)
 sum(x2)
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{\texttt{NA} en las funciones}
-\label{sec-2-3-3}
-
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-2-3-3]{\texttt{NA} en las funciones}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 mean(x2, na.rm=TRUE)
 sum(x2, na.rm=TRUE)
@@ -589,28 +453,22 @@ sd(x2, na.rm=TRUE)
 class(TRUE)
 \end{lstlisting}
 \end{frame}
+
 \section{Funciones}
 \label{sec-3}
+
 \subsection{Definición de funciones}
 \label{sec-3-1}
-\begin{frame}[fragile]
-\frametitle{Para definir una función usamos la función \texttt{function}}
-\label{sec-3-1-1}
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-3-1-1]{Para definir una función usamos la función \texttt{function}}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 myFun <- function(x, y) x + y
 myFun(3, 4)
 class(myFun)
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{Definir una función a partir de funciones}
-\label{sec-3-1-2}
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-3-1-2]{Definir una función a partir de funciones}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 foo  <-  function(x, ...){
   mx <- mean(x, ...)
@@ -620,20 +478,16 @@ foo  <-  function(x, ...){
   }
 \end{lstlisting}
 O en forma resumida:
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 foo <- function(x, ...){c(mean(x, ...), median(x, ...), sd(x, ...))}
 \end{lstlisting}
 \end{frame}
+
 \subsection{Uso de funciones}
 \label{sec-3-2}
-\begin{frame}[fragile]
-\frametitle{Y ahora usamos la función con vectores}
-\label{sec-3-2-1}
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-3-2-1]{Y ahora usamos la función con vectores}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 foo(1:10)
 
@@ -642,12 +496,8 @@ help(rnorm)
 foo(rnorm(1e5))
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{Y también funciona con matrices}
-\label{sec-3-2-2}
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-3-2-2]{Y también funciona con matrices}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 rowMeans(M)
 apply(M, 1, foo)
@@ -655,12 +505,8 @@ colMeans(M)
 apply(M, 2, foo)
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{La función \texttt{outer}}
-\label{sec-3-2-3}
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-3-2-3]{La función \texttt{outer}}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 f <- function(x, y)x^2+y^2
 f
@@ -673,33 +519,27 @@ z
 image(x, y, z)
 \end{lstlisting}
 \end{frame}
+
 \section{Listas y data.frame}
 \label{sec-4}
+
 \subsection{Listas}
 \label{sec-4-1}
-\begin{frame}[fragile]
-\frametitle{Para crear una lista usamos la función \texttt{list}}
-\label{sec-4-1-1}
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-4-1-1]{Para crear una lista usamos la función \texttt{list}}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 lista <- list(a=c(1,3,5),
-              b=c('l', 'p', 'r', 's'),
-              c=3)
+	      b=c('l', 'p', 'r', 's'),
+	      c=3)
 class(list)
 class(lista)
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{Podemos acceder a los elementos\ldots{}}
-\label{sec-4-1-2}
-
-\begin{itemize}
+\begin{frame}[fragile,label=sec-4-1-2]{Podemos acceder a los elementos\ldots{}}
+ \begin{itemize}
 \item Por su nombre
 \end{itemize}
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 lista
 lista$a
@@ -710,8 +550,7 @@ lista$c
 \begin{itemize}
 \item o por su índice
 \end{itemize}
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 lista[1]
 lista[[1]]
@@ -726,15 +565,11 @@ class(lista[2])
 class(lista[[2]])
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{Cada elemento es diferente}
-\label{sec-4-1-3}
-
-\begin{itemize}
+\begin{frame}[fragile,label=sec-4-1-3]{Cada elemento es diferente}
+ \begin{itemize}
 \item Clase
 \end{itemize}
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 class(lista)
 class(lista$a)
@@ -744,8 +579,7 @@ class(lista$c)
 \begin{itemize}
 \item Longitud
 \end{itemize}
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 length(lista)
 length(lista$a)
@@ -753,19 +587,15 @@ length(lista$b)
 length(lista$c)
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{Para matrices \texttt{apply}, para listas \texttt{lapply} y \texttt{sapply}}
-\label{sec-4-1-4}
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-4-1-4]{Para matrices \texttt{apply}, para listas \texttt{lapply} y \texttt{sapply}}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 lapply(lista, length)
 sapply(lista, length)
 
 lista <- list(x = 1:10,
-              y = seq(0, 10, 2),
-              z = rnorm(30))
+	      y = seq(0, 10, 2),
+	      z = rnorm(30))
 lista
 
 lapply(lista, sum)
@@ -773,32 +603,26 @@ lapply(lista, median)
 lapply(lista, foo)
 \end{lstlisting}
 \end{frame}
+
 \subsection{Data.frame}
 \label{sec-4-2}
-\begin{frame}[fragile]
-\frametitle{Para crear un \texttt{data.frame}...}
-\label{sec-4-2-1}
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-4-2-1]{Para crear un \texttt{data.frame}\ldots{}}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 df <- data.frame(x = 1:10,
-                 y = rnorm(10),
-                 z = 0)
+		 y = rnorm(10),
+		 z = 0)
 
 length(df)
 dim(df)
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{Podemos acceder a los elementos}
-\label{sec-4-2-2}
 
-\begin{itemize}
+\begin{frame}[fragile,label=sec-4-2-2]{Podemos acceder a los elementos}
+ \begin{itemize}
 \item Por su nombre
 \end{itemize}
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 df$x
 df$y
@@ -808,8 +632,7 @@ df$z
 \begin{itemize}
 \item Por su índice
 \end{itemize}
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 df
 df[1,]
@@ -817,12 +640,8 @@ df[,1]
 df[,2]
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{La regla del reciclaje}
-\label{sec-4-2-3}
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-4-2-3]{La regla del reciclaje}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 year <- 2011
 month <- 1:12
@@ -833,13 +652,9 @@ dats <- data.frame(year, month, class, vals)
 dats
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{La función \texttt{expand.grid}}
-\label{sec-4-2-4}
 
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-4-2-4]{La función \texttt{expand.grid}}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 x <- y <- seq(-4*pi, 4*pi, len=200)
 df <- expand.grid(x = x, y = y)
@@ -850,13 +665,8 @@ dim(df)
 names(df)
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{Funciones sobre \texttt{data.frame}}
-\label{sec-4-2-5}
-
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-4-2-5]{Funciones sobre \texttt{data.frame}}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 circles <- function(object){
   r <- with(object, sqrt(x^2 + y^2))
@@ -867,62 +677,48 @@ df$result <- circles(df)
 head(df)
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{Una imagen vale más que mil palabras}
-\label{sec-4-2-6}
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-4-2-6]{Una imagen vale más que mil palabras}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 library(lattice)
 levelplot(result ~ x + y, data=df)
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{Unir dos \texttt{data.frame}}
-\label{sec-4-2-7}
-
-\begin{itemize}
+\begin{frame}[fragile,label=sec-4-2-7]{Unir dos \texttt{data.frame}}
+ \begin{itemize}
 \item Primero construimos un \texttt{data.frame} de ejemplo
 \end{itemize}
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 USStates <- as.data.frame(state.x77)
 USStates$Name <- rownames(USStates)
 rownames(USStates) <- NULL
 \end{lstlisting}
 \begin{itemize}
-\item Lo partimos en estados ``fríos'' y estados ``grandes''
+\item Lo partimos en estados \guillemotleft{}fríos\guillemotright{} y estados \guillemotleft{}grandes\guillemotright{}
 \end{itemize}
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 coldStates <- USStates[USStates$Frost>150, c('Name', 'Frost')]
 largeStates <- USStates[USStates$Area>1e5, c('Name', 'Area')]
 \end{lstlisting}
 \begin{itemize}
-\item Unimos los dos conjuntos (estados ``fríos'' y ``grandes'')
+\item Unimos los dos conjuntos (estados \guillemotleft{}fríos\guillemotright{} y \guillemotleft{}grandes\guillemotright{})
 \end{itemize}
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 merge(coldStates, largeStates)
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{\texttt{merge} usa \texttt{match}}
-\label{sec-4-2-8}
-
-\begin{itemize}
+\begin{frame}[fragile,label=sec-4-2-8]{\texttt{merge} usa \texttt{match}}
+ \begin{itemize}
 \item Estados grandes que también son fríos
 \end{itemize}
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 idxLarge <- match(largeStates$Name,
-                  coldStates$Name,
-                  nomatch=0)
+		  coldStates$Name,
+		  nomatch=0)
 idxLarge
 
 coldStates[idxLarge,]
@@ -931,12 +727,11 @@ coldStates[idxLarge,]
 \begin{itemize}
 \item Estados frios que también son grandes
 \end{itemize}
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 idxCold <- match(coldStates$Name,
-                 largeStates$Name,
-                 nomatch=0)
+		 largeStates$Name,
+		 nomatch=0)
 idxCold
 
 largeStates[idxCold,]
@@ -946,27 +741,19 @@ largeStates[idxCold,]
 \label{sec-5}
 \subsection{\texttt{factor}}
 \label{sec-5-1}
-\begin{frame}[fragile]
-\frametitle{Una variable numérica que nos servirá para el ejemplo}
-\label{sec-5-1-1}
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-5-1-1]{Una variable numérica que nos servirá para el ejemplo}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 N <- 100
 edad <- sample(seq(18, 40, 1), N, replace=TRUE)
 summary(edad)
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{Una variable cualitativa se define con \texttt{factor}}
-\label{sec-5-1-2}
-
-\begin{itemize}
+\begin{frame}[fragile,label=sec-5-1-2]{Una variable cualitativa se define con \texttt{factor}}
+ \begin{itemize}
 \item Ahora es un \texttt{character}
 \end{itemize}
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 sexo <- sample(c('H', 'M'), N, replace=TRUE)
 class(sexo)
@@ -975,8 +762,7 @@ summary(sexo)
 \begin{itemize}
 \item Ahora es un \texttt{factor}
 \end{itemize}
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 sexo <- factor(sexo)
 class(sexo)
@@ -985,16 +771,11 @@ levels(sexo)
 nlevels(sexo)
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{Los \texttt{factor} sirven para agrupar}
-\label{sec-5-1-3}
-
-
-\begin{itemize}
+\begin{frame}[fragile,label=sec-5-1-3]{Los \texttt{factor} sirven para agrupar}
+ \begin{itemize}
 \item Con la función \texttt{table}
 \end{itemize}
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 table(edad, sexo)
 table(edad > 30, sexo)
@@ -1004,19 +785,14 @@ table(edad %in% 20:30, sexo)
 \begin{itemize}
 \item Con \texttt{tapply} o \texttt{aggregate}
 \end{itemize}
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 tapply(edad,sexo, mean)
 aggregate(edad ~ sexo, FUN=median)
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{Los factores sirven para separar}
-\label{sec-5-1-4}
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-5-1-4]{Los factores sirven para separar}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 edadSexo <- split(edad, sexo)
 class(edadSexo)
@@ -1024,15 +800,11 @@ class(edadSexo)
 sapply(edadSexo, mean)
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{Los \texttt{factor} se pueden generar a partir de variables numéricas}
-\label{sec-5-1-5}
-
-\begin{itemize}
+\begin{frame}[fragile,label=sec-5-1-5]{Los \texttt{factor} se pueden generar a partir de variables numéricas}
+ \begin{itemize}
 \item Por ejemplo, con \texttt{cut}
 \end{itemize}
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 gEdad <- cut(edad, breaks=4)
 class(gEdad)
@@ -1043,8 +815,7 @@ nlevels(gEdad)
 \begin{itemize}
 \item Nuevamente \texttt{table}
 \end{itemize}
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 table(gEdad)
 table(gEdad, sexo)
@@ -1052,12 +823,9 @@ table(gEdad, sexo)
 \end{frame}
 \subsection{Fechas}
 \label{sec-5-2}
-\begin{frame}[fragile]
-\frametitle{\texttt{Date}}
-\label{sec-5-2-1}
 
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-5-2-1]{\texttt{Date}}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 as.Date('2013-02-06')
 as.Date('2013/02/06')
@@ -1068,31 +836,22 @@ as.Date('06.02.2013', format='%d.%m.%Y')
 as.Date(37, origin='2013-01-01')
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{Secuencias temporales con \texttt{Date}}
-\label{sec-5-2-2}
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-5-2-2]{Secuencias temporales con \texttt{Date}}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 seq(as.Date('2004-01-01'), by='day', length=10)
 seq(as.Date('2004-01-01'), by='month', length=10)
 seq(as.Date('2004-01-01'), by='10 day', length=10)
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{POSIXct}
-\label{sec-5-2-3}
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-5-2-3]{POSIXct}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 as.POSIXct('2013-02-06')
 ISOdate(2013, 2, 7)
 \end{lstlisting}
 
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 hoy <- as.POSIXct('2013-02-06')
 
@@ -1104,8 +863,7 @@ format(hoy, '%b')
 format(hoy, '%d de %B de %Y')
 \end{lstlisting}
 
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 hora <- Sys.time()
 hora
@@ -1114,31 +872,21 @@ format(hora, '%H:%M:%S')
 format(hora, '%H horas, %M minutos y %S segundos')
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{Secuencias temporales con \texttt{POSIXct}}
-\label{sec-5-2-4}
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-5-2-4]{Secuencias temporales con \texttt{POSIXct}}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 seq(as.POSIXct('2004-01-01'), by='month', length=10)
 seq(as.POSIXct('2004-01-01 10:00:00'), by='15 min', length=10)
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{Zonas horarias}
-\label{sec-5-2-5}
-
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-5-2-5]{Zonas horarias}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 as.POSIXct('2013-02-06 15:30:00', tz='GMT')
 as.POSIXct('2013-02-06 15:30:00', tz='Europe/Madrid')
 \end{lstlisting}
 
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 hawaii <- as.POSIXct('2013-02-06 15:30:00', tz='HST')
 ## Character
@@ -1149,13 +897,9 @@ as.POSIXct(format(hawaii, tz='GMT'), tz='GMT')
 \end{frame}
 \subsection{Caracteres}
 \label{sec-5-3}
-\begin{frame}[fragile]
-\frametitle{Bastan unas simples comillas}
-\label{sec-5-3-1}
 
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-5-3-1]{Bastan unas simples comillas}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 cadena <- "Hola mundo"
 class(cadena)
@@ -1165,33 +909,23 @@ nchar(cadena)
 \begin{itemize}
 \item Y aquí, ¿qué pasa?
 \end{itemize}
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 length(cadena)
 cadena[1]
 cadena[2]
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{Un vector de \texttt{character}}
-\label{sec-5-3-2}
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-5-3-2]{Un vector de \texttt{character}}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 cadenaVec <- c("Hola mundo", "Hello world")
 nchar(cadenaVec)
 length(cadenaVec)
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{Para mostrarlos usamos \texttt{cat} o \texttt{print}}
-\label{sec-5-3-3}
-
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-5-3-3]{Para mostrarlos usamos \texttt{cat} o \texttt{print}}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 a = 2
 b = 3
@@ -1207,15 +941,11 @@ cat('La suma de', a, 'y', b, 'es', a + b, '\n',
     'La multiplicación de', a, 'por', b, 'es', a*b, fill=15)
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{Los \texttt{character} se pueden unir\ldots{}}
-\label{sec-5-3-4}
-
-\begin{itemize}
+\begin{frame}[fragile,label=sec-5-3-4]{Los \texttt{character} se pueden unir\ldots{}}
+ \begin{itemize}
 \item Primero sencillo
 \end{itemize}
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 paste('Hello', 'World', sep='_')
 
@@ -1225,8 +955,7 @@ paste(cadenaVec, collapse='=')
 \begin{itemize}
 \item Y algo más complicado
 \end{itemize}
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 paste('X', 1:5, sep='.')
 paste(c('A', 'B'), 1:5, sep='.')
@@ -1234,19 +963,14 @@ paste(c('A', 'B'), 1:5, sep='.')
 paste(c('A', 'B'), 1:5, sep='.', collapse='|')
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{\ldots{} y también se pueden separar\ldots{}}
-\label{sec-5-3-5}
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-5-3-5]{\ldots{} y también se pueden separar\ldots{}}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 strsplit(cadenaVec, split=' ')
 strsplit(cadenaVec, split='')
 \end{lstlisting}
 
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 chSep <- strsplit(cadenaVec, split=' ')
 class(chSep)
@@ -1255,12 +979,8 @@ sapply(chSep, length)
 sapply(chSep, nchar)
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{\ldots{} y, por supuesto, manipular}
-\label{sec-5-3-6}
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-5-3-6]{\ldots{} y, por supuesto, manipular}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 sub('o', '0', 'Hola Mundo')
 gsub('o', '0', 'Hola Mundo')
@@ -1272,16 +992,14 @@ tolower(cadena)
 toupper(cadena)
 \end{lstlisting}
 \end{frame}
+
+
 \section{Bucles y condiciones}
 \label{sec-6}
 \subsection{Bucles \texttt{for}}
 \label{sec-6-1}
-\begin{frame}[fragile]
-\frametitle{\texttt{for}}
-\label{sec-6-1-1}
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-6-1-1]{\texttt{for}}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 for(n in c(2,5,10,20,50)) {
     x <- rnorm(n)
@@ -1289,14 +1007,11 @@ for(n in c(2,5,10,20,50)) {
 }
 \end{lstlisting}
 \end{frame}
+
 \subsection{Condiciones con \texttt{if}, \texttt{else} e \texttt{ifelse}}
 \label{sec-6-2}
-\begin{frame}[fragile]
-\frametitle{\texttt{if}}
-\label{sec-6-2-1}
-
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-6-2-1]{\texttt{if}}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 x <- rnorm(10)
 x2 <- numeric(length(x))
@@ -1306,16 +1021,13 @@ for (i in seq_along(x2)){
 cbind(x, x2)
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{\texttt{ifelse}}
-\label{sec-6-2-2}
 
-
-\lstset{language=R}
+\begin{frame}[fragile,label=sec-6-2-2]{\texttt{ifelse}}
+ \lstset{language=R,numbers=none}
 \begin{lstlisting}
 x <- rnorm(10)
 ifelse(x>0, 1, 0)
 \end{lstlisting}
 \end{frame}
-
+% Emacs 24.3.1 (Org mode 8.2.1)
 \end{document}

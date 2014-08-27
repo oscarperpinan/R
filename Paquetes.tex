@@ -1,4 +1,4 @@
-% Created 2013-03-11 lun 13:58
+% Created 2014-08-27 mié 00:17
 \documentclass[xcolor={usenames,svgnames,dvipsnames}]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -7,11 +7,12 @@
 \usepackage{longtable}
 \usepackage{float}
 \usepackage{wrapfig}
-\usepackage{soul}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
 \usepackage{textcomp}
 \usepackage{marvosym}
 \usepackage{wasysym}
-\usepackage{latexsym}
 \usepackage{amssymb}
 \usepackage{hyperref}
 \tolerance=1000
@@ -20,74 +21,59 @@
 \AtBeginSection[]{\begin{frame}[plain]\tableofcontents[currentsection,hideallsubsections]\end{frame}}
 \lstset{keywordstyle=\color{blue}, commentstyle=\color{gray!90}, basicstyle=\ttfamily\small, columns=fullflexible, breaklines=true,linewidth=\textwidth, backgroundcolor=\color{gray!23}, basewidth={0.5em,0.4em}, literate={á}{{\'a}}1 {ñ}{{\~n}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {º}{{\textordmasculine}}1}
 \usepackage{mathpazo}
-\usefonttheme{serif}
-\usecolortheme{rose}  
-\usetheme{Goettingen}
 \hypersetup{colorlinks=true, linkcolor=Blue, urlcolor=Blue}
 \usepackage{fancyvrb}
 \DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\tiny, formatcom = {\color{black!70}}}
-\providecommand{\alert}[1]{\textbf{#1}}
-
+\usetheme{Goettingen}
+\usecolortheme{rose}
+\usefonttheme{serif}
+\author{Oscar Perpiñán Lamigueiro \\ \url{http://oscarperpinan.github.io}}
+\date{}
 \title{Crear paquetes en R}
-\author{Oscar Perpiñán Lamigueiro}
-\date{Marzo de 2013}
 \hypersetup{
   pdfkeywords={},
   pdfsubject={},
-  pdfcreator={Emacs Org-mode version 7.8.11}}
-
+  pdfcreator={Emacs 24.3.1 (Org mode 8.2.1)}}
 \begin{document}
 
 \maketitle
 
-
 \section{Introducción}
 \label{sec-1}
-\begin{frame}
-\frametitle{Definiciones previas}
-\framesubtitle{\href{http://cran.r-project.org/doc/contrib/Leisch-CreatingPackages.pdf}{Creating R Packages: a tutorial}}
-\label{sec-1-1}
 
+\begin{frame}[label=sec-1-1]{Definiciones previas (\href{http://cran.r-project.org/doc/contrib/Leisch-CreatingPackages.pdf}{Creating R Packages: a tutorial})}
 \begin{itemize}
-\item \textbf{Package}: An extension of the R base system with code, data and
-  documentation in standardized format.
-\item \textbf{Library}: A directory containing installed packages.
-\item \textbf{Repository}: A website providing packages for installation.
-\item \textbf{Source}: The original version of a package with human-readable text and code.
-\item \textbf{Binary}: A compiled version of a package with computer-readable
-  text and code, may work only on a specific platform.
-\item \textbf{Base packages}: Part of the R source tree, maintained by R Core.
-\item \textbf{Recommended packages}: Part of every R installation, but not
-  necessarily maintained by R Core.
-\item \textbf{Contributed packages}: All the rest.
+\item \alert{Package}: An extension of the R base system with code, data and
+documentation in standardized format.
+\item \alert{Library}: A directory containing installed packages.
+\item \alert{Repository}: A website providing packages for installation.
+\item \alert{Source}: The original version of a package with human-readable text and code.
+\item \alert{Binary}: A compiled version of a package with computer-readable
+text and code, may work only on a specific platform.
+\item \alert{Base packages}: Part of the R source tree, maintained by R Core.
+\item \alert{Recommended packages}: Part of every R installation, but not
+necessarily maintained by R Core.
+\item \alert{Contributed packages}: All the rest.
 \end{itemize}
 \end{frame}
-\begin{frame}
-\frametitle{¿Por qué crear y publicar un paquete para \texttt{R}?}
-\label{sec-1-2}
-
-
-\begin{itemize}
+\begin{frame}[fragile,label=sec-1-2]{¿Por qué crear y publicar un paquete para \texttt{R}?}
+ \begin{itemize}
 \item Es una herramienta cómoda para mantener colecciones coherentes de funciones
-  y datos.
+y datos.
 \item Permite publicar código de forma que pueda ser empleado por
-  otros siguiendo unas estructuras comunes.
+otros siguiendo unas estructuras comunes.
 \item La estructura de un paquete obliga a organizar, limpiar y
-  documentar el código.
+documentar el código.
 \item Al distribuir las herramientas para que otros puedan usarlas, se
-  obtiene realimentación sobre lo publicado, de forma que se
-  aumenta su robustez, se amplian sus funcionalidades y se conecta
-  con otras herramientas y proyectos.
-\item ``As we enjoy great advantages from the inventions of others, we
-  should be glad of an opportunity to serve others by any
-  invention of ours, and this we should do freely and generously.''
+obtiene realimentación sobre lo publicado, de forma que se
+aumenta su robustez, se amplian sus funcionalidades y se conecta
+con otras herramientas y proyectos.
+\item \guillemotleft{}As we enjoy great advantages from the inventions of others, we
+should be glad of an opportunity to serve others by any
+invention of ours, and this we should do freely and generously.\guillemotright{}
 \end{itemize}
 \end{frame}
-\begin{frame}
-\frametitle{Algunos consejos genéricos}
-\label{sec-1-3}
-
-
+\begin{frame}[label=sec-1-3]{Algunos consejos genéricos}
 Extraído de \href{http://arxiv.org/abs/1210.0530}{Best Practices for Scientific Computing}
 
 \begin{itemize}
@@ -103,10 +89,8 @@ Extraído de \href{http://arxiv.org/abs/1210.0530}{Best Practices for Scientific
 \item Collaborate
 \end{itemize}
 \end{frame}
-\begin{frame}
+\begin{frame}[label=sec-1-4]{}
 \begin{block}{Referencias}
-\label{sec-1-4-1}
-
 \begin{itemize}
 \item \href{http://cran.r-project.org/doc/manuals/r-release/R-exts.html}{Writing R Extensions}
 \item \href{http://cran.r-project.org/doc/contrib/Leisch-CreatingPackages.pdf}{Creating R Packages: a tutorial}
@@ -115,34 +99,28 @@ Extraído de \href{http://arxiv.org/abs/1210.0530}{Best Practices for Scientific
 \end{frame}
 \section{Crear un paquete en R}
 \label{sec-2}
-\begin{frame}
-\frametitle{Estructura}
-\label{sec-2-1}
 
-\begin{itemize}
+\begin{frame}[fragile,label=sec-2-1]{Estructura}
+ \begin{itemize}
 \item Las fuentes de un paquete de \texttt{R} están contenidas en un
-  directorio que contiene al menos:
+directorio que contiene al menos:
 \begin{itemize}
 \item Los ficheros DESCRIPTION y NAMESPACE
 \item Los subdirectorios:
 \begin{itemize}
 \item \texttt{R}: código en ficheros .R
 \item \texttt{man}: páginas de ayuda de las funciones, métodos y clases
-      contenidos en el paquete.
+contenidos en el paquete.
 \end{itemize}
 \end{itemize}
 \item Esta escructura puede ser generada con \texttt{package.skeleton}.
 \end{itemize}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{DESCRIPTION}
-\label{sec-2-2}
-
-\begin{itemize}
+\begin{frame}[fragile,label=sec-2-2]{DESCRIPTION}
+ \begin{itemize}
 \item El fichero DESCRIPTION contiene la información básica sobre el
-  paquete con un formato preestablecido:
+paquete con un formato preestablecido:
 \end{itemize}
-
 \begin{verbatim}
 Package: pkgname
 Version: 0.5-1
@@ -152,7 +130,7 @@ Authors@R: c(person("Joe", "Developer", role = c("aut", "cre"),
                      email = "Joe.Developer@some.domain.net"),
               person("Pat", "Developer", role = "aut"),
               person("A.", "User", role = "ctb",
-                email = "A.User@whereever.net"))
+     	        email = "A.User@whereever.net"))
 Author: Joe Developer and Pat Developer, with contributions from A. User
 Maintainer: Joe Developer <Joe.Developer@some.domain.net>
 Depends: R (>= 1.8.0), nlme
@@ -167,16 +145,14 @@ URL: http://www.r-project.org, http://www.another.url
   \texttt{Maintainer} son obligatorios.
 \end{itemize}
 \end{frame}
-\begin{frame}
-\frametitle{NAMESPACE}
-\label{sec-2-3}
 
-\begin{itemize}
+\begin{frame}[fragile,label=sec-2-3]{NAMESPACE}
+ \begin{itemize}
 \item \texttt{R} usa un sistema de gestión de \emph{espacio de nombres} que
-  permite al autor del paquete especificar:
+permite al autor del paquete especificar:
 \begin{itemize}
 \item las variables del paquete que se exportan (y son, por tanto,
-    accesibles a los usuarios)
+accesibles a los usuarios)
 \item las variables que se importan de otros paquetes.
 \item las clases y métodos \texttt{S3} y \texttt{S4} que deben registrarse.
 \end{itemize}
@@ -184,40 +160,33 @@ URL: http://www.r-project.org, http://www.another.url
   \texttt{NAMESPACE}.
 \end{itemize}
 \end{frame}
-\begin{frame}
-\frametitle{NAMESPACE}
-\label{sec-2-4}
 
-\begin{itemize}
+\begin{frame}[fragile,label=sec-2-4]{NAMESPACE}
+ \begin{itemize}
 \item El \texttt{NAMESPACE} controla la estrategia de busqueda de variables
-  que utilizan las funciones del paquete:
+que utilizan las funciones del paquete:
 \begin{itemize}
 \item En primer lugar busca entre las creadas localmente (por el código de la carpeta \texttt{R/}).
 \item En segundo lugar busca entre las variables importadas
-    explicitamente de otros paquetes.
+explicitamente de otros paquetes.
 \item En tercer lugar busca en el \texttt{NAMESPACE} del paquete \texttt{base}.
 \item Por último busca siguiendo el camino habitual (ver el
-    resultado de \texttt{search()})
+resultado de \texttt{search()})
 \end{itemize}
 \end{itemize}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{NAMESPACE}
-\label{sec-2-5}
-
-\begin{itemize}
+\begin{frame}[fragile,label=sec-2-5]{NAMESPACE}
+ \begin{itemize}
 \item Para exportar las variables \texttt{f} y \texttt{g}:
 \end{itemize}
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 export(f, g)
 \end{lstlisting}
 \begin{itemize}
-\item Para importar \textbf{todas} las variables del paquete \texttt{pkgExt}:
+\item Para importar \alert{todas} las variables del paquete \texttt{pkgExt}:
 \end{itemize}
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 import(pkgExt)
 \end{lstlisting}
@@ -225,57 +194,46 @@ import(pkgExt)
 \item Para importar las variables \texttt{var1} y \texttt{var2} del paquete
   \texttt{pkgExt}:
 \end{itemize}
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 importFrom(pkgExt, var1, var2)
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{NAMESPACE}
-\label{sec-2-6}
-
-\begin{itemize}
+\begin{frame}[fragile,label=sec-2-6]{NAMESPACE}
+ \begin{itemize}
 \item Para registar el método \texttt{S3} \texttt{print} para la clase \texttt{myClass}:
 \end{itemize}
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 S3method(print, foo)
 \end{lstlisting}
 \begin{itemize}
 \item Para registrar las clases \texttt{S4} \texttt{class1} y \texttt{class2}:
 \end{itemize}
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 exportClasses(class1, class2)
 \end{lstlisting}
 \begin{itemize}
 \item Para registrar los métodos \texttt{S4} \texttt{method1} y \texttt{method2}:
 \end{itemize}
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 exportMethods(method1, method2)
 \end{lstlisting}
 \begin{itemize}
 \item Para importar métodos y clases \texttt{S4} de otro paquete:
 \end{itemize}
-
-\lstset{language=R}
+\lstset{language=R,numbers=none}
 \begin{lstlisting}
 importClassesFrom(package, ...)
 importMethodsFrom(package, ...)
 \end{lstlisting}
 \end{frame}
-\begin{frame}
-\frametitle{Documentación}
-\label{sec-2-7}
-
-\begin{itemize}
+\begin{frame}[fragile,label=sec-2-7]{Documentación}
+ \begin{itemize}
 \item Las páginas de ayuda de los objetos \texttt{R} se escriben usando el
-  formato “R documentation” (Rd), un lenguaje similar a \LaTeX{}.
+formato “R documentation” (Rd), un lenguaje similar a \LaTeX{}.
 \item Es aconsejable seguir estas orientaciones: \href{http://developer.r-project.org/Rds.html}{Guidelines for Rd files}
 \item Para generar el esqueleto de un fichero Rd es aconsejable usar:
 \begin{itemize}
@@ -284,13 +242,12 @@ importMethodsFrom(package, ...)
 \item \texttt{promptPackage}: \href{http://cran.r-project.org/doc/manuals/r-release/R-exts.html\#Documenting-packages}{paquete}
 \item \texttt{promptData}: \href{http://cran.r-project.org/doc/manuals/r-release/R-exts.html\#Documenting-data-sets}{datos}
 \end{itemize}
-\item Todos los comandos disponibles están en el documento \href{http://developer.r-project.org/parseRd.pdf}{Parsing Rd files}.
+\item Todos los comandos disponibles están en el documento \href{http://developer.r-project.org/parseRd.pdf}{Parsing Rd
+files}.
 \end{itemize}
 \end{frame}
-\begin{frame}[fragile]
-
-
-\begin{verbatim}
+\begin{frame}[fragile,label=sec-2-8]{}
+ \begin{verbatim}
 \name{load}
 \alias{load}
 \title{Reload Saved Datasets}
@@ -313,10 +270,10 @@ importMethodsFrom(package, ...)
 \examples{
   ## save all data
   save(list = ls(), file= "all.RData")
-  
+
   ## restore the saved values to the current environment
   load("all.RData")
-  
+
   ## restore the saved values to the workspace
   load("all.RData", .GlobalEnv)
 }
@@ -325,21 +282,17 @@ importMethodsFrom(package, ...)
 \end{frame}
 \section{Publicar un paquete}
 \label{sec-3}
-\begin{frame}[fragile]
-\frametitle{Itinerario}
-\label{sec-3-1}
 
-\begin{itemize}
+\begin{frame}[fragile,label=sec-3-1]{Itinerario}
+ \begin{itemize}
 \item Comprobar
 \end{itemize}
-
 \begin{verbatim}
 R CMD check myPackage/
 \end{verbatim}
 \begin{itemize}
 \item Construir
 \end{itemize}
-
 \begin{verbatim}
 R CMD build myPackage/
 \end{verbatim}
@@ -347,50 +300,39 @@ R CMD build myPackage/
 \item Publicar (o actualizar) en un repositorio
 \end{itemize}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{Comprobar}
-\label{sec-3-2}
-
-\begin{itemize}
+\begin{frame}[fragile,label=sec-3-2]{Comprobar}
+ \begin{itemize}
 \item Comprobar un directorio (desde línea de comandos):
 \end{itemize}
-
 \begin{verbatim}
 R CMD check myPackage/
 \end{verbatim}
 \begin{itemize}
 \item Comprobar un paquete ya construido (desde línea de comandos):
 \end{itemize}
-
 \begin{verbatim}
 R CMD check myPackage.tar.gz
 \end{verbatim}
 \begin{itemize}
 \item Esta comprobación incluye más de 20 puntos de prueba detallados
-  en el manual \href{http://cran.r-project.org/doc/manuals/R-exts.html#Checking-packages}{Writing R extensions}.
+en el manual \href{http://cran.r-project.org/doc/manuals/R-exts.html#Checking-packages}{Writing R extensions}.
 \end{itemize}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{Construir}
-\label{sec-3-3}
-\begin{block}{Fuente o binario}
-\label{sec-3-3-1}
 
-    Se puede construir un fichero fuente en formato \emph{tarball}
-    (independiente de la plataforma, habitual en sistemas Unix) o en
-    forma binaria (dependiente de la plataforma, habitual para Windows y Mac).
+\begin{frame}[fragile,label=sec-3-3]{Construir}
+ \begin{block}{Fuente o binario}
+Se puede construir un fichero fuente en formato \emph{tarball}
+(independiente de la plataforma, habitual en sistemas Unix) o en
+forma binaria (dependiente de la plataforma, habitual para Windows y Mac).
 \end{block}
-%% Cómo hacerlo
-\label{sec-3-3-2}
 
 \begin{itemize}
 \item Fuente en formato \emph{tarball}
 \begin{itemize}
 \item El resultado es un fichero \emph{tarball} \texttt{myPackage.tar.gz} que
-     se puede distribuir a cualquier sistema.
+se puede distribuir a cualquier sistema.
 \end{itemize}
 \end{itemize}
-
 \begin{verbatim}
 R CMD build myPackage/
 \end{verbatim}
@@ -398,69 +340,63 @@ R CMD build myPackage/
 \item Comprimido binario
 \begin{itemize}
 \item El resultado es una copia comprimida de la versión
-     \textbf{instalada} del paquete: depende del sistema operativo.
+     \alert{instalada} del paquete: depende del sistema operativo.
 \end{itemize}
 \end{itemize}
-
 \begin{verbatim}
 R CMD INSTALL --build myPackage/
 \end{verbatim}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{Comprobar y construir en sistemas Windows}
-\label{sec-3-4}
-
-
-\begin{itemize}
+\begin{frame}[fragile,label=sec-3-4]{Comprobar y construir en sistemas Windows}
+ \begin{itemize}
 \item Para paquetes sin código compilado (C, Fortran), también se puede usar
   \texttt{R CMD check} y \texttt{R CMD build} en un sistema Windows.
 \item Para generar un binario hay que usar \texttt{R CMD INSTALL -{}-build}.
 \begin{itemize}
 \item Es posible que haya que modificar la variables de entorno
-    \texttt{TEMP} y \texttt{TMP} de forma que \textbf{sólo} contengan caracteres ASCII.
+    \texttt{TEMP} y \texttt{TMP} de forma que \alert{sólo} contengan caracteres ASCII.
 \end{itemize}
 \item Para paquetes con código compilado, o en caso de problemas con
-  los comandos anteriores, hay que usar \href{http://cran.r-project.org/bin/windows/Rtools/}{Rtools}.
+los comandos anteriores, hay que usar \href{http://cran.r-project.org/bin/windows/Rtools/}{Rtools}.
 \item Se pueden instalar fuentes \emph{tarball} con (ver \href{http://cran.r-project.org/doc/manuals/R-admin.html#Windows-packages}{R installation and administration}):
 \end{itemize}
-
 \begin{verbatim}
 install.packages(myPackage.tar.gz, type='source')
 \end{verbatim}
 \end{frame}
-\begin{frame}
-\frametitle{Repositorios}
-\label{sec-3-5}
 
-\begin{itemize}
+\begin{frame}[fragile,label=sec-3-5]{Repositorios}
+ \begin{itemize}
 \item El principal repositorio de paquetes estables es \href{http://cran.r-project.org/}{CRAN}.
 \begin{itemize}
 \item Publicar en este repositorio conlleva la aceptación de unas \href{http://cran.r-project.org/web/packages/policies.html}{condiciones}.
 \item Para publicar en CRAN hay que subir el fichero fuente
-    \emph{tarball} resultado de \texttt{R CMD build} via FTP anónimo a la
-    dirección \href{ftp://CRAN.R-project.org/incoming/}{ftp://CRAN.R-project.org/incoming/} y enviar un
-    correo en texto plano a CRAN@R-project.org.
-\item Es imprescindible haber comprobado el fichero con \texttt{R CMD check     -{}-as-cran} antes de subirlo al servidor FTP. El resultado de
-    esta comprobación \textbf{no} debe contener errores ni advertencias
-    (\texttt{warnings}).
-\item Más detalle en el apartado Submission de las \href{http://cran.r-project.org/web/packages/policies.html}{condiciones de CRAN} y en el manual \href{http://cran.r-project.org/doc/manuals/R-exts.html\#Submitting-a-package-to-CRAN}{R Extensions}.
+\emph{tarball} resultado de \texttt{R CMD build} via FTP anónimo a la
+dirección \url{ftp://CRAN.R-project.org/incoming/} y enviar un
+correo en texto plano a CRAN@R-project.org.
+\item Es imprescindible haber comprobado el fichero con \texttt{R CMD check
+    -{}-as-cran} antes de subirlo al servidor FTP. El resultado de
+esta comprobación \alert{no} debe contener errores ni advertencias
+(\texttt{warnings}).
+\item Más detalle en el apartado Submission de las \href{http://cran.r-project.org/web/packages/policies.html}{condiciones de
+CRAN} y en el manual \href{http://cran.r-project.org/doc/manuals/R-exts.html\#Submitting-a-package-to-CRAN}{R Extensions}.
 \end{itemize}
 \end{itemize}
 \end{frame}
-\begin{frame}
-\frametitle{Repositorios}
-\label{sec-3-6}
-
-
+\begin{frame}[label=sec-3-6]{Repositorios}
 \begin{itemize}
 \item Otros repositorios destacables son:
+
 \begin{itemize}
 \item \href{http://r-forge.r-project.org/}{R-Forge} (versiones de desarrollo)
+
 \item \href{http://www.bioconductor.org/}{Bioconductor} (paquetes de bioinformática)
+
 \item \href{https://github.com/languages/R}{Proyectos R en Github} (versiones de desarrollo)
+
 \item \href{http://rforge.net/}{RForge} (versiones de desarrollo)
 \end{itemize}
 \end{itemize}
 \end{frame}
-
+% Emacs 24.3.1 (Org mode 8.2.1)
 \end{document}

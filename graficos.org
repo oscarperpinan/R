@@ -1,37 +1,9 @@
 #+TITLE:     Gráficos con R
-#+AUTHOR:    Oscar Perpiñán Lamigueiro
-#+EMAIL:     oscar.perpinan@gmail.com
-#+DATE: Marzo de 2013
-#+DESCRIPTION:
-#+KEYWORDS:
-#+LANGUAGE:  es
-#+OPTIONS:   H:3 num:t toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
-#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
-#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
-#+EXPORT_SELECT_TAGS: export
-#+EXPORT_EXCLUDE_TAGS: noexport
-#+LINK_UP:   
-#+LINK_HOME: 
-#+XSLT:
-#+startup: beamer
-#+LaTeX_CLASS: beamer
-#+BEAMER_FRAME_LEVEL: 3
-#+LATEX_CLASS_OPTIONS: [xcolor={usenames,svgnames,dvipsnames}]
-#+LATEX_HEADER: \AtBeginSection[]{\begin{frame}<beamer>\frametitle{Contenidos}\tableofcontents[currentsection]\end{frame}}
-#+LATEX_HEADER: \lstset{keywordstyle=\color{blue}, commentstyle=\color{gray!90}, basicstyle=\ttfamily\small, columns=fullflexible, breaklines=true,linewidth=\textwidth, backgroundcolor=\color{gray!23}, basewidth={0.5em,0.4em}, literate={á}{{\'a}}1 {ñ}{{\~n}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {º}{{\textordmasculine}}1}
-#+LATEX_HEADER: \usepackage{mathpazo}
-#+LATEX_HEADER: \setbeamercovered{transparent}
-#+LATEX_HEADER: \usefonttheme{serif} 
-#+LATEX_HEADER: \usetheme{Goettingen}
-#+LATEX_HEADER: \hypersetup{colorlinks=true, linkcolor=Blue, urlcolor=Blue}
-#+LATEX_HEADER: \usepackage{fancyvrb}
-#+LATEX_HEADER: \DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\tiny, formatcom = {\color{black!70}}}
-#+PROPERTY:  tangle yes
-#+PROPERTY:  comments org
-#+PROPERTY:  session *R*
+
+#+SETUPFILE: config.org
+#+OPTIONS: H:3
 #+PROPERTY: exports both 
 #+PROPERTY: results output graphics
-
 
 
 * Introducción
@@ -59,6 +31,11 @@
   defaultArgs <- lattice.options()$default.args
   lattice.options(default.theme = myTheme, default.args = modifyList(defaultArgs, myArgs))
 #+end_src
+
+#+begin_src R :exports none :tangle no
+  setwd('~/github/intro/')
+#+end_src
+
 ** Base y grid
 *** Base y grid
  En =R= existen dos formas de generar gráficos:
@@ -105,22 +82,22 @@ Dentro del conjunto =grid= existen dos grandes paquetes:
 #+end_src
 
 *** =xyplot=
-#+ATTR_LaTeX: width=0.7\textwidth
-#+begin_src R  :file xyplot.pdf
+#+ATTR_LATEX: :height 0.6\textheight
+#+begin_src R  :file figs/xyplot.pdf
   xyplot(Radiation ~ TempAvg, data=aranjuez)
 #+end_src
     
 *** =xyplot=
-#+ATTR_LaTeX: width=0.7\textwidth
-#+begin_src R :file xyplotPG.pdf
+#+ATTR_LATEX: :height 0.6\textheight
+#+begin_src R :file figs/xyplotPG.pdf
   xyplot(Radiation ~ TempAvg, data=aranjuez,
          type=c('p', 'g'))
 #+end_src
 
 
 *** =xyplot=
-#+ATTR_LaTeX: width=0.7\textwidth
-#+begin_src R :file xyplotPRG.pdf
+#+ATTR_LATEX: :height 0.6\textheight
+#+begin_src R :file figs/xyplotPRG.pdf
   xyplot(Radiation ~ TempAvg, data=aranjuez,
          type=c('p', 'r', 'g'),
          lwd=2, col.line='black')
@@ -129,8 +106,8 @@ Dentro del conjunto =grid= existen dos grandes paquetes:
 
 
 *** =xyplot=
-#+ATTR_LaTeX: width=0.7\textwidth
-#+begin_src R :file xyplotSmooth.pdf
+#+ATTR_LATEX: :height 0.6\textheight
+#+begin_src R :file figs/xyplotSmooth.pdf
   xyplot(Radiation ~ TempAvg, data=aranjuez,
          type=c('p', 'smooth', 'g'),
          lwd=2, col.line='black')
@@ -138,22 +115,22 @@ Dentro del conjunto =grid= existen dos grandes paquetes:
 
 
 *** Paneles
-#+ATTR_LaTeX: width=0.7\textwidth
-#+begin_src R :file xyplotYear.pdf
+#+ATTR_LATEX: :height 0.6\textheight
+#+begin_src R :file figs/xyplotYear.pdf
   xyplot(Radiation ~ TempAvg|factor(year),
          data=aranjuez)
 #+end_src
 
 *** Grupos
-#+ATTR_LaTeX: width=0.7\textwidth
-#+begin_src R :file xyplotQuarter.pdf
+#+ATTR_LATEX: :height 0.6\textheight
+#+begin_src R :file figs/xyplotQuarter.pdf
   xyplot(Radiation ~ TempAvg, groups=quarter,
          data=aranjuez, auto.key=list(space='right'))
 #+end_src
 
 *** Paneles y grupos
-#+ATTR_LaTeX: width=0.6\textwidth
-#+begin_src R :file xyplotQuarterYear.pdf
+#+ATTR_LATEX: :width 0.6\textwidth
+#+begin_src R :file figs/xyplotQuarterYear.pdf
   xyplot(Radiation ~ TempAvg|factor(year),
          groups=quarter,
          data=aranjuez,
@@ -162,8 +139,8 @@ Dentro del conjunto =grid= existen dos grandes paquetes:
 #+end_src
 
 *** Paneles y grupos
-#+ATTR_LaTeX: width=0.6\textwidth
-#+begin_src R :file xyplotQuarterYearSmooth.pdf
+#+ATTR_LATEX: :width 0.6\textwidth
+#+begin_src R :file figs/xyplotQuarterYearSmooth.pdf
   xyplot(Radiation ~ TempAvg|factor(year),
          groups=quarter,
          data=aranjuez,
@@ -173,8 +150,8 @@ Dentro del conjunto =grid= existen dos grandes paquetes:
 #+end_src
 
 *** Colores y tamaños
-#+ATTR_LaTeX: width=0.6\textwidth
-#+begin_src R :file xyplotColors.pdf
+#+ATTR_LATEX: :width 0.6\textwidth
+#+begin_src R :file figs/xyplotColors.pdf
   xyplot(Radiation ~ TempAvg,
          type=c('p', 'r'),
          cex=2, col='blue',
@@ -184,8 +161,8 @@ Dentro del conjunto =grid= existen dos grandes paquetes:
 #+end_src
 
 *** Colores con grupos
-#+ATTR_LaTeX: width=0.6\textwidth
-#+begin_src R :file xyplotColorGroups.pdf
+#+ATTR_LATEX: :width 0.6\textwidth
+#+begin_src R :file figs/xyplotColorGroups.pdf
   xyplot(Radiation ~ TempAvg,
          group=quarter,
          col=c('red', 'blue', 'green', 'yellow'),
@@ -204,8 +181,8 @@ Dentro del conjunto =grid= existen dos grandes paquetes:
 
 *** Colores con grupos: =par.settings= y =simpleTheme=
 - Aplicamos el resultado en =par.settings=
-#+ATTR_LaTeX: width=0.45\textwidth
-#+begin_src R :file myTheme.pdf
+#+ATTR_LATEX: :width 0.45\textwidth
+#+begin_src R :file figs/myTheme.pdf
   xyplot(Radiation ~ TempAvg,
          groups=quarter,
          par.settings=myTheme,
@@ -214,8 +191,8 @@ Dentro del conjunto =grid= existen dos grandes paquetes:
 #+end_src
 
 *** Colores: brewer.pal
-#+ATTR_LaTeX: width=0.45\textwidth
-#+begin_src R :file brewer.pdf
+#+ATTR_LATEX: :width 0.45\textwidth
+#+begin_src R :file figs/brewer.pdf
   library(RColorBrewer)
   myTheme <- custom.theme(symbol=brewer.pal(n=4,
                           'Dark2'),
@@ -227,8 +204,8 @@ Dentro del conjunto =grid= existen dos grandes paquetes:
          data=aranjuez)
 #+end_src
 *** Paneles a medida
-#+ATTR_LaTeX: width=0.3\textwidth
-#+begin_src R :file panel.pdf
+#+ATTR_LATEX: :width 0.3\textwidth
+#+begin_src R :file figs/panel.pdf
   xyplot(Radiation ~ TempAvg, data=aranjuez,
          panel=function(x, y, ...){
              panel.xyplot(x, y, ...)
@@ -243,15 +220,15 @@ Dentro del conjunto =grid= existen dos grandes paquetes:
 #+end_src
 
 *** Matriz de gráficos de dispersión
-#+ATTR_LaTeX: width=0.45\textwidth
-#+begin_src R :file splom.png
+#+ATTR_LATEX: :width 0.45\textwidth
+#+begin_src R :file figs/splom.png
   splom(aranjuez[,c("TempAvg", "HumidAvg", "WindAvg",
                     "Rain", "Radiation", "ET")],
         pscale=0, alpha=0.6, cex=0.3, pch=19)
 #+end_src
 *** Matriz de gráficos de dispersión
-#+ATTR_LaTeX: width=0.45\textwidth
-#+begin_src R :file splomGroup.png
+#+ATTR_LATEX: :width 0.45\textwidth
+#+begin_src R :file figs/splomGroup.png
   splom(aranjuez[,c("TempAvg", "HumidAvg", "WindAvg",
                     "Rain", "Radiation", "ET")],
         groups=aranjuez$quarter,
@@ -259,15 +236,15 @@ Dentro del conjunto =grid= existen dos grandes paquetes:
         pscale=0, alpha=0.6, cex=0.3, pch=19)
 #+end_src
 *** =levelplot=
-#+ATTR_LaTeX: width=0.6\textwidth
-#+begin_src R :file levelplot.pdf
+#+ATTR_LATEX: :width 0.6\textwidth
+#+begin_src R :file figs/levelplot.pdf
   levelplot(TempAvg ~ year * day,
             data=aranjuez)
 #+end_src
 
 *** =contourplot=
-#+ATTR_LaTeX: width=0.7\textwidth
-#+begin_src R :file contourplot.pdf
+#+ATTR_LATEX: :height 0.6\textheight
+#+begin_src R :file figs/contourplot.pdf
   contourplot(Radiation ~ year * day,
               lwd=.5, labels=FALSE,
               region=TRUE, 
@@ -275,29 +252,29 @@ Dentro del conjunto =grid= existen dos grandes paquetes:
 #+end_src
 
 *** Box-and-Whiskers
-#+ATTR_LaTeX: width=0.7\textwidth
-#+begin_src R :file bwplot.pdf
+#+ATTR_LATEX: :height 0.6\textheight
+#+begin_src R :file figs/bwplot.pdf
   bwplot(Radiation ~ month, data=aranjuez,
          horizontal=FALSE, pch='|')
 #+end_src
 
 *** Box-and-Whiskers
-#+ATTR_LaTeX: width=0.7\textwidth
-#+begin_src R :file violin.pdf
+#+ATTR_LATEX: :height 0.6\textheight
+#+begin_src R :file figs/violin.pdf
   bwplot(Radiation ~ month, data=aranjuez,
          horizontal=FALSE,
          panel=panel.violin)
 #+end_src
     
 *** Histogramas
-#+ATTR_LaTeX: width=0.7\textwidth
-#+begin_src R :file histogram.pdf
+#+ATTR_LATEX: :height 0.6\textheight
+#+begin_src R :file figs/histogram.pdf
   histogram(~Radiation|factor(year), data=aranjuez)
 #+end_src
 
 *** Gráficos de densidad
-#+ATTR_LaTeX: width=0.7\textwidth
-#+begin_src R :file density.pdf
+#+ATTR_LATEX: :height 0.6\textheight
+#+begin_src R :file figs/density.pdf
 densityplot(~Radiation, groups=quarter,
             data=aranjuez,
             auto.key=list(space='right'))
@@ -308,31 +285,31 @@ densityplot(~Radiation, groups=quarter,
   avRad <- aggregate(Radiation ~ month * year,
                      data=aranjuez, FUN=mean)
 #+end_src
-#+ATTR_LaTeX: width=0.7\textwidth
-#+begin_src R :file dotplot.pdf
+#+ATTR_LATEX: :height 0.6\textheight
+#+begin_src R :file figs/dotplot.pdf
   dotplot(month ~ Radiation|factor(year), data=avRad)
 #+end_src
 
 
 *** Quantile-Quantile
-#+ATTR_LaTeX: width=0.7\textwidth
-#+begin_src R :file qqHalf.pdf
+#+ATTR_LATEX: :height 0.6\textheight
+#+begin_src R :file figs/qqHalf.pdf
   firstHalf <- aranjuez$quarter %in% c('Q1', 'Q2')
   
   qq(firstHalf ~ Radiation, data=aranjuez)
 #+end_src
 
 *** Quantile-quantile
-#+ATTR_LaTeX: width=0.7\textwidth
-#+begin_src R :file qqWinter.pdf
+#+ATTR_LATEX: :height 0.6\textheight
+#+begin_src R :file figs/qqWinter.pdf
   winter <- aranjuez$quarter %in% c('Q1', 'Q4')
   
   qq(winter ~ Radiation, data=aranjuez)
 #+end_src
 
 *** Quantile-Quantile
-#+ATTR_LaTeX: width=0.7\textwidth
-#+begin_src R :file qqNorm.pdf
+#+ATTR_LATEX: :height 0.6\textheight
+#+begin_src R :file figs/qqNorm.pdf
   qqmath(~TempAvg, data=aranjuez,
          groups=year, distribution=qnorm)
 #+end_src
