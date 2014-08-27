@@ -17,20 +17,20 @@ Puedes [[https://github.com/oscarperpinan/intro][visitar el proyecto en GitHub]]
 
 * Introducción
 En este apartado agrupo el material apropiado para trabajar con R desde el rol de usuario.
-- Introducción: [[https://raw.github.com/oscarperpinan/intro/master/intro.pdf][pdf]], [[https://github.com/oscarperpinan/intro/blob/master/intro.R][código]].
-- Manejo de datos: [[https://raw.github.com/oscarperpinan/intro/master/datos.pdf][pdf]], [[https://github.com/oscarperpinan/intro/blob/master/datos.R][código]].
-- Gráficos: [[https://raw.github.com/oscarperpinan/intro/master/graficos.pdf][pdf]], [[https://github.com/oscarperpinan/intro/blob/master/graficos.R][código]].
-- Estadística: [[https://raw.github.com/oscarperpinan/intro/master/estadistica.pdf][pdf]], [[https://github.com/oscarperpinan/intro/blob/master/estadistica.R][código]].
+- Introducción: [[file:intro.pdf][pdf]], [[https://github.com/oscarperpinan/intro/blob/master/intro.R][código]].
+- Manejo de datos: [[file:datos.pdf][pdf]], [[https://github.com/oscarperpinan/intro/blob/master/datos.R][código]].
+- Gráficos: [[file:graficos.pdf][pdf]], [[https://github.com/oscarperpinan/intro/blob/master/graficos.R][código]].
+- Estadística: [[file:estadistica.pdf][pdf]], [[https://github.com/oscarperpinan/intro/blob/master/estadistica.R][código]].
   
 * Avanzado
 En este apartado agrupo el material apropiado para trabajar con R desde el rol de desarrollador.
-- Funciones: [[https://raw.github.com/oscarperpinan/intro/master/Funciones.pdf][pdf]], [[https://github.com/oscarperpinan/intro/blob/master/Funciones.R][código]].
-- Clases y métodos: [[https://raw.github.com/oscarperpinan/intro/master/ClasesMetodos.pdf][pdf]], [[https://github.com/oscarperpinan/intro/blob/master/ClasesMetodos.R][código]].
-- Paquetes: [[https://raw.github.com/oscarperpinan/intro/master/Paquetes.pdf][pdf]].
+- Funciones: [[file:Funciones.pdf][pdf]], [[https://github.com/oscarperpinan/intro/blob/master/Funciones.R][código]].
+- Clases y métodos: [[file:ClasesMetodos.pdf][pdf]], [[https://github.com/oscarperpinan/intro/blob/master/ClasesMetodos.R][código]].
+- Paquetes: [[file:Paquetes.pdf][pdf]].
 
 * Miscelánea
 En este apartado agrupo material sobre series temporales y datos espaciales:
-- Series temporales: [[https://raw.github.com/oscarperpinan/intro/master/zoo.pdf][pdf]], [[https://github.com/oscarperpinan/intro/blob/master/zoo.R][código]].
-- Datos espaciales: [[https://raw.github.com/oscarperpinan/intro/master/raster.pdf][pdf]], [[https://github.com/oscarperpinan/intro/blob/master/raster.R][código]].
+- Series temporales: [[file:zoo.pdf][pdf]], [[https://github.com/oscarperpinan/intro/blob/master/zoo.R][código]].
+- Datos espaciales: [[file:raster.pdf][pdf]], [[https://github.com/oscarperpinan/intro/blob/master/raster.R][código]].
 Si trabajas con series temporales y datos espaciales te puede interesar mi libro "[[http://oscarperpinan.github.io/spacetime-vis/][Displaying time series, spatial and space-time data with R]]".
 ------
