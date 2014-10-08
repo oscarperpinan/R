@@ -2,6 +2,9 @@ Introducción a R
 ====
 Este repositorio incluye diapositivas, datos y código que utilizo en cursos introductorios a R.
 
+[https://i.creativecommons.org/l/by-sa/4.0/88x31.png](http://creativecommons.org/licenses/by-sa/4.0/) Este material está
+bajo una licencia [Creative Commons CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/).
+
 Cómo usar esta documentación
 ---- 
 Para trabajar con la documentación de este repositorio es recomendable obtener una copia local. Puedes hacerlo descargando el repositorio en formato [ZIP](https://github.com/oscarperpinan/intro/archive/master.zip) o haciendo una copia del repositorio con git: `git://github.com/oscarperpinan/intro.git`
