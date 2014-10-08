@@ -19,7 +19,11 @@
   :END:
 Esta página publica material didáctico (diapositivas, datos y código)
 adecuado a cursos introductorios a R. Este material ha sido elaborado
-por [[http://oscarperpinan.github.io][Oscar Perpiñán Lamigueiro]] empleando [[http://orgmode.org/][org-mode]] y [[http://ess.r-project.org/][ESS]] sobre [[http://www.gnu.org/software/emacs/][Emacs]].
+por [[http://oscarperpinan.github.io][Oscar Perpiñán Lamigueiro]] empleando [[http://orgmode.org/][org-mode]] y [[http://ess.r-project.org/][ESS]] sobre
+[[http://www.gnu.org/software/emacs/][Emacs]]. 
+
+[[http://creativecommons.org/licenses/by-sa/4.0/][https://i.creativecommons.org/l/by-sa/4.0/88x31.png]] Este material está
+bajo una licencia [[http://creativecommons.org/licenses/by-sa/4.0/][Creative Commons CC-BY-SA 4.0]].
 
 Para trabajar con este material es recomendable obtener una copia
 local del [[https://github.com/oscarperpinan/intro][repositorio]]. Puedes hacerlo descargando el repositorio en
