@@ -25,15 +25,78 @@ por [[http://oscarperpinan.github.io][Oscar Perpiñán Lamigueiro]] empleando [[
 [[http://creativecommons.org/licenses/by-sa/4.0/][https://i.creativecommons.org/l/by-sa/4.0/88x31.png]] Este material está
 bajo una licencia [[http://creativecommons.org/licenses/by-sa/4.0/][Creative Commons CC-BY-SA 4.0]].
 
+* Instalar R
+  :PROPERTIES:
+  :HTML_CONTAINER_CLASS: container
+  :END:
+
+- Si utilizáis Windows, podéis descargar el instalador desde [[http://cran.es.r-project.org/bin/windows/base/][aquí]].
+- Si utilizáis Mac debéis ir a esta [[http://cran.es.r-project.org/bin/macosx/][página]].
+- Y si utilizáis Linux, posiblemente lo tengáis disponible en vuestro
+  gestor de aplicaciones. En todo caso, la página para Linux está [[http://cran.es.r-project.org/bin/linux/][aquí]].
+
+* Interfaces para R
+  :PROPERTIES:
+  :HTML_CONTAINER_CLASS: container
+  :END:
+
+En mi opinión, la mejor interfaz para R es [[http://ess.r-project.org/][ESS]] con [[http://www.gnu.org/software/emacs/][Emacs]], aunque
+posiblemente no es lo más recomendable para un principiante.
+
+La alternativa más recomendable es [[http://www.rstudio.com/ide/][RStudio]]. Podéis descargar el
+instalador desde [[http://www.rstudio.com/ide/download/desktop][aquí]]. Es aconsejable la lectura de esta [[http://www.rstudio.com/ide/docs/using/source][introducción]].
+
+* Cómo usar el material
+  :PROPERTIES:
+  :HTML_CONTAINER_CLASS: container
+  :END:
+
 Para trabajar con este material es recomendable obtener una copia
 local del [[https://github.com/oscarperpinan/intro][repositorio]]. Puedes hacerlo descargando el repositorio en
-formato [[https://github.com/oscarperpinan/intro/archive/master.zip][ZIP]] o haciendo una copia del repositorio con git:
+formato [[https://github.com/oscarperpinan/intro/archive/master.zip][ZIP]]. Es recomendable descomprimirlo en una ruta sencilla (por
+ejemplo, en Windows =C:\cursoR\= y en Linux/Mac
+=/home/miusuario/cursoR/=). Si tienes [[http://git-scm.com/][=git=]] en tu ordenador, puedes
+hacer una copia de forma aún más sencilla:
 
 #+BEGIN_SRC bash
   git clone git://github.com/oscarperpinan/intro.git
 #+END_SRC
 
-* Usuario
+Una vez realizado el paso anterior, existirá una carpeta en tu
+ordenador con el contenido del curso. Todo el código asume que la ruta
+de trabajo coincide con esa carpeta. Por tanto, el primer paso a dar
+en =R= es definir la ruta de trabajo con =setwd=:
+#+begin_src R
+setwd('/ruta/de/copia/local/del/repositorio/')
+#+end_src
+Puedes comprobar que todo ha ido bien con =dir=. El resultado de la
+siguiente instrucción debe ser la estructura de carpetas y ficheros
+del repositorio:
+#+begin_src R
+dir()
+#+end_src
+
+A continuación, debes instalar los paquetes que se emplean a lo largo
+del curso. Algunos ya vendrán instalados con tu distribución de R por
+ser paquetes recomendados. En =R= debes usar =install.packages=. En la
+siguiente instrucción usamos el /CRAN mirror/ de la Oficina de
+Software Libre (CIXUG). Consulta [[http://cran.r-project.org/mirrors.html][esta lista]] para elegir un /CRAN
+mirror/ diferente.
+
+#+begin_src R
+install.packages(c('lattice', 'latticeExtra', 'RColorBrewer', 'zoo'),
+                 repos = 'http://ftp.cixug.es/CRAN')
+#+end_src
+
+Ya está todo listo para empezar a trabajar con el material.
+
+
+* Contenido
+  :PROPERTIES:
+  :HTML_CONTAINER_CLASS: container
+  :END:
+
+** Usuario
   :PROPERTIES:
   :HTML_CONTAINER_CLASS: container
   :END:
@@ -75,7 +138,7 @@ Este apartado agrupa el material apropiado para trabajar con R desde el rol de u
    [[https://github.com/oscarperpinan/intro/blob/master/estadistica.R][código]]
   
 
-* Desarrollador
+** Desarrollador
   :PROPERTIES:
   :HTML_CONTAINER_CLASS: container
   :END:
@@ -109,7 +172,7 @@ Este apartado agrupa material apropiado para trabajar con R desde el rol de desa
    [[file:Paquetes.pdf][pdf]]
 
 
-* Miscelánea
+** Miscelánea
   :PROPERTIES:
   :HTML_CONTAINER_CLASS: container
   :END:
