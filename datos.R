@@ -1,48 +1,40 @@
 
 ## =setwd=, =getwd=, =dir=
 
-getwd()
-old <- setwd("~/R/intro")
-dir()
-dir(pattern='.R')
-dir('data')
+  getwd()
+  old <- setwd("~/github/intro")
+  dir()
+  dir(pattern='.R')
+  dir('data')
 
 ## read.table
-## - Con un fichero local
+## # - Con un fichero local
 
-download.file('http://oscarperpinan.github.com/spacetime-vis/data/CO2_GNI_BM.csv',
-              destfile='data/CO2_GNI_BM.csv')
-
-CO2 <- read.table('data/CO2_GNI_BM.csv', header=TRUE, sep=',')
-head(CO2)
-
-## - Directamente de un enlace URL
-
-CO2 <- read.table('http://oscarperpinan.github.com/spacetime-vis/data/CO2_GNI_BM.csv',
-                header=TRUE, sep=',')
-head(CO2)
+  CO2 <- read.table('data/CO2_GNI_BM.csv', header=TRUE, sep=',')
+  head(CO2)
+  
 
 ## read.csv, read.csv2
 ## - =read.csv= y =read.csv2= son como =read.table= con valores
 ##   por defecto para encabezado y separadores
 
-CO2 <- read.csv('data/CO2_GNI_BM.csv')
+  CO2 <- read.csv('data/CO2_GNI_BM.csv')
 
-names(CO2)
-head(CO2)
-tail(CO2)
+  names(CO2)
+  head(CO2)
+  tail(CO2)
 
-summary(CO2)
+  summary(CO2)
 
-## table \\ =data.frame= de ejemplo
+## table, =data.frame= de ejemplo
 
-chromosome <- gl(3,  10, labels = c('A',  'B',  'C'))
-probeset <- gl(3,  10, labels = c('X',  'Y',  'Z'))
-ensg <-  gl(3,  10, labels = c('E1',  'E2',  'E3'))
-symbol <- gl(3,  10, labels = c('S1',  'S2',  'S3'))
-XXA_00 <- rnorm(30)
-XXA_36 <- rnorm(30)
-XXB_00 <- rnorm(30)
+  chromosome <- gl(3,  10, labels = c('A',  'B',  'C'))
+  probeset <- gl(3,  10, labels = c('X',  'Y',  'Z'))
+  ensg <-  gl(3,  10, labels = c('E1',  'E2',  'E3'))
+  symbol <- gl(3,  10, labels = c('S1',  'S2',  'S3'))
+  XXA_00 <- rnorm(30)
+  XXA_36 <- rnorm(30)
+  XXB_00 <- rnorm(30)
 
 chromo <- data.frame(chromosome, probeset, ensg, symbol,
                      XXA_00, XXA_36, XXB_00)
@@ -56,108 +48,109 @@ table(chromo$probeset, chromo$XXA_00 > -1 & chromo$XXA_00 < 1)
 
 ## xtabs
 
-xtabs(XXA_00 > 1 ~ chromosome + probeset,
-      data=chromo)
+  xtabs(XXA_00 > 1 ~ chromosome + probeset,
+        data=chromo)
 
 ## tapply
 
-tapply(CO2$X2000, CO2$Indicator.Name,
-       FUN=mean)
+  tapply(CO2$X2000, CO2$Indicator.Name,
+         FUN=mean)
 
 ## tapply
 
-tapply(CO2$X2000, CO2[,c("Indicator.Name", "Country.Name")],
-       FUN=mean)
+  tapply(CO2$X2000, CO2[,c("Indicator.Name", "Country.Name")],
+         FUN=mean)
 
 ## aggregate
 
-aggregate(X2000 ~ Indicator.Name,
-          data=CO2, FUN=mean)
+  aggregate(X2000 ~ Indicator.Name,
+            data=CO2, FUN=mean)  
 
-aggregate(cbind(X2000, X2001) ~ Indicator.Name,
-          data=CO2, FUN=mean)
+  aggregate(cbind(X2000, X2001) ~ Indicator.Name,
+            data=CO2, FUN=mean)
+  
 
-aggregate(X2000 ~ Indicator.Name + Country.Name,
-          data=CO2, FUN=mean)
-
-## aggregate
-
-aggregate(cbind(X2000, X2001) ~
-          Indicator.Name + Country.Name,
-          data=CO2, FUN=mean)
-
-aggregate(cbind(X2000, X2001) ~
-          Indicator.Name + Country.Name,
-          data=CO2, FUN=mean)
-
-aggregate(cbind(X2000, X2001) ~
-          Indicator.Name + Country.Name,
-          subset=(Country.Name %in% c('United States', 'China')),
-                  data=CO2, FUN=mean)
+  aggregate(X2000 ~ Indicator.Name + Country.Name,
+            data=CO2, FUN=mean)
 
 ## aggregate
 
-aggregate(cbind(XXA_00, XXA_36, XXB_00) ~
-          ensg + chromosome + symbol,
-          data = chromo,  FUN = mean)
+  aggregate(cbind(X2000, X2001) ~
+            Indicator.Name + Country.Name,
+            data=CO2, FUN=mean)
 
-aggregate(cbind(XXA_00, XXA_36, XXB_00) ~ ensg ,
-          data = chromo,  FUN = mean)
+  aggregate(cbind(X2000, X2001) ~
+            Indicator.Name + Country.Name,
+            data=CO2, FUN=mean)
+
+  aggregate(cbind(X2000, X2001) ~
+            Indicator.Name + Country.Name,
+            subset=(Country.Name %in% c('United States', 'China')),
+                    data=CO2, FUN=mean)
+
+## aggregate
+
+  aggregate(cbind(XXA_00, XXA_36, XXB_00) ~
+            ensg + chromosome + symbol,
+            data = chromo,  FUN = mean)
+
+  aggregate(cbind(XXA_00, XXA_36, XXB_00) ~ ensg ,
+            data = chromo,  FUN = mean)
 
 ## =stack=
 ## - Primero escogemos un subconjunto
 
-CO2China <- subset(CO2,
-                   subset=(Country.Name=='China' &
-                           Indicator.Name=='CO2 emissions (kg per PPP $ of GDP)'),
-                   select=-c(Country.Name, Country.Code,
-                             Indicator.Name, Indicator.Code))
-head(CO2China)
+  CO2China <- subset(CO2,
+                     subset=(Country.Name=='China' &
+                             Indicator.Name=='CO2 emissions (kg per PPP $ of GDP)'),
+                     select=-c(Country.Name, Country.Code,
+                               Indicator.Name, Indicator.Code))
+  head(CO2China)
 
 ## =stack=
 ## - Pasamos de formato =wide= a =long=
 
-stack(CO2China)
+  stack(CO2China)
 
 ## =reshape=: =wide= a =long=
 ## - Primer intento
 
-CO2long <- reshape(CO2,
-                   varying=list(names(CO2)[5:16]),
-                   direction='long')
-head(CO2long)
+  CO2long <- reshape(CO2,
+                     varying=list(names(CO2)[5:16]),
+                     direction='long')
+  head(CO2long)
 
 ## =reshape=: =wide= a =long=
 ## - Añadimos argumentos
 
-CO2long <- reshape(CO2,
-                   varying=list(names(CO2)[5:16]),
-                   timevar='Year', v.names='Value',
-                   times=2000:2011,
-                   direction='long')
-head(CO2long)
+  CO2long <- reshape(CO2,
+                     varying=list(names(CO2)[5:16]),
+                     timevar='Year', v.names='Value',
+                     times=2000:2011,
+                     direction='long')
+  head(CO2long)
 
 ## =reshape=: =long= a =wide=
 ## - Primero escogemos las columnas de interés
 
-CO2subset <- CO2long[c("Country.Name",
-                       "Indicator.Name",
-                       "Year", "Value")]
-head(CO2subset)
+  CO2subset <- CO2long[c("Country.Name",
+                         "Indicator.Name",
+                         "Year", "Value")]
+  head(CO2subset)
 
 ## =reshape=: =long= a =wide=
 ## - Ahora cambiamos formato
 
-CO2wide <- reshape(CO2subset,
-                   idvar=c('Country.Name','Year'),
-                   timevar='Indicator.Name',
-                   direction='wide')
-head(CO2wide)
+  CO2wide <- reshape(CO2subset,
+                     idvar=c('Country.Name','Year'),
+                     timevar='Indicator.Name',
+                     direction='wide')
+  head(CO2wide)
 
 ## =reshape=: =long= a =wide=
 ## - Y ponemos nombres al gusto
 
-names(CO2wide)[3:6] <- c('CO2.PPP', 'CO2.capita',
-                         'GNI.PPP', 'GNI.capita')
-
-head(CO2wide)
+  names(CO2wide)[3:6] <- c('CO2.PPP', 'CO2.capita',
+                           'GNI.PPP', 'GNI.capita')
+  
+  head(CO2wide)

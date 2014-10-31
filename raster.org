@@ -30,7 +30,7 @@
 #+begin_src R
   ## Entre las comillas hay que indicar el directorio en el que está el
   ## repositorio (será visible la carpeta data/)
-  setwd('~/R/intro/')
+  setwd('~/github/intro/')
 #+end_src
 - Cargo los paquetes que usaremos
 #+begin_src R
