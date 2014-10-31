@@ -46,7 +46,7 @@ posiblemente no es lo más recomendable para un principiante.
 La alternativa más recomendable es [[http://www.rstudio.com/ide/][RStudio]]. Podéis descargar el
 instalador desde [[http://www.rstudio.com/ide/download/desktop][aquí]]. Es aconsejable la lectura de esta [[http://www.rstudio.com/ide/docs/using/source][introducción]].
 
-* <<instrucciones>>Cómo usar el material
+* <<uso>>Cómo usar el material
   :PROPERTIES:
   :HTML_CONTAINER_CLASS: container
   :END:
