@@ -25,7 +25,7 @@ por [[http://oscarperpinan.github.io][Oscar Perpiñán Lamigueiro]] empleando [[
 [[http://creativecommons.org/licenses/by-sa/4.0/][https://i.creativecommons.org/l/by-sa/4.0/88x31.png]] Este material está
 bajo una licencia [[http://creativecommons.org/licenses/by-sa/4.0/][Creative Commons CC-BY-SA 4.0]].
 
-* Instalar R
+* <<instalacion>>Instalar R
   :PROPERTIES:
   :HTML_CONTAINER_CLASS: container
   :END:
@@ -35,7 +35,7 @@ bajo una licencia [[http://creativecommons.org/licenses/by-sa/4.0/][Creative Com
 - Y si utilizáis Linux, posiblemente lo tengáis disponible en vuestro
   gestor de aplicaciones. En todo caso, la página para Linux está [[http://cran.es.r-project.org/bin/linux/][aquí]].
 
-* Interfaces para R
+* <<gui>>Interfaces para R
   :PROPERTIES:
   :HTML_CONTAINER_CLASS: container
   :END:
@@ -46,7 +46,7 @@ posiblemente no es lo más recomendable para un principiante.
 La alternativa más recomendable es [[http://www.rstudio.com/ide/][RStudio]]. Podéis descargar el
 instalador desde [[http://www.rstudio.com/ide/download/desktop][aquí]]. Es aconsejable la lectura de esta [[http://www.rstudio.com/ide/docs/using/source][introducción]].
 
-* Cómo usar el material
+* <<instrucciones>>Cómo usar el material
   :PROPERTIES:
   :HTML_CONTAINER_CLASS: container
   :END:
@@ -91,12 +91,12 @@ install.packages(c('lattice', 'latticeExtra', 'RColorBrewer', 'zoo'),
 Ya está todo listo para empezar a trabajar con el material.
 
 
-* Contenido
+* <<contenido>>Contenido
   :PROPERTIES:
   :HTML_CONTAINER_CLASS: container
   :END:
 
-** Usuario
+** <<usuario>>Usuario
   :PROPERTIES:
   :HTML_CONTAINER_CLASS: container
   :END:
@@ -138,7 +138,7 @@ Este apartado agrupa el material apropiado para trabajar con R desde el rol de u
    [[https://github.com/oscarperpinan/intro/blob/master/estadistica.R][código]]
   
 
-** Desarrollador
+** <<desarrollador>>Desarrollador
   :PROPERTIES:
   :HTML_CONTAINER_CLASS: container
   :END:
@@ -172,7 +172,7 @@ Este apartado agrupa material apropiado para trabajar con R desde el rol de desa
    [[file:Paquetes.pdf][pdf]]
 
 
-** Miscelánea
+** <<misc>>Miscelánea
   :PROPERTIES:
   :HTML_CONTAINER_CLASS: container
   :END:
