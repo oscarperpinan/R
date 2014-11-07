@@ -36,7 +36,7 @@ cualitativa y publicado como software libre con licencia GNU-GPL.
 ** R es un proyecto colaborativo
 *** R es un proyecto colaborativo
 - Una de las grandes riquezas de R es la cantidad de paquetes (más
-  de 4000 actualmente) que amplían sus funcionalidades.  
+  de 6000 actualmente) que amplían sus funcionalidades.  
 - La lista completa está en http://cran.es.r-project.org/web/packages/.
 - Las CRAN Task Views agrupan por temáticas:
   [[http://cran.r-project.org/web/views/]]
