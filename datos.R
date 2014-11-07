@@ -44,7 +44,8 @@ head(chromo)
 
 table(chromo$chromosome, chromo$XXA_00 > 0)
 
-table(chromo$probeset, chromo$XXA_00 > -1 & chromo$XXA_00 < 1)
+table(chromo$probeset,
+      chromo$XXA_00 > -1 & chromo$XXA_00 < 1)
 
 ## xtabs
 
@@ -58,7 +59,8 @@ table(chromo$probeset, chromo$XXA_00 > -1 & chromo$XXA_00 < 1)
 
 ## tapply
 
-  tapply(CO2$X2000, CO2[,c("Indicator.Name", "Country.Name")],
+  tapply(CO2$X2000,
+         CO2[,c("Indicator.Name", "Country.Name")],
          FUN=mean)
 
 ## aggregate
@@ -154,3 +156,24 @@ table(chromo$probeset, chromo$XXA_00 > -1 & chromo$XXA_00 < 1)
                            'GNI.PPP', 'GNI.capita')
   
   head(CO2wide)
+
+## Alternativa: =reshape2=
+## - =reshape2= es un paquete que puede facilitar la transformación de =data.frame= y matrices.
+
+library(reshape2)
+
+## Alternativa: =reshape2=
+## - Para cambiar de /wide/ a /long/ usamos =melt=:
+
+CO2long2 <- melt(CO2, id.vars = 1:4,
+                 variable.name = 'Year',
+                 value.name = 'Value')
+
+head(CO2long2)
+
+## Alternativa: =reshape2=
+## - Para cambiar de /long/ a /wide/ usamos =dcast=:
+
+CO2wide2 <- dcast(CO2subset,
+                  Country.Name + Year ~ Indicator.Name)
+head(CO2wide2)
