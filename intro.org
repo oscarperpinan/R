@@ -41,7 +41,7 @@ cualitativa y publicado como software libre con licencia GNU-GPL.
 - Las CRAN Task Views agrupan por temáticas:
   [[http://cran.r-project.org/web/views/]]
 
-*** Más de 4000 paquetes disponibles
+*** Más de 6000 paquetes disponibles
 - Algunos vienen instalados y se cargan al empezar:
 #+begin_src R 
   sessionInfo()
@@ -571,8 +571,10 @@ df[,2]
 #+end_src
 - Lo partimos en estados "fríos" y estados "grandes"
 #+begin_src R 
-  coldStates <- USStates[USStates$Frost>150, c('Name', 'Frost')]
-  largeStates <- USStates[USStates$Area>1e5, c('Name', 'Area')]
+  coldStates <- USStates[USStates$Frost>150,
+                         c('Name', 'Frost')]
+  largeStates <- USStates[USStates$Area>1e5,
+                          c('Name', 'Area')]
 #+end_src
 - Unimos los dos conjuntos (estados "fríos" y "grandes")
 #+begin_src R 
@@ -717,8 +719,10 @@ seq(as.POSIXct('2004-01-01 10:00:00'), by='15 min', length=10)
 *** Zonas horarias
 
 #+begin_src R 
-  as.POSIXct('2013-02-06 15:30:00', tz='GMT')
-  as.POSIXct('2013-02-06 15:30:00', tz='Europe/Madrid')
+  as.POSIXct('2013-02-06 15:30:00',
+             tz='GMT')
+  as.POSIXct('2013-02-06 15:30:00',
+             tz='Europe/Madrid')
 #+end_src
 
 #+begin_src R 
