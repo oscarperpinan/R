@@ -84,7 +84,8 @@ Software Libre (CIXUG). Consulta [[http://cran.r-project.org/mirrors.html][esta 
 mirror/ diferente.
 
 #+begin_src R
-install.packages(c('lattice', 'latticeExtra', 'RColorBrewer', 'zoo'),
+install.packages(c('lattice', 'latticeExtra', 'RColorBrewer',
+                   'zoo', 'reshape2', 'ggplot2'),
                  repos = 'http://ftp.cixug.es/CRAN')
 #+end_src
 
