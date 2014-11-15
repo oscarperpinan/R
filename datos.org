@@ -1,13 +1,14 @@
 #+TITLE:     Manejo de datos con R
 
 #+SETUPFILE: config.org
-#+OPTIONS: H:2
+#+OPTIONS: H:3
 #+PROPERTY: results output
 #+PROPERTY: exports both
 
 
-* Fuentes de datos
+* Lectura de datos
 ** Fuentes de datos
+*** Fuentes de datos
 
 - [[http://stat.ethz.ch/R-manual/R-patched/library/datasets/html/00Index.html][The R Datasets Package]]
 
@@ -15,8 +16,8 @@
 
 - ...
 
-* Lectura de datos
-** =setwd=, =getwd=, =dir=
+** Lectura de datos con R
+*** =setwd=, =getwd=, =dir=
 #+begin_src R :exports code
   getwd()
   old <- setwd("~/github/intro")
@@ -25,10 +26,11 @@
   dir('data')
 #+end_src
 
-** read.table
+*** read.table
 # - Con un fichero local
 #+begin_src R 
-  CO2 <- read.table('data/CO2_GNI_BM.csv', header=TRUE, sep=',')
+  CO2 <- read.table('data/CO2_GNI_BM.csv',
+                    header=TRUE, sep=',')
   head(CO2)
   
 #+end_src
@@ -39,7 +41,7 @@
 #   head(CO2)
 # #+end_src
 
-** read.csv, read.csv2
+*** read.csv, read.csv2
 - =read.csv= y =read.csv2= son como =read.table= con valores
   por defecto para encabezado y separadores
 
@@ -56,44 +58,14 @@
   summary(CO2)
 #+end_src
 * Datos agregados
-** table, =data.frame= de ejemplo
-#+begin_src R 
-  chromosome <- gl(3,  10, labels = c('A',  'B',  'C'))
-  probeset <- gl(3,  10, labels = c('X',  'Y',  'Z'))
-  ensg <-  gl(3,  10, labels = c('E1',  'E2',  'E3'))
-  symbol <- gl(3,  10, labels = c('S1',  'S2',  'S3'))
-  XXA_00 <- rnorm(30)
-  XXA_36 <- rnorm(30)
-  XXB_00 <- rnorm(30)
-#+end_src
-#+begin_src R 
-chromo <- data.frame(chromosome, probeset, ensg, symbol,
-                     XXA_00, XXA_36, XXB_00)
-head(chromo)
-#+end_src
-** table
-#+begin_src R 
-table(chromo$chromosome, chromo$XXA_00 > 0)
-#+end_src
-
-#+begin_src R 
-table(chromo$probeset,
-      chromo$XXA_00 > -1 & chromo$XXA_00 < 1)
-#+end_src
-
-
-** xtabs
-#+begin_src R 
-  xtabs(XXA_00 > 1 ~ chromosome + probeset,
-        data=chromo)
-#+end_src
 ** tapply
+*** Una variable numérica y una variable categórica
 #+begin_src R :results output :exports both
   tapply(CO2$X2000, CO2$Indicator.Name,
          FUN=mean)
 #+end_src
 
-** tapply
+*** Una variable numérica y varias categóricas
 #+begin_src R :results output :exports both
   tapply(CO2$X2000,
          CO2[,c("Indicator.Name", "Country.Name")],
@@ -101,74 +73,77 @@ table(chromo$probeset,
 #+end_src
 
 ** aggregate
+*** Una variable numérica y una variable categórica
 #+begin_src R 
   aggregate(X2000 ~ Indicator.Name,
             data=CO2, FUN=mean)  
 #+end_src
+
+*** Dos variables numéricas y una variable categórica
+- Hay que usar =cbind=
 #+begin_src R 
   aggregate(cbind(X2000, X2001) ~ Indicator.Name,
             data=CO2, FUN=mean)
   
 #+end_src
+
+- En caso contrario...
+#+begin_src R 
+  aggregate(X2000 + X2001 ~ Indicator.Name,
+            data=CO2, FUN=mean)
+  
+#+end_src
+
+
+*** Una variable numérica y varias variable categórica
 #+begin_src R 
   aggregate(X2000 ~ Indicator.Name + Country.Name,
             data=CO2, FUN=mean)
 #+end_src
-** aggregate
+*** Dos variables numéricas, dos variables categóricas
 #+begin_src R 
   aggregate(cbind(X2000, X2001) ~
             Indicator.Name + Country.Name,
             data=CO2, FUN=mean)
 #+end_src
-#+begin_src R 
-  aggregate(cbind(X2000, X2001) ~
-            Indicator.Name + Country.Name,
-            data=CO2, FUN=mean)
-#+end_src
+
+*** Usando =subset=
 #+begin_src R 
   aggregate(cbind(X2000, X2001) ~
             Indicator.Name + Country.Name,
             subset=(Country.Name %in% c('United States', 'China')),
                     data=CO2, FUN=mean)
 #+end_src
-** aggregate
-#+begin_src R 
-  aggregate(cbind(XXA_00, XXA_36, XXB_00) ~
-            ensg + chromosome + symbol,
-            data = chromo,  FUN = mean)
-#+end_src   
-#+begin_src R 
-  aggregate(cbind(XXA_00, XXA_36, XXB_00) ~ ensg ,
-            data = chromo,  FUN = mean)
-#+end_src
+
 * Cambio de formato
-** =stack=
-- Primero escogemos un subconjunto
+** Forma simple con =stack= 
+*** Primero escogemos un subconjunto
 #+begin_src R 
   CO2China <- subset(CO2,
-                     subset=(Country.Name=='China' &
-                             Indicator.Name=='CO2 emissions (kg per PPP $ of GDP)'),
-                     select=-c(Country.Name, Country.Code,
-                               Indicator.Name, Indicator.Code))
+                     subset = (Country.Name=='China' &
+                                   Indicator.Name == 'CO2 emissions (kg per PPP $ of GDP)'),
+                     select = -c(Country.Name,
+                                 Country.Code,
+                                 Indicator.Name,
+                                 Indicator.Code)
+                     )
   head(CO2China)
 #+end_src
 
-** =stack=
-- Pasamos de formato =wide= a =long=
+*** Pasamos de formato =wide= a =long=
 #+begin_src R 
   stack(CO2China)
 #+end_src
 
-** =reshape=: =wide= a =long=
-- Primer intento
+** De forma flexible con =reshape= 
+*** =wide= a =long=: primer intento
 #+begin_src R 
   CO2long <- reshape(CO2,
                      varying=list(names(CO2)[5:16]),
                      direction='long')
   head(CO2long)
 #+end_src
-** =reshape=: =wide= a =long=
-- Añadimos argumentos
+*** =wide= a =long=: añadimos argumentos
 #+begin_src R 
   CO2long <- reshape(CO2,
                      varying=list(names(CO2)[5:16]),
@@ -177,7 +152,7 @@ table(chromo$probeset,
                      direction='long')
   head(CO2long)
 #+end_src
-** =reshape=: =long= a =wide=
+*** =long= a =wide=
 - Primero escogemos las columnas de interés
 #+begin_src R 
   CO2subset <- CO2long[c("Country.Name",
@@ -185,7 +160,7 @@ table(chromo$probeset,
                          "Year", "Value")]
   head(CO2subset)
 #+end_src
-** =reshape=: =long= a =wide=
+*** =long= a =wide=
 - Ahora cambiamos formato
 #+begin_src R 
   CO2wide <- reshape(CO2subset,
@@ -194,7 +169,7 @@ table(chromo$probeset,
                      direction='wide')
   head(CO2wide)
 #+end_src
-** =reshape=: =long= a =wide=
+*** =long= a =wide=
 - Y ponemos nombres al gusto
 #+begin_src R 
   names(CO2wide)[3:6] <- c('CO2.PPP', 'CO2.capita',
@@ -204,13 +179,14 @@ table(chromo$probeset,
 #+end_src
 
 ** Alternativa: =reshape2=
+
+*** =reshape2=
 - =reshape2= es un paquete que puede facilitar la transformación de =data.frame= y matrices.
 #+begin_src R
 library(reshape2)
 #+end_src
 
-** Alternativa: =reshape2=
-- Para cambiar de /wide/ a /long/ usamos =melt=:
+*** =melt= para cambiar de /wide/ a /long/
 #+begin_src R
 CO2long2 <- melt(CO2, id.vars = 1:4,
                  variable.name = 'Year',
@@ -219,47 +195,9 @@ CO2long2 <- melt(CO2, id.vars = 1:4,
 head(CO2long2)
 #+end_src
 
-** Alternativa: =reshape2=
-- Para cambiar de /long/ a /wide/ usamos =dcast=:
+*** =dcast= para cambiar de /long/ a /wide/
 #+begin_src R
 CO2wide2 <- dcast(CO2subset,
                   Country.Name + Year ~ Indicator.Name)
 head(CO2wide2)
 #+end_src
-
-# #+begin_src R 
-#   dat2011 <- read.csv('data/GeneralSpanishElections2011.gz')
-  
-#   names(dat2011)[1:13]
-  
-#   aggregate(cbind(Votos.en.blanco, Votos.nulos, Votos.válidos) ~ Nombre.de.Comunidad,
-#             data=dat2011, FUN=sum)
-  
-#   census <- dat2011$Total.censo.electoral
-#   validVotes <- dat2011$Votos.válidos
-#   ## Election results per political party and municipality
-#   votesData <- dat2011[, 12:1023]
-#   ## Abstention as an additional party
-#   votesData$ABS <- census - validVotes
-#   ## Winner party at each municipality
-#   whichMax <- apply(votesData,  1, function(x)names(votesData)[which.max(x)])
-#   ## Results of the winner party at each municipality
-#   Max <- apply(votesData, 1, max)
-#   ## OTH for everything but PP, PSOE and ABS
-#   whichMax[!(whichMax %in% c('PP',  'PSOE', 'ABS'))] <- 'OTH'
-#   ## Percentage of votes with the electoral census
-#   pcMax <- Max/census * 100
-  
-#   ## Province-Municipality code. sprintf formats a number with leading zeros.
-#   PROVMUN <- with(dat2011, paste(sprintf('%02d', Código.de.Provincia),
-#                                  sprintf('%03d', Código.de.Municipio),
-#                                  sep=""))
-  
-#   votes2011 <- data.frame(dat2011[,c('Nombre.de.Comunidad', 'Nombre.de.Provincia')],
-#                           PROVMUN, whichMax, Max, pcMax)
-  
-  
-#   ##write.csv(votes2011, 'data/votes2011.csv', row.names=FALSE)
-# #+end_src
-
-

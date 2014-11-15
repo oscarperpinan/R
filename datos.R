@@ -26,32 +26,6 @@
 
   summary(CO2)
 
-## table, =data.frame= de ejemplo
-
-  chromosome <- gl(3,  10, labels = c('A',  'B',  'C'))
-  probeset <- gl(3,  10, labels = c('X',  'Y',  'Z'))
-  ensg <-  gl(3,  10, labels = c('E1',  'E2',  'E3'))
-  symbol <- gl(3,  10, labels = c('S1',  'S2',  'S3'))
-  XXA_00 <- rnorm(30)
-  XXA_36 <- rnorm(30)
-  XXB_00 <- rnorm(30)
-
-chromo <- data.frame(chromosome, probeset, ensg, symbol,
-                     XXA_00, XXA_36, XXB_00)
-head(chromo)
-
-## table
-
-table(chromo$chromosome, chromo$XXA_00 > 0)
-
-table(chromo$probeset,
-      chromo$XXA_00 > -1 & chromo$XXA_00 < 1)
-
-## xtabs
-
-  xtabs(XXA_00 > 1 ~ chromosome + probeset,
-        data=chromo)
-
 ## tapply
 
   tapply(CO2$X2000, CO2$Indicator.Name,
@@ -89,15 +63,6 @@ table(chromo$probeset,
             Indicator.Name + Country.Name,
             subset=(Country.Name %in% c('United States', 'China')),
                     data=CO2, FUN=mean)
-
-## aggregate
-
-  aggregate(cbind(XXA_00, XXA_36, XXB_00) ~
-            ensg + chromosome + symbol,
-            data = chromo,  FUN = mean)
-
-  aggregate(cbind(XXA_00, XXA_36, XXB_00) ~ ensg ,
-            data = chromo,  FUN = mean)
 
 ## =stack=
 ## - Primero escogemos un subconjunto
