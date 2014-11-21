@@ -1,4 +1,4 @@
-% Created 2014-08-27 mié 09:02
+% Created 2014-11-21 vie 14:58
 \documentclass[xcolor={usenames,svgnames,dvipsnames}]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -18,7 +18,7 @@
 \tolerance=1000
 \usepackage{color}
 \usepackage{listings}
-\AtBeginSection[]{\begin{frame}[plain]\tableofcontents[currentsection,hideallsubsections]\end{frame}}
+\AtBeginSubsection[]{\begin{frame}[plain]\tableofcontents[currentsubsection,sectionstyle=show/shaded,subsectionstyle=show/shaded/hide]\end{frame}}
 \lstset{keywordstyle=\color{blue}, commentstyle=\color{gray!90}, basicstyle=\ttfamily\small, columns=fullflexible, breaklines=true,linewidth=\textwidth, backgroundcolor=\color{gray!23}, basewidth={0.5em,0.4em}, literate={á}{{\'a}}1 {ñ}{{\~n}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {º}{{\textordmasculine}}1}
 \usepackage{mathpazo}
 \hypersetup{colorlinks=true, linkcolor=Blue, urlcolor=Blue}
@@ -33,7 +33,7 @@
 \hypersetup{
   pdfkeywords={},
   pdfsubject={},
-  pdfcreator={Emacs 24.3.1 (Org mode 8.2.1)}}
+  pdfcreator={Emacs 24.3.1 (Org mode 8.2.7c)}}
 \begin{document}
 
 \maketitle
@@ -55,68 +55,71 @@ about 1888. 6 variables in percent [0, 100]:
 \item \alert{Infant.Mortality}:  live births who live less than 1year.
 \end{itemize}
 \end{frame}
-\begin{frame}[fragile,label=sec-1-2]{Conjunto de datos: swiss}
- \lstset{language=R,numbers=none}
-\begin{lstlisting}
-data(swiss)
 
-summary(swiss)
+\begin{frame}[fragile,label=sec-1-2]{Conjunto de datos: swiss}
+ \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+  data(swiss)
+  
+  summary(swiss)
 \end{lstlisting}
 
 \begin{verbatim}
-  Fertility      Agriculture     Examination      Education    
-Min.   :35.00   Min.   : 1.20   Min.   : 3.00   Min.   : 1.00  
-1st Qu.:64.70   1st Qu.:35.90   1st Qu.:12.00   1st Qu.: 6.00  
-Median :70.40   Median :54.10   Median :16.00   Median : 8.00  
-Mean   :70.14   Mean   :50.66   Mean   :16.49   Mean   :10.98  
-3rd Qu.:78.45   3rd Qu.:67.65   3rd Qu.:22.00   3rd Qu.:12.00  
-Max.   :92.50   Max.   :89.70   Max.   :37.00   Max.   :53.00  
-   Catholic       Infant.Mortality
-Min.   :  2.150   Min.   :10.80   
-1st Qu.:  5.195   1st Qu.:18.15   
-Median : 15.140   Median :20.00   
-Mean   : 41.144   Mean   :19.94   
-3rd Qu.: 93.125   3rd Qu.:21.70   
-Max.   :100.000   Max.   :26.60
+   Fertility      Agriculture     Examination      Education    
+ Min.   :35.00   Min.   : 1.20   Min.   : 3.00   Min.   : 1.00  
+ 1st Qu.:64.70   1st Qu.:35.90   1st Qu.:12.00   1st Qu.: 6.00  
+ Median :70.40   Median :54.10   Median :16.00   Median : 8.00  
+ Mean   :70.14   Mean   :50.66   Mean   :16.49   Mean   :10.98  
+ 3rd Qu.:78.45   3rd Qu.:67.65   3rd Qu.:22.00   3rd Qu.:12.00  
+ Max.   :92.50   Max.   :89.70   Max.   :37.00   Max.   :53.00  
+    Catholic       Infant.Mortality
+ Min.   :  2.150   Min.   :10.80   
+ 1st Qu.:  5.195   1st Qu.:18.15   
+ Median : 15.140   Median :20.00   
+ Mean   : 41.144   Mean   :19.94   
+ 3rd Qu.: 93.125   3rd Qu.:21.70   
+ Max.   :100.000   Max.   :26.60
 \end{verbatim}
 \end{frame}
+
 \begin{frame}[fragile,label=sec-1-3]{}
- \lstset{language=R,numbers=none}
+ \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-library(lattice)
-splom(swiss, pscale=0, type=c('p', 'smooth'),
-      groups=swiss$Catholic > 50, xlab='')
+  library(lattice)
+  splom(swiss, pscale=0, type=c('p', 'smooth'),
+        groups=swiss$Catholic > 50, xlab='')
 \end{lstlisting}
 
 \includegraphics[width=.9\linewidth]{figs/splomSwiss.pdf}
 \end{frame}
+
 \section{Estadística Univariante}
 \label{sec-2}
 
 \begin{frame}[fragile,label=sec-2-1]{Resumir información}
- \lstset{language=R,numbers=none}
+ \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-summary(swiss)
+  summary(swiss)
 \end{lstlisting}
 
 \begin{verbatim}
-  Fertility      Agriculture     Examination      Education    
-Min.   :35.00   Min.   : 1.20   Min.   : 3.00   Min.   : 1.00  
-1st Qu.:64.70   1st Qu.:35.90   1st Qu.:12.00   1st Qu.: 6.00  
-Median :70.40   Median :54.10   Median :16.00   Median : 8.00  
-Mean   :70.14   Mean   :50.66   Mean   :16.49   Mean   :10.98  
-3rd Qu.:78.45   3rd Qu.:67.65   3rd Qu.:22.00   3rd Qu.:12.00  
-Max.   :92.50   Max.   :89.70   Max.   :37.00   Max.   :53.00  
-   Catholic       Infant.Mortality
-Min.   :  2.150   Min.   :10.80   
-1st Qu.:  5.195   1st Qu.:18.15   
-Median : 15.140   Median :20.00   
-Mean   : 41.144   Mean   :19.94   
-3rd Qu.: 93.125   3rd Qu.:21.70   
-Max.   :100.000   Max.   :26.60
+   Fertility      Agriculture     Examination      Education    
+ Min.   :35.00   Min.   : 1.20   Min.   : 3.00   Min.   : 1.00  
+ 1st Qu.:64.70   1st Qu.:35.90   1st Qu.:12.00   1st Qu.: 6.00  
+ Median :70.40   Median :54.10   Median :16.00   Median : 8.00  
+ Mean   :70.14   Mean   :50.66   Mean   :16.49   Mean   :10.98  
+ 3rd Qu.:78.45   3rd Qu.:67.65   3rd Qu.:22.00   3rd Qu.:12.00  
+ Max.   :92.50   Max.   :89.70   Max.   :37.00   Max.   :53.00  
+    Catholic       Infant.Mortality
+ Min.   :  2.150   Min.   :10.80   
+ 1st Qu.:  5.195   1st Qu.:18.15   
+ Median : 15.140   Median :20.00   
+ Mean   : 41.144   Mean   :19.94   
+ 3rd Qu.: 93.125   3rd Qu.:21.70   
+ Max.   :100.000   Max.   :26.60
 \end{verbatim}
 
-\lstset{language=R,numbers=none}
+\lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
 mean(swiss$Fertility)
 \end{lstlisting}
@@ -125,7 +128,7 @@ mean(swiss$Fertility)
 [1] 70.14255
 \end{verbatim}
 
-\lstset{language=R,numbers=none}
+\lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
 colMeans(swiss)
 \end{lstlisting}
@@ -137,19 +140,20 @@ Fertility      Agriculture      Examination        Education
  41.14383         19.94255
 \end{verbatim}
 \end{frame}
+
 \begin{frame}[fragile,label=sec-2-2]{Resumir información}
- \lstset{language=R,numbers=none}
+ \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-sd(swiss$Fertility)
+  sd(swiss$Fertility)
 \end{lstlisting}
 
 \begin{verbatim}
 [1] 12.4917
 \end{verbatim}
 
-\lstset{language=R,numbers=none}
+\lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-sapply(swiss, sd)
+  sapply(swiss, sd)
 \end{lstlisting}
 
 \begin{verbatim}
@@ -159,79 +163,82 @@ Fertility      Agriculture      Examination        Education
 41.704850         2.912697
 \end{verbatim}
 \end{frame}
+
 \begin{frame}[fragile,label=sec-2-3]{Generar datos aleatorios}
- \lstset{language=R,numbers=none}
+ \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-rnorm(10, mean=1, sd=.4)
+  rnorm(10, mean=1, sd=.4)
 \end{lstlisting}
 
 \begin{verbatim}
-[1] 0.7064289 0.2503243 0.3915537 0.9540453 1.5930067 1.6747795 1.4143566
-[8] 0.5976072 1.0993326 0.8726457
+[1] 0.8298012 1.1797862 1.2961353 0.5210375 1.6193431 1.7862777 1.3892613
+[8] 1.1364440 0.7695961 0.5386398
 \end{verbatim}
 
-\lstset{language=R,numbers=none}
+\lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-runif(10, min=-3, max=3)
+  runif(10, min=-3, max=3)
 \end{lstlisting}
 
 \begin{verbatim}
-[1] -1.3926340 -2.0354718 -0.6807207 -0.1301546  0.8125971  1.5668845
-[7] -1.1431061 -1.2554640  2.7770316  0.8801502
+[1]  0.2326529  2.1222381  2.5497648  2.3988748 -1.7957398  2.0747642
+[7] -2.9456805 -0.9728395  0.5573549  0.7175066
 \end{verbatim}
 
-\lstset{language=R,numbers=none}
+\lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-rweibull(n=10, shape=3, scale=2)
+  rweibull(n=10, shape=3, scale=2)
 \end{lstlisting}
 
 \begin{verbatim}
-[1] 0.8448115 1.2067823 1.1051633 0.9596368 1.7315224 0.3808950 0.7342149
-[8] 2.1153902 1.8483453 2.6127352
+[1] 1.0053582 1.8549015 1.4119533 1.5820276 2.0005786 1.6126314 1.9596489
+[8] 2.2541642 1.5065545 0.8168459
 \end{verbatim}
 \end{frame}
+
 \begin{frame}[fragile,label=sec-2-4]{Generar datos aleatorios}
- \lstset{language=R,numbers=none}
+ \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-x <- seq(1, 100, length=10)
-x
+  x <- seq(1, 100, length=10)
+  x
 \end{lstlisting}
 
 \begin{verbatim}
 [1]   1  12  23  34  45  56  67  78  89 100
 \end{verbatim}
 
-\lstset{language=R,numbers=none}
+\lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-sample(x)
+  sample(x)
 \end{lstlisting}
 
 \begin{verbatim}
-[1] 100   1  34  45  12  56  78  67  89  23
+[1]  23  34  56  67  78  89   1 100  45  12
 \end{verbatim}
 
-\lstset{language=R,numbers=none}
+\lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-sample(x, 5)
+  sample(x, 5)
 \end{lstlisting}
 
 \begin{verbatim}
-[1] 12 34 78 23  1
+[1]  34  67  89  23 100
 \end{verbatim}
 
-\lstset{language=R,numbers=none}
+\lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-sample(x, 5, replace=TRUE)
+  sample(x, 5, replace=TRUE)
 \end{lstlisting}
 
 \begin{verbatim}
-[1]  12  56  12 100  67
+[1]  56  45 100  78  23
 \end{verbatim}
 \end{frame}
+
 \begin{frame}[fragile,label=sec-2-5]{Tests}
- \lstset{language=R,numbers=none}
+ \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-t.test(swiss$Fertility, mu=70)
+  t.test(swiss$Fertility, mu=70)
 \end{lstlisting}
 
 \begin{verbatim}
@@ -247,9 +254,9 @@ mean of x
  70.14255
 \end{verbatim}
 
-\lstset{language=R,numbers=none}
+\lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-wilcox.test(swiss$Fertility, mu=70)
+  wilcox.test(swiss$Fertility, mu=70)
 \end{lstlisting}
 
 \begin{verbatim}
@@ -264,15 +271,16 @@ In wilcox.test.default(swiss$Fertility, mu = 70) :
   cannot compute exact p-value with ties
 \end{verbatim}
 \end{frame}
+
 \begin{frame}[fragile,label=sec-2-6]{Tests}
- \lstset{language=R,numbers=none}
+ \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-A <- rnorm(1000)
-B <- rnorm(1000)
-C <- rnorm(1000, sd=3)
+  A <- rnorm(1000)
+  B <- rnorm(1000)
+  C <- rnorm(1000, sd=3)
 \end{lstlisting}
 
-\lstset{language=R,numbers=none}
+\lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
 t.test(A, B)
 \end{lstlisting}
@@ -281,18 +289,18 @@ t.test(A, B)
 	Welch Two Sample t-test
 
 data:  A and B
-t = 1.3351, df = 1995.563, p-value = 0.182
+t = -1.8693, df = 1997.418, p-value = 0.06173
 alternative hypothesis: true difference in means is not equal to 0
 95 percent confidence interval:
- -0.02808643  0.14788341
+ -0.171316781  0.004108949
 sample estimates:
   mean of x   mean of y 
- 0.01054104 -0.04935745
+-0.02630855  0.05729536
 \end{verbatim}
 
-\lstset{language=R,numbers=none}
+\lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-wilcox.test(A, B)
+  wilcox.test(A, B)
 \end{lstlisting}
 
 \begin{verbatim}
@@ -300,33 +308,34 @@ wilcox.test(A, B)
         Wilcoxon rank sum test with continuity correction
 
 data:  A and B
-W = 517356, p-value = 0.1789
+W = 479580, p-value = 0.1138
 alternative hypothesis: true location shift is not equal to 0
 \end{verbatim}
 \end{frame}
 
+
 \begin{frame}[fragile,label=sec-2-7]{Tests}
- \lstset{language=R,numbers=none}
+ \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-t.test(A, C)
+  t.test(A, C)
 \end{lstlisting}
 
 \begin{verbatim}
 	Welch Two Sample t-test
 
 data:  A and C
-t = 1.4855, df = 1210.589, p-value = 0.1377
+t = 1.3394, df = 1218.573, p-value = 0.1807
 alternative hypothesis: true difference in means is not equal to 0
 95 percent confidence interval:
- -0.0494307  0.3576906
+ -0.06274911  0.33276906
 sample estimates:
   mean of x   mean of y 
- 0.01054104 -0.14358892
+-0.02630855 -0.16131853
 \end{verbatim}
 
-\lstset{language=R,numbers=none}
+\lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-wilcox.test(A, C)
+  wilcox.test(A, C)
 \end{lstlisting}
 
 \begin{verbatim}
@@ -334,20 +343,21 @@ wilcox.test(A, C)
         Wilcoxon rank sum test with continuity correction
 
 data:  A and C
-W = 521044, p-value = 0.1032
+W = 519723, p-value = 0.1267
 alternative hypothesis: true location shift is not equal to 0
 \end{verbatim}
 \end{frame}
+
 \begin{frame}[fragile,label=sec-2-8]{Tests}
- \lstset{language=R,numbers=none}
+ \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-Religion <- ifelse(swiss$Catholic > 50,
-		   'Catholic', 'Protestant')
+  Religion <- ifelse(swiss$Catholic > 50,
+                     'Catholic', 'Protestant')
 \end{lstlisting}
 
-\lstset{language=R,numbers=none}
+\lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-t.test(Fertility ~ Religion, data=swiss)
+  t.test(Fertility ~ Religion, data=swiss)
 \end{lstlisting}
 
 \begin{verbatim}
@@ -363,9 +373,9 @@ sample estimates:
                 76.46111                 66.22069
 \end{verbatim}
 
-\lstset{language=R,numbers=none}
+\lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-wilcox.test(Fertility ~ Religion, data=swiss)
+  wilcox.test(Fertility ~ Religion, data=swiss)
 \end{lstlisting}
 
 \begin{verbatim}
@@ -380,14 +390,15 @@ In wilcox.test.default(x = c(83.1, 92.5, 76.1, 83.8, 92.4, 82.4,  :
   cannot compute exact p-value with ties
 \end{verbatim}
 \end{frame}
+
 \section{Regresión lineal}
 \label{sec-3}
 
 \begin{frame}[fragile,label=sec-3-1]{Fertilidad y educación}
- \lstset{language=R,numbers=none}
+ \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-lmFertEdu <- lm(Fertility ~ Education, data = swiss)
-summary(lmFertEdu)
+  lmFertEdu <- lm(Fertility ~ Education, data = swiss)
+  summary(lmFertEdu)
 \end{lstlisting}
 
 \begin{verbatim}
@@ -410,10 +421,11 @@ Multiple R-squared:  0.4406,	Adjusted R-squared:  0.4282
 F-statistic: 35.45 on 1 and 45 DF,  p-value: 3.659e-07
 \end{verbatim}
 \end{frame}
+
 \begin{frame}[fragile,label=sec-3-2]{Fertilidad y educación}
- \lstset{language=R,numbers=none}
+ \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-coef(lmFertEdu)
+  coef(lmFertEdu)
 \end{lstlisting}
 
 \begin{verbatim}
@@ -421,60 +433,61 @@ coef(lmFertEdu)
  79.6100585  -0.8623503
 \end{verbatim}
 
-\lstset{language=R,numbers=none}
+\lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
 residuals(lmFertEdu)
 \end{lstlisting}
 
 \begin{verbatim}
-Courtelary     Delemont Franches-Mnt      Moutier   Neuveville   Porrentruy 
-10.9381450   11.2510941   17.2016929   12.2263935   10.2251959    2.5263935 
-     Broye        Glane      Gruyere       Sarine      Veveyse        Aigle 
-10.2263935   19.6887438    8.8263935   14.5004953   12.6640432   -5.1618550 
-   Aubonne     Avenches     Cossonay    Echallens     Grandson     Lausanne 
--6.6736065   -0.3618550  -13.5983071   -9.5853579   -1.0112562    0.2357497 
- La Vallee       Lavaux       Morges       Moudon        Nyone         Orbe 
--8.0630527   -6.7489059   -5.4865556  -12.0230077  -12.6618550  -17.0359568 
-      Oron      Payerne Paysd'enhaut        Rolle        Vevey      Yverdon 
--6.2477082    1.4887438   -5.0230077  -10.4865556   -4.9254030   -7.3112562 
-   Conthey    Entremont       Herens     Martigwy      Monthey   St Maurice 
--2.3853579   -5.1359568   -0.5853579   -3.9359568    2.3769923   -6.8489059 
-    Sierre         Sion       Boudry La Chauxdfnd     Le Locle    Neuchatel 
-15.1769923   10.9004953    1.1381450   -4.4242053    4.3004953   12.3851508 
-Val de Ruz ValdeTravers V. De Geneve  Rive Droite  Rive Gauche 
- 4.0263935   -5.9736065    1.0945070   -9.9019000  -11.8019000
+  Courtelary     Delemont Franches-Mnt      Moutier   Neuveville   Porrentruy 
+  10.9381450   11.2510941   17.2016929   12.2263935   10.2251959    2.5263935 
+       Broye        Glane      Gruyere       Sarine      Veveyse        Aigle 
+  10.2263935   19.6887438    8.8263935   14.5004953   12.6640432   -5.1618550 
+     Aubonne     Avenches     Cossonay    Echallens     Grandson     Lausanne 
+  -6.6736065   -0.3618550  -13.5983071   -9.5853579   -1.0112562    0.2357497 
+   La Vallee       Lavaux       Morges       Moudon        Nyone         Orbe 
+  -8.0630527   -6.7489059   -5.4865556  -12.0230077  -12.6618550  -17.0359568 
+        Oron      Payerne Paysd'enhaut        Rolle        Vevey      Yverdon 
+  -6.2477082    1.4887438   -5.0230077  -10.4865556   -4.9254030   -7.3112562 
+     Conthey    Entremont       Herens     Martigwy      Monthey   St Maurice 
+  -2.3853579   -5.1359568   -0.5853579   -3.9359568    2.3769923   -6.8489059 
+      Sierre         Sion       Boudry La Chauxdfnd     Le Locle    Neuchatel 
+  15.1769923   10.9004953    1.1381450   -4.4242053    4.3004953   12.3851508 
+  Val de Ruz ValdeTravers V. De Geneve  Rive Droite  Rive Gauche 
+   4.0263935   -5.9736065    1.0945070   -9.9019000  -11.8019000
 \end{verbatim}
 
-\lstset{language=R,numbers=none}
+\lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
 fitted.values(lmFertEdu)
 \end{lstlisting}
 
 \begin{verbatim}
-Courtelary     Delemont Franches-Mnt      Moutier   Neuveville   Porrentruy 
-  69.26186     71.84891     75.29831     73.57361     66.67480     73.57361 
-     Broye        Glane      Gruyere       Sarine      Veveyse        Aigle 
-  73.57361     72.71126     73.57361     68.39950     74.43596     69.26186 
-   Aubonne     Avenches     Cossonay    Echallens     Grandson     Lausanne 
-  73.57361     69.26186     75.29831     77.88536     72.71126     55.46425 
- La Vallee       Lavaux       Morges       Moudon        Nyone         Orbe 
-  62.36305     71.84891     70.98656     77.02301     69.26186     74.43596 
-      Oron      Payerne Paysd'enhaut        Rolle        Vevey      Yverdon 
-  78.74771     72.71126     77.02301     70.98656     63.22540     72.71126 
-   Conthey    Entremont       Herens     Martigwy      Monthey   St Maurice 
-  77.88536     74.43596     77.88536     74.43596     77.02301     71.84891 
-    Sierre         Sion       Boudry La Chauxdfnd     Le Locle    Neuchatel 
-  77.02301     68.39950     69.26186     70.12421     68.39950     52.01485 
-Val de Ruz ValdeTravers V. De Geneve  Rive Droite  Rive Gauche 
-  73.57361     73.57361     33.90549     54.60190     54.60190
+  Courtelary     Delemont Franches-Mnt      Moutier   Neuveville   Porrentruy 
+    69.26186     71.84891     75.29831     73.57361     66.67480     73.57361 
+       Broye        Glane      Gruyere       Sarine      Veveyse        Aigle 
+    73.57361     72.71126     73.57361     68.39950     74.43596     69.26186 
+     Aubonne     Avenches     Cossonay    Echallens     Grandson     Lausanne 
+    73.57361     69.26186     75.29831     77.88536     72.71126     55.46425 
+   La Vallee       Lavaux       Morges       Moudon        Nyone         Orbe 
+    62.36305     71.84891     70.98656     77.02301     69.26186     74.43596 
+        Oron      Payerne Paysd'enhaut        Rolle        Vevey      Yverdon 
+    78.74771     72.71126     77.02301     70.98656     63.22540     72.71126 
+     Conthey    Entremont       Herens     Martigwy      Monthey   St Maurice 
+    77.88536     74.43596     77.88536     74.43596     77.02301     71.84891 
+      Sierre         Sion       Boudry La Chauxdfnd     Le Locle    Neuchatel 
+    77.02301     68.39950     69.26186     70.12421     68.39950     52.01485 
+  Val de Ruz ValdeTravers V. De Geneve  Rive Droite  Rive Gauche 
+    73.57361     73.57361     33.90549     54.60190     54.60190
 \end{verbatim}
 \end{frame}
+
 \begin{frame}[fragile,label=sec-3-3]{Fertilidad, educación y religión}
- \lstset{language=R,numbers=none}
+ \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-lmFertEduCat <- lm(Fertility ~ Education + Catholic,
-		   data = swiss)
-summary(lmFertEduCat)
+  lmFertEduCat <- lm(Fertility ~ Education + Catholic,
+                     data = swiss)
+  summary(lmFertEduCat)
 \end{lstlisting}
 
 \begin{verbatim}
@@ -498,13 +511,14 @@ Multiple R-squared:  0.5745,	Adjusted R-squared:  0.5552
 F-statistic:  29.7 on 2 and 44 DF,  p-value: 6.849e-09
 \end{verbatim}
 \end{frame}
+
 
 \begin{frame}[fragile,label=sec-3-4]{Lo mismo con \texttt{update}}
- \lstset{language=R,numbers=none}
+ \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-lmFertEduCat <- update(lmFertEdu, . ~ . + Catholic,
-		       data = swiss)
-summary(lmFertEduCat)
+  lmFertEduCat <- update(lmFertEdu, . ~ . + Catholic,
+                         data = swiss)
+  summary(lmFertEduCat)
 \end{lstlisting}
 
 \begin{verbatim}
@@ -529,12 +543,13 @@ F-statistic:  29.7 on 2 and 44 DF,  p-value: 6.849e-09
 \end{verbatim}
 \end{frame}
 
+
 \begin{frame}[fragile,label=sec-3-5]{Fertilidad, educación, religión y agricultura}
- \lstset{language=R,numbers=none}
+ \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-lmFertEduCatAgr <- lm(Fertility ~ Education + Catholic + Agriculture,
-		      data = swiss)
-summary(lmFertEduCatAgr)
+  lmFertEduCatAgr <- lm(Fertility ~ Education + Catholic + Agriculture,
+                        data = swiss)
+  summary(lmFertEduCatAgr)
 \end{lstlisting}
 
 \begin{verbatim}
@@ -560,13 +575,14 @@ Multiple R-squared:  0.6423,	Adjusted R-squared:  0.6173
 F-statistic: 25.73 on 3 and 43 DF,  p-value: 1.089e-09
 \end{verbatim}
 \end{frame}
+
 
 \begin{frame}[fragile,label=sec-3-6]{Lo mismo con \texttt{update}}
- \lstset{language=R,numbers=none}
+ \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-lmFertEduCatAgr <- update(lmFertEduCat, . ~ . + Agriculture,
-			  data = swiss)
-summary(lmFertEduCatAgr)
+  lmFertEduCatAgr <- update(lmFertEduCat, . ~ . + Agriculture,
+                            data = swiss)
+  summary(lmFertEduCatAgr)
 \end{lstlisting}
 
 \begin{verbatim}
@@ -592,12 +608,13 @@ Multiple R-squared:  0.6423,	Adjusted R-squared:  0.6173
 F-statistic: 25.73 on 3 and 43 DF,  p-value: 1.089e-09
 \end{verbatim}
 \end{frame}
+
 \begin{frame}[fragile,label=sec-3-7]{Lo mismo con \texttt{update}}
- \lstset{language=R,numbers=none}
+ \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-lmFertEduCatAgr <- update(lmFertEdu, . ~ . + Catholic + Agriculture,
-			  data = swiss)
-summary(lmFertEduCatAgr)
+  lmFertEduCatAgr <- update(lmFertEdu, . ~ . + Catholic + Agriculture,
+                            data = swiss)
+  summary(lmFertEduCatAgr)
 \end{lstlisting}
 
 \begin{verbatim}
@@ -623,10 +640,11 @@ Multiple R-squared:  0.6423,	Adjusted R-squared:  0.6173
 F-statistic: 25.73 on 3 and 43 DF,  p-value: 1.089e-09
 \end{verbatim}
 \end{frame}
+
 \begin{frame}[fragile,label=sec-3-8]{anova}
- \lstset{language=R,numbers=none}
+ \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-anova(lmFertEdu, lmFertEduCat, lmFertEduCatAgr)
+  anova(lmFertEdu, lmFertEduCat, lmFertEduCatAgr)
 \end{lstlisting}
 
 \begin{verbatim}
@@ -643,12 +661,13 @@ Model 3: Fertility ~ Education + Catholic + Agriculture
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 \end{verbatim}
 \end{frame}
-\begin{frame}[fragile,label=sec-3-9]{Fertilidad contra todo}
- \lstset{language=R,numbers=none}
-\begin{lstlisting}
-lmFert <- lm(Fertility ~ ., data=swiss)
 
-summary(lmFert)
+\begin{frame}[fragile,label=sec-3-9]{Fertilidad contra todo}
+ \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+  lmFert <- lm(Fertility ~ ., data=swiss)
+  
+  summary(lmFert)
 \end{lstlisting}
 
 \begin{verbatim}
@@ -675,10 +694,11 @@ Multiple R-squared:  0.7067,	Adjusted R-squared:  0.671
 F-statistic: 19.76 on 5 and 41 DF,  p-value: 5.594e-10
 \end{verbatim}
 \end{frame}
+
 \begin{frame}[fragile,label=sec-3-10]{Elegir un modelo}
- \lstset{language=R,numbers=none}
+ \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-anova(lmFert)
+  anova(lmFert)
 \end{lstlisting}
 
 \begin{verbatim}
@@ -696,10 +716,11 @@ Residuals        41 2105.04   51.34
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 \end{verbatim}
 \end{frame}
+
 \begin{frame}[fragile,label=sec-3-11]{Elegir un modelo}
- \lstset{language=R,numbers=none}
+ \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-stepFert <- step(lmFert)
+  stepFert <- step(lmFert)
 \end{lstlisting}
 
 \begin{verbatim}
@@ -726,10 +747,11 @@ Fertility ~ Agriculture + Education + Catholic + Infant.Mortality
 - Education         1   2249.97 4408.0 221.43
 \end{verbatim}
 \end{frame}
+
 \begin{frame}[fragile,label=sec-3-12]{Elegir un modelo}
- \lstset{language=R,numbers=none}
+ \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-summary(stepFert)
+  summary(stepFert)
 \end{lstlisting}
 
 \begin{verbatim}
@@ -756,8 +778,9 @@ Multiple R-squared:  0.6993,	Adjusted R-squared:  0.6707
 F-statistic: 24.42 on 4 and 42 DF,  p-value: 1.717e-10
 \end{verbatim}
 \end{frame}
+
 \begin{frame}[fragile,label=sec-3-13]{Elegir un modelo}
- \lstset{language=R,numbers=none}
+ \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
 stepFert$anova
 \end{lstlisting}
@@ -768,5 +791,5 @@ stepFert$anova
 2 - Examination  1 53.02656        42   2158.069 189.8606
 \end{verbatim}
 \end{frame}
-% Emacs 24.3.1 (Org mode 8.2.1)
+% Emacs 24.3.1 (Org mode 8.2.7c)
 \end{document}
