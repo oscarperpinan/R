@@ -15,7 +15,13 @@
 - *Variables*: Temperatura, Humedad, Viento, Lluvia, Radiación, ET
 
 ** Lectura de datos con =read.table=
-- Primero lo intentamos con la versión final
+- Primero configuramos el directorio de trabajo
+#+begin_src R
+  ## Entre las comillas hay que indicar el directorio en el que está el
+  ## repositorio (será visible la carpeta data/)
+  setwd('~/github/intro/')
+#+end_src
+- A continuación leemos el fichero (usamos la versión final)
 #+begin_src R
   dats <- read.table('data/aranjuez.csv')
   head(dats)
