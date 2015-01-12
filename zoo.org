@@ -21,6 +21,8 @@
   ## repositorio (será visible la carpeta data/)
   setwd('~/github/intro/')
 #+end_src
+
+** Lectura de datos con =read.table=
 - A continuación leemos el fichero (usamos la versión final)
 #+begin_src R
   dats <- read.table('data/aranjuez.csv')
