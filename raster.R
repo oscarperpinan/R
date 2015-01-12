@@ -22,11 +22,13 @@
 
 ## Leo los ficheros CMSAF
 
-    unzip("SISmm2008_CMSAF.zip")
-    listFich <- dir(pattern=".nc")
-    stackSIS <- stack(listFich)
-    ## irradiancia (W/m2) a irradiacion Wh/m2
-    stackSIS <- stackSIS*24 
+old <- setwd('data')
+unzip("SISmm2008_CMSAF.zip")
+listFich <- dir(pattern="\\.nc")
+stackSIS <- stack(listFich)
+## irradiancia (W/m2) a irradiacion Wh/m2
+stackSIS <- stackSIS*24
+setwd(old)
 
 ## Añado información temporal
 
