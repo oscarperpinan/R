@@ -1,0 +1,289 @@
+#+TITLE: Factores, fechas y caracteres
+
+#+SETUPFILE: config.org
+#+OPTIONS: H:2
+#+PROPERTY: results output
+#+PROPERTY: exports both
+
+
+* =factor= 
+** Construimos un ejemplo
+#+begin_src R 
+  N <- 100
+  edad <- sample(seq(18, 40, 1), N, replace=TRUE)
+  summary(edad)
+#+end_src
+
+#+begin_src R 
+  sexo <- sample(c('H', 'M'), N, replace=TRUE)
+  class(sexo)
+  summary(sexo)
+#+end_src  
+
+** Una variable cualitativa se define con =factor=
+#+begin_src R 
+  sexo <- factor(sexo)
+#+end_src
+
+#+begin_src R
+  class(sexo)
+#+end_src
+#+begin_src R
+  summary(sexo)
+#+end_src
+#+begin_src R
+  levels(sexo)
+#+end_src
+#+begin_src R
+  nlevels(sexo)
+#+end_src
+
+** Los =factor= sirven para agrupar
+- Con la función =table=
+#+begin_src R
+  table(edad > 30, sexo)
+#+end_src
+
+#+begin_src R
+  table(edad %in% 20:30, sexo)
+#+end_src
+
+** Los =factor= sirven para agrupar
+- Con =tapply= o =aggregate=
+#+begin_src R 
+tapply(edad, sexo, mean)
+#+end_src
+
+#+begin_src R
+aggregate(edad ~ sexo, FUN=median)
+#+end_src
+
+** Los factores sirven para separar
+#+begin_src R 
+  edadSexo <- split(edad, sexo)
+  class(edadSexo)
+#+end_src
+#+begin_src R
+  sapply(edadSexo, mean)
+#+end_src
+** Los =factor= se pueden generar a partir de variables numéricas
+- Por ejemplo, con =cut=
+#+begin_src R 
+  gEdad <- cut(edad, breaks=4)
+  class(gEdad)
+#+end_src
+#+begin_src R
+  levels(gEdad)
+#+end_src
+
+- Nuevamente =table=
+#+begin_src R 
+  table(gEdad)
+#+end_src
+
+#+begin_src R
+  table(gEdad, sexo)
+#+end_src
+* Fechas
+** =Date=
+#+begin_src R 
+  as.Date('2013-02-06')
+#+end_src
+#+begin_src R
+  as.Date('2013/02/06')
+#+end_src
+#+begin_src R
+  as.Date('06.02.2013')
+#+end_src
+#+begin_src R
+  as.Date('06.02.2013', format='%d.%m.%Y')
+#+end_src
+#+begin_src R
+  as.Date(37, origin='2013-01-01')
+#+end_src
+
+** Secuencias temporales con =Date=
+#+begin_src R 
+  seq(as.Date('2004-01-01'), by='day', length=10)
+#+end_src
+#+begin_src R
+  seq(as.Date('2004-01-01'), by='month', length=10)
+#+end_src
+#+begin_src R
+  seq(as.Date('2004-01-01'), by='10 day', length=10)
+#+end_src
+** POSIXct
+- =help(format.POSIXct)=
+#+begin_src R 
+  as.POSIXct('2013-02-06')
+#+end_src
+
+#+begin_src R
+  ISOdate(2013, 2, 7)
+#+end_src
+
+#+begin_src R 
+hoy <- as.POSIXct('2013-02-06')
+
+format(hoy, '%Y')
+#+end_src
+
+#+begin_src R
+format(hoy, '%d')
+#+end_src
+
+#+begin_src R
+format(hoy, '%m')
+#+end_src
+
+#+begin_src R
+format(hoy, '%b')
+#+end_src
+
+#+begin_src R
+format(hoy, '%d de %B de %Y')
+#+end_src
+
+** =POSIxct=
+#+begin_src R 
+  hora <- Sys.time()
+  hora
+#+end_src
+#+begin_src R
+  format(hora, '%H:%M:%S')
+#+end_src
+#+begin_src R
+  format(hora, '%H horas, %M minutos y %S segundos')
+#+end_src
+** Secuencias temporales con =POSIXct=
+#+begin_src R 
+seq(as.POSIXct('2004-01-01'), by='month', length=10)
+#+end_src
+#+begin_src R
+seq(as.POSIXct('2004-01-01 10:00:00'), by='15 min', length=10)
+#+end_src
+** Zonas horarias
+
+#+begin_src R 
+  as.POSIXct('2013-02-06 15:30:00',
+             tz='GMT')
+#+end_src
+
+#+begin_src R
+  as.POSIXct('2013-02-06 15:30:00',
+             tz='Europe/Madrid')
+#+end_src
+
+#+begin_src R 
+hawaii <- as.POSIXct('2013-02-06 15:30:00', tz='HST')
+## Character
+format(hawaii, tz='GMT')
+#+end_src
+
+#+begin_src R
+## POSIXct
+as.POSIXct(format(hawaii, tz='GMT'), tz='GMT')
+#+end_src
+* Caracteres
+
+** Bastan unas simples comillas
+
+#+begin_src R 
+  cadena <- "Hola mundo"
+  class(cadena)
+#+end_src
+
+#+begin_src R
+  nchar(cadena)
+#+end_src
+
+** Un vector de =character=
+#+begin_src R 
+  cadenaVec <- c("Hola mundo", "Hello world")
+  nchar(cadenaVec)
+#+end_src
+
+#+begin_src R
+  length(cadenaVec)
+#+end_src
+
+#+begin_src R
+cadenaVec[1]
+#+end_src
+** Para mostrarlos usamos =cat= o =print=
+
+#+begin_src R 
+  a <- 2
+  b <- 3
+#+end_src
+
+#+begin_src R
+  cat('La suma de', a, 'y', b, 'es', a + b, fill=TRUE)
+#+end_src
+
+#+begin_src R
+  cat('La suma de', a, 'y', b, 'es', a + b, '\n',
+      'La multiplicación de', a, 'por', b, 'es', a*b, '\n')
+#+end_src
+
+** Los =character= se pueden unir...
+#+begin_src R 
+  paste('Hello', 'World', sep='_')
+#+end_src
+
+#+begin_src R 
+  paste('X', 1:5, sep='.')
+#+end_src
+
+#+begin_src R
+  paste(c('A', 'B'), 1:5, sep='.')
+#+end_src
+
+#+begin_src R
+  paste(c('A', 'B'), 1:5, sep='.', collapse='|')
+#+end_src
+
+** ... y también se pueden separar...
+#+begin_src R 
+  strsplit(cadenaVec, split=' ')
+#+end_src
+
+#+begin_src R
+  strsplit(cadenaVec, split='')
+#+end_src
+
+#+begin_src R 
+  chSep <- strsplit(cadenaVec, split=' ')
+  class(chSep)
+#+end_src
+
+#+begin_src R
+  length(chSep)
+#+end_src
+
+#+begin_src R
+  sapply(chSep, nchar)
+#+end_src
+
+** ... y, por supuesto, manipular
+#+begin_src R 
+  sub('o', '0', 'Hola Mundo')
+#+end_src
+
+#+begin_src R 
+  gsub('o', '0', 'Hola Mundo')
+#+end_src
+
+#+begin_src R 
+  substring(cadena, 1) <- 'HOLA'
+  cadena
+#+end_src
+
+#+begin_src R 
+  tolower(cadena)
+#+end_src
+
+#+begin_src R 
+  toupper(cadena)
+#+end_src
+
