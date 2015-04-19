@@ -1,4 +1,4 @@
-% Created 2015-04-19 dom 17:39
+% Created 2015-04-19 dom 19:38
 \documentclass[xcolor={usenames,svgnames,dvipsnames}]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -24,6 +24,7 @@
 \hypersetup{colorlinks=true, linkcolor=Blue, urlcolor=Blue}
 \usepackage{fancyvrb}
 \DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\tiny, formatcom = {\color{black!70}}}
+\AtBeginSection[]{\begin{frame}[plain]\tableofcontents[currentsection,sectionstyle=show/shaded]\end{frame}}
 \usetheme{Goettingen}
 \usecolortheme{rose}
 \usefonttheme{serif}
@@ -39,7 +40,7 @@
 \maketitle
 
 
-\section*{\texttt{factor}}
+\section{\texttt{factor}}
 \label{sec-1}
 \begin{frame}[fragile,label=sec-1-1]{Construimos un ejemplo}
  \lstset{language=R,label= ,caption= ,numbers=none}
@@ -51,7 +52,7 @@
 
 \begin{verbatim}
  Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-18.00   23.00   29.00   28.72   35.00   40.00
+18.00   23.75   29.50   29.34   36.00   40.00
 \end{verbatim}
 
 \lstset{language=R,label= ,caption= ,numbers=none}
@@ -90,7 +91,7 @@
 
 \begin{verbatim}
  H  M 
-42 58
+56 44
 \end{verbatim}
 
 \lstset{language=R,label= ,caption= ,numbers=none}
@@ -124,8 +125,8 @@
 \begin{verbatim}
      sexo
        H  M
-FALSE 23 35
-TRUE  19 23
+FALSE 35 22
+TRUE  21 22
 \end{verbatim}
 
 \lstset{language=R,label= ,caption= ,numbers=none}
@@ -136,8 +137,8 @@ TRUE  19 23
 \begin{verbatim}
      sexo
        H  M
-FALSE 24 30
-TRUE  18 28
+FALSE 27 28
+TRUE  29 16
 \end{verbatim}
 \end{frame}
 
@@ -147,12 +148,12 @@ TRUE  18 28
 \end{itemize}
 \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-tapply(edad,sexo, mean)
+tapply(edad, sexo, mean)
 \end{lstlisting}
 
 \begin{verbatim}
        H        M 
-29.19048 28.37931
+29.14286 29.59091
 \end{verbatim}
 
 \lstset{language=R,label= ,caption= ,numbers=none}
@@ -162,8 +163,8 @@ aggregate(edad ~ sexo, FUN=median)
 
 \begin{verbatim}
   sexo edad
-1    H 29.5
-2    M 28.0
+1    H 28.5
+2    M 31.0
 \end{verbatim}
 \end{frame}
 
@@ -185,7 +186,7 @@ aggregate(edad ~ sexo, FUN=median)
 
 \begin{verbatim}
        H        M 
-29.19048 28.37931
+29.14286 29.59091
 \end{verbatim}
 \end{frame}
 
@@ -223,7 +224,7 @@ aggregate(edad ~ sexo, FUN=median)
 \begin{verbatim}
 gEdad
 (18,23.5] (23.5,29] (29,34.5] (34.5,40] 
-       28        24        21        27
+       25        25        21        29
 \end{verbatim}
 
 \lstset{language=R,label= ,caption= ,numbers=none}
@@ -234,14 +235,14 @@ gEdad
 \begin{verbatim}
            sexo
 gEdad        H  M
-  (18,23.5]  9 19
-  (23.5,29] 12 12
-  (29,34.5] 10 11
-  (34.5,40] 11 16
+  (18,23.5] 13 12
+  (23.5,29] 18  7
+  (29,34.5]  9 12
+  (34.5,40] 16 13
 \end{verbatim}
 \end{frame}
 
-\section*{Fechas}
+\section{Fechas}
 \label{sec-2}
 \begin{frame}[fragile,label=sec-2-1]{\texttt{Date}}
  \lstset{language=R,label= ,caption= ,numbers=none}
@@ -401,7 +402,7 @@ format(hoy, '%d de %B de %Y')
 \end{lstlisting}
 
 \begin{verbatim}
-[1] "2015-04-19 17:39:47 CEST"
+[1] "2015-04-19 19:38:50 CEST"
 \end{verbatim}
 
 \lstset{language=R,label= ,caption= ,numbers=none}
@@ -410,7 +411,7 @@ format(hoy, '%d de %B de %Y')
 \end{lstlisting}
 
 \begin{verbatim}
-[1] "17:39:47"
+[1] "19:38:50"
 \end{verbatim}
 
 \lstset{language=R,label= ,caption= ,numbers=none}
@@ -419,7 +420,7 @@ format(hoy, '%d de %B de %Y')
 \end{lstlisting}
 
 \begin{verbatim}
-[1] "17 horas, 39 minutos y 47 segundos"
+[1] "19 horas, 38 minutos y 50 segundos"
 \end{verbatim}
 \end{frame}
 
@@ -492,7 +493,7 @@ as.POSIXct(format(hawaii, tz='GMT'), tz='GMT')
 \end{verbatim}
 \end{frame}
 
-\section*{Caracteres}
+\section{Caracteres}
 \label{sec-3}
 
 \begin{frame}[fragile,label=sec-3-1]{Bastan unas simples comillas}

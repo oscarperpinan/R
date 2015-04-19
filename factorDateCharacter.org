@@ -4,6 +4,7 @@
 #+OPTIONS: H:2
 #+PROPERTY: results output
 #+PROPERTY: exports both
+#+LATEX_HEADER: \AtBeginSection[]{\begin{frame}[plain]\tableofcontents[currentsection,sectionstyle=show/shaded]\end{frame}}
 
 
 * =factor= 
