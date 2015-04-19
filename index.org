@@ -122,6 +122,8 @@ Este apartado agrupa el material apropiado para trabajar con R desde el rol de u
    #+ATTR_HTML: :class btn btn-info btn-sm :role button
    [[FILE:datos.pdf][PDF]]
    #+ATTR_HTML: :class btn btn-info btn-sm :role button
+   [[file:datos.html][HTML]] 
+   #+ATTR_HTML: :class btn btn-info btn-sm :role button
    [[https://github.com/oscarperpinan/intro/blob/master/datos.R][Código]]
 *** Gráficos
    :PROPERTIES:
