@@ -1,0 +1,706 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<title>Manejo de datos con R</title>
+<meta name="author" content="(Oscar Perpiñán Lamigueiro \\  (link (:type http :path //oscarperpinan.github.io :raw-link http://oscarperpinan.github.io :application nil :search-option nil :begin 30 :end 60 :contents-begin nil :contents-end nil :post-blank 0 :parent #0)))"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+
+<link rel="stylesheet" href="http://cdn.jsdelivr.net/reveal.js/2.5.0/css/reveal.css"/>
+<link rel="stylesheet" href="http://cdn.jsdelivr.net/reveal.js/2.5.0/css/theme/solarized.css" id="theme"/>
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'http://cdn.jsdelivr.net/reveal.js/2.5.0/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide">
+<h1>Manejo de datos con R</h1>
+<h2>Oscar Perpiñán Lamigueiro \\ <a href="http://oscarperpinan.github.io">http://oscarperpinan.github.io</a></h2>
+<h2><a href="mailto:oscar.perpinan@gmail.com">oscar.perpinan@gmail.com</a></h2>
+<h2></h2>
+</section>
+
+<section>
+<section id="slide-sec-1">
+<h2 id="sec-1"><span class="section-number-2">1</span> Lectura de datos</h2>
+<div class="outline-text-2" id="text-1">
+</div></section>
+<section id="slide-sec-1-1">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> <code>setwd</code>, <code>getwd</code>, <code>dir</code></h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">  getwd()
+  old <span class="org-constant">&lt;-</span> setwd(<span class="org-string">"~/github/r-intro-eoi"</span>)
+  dir()
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">  dir(pattern=<span class="org-string">'.R'</span>)
+</pre>
+</div>
+
+<pre class="example">
+[1] "intro.R"
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">  dir(<span class="org-string">'data'</span>)
+</pre>
+</div>
+
+<pre class="example">
+[1] "aranjuez.csv"
+</pre>
+
+</section>
+<section id="slide-sec-1-2">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Lectura de datos con <code>read.table</code></h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">  dats <span class="org-constant">&lt;-</span> read.table(<span class="org-string">'data/aranjuez.csv'</span>, sep=<span class="org-string">','</span>, header=<span class="org-type">TRUE</span>)
+  head(dats)
+</pre>
+</div>
+
+<pre class="example">
+           X TempAvg TempMax TempMin HumidAvg HumidMax WindAvg WindMax Rain
+1 2004-01-01   4.044   10.71  -1.969     88.3     95.9   0.746   3.528    0
+2 2004-01-02   5.777   11.52   1.247     83.3     98.5   1.078   6.880    0
+3 2004-01-03   5.850   13.32   0.377     75.0     94.4   0.979   6.576    0
+4 2004-01-04   4.408   15.59  -2.576     82.0     97.0   0.633   3.704    0
+5 2004-01-05   3.081   14.58  -2.974     83.2     97.0   0.389   2.244    0
+6 2004-01-06   2.304   11.83  -3.379     84.5     96.5   0.436   2.136    0
+  Radiation        ET
+1     5.490 0.5352688
+2     6.537 0.7710499
+3     8.810 0.8361229
+4     9.790 0.6861381
+5    10.300 0.5152422
+6     9.940 0.4886631
+</pre>
+
+</section>
+<section id="slide-sec-1-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Lectura de datos con <code>read.csv</code></h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">aranjuez <span class="org-constant">&lt;-</span> read.csv(<span class="org-string">'data/aranjuez.csv'</span>)
+names(aranjuez)[1] <span class="org-constant">&lt;-</span> <span class="org-string">'Date'</span>
+head(aranjuez)
+</pre>
+</div>
+
+<pre class="example">
+        Date TempAvg TempMax TempMin HumidAvg HumidMax WindAvg WindMax Rain
+1 2004-01-01   4.044   10.71  -1.969     88.3     95.9   0.746   3.528    0
+2 2004-01-02   5.777   11.52   1.247     83.3     98.5   1.078   6.880    0
+3 2004-01-03   5.850   13.32   0.377     75.0     94.4   0.979   6.576    0
+4 2004-01-04   4.408   15.59  -2.576     82.0     97.0   0.633   3.704    0
+5 2004-01-05   3.081   14.58  -2.974     83.2     97.0   0.389   2.244    0
+6 2004-01-06   2.304   11.83  -3.379     84.5     96.5   0.436   2.136    0
+  Radiation        ET
+1     5.490 0.5352688
+2     6.537 0.7710499
+3     8.810 0.8361229
+4     9.790 0.6861381
+5    10.300 0.5152422
+6     9.940 0.4886631
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">  class(aranjuez)
+</pre>
+</div>
+
+<pre class="example">
+[1] "data.frame"
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">  names(aranjuez)
+</pre>
+</div>
+
+<pre class="example">
+[1] "Date"      "TempAvg"   "TempMax"   "TempMin"   "HumidAvg"  "HumidMax" 
+[7] "WindAvg"   "WindMax"   "Rain"      "Radiation" "ET"
+</pre>
+
+</section>
+</section>
+<section>
+<section id="slide-sec-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Indexado</h2>
+<div class="outline-text-2" id="text-2">
+</div></section>
+<section id="slide-sec-2-1">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Indexado con <code>[]</code></h3>
+<ul>
+<li>Filas</li>
+
+</ul>
+<div class="org-src-container">
+
+<pre  class="src src-R">aranjuez[1:5,]
+</pre>
+</div>
+
+<pre class="example">
+        Date TempAvg TempMax TempMin HumidAvg HumidMax WindAvg WindMax Rain
+1 2004-01-01   4.044   10.71  -1.969     88.3     95.9   0.746   3.528    0
+2 2004-01-02   5.777   11.52   1.247     83.3     98.5   1.078   6.880    0
+3 2004-01-03   5.850   13.32   0.377     75.0     94.4   0.979   6.576    0
+4 2004-01-04   4.408   15.59  -2.576     82.0     97.0   0.633   3.704    0
+5 2004-01-05   3.081   14.58  -2.974     83.2     97.0   0.389   2.244    0
+  Radiation        ET
+1     5.490 0.5352688
+2     6.537 0.7710499
+3     8.810 0.8361229
+4     9.790 0.6861381
+5    10.300 0.5152422
+</pre>
+
+<ul>
+<li>Filas y Columnas</li>
+
+</ul>
+<div class="org-src-container">
+
+<pre  class="src src-R">aranjuez[10:14, 1:5]
+</pre>
+</div>
+
+<pre class="example">
+         Date TempAvg TempMax TempMin HumidAvg
+10 2004-01-10   10.85   16.59   5.676     84.9
+11 2004-01-11    7.59    9.23   4.806     95.4
+12 2004-01-12    7.41   10.24   5.200     93.1
+13 2004-01-13    8.35   11.38   4.137     91.3
+14 2004-01-14    8.74   13.32   2.857     86.9
+</pre>
+
+</section>
+<section id="slide-sec-2-2">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Indexado con <code>[]</code></h3>
+<ul>
+<li>Condición basada en los datos</li>
+
+</ul>
+<div class="org-src-container">
+
+<pre  class="src src-R">idx <span class="org-constant">&lt;-</span> with(aranjuez, Radiation &gt; 20 &amp; TempAvg &lt; 10) 
+
+head(aranjuez[idx, ])
+</pre>
+</div>
+
+<pre class="example">
+          Date TempAvg TempMax TempMin HumidAvg HumidMax WindAvg WindMax Rain
+82  2004-03-22    9.78   16.12   4.340    51.65     87.9   1.526   7.660    0
+83  2004-03-23    8.50   15.52  -0.290    50.10     83.3   1.533   6.027    0
+85  2004-03-25    7.47   14.58   1.584    49.66     76.6   1.138   5.939    0
+100 2004-04-09    8.83   15.52   2.056    47.50     70.8   1.547   6.125    0
+101 2004-04-10    7.04   13.85  -0.155    54.45     85.8   1.448   6.958    0
+102 2004-04-11    7.50   15.19  -1.699    54.98     91.0   1.126   7.590    0
+    Radiation       ET
+82      21.92 3.075785
+83      20.62 2.881419
+85      22.44 2.849603
+100     25.45 3.566452
+101     21.07 2.943239
+102     20.99 2.905479
+</pre>
+
+</section>
+<section id="slide-sec-2-3">
+<h3 id="sec-2-3"><span class="section-number-3">2.3</span> <code>subset</code></h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">subset(aranjuez,
+       subset = (Radiation &gt; 20 &amp; TempAvg &lt; 10),
+       select = c(Radiation, TempAvg,
+           TempMax, TempMin))
+</pre>
+</div>
+
+<pre class="example">
+     Radiation TempAvg TempMax TempMin
+82       21.92   9.780   16.12   4.340
+83       20.62   8.500   15.52  -0.290
+85       22.44   7.470   14.58   1.584
+100      25.45   8.830   15.52   2.056
+101      21.07   7.040   13.85  -0.155
+102      20.99   7.500   15.19  -1.699
+104      25.76   9.420   17.47   0.115
+461      24.29   7.460   14.66  -0.081
+462      25.25   7.930   17.35  -1.686
+463      24.56   9.800   19.08  -1.484
+1146     20.08   7.170   18.20  -3.746
+1157     20.90   4.378   12.03  -6.353
+1159     21.87   7.920   18.54  -2.941
+1160     20.35   7.830   16.49  -2.807
+1521     21.54   8.100   19.29  -4.075
+2244     20.49   6.121   15.15  -0.940
+2245     21.02   5.989   16.94  -3.208
+2246     20.22   9.020   19.74  -2.068
+2261     23.00   9.500   14.96   3.662
+2262     20.40   9.910   14.70   4.668
+2263     24.09   9.440   16.89   0.794
+2265     23.64   9.680   16.35   2.938
+2295     22.46   8.730   13.84   1.740
+</pre>
+
+
+</section>
+</section>
+<section>
+<section id="slide-sec-3">
+<h2 id="sec-3"><span class="section-number-2">3</span> Cambio de formato</h2>
+<div class="outline-text-2" id="text-3">
+</div></section>
+<section id="slide-sec-3-1">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> Forma simple con <code>stack</code></h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">aranjuezWide <span class="org-constant">&lt;-</span> aranjuez[, c(<span class="org-string">'Radiation'</span>,
+                             <span class="org-string">'TempAvg'</span>, <span class="org-string">'TempMax'</span>,
+                             <span class="org-string">'WindAvg'</span>, <span class="org-string">'WindMax'</span>)]
+</pre>
+</div>
+
+<ul>
+<li>Pasamos de formato <code>wide</code> a <code>long</code></li>
+
+</ul>
+<div class="org-src-container">
+
+<pre  class="src src-R">aranjuezLong <span class="org-constant">&lt;-</span> stack(aranjuezWide)
+
+head(aranjuezLong)
+</pre>
+</div>
+
+<pre class="example">
+  values       ind
+1  5.490 Radiation
+2  6.537 Radiation
+3  8.810 Radiation
+4  9.790 Radiation
+5 10.300 Radiation
+6  9.940 Radiation
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">summary(aranjuezLong)
+</pre>
+</div>
+
+<pre class="example">
+    values              ind      
+Min.   :-5.309   Radiation:2898  
+1st Qu.: 3.158   TempAvg  :2898  
+Median : 8.720   TempMax  :2898  
+Mean   :12.074   WindAvg  :2898  
+3rd Qu.:19.970   WindMax  :2898  
+Max.   :41.910                   
+NA's   :149
+</pre>
+
+</section>
+<section id="slide-sec-3-2">
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> Más flexible con <code>reshape2</code></h3>
+<ul>
+<li><code>reshape2</code> es un paquete que puede facilitar la transformación de <code>data.frame</code> y matrices.</li>
+
+</ul>
+
+<div class="org-src-container">
+
+<pre  class="src src-R"><span class="org-constant">library</span>(reshape2)
+</pre>
+</div>
+
+</section>
+<section id="slide-sec-3-3">
+<h3 id="sec-3-3"><span class="section-number-3">3.3</span> <code>melt</code> para cambiar de <i>wide</i> a <i>long</i></h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">aranjuezLong2 <span class="org-constant">&lt;-</span> melt(aranjuez, id.vars = <span class="org-string">'Date'</span>,
+                      variable.name = <span class="org-string">'Variable'</span>,
+                      value.name = <span class="org-string">'Value'</span>)
+
+head(aranjuezLong2)
+</pre>
+</div>
+
+<pre class="example">
+        Date Variable Value
+1 2004-01-01  TempAvg 4.044
+2 2004-01-02  TempAvg 5.777
+3 2004-01-03  TempAvg 5.850
+4 2004-01-04  TempAvg 4.408
+5 2004-01-05  TempAvg 3.081
+6 2004-01-06  TempAvg 2.304
+</pre>
+
+</section>
+<section id="slide-sec-3-4">
+<h3 id="sec-3-4"><span class="section-number-3">3.4</span> <code>dcast</code> para cambiar de <i>long</i> a <i>wide</i></h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">aranjuezWide2 <span class="org-constant">&lt;-</span> dcast(aranjuezLong2,
+                       Variable ~ Date)
+head(aranjuezWide2[, 1:10])
+</pre>
+</div>
+
+<pre class="example">
+ Using Value as value column: use value.var to override.
+  Variable 2004-01-01 2004-01-02 2004-01-03 2004-01-04 2004-01-05 2004-01-06
+1  TempAvg      4.044      5.777      5.850      4.408      3.081      2.304
+2  TempMax     10.710     11.520     13.320     15.590     14.580     11.830
+3  TempMin     -1.969      1.247      0.377     -2.576     -2.974     -3.379
+4 HumidAvg     88.300     83.300     75.000     82.000     83.200     84.500
+5 HumidMax     95.900     98.500     94.400     97.000     97.000     96.500
+6  WindAvg      0.746      1.078      0.979      0.633      0.389      0.436
+  2004-01-07 2004-01-08 2004-01-09
+1      2.080      6.405     12.060
+2     11.500     13.380     15.330
+3     -3.109     -1.301      9.830
+4     87.000     88.600     86.800
+5     96.600     97.400     94.500
+6      0.449      1.188      2.737
+</pre>
+
+
+</section>
+</section>
+<section>
+<section id="slide-sec-4">
+<h2 id="sec-4"><span class="section-number-2">4</span> Datos agregados</h2>
+<div class="outline-text-2" id="text-4">
+</div></section>
+<section id="slide-sec-4-1">
+<h3 id="sec-4-1"><span class="section-number-3">4.1</span> <code>aggregate</code></h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">aranjuez$rainy <span class="org-constant">&lt;-</span> aranjuez$Rain &gt; 0
+
+aggregate(Radiation ~ rainy, data = aranjuez,
+          FUN = mean)
+</pre>
+</div>
+
+<pre class="example">
+  rainy Radiation
+1 FALSE  19.63325
+2  TRUE  10.26028
+</pre>
+
+</section>
+<section id="slide-sec-4-2">
+<h3 id="sec-4-2"><span class="section-number-3">4.2</span> Variable categórica con <code>cut</code></h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">aranjuez$tempClass <span class="org-constant">&lt;-</span> cut(aranjuez$TempAvg, 5)
+
+aggregate(Radiation ~ tempClass, data = aranjuez,
+          FUN = mean)
+</pre>
+</div>
+
+<pre class="example">
+     tempClass Radiation
+1 (-5.34,1.89]  8.805389
+2  (1.89,9.09]  9.014178
+3  (9.09,16.3] 14.554177
+4  (16.3,23.5] 21.912414
+5  (23.5,30.7] 26.192742
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">aggregate(Radiation ~ tempClass + rainy,
+          data = aranjuez, FUN = mean)
+</pre>
+</div>
+
+<pre class="example">
+      tempClass rainy Radiation
+1  (-5.34,1.89] FALSE  9.869134
+2   (1.89,9.09] FALSE 10.718837
+3   (9.09,16.3] FALSE 17.238283
+4   (16.3,23.5] FALSE 23.238145
+5   (23.5,30.7] FALSE 26.392665
+6  (-5.34,1.89]  TRUE  6.822955
+7   (1.89,9.09]  TRUE  7.063932
+8   (9.09,16.3]  TRUE 11.091063
+9   (16.3,23.5]  TRUE 15.802522
+10  (23.5,30.7]  TRUE 22.545862
+</pre>
+
+</section>
+<section id="slide-sec-4-3">
+<h3 id="sec-4-3"><span class="section-number-3">4.3</span> Agregamos varias variables</h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">aggregate(cbind(Radiation, TempAvg) ~ tempClass,
+          data = aranjuez, FUN = mean)
+</pre>
+</div>
+
+<pre class="example">
+     tempClass Radiation    TempAvg
+1 (-5.34,1.89]  8.805389  0.3423095
+2  (1.89,9.09]  9.014178  5.6663267
+3  (9.09,16.3] 14.554177 12.5219084
+4  (16.3,23.5] 21.912414 19.7486310
+5  (23.5,30.7] 26.192742 26.0496953
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">aggregate(cbind(Radiation, TempAvg) ~ tempClass + rainy,
+          data = aranjuez, FUN = mean)
+</pre>
+</div>
+
+<pre class="example">
+      tempClass rainy Radiation    TempAvg
+1  (-5.34,1.89] FALSE  9.869134  0.3550122
+2   (1.89,9.09] FALSE 10.718837  5.6657481
+3   (9.09,16.3] FALSE 17.238283 12.6959488
+4   (16.3,23.5] FALSE 23.238145 19.9486604
+5   (23.5,30.7] FALSE 26.392665 26.0896408
+6  (-5.34,1.89]  TRUE  6.822955  0.3186364
+7   (1.89,9.09]  TRUE  7.063932  5.6669887
+8   (9.09,16.3]  TRUE 11.091063 12.2973563
+9   (16.3,23.5]  TRUE 15.802522 18.8267565
+10  (23.5,30.7]  TRUE 22.545862 25.3210345
+</pre>
+
+
+</section>
+<section id="slide-sec-4-4">
+<h3 id="sec-4-4"><span class="section-number-3">4.4</span> Agregamos a partir de un formato <code>long</code></h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">head(aranjuezLong2)
+</pre>
+</div>
+
+<pre class="example">
+        Date Variable Value
+1 2004-01-01  TempAvg 4.044
+2 2004-01-02  TempAvg 5.777
+3 2004-01-03  TempAvg 5.850
+4 2004-01-04  TempAvg 4.408
+5 2004-01-05  TempAvg 3.081
+6 2004-01-06  TempAvg 2.304
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">aggregate(Value ~ Variable, data = aranjuezLong2,
+          FUN = mean)
+</pre>
+</div>
+
+<pre class="example">
+    Variable     Value
+1    TempAvg 14.404856
+2    TempMax 22.531033
+3    TempMin  6.887590
+4   HumidAvg 62.160390
+5   HumidMax 87.216887
+6    WindAvg  1.173983
+7    WindMax  5.208021
+8       Rain  1.094255
+9  Radiation 16.741759
+10        ET  3.091191
+</pre>
+
+</section>
+</section>
+<section>
+<section id="slide-sec-5">
+<h2 id="sec-5"><span class="section-number-2">5</span> Unión de <code>data.frame</code></h2>
+<div class="outline-text-2" id="text-5">
+</div></section>
+<section id="slide-sec-5-1">
+<h3 id="sec-5-1"><span class="section-number-3">5.1</span> Con <code>merge</code></h3>
+<ul>
+<li>Primero construimos un <code>data.frame</code> de ejemplo</li>
+
+</ul>
+<div class="org-src-container">
+
+<pre  class="src src-R">  USStates <span class="org-constant">&lt;-</span> as.data.frame(state.x77)
+  USStates$Name <span class="org-constant">&lt;-</span> rownames(USStates)
+  rownames(USStates) <span class="org-constant">&lt;-</span> <span class="org-type">NULL</span>
+</pre>
+</div>
+
+<ul>
+<li>Lo partimos en estados &laquo;fríos&raquo; y estados &laquo;grandes&raquo;</li>
+
+</ul>
+<div class="org-src-container">
+
+<pre  class="src src-R">  coldStates <span class="org-constant">&lt;-</span> USStates[USStates$Frost&gt;150,
+                         c(<span class="org-string">'Name'</span>, <span class="org-string">'Frost'</span>)]
+  largeStates <span class="org-constant">&lt;-</span> USStates[USStates$Area&gt;1e5,
+                          c(<span class="org-string">'Name'</span>, <span class="org-string">'Area'</span>)]
+</pre>
+</div>
+
+</section>
+<section id="slide-sec-5-2">
+<h3 id="sec-5-2"><span class="section-number-3">5.2</span> Con <code>merge</code></h3>
+<ul>
+<li>Unimos los dos conjuntos (estados &laquo;fríos&raquo; y &laquo;grandes&raquo;)</li>
+
+</ul>
+<div class="org-src-container">
+
+<pre  class="src src-R">  merge(coldStates, largeStates)
+</pre>
+</div>
+
+<pre class="example">
+      Name Frost   Area
+1   Alaska   152 566432
+2 Colorado   166 103766
+3  Montana   155 145587
+4   Nevada   188 109889
+</pre>
+
+</section>
+<section id="slide-sec-5-3">
+<h3 id="sec-5-3"><span class="section-number-3">5.3</span> <code>merge</code> usa <code>match</code></h3>
+<ul>
+<li>Estados grandes que también son fríos</li>
+
+</ul>
+<div class="org-src-container">
+
+<pre  class="src src-R">  idxLarge <span class="org-constant">&lt;-</span> match(largeStates$Name,
+                    coldStates$Name,
+                    nomatch=0)
+  idxLarge
+</pre>
+</div>
+
+<pre class="example">
+[1] 1 0 0 2 5 6 0 0
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">  coldStates[idxLarge,]
+</pre>
+</div>
+
+<pre class="example">
+       Name Frost
+2    Alaska   152
+6  Colorado   166
+26  Montana   155
+28   Nevada   188
+</pre>
+
+</section>
+<section id="slide-sec-5-4">
+<h3 id="sec-5-4"><span class="section-number-3">5.4</span> <code>merge</code> usa <code>match</code></h3>
+<ul>
+<li>Estados frios que también son grandes</li>
+
+</ul>
+<div class="org-src-container">
+
+<pre  class="src src-R">  idxCold <span class="org-constant">&lt;-</span> match(coldStates$Name,
+                   largeStates$Name,
+                   nomatch=0)
+  idxCold
+</pre>
+</div>
+
+<pre class="example">
+[1] 1 4 0 0 5 6 0 0 0 0 0
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">  largeStates[idxCold,]
+</pre>
+</div>
+
+<pre class="example">
+       Name   Area
+2    Alaska 566432
+6  Colorado 103766
+26  Montana 145587
+28   Nevada 109889
+</pre>
+</section>
+</section>
+</div>
+</div>
+
+<script src="http://cdn.jsdelivr.net/reveal.js/2.5.0/lib/js/head.min.js"></script>
+<script src="http://cdn.jsdelivr.net/reveal.js/2.5.0/js/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: false,
+center: true,
+slideNumber: true,
+rollingLinks: false,
+keyboard: true,
+overview: true,
+
+theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+transitionSpeed: 'default',
+multiplex: {
+    secret: '', // null if client
+    id: '', // id, obtained from socket.io server
+    url: '' // Location of socket.io server
+},
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: 'http://cdn.jsdelivr.net/reveal.js/2.5.0/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/2.5.0/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/2.5.0/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/2.5.0/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/2.5.0/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/2.5.0/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+]
+});
+</script>
+</body>
+</html>
