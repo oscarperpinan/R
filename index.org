@@ -110,9 +110,11 @@ Este apartado agrupa el material apropiado para trabajar con R desde el rol de u
    :HTML_CONTAINER_CLASS: col-md-6
    :END:
    #+ATTR_HTML: :class btn btn-info btn-sm :role button
-   [[file:intro.pdf][pdf]] 
+   [[file:intro.pdf][PDF]] 
    #+ATTR_HTML: :class btn btn-info btn-sm :role button
-   [[https://github.com/oscarperpinan/intro/blob/master/intro.R][código]]
+   [[file:intro.html][HTML]] 
+   #+ATTR_HTML: :class btn btn-info btn-sm :role button
+   [[https://github.com/oscarperpinan/intro/blob/master/intro.R][Código]]
 *** Manejo de datos
    :PROPERTIES:
    :HTML_CONTAINER_CLASS: col-md-6
