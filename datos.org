@@ -1,123 +1,167 @@
 #+TITLE:     Manejo de datos con R
 
 #+SETUPFILE: config.org
-#+OPTIONS: H:3
+#+OPTIONS: H:2
 #+PROPERTY: results output
 #+PROPERTY: exports both
-
+#+LATEX_HEADER: \AtBeginSection[]{\begin{frame}[plain]\tableofcontents[currentsection,sectionstyle=show/shaded]\end{frame}}
 
 * Lectura de datos
-** Fuentes de datos
-*** Fuentes de datos
-
-- [[http://stat.ethz.ch/R-manual/R-patched/library/datasets/html/00Index.html][The R Datasets Package]]
-
-- [[http://www.bibsonomy.org/user/procomun/data][Enlaces en Bibsonomy]]
-
-- ...
-
-** Lectura de datos con R
-*** =setwd=, =getwd=, =dir=
+** =setwd=, =getwd=, =dir=
 #+begin_src R :exports code
   getwd()
-  old <- setwd("~/github/intro")
+  old <- setwd("~/github/r-intro-eoi")
   dir()
+#+end_src
+
+#+begin_src R
   dir(pattern='.R')
+#+end_src
+
+#+begin_src R
   dir('data')
 #+end_src
 
-*** read.table
-# - Con un fichero local
-#+begin_src R 
-  CO2 <- read.table('data/CO2_GNI_BM.csv',
-                    header=TRUE, sep=',')
-  head(CO2)
+** Lectura de datos con =read.table=
+#+begin_src R
   
+  dats <- read.table('data/aranjuez.csv', sep=',', header=TRUE)
+  head(dats)
 #+end_src
-# - Directamente de un enlace URL
-# #+begin_src R 
-#   CO2 <- read.table('https://raw.github.com/oscarperpinan/spacetime-vis/master/data/CO2_GNI_BM.csv',
-#                   header=TRUE, sep=',')
-#   head(CO2)
-# #+end_src
-
-*** read.csv, read.csv2
-- =read.csv= y =read.csv2= son como =read.table= con valores
-  por defecto para encabezado y separadores
-
-#+begin_src R 
-  CO2 <- read.csv('data/CO2_GNI_BM.csv')
+** Lectura de datos con =read.csv=
+#+begin_src R
+aranjuez <- read.csv('data/aranjuez.csv')
+names(aranjuez)[1] <- 'Date'
+head(aranjuez)
 #+end_src
 
-#+begin_src R :exports code
-  names(CO2)
-  head(CO2)
-  tail(CO2)
-#+end_src
-#+begin_src R 
-  summary(CO2)
-#+end_src
-* Datos agregados
-** tapply
-*** Una variable numérica y una variable categórica
-#+begin_src R :results output :exports both
-  tapply(CO2$X2000, CO2$Indicator.Name,
-         FUN=mean)
+#+begin_src R
+  class(aranjuez)
 #+end_src
 
-*** Una variable numérica y varias categóricas
-#+begin_src R :results output :exports both
-  tapply(CO2$X2000,
-         CO2[,c("Indicator.Name", "Country.Name")],
-         FUN=mean)
+#+begin_src R
+  names(aranjuez)
 #+end_src
 
-** aggregate
-*** Una variable numérica y una variable categórica
-#+begin_src R 
-  aggregate(X2000 ~ Indicator.Name,
-            data=CO2, FUN=mean)  
+* Indexado
+
+** Indexado con =[]=
+- Filas
+#+begin_src R
+aranjuez[1:5,]
+#+end_src
+- Filas y Columnas
+#+begin_src R
+aranjuez[10:14, 1:5]
 #+end_src
 
-*** Dos variables numéricas y una variable categórica
-- Hay que usar =cbind=
-#+begin_src R 
-  aggregate(cbind(X2000, X2001) ~ Indicator.Name,
-            data=CO2, FUN=mean)
-  
+** Indexado con =[]=
+- Condición basada en los datos
+#+begin_src R
+idx <- with(aranjuez, Radiation > 20 & TempAvg < 10) 
+
+head(aranjuez[idx, ])
 #+end_src
 
-- En caso contrario...
-#+begin_src R 
-  aggregate(X2000 + X2001 ~ Indicator.Name,
-            data=CO2, FUN=mean)
-  
+** =subset=
+#+begin_src R
+subset(aranjuez,
+       subset = (Radiation > 20 & TempAvg < 10),
+       select = c(Radiation, TempAvg,
+           TempMax, TempMin))
 #+end_src
 
-
-*** Una variable numérica y varias variable categórica
-#+begin_src R 
-  aggregate(X2000 ~ Indicator.Name + Country.Name,
-            data=CO2, FUN=mean)
-#+end_src
-*** Dos variables numéricas, dos variables categóricas
-#+begin_src R 
-  aggregate(cbind(X2000, X2001) ~
-            Indicator.Name + Country.Name,
-            data=CO2, FUN=mean)
-#+end_src
-
-*** Usando =subset=
-#+begin_src R 
-  aggregate(cbind(X2000, X2001) ~
-            Indicator.Name + Country.Name,
-            subset=(Country.Name %in% c('United States', 'China')),
-                    data=CO2, FUN=mean)
-#+end_src
 
 * Cambio de formato
-** Union de =data.frame=
-*** Con =merge=
+** Forma simple con =stack= 
+#+begin_src R
+aranjuezWide <- aranjuez[, c('Radiation',
+                             'TempAvg', 'TempMax',
+                             'WindAvg', 'WindMax')]
+#+end_src
+- Pasamos de formato =wide= a =long=
+#+begin_src R 
+aranjuezLong <- stack(aranjuezWide)
+
+head(aranjuezLong)
+#+end_src
+
+#+begin_src R
+summary(aranjuezLong)
+#+end_src
+
+** Más flexible con =reshape2=
+- =reshape2= es un paquete que puede facilitar la transformación de =data.frame= y matrices.
+
+#+begin_src R
+library(reshape2)
+#+end_src
+
+** =melt= para cambiar de /wide/ a /long/
+#+begin_src R
+aranjuezLong2 <- melt(aranjuez, id.vars = 'Date',
+                      variable.name = 'Variable',
+                      value.name = 'Value')
+
+head(aranjuezLong2)
+#+end_src
+
+** =dcast= para cambiar de /long/ a /wide/
+#+begin_src R
+aranjuezWide2 <- dcast(aranjuezLong2,
+                       Variable ~ Date)
+head(aranjuezWide2[, 1:10])
+#+end_src
+
+
+* Datos agregados
+
+** =aggregate=
+#+begin_src R
+aranjuez$rainy <- aranjuez$Rain > 0
+
+aggregate(Radiation ~ rainy, data = aranjuez,
+          FUN = mean)
+#+end_src
+
+** Variable categórica con =cut=
+#+begin_src R
+aranjuez$tempClass <- cut(aranjuez$TempAvg, 5)
+
+aggregate(Radiation ~ tempClass, data = aranjuez,
+          FUN = mean)
+#+end_src
+
+#+begin_src R
+aggregate(Radiation ~ tempClass + rainy,
+          data = aranjuez, FUN = mean)
+#+end_src
+
+** Agregamos varias variables
+
+#+begin_src R
+aggregate(cbind(Radiation, TempAvg) ~ tempClass,
+          data = aranjuez, FUN = mean)
+#+end_src
+
+#+begin_src R
+aggregate(cbind(Radiation, TempAvg) ~ tempClass + rainy,
+          data = aranjuez, FUN = mean)
+#+end_src
+
+
+** Agregamos a partir de un formato =long=
+#+begin_src R
+head(aranjuezLong2)
+#+end_src
+
+#+begin_src R
+aggregate(Value ~ Variable, data = aranjuezLong2,
+          FUN = mean)
+#+end_src
+
+* Unión de =data.frame=
+** Con =merge=
 - Primero construimos un =data.frame= de ejemplo
 #+begin_src R 
   USStates <- as.data.frame(state.x77)
@@ -131,115 +175,32 @@
   largeStates <- USStates[USStates$Area>1e5,
                           c('Name', 'Area')]
 #+end_src
+** Con =merge=
 - Unimos los dos conjuntos (estados "fríos" y "grandes")
 #+begin_src R 
   merge(coldStates, largeStates)
 #+end_src
 
-*** =merge= usa =match=
+** =merge= usa =match=
 - Estados grandes que también son fríos
 #+begin_src R 
   idxLarge <- match(largeStates$Name,
                     coldStates$Name,
                     nomatch=0)
   idxLarge
-  
+#+end_src  
+#+begin_src R
   coldStates[idxLarge,]
 #+end_src
-
+** =merge= usa =match=
 - Estados frios que también son grandes
 #+begin_src R 
   idxCold <- match(coldStates$Name,
                    largeStates$Name,
                    nomatch=0)
   idxCold
-  
+#+end_src  
+
+#+begin_src R
   largeStates[idxCold,]
-#+end_src
-
-
-** Forma simple con =stack= 
-*** Primero escogemos un subconjunto
-#+begin_src R 
-  CO2China <- subset(CO2,
-                     subset = (Country.Name=='China' &
-                                   Indicator.Name == 'CO2 emissions (kg per PPP $ of GDP)'),
-                     select = -c(Country.Name,
-                                 Country.Code,
-                                 Indicator.Name,
-                                 Indicator.Code)
-                     )
-  head(CO2China)
-#+end_src
-
-*** Pasamos de formato =wide= a =long=
-#+begin_src R 
-  stack(CO2China)
-#+end_src
-
-** De forma flexible con =reshape= 
-*** =wide= a =long=: primer intento
-#+begin_src R 
-  CO2long <- reshape(CO2,
-                     varying=list(names(CO2)[5:16]),
-                     direction='long')
-  head(CO2long)
-#+end_src
-*** =wide= a =long=: añadimos argumentos
-#+begin_src R 
-  CO2long <- reshape(CO2,
-                     varying=list(names(CO2)[5:16]),
-                     timevar='Year', v.names='Value',
-                     times=2000:2011,
-                     direction='long')
-  head(CO2long)
-#+end_src
-*** =long= a =wide=
-- Primero escogemos las columnas de interés
-#+begin_src R 
-  CO2subset <- CO2long[c("Country.Name",
-                         "Indicator.Name",
-                         "Year", "Value")]
-  head(CO2subset)
-#+end_src
-*** =long= a =wide=
-- Ahora cambiamos formato
-#+begin_src R 
-  CO2wide <- reshape(CO2subset,
-                     idvar=c('Country.Name','Year'),
-                     timevar='Indicator.Name',
-                     direction='wide')
-  head(CO2wide)
-#+end_src
-*** =long= a =wide=
-- Y ponemos nombres al gusto
-#+begin_src R 
-  names(CO2wide)[3:6] <- c('CO2.PPP', 'CO2.capita',
-                           'GNI.PPP', 'GNI.capita')
-  
-  head(CO2wide)
-#+end_src
-
-** Alternativa: =reshape2=
-
-*** =reshape2=
-- =reshape2= es un paquete que puede facilitar la transformación de =data.frame= y matrices.
-#+begin_src R
-library(reshape2)
-#+end_src
-
-*** =melt= para cambiar de /wide/ a /long/
-#+begin_src R
-CO2long2 <- melt(CO2, id.vars = 1:4,
-                 variable.name = 'Year',
-                 value.name = 'Value')
-
-head(CO2long2)
-#+end_src
-
-*** =dcast= para cambiar de /long/ a /wide/
-#+begin_src R
-CO2wide2 <- dcast(CO2subset,
-                  Country.Name + Year ~ Indicator.Name)
-head(CO2wide2)
 #+end_src
