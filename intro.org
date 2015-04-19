@@ -5,17 +5,10 @@
 #+PROPERTY: results code
 #+PROPERTY: eval no
 
-
-* R es software libre
+* Introducción
 ** ¿Qué es =R=?
 *** ¿Qué es =R=?						    
-**** ¿Qué es [[http://procomun.wordpress.com/2011/02/23/que-es-r/][R]]?			    :B_block:
-     :PROPERTIES:
-     :BEAMER_env: block
-     :END:
-Es un lenguaje de programación principalmente orientado al
-análisis estadístico y visualización de información cuantitativa y
-cualitativa y publicado como software libre con licencia GNU-GPL.
+Es un entorno de programación orientado al cálculo, manipulación de datos, y representación gráfica, publicado como software libre con licencia GNU-GPL.
 #+BEGIN_CENTER
  [[http://www.R-project.org]] 
 #+END_CENTER
@@ -33,7 +26,33 @@ cualitativa y publicado como software libre con licencia GNU-GPL.
   - Instalador: http://www.rstudio.com/ide/download/desktop
   - Introducción: http://www.rstudio.com/ide/docs/using/source
 
-** R es un proyecto colaborativo
+
+
+*** R está muy bien documentado
+- [[http://cran.r-project.org/manuals.html][Manuales Oficiales]]
+
+  - [[http://cran.r-project.org/doc/manuals/r-release/R-intro.html][Introduction to R]]
+
+  - [[http://cran.r-project.org/doc/manuals/r-release/R-data.html][R Data Import/Export]]
+
+  - [[http://cran.r-project.org/doc/manuals/r-release/R-admin.html][R Installation and Administration]]
+
+  - [[http://cran.r-project.org/doc/manuals/r-release/R-exts.html][Writing R Extensions]]
+
+  - [[http://cran.r-project.org/doc/manuals/r-release/R-lang.html][R language definition]]
+
+  - [[http://cran.r-project.org/doc/manuals/r-release/R-ints.html][R Internals]]
+
+- [[http://cran.r-project.org/other-docs.html][Manuales externos]]
+
+*** Otros recursos de información
+
+- [[http://www.r-project.org/mail.html][Listas de correo]] (sin olvidar respetar [[http://www.r-project.org/posting-guide.html][estos consejos]])
+  - Generales: R-announce, R-help, R-devel
+  - Special Interest Group (SIG) mailing lists
+- [[http://www.r-bloggers.com][R-bloggers]]
+- [[http://stackoverflow.com/questions/tagged/r][stackoverflow]]
+
 *** R es un proyecto colaborativo
 - Una de las grandes riquezas de R es la cantidad de paquetes (más
   de 6000 actualmente) que amplían sus funcionalidades.  
@@ -46,27 +65,76 @@ cualitativa y publicado como software libre con licencia GNU-GPL.
 #+begin_src R 
   sessionInfo()
 #+end_src
+*** Más de 6000 paquetes disponibles
 - Otros vienen instalados pero hay que cargarlos:
 #+begin_src R 
   library(lattice)
   packageVersion('lattice')
+#+end_src
+#+begin_src R
   packageDescription('lattice')
 #+end_src
+
+*** Más de 6000 paquetes disponibles
 - Otros hay que instalarlos y después cargarlos:
-#+begin_src R 
-  install.packages('zoo')
-  library('zoo')
-  packageDescription('zoo')
+#+begin_src R :eval no
+  install.packages('data.table')
+  library('data.table')
+  packageDescription('data.table')
 #+end_src
 
-** R está muy bien documentado
 
-*** Fuentes de información
-- [[http://cran.r-project.org/doc/manuals/R-intro.html][Manual introductorio]]
-- [[http://cran.r-project.org/manuals.html][Manuales oficiales]]
-- [[http://cran.r-project.org/other-docs.html][Manuales externos]]
-- [[http://www.r-project.org/mail.html][Listas de correo]] (sin olvidar respetar [[http://www.r-project.org/posting-guide.html][estos consejos]]).
-- [[http://www.r-bloggers.com][R-bloggers]]
+** Guía para usar el curso
+
+*** Interfaz gráfica: RStudio
+[[file:figs/rstudio-ubuntu.png]]
+
+*** Interfaz gráfica: RStudio
+- La consola de R es el área en la que se ejecuta código (=Ctrl + 2=)
+  - Indica con =>= que está listo para aceptar comandos.
+  - Indica con =+= que está a la espera de completar comando (salir con =Esc=).
+  - Permite recuperar comandos antiguos con flechas arriba y abajo.
+- El área de código es donde se edita y almacena código (=Ctrl + 1=)
+  - Escribir (y grabar) en área de código y enviar a consola (=Ctrl + Enter=)
+  - Permite completar comandos con =TAB=
+- Para la asignación =<-= usar =Alt + -=
+
+*** Material
+- Primero obtenemos una copia local del repositorio. Opciones:
+
+  - Descargando el repositorio en formato [[https://github.com/oscarperpinan/intro/archive/master.zip][ZIP]]: descomprímelo en una ruta sencilla (por ejemplo, =C:\cursoR\= o =/home/miusuario/cursoR/=).
+
+  - Usando =git=:
+#+BEGIN_SRC sh
+git clone git://github.com/oscarperpinan/intro.git
+#+END_SRC
+
+*** Material
+- Todo el código del curso asume que la ruta de trabajo coincide con la carpeta local: definimos la ruta de trabajo con =setwd=
+#+begin_src R
+setwd('/ruta/de/copia/local/del/repositorio/')
+#+end_src
+
+- Comprobamos que todo ha ido bien. El resultado de la siguiente instrucción debe ser la estructura de carpetas y ficheros del repositorio:
+#+begin_src R
+dir()
+#+end_src
+
+*** Material
+- Finalmente hay que instalar los paquetes que se emplean a lo largo del curso. Algunos ya vendrán instalados con tu distribución de R por ser paquetes recomendados. En la siguiente instrucción usamos el /CRAN mirror/ de la Oficina de Software Libre (CIXUG). 
+#+begin_src R
+install.packages(c('lattice', 'latticeExtra',
+                   'RColorBrewer',
+                   'zoo',
+                   'reshape2', 'ggplot2'),
+                 repos = 'http://ftp.cixug.es/CRAN')
+#+end_src
+
+*** Bloc de Notas
+
+- Usaremos un bloc de notas colaborativo para escribir código juntos y resolver dudas. Está accesible en: https://etsidifv.titanpad.com/r-ice-upm
+
+- La clave será comunicada al inicio de las clases.
 
 
 * Vectores y Matrices

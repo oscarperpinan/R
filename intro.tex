@@ -1,4 +1,4 @@
-% Created 2014-11-07 vie 10:56
+% Created 2015-04-19 dom 15:49
 \documentclass[xcolor={usenames,svgnames,dvipsnames}]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -33,25 +33,20 @@
 \hypersetup{
   pdfkeywords={},
   pdfsubject={},
-  pdfcreator={Emacs 24.3.1 (Org mode 8.2.7c)}}
+  pdfcreator={Emacs 24.4.1 (Org mode 8.2.7c)}}
 \begin{document}
 
 \maketitle
 
-
-\section{R es software libre}
+\section{Introducción}
 \label{sec-1}
 \subsection{¿Qué es \texttt{R}?}
 \label{sec-1-1}
 \begin{frame}[fragile,label=sec-1-1-1]{¿Qué es \texttt{R}?}
- \begin{block}{¿Qué es \href{http://procomun.wordpress.com/2011/02/23/que-es-r/}{R}?}
-Es un lenguaje de programación principalmente orientado al
-análisis estadístico y visualización de información cuantitativa y
-cualitativa y publicado como software libre con licencia GNU-GPL.
+ Es un entorno de programación orientado al cálculo, manipulación de datos, y representación gráfica, publicado como software libre con licencia GNU-GPL.
 \begin{center}
 \url{http://www.R-project.org} 
 \end{center}
-\end{block}
 \end{frame}
 
 \begin{frame}[fragile,label=sec-1-1-2]{Para instalar \texttt{R}}
@@ -73,9 +68,43 @@ cualitativa y publicado como software libre con licencia GNU-GPL.
 \end{itemize}
 \end{frame}
 
-\subsection{R es un proyecto colaborativo}
-\label{sec-1-2}
-\begin{frame}[label=sec-1-2-1]{R es un proyecto colaborativo}
+
+
+\begin{frame}[label=sec-1-1-4]{R está muy bien documentado}
+\begin{itemize}
+\item \href{http://cran.r-project.org/manuals.html}{Manuales Oficiales}
+
+\begin{itemize}
+\item \href{http://cran.r-project.org/doc/manuals/r-release/R-intro.html}{Introduction to R}
+
+\item \href{http://cran.r-project.org/doc/manuals/r-release/R-data.html}{R Data Import/Export}
+
+\item \href{http://cran.r-project.org/doc/manuals/r-release/R-admin.html}{R Installation and Administration}
+
+\item \href{http://cran.r-project.org/doc/manuals/r-release/R-exts.html}{Writing R Extensions}
+
+\item \href{http://cran.r-project.org/doc/manuals/r-release/R-lang.html}{R language definition}
+
+\item \href{http://cran.r-project.org/doc/manuals/r-release/R-ints.html}{R Internals}
+\end{itemize}
+
+\item \href{http://cran.r-project.org/other-docs.html}{Manuales externos}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[label=sec-1-1-5]{Otros recursos de información}
+\begin{itemize}
+\item \href{http://www.r-project.org/mail.html}{Listas de correo} (sin olvidar respetar \href{http://www.r-project.org/posting-guide.html}{estos consejos})
+\begin{itemize}
+\item Generales: R-announce, R-help, R-devel
+\item Special Interest Group (SIG) mailing lists
+\end{itemize}
+\item \href{http://www.r-bloggers.com}{R-bloggers}
+\item \href{http://stackoverflow.com/questions/tagged/r}{stackoverflow}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[label=sec-1-1-6]{R es un proyecto colaborativo}
 \begin{itemize}
 \item Una de las grandes riquezas de R es la cantidad de paquetes (más
 de 6000 actualmente) que amplían sus funcionalidades.
@@ -85,7 +114,7 @@ de 6000 actualmente) que amplían sus funcionalidades.
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-1-2-2]{Más de 6000 paquetes disponibles}
+\begin{frame}[fragile,label=sec-1-1-7]{Más de 6000 paquetes disponibles}
  \begin{itemize}
 \item Algunos vienen instalados y se cargan al empezar:
 \end{itemize}
@@ -93,36 +122,110 @@ de 6000 actualmente) que amplían sus funcionalidades.
 \begin{lstlisting}
   sessionInfo()
 \end{lstlisting}
-\begin{itemize}
+\end{frame}
+\begin{frame}[fragile,label=sec-1-1-8]{Más de 6000 paquetes disponibles}
+ \begin{itemize}
 \item Otros vienen instalados pero hay que cargarlos:
 \end{itemize}
 \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
   library(lattice)
   packageVersion('lattice')
+\end{lstlisting}
+\lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
   packageDescription('lattice')
 \end{lstlisting}
-\begin{itemize}
+\end{frame}
+
+\begin{frame}[fragile,label=sec-1-1-9]{Más de 6000 paquetes disponibles}
+ \begin{itemize}
 \item Otros hay que instalarlos y después cargarlos:
 \end{itemize}
 \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-  install.packages('zoo')
-  library('zoo')
-  packageDescription('zoo')
+  install.packages('data.table')
+  library('data.table')
+  packageDescription('data.table')
 \end{lstlisting}
 \end{frame}
 
-\subsection{R está muy bien documentado}
-\label{sec-1-3}
 
-\begin{frame}[label=sec-1-3-1]{Fuentes de información}
+\subsection{Guía para usar el curso}
+\label{sec-1-2}
+
+\begin{frame}[label=sec-1-2-1]{Interfaz gráfica: RStudio}
+\includegraphics[width=.9\linewidth]{figs/rstudio-ubuntu.png}
+\end{frame}
+
+\begin{frame}[fragile,label=sec-1-2-2]{Interfaz gráfica: RStudio}
+ \begin{itemize}
+\item La consola de R es el área en la que se ejecuta código (\texttt{Ctrl + 2})
 \begin{itemize}
-\item \href{http://cran.r-project.org/doc/manuals/R-intro.html}{Manual introductorio}
-\item \href{http://cran.r-project.org/manuals.html}{Manuales oficiales}
-\item \href{http://cran.r-project.org/other-docs.html}{Manuales externos}
-\item \href{http://www.r-project.org/mail.html}{Listas de correo} (sin olvidar respetar \href{http://www.r-project.org/posting-guide.html}{estos consejos}).
-\item \href{http://www.r-bloggers.com}{R-bloggers}
+\item Indica con \texttt{>} que está listo para aceptar comandos.
+\item Indica con \texttt{+} que está a la espera de completar comando (salir con \texttt{Esc}).
+\item Permite recuperar comandos antiguos con flechas arriba y abajo.
+\end{itemize}
+\item El área de código es donde se edita y almacena código (\texttt{Ctrl + 1})
+\begin{itemize}
+\item Escribir (y grabar) en área de código y enviar a consola (\texttt{Ctrl + Enter})
+\item Permite completar comandos con \texttt{TAB}
+\end{itemize}
+\item Para la asignación \texttt{<-} usar \texttt{Alt + -}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile,label=sec-1-2-3]{Material}
+ \begin{itemize}
+\item Primero obtenemos una copia local del repositorio. Opciones:
+
+\begin{itemize}
+\item Descargando el repositorio en formato ZIP: descomprímelo en una ruta sencilla (por ejemplo, en Windows \texttt{C:\textbackslash{}cursoR\textbackslash{}} y en Linux/Mac \texttt{/home/miusuario/cursoR/}).
+
+\item Usando \texttt{git}:
+\end{itemize}
+\end{itemize}
+\lstset{language=sh,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+git clone git://github.com/oscarperpinan/intro.git
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile,label=sec-1-2-4]{Material}
+ \begin{itemize}
+\item Todo el código del curso asume que la ruta de trabajo coincide con la carpeta local: definimos la ruta de trabajo con \texttt{setwd}
+\end{itemize}
+\lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+setwd('/ruta/de/copia/local/del/repositorio/')
+\end{lstlisting}
+
+\begin{itemize}
+\item Comprobamos que todo ha ido bien. El resultado de la siguiente instrucción debe ser la estructura de carpetas y ficheros del repositorio:
+\end{itemize}
+\lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+dir()
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile,label=sec-1-2-5]{Material}
+ \begin{itemize}
+\item Finalmente hay que instalar los paquetes que se emplean a lo largo del curso. Algunos ya vendrán instalados con tu distribución de R por ser paquetes recomendados. En la siguiente instrucción usamos el \emph{CRAN mirror} de la Oficina de Software Libre (CIXUG).
+\end{itemize}
+\lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+install.packages(c('lattice', 'latticeExtra', 'RColorBrewer',
+                   'zoo', 'reshape2', 'ggplot2'),
+                 repos = 'http://ftp.cixug.es/CRAN')
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[label=sec-1-2-6]{Bloc de Notas}
+\begin{itemize}
+\item Usaremos un bloc de notas colaborativo para escribir código juntos y resolver dudas. Está accesible en: \url{https://etsidifv.titanpad.com/r-ice-upm}
+
+\item La clave será comunicada al inicio de las clases.
 \end{itemize}
 \end{frame}
 
@@ -1092,5 +1195,5 @@ cadena[2]
   ifelse(x>0, 1, 0)
 \end{lstlisting}
 \end{frame}
-% Emacs 24.3.1 (Org mode 8.2.7c)
+% Emacs 24.4.1 (Org mode 8.2.7c)
 \end{document}
