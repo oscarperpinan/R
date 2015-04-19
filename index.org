@@ -107,7 +107,7 @@ Este apartado agrupa el material apropiado para trabajar con R desde el rol de u
 
 *** Introducción
    :PROPERTIES:
-   :HTML_CONTAINER_CLASS: col-md-6
+   :HTML_CONTAINER_CLASS: col-md-4
    :END:
    #+ATTR_HTML: :class btn btn-info btn-sm :role button
    [[file:intro.pdf][PDF]] 
@@ -117,28 +117,38 @@ Este apartado agrupa el material apropiado para trabajar con R desde el rol de u
    [[https://github.com/oscarperpinan/intro/blob/master/intro.R][Código]]
 *** Manejo de datos
    :PROPERTIES:
-   :HTML_CONTAINER_CLASS: col-md-6
+   :HTML_CONTAINER_CLASS: col-md-4
    :END:
    #+ATTR_HTML: :class btn btn-info btn-sm :role button
-   [[file:datos.pdf][pdf]]
+   [[FILE:datos.pdf][PDF]]
    #+ATTR_HTML: :class btn btn-info btn-sm :role button
-   [[https://github.com/oscarperpinan/intro/blob/master/datos.R][código]]
+   [[https://github.com/oscarperpinan/intro/blob/master/datos.R][Código]]
 *** Gráficos
    :PROPERTIES:
-   :HTML_CONTAINER_CLASS: col-md-6
+   :HTML_CONTAINER_CLASS: col-md-4
    :END:
    #+ATTR_HTML: :class btn btn-info btn-sm :role button
-   [[file:graficos.pdf][pdf]]
+   [[file:graficos.pdf][PDF]]
    #+ATTR_HTML: :class btn btn-info btn-sm :role button
-   [[https://github.com/oscarperpinan/intro/blob/master/graficos.R][código]]
+   [[https://github.com/oscarperpinan/intro/blob/master/graficos.R][Código]]
 *** Estadística
    :PROPERTIES:
-   :HTML_CONTAINER_CLASS: col-md-6
+   :HTML_CONTAINER_CLASS: col-md-4
    :END:
    #+ATTR_HTML: :class btn btn-info btn-sm :role button
-   [[file:estadistica.pdf][pdf]]
+   [[file:estadistica.pdf][PDF]]
    #+ATTR_HTML: :class btn btn-info btn-sm :role button
-   [[https://github.com/oscarperpinan/intro/blob/master/estadistica.R][código]]
+   [[https://github.com/oscarperpinan/intro/blob/master/estadistica.R][Código]]
+*** Factores, Fechas, Caracteres
+   :PROPERTIES:
+   :HTML_CONTAINER_CLASS: col-md-4
+   :END:
+   #+ATTR_HTML: :class btn btn-info btn-sm :role button
+   [[file:factorDateCharacter.pdf][PDF]] 
+   #+ATTR_HTML: :class btn btn-info btn-sm :role button
+   [[file:factorDateCharacter.html][HTML]] 
+   #+ATTR_HTML: :class btn btn-info btn-sm :role button
+   [[https://github.com/oscarperpinan/intro/blob/master/factorDateCharacter.R][Código]]
   
 
 ** <<desarrollador>>Desarrollador
@@ -153,26 +163,26 @@ Este apartado agrupa material apropiado para trabajar con R desde el rol de desa
 
 *** Funciones
    :PROPERTIES:
-   :HTML_CONTAINER_CLASS: col-md-6
+   :HTML_CONTAINER_CLASS: col-md-4
    :END:
    #+ATTR_HTML: :class btn btn-info btn-sm :role button
-   [[file:Funciones.pdf][pdf]]
+   [[file:Funciones.pdf][PDF]]
    #+ATTR_HTML: :class btn btn-info btn-sm :role button
-   [[https://github.com/oscarperpinan/intro/blob/master/Funciones.R][código]]
+   [[https://github.com/oscarperpinan/intro/blob/master/Funciones.R][Código]]
 *** Clases y métodos
    :PROPERTIES:
-   :HTML_CONTAINER_CLASS: col-md-6
+   :HTML_CONTAINER_CLASS: col-md-4
    :END:
    #+ATTR_HTML: :class btn btn-info btn-sm :role button
-   [[file:ClasesMetodos.pdf][pdf]] 
+   [[FILE:ClasesMetodos.pdf][PDF]] 
    #+ATTR_HTML: :class btn btn-info btn-sm :role button
-   [[https://github.com/oscarperpinan/intro/blob/master/ClasesMetodos.R][código]]
+   [[https://github.com/oscarperpinan/intro/blob/master/ClasesMetodos.R][Código]]
 *** Paquetes
    :PROPERTIES:
-   :HTML_CONTAINER_CLASS: col-md-6
+   :HTML_CONTAINER_CLASS: col-md-4
    :END:
    #+ATTR_HTML: :class btn btn-info btn-sm :role button
-   [[file:Paquetes.pdf][pdf]]
+   [[FILE:Paquetes.pdf][PDF]]
 
 
 ** <<misc>>Miscelánea
@@ -185,20 +195,20 @@ Este apartado agrupa material sobre series temporales y datos espaciales.
 
 *** Series temporales
    :PROPERTIES:
-   :HTML_CONTAINER_CLASS: col-md-6
+   :HTML_CONTAINER_CLASS: col-md-4
    :END:
    #+ATTR_HTML: :class btn btn-info btn-sm :role button
-   [[file:zoo.pdf][pdf]]
+   [[file:zoo.pdf][PDF]]
    #+ATTR_HTML: :class btn btn-info btn-sm :role button
-   [[https://github.com/oscarperpinan/intro/blob/master/zoo.R][código]]
+   [[https://github.com/oscarperpinan/intro/blob/master/zoo.R][Código]]
 *** Datos espaciales
    :PROPERTIES:
-   :HTML_CONTAINER_CLASS: col-md-6
+   :HTML_CONTAINER_CLASS: col-md-4
    :END:
    #+ATTR_HTML: :class btn btn-info btn-sm :role button
-   [[file:raster.pdf][pdf]]
+   [[file:raster.pdf][PDF]]
    #+ATTR_HTML: :class btn btn-info btn-sm :role button
-   [[https://github.com/oscarperpinan/intro/blob/master/raster.R][código]]
+   [[https://github.com/oscarperpinan/intro/blob/master/raster.R][Código]]
 ------
 **  
    :PROPERTIES:

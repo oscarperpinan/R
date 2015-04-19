@@ -1,0 +1,852 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<title>Factores, fechas y caracteres</title>
+<meta name="author" content="(Oscar Perpiñán Lamigueiro \\  (link (:type http :path //oscarperpinan.github.io :raw-link http://oscarperpinan.github.io :application nil :search-option nil :begin 30 :end 60 :contents-begin nil :contents-end nil :post-blank 0 :parent #0)))"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+
+<link rel="stylesheet" href="http://cdn.jsdelivr.net/reveal.js/2.5.0/css/reveal.css"/>
+<link rel="stylesheet" href="http://cdn.jsdelivr.net/reveal.js/2.5.0/css/theme/solarized.css" id="theme"/>
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'http://cdn.jsdelivr.net/reveal.js/2.5.0/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide">
+<h1>Factores, fechas y caracteres</h1>
+<h2>Oscar Perpiñán Lamigueiro \\ <a href="http://oscarperpinan.github.io">http://oscarperpinan.github.io</a></h2>
+<h2><a href="mailto:oscar.perpinan@gmail.com">oscar.perpinan@gmail.com</a></h2>
+<h2></h2>
+</section>
+
+
+<section>
+<section id="slide-sec-1">
+<h2 id="sec-1"><code>factor</code></h2>
+<div class="outline-text-2" id="text-1">
+</div></section>
+<section id="slide-sec-1-1">
+<h3 id="sec-1-1">Construimos un ejemplo</h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">  N <span class="org-constant">&lt;-</span> 100
+  edad <span class="org-constant">&lt;-</span> sample(seq(18, 40, 1), N, replace=<span class="org-type">TRUE</span>)
+  summary(edad)
+</pre>
+</div>
+
+<pre class="example">
+ Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+18.00   24.00   30.00   29.46   35.00   40.00
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">  sexo <span class="org-constant">&lt;-</span> sample(c(<span class="org-string">'H'</span>, <span class="org-string">'M'</span>), N, replace=<span class="org-type">TRUE</span>)
+  class(sexo)
+  summary(sexo)
+</pre>
+</div>
+
+<pre class="example">
+[1] "character"
+   Length     Class      Mode 
+      100 character character
+</pre>
+
+</section>
+<section id="slide-sec-1-2">
+<h3 id="sec-1-2">Una variable cualitativa se define con <code>factor</code></h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">  sexo <span class="org-constant">&lt;-</span> factor(sexo)
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">  class(sexo)
+</pre>
+</div>
+
+<pre class="example">
+[1] "factor"
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">  summary(sexo)
+</pre>
+</div>
+
+<pre class="example">
+ H  M 
+45 55
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">  levels(sexo)
+</pre>
+</div>
+
+<pre class="example">
+[1] "H" "M"
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">  nlevels(sexo)
+</pre>
+</div>
+
+<pre class="example">
+[1] 2
+</pre>
+
+</section>
+<section id="slide-sec-1-3">
+<h3 id="sec-1-3">Los <code>factor</code> sirven para agrupar</h3>
+<ul>
+<li>Con la función <code>table</code></li>
+
+</ul>
+<div class="org-src-container">
+
+<pre  class="src src-R">  table(edad &gt; 30, sexo)
+</pre>
+</div>
+
+<pre class="example">
+     sexo
+       H  M
+FALSE 23 32
+TRUE  22 23
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">  table(edad %<span class="org-keyword">in</span>% 20:30, sexo)
+</pre>
+</div>
+
+<pre class="example">
+     sexo
+       H  M
+FALSE 25 26
+TRUE  20 29
+</pre>
+
+</section>
+<section id="slide-sec-1-4">
+<h3 id="sec-1-4">Los <code>factor</code> sirven para agrupar</h3>
+<ul>
+<li>Con <code>tapply</code> o <code>aggregate</code></li>
+
+</ul>
+<div class="org-src-container">
+
+<pre  class="src src-R">tapply(edad, sexo, mean)
+</pre>
+</div>
+
+<pre class="example">
+       H        M 
+29.55556 29.38182
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">aggregate(edad ~ sexo, FUN=median)
+</pre>
+</div>
+
+<pre class="example">
+  sexo edad
+1    H   30
+2    M   29
+</pre>
+
+</section>
+<section id="slide-sec-1-5">
+<h3 id="sec-1-5">Los factores sirven para separar</h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">  edadSexo <span class="org-constant">&lt;-</span> split(edad, sexo)
+  class(edadSexo)
+</pre>
+</div>
+
+<pre class="example">
+[1] "list"
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">  sapply(edadSexo, mean)
+</pre>
+</div>
+
+<pre class="example">
+       H        M 
+29.55556 29.38182
+</pre>
+
+</section>
+<section id="slide-sec-1-6">
+<h3 id="sec-1-6">Los <code>factor</code> se pueden generar a partir de variables numéricas</h3>
+<ul>
+<li>Por ejemplo, con <code>cut</code></li>
+
+</ul>
+<div class="org-src-container">
+
+<pre  class="src src-R">  gEdad <span class="org-constant">&lt;-</span> cut(edad, breaks=4)
+  class(gEdad)
+</pre>
+</div>
+
+<pre class="example">
+[1] "factor"
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">  levels(gEdad)
+</pre>
+</div>
+
+<pre class="example">
+[1] "(18,23.5]" "(23.5,29]" "(29,34.5]" "(34.5,40]"
+</pre>
+
+<ul>
+<li>Nuevamente <code>table</code></li>
+
+</ul>
+<div class="org-src-container">
+
+<pre  class="src src-R">  table(gEdad)
+</pre>
+</div>
+
+<pre class="example">
+gEdad
+(18,23.5] (23.5,29] (29,34.5] (34.5,40] 
+       24        25        25        26
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">  table(gEdad, sexo)
+</pre>
+</div>
+
+<pre class="example">
+           sexo
+gEdad        H  M
+  (18,23.5] 13 11
+  (23.5,29]  8 17
+  (29,34.5] 13 12
+  (34.5,40] 11 15
+</pre>
+
+</section>
+</section>
+<section>
+<section id="slide-sec-2">
+<h2 id="sec-2">Fechas</h2>
+<div class="outline-text-2" id="text-2">
+</div></section>
+<section id="slide-sec-2-1">
+<h3 id="sec-2-1"><code>Date</code></h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">  as.Date(<span class="org-string">'2013-02-06'</span>)
+</pre>
+</div>
+
+<pre class="example">
+[1] "2013-02-06"
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">  as.Date(<span class="org-string">'2013/02/06'</span>)
+</pre>
+</div>
+
+<pre class="example">
+[1] "2013-02-06"
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">  as.Date(<span class="org-string">'06.02.2013'</span>)
+</pre>
+</div>
+
+<pre class="example">
+Error en charToDate(x) : 
+  character string is not in a standard unambiguous format
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">  as.Date(<span class="org-string">'06.02.2013'</span>, format=<span class="org-string">'%d.%m.%Y'</span>)
+</pre>
+</div>
+
+<pre class="example">
+[1] "2013-02-06"
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">  as.Date(37, origin=<span class="org-string">'2013-01-01'</span>)
+</pre>
+</div>
+
+<pre class="example">
+[1] "2013-02-07"
+</pre>
+
+</section>
+<section id="slide-sec-2-2">
+<h3 id="sec-2-2">Secuencias temporales con <code>Date</code></h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">  seq(as.Date(<span class="org-string">'2004-01-01'</span>), by=<span class="org-string">'day'</span>, length=10)
+</pre>
+</div>
+
+<pre class="example">
+[1] "2004-01-01" "2004-01-02" "2004-01-03" "2004-01-04" "2004-01-05"
+[6] "2004-01-06" "2004-01-07" "2004-01-08" "2004-01-09" "2004-01-10"
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">  seq(as.Date(<span class="org-string">'2004-01-01'</span>), by=<span class="org-string">'month'</span>, length=10)
+</pre>
+</div>
+
+<pre class="example">
+[1] "2004-01-01" "2004-02-01" "2004-03-01" "2004-04-01" "2004-05-01"
+[6] "2004-06-01" "2004-07-01" "2004-08-01" "2004-09-01" "2004-10-01"
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">  seq(as.Date(<span class="org-string">'2004-01-01'</span>), by=<span class="org-string">'10 day'</span>, length=10)
+</pre>
+</div>
+
+<pre class="example">
+[1] "2004-01-01" "2004-01-11" "2004-01-21" "2004-01-31" "2004-02-10"
+[6] "2004-02-20" "2004-03-01" "2004-03-11" "2004-03-21" "2004-03-31"
+</pre>
+
+</section>
+<section id="slide-sec-2-3">
+<h3 id="sec-2-3">POSIXct</h3>
+<ul>
+<li><code>help(format.POSIXct)</code></li>
+
+</ul>
+<div class="org-src-container">
+
+<pre  class="src src-R">  as.POSIXct(<span class="org-string">'2013-02-06'</span>)
+</pre>
+</div>
+
+<pre class="example">
+[1] "2013-02-06 CET"
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">  ISOdate(2013, 2, 7)
+</pre>
+</div>
+
+<pre class="example">
+[1] "2013-02-07 12:00:00 GMT"
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">hoy <span class="org-constant">&lt;-</span> as.POSIXct(<span class="org-string">'2013-02-06'</span>)
+
+format(hoy, <span class="org-string">'%Y'</span>)
+</pre>
+</div>
+
+<pre class="example">
+[1] "2013"
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">format(hoy, <span class="org-string">'%d'</span>)
+</pre>
+</div>
+
+<pre class="example">
+[1] "06"
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">format(hoy, <span class="org-string">'%m'</span>)
+</pre>
+</div>
+
+<pre class="example">
+[1] "02"
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">format(hoy, <span class="org-string">'%b'</span>)
+</pre>
+</div>
+
+<pre class="example">
+[1] "feb"
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">format(hoy, <span class="org-string">'%d de %B de %Y'</span>)
+</pre>
+</div>
+
+<pre class="example">
+[1] "06 de febrero de 2013"
+</pre>
+
+</section>
+<section id="slide-sec-2-4">
+<h3 id="sec-2-4"><code>POSIxct</code></h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">  hora <span class="org-constant">&lt;-</span> Sys.time()
+  hora
+</pre>
+</div>
+
+<pre class="example">
+[1] "2015-04-19 17:40:52 CEST"
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">  format(hora, <span class="org-string">'%H:%M:%S'</span>)
+</pre>
+</div>
+
+<pre class="example">
+[1] "17:40:52"
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">  format(hora, <span class="org-string">'%H horas, %M minutos y %S segundos'</span>)
+</pre>
+</div>
+
+<pre class="example">
+[1] "17 horas, 40 minutos y 52 segundos"
+</pre>
+
+</section>
+<section id="slide-sec-2-5">
+<h3 id="sec-2-5">Secuencias temporales con <code>POSIXct</code></h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">seq(as.POSIXct(<span class="org-string">'2004-01-01'</span>), by=<span class="org-string">'month'</span>, length=10)
+</pre>
+</div>
+
+<pre class="example">
+[1] "2004-01-01 CET"  "2004-02-01 CET"  "2004-03-01 CET"  "2004-04-01 CEST"
+[5] "2004-05-01 CEST" "2004-06-01 CEST" "2004-07-01 CEST" "2004-08-01 CEST"
+[9] "2004-09-01 CEST" "2004-10-01 CEST"
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">seq(as.POSIXct(<span class="org-string">'2004-01-01 10:00:00'</span>), by=<span class="org-string">'15 min'</span>, length=10)
+</pre>
+</div>
+
+<pre class="example">
+[1] "2004-01-01 10:00:00 CET" "2004-01-01 10:15:00 CET"
+[3] "2004-01-01 10:30:00 CET" "2004-01-01 10:45:00 CET"
+[5] "2004-01-01 11:00:00 CET" "2004-01-01 11:15:00 CET"
+[7] "2004-01-01 11:30:00 CET" "2004-01-01 11:45:00 CET"
+[9] "2004-01-01 12:00:00 CET" "2004-01-01 12:15:00 CET"
+</pre>
+
+</section>
+<section id="slide-sec-2-6">
+<h3 id="sec-2-6">Zonas horarias</h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">  as.POSIXct(<span class="org-string">'2013-02-06 15:30:00'</span>,
+             tz=<span class="org-string">'GMT'</span>)
+</pre>
+</div>
+
+<pre class="example">
+[1] "2013-02-06 15:30:00 GMT"
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">  as.POSIXct(<span class="org-string">'2013-02-06 15:30:00'</span>,
+             tz=<span class="org-string">'Europe/Madrid'</span>)
+</pre>
+</div>
+
+<pre class="example">
+[1] "2013-02-06 15:30:00 CET"
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">hawaii <span class="org-constant">&lt;-</span> as.POSIXct(<span class="org-string">'2013-02-06 15:30:00'</span>, tz=<span class="org-string">'HST'</span>)
+<span class="org-comment-delimiter">## </span><span class="org-comment">Character</span>
+format(hawaii, tz=<span class="org-string">'GMT'</span>)
+</pre>
+</div>
+
+<pre class="example">
+[1] "2013-02-07 01:30:00"
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R"><span class="org-comment-delimiter">## </span><span class="org-comment">POSIXct</span>
+as.POSIXct(format(hawaii, tz=<span class="org-string">'GMT'</span>), tz=<span class="org-string">'GMT'</span>)
+</pre>
+</div>
+
+<pre class="example">
+[1] "2013-02-07 01:30:00 GMT"
+</pre>
+
+</section>
+</section>
+<section>
+<section id="slide-sec-3">
+<h2 id="sec-3">Caracteres</h2>
+<div class="outline-text-2" id="text-3">
+</div></section>
+<section id="slide-sec-3-1">
+<h3 id="sec-3-1">Bastan unas simples comillas</h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">  cadena <span class="org-constant">&lt;-</span> <span class="org-string">"Hola mundo"</span>
+  class(cadena)
+</pre>
+</div>
+
+<pre class="example">
+[1] "character"
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">  nchar(cadena)
+</pre>
+</div>
+
+<pre class="example">
+[1] 10
+</pre>
+
+</section>
+<section id="slide-sec-3-2">
+<h3 id="sec-3-2">Un vector de <code>character</code></h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">  cadenaVec <span class="org-constant">&lt;-</span> c(<span class="org-string">"Hola mundo"</span>, <span class="org-string">"Hello world"</span>)
+  nchar(cadenaVec)
+</pre>
+</div>
+
+<pre class="example">
+[1] 10 11
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">  length(cadenaVec)
+</pre>
+</div>
+
+<pre class="example">
+[1] 2
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">cadenaVec[1]
+</pre>
+</div>
+
+<pre class="example">
+[1] "Hola mundo"
+</pre>
+
+</section>
+<section id="slide-sec-3-3">
+<h3 id="sec-3-3">Para mostrarlos usamos <code>cat</code> o <code>print</code></h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">  a <span class="org-constant">&lt;-</span> 2
+  b <span class="org-constant">&lt;-</span> 3
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">  cat(<span class="org-string">'La suma de'</span>, a, <span class="org-string">'y'</span>, b, <span class="org-string">'es'</span>, a + b, fill=<span class="org-type">TRUE</span>)
+</pre>
+</div>
+
+<pre class="example">
+La suma de 2 y 3 es 5
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">  cat(<span class="org-string">'La suma de'</span>, a, <span class="org-string">'y'</span>, b, <span class="org-string">'es'</span>, a + b, <span class="org-string">'\n'</span>,
+      <span class="org-string">'La multiplicaci&#243;n de'</span>, a, <span class="org-string">'por'</span>, b, <span class="org-string">'es'</span>, a*b, <span class="org-string">'\n'</span>)
+</pre>
+</div>
+
+<pre class="example">
+La suma de 2 y 3 es 5 
+La multiplicación de 2 por 3 es 6
+</pre>
+
+</section>
+<section id="slide-sec-3-4">
+<h3 id="sec-3-4">Los <code>character</code> se pueden unir&#x2026;</h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">  paste(<span class="org-string">'Hello'</span>, <span class="org-string">'World'</span>, sep=<span class="org-string">'_'</span>)
+</pre>
+</div>
+
+<pre class="example">
+[1] "Hello_World"
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">  paste(<span class="org-string">'X'</span>, 1:5, sep=<span class="org-string">'.'</span>)
+</pre>
+</div>
+
+<pre class="example">
+[1] "X.1" "X.2" "X.3" "X.4" "X.5"
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">  paste(c(<span class="org-string">'A'</span>, <span class="org-string">'B'</span>), 1:5, sep=<span class="org-string">'.'</span>)
+</pre>
+</div>
+
+<pre class="example">
+[1] "A.1" "B.2" "A.3" "B.4" "A.5"
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">  paste(c(<span class="org-string">'A'</span>, <span class="org-string">'B'</span>), 1:5, sep=<span class="org-string">'.'</span>, collapse=<span class="org-string">'|'</span>)
+</pre>
+</div>
+
+<pre class="example">
+[1] "A.1|B.2|A.3|B.4|A.5"
+</pre>
+
+</section>
+<section id="slide-sec-3-5">
+<h3 id="sec-3-5">&#x2026; y también se pueden separar&#x2026;</h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">  strsplit(cadenaVec, split=<span class="org-string">' '</span>)
+</pre>
+</div>
+
+<pre class="example">
+[[1]]
+[1] "Hola"  "mundo"
+
+[[2]]
+[1] "Hello" "world"
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">  strsplit(cadenaVec, split=<span class="org-string">''</span>)
+</pre>
+</div>
+
+<pre class="example">
+[[1]]
+ [1] "H" "o" "l" "a" " " "m" "u" "n" "d" "o"
+
+[[2]]
+ [1] "H" "e" "l" "l" "o" " " "w" "o" "r" "l" "d"
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">  chSep <span class="org-constant">&lt;-</span> strsplit(cadenaVec, split=<span class="org-string">' '</span>)
+  class(chSep)
+</pre>
+</div>
+
+<pre class="example">
+[1] "list"
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">  length(chSep)
+</pre>
+</div>
+
+<pre class="example">
+[1] 2
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">  sapply(chSep, nchar)
+</pre>
+</div>
+
+<pre class="example">
+     [,1] [,2]
+[1,]    4    5
+[2,]    5    5
+</pre>
+
+</section>
+<section id="slide-sec-3-6">
+<h3 id="sec-3-6">&#x2026; y, por supuesto, manipular</h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">  sub(<span class="org-string">'o'</span>, <span class="org-string">'0'</span>, <span class="org-string">'Hola Mundo'</span>)
+</pre>
+</div>
+
+<pre class="example">
+[1] "H0la Mundo"
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">  gsub(<span class="org-string">'o'</span>, <span class="org-string">'0'</span>, <span class="org-string">'Hola Mundo'</span>)
+</pre>
+</div>
+
+<pre class="example">
+[1] "H0la Mund0"
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">  substring(cadena, 1) <span class="org-constant">&lt;-</span> <span class="org-string">'HOLA'</span>
+  cadena
+</pre>
+</div>
+
+<pre class="example">
+[1] "HOLA mundo"
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">  tolower(cadena)
+</pre>
+</div>
+
+<pre class="example">
+[1] "hola mundo"
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">  toupper(cadena)
+</pre>
+</div>
+
+<pre class="example">
+[1] "HOLA MUNDO"
+</pre>
+</section>
+</section>
+</div>
+</div>
+
+<script src="http://cdn.jsdelivr.net/reveal.js/2.5.0/lib/js/head.min.js"></script>
+<script src="http://cdn.jsdelivr.net/reveal.js/2.5.0/js/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: false,
+center: true,
+slideNumber: true,
+rollingLinks: false,
+keyboard: true,
+overview: true,
+
+theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+transitionSpeed: 'default',
+multiplex: {
+    secret: '', // null if client
+    id: '', // id, obtained from socket.io server
+    url: '' // Location of socket.io server
+},
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: 'http://cdn.jsdelivr.net/reveal.js/2.5.0/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/2.5.0/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/2.5.0/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/2.5.0/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/2.5.0/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/2.5.0/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+]
+});
+</script>
+</body>
+</html>
