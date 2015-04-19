@@ -27,3 +27,5 @@
 #+PROPERTY:  tangle yes
 #+PROPERTY:  comments org
 #+PROPERTY: session *R*
+#+REVEAL_ROOT: http://cdn.jsdelivr.net/reveal.js/2.5.0/
+#+REVEAL_THEME: solarized
