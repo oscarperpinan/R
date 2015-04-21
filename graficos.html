@@ -1,0 +1,788 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<title>Gráficos con R</title>
+<meta name="author" content="(Oscar Perpiñán Lamigueiro \\  (link (:type http :path //oscarperpinan.github.io :raw-link http://oscarperpinan.github.io :application nil :search-option nil :begin 30 :end 60 :contents-begin nil :contents-end nil :post-blank 0 :parent #0)))"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+
+<link rel="stylesheet" href="http://cdn.jsdelivr.net/reveal.js/2.5.0/css/reveal.css"/>
+<link rel="stylesheet" href="http://cdn.jsdelivr.net/reveal.js/2.5.0/css/theme/solarized.css" id="theme"/>
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'http://cdn.jsdelivr.net/reveal.js/2.5.0/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide">
+<h1>Gráficos con R</h1>
+<h2>Oscar Perpiñán Lamigueiro \\ <a href="http://oscarperpinan.github.io">http://oscarperpinan.github.io</a></h2>
+<h2><a href="mailto:"></a></h2>
+<h2></h2>
+</section>
+
+
+<section>
+<section id="slide-sec-1">
+<h2 id="sec-1"><span class="section-number-2">1</span> Introducción</h2>
+<div class="outline-text-2" id="text-1">
+</div></section>
+<section id="slide-sec-1-1">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Base y grid</h3>
+<div class="outline-text-3" id="text-1-1">
+</div></section>
+<section id="slide-sec-1-1-1">
+<h4 id="sec-1-1-1"><span class="section-number-4">1.1.1</span> Base y grid</h4>
+<ul>
+<li>En <code>R</code> existen dos formas de generar gráficos:
+<ul>
+<li>Base graphics</li>
+<li>Grid graphics</li>
+
+</ul></li>
+<li>Los gráficos base sólo producen un resultado gráfico, pero no un objeto.</li>
+<li>Los gráficos <code>grid</code> generan un resultado gráfico <b>y</b> un objeto.</li>
+
+</ul>
+
+</section>
+<section id="slide-sec-1-1-2">
+<h4 id="sec-1-1-2"><span class="section-number-4">1.1.2</span> Gráficos <code>grid</code></h4>
+<p>
+Dentro del conjunto <code>grid</code> existen dos grandes paquetes:
+</p>
+
+<ol class="org-ol"><li><code>lattice</code><br  /><ul>
+<li>Implementación de los gráficos <i>trellis</i>, <i>The Elements of Graphing Data</i> de Cleveland)</li>
+
+<li>Estructura matricial de paneles definida a través de una fórmula.</li>
+
+</ul>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">xyplot(wt ~ mpg | am, data = mtcars, groups = cyl)
+</pre>
+</div>
+</li></ol>
+
+</section>
+<section id="slide-sec-1-1-3">
+<h4 id="sec-1-1-3"><span class="section-number-4">1.1.3</span> Gráficos <code>grid</code></h4>
+<p>
+Dentro del conjunto <code>grid</code> existen dos grandes paquetes:
+</p>
+
+<ol class="org-ol"><li><code>ggplot2</code><br  /><ul>
+<li>Implementación de <i>The Grammar of Graphics</i> de Wilkinson.</li>
+
+<li>Combinación de funciones que proporcionan los componentes (capas) del gráfico.</li>
+
+</ul>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">ggplot(mtcars, aes(mpg, wt)) +
+    geom_point(aes(colour=factor(cyl))) +
+    facet_grid(. ~ am)
+</pre>
+</div>
+</li></ol>
+
+</section>
+<section id="slide-sec-1-2">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Datos de ejemplo</h3>
+<div class="outline-text-3" id="text-1-2">
+</div></section>
+<section id="slide-sec-1-2-1">
+<h4 id="sec-1-2-1"><span class="section-number-4">1.2.1</span> Leemos desde el archivo local</h4>
+<div class="org-src-container">
+
+<pre  class="src src-R">  aranjuez <span class="org-constant">&lt;-</span> read.csv(<span class="org-string">'data/aranjuez.csv'</span>)
+
+  summary(aranjuez)
+</pre>
+</div>
+
+</section>
+<section id="slide-sec-1-2-2">
+<h4 id="sec-1-2-2"><span class="section-number-4">1.2.2</span> Añadimos algunas columnas</h4>
+<div class="org-src-container">
+
+<pre  class="src src-R">aranjuez$date <span class="org-constant">&lt;-</span> as.Date(aranjuez$X)
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre  class="src src-R">  aranjuez$month <span class="org-constant">&lt;-</span> as.numeric(
+                    format(aranjuez$date, <span class="org-string">'%m'</span>))
+
+  aranjuez$year <span class="org-constant">&lt;-</span> as.numeric(
+                   format(aranjuez$date, <span class="org-string">'%Y'</span>))
+
+  aranjuez$day <span class="org-constant">&lt;-</span> as.numeric(
+                  format(aranjuez$date, <span class="org-string">'%j'</span>))
+
+  aranjuez$quarter <span class="org-constant">&lt;-</span> quarters(aranjuez$date)
+</pre>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-sec-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Gráficos Grid</h2>
+<div class="outline-text-2" id="text-2">
+</div></section>
+<section id="slide-sec-2-1">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Lattice</h3>
+<div class="outline-text-3" id="text-2-1">
+</div></section>
+<section id="slide-sec-2-1-1">
+<h4 id="sec-2-1-1"><span class="section-number-4">2.1.1</span> Lattice</h4>
+<ul>
+<li>Documentación: <a href="http://lmdvr.r-forge.r-project.org/figures/figures.html">Código y Figuras del libro</a></li>
+
+</ul>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">  <span class="org-constant">library</span>(lattice)
+</pre>
+</div>
+
+</section>
+<section id="slide-sec-2-1-2">
+<h4 id="sec-2-1-2"><span class="section-number-4">2.1.2</span> <code>xyplot</code></h4>
+<div class="org-src-container">
+
+<pre  class="src src-R">  xyplot(Radiation ~ TempAvg, data=aranjuez)
+</pre>
+</div>
+
+</section>
+<section id="slide-sec-2-1-3">
+<h4 id="sec-2-1-3"><span class="section-number-4">2.1.3</span> </h4>
+<p>
+<a href="figs/xyplot.pdf">figs/xyplot.pdf</a>
+</p>
+
+
+</section>
+<section id="slide-sec-2-1-4">
+<h4 id="sec-2-1-4"><span class="section-number-4">2.1.4</span> Añadimos rejilla</h4>
+<div class="org-src-container">
+
+<pre  class="src src-R">  xyplot(Radiation ~ TempAvg, data=aranjuez,
+         grid = <span class="org-type">TRUE</span>)
+</pre>
+</div>
+
+</section>
+<section id="slide-sec-2-1-5">
+<h4 id="sec-2-1-5"><span class="section-number-4">2.1.5</span> </h4>
+<p>
+<a href="figs/xyplotPG.pdf">figs/xyplotPG.pdf</a>
+</p>
+
+
+</section>
+<section id="slide-sec-2-1-6">
+<h4 id="sec-2-1-6"><span class="section-number-4">2.1.6</span> Añadimos regresión lineal</h4>
+<div class="org-src-container">
+
+<pre  class="src src-R">  xyplot(Radiation ~ TempAvg, data=aranjuez,
+         type=c(<span class="org-string">'p'</span>, <span class="org-string">'r'</span>), grid = <span class="org-type">TRUE</span>,
+         lwd=2, col.line=<span class="org-string">'black'</span>)
+</pre>
+</div>
+
+</section>
+<section id="slide-sec-2-1-7">
+<h4 id="sec-2-1-7"><span class="section-number-4">2.1.7</span> </h4>
+<p>
+<a href="figs/xyplotPRG.pdf">figs/xyplotPRG.pdf</a>
+</p>
+
+
+
+</section>
+<section id="slide-sec-2-1-8">
+<h4 id="sec-2-1-8"><span class="section-number-4">2.1.8</span> Añadimos ajuste local</h4>
+<div class="org-src-container">
+
+<pre  class="src src-R">  xyplot(Radiation ~ TempAvg, data=aranjuez,
+         type=c(<span class="org-string">'p'</span>, <span class="org-string">'smooth'</span>), grid = <span class="org-type">TRUE</span>,
+         lwd=2, col.line=<span class="org-string">'black'</span>)
+</pre>
+</div>
+
+</section>
+<section id="slide-sec-2-1-9">
+<h4 id="sec-2-1-9"><span class="section-number-4">2.1.9</span> </h4>
+<p>
+<a href="figs/xyplotSmooth.pdf">figs/xyplotSmooth.pdf</a>
+</p>
+
+
+</section>
+<section id="slide-sec-2-1-10">
+<h4 id="sec-2-1-10"><span class="section-number-4">2.1.10</span> Paneles</h4>
+<div class="org-src-container">
+
+<pre  class="src src-R">  xyplot(Radiation ~ TempAvg|factor(year),
+         data=aranjuez)
+</pre>
+</div>
+
+</section>
+<section id="slide-sec-2-1-11">
+<h4 id="sec-2-1-11"><span class="section-number-4">2.1.11</span> </h4>
+<p>
+<a href="figs/xyplotYear.pdf">figs/xyplotYear.pdf</a>
+</p>
+
+</section>
+<section id="slide-sec-2-1-12">
+<h4 id="sec-2-1-12"><span class="section-number-4">2.1.12</span> Grupos</h4>
+<div class="org-src-container">
+
+<pre  class="src src-R">  xyplot(Radiation ~ TempAvg, groups=quarter,
+         data=aranjuez, auto.key=list(space=<span class="org-string">'right'</span>))
+</pre>
+</div>
+
+</section>
+<section id="slide-sec-2-1-13">
+<h4 id="sec-2-1-13"><span class="section-number-4">2.1.13</span> </h4>
+<p>
+<a href="figs/xyplotQuarter.pdf">figs/xyplotQuarter.pdf</a>
+</p>
+
+</section>
+<section id="slide-sec-2-1-14">
+<h4 id="sec-2-1-14"><span class="section-number-4">2.1.14</span> Paneles y grupos</h4>
+<div class="org-src-container">
+
+<pre  class="src src-R">  xyplot(Radiation ~ TempAvg|factor(year),
+         groups=quarter,
+         data=aranjuez,
+         layout=c(4, 2),
+         auto.key=list(space=<span class="org-string">'right'</span>))
+</pre>
+</div>
+
+</section>
+<section id="slide-sec-2-1-15">
+<h4 id="sec-2-1-15"><span class="section-number-4">2.1.15</span> </h4>
+<p>
+<a href="figs/xyplotQuarterYear.pdf">figs/xyplotQuarterYear.pdf</a>
+</p>
+
+</section>
+<section id="slide-sec-2-1-16">
+<h4 id="sec-2-1-16"><span class="section-number-4">2.1.16</span> Paneles y grupos</h4>
+<div class="org-src-container">
+
+<pre  class="src src-R">  xyplot(Radiation ~ TempAvg|factor(year),
+         groups=quarter,
+         data=aranjuez,
+         layout=c(4, 2),
+         type=c(<span class="org-string">'p'</span>, <span class="org-string">'r'</span>),
+         auto.key=list(space=<span class="org-string">'right'</span>))
+</pre>
+</div>
+
+</section>
+<section id="slide-sec-2-1-17">
+<h4 id="sec-2-1-17"><span class="section-number-4">2.1.17</span> </h4>
+<p>
+<a href="figs/xyplotQuarterYearSmooth.pdf">figs/xyplotQuarterYearSmooth.pdf</a>
+</p>
+
+</section>
+<section id="slide-sec-2-1-18">
+<h4 id="sec-2-1-18"><span class="section-number-4">2.1.18</span> Colores y tamaños</h4>
+<div class="org-src-container">
+
+<pre  class="src src-R">  xyplot(Radiation ~ TempAvg,
+         type=c(<span class="org-string">'p'</span>, <span class="org-string">'r'</span>),
+         cex=2, col=<span class="org-string">'blue'</span>,
+         alpha=.5, pch=19,
+         lwd=3, col.line=<span class="org-string">'black'</span>,
+         data=aranjuez)
+</pre>
+</div>
+
+</section>
+<section id="slide-sec-2-1-19">
+<h4 id="sec-2-1-19"><span class="section-number-4">2.1.19</span> </h4>
+<p>
+<a href="figs/xyplotColors.pdf">figs/xyplotColors.pdf</a>
+</p>
+
+</section>
+<section id="slide-sec-2-1-20">
+<h4 id="sec-2-1-20"><span class="section-number-4">2.1.20</span> Colores con grupos</h4>
+<div class="org-src-container">
+
+<pre  class="src src-R">  xyplot(Radiation ~ TempAvg,
+         group=quarter,
+         col=c(<span class="org-string">'red'</span>, <span class="org-string">'blue'</span>, <span class="org-string">'green'</span>, <span class="org-string">'yellow'</span>),
+         pch=19,
+         auto.key=list(space=<span class="org-string">'right'</span>),
+         data=aranjuez)
+</pre>
+</div>
+
+</section>
+<section id="slide-sec-2-1-21">
+<h4 id="sec-2-1-21"><span class="section-number-4">2.1.21</span> </h4>
+<p>
+<a href="figs/xyplotColorGroups.pdf">figs/xyplotColorGroups.pdf</a>
+</p>
+
+</section>
+<section id="slide-sec-2-1-22">
+<h4 id="sec-2-1-22"><span class="section-number-4">2.1.22</span> Colores con grupos: <code>par.settings</code> y <code>simpleTheme</code></h4>
+<ul>
+<li>Primero definimos el tema con <code>simpleTheme</code></li>
+
+</ul>
+<div class="org-src-container">
+
+<pre  class="src src-R">  myTheme <span class="org-constant">&lt;-</span> simpleTheme(col=c(<span class="org-string">'red'</span>, <span class="org-string">'blue'</span>,
+                          <span class="org-string">'green'</span>, <span class="org-string">'yellow'</span>),
+                          pch=19, alpha=.6)
+</pre>
+</div>
+
+</section>
+<section id="slide-sec-2-1-23">
+<h4 id="sec-2-1-23"><span class="section-number-4">2.1.23</span> Colores con grupos: <code>par.settings</code> y <code>simpleTheme</code></h4>
+<ul>
+<li>Aplicamos el resultado en <code>par.settings</code></li>
+
+</ul>
+<div class="org-src-container">
+
+<pre  class="src src-R">  xyplot(Radiation ~ TempAvg,
+         groups=quarter,
+         par.settings=myTheme,
+         auto.key=list(space=<span class="org-string">'right'</span>),
+         data=aranjuez)
+</pre>
+</div>
+
+</section>
+<section id="slide-sec-2-1-24">
+<h4 id="sec-2-1-24"><span class="section-number-4">2.1.24</span> </h4>
+<p>
+<a href="figs/myTheme.pdf">figs/myTheme.pdf</a>
+</p>
+
+</section>
+<section id="slide-sec-2-1-25">
+<h4 id="sec-2-1-25"><span class="section-number-4">2.1.25</span> Colores: brewer.pal</h4>
+<div class="org-src-container">
+
+<pre  class="src src-R"><span class="org-constant">library</span>(RColorBrewer)
+
+myPal <span class="org-constant">&lt;-</span> brewer.pal(n = 4, <span class="org-string">'Dark2'</span>)
+
+myTheme <span class="org-constant">&lt;-</span> simpleTheme(col = myPal,
+                       pch=19, alpha=.6)
+</pre>
+</div>
+
+<ol class="org-ol"><li>ColorBrewer: <a href="http://colorbrewer2.org/">http://colorbrewer2.org/</a><br  /></li></ol>
+
+</section>
+<section id="slide-sec-2-1-26">
+<h4 id="sec-2-1-26"><span class="section-number-4">2.1.26</span> Asignamos paleta con <code>par.settings</code></h4>
+<div class="org-src-container">
+
+<pre  class="src src-R">xyplot(Radiation ~ TempAvg,
+       groups=quarter,
+       par.settings=myTheme,
+       auto.key=list(space=<span class="org-string">'right'</span>),
+       data=aranjuez)
+</pre>
+</div>
+
+</section>
+<section id="slide-sec-2-1-27">
+<h4 id="sec-2-1-27"><span class="section-number-4">2.1.27</span> </h4>
+<p>
+<a href="figs/brewer.pdf">figs/brewer.pdf</a>
+</p>
+
+</section>
+<section id="slide-sec-2-1-28">
+<h4 id="sec-2-1-28"><span class="section-number-4">2.1.28</span> Paneles a medida</h4>
+<div class="org-src-container">
+
+<pre  class="src src-R">  xyplot(Radiation ~ TempAvg, data=aranjuez,
+         panel=<span class="org-keyword">function</span>(x, y, ...){
+             panel.xyplot(x, y, ...)
+             minIdx <span class="org-constant">&lt;-</span> which.min(x)
+             maxIdx <span class="org-constant">&lt;-</span> which.max(x)
+             panel.points(x[c(minIdx, maxIdx)],
+                          y[c(minIdx, maxIdx)],
+                          cex=2, col=<span class="org-string">'red'</span>)
+             panel.text(x[minIdx], y[minIdx],
+                        <span class="org-string">'MIN'</span>, pos=1)
+             })
+</pre>
+</div>
+
+</section>
+<section id="slide-sec-2-1-29">
+<h4 id="sec-2-1-29"><span class="section-number-4">2.1.29</span> </h4>
+<p>
+<a href="figs/panel.pdf">figs/panel.pdf</a>
+</p>
+
+</section>
+<section id="slide-sec-2-1-30">
+<h4 id="sec-2-1-30"><span class="section-number-4">2.1.30</span> Matriz de gráficos de dispersión</h4>
+<div class="org-src-container">
+
+<pre  class="src src-R">  splom(aranjuez[,c(<span class="org-string">"TempAvg"</span>, <span class="org-string">"HumidAvg"</span>, <span class="org-string">"WindAvg"</span>,
+                    <span class="org-string">"Rain"</span>, <span class="org-string">"Radiation"</span>, <span class="org-string">"ET"</span>)],
+        pscale=0, alpha=0.6, cex=0.3, pch=19)
+</pre>
+</div>
+
+</section>
+<section id="slide-sec-2-1-31">
+<h4 id="sec-2-1-31"><span class="section-number-4">2.1.31</span> </h4>
+
+<div class="figure">
+<p><img src="figs/splom.png" alt="splom.png" />
+</p>
+</div>
+
+</section>
+<section id="slide-sec-2-1-32">
+<h4 id="sec-2-1-32"><span class="section-number-4">2.1.32</span> Matriz de gráficos de dispersión</h4>
+<div class="org-src-container">
+
+<pre  class="src src-R">  splom(aranjuez[,c(<span class="org-string">"TempAvg"</span>, <span class="org-string">"HumidAvg"</span>, <span class="org-string">"WindAvg"</span>,
+                    <span class="org-string">"Rain"</span>, <span class="org-string">"Radiation"</span>, <span class="org-string">"ET"</span>)],
+        groups=aranjuez$quarter,
+        auto.key=list(space=<span class="org-string">'right'</span>),
+        pscale=0, alpha=0.6, cex=0.3, pch=19)
+</pre>
+</div>
+
+</section>
+<section id="slide-sec-2-1-33">
+<h4 id="sec-2-1-33"><span class="section-number-4">2.1.33</span> </h4>
+
+<div class="figure">
+<p><img src="figs/splomGroup.png" alt="splomGroup.png" />
+</p>
+</div>
+
+</section>
+<section id="slide-sec-2-1-34">
+<h4 id="sec-2-1-34"><span class="section-number-4">2.1.34</span> <code>levelplot</code></h4>
+<div class="org-src-container">
+
+<pre  class="src src-R">  levelplot(TempAvg ~ year * day, data = aranjuez)
+</pre>
+</div>
+
+</section>
+<section id="slide-sec-2-1-35">
+<h4 id="sec-2-1-35"><span class="section-number-4">2.1.35</span> </h4>
+<p>
+<a href="figs/levelplot.pdf">figs/levelplot.pdf</a>
+</p>
+
+</section>
+<section id="slide-sec-2-1-36">
+<h4 id="sec-2-1-36"><span class="section-number-4">2.1.36</span> <code>levelplot</code> con una paleta mejor</h4>
+<ul>
+<li>Usamos <code>colorRampPalette</code> para generar una función que interpola colores a partir de una paleta</li>
+
+</ul>
+<div class="org-src-container">
+
+<pre  class="src src-R">levelPal <span class="org-constant">&lt;-</span> colorRampPalette(
+    brewer.pal(n = 9, <span class="org-string">'Oranges'</span>))
+</pre>
+</div>
+<ul>
+<li>Comprobamos que es una función generadora de colores</li>
+
+</ul>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">levelPal(14)
+</pre>
+</div>
+
+<pre class="example">
+[1] "#FFF5EB" "#FEEBD9" "#FDE0C3" "#FDD3A8" "#FDC088" "#FDAB67" "#FD974A"
+[8] "#F9812F" "#F16B16" "#E45709" "#D14501" "#B13A02" "#973003" "#7F2704"
+</pre>
+
+<ul>
+<li>Usamos esta función con <code>col.regions</code></li>
+
+</ul>
+<div class="org-src-container">
+
+<pre  class="src src-R">  levelplot(TempAvg ~ year * day,
+            col.regions = levelPal,
+            data = aranjuez)
+</pre>
+</div>
+
+</section>
+<section id="slide-sec-2-1-37">
+<h4 id="sec-2-1-37"><span class="section-number-4">2.1.37</span> </h4>
+<p>
+<a href="figs/levelplotPal.pdf">figs/levelplotPal.pdf</a>
+</p>
+
+</section>
+<section id="slide-sec-2-1-38">
+<h4 id="sec-2-1-38"><span class="section-number-4">2.1.38</span> <code>contourplot</code></h4>
+<div class="org-src-container">
+
+<pre  class="src src-R">  contourplot(TempAvg ~ year * day,
+              data = aranjuez,
+              lwd = .5,
+              labels = list(cex = 0.6),
+              label.style = <span class="org-string">'align'</span>,
+              cuts = 5)
+</pre>
+</div>
+
+</section>
+<section id="slide-sec-2-1-39">
+<h4 id="sec-2-1-39"><span class="section-number-4">2.1.39</span> </h4>
+<p>
+<a href="figs/contourplot.pdf">figs/contourplot.pdf</a>
+</p>
+
+</section>
+<section id="slide-sec-2-1-40">
+<h4 id="sec-2-1-40"><span class="section-number-4">2.1.40</span> Box-and-Whiskers</h4>
+<div class="org-src-container">
+
+<pre  class="src src-R">  bwplot(Radiation ~ month, data=aranjuez,
+         horizontal=<span class="org-type">FALSE</span>, pch=<span class="org-string">'|'</span>)
+</pre>
+</div>
+
+</section>
+<section id="slide-sec-2-1-41">
+<h4 id="sec-2-1-41"><span class="section-number-4">2.1.41</span> </h4>
+<p>
+<a href="figs/bwplot.pdf">figs/bwplot.pdf</a>
+</p>
+
+</section>
+<section id="slide-sec-2-1-42">
+<h4 id="sec-2-1-42"><span class="section-number-4">2.1.42</span> Box-and-Whiskers</h4>
+<div class="org-src-container">
+
+<pre  class="src src-R">  bwplot(Radiation ~ month, data=aranjuez,
+         horizontal=<span class="org-type">FALSE</span>,
+         panel=panel.violin)
+</pre>
+</div>
+
+</section>
+<section id="slide-sec-2-1-43">
+<h4 id="sec-2-1-43"><span class="section-number-4">2.1.43</span> </h4>
+<p>
+<a href="figs/violin.pdf">figs/violin.pdf</a>
+</p>
+
+
+</section>
+<section id="slide-sec-2-1-44">
+<h4 id="sec-2-1-44"><span class="section-number-4">2.1.44</span> Histogramas</h4>
+<div class="org-src-container">
+
+<pre  class="src src-R">  histogram(~ Radiation|factor(year), data=aranjuez)
+</pre>
+</div>
+
+</section>
+<section id="slide-sec-2-1-45">
+<h4 id="sec-2-1-45"><span class="section-number-4">2.1.45</span> </h4>
+<p>
+<a href="figs/histogram.pdf">figs/histogram.pdf</a>
+</p>
+
+</section>
+<section id="slide-sec-2-1-46">
+<h4 id="sec-2-1-46"><span class="section-number-4">2.1.46</span> Gráficos de densidad</h4>
+<div class="org-src-container">
+
+<pre  class="src src-R">densityplot(~ Radiation, groups=quarter,
+            data=aranjuez,
+            auto.key=list(space=<span class="org-string">'right'</span>))
+</pre>
+</div>
+
+</section>
+<section id="slide-sec-2-1-47">
+<h4 id="sec-2-1-47"><span class="section-number-4">2.1.47</span> </h4>
+<p>
+<a href="figs/density.pdf">figs/density.pdf</a>
+</p>
+
+</section>
+<section id="slide-sec-2-1-48">
+<h4 id="sec-2-1-48"><span class="section-number-4">2.1.48</span> <code>dotplot</code></h4>
+<div class="org-src-container">
+
+<pre  class="src src-R">  avRad <span class="org-constant">&lt;-</span> aggregate(Radiation ~ month * year,
+                     data=aranjuez, FUN=mean)
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">  dotplot(month ~ Radiation|factor(year), data=avRad)
+</pre>
+</div>
+
+</section>
+<section id="slide-sec-2-1-49">
+<h4 id="sec-2-1-49"><span class="section-number-4">2.1.49</span> </h4>
+<p>
+<a href="figs/dotplot.pdf">figs/dotplot.pdf</a>
+</p>
+
+
+</section>
+<section id="slide-sec-2-1-50">
+<h4 id="sec-2-1-50"><span class="section-number-4">2.1.50</span> Quantile-Quantile</h4>
+<div class="org-src-container">
+
+<pre  class="src src-R">  firstHalf <span class="org-constant">&lt;-</span> aranjuez$quarter %<span class="org-keyword">in</span>% c(<span class="org-string">'Q1'</span>, <span class="org-string">'Q2'</span>)
+  
+  qq(firstHalf ~ Radiation, data=aranjuez)
+</pre>
+</div>
+
+</section>
+<section id="slide-sec-2-1-51">
+<h4 id="sec-2-1-51"><span class="section-number-4">2.1.51</span> </h4>
+<p>
+<a href="figs/qqHalf.pdf">figs/qqHalf.pdf</a>
+</p>
+
+</section>
+<section id="slide-sec-2-1-52">
+<h4 id="sec-2-1-52"><span class="section-number-4">2.1.52</span> Quantile-quantile</h4>
+<div class="org-src-container">
+
+<pre  class="src src-R">  winter <span class="org-constant">&lt;-</span> aranjuez$quarter %<span class="org-keyword">in</span>% c(<span class="org-string">'Q1'</span>, <span class="org-string">'Q4'</span>)
+  
+  qq(winter ~ Radiation, data=aranjuez)
+</pre>
+</div>
+
+</section>
+<section id="slide-sec-2-1-53">
+<h4 id="sec-2-1-53"><span class="section-number-4">2.1.53</span> </h4>
+<p>
+<a href="figs/qqWinter.pdf">figs/qqWinter.pdf</a>
+</p>
+
+</section>
+<section id="slide-sec-2-1-54">
+<h4 id="sec-2-1-54"><span class="section-number-4">2.1.54</span> Quantile-Quantile</h4>
+<div class="org-src-container">
+
+<pre  class="src src-R">  qqmath(~TempAvg, data=aranjuez,
+         groups=year, distribution=qnorm)
+</pre>
+</div>
+
+</section>
+<section id="slide-sec-2-1-55">
+<h4 id="sec-2-1-55"><span class="section-number-4">2.1.55</span> </h4>
+<p>
+<a href="figs/qqNorm.pdf">figs/qqNorm.pdf</a>
+</p>
+
+
+</section>
+<section id="slide-sec-2-2">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> ggplot2</h3>
+<div class="outline-text-3" id="text-2-2">
+</div></section>
+<section id="slide-sec-2-2-1">
+<h4 id="sec-2-2-1"><span class="section-number-4">2.2.1</span> ggplot2</h4>
+<ul>
+<li><a href="http://docs.ggplot2.org/current/">Documentación de ggplot2</a></li>
+<li><a href="http://ggplot2.org/book/">Codigo del libro</a></li>
+<li><a href="http://learnr.wordpress.com/2009/06/28/ggplot2-version-of-figures-in-lattice-multivariate-data-visualization-with-r-part-1/">ggplot2 desde lattice</a> (<a href="http://learnr.files.wordpress.com/2009/08/latbook.pdf">PDF</a>)</li>
+
+</ul>
+</section>
+</section>
+</div>
+</div>
+
+<script src="http://cdn.jsdelivr.net/reveal.js/2.5.0/lib/js/head.min.js"></script>
+<script src="http://cdn.jsdelivr.net/reveal.js/2.5.0/js/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: false,
+center: true,
+slideNumber: true,
+rollingLinks: false,
+keyboard: true,
+overview: true,
+
+theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+transitionSpeed: 'default',
+multiplex: {
+    secret: '', // null if client
+    id: '', // id, obtained from socket.io server
+    url: '' // Location of socket.io server
+},
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: 'http://cdn.jsdelivr.net/reveal.js/2.5.0/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/2.5.0/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/2.5.0/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/2.5.0/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/2.5.0/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/2.5.0/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+]
+});
+</script>
+</body>
+</html>
