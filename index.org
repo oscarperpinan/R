@@ -140,6 +140,8 @@ Este apartado agrupa el material apropiado para trabajar con R desde el rol de u
    #+ATTR_HTML: :class btn btn-info btn-sm :role button
    [[file:estadistica.pdf][PDF]]
    #+ATTR_HTML: :class btn btn-info btn-sm :role button
+   [[file:estadistica.html][HTML]] 
+   #+ATTR_HTML: :class btn btn-info btn-sm :role button
    [[https://github.com/oscarperpinan/intro/blob/master/estadistica.R][Código]]
 *** Factores, Fechas, Caracteres
    :PROPERTIES:

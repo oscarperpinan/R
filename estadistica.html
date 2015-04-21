@@ -1,0 +1,1015 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<title>Estadística básica con R</title>
+<meta name="author" content="(Oscar Perpiñán Lamigueiro \\  (link (:type http :path //oscarperpinan.github.io :raw-link http://oscarperpinan.github.io :application nil :search-option nil :begin 30 :end 60 :contents-begin nil :contents-end nil :post-blank 0 :parent #0)))"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+
+<link rel="stylesheet" href="http://cdn.jsdelivr.net/reveal.js/2.5.0/css/reveal.css"/>
+<link rel="stylesheet" href="http://cdn.jsdelivr.net/reveal.js/2.5.0/css/theme/solarized.css" id="theme"/>
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'http://cdn.jsdelivr.net/reveal.js/2.5.0/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide">
+<h1>Estadística básica con R</h1>
+<h2>Oscar Perpiñán Lamigueiro \\ <a href="http://oscarperpinan.github.io">http://oscarperpinan.github.io</a></h2>
+<h2><a href="mailto:"></a></h2>
+<h2></h2>
+</section>
+
+<section>
+<section id="slide-sec-1">
+<h2 id="sec-1"><span class="section-number-2">1</span> Conjunto de datos</h2>
+<div class="outline-text-2" id="text-1">
+</div></section>
+<section id="slide-sec-1-1">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Conjunto de datos: swiss</h3>
+<p>
+Standardized fertility measure and socio-economic indicators for
+each of 47 French-speaking provinces of Switzerland at
+about 1888. 6 variables in percent [0, 100]:
+</p>
+
+<ul>
+<li><b>Fertility</b>:         Ig, ‘common standardized fertility measure’</li>
+<li><b>Agriculture</b>:       % of males involved in agriculture as occupation</li>
+<li><b>Examination</b>:       % draftees receiving highest mark on army examination</li>
+<li><b>Education</b>:         % education beyond primary school for draftees.</li>
+<li><b>Catholic</b>:          % ‘catholic’ (as opposed to ‘protestant’).</li>
+<li><b>Infant.Mortality</b>:  live births who live less than 1year.</li>
+
+</ul>
+
+</section>
+<section id="slide-sec-1-2">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Conjunto de datos: swiss</h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">data(swiss)
+
+summary(swiss)
+</pre>
+</div>
+
+<pre class="example">
+   Fertility      Agriculture     Examination      Education    
+ Min.   :35.00   Min.   : 1.20   Min.   : 3.00   Min.   : 1.00  
+ 1st Qu.:64.70   1st Qu.:35.90   1st Qu.:12.00   1st Qu.: 6.00  
+ Median :70.40   Median :54.10   Median :16.00   Median : 8.00  
+ Mean   :70.14   Mean   :50.66   Mean   :16.49   Mean   :10.98  
+ 3rd Qu.:78.45   3rd Qu.:67.65   3rd Qu.:22.00   3rd Qu.:12.00  
+ Max.   :92.50   Max.   :89.70   Max.   :37.00   Max.   :53.00  
+    Catholic       Infant.Mortality
+ Min.   :  2.150   Min.   :10.80   
+ 1st Qu.:  5.195   1st Qu.:18.15   
+ Median : 15.140   Median :20.00   
+ Mean   : 41.144   Mean   :19.94   
+ 3rd Qu.: 93.125   3rd Qu.:21.70   
+ Max.   :100.000   Max.   :26.60
+</pre>
+
+</section>
+<section id="slide-sec-1-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> </h3>
+<div class="org-src-container">
+
+<pre  class="src src-R"><span class="org-constant">library</span>(lattice)
+splom(swiss, pscale=0, type=c(<span class="org-string">'p'</span>, <span class="org-string">'smooth'</span>),
+      groups=swiss$Catholic &gt; 50, xlab=<span class="org-string">''</span>)
+</pre>
+</div>
+
+<p>
+<a href="figs/splomSwiss.pdf">figs/splomSwiss.pdf</a>
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-sec-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Estadística Univariante</h2>
+<div class="outline-text-2" id="text-2">
+</div></section>
+<section id="slide-sec-2-1">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Resumen de  información</h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">summary(swiss)
+</pre>
+</div>
+
+<pre class="example">
+   Fertility      Agriculture     Examination      Education    
+ Min.   :35.00   Min.   : 1.20   Min.   : 3.00   Min.   : 1.00  
+ 1st Qu.:64.70   1st Qu.:35.90   1st Qu.:12.00   1st Qu.: 6.00  
+ Median :70.40   Median :54.10   Median :16.00   Median : 8.00  
+ Mean   :70.14   Mean   :50.66   Mean   :16.49   Mean   :10.98  
+ 3rd Qu.:78.45   3rd Qu.:67.65   3rd Qu.:22.00   3rd Qu.:12.00  
+ Max.   :92.50   Max.   :89.70   Max.   :37.00   Max.   :53.00  
+    Catholic       Infant.Mortality
+ Min.   :  2.150   Min.   :10.80   
+ 1st Qu.:  5.195   1st Qu.:18.15   
+ Median : 15.140   Median :20.00   
+ Mean   : 41.144   Mean   :19.94   
+ 3rd Qu.: 93.125   3rd Qu.:21.70   
+ Max.   :100.000   Max.   :26.60
+</pre>
+
+</section>
+<section id="slide-sec-2-2">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Media</h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">mean(swiss$Fertility)
+</pre>
+</div>
+
+<pre class="example">
+[1] 70.14255
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">colMeans(swiss)
+</pre>
+</div>
+
+<pre class="example">
+Fertility      Agriculture      Examination        Education 
+ 70.14255         50.65957         16.48936         10.97872 
+ Catholic Infant.Mortality 
+ 41.14383         19.94255
+</pre>
+
+</section>
+<section id="slide-sec-2-3">
+<h3 id="sec-2-3"><span class="section-number-3">2.3</span> Desviación Estándar</h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">sd(swiss$Fertility)
+</pre>
+</div>
+
+<pre class="example">
+[1] 12.4917
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">sapply(swiss, sd)
+</pre>
+</div>
+
+<pre class="example">
+Fertility      Agriculture      Examination        Education 
+12.491697        22.711218         7.977883         9.615407 
+ Catholic Infant.Mortality 
+41.704850         2.912697
+</pre>
+
+</section>
+<section id="slide-sec-2-4">
+<h3 id="sec-2-4"><span class="section-number-3">2.4</span> Otras</h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">median(swiss$Fertility)
+</pre>
+</div>
+
+<pre class="example">
+[1] 70.4
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">mad(swiss$Fertility)
+</pre>
+</div>
+
+<pre class="example">
+[1] 10.22994
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">IQR(swiss$Fertility)
+</pre>
+</div>
+
+<pre class="example">
+[1] 13.75
+</pre>
+
+</section>
+</section>
+<section>
+<section id="slide-sec-3">
+<h2 id="sec-3"><span class="section-number-2">3</span> Generar datos aleatorios</h2>
+<div class="outline-text-2" id="text-3">
+</div></section>
+<section id="slide-sec-3-1">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> Distribuciones disponibles</h3>
+<div class="outline-text-3" id="text-3-1">
+</div><ol class="org-ol"><li>&#xa0;&#xa0;&#xa0;<span class="tag"><span class="BMCOL">BMCOL</span></span><br  /><ul>
+<li>beta <code>beta</code></li>
+<li>binomial <code>binom</code></li>
+<li>Cauchy <code>cauchy</code></li>
+<li>chi-squared <code>chisq</code></li>
+<li>exponential <code>exp</code></li>
+<li>F <code>f</code></li>
+<li>gamma <code>gamma</code></li>
+<li>geometric <code>geom</code></li>
+<li>hypergeometric <code>hyper</code></li>
+
+</ul>
+</li>
+<li>&#xa0;&#xa0;&#xa0;<span class="tag"><span class="BMCOL">BMCOL</span></span><br  /><ul>
+<li>log-normal <code>lnorm</code></li>
+<li>logistic <code>logis</code></li>
+<li>negative <code>binomial</code></li>
+<li>normal <code>norm</code></li>
+<li>Poisson <code>pois</code></li>
+<li>signed rank <code>signrank</code></li>
+<li>Student’s t <code>t</code></li>
+<li>uniform <code>unif</code></li>
+<li>Weibull <code>weibull</code></li>
+<li>Wilcoxon <code>wilcox</code></li>
+
+</ul>
+</li></ol>
+
+</section>
+<section id="slide-sec-3-2">
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> Densidad, CDF, Cuantiles, y Números aleatorios</h3>
+<dl>
+<dt><code>dxxx</code></dt><dd>función de densidad de probabilidad</dd>
+<dt><code>pxxx</code></dt><dd>función acumulada de probabilidad</dd>
+<dt><code>qxxx</code></dt><dd>cuantiles</dd>
+<dt><code>rxxx</code></dt><dd>generación de números aleatorios</dd>
+
+</dl>
+
+</section>
+<section id="slide-sec-3-3">
+<h3 id="sec-3-3"><span class="section-number-3">3.3</span> Distribución Normal</h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">rnorm(10, mean = 1, sd = .4)
+</pre>
+</div>
+
+<pre class="example">
+[1] 1.0623882 1.5547562 1.1916521 0.6796903 0.8510718 0.9799139 1.2185723
+[8] 1.4573373 0.4584271 1.1700426
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">hist(rnorm(1e6, mean = 1, sd = .4))
+</pre>
+</div>
+
+<p>
+<a href="figs/rnorm.pdf">figs/rnorm.pdf</a>
+</p>
+
+</section>
+<section id="slide-sec-3-4">
+<h3 id="sec-3-4"><span class="section-number-3">3.4</span> Distribución Normal</h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">x <span class="org-constant">&lt;-</span> seq( -5, 5, by =.01)
+plot(x, dnorm(x), type = <span class="org-string">'l'</span>)
+</pre>
+</div>
+
+<p>
+<a href="figs/dnorm.pdf">figs/dnorm.pdf</a>
+</p>
+
+</section>
+<section id="slide-sec-3-5">
+<h3 id="sec-3-5"><span class="section-number-3">3.5</span> Distribución Uniforme</h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">runif(10, min=-3, max=3)
+</pre>
+</div>
+
+<pre class="example">
+[1] -1.1276571  1.9305936  0.7966672  2.0671746 -1.0291156 -2.2655299
+[7] -2.4536620  2.1255770  2.9414816  1.9566966
+</pre>
+
+
+<div class="org-src-container">
+
+<pre  class="src src-R">hist(runif(1e6, min = -3, max = 3))
+</pre>
+</div>
+
+<p>
+<a href="figs/runif.pdf">figs/runif.pdf</a>
+</p>
+
+</section>
+<section id="slide-sec-3-6">
+<h3 id="sec-3-6"><span class="section-number-3">3.6</span> Distribución de Weibull</h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">rweibull(n=10, shape = 3, scale = 2)
+</pre>
+</div>
+
+<pre class="example">
+[1] 2.247363 1.367798 2.384960 1.733157 1.492485 2.075554 2.008551 1.933942
+[9] 2.117516 2.906656
+</pre>
+
+
+<div class="org-src-container">
+
+<pre  class="src src-R">hist(rweibull(1e6, shape = 3, scale = 2))
+</pre>
+</div>
+
+<p>
+<a href="figs/rweibull.pdf">figs/rweibull.pdf</a>
+</p>
+
+</section>
+<section id="slide-sec-3-7">
+<h3 id="sec-3-7"><span class="section-number-3">3.7</span> Muestreo aleatorio</h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">x <span class="org-constant">&lt;-</span> seq(1, 100, length = 10)
+x
+</pre>
+</div>
+
+<pre class="example">
+[1]   1  12  23  34  45  56  67  78  89 100
+</pre>
+
+<ul>
+<li>Sin reemplazo</li>
+
+</ul>
+<div class="org-src-container">
+
+<pre  class="src src-R">sample(x)
+</pre>
+</div>
+
+<pre class="example">
+[1]  45  34   1  12  67  89 100  78  56  23
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">sample(x, 5)
+</pre>
+</div>
+
+<pre class="example">
+[1] 34 89 67 56 12
+</pre>
+
+<ul>
+<li>Con reemplazo</li>
+
+</ul>
+<div class="org-src-container">
+
+<pre  class="src src-R">sample(x, 5, replace = <span class="org-type">TRUE</span>)
+</pre>
+</div>
+
+<pre class="example">
+[1]  23  89  67 100  45
+</pre>
+
+
+</section>
+</section>
+<section>
+<section id="slide-sec-4">
+<h2 id="sec-4"><span class="section-number-2">4</span> Tests de Hipótesis</h2>
+<div class="outline-text-2" id="text-4">
+</div></section>
+<section id="slide-sec-4-1">
+<h3 id="sec-4-1"><span class="section-number-3">4.1</span> Para muestra única</h3>
+<ul>
+<li>t de Student</li>
+
+</ul>
+<div class="org-src-container">
+
+<pre  class="src src-R">t.test(swiss$Fertility, mu=70)
+</pre>
+</div>
+
+<pre class="example">
+	One Sample t-test
+
+data:  swiss$Fertility
+t = 0.078236, df = 46, p-value = 0.938
+alternative hypothesis: true mean is not equal to 70
+95 percent confidence interval:
+ 66.47485 73.81025
+sample estimates:
+mean of x 
+ 70.14255
+</pre>
+
+<ul>
+<li>Wilcoxon (no paramétrico)</li>
+
+</ul>
+<div class="org-src-container">
+
+<pre  class="src src-R">wilcox.test(swiss$Fertility, mu=70)
+</pre>
+</div>
+
+<pre class="example">
+	Wilcoxon signed rank test with continuity correction
+
+data:  swiss$Fertility
+V = 592.5, p-value = 0.767
+alternative hypothesis: true location is not equal to 70
+
+Warning message:
+In wilcox.test.default(swiss$Fertility, mu = 70) :
+  cannot compute exact p-value with ties
+</pre>
+
+</section>
+<section id="slide-sec-4-2">
+<h3 id="sec-4-2"><span class="section-number-3">4.2</span> Para muestras pareadas</h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">Religion <span class="org-constant">&lt;-</span> ifelse(swiss$Catholic &gt; 50,
+                   <span class="org-string">'Catholic'</span>, <span class="org-string">'Protestant'</span>)
+</pre>
+</div>
+
+<ul>
+<li>t de Student</li>
+
+</ul>
+<div class="org-src-container">
+
+<pre  class="src src-R">t.test(Fertility ~ Religion, data=swiss)
+</pre>
+</div>
+
+<pre class="example">
+	Welch Two Sample t-test
+
+data:  Fertility by Religion
+t = 2.7004, df = 26.742, p-value = 0.01186
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+  2.455904 18.024939
+sample estimates:
+  mean in group Catholic mean in group Protestant 
+                76.46111                 66.22069
+</pre>
+
+</section>
+<section id="slide-sec-4-3">
+<h3 id="sec-4-3"><span class="section-number-3">4.3</span> Para muestras pareadas</h3>
+<ul>
+<li>Wilcoxon</li>
+
+</ul>
+<div class="org-src-container">
+
+<pre  class="src src-R">wilcox.test(Fertility ~ Religion, data=swiss)
+</pre>
+</div>
+
+<pre class="example">
+	Wilcoxon rank sum test with continuity correction
+
+data:  Fertility by Religion
+W = 409.5, p-value = 0.0012
+alternative hypothesis: true location shift is not equal to 0
+
+Warning message:
+In wilcox.test.default(x = c(83.1, 92.5, 76.1, 83.8, 92.4, 82.4,  :
+  cannot compute exact p-value with ties
+</pre>
+
+</section>
+</section>
+<section>
+<section id="slide-sec-5">
+<h2 id="sec-5"><span class="section-number-2">5</span> Regresión lineal</h2>
+<div class="outline-text-2" id="text-5">
+</div></section>
+<section id="slide-sec-5-1">
+<h3 id="sec-5-1"><span class="section-number-3">5.1</span> Fertilidad y educación</h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">lmFertEdu <span class="org-constant">&lt;-</span> lm(Fertility ~ Education,
+              data = swiss)
+summary(lmFertEdu)
+</pre>
+</div>
+
+<pre class="example">
+Call:
+lm(formula = Fertility ~ Education, data = swiss)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-17.036  -6.711  -1.011   9.526  19.689 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  79.6101     2.1041  37.836  &lt; 2e-16 ***
+Education    -0.8624     0.1448  -5.954 3.66e-07 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 9.446 on 45 degrees of freedom
+Multiple R-squared:  0.4406,	Adjusted R-squared:  0.4282 
+F-statistic: 35.45 on 1 and 45 DF,  p-value: 3.659e-07
+</pre>
+
+</section>
+<section id="slide-sec-5-2">
+<h3 id="sec-5-2"><span class="section-number-3">5.2</span> Fertilidad y educación</h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">coef(lmFertEdu)
+</pre>
+</div>
+
+<pre class="example">
+(Intercept)   Education 
+ 79.6100585  -0.8623503
+</pre>
+
+<div class="org-src-container">
+
+<pre  class="src src-R">fitted.values(lmFertEdu)
+</pre>
+</div>
+
+<pre class="example">
+  Courtelary     Delemont Franches-Mnt      Moutier   Neuveville   Porrentruy 
+    69.26186     71.84891     75.29831     73.57361     66.67480     73.57361 
+       Broye        Glane      Gruyere       Sarine      Veveyse        Aigle 
+    73.57361     72.71126     73.57361     68.39950     74.43596     69.26186 
+     Aubonne     Avenches     Cossonay    Echallens     Grandson     Lausanne 
+    73.57361     69.26186     75.29831     77.88536     72.71126     55.46425 
+   La Vallee       Lavaux       Morges       Moudon        Nyone         Orbe 
+    62.36305     71.84891     70.98656     77.02301     69.26186     74.43596 
+        Oron      Payerne Paysd'enhaut        Rolle        Vevey      Yverdon 
+    78.74771     72.71126     77.02301     70.98656     63.22540     72.71126 
+     Conthey    Entremont       Herens     Martigwy      Monthey   St Maurice 
+    77.88536     74.43596     77.88536     74.43596     77.02301     71.84891 
+      Sierre         Sion       Boudry La Chauxdfnd     Le Locle    Neuchatel 
+    77.02301     68.39950     69.26186     70.12421     68.39950     52.01485 
+  Val de Ruz ValdeTravers V. De Geneve  Rive Droite  Rive Gauche 
+    73.57361     73.57361     33.90549     54.60190     54.60190
+</pre>
+
+</section>
+<section id="slide-sec-5-3">
+<h3 id="sec-5-3"><span class="section-number-3">5.3</span> Fertilidad y educación</h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">residuals(lmFertEdu)
+</pre>
+</div>
+
+<pre class="example">
+  Courtelary     Delemont Franches-Mnt      Moutier   Neuveville   Porrentruy 
+  10.9381450   11.2510941   17.2016929   12.2263935   10.2251959    2.5263935 
+       Broye        Glane      Gruyere       Sarine      Veveyse        Aigle 
+  10.2263935   19.6887438    8.8263935   14.5004953   12.6640432   -5.1618550 
+     Aubonne     Avenches     Cossonay    Echallens     Grandson     Lausanne 
+  -6.6736065   -0.3618550  -13.5983071   -9.5853579   -1.0112562    0.2357497 
+   La Vallee       Lavaux       Morges       Moudon        Nyone         Orbe 
+  -8.0630527   -6.7489059   -5.4865556  -12.0230077  -12.6618550  -17.0359568 
+        Oron      Payerne Paysd'enhaut        Rolle        Vevey      Yverdon 
+  -6.2477082    1.4887438   -5.0230077  -10.4865556   -4.9254030   -7.3112562 
+     Conthey    Entremont       Herens     Martigwy      Monthey   St Maurice 
+  -2.3853579   -5.1359568   -0.5853579   -3.9359568    2.3769923   -6.8489059 
+      Sierre         Sion       Boudry La Chauxdfnd     Le Locle    Neuchatel 
+  15.1769923   10.9004953    1.1381450   -4.4242053    4.3004953   12.3851508 
+  Val de Ruz ValdeTravers V. De Geneve  Rive Droite  Rive Gauche 
+   4.0263935   -5.9736065    1.0945070   -9.9019000  -11.8019000
+</pre>
+
+</section>
+<section id="slide-sec-5-4">
+<h3 id="sec-5-4"><span class="section-number-3">5.4</span> Fertilidad y educación</h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">plot(lmFertEdu, which = 1)
+</pre>
+</div>
+
+<p>
+<a href="figs/lmFertEdu.pdf">figs/lmFertEdu.pdf</a>
+</p>
+
+
+
+</section>
+<section id="slide-sec-5-5">
+<h3 id="sec-5-5"><span class="section-number-3">5.5</span> Fertilidad, educación y religión</h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">lmFertEduCat <span class="org-constant">&lt;-</span> lm(Fertility ~ Education + Catholic,
+                   data = swiss)
+summary(lmFertEduCat)
+</pre>
+</div>
+
+<pre class="example">
+Call:
+lm(formula = Fertility ~ Education + Catholic, data = swiss)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-15.042  -6.578  -1.431   6.122  14.322 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 74.23369    2.35197  31.562  &lt; 2e-16 ***
+Education   -0.78833    0.12929  -6.097 2.43e-07 ***
+Catholic     0.11092    0.02981   3.721  0.00056 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 8.331 on 44 degrees of freedom
+Multiple R-squared:  0.5745,	Adjusted R-squared:  0.5552 
+F-statistic:  29.7 on 2 and 44 DF,  p-value: 6.849e-09
+</pre>
+
+
+</section>
+<section id="slide-sec-5-6">
+<h3 id="sec-5-6"><span class="section-number-3">5.6</span> Lo mismo con <code>update</code></h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">lmFertEduCat <span class="org-constant">&lt;-</span> update(lmFertEdu, . ~ . + Catholic,
+                       data = swiss)
+summary(lmFertEduCat)
+</pre>
+</div>
+
+<pre class="example">
+Call:
+lm(formula = Fertility ~ Education + Catholic, data = swiss)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-15.042  -6.578  -1.431   6.122  14.322 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 74.23369    2.35197  31.562  &lt; 2e-16 ***
+Education   -0.78833    0.12929  -6.097 2.43e-07 ***
+Catholic     0.11092    0.02981   3.721  0.00056 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 8.331 on 44 degrees of freedom
+Multiple R-squared:  0.5745,	Adjusted R-squared:  0.5552 
+F-statistic:  29.7 on 2 and 44 DF,  p-value: 6.849e-09
+</pre>
+
+
+</section>
+<section id="slide-sec-5-7">
+<h3 id="sec-5-7"><span class="section-number-3">5.7</span> Fertilidad, educación, religión y agricultura</h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">lmFertEduCatAgr <span class="org-constant">&lt;-</span> lm(Fertility ~ Education + Catholic + Agriculture,
+                      data = swiss)
+summary(lmFertEduCatAgr)
+</pre>
+</div>
+
+<pre class="example">
+Call:
+lm(formula = Fertility ~ Education + Catholic + Agriculture, 
+    data = swiss)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-15.178  -6.548   1.379   5.822  14.840 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 86.22502    4.73472  18.211  &lt; 2e-16 ***
+Education   -1.07215    0.15580  -6.881 1.91e-08 ***
+Catholic     0.14520    0.03015   4.817 1.84e-05 ***
+Agriculture -0.20304    0.07115  -2.854  0.00662 ** 
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 7.728 on 43 degrees of freedom
+Multiple R-squared:  0.6423,	Adjusted R-squared:  0.6173 
+F-statistic: 25.73 on 3 and 43 DF,  p-value: 1.089e-09
+</pre>
+
+
+</section>
+<section id="slide-sec-5-8">
+<h3 id="sec-5-8"><span class="section-number-3">5.8</span> Lo mismo con <code>update</code></h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">lmFertEduCatAgr <span class="org-constant">&lt;-</span> update(lmFertEduCat,
+                          . ~ . + Agriculture,
+                          data = swiss)
+summary(lmFertEduCatAgr)
+</pre>
+</div>
+
+<pre class="example">
+Call:
+lm(formula = Fertility ~ Education + Catholic + Agriculture, 
+    data = swiss)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-15.178  -6.548   1.379   5.822  14.840 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 86.22502    4.73472  18.211  &lt; 2e-16 ***
+Education   -1.07215    0.15580  -6.881 1.91e-08 ***
+Catholic     0.14520    0.03015   4.817 1.84e-05 ***
+Agriculture -0.20304    0.07115  -2.854  0.00662 ** 
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 7.728 on 43 degrees of freedom
+Multiple R-squared:  0.6423,	Adjusted R-squared:  0.6173 
+F-statistic: 25.73 on 3 and 43 DF,  p-value: 1.089e-09
+</pre>
+
+</section>
+<section id="slide-sec-5-9">
+<h3 id="sec-5-9"><span class="section-number-3">5.9</span> Lo mismo con <code>update</code></h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">lmFertEduCatAgr <span class="org-constant">&lt;-</span> update(lmFertEdu,
+                          . ~ . + Catholic + Agriculture,
+                          data = swiss)
+summary(lmFertEduCatAgr)
+</pre>
+</div>
+
+<pre class="example">
+Call:
+lm(formula = Fertility ~ Education + Catholic + Agriculture, 
+    data = swiss)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-15.178  -6.548   1.379   5.822  14.840 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 86.22502    4.73472  18.211  &lt; 2e-16 ***
+Education   -1.07215    0.15580  -6.881 1.91e-08 ***
+Catholic     0.14520    0.03015   4.817 1.84e-05 ***
+Agriculture -0.20304    0.07115  -2.854  0.00662 ** 
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 7.728 on 43 degrees of freedom
+Multiple R-squared:  0.6423,	Adjusted R-squared:  0.6173 
+F-statistic: 25.73 on 3 and 43 DF,  p-value: 1.089e-09
+</pre>
+
+</section>
+<section id="slide-sec-5-10">
+<h3 id="sec-5-10"><span class="section-number-3">5.10</span> Comparamos modelos con <code>anova</code></h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">anova(lmFertEdu, lmFertEduCat, lmFertEduCatAgr)
+</pre>
+</div>
+
+<pre class="example">
+Analysis of Variance Table
+
+Model 1: Fertility ~ Education
+Model 2: Fertility ~ Education + Catholic
+Model 3: Fertility ~ Education + Catholic + Agriculture
+  Res.Df    RSS Df Sum of Sq      F    Pr(&gt;F)    
+1     45 4015.2                                  
+2     44 3054.2  1    961.07 16.093 0.0002365 ***
+3     43 2567.9  1    486.28  8.143 0.0066235 ** 
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+</pre>
+
+</section>
+<section id="slide-sec-5-11">
+<h3 id="sec-5-11"><span class="section-number-3">5.11</span> Fertilidad contra todo</h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">lmFert <span class="org-constant">&lt;-</span> lm(Fertility ~ ., data=swiss)
+
+summary(lmFert)
+</pre>
+</div>
+
+<pre class="example">
+Call:
+lm(formula = Fertility ~ ., data = swiss)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-15.2743  -5.2617   0.5032   4.1198  15.3213 
+
+Coefficients:
+                 Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)      66.91518   10.70604   6.250 1.91e-07 ***
+Agriculture      -0.17211    0.07030  -2.448  0.01873 *  
+Examination      -0.25801    0.25388  -1.016  0.31546    
+Education        -0.87094    0.18303  -4.758 2.43e-05 ***
+Catholic          0.10412    0.03526   2.953  0.00519 ** 
+Infant.Mortality  1.07705    0.38172   2.822  0.00734 ** 
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 7.165 on 41 degrees of freedom
+Multiple R-squared:  0.7067,	Adjusted R-squared:  0.671 
+F-statistic: 19.76 on 5 and 41 DF,  p-value: 5.594e-10
+</pre>
+
+</section>
+<section id="slide-sec-5-12">
+<h3 id="sec-5-12"><span class="section-number-3">5.12</span> Elegir un modelo con <code>anova</code></h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">anova(lmFert)
+</pre>
+</div>
+
+<pre class="example">
+Analysis of Variance Table
+
+Response: Fertility
+                 Df  Sum Sq Mean Sq F value    Pr(&gt;F)    
+Agriculture       1  894.84  894.84 17.4288 0.0001515 ***
+Examination       1 2210.38 2210.38 43.0516 6.885e-08 ***
+Education         1  891.81  891.81 17.3699 0.0001549 ***
+Catholic          1  667.13  667.13 12.9937 0.0008387 ***
+Infant.Mortality  1  408.75  408.75  7.9612 0.0073357 ** 
+Residuals        41 2105.04   51.34                      
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+</pre>
+
+</section>
+<section id="slide-sec-5-13">
+<h3 id="sec-5-13"><span class="section-number-3">5.13</span> Elegir un modelo con <code>step</code></h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">stepFert <span class="org-constant">&lt;-</span> step(lmFert)
+</pre>
+</div>
+
+<pre class="example">
+Start:  AIC=190.69
+Fertility ~ Agriculture + Examination + Education + Catholic + 
+    Infant.Mortality
+
+                   Df Sum of Sq    RSS    AIC
+- Examination       1     53.03 2158.1 189.86
+&lt;none&gt;                          2105.0 190.69
+- Agriculture       1    307.72 2412.8 195.10
+- Infant.Mortality  1    408.75 2513.8 197.03
+- Catholic          1    447.71 2552.8 197.75
+- Education         1   1162.56 3267.6 209.36
+
+Step:  AIC=189.86
+Fertility ~ Agriculture + Education + Catholic + Infant.Mortality
+
+                   Df Sum of Sq    RSS    AIC
+&lt;none&gt;                          2158.1 189.86
+- Agriculture       1    264.18 2422.2 193.29
+- Infant.Mortality  1    409.81 2567.9 196.03
+- Catholic          1    956.57 3114.6 205.10
+- Education         1   2249.97 4408.0 221.43
+</pre>
+
+</section>
+<section id="slide-sec-5-14">
+<h3 id="sec-5-14"><span class="section-number-3">5.14</span> Elegir un modelo</h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">summary(stepFert)
+</pre>
+</div>
+
+<pre class="example">
+Call:
+lm(formula = Fertility ~ Agriculture + Education + Catholic + 
+    Infant.Mortality, data = swiss)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-14.6765  -6.0522   0.7514   3.1664  16.1422 
+
+Coefficients:
+                 Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)      62.10131    9.60489   6.466 8.49e-08 ***
+Agriculture      -0.15462    0.06819  -2.267  0.02857 *  
+Education        -0.98026    0.14814  -6.617 5.14e-08 ***
+Catholic          0.12467    0.02889   4.315 9.50e-05 ***
+Infant.Mortality  1.07844    0.38187   2.824  0.00722 ** 
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 7.168 on 42 degrees of freedom
+Multiple R-squared:  0.6993,	Adjusted R-squared:  0.6707 
+F-statistic: 24.42 on 4 and 42 DF,  p-value: 1.717e-10
+</pre>
+
+</section>
+<section id="slide-sec-5-15">
+<h3 id="sec-5-15"><span class="section-number-3">5.15</span> Elegir un modelo</h3>
+<div class="org-src-container">
+
+<pre  class="src src-R">stepFert$anova
+</pre>
+</div>
+
+<pre class="example">
+           Step Df Deviance Resid. Df Resid. Dev      AIC
+1               NA       NA        41   2105.043 190.6913
+2 - Examination  1 53.02656        42   2158.069 189.8606
+</pre>
+</section>
+</section>
+</div>
+</div>
+
+<script src="http://cdn.jsdelivr.net/reveal.js/2.5.0/lib/js/head.min.js"></script>
+<script src="http://cdn.jsdelivr.net/reveal.js/2.5.0/js/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: false,
+center: true,
+slideNumber: true,
+rollingLinks: false,
+keyboard: true,
+overview: true,
+
+theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+transitionSpeed: 'default',
+multiplex: {
+    secret: '', // null if client
+    id: '', // id, obtained from socket.io server
+    url: '' // Location of socket.io server
+},
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: 'http://cdn.jsdelivr.net/reveal.js/2.5.0/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/2.5.0/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/2.5.0/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/2.5.0/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/2.5.0/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/2.5.0/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+]
+});
+</script>
+</body>
+</html>
