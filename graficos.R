@@ -1,4 +1,22 @@
 
+## =lattice=
+
+##   - Implementación de los gráficos /trellis/, /The Elements of Graphing Data/ de Cleveland)
+
+##   - Estructura matricial de paneles definida a través de una fórmula.
+
+xyplot(wt ~ mpg | am, data = mtcars, groups = cyl)
+
+## =ggplot2=
+
+##   - Implementación de /The Grammar of Graphics/ de Wilkinson.
+
+##   - Combinación de funciones que proporcionan los componentes (capas) del gráfico.
+
+ggplot(mtcars, aes(mpg, wt)) +
+    geom_point(aes(colour=factor(cyl))) +
+    facet_grid(. ~ am)
+
 ## Leemos desde el archivo local
 
   aranjuez <- read.csv('data/aranjuez.csv')

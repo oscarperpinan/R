@@ -1,4 +1,4 @@
-% Created 2014-11-21 vie 23:36
+% Created 2015-04-21 mar 15:17
 \documentclass[xcolor={usenames,svgnames,dvipsnames}]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -33,7 +33,7 @@
 \hypersetup{
   pdfkeywords={},
   pdfsubject={},
-  pdfcreator={Emacs 24.3.1 (Org mode 8.2.7c)}}
+  pdfcreator={Emacs 24.4.1 (Org mode 8.2.7c)}}
 \begin{document}
 
 \maketitle
@@ -64,7 +64,16 @@
 
 \item Estructura matricial de paneles definida a través de una fórmula.
 \end{itemize}
+
+\lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+xyplot(wt ~ mpg | am, data = mtcars, groups = cyl)
+\end{lstlisting}
 \end{block}
+\end{frame}
+
+\begin{frame}[fragile,label=sec-1-1-3]{Gráficos \texttt{grid}}
+ Dentro del conjunto \texttt{grid} existen dos grandes paquetes:
 
 \begin{block}{\texttt{ggplot2}}
 \begin{itemize}
@@ -72,6 +81,13 @@
 
 \item Combinación de funciones que proporcionan los componentes (capas) del gráfico.
 \end{itemize}
+
+\lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+ggplot(mtcars, aes(mpg, wt)) +
+    geom_point(aes(colour=factor(cyl))) +
+    facet_grid(. ~ am)
+\end{lstlisting}
 \end{block}
 \end{frame}
 
@@ -555,5 +571,5 @@ densityplot(~ Radiation, groups=quarter,
 \item \href{http://learnr.wordpress.com/2009/06/28/ggplot2-version-of-figures-in-lattice-multivariate-data-visualization-with-r-part-1/}{ggplot2 desde lattice} (\href{http://learnr.files.wordpress.com/2009/08/latbook.pdf}{PDF})
 \end{itemize}
 \end{frame}
-% Emacs 24.3.1 (Org mode 8.2.7c)
+% Emacs 24.4.1 (Org mode 8.2.7c)
 \end{document}
