@@ -5,6 +5,7 @@
 #+OPTIONS: H:2
 #+PROPERTY: results output
 #+PROPERTY: exports both
+#+LATEX_HEADER: \AtBeginSection[]{\begin{frame}[plain]\tableofcontents[currentsection,sectionstyle=show/shaded]\end{frame}}
 
 * Conjunto de datos
 
@@ -19,33 +20,36 @@ about 1888. 6 variables in percent [0, 100]:
 - *Education*:         % education beyond primary school for draftees. 
 - *Catholic*:          % ‘catholic’ (as opposed to ‘protestant’).      
 - *Infant.Mortality*:  live births who live less than 1year.           
-      
+    
 ** Conjunto de datos: swiss
 
 #+begin_src R
-  data(swiss)
-  
-  summary(swiss)
+data(swiss)
+
+summary(swiss)
 #+end_src
 
 ** 
-#+ATTR_LATEX: :width 0.6\textwidth
+
+
 #+begin_src R :results output graphics :file figs/splomSwiss.pdf
-  library(lattice)
-  splom(swiss, pscale=0, type=c('p', 'smooth'),
-        groups=swiss$Catholic > 50, xlab='')
+library(lattice)
+splom(swiss, pscale=0, type=c('p', 'smooth'),
+      groups=swiss$Catholic > 50, xlab='')
 #+end_src
 
+#+ATTR_LATEX: :height 0.5\textheight
 #+RESULTS:
 [[file:figs/splomSwiss.pdf]]
 
 * Estadística Univariante
 
-** Resumir información
+** Resumen de  información
 #+begin_src R
-  summary(swiss)
+summary(swiss)
 #+end_src
 
+** Media
 #+begin_src R 
 mean(swiss$Fertility)
 #+end_src
@@ -54,177 +58,269 @@ mean(swiss$Fertility)
 colMeans(swiss)
 #+end_src
 
-** Resumir información
+** Desviación Estándar
 
 #+begin_src R 
-  sd(swiss$Fertility)
+sd(swiss$Fertility)
 #+end_src
 
 #+begin_src R 
-  sapply(swiss, sd)
+sapply(swiss, sd)
 #+end_src
 
-** Generar datos aleatorios
+** Otras
+
+#+begin_src R
+median(swiss$Fertility)
+#+end_src
+
+#+begin_src R
+mad(swiss$Fertility)
+#+end_src
+
+#+begin_src R
+IQR(swiss$Fertility)
+#+end_src
+
+* Generar datos aleatorios
+
+** Distribuciones disponibles
+*** 								      :BMCOL:
+    :PROPERTIES:
+    :BEAMER_col: .5
+    :END:
+- beta =beta=
+- binomial =binom=
+- Cauchy =cauchy=
+- chi-squared =chisq=
+- exponential =exp=
+- F =f=
+- gamma =gamma=
+- geometric =geom=
+- hypergeometric =hyper=
+*** 								      :BMCOL:
+    :PROPERTIES:
+    :BEAMER_col: .5
+    :END:
+- log-normal =lnorm=
+- logistic =logis=
+- negative =binomial=
+- normal =norm=
+- Poisson =pois=
+- signed rank =signrank=
+- Student’s t =t=
+- uniform =unif=
+- Weibull =weibull=
+- Wilcoxon =wilcox=
+
+** Densidad, CDF, Cuantiles, y Números aleatorios
+
+- =dxxx= :: función de densidad de probabilidad
+- =pxxx= :: función acumulada de probabilidad
+- =qxxx= :: cuantiles
+- =rxxx= :: generación de números aleatorios
+
+** Distribución Normal
+#+begin_src R 
+rnorm(10, mean = 1, sd = .4)
+#+end_src
+
+#+begin_src R :results output graphics :file figs/rnorm.pdf
+hist(rnorm(1e6, mean = 1, sd = .4))
+#+end_src
+
+#+ATTR_LATEX: :height 0.6\textheight
+#+RESULTS:
+[[file:figs/rnorm.pdf]]
+
+** Distribución Normal
+#+begin_src R :results output graphics :file figs/dnorm.pdf
+x <- seq( -5, 5, by =.01)
+plot(x, dnorm(x), type = 'l')
+#+end_src
+
+#+ATTR_LATEX: :height 0.6\textheight
+#+RESULTS:
+[[file:figs/dnorm.pdf]]
+
+** Distribución Uniforme
 
 #+begin_src R 
-  rnorm(10, mean=1, sd=.4)
+runif(10, min=-3, max=3)
+#+end_src
+
+
+#+begin_src R :results output graphics :file figs/runif.pdf
+hist(runif(1e6, min = -3, max = 3))
+#+end_src
+
+#+ATTR_LATEX: :height 0.6\textheight
+#+RESULTS:
+[[file:figs/runif.pdf]]
+
+** Distribución de Weibull
+#+begin_src R 
+rweibull(n=10, shape = 3, scale = 2)
+#+end_src
+
+
+#+begin_src R :results output graphics :file figs/rweibull.pdf
+hist(rweibull(1e6, shape = 3, scale = 2))
+#+end_src
+
+#+ATTR_LATEX: :height 0.6\textheight
+#+RESULTS:
+[[file:figs/rweibull.pdf]]
+
+** Muestreo aleatorio
+
+#+begin_src R 
+x <- seq(1, 100, length = 10)
+x
+#+end_src
+
+- Sin reemplazo
+#+begin_src R 
+sample(x)
 #+end_src
 
 #+begin_src R 
-  runif(10, min=-3, max=3)
+sample(x, 5)
 #+end_src
 
+- Con reemplazo
 #+begin_src R 
-  rweibull(n=10, shape=3, scale=2)
-#+end_src
-
-** Generar datos aleatorios
-
-#+begin_src R 
-  x <- seq(1, 100, length=10)
-  x
-#+end_src
-#+begin_src R 
-  sample(x)
-#+end_src
-#+begin_src R 
-  sample(x, 5)
-#+end_src
-#+begin_src R 
-  sample(x, 5, replace=TRUE)
-#+end_src
-
-** Tests
-
-#+begin_src R 
-  t.test(swiss$Fertility, mu=70)
-#+end_src
-
-#+begin_src R 
-  wilcox.test(swiss$Fertility, mu=70)
-#+end_src
-
-** Tests
-#+begin_src R 
-  A <- rnorm(1000)
-  B <- rnorm(1000)
-  C <- rnorm(1000, sd=3)
-#+end_src
-
-#+begin_src R 
-t.test(A, B)
-#+end_src
-
-#+begin_src R 
-  wilcox.test(A, B)
+sample(x, 5, replace = TRUE)
 #+end_src
 
 
-** Tests
+* Tests de Hipótesis
+** Para muestra única
+
+- t de Student
 #+begin_src R 
-  t.test(A, C)
+t.test(swiss$Fertility, mu=70)
 #+end_src
 
+- Wilcoxon (no paramétrico)
 #+begin_src R 
-  wilcox.test(A, C)
+wilcox.test(swiss$Fertility, mu=70)
 #+end_src
 
-** Tests
+** Para muestras pareadas
 #+begin_src R 
-  Religion <- ifelse(swiss$Catholic > 50,
-                     'Catholic', 'Protestant')
-#+end_src
-#+begin_src R 
-  t.test(Fertility ~ Religion, data=swiss)
+Religion <- ifelse(swiss$Catholic > 50,
+                   'Catholic', 'Protestant')
 #+end_src
 
+- t de Student
 #+begin_src R 
-  wilcox.test(Fertility ~ Religion, data=swiss)
+t.test(Fertility ~ Religion, data=swiss)
+#+end_src
+
+** Para muestras pareadas
+- Wilcoxon
+#+begin_src R 
+wilcox.test(Fertility ~ Religion, data=swiss)
 #+end_src
 
 * Regresión lineal
 
 ** Fertilidad y educación
 #+begin_src R
-  lmFertEdu <- lm(Fertility ~ Education, data = swiss)
-  summary(lmFertEdu)
-  
+lmFertEdu <- lm(Fertility ~ Education,
+              data = swiss)
+summary(lmFertEdu)
 #+end_src
 
 ** Fertilidad y educación
 #+begin_src R
-  coef(lmFertEdu)
-#+end_src
-
-#+begin_src R
-residuals(lmFertEdu)
+coef(lmFertEdu)
 #+end_src
 
 #+begin_src R
 fitted.values(lmFertEdu)
 #+end_src
 
+** Fertilidad y educación
+#+begin_src R
+residuals(lmFertEdu)
+#+end_src
+
+** Fertilidad y educación
+#+begin_src R :results output graphics :file figs/lmFertEdu.pdf
+plot(lmFertEdu, which = 1)
+#+end_src
+
+#+ATTR_LATEX: :height 0.85\textheight
+#+RESULTS:
+[[file:figs/lmFertEdu.pdf]]
+
+
+
 ** Fertilidad, educación y religión
 #+begin_src R
-  lmFertEduCat <- lm(Fertility ~ Education + Catholic,
-                     data = swiss)
-  summary(lmFertEduCat)
+lmFertEduCat <- lm(Fertility ~ Education + Catholic,
+                   data = swiss)
+summary(lmFertEduCat)
 #+end_src
    
 ** Lo mismo con =update=
 #+begin_src R
-  lmFertEduCat <- update(lmFertEdu, . ~ . + Catholic,
-                         data = swiss)
-  summary(lmFertEduCat)
+lmFertEduCat <- update(lmFertEdu, . ~ . + Catholic,
+                       data = swiss)
+summary(lmFertEduCat)
 #+end_src
 
 
 ** Fertilidad, educación, religión y agricultura
 #+begin_src R
-  lmFertEduCatAgr <- lm(Fertility ~ Education + Catholic + Agriculture,
-                        data = swiss)
-  summary(lmFertEduCatAgr)
+lmFertEduCatAgr <- lm(Fertility ~ Education + Catholic + Agriculture,
+                      data = swiss)
+summary(lmFertEduCatAgr)
 #+end_src
 
 
 ** Lo mismo con =update=
 #+begin_src R
-  lmFertEduCatAgr <- update(lmFertEduCat, . ~ . + Agriculture,
-                            data = swiss)
-  summary(lmFertEduCatAgr)
+lmFertEduCatAgr <- update(lmFertEduCat,
+                          . ~ . + Agriculture,
+                          data = swiss)
+summary(lmFertEduCatAgr)
 #+end_src
 
 ** Lo mismo con =update=
 #+begin_src R
-  lmFertEduCatAgr <- update(lmFertEdu, . ~ . + Catholic + Agriculture,
-                            data = swiss)
-  summary(lmFertEduCatAgr)
+lmFertEduCatAgr <- update(lmFertEdu,
+                          . ~ . + Catholic + Agriculture,
+                          data = swiss)
+summary(lmFertEduCatAgr)
 #+end_src
 
-** anova
+** Comparamos modelos con =anova=
 #+begin_src R
-  anova(lmFertEdu, lmFertEduCat, lmFertEduCatAgr)
+anova(lmFertEdu, lmFertEduCat, lmFertEduCatAgr)
 #+end_src
 
 ** Fertilidad contra todo
 #+begin_src R
-  lmFert <- lm(Fertility ~ ., data=swiss)
-  
-  summary(lmFert)
+lmFert <- lm(Fertility ~ ., data=swiss)
+
+summary(lmFert)
 #+end_src
 
-** Elegir un modelo
+** Elegir un modelo con =anova=
 #+begin_src R
-  anova(lmFert)
+anova(lmFert)
 #+end_src
 
-** Elegir un modelo
+** Elegir un modelo con =step=
 #+begin_src R
-  stepFert <- step(lmFert)
+stepFert <- step(lmFert)
 #+end_src
 ** Elegir un modelo
 #+begin_src R 
-  summary(stepFert)
+summary(stepFert)
 #+end_src
 
 ** Elegir un modelo
