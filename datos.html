@@ -1,79 +1,194 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html>
-<html lang="es">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
 <head>
-<meta charset="utf-8"/>
 <title>Manejo de datos con R</title>
-<meta name="author" content="(Oscar Perpiñán Lamigueiro \\  (link (:type http :path //oscarperpinan.github.io :raw-link http://oscarperpinan.github.io :application nil :search-option nil :begin 30 :end 60 :contents-begin nil :contents-end nil :post-blank 0 :parent #0)))"/>
-<meta name="description" content=""/>
-<meta name="keywords" content=""/>
+<!-- 2015-04-26 dom 16:42 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Oscar Perpiñán Lamigueiro \\ [[http://oscarperpinan.github.io]]" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
 
-<link rel="stylesheet" href="http://cdn.jsdelivr.net/reveal.js/2.5.0/css/reveal.css"/>
-<link rel="stylesheet" href="http://cdn.jsdelivr.net/reveal.js/2.5.0/css/theme/solarized.css" id="theme"/>
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
 
-<!-- If the query includes 'print-pdf', include the PDF print sheet -->
-<script>
-    if( window.location.search.match( /print-pdf/gi ) ) {
-        var link = document.createElement( 'link' );
-        link.rel = 'stylesheet';
-        link.type = 'text/css';
-        link.href = 'http://cdn.jsdelivr.net/reveal.js/2.5.0/css/print/pdf.css';
-        document.getElementsByTagName( 'head' )[0].appendChild( link );
-    }
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
 </script>
 </head>
 <body>
-<div class="reveal">
-<div class="slides">
-<section id="sec-title-slide">
-<h1>Manejo de datos con R</h1>
-<h2>Oscar Perpiñán Lamigueiro \\ <a href="http://oscarperpinan.github.io">http://oscarperpinan.github.io</a></h2>
-<h2><a href="mailto:"></a></h2>
-<h2></h2>
-</section>
+<div id="content">
+<h1 class="title">Manejo de datos con R</h1>
 
-<section>
-<section id="slide-sec-1">
+<div id="outline-container-sec-1" class="outline-2">
 <h2 id="sec-1"><span class="section-number-2">1</span> Lectura de datos</h2>
 <div class="outline-text-2" id="text-1">
-</div></section>
-<section id="slide-sec-1-1">
+</div><div id="outline-container-sec-1-1" class="outline-3">
 <h3 id="sec-1-1"><span class="section-number-3">1.1</span> <code>setwd</code>, <code>getwd</code>, <code>dir</code></h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+En <code>setwd</code> hay que especificar el directorio que contiene el repositorio.
+</p>
 <div class="org-src-container">
 
-<pre  class="src src-R">  getwd()
-  old <span class="org-constant">&lt;-</span> setwd(<span class="org-string">"~/github/r-intro-eoi"</span>)
-  dir()
+<pre class="src src-R">getwd()
+old <span class="org-constant">&lt;-</span> setwd(<span class="org-string">"~/github/intro"</span>)
+dir()
 </pre>
 </div>
 
 <div class="org-src-container">
 
-<pre  class="src src-R">  dir(pattern=<span class="org-string">'.R'</span>)
-</pre>
-</div>
-
-<pre class="example">
-[1] "intro.R"
-</pre>
-
-<div class="org-src-container">
-
-<pre  class="src src-R">  dir(<span class="org-string">'data'</span>)
+<pre class="src src-R">dir(pattern=<span class="org-string">'.R'</span>)
 </pre>
 </div>
 
 <pre class="example">
-[1] "aranjuez.csv"
+[1] "ClasesMetodos.R"       "datos.R"               "estadistica.R"        
+[4] "factorDateCharacter.R" "Funciones.R"           "graficos.R"           
+[7] "intro.R"               "raster.R"              "zoo.R"
 </pre>
 
-</section>
-<section id="slide-sec-1-2">
+<div class="org-src-container">
+
+<pre class="src src-R">dir(<span class="org-string">'data'</span>)
+</pre>
+</div>
+
+<pre class="example">
+[1] "aranjuez.csv"        "aranjuez.RData"      "CO2_GNI_BM.csv"     
+[4] "El.Arenosillo.txt"   "InformeDatos.zip"    "NREL-Hawaii.csv"    
+[7] "radiacion_datas.csv" "SIAR.csv"            "SISmm2008_CMSAF.zip"
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2" class="outline-3">
 <h3 id="sec-1-2"><span class="section-number-3">1.2</span> Lectura de datos con <code>read.table</code></h3>
+<div class="outline-text-3" id="text-1-2">
 <div class="org-src-container">
 
-<pre  class="src src-R">  dats <span class="org-constant">&lt;-</span> read.table(<span class="org-string">'data/aranjuez.csv'</span>, sep=<span class="org-string">','</span>, header=<span class="org-type">TRUE</span>)
-  head(dats)
+<pre class="src src-R">dats <span class="org-constant">&lt;-</span> read.table(<span class="org-string">'data/aranjuez.csv'</span>, sep=<span class="org-string">','</span>, header=<span class="org-type">TRUE</span>)
+head(dats)
 </pre>
 </div>
 
@@ -93,15 +208,48 @@
 5    10.300 0.5152422
 6     9.940 0.4886631
 </pre>
+</div>
+</div>
 
-</section>
-<section id="slide-sec-1-3">
+<div id="outline-container-sec-1-3" class="outline-3">
 <h3 id="sec-1-3"><span class="section-number-3">1.3</span> Lectura de datos con <code>read.csv</code></h3>
+<div class="outline-text-3" id="text-1-3">
 <div class="org-src-container">
 
-<pre  class="src src-R">aranjuez <span class="org-constant">&lt;-</span> read.csv(<span class="org-string">'data/aranjuez.csv'</span>)
+<pre class="src src-R">aranjuez <span class="org-constant">&lt;-</span> read.csv(<span class="org-string">'data/aranjuez.csv'</span>)
 names(aranjuez)[1] <span class="org-constant">&lt;-</span> <span class="org-string">'Date'</span>
-head(aranjuez)
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-R">class(aranjuez)
+</pre>
+</div>
+
+<pre class="example">
+[1] "data.frame"
+</pre>
+
+<div class="org-src-container">
+
+<pre class="src src-R">names(aranjuez)
+</pre>
+</div>
+
+<pre class="example">
+[1] "Date"      "TempAvg"   "TempMax"   "TempMin"   "HumidAvg"  "HumidMax" 
+[7] "WindAvg"   "WindMax"   "Rain"      "Radiation" "ET"
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> Inspeccionamos el resultado</h3>
+<div class="outline-text-3" id="text-1-4">
+<div class="org-src-container">
+
+<pre class="src src-R">head(aranjuez)
 </pre>
 </div>
 
@@ -124,41 +272,176 @@ head(aranjuez)
 
 <div class="org-src-container">
 
-<pre  class="src src-R">  class(aranjuez)
+<pre class="src src-R">tail(aranjuez)
 </pre>
 </div>
 
 <pre class="example">
-[1] "data.frame"
+           Date TempAvg TempMax TempMin HumidAvg HumidMax WindAvg WindMax  Rain
+2893 2011-12-26   3.366   13.88  -3.397     81.5      100   0.556   3.263 0.000
+2894 2011-12-27   2.222   13.33  -4.005     87.0      100   0.369   1.842 0.000
+2895 2011-12-28   1.810   12.33  -4.682     85.0      100   0.540   3.401 0.203
+2896 2011-12-29   2.512   11.92  -4.682     77.2      100   0.546   4.420 0.203
+2897 2011-12-30   1.006   11.05  -5.822     79.7      100   0.446   2.832 0.000
+2898 2011-12-31   2.263   12.67  -3.938     80.3      100   0.270   1.950 0.000
+     Radiation        ET
+2893      9.44 0.5358751
+2894      9.52 0.4386931
+2895      9.59 0.5183545
+2896      9.72 0.5428373
+2897      9.74 0.4614953
+2898      8.11 0.4246270
 </pre>
+</div>
+</div>
 
+<div id="outline-container-sec-1-5" class="outline-3">
+<h3 id="sec-1-5"><span class="section-number-3">1.5</span> Inspeccionamos el resultado</h3>
+<div class="outline-text-3" id="text-1-5">
 <div class="org-src-container">
 
-<pre  class="src src-R">  names(aranjuez)
+<pre class="src src-R">summary(aranjuez)
 </pre>
 </div>
 
 <pre class="example">
-[1] "Date"      "TempAvg"   "TempMax"   "TempMin"   "HumidAvg"  "HumidMax" 
-[7] "WindAvg"   "WindMax"   "Rain"      "Radiation" "ET"
+         Date         TempAvg          TempMax          TempMin       
+ 2004-01-01:   1   Min.   :-5.309   Min.   :-2.362   Min.   :-12.980  
+ 2004-01-02:   1   1st Qu.: 7.692   1st Qu.:14.530   1st Qu.:  1.515  
+ 2004-01-03:   1   Median :13.810   Median :21.670   Median :  7.170  
+ 2004-01-04:   1   Mean   :14.405   Mean   :22.531   Mean   :  6.888  
+ 2004-01-05:   1   3rd Qu.:21.615   3rd Qu.:30.875   3rd Qu.: 12.590  
+ 2004-01-06:   1   Max.   :30.680   Max.   :41.910   Max.   : 22.710  
+ (Other)   :2892                                     NA's   :4        
+    HumidAvg         HumidMax         WindAvg         WindMax      
+ Min.   : 19.89   Min.   : 35.88   Min.   :0.251   Min.   : 0.000  
+ 1st Qu.: 47.04   1st Qu.: 81.60   1st Qu.:0.667   1st Qu.: 3.783  
+ Median : 62.58   Median : 90.90   Median :0.920   Median : 5.027  
+ Mean   : 62.16   Mean   : 87.22   Mean   :1.174   Mean   : 5.208  
+ 3rd Qu.: 77.38   3rd Qu.: 94.90   3rd Qu.:1.431   3rd Qu.: 6.537  
+ Max.   :100.00   Max.   :100.00   Max.   :8.260   Max.   :10.000  
+                  NA's   :13       NA's   :8       NA's   :128     
+      Rain          Radiation            ET       
+ Min.   : 0.000   Min.   : 0.277   Min.   :0.000  
+ 1st Qu.: 0.000   1st Qu.: 9.370   1st Qu.:1.168  
+ Median : 0.000   Median :16.660   Median :2.758  
+ Mean   : 1.094   Mean   :16.742   Mean   :3.091  
+ 3rd Qu.: 0.200   3rd Qu.:24.650   3rd Qu.:4.926  
+ Max.   :49.730   Max.   :32.740   Max.   :8.564  
+ NA's   :4        NA's   :13       NA's   :18
 </pre>
+</div>
+</div>
 
-</section>
-</section>
-<section>
-<section id="slide-sec-2">
-<h2 id="sec-2"><span class="section-number-2">2</span> Indexado</h2>
-<div class="outline-text-2" id="text-2">
-</div></section>
-<section id="slide-sec-2-1">
-<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Indexado con <code>[]</code></h3>
-<ul>
-<li>Filas</li>
-
+<div id="outline-container-sec-1-6" class="outline-3">
+<h3 id="sec-1-6"><span class="section-number-3">1.6</span> Valores ausentes</h3>
+<div class="outline-text-3" id="text-1-6">
+<ul class="org-ul">
+<li><code>NA</code> está definido como <code>logical</code>
+</li>
 </ul>
 <div class="org-src-container">
 
-<pre  class="src src-R">aranjuez[1:5,]
+<pre class="src src-R">class(<span class="org-type">NA</span>)
+</pre>
+</div>
+
+<pre class="example">
+[1] "logical"
+</pre>
+
+<ul class="org-ul">
+<li>Operar con <code>NA</code> siempre produce un <code>NA</code>
+</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-R">1 + <span class="org-type">NA</span>
+</pre>
+</div>
+
+<pre class="example">
+[1] NA
+</pre>
+
+<ul class="org-ul">
+<li>Esto es un &laquo;problema&raquo; al usar funciones
+</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-R">mean(aranjuez$Radiation)
+</pre>
+</div>
+
+<pre class="example">
+[1] NA
+</pre>
+
+<div class="org-src-container">
+
+<pre class="src src-R">mean(aranjuez$Radiation, na.rm =  <span class="org-type">TRUE</span>)
+</pre>
+</div>
+
+<pre class="example">
+[1] 16.74176
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-1-7" class="outline-3">
+<h3 id="sec-1-7"><span class="section-number-3">1.7</span> Valores ausentes</h3>
+<div class="outline-text-3" id="text-1-7">
+<p>
+Las funciones <code>is.na</code> y <code>anyNA</code> los identifican 
+</p>
+<div class="org-src-container">
+
+<pre class="src src-R">anyNA(aranjuez)
+</pre>
+</div>
+
+<pre class="example">
+[1] TRUE
+</pre>
+
+<div class="org-src-container">
+
+<pre class="src src-R">which(is.na(aranjuez$Radiation))
+</pre>
+</div>
+
+<pre class="example">
+[1] 1861 1867 1873 1896 1897 1908 1923 2153 2413 2587 2600 2603 2684
+</pre>
+
+<div class="org-src-container">
+
+<pre class="src src-R">sum(is.na(aranjuez$Radiation))
+</pre>
+</div>
+
+<pre class="example">
+[1] 13
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Indexado</h2>
+<div class="outline-text-2" id="text-2">
+</div><div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Indexado con <code>[]</code></h3>
+<div class="outline-text-3" id="text-2-1">
+<ul class="org-ul">
+<li>Filas
+</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-R">aranjuez[1:5,]
 </pre>
 </div>
 
@@ -177,13 +460,13 @@ head(aranjuez)
 5    10.300 0.5152422
 </pre>
 
-<ul>
-<li>Filas y Columnas</li>
-
+<ul class="org-ul">
+<li>Filas y Columnas
+</li>
 </ul>
 <div class="org-src-container">
 
-<pre  class="src src-R">aranjuez[10:14, 1:5]
+<pre class="src src-R">aranjuez[10:14, 1:5]
 </pre>
 </div>
 
@@ -195,17 +478,19 @@ head(aranjuez)
 13 2004-01-13    8.35   11.38   4.137     91.3
 14 2004-01-14    8.74   13.32   2.857     86.9
 </pre>
+</div>
+</div>
 
-</section>
-<section id="slide-sec-2-2">
+<div id="outline-container-sec-2-2" class="outline-3">
 <h3 id="sec-2-2"><span class="section-number-3">2.2</span> Indexado con <code>[]</code></h3>
-<ul>
-<li>Condición basada en los datos</li>
-
+<div class="outline-text-3" id="text-2-2">
+<ul class="org-ul">
+<li>Condición basada en los datos
+</li>
 </ul>
 <div class="org-src-container">
 
-<pre  class="src src-R">idx <span class="org-constant">&lt;-</span> with(aranjuez, Radiation &gt; 20 &amp; TempAvg &lt; 10) 
+<pre class="src src-R">idx <span class="org-constant">&lt;-</span> with(aranjuez, Radiation &gt; 20 &amp; TempAvg &lt; 10) 
 
 head(aranjuez[idx, ])
 </pre>
@@ -227,13 +512,15 @@ head(aranjuez[idx, ])
 101     21.07 2.943239
 102     20.99 2.905479
 </pre>
+</div>
+</div>
 
-</section>
-<section id="slide-sec-2-3">
+<div id="outline-container-sec-2-3" class="outline-3">
 <h3 id="sec-2-3"><span class="section-number-3">2.3</span> <code>subset</code></h3>
+<div class="outline-text-3" id="text-2-3">
 <div class="org-src-container">
 
-<pre  class="src src-R">subset(aranjuez,
+<pre class="src src-R">subset(aranjuez,
        subset = (Radiation &gt; 20 &amp; TempAvg &lt; 10),
        select = c(Radiation, TempAvg,
            TempMax, TempMin))
@@ -266,32 +553,32 @@ head(aranjuez[idx, ])
 2265     23.64   9.680   16.35   2.938
 2295     22.46   8.730   13.84   1.740
 </pre>
+</div>
+</div>
+</div>
 
 
-</section>
-</section>
-<section>
-<section id="slide-sec-3">
+<div id="outline-container-sec-3" class="outline-2">
 <h2 id="sec-3"><span class="section-number-2">3</span> Cambio de formato</h2>
 <div class="outline-text-2" id="text-3">
-</div></section>
-<section id="slide-sec-3-1">
+</div><div id="outline-container-sec-3-1" class="outline-3">
 <h3 id="sec-3-1"><span class="section-number-3">3.1</span> Forma simple con <code>stack</code></h3>
+<div class="outline-text-3" id="text-3-1">
 <div class="org-src-container">
 
-<pre  class="src src-R">aranjuezWide <span class="org-constant">&lt;-</span> aranjuez[, c(<span class="org-string">'Radiation'</span>,
+<pre class="src src-R">aranjuezWide <span class="org-constant">&lt;-</span> aranjuez[, c(<span class="org-string">'Radiation'</span>,
                              <span class="org-string">'TempAvg'</span>, <span class="org-string">'TempMax'</span>,
                              <span class="org-string">'WindAvg'</span>, <span class="org-string">'WindMax'</span>)]
 </pre>
 </div>
 
-<ul>
-<li>Pasamos de formato <code>wide</code> a <code>long</code></li>
-
+<ul class="org-ul">
+<li>Pasamos de formato <code>wide</code> a <code>long</code>
+</li>
 </ul>
 <div class="org-src-container">
 
-<pre  class="src src-R">aranjuezLong <span class="org-constant">&lt;-</span> stack(aranjuezWide)
+<pre class="src src-R">aranjuezLong <span class="org-constant">&lt;-</span> stack(aranjuezWide)
 
 head(aranjuezLong)
 </pre>
@@ -309,7 +596,7 @@ head(aranjuezLong)
 
 <div class="org-src-container">
 
-<pre  class="src src-R">summary(aranjuezLong)
+<pre class="src src-R">summary(aranjuezLong)
 </pre>
 </div>
 
@@ -323,27 +610,31 @@ Mean   :12.074   WindAvg  :2898
 Max.   :41.910                   
 NA's   :149
 </pre>
+</div>
+</div>
 
-</section>
-<section id="slide-sec-3-2">
+<div id="outline-container-sec-3-2" class="outline-3">
 <h3 id="sec-3-2"><span class="section-number-3">3.2</span> Más flexible con <code>reshape2</code></h3>
-<ul>
-<li><code>reshape2</code> es un paquete que puede facilitar la transformación de <code>data.frame</code> y matrices.</li>
-
+<div class="outline-text-3" id="text-3-2">
+<ul class="org-ul">
+<li><code>reshape2</code> es un paquete que puede facilitar la transformación de <code>data.frame</code> y matrices.
+</li>
 </ul>
 
 <div class="org-src-container">
 
-<pre  class="src src-R"><span class="org-constant">library</span>(reshape2)
+<pre class="src src-R"><span class="org-constant">library</span>(reshape2)
 </pre>
 </div>
+</div>
+</div>
 
-</section>
-<section id="slide-sec-3-3">
+<div id="outline-container-sec-3-3" class="outline-3">
 <h3 id="sec-3-3"><span class="section-number-3">3.3</span> <code>melt</code> para cambiar de <i>wide</i> a <i>long</i></h3>
+<div class="outline-text-3" id="text-3-3">
 <div class="org-src-container">
 
-<pre  class="src src-R">aranjuezLong2 <span class="org-constant">&lt;-</span> melt(aranjuez, id.vars = <span class="org-string">'Date'</span>,
+<pre class="src src-R">aranjuezLong2 <span class="org-constant">&lt;-</span> melt(aranjuez, id.vars = <span class="org-string">'Date'</span>,
                       variable.name = <span class="org-string">'Variable'</span>,
                       value.name = <span class="org-string">'Value'</span>)
 
@@ -360,13 +651,15 @@ head(aranjuezLong2)
 5 2004-01-05  TempAvg 3.081
 6 2004-01-06  TempAvg 2.304
 </pre>
+</div>
+</div>
 
-</section>
-<section id="slide-sec-3-4">
+<div id="outline-container-sec-3-4" class="outline-3">
 <h3 id="sec-3-4"><span class="section-number-3">3.4</span> <code>dcast</code> para cambiar de <i>long</i> a <i>wide</i></h3>
+<div class="outline-text-3" id="text-3-4">
 <div class="org-src-container">
 
-<pre  class="src src-R">aranjuezWide2 <span class="org-constant">&lt;-</span> dcast(aranjuezLong2,
+<pre class="src src-R">aranjuezWide2 <span class="org-constant">&lt;-</span> dcast(aranjuezLong2,
                        Variable ~ Date)
 head(aranjuezWide2[, 1:10])
 </pre>
@@ -389,20 +682,20 @@ head(aranjuezWide2[, 1:10])
 5     96.600     97.400     94.500
 6      0.449      1.188      2.737
 </pre>
+</div>
+</div>
+</div>
 
 
-</section>
-</section>
-<section>
-<section id="slide-sec-4">
+<div id="outline-container-sec-4" class="outline-2">
 <h2 id="sec-4"><span class="section-number-2">4</span> Datos agregados</h2>
 <div class="outline-text-2" id="text-4">
-</div></section>
-<section id="slide-sec-4-1">
+</div><div id="outline-container-sec-4-1" class="outline-3">
 <h3 id="sec-4-1"><span class="section-number-3">4.1</span> <code>aggregate</code></h3>
+<div class="outline-text-3" id="text-4-1">
 <div class="org-src-container">
 
-<pre  class="src src-R">aranjuez$rainy <span class="org-constant">&lt;-</span> aranjuez$Rain &gt; 0
+<pre class="src src-R">aranjuez$rainy <span class="org-constant">&lt;-</span> aranjuez$Rain &gt; 0
 
 aggregate(Radiation ~ rainy, data = aranjuez,
           FUN = mean)
@@ -414,13 +707,15 @@ aggregate(Radiation ~ rainy, data = aranjuez,
 1 FALSE  19.63325
 2  TRUE  10.26028
 </pre>
+</div>
+</div>
 
-</section>
-<section id="slide-sec-4-2">
+<div id="outline-container-sec-4-2" class="outline-3">
 <h3 id="sec-4-2"><span class="section-number-3">4.2</span> Variable categórica con <code>cut</code></h3>
+<div class="outline-text-3" id="text-4-2">
 <div class="org-src-container">
 
-<pre  class="src src-R">aranjuez$tempClass <span class="org-constant">&lt;-</span> cut(aranjuez$TempAvg, 5)
+<pre class="src src-R">aranjuez$tempClass <span class="org-constant">&lt;-</span> cut(aranjuez$TempAvg, 5)
 
 aggregate(Radiation ~ tempClass, data = aranjuez,
           FUN = mean)
@@ -438,7 +733,7 @@ aggregate(Radiation ~ tempClass, data = aranjuez,
 
 <div class="org-src-container">
 
-<pre  class="src src-R">aggregate(Radiation ~ tempClass + rainy,
+<pre class="src src-R">aggregate(Radiation ~ tempClass + rainy,
           data = aranjuez, FUN = mean)
 </pre>
 </div>
@@ -456,13 +751,15 @@ aggregate(Radiation ~ tempClass, data = aranjuez,
 9   (16.3,23.5]  TRUE 15.802522
 10  (23.5,30.7]  TRUE 22.545862
 </pre>
+</div>
+</div>
 
-</section>
-<section id="slide-sec-4-3">
+<div id="outline-container-sec-4-3" class="outline-3">
 <h3 id="sec-4-3"><span class="section-number-3">4.3</span> Agregamos varias variables</h3>
+<div class="outline-text-3" id="text-4-3">
 <div class="org-src-container">
 
-<pre  class="src src-R">aggregate(cbind(Radiation, TempAvg) ~ tempClass,
+<pre class="src src-R">aggregate(cbind(Radiation, TempAvg) ~ tempClass,
           data = aranjuez, FUN = mean)
 </pre>
 </div>
@@ -478,7 +775,7 @@ aggregate(Radiation ~ tempClass, data = aranjuez,
 
 <div class="org-src-container">
 
-<pre  class="src src-R">aggregate(cbind(Radiation, TempAvg) ~ tempClass + rainy,
+<pre class="src src-R">aggregate(cbind(Radiation, TempAvg) ~ tempClass + rainy,
           data = aranjuez, FUN = mean)
 </pre>
 </div>
@@ -496,14 +793,16 @@ aggregate(Radiation ~ tempClass, data = aranjuez,
 9   (16.3,23.5]  TRUE 15.802522 18.8267565
 10  (23.5,30.7]  TRUE 22.545862 25.3210345
 </pre>
+</div>
+</div>
 
 
-</section>
-<section id="slide-sec-4-4">
+<div id="outline-container-sec-4-4" class="outline-3">
 <h3 id="sec-4-4"><span class="section-number-3">4.4</span> Agregamos a partir de un formato <code>long</code></h3>
+<div class="outline-text-3" id="text-4-4">
 <div class="org-src-container">
 
-<pre  class="src src-R">head(aranjuezLong2)
+<pre class="src src-R">head(aranjuezLong2)
 </pre>
 </div>
 
@@ -519,7 +818,7 @@ aggregate(Radiation ~ tempClass, data = aranjuez,
 
 <div class="org-src-container">
 
-<pre  class="src src-R">aggregate(Value ~ Variable, data = aranjuezLong2,
+<pre class="src src-R">aggregate(Value ~ Variable, data = aranjuezLong2,
           FUN = mean)
 </pre>
 </div>
@@ -537,51 +836,53 @@ aggregate(Radiation ~ tempClass, data = aranjuez,
 9  Radiation 16.741759
 10        ET  3.091191
 </pre>
+</div>
+</div>
+</div>
 
-</section>
-</section>
-<section>
-<section id="slide-sec-5">
+<div id="outline-container-sec-5" class="outline-2">
 <h2 id="sec-5"><span class="section-number-2">5</span> Unión de <code>data.frame</code></h2>
 <div class="outline-text-2" id="text-5">
-</div></section>
-<section id="slide-sec-5-1">
+</div><div id="outline-container-sec-5-1" class="outline-3">
 <h3 id="sec-5-1"><span class="section-number-3">5.1</span> Con <code>merge</code></h3>
-<ul>
-<li>Primero construimos un <code>data.frame</code> de ejemplo</li>
-
+<div class="outline-text-3" id="text-5-1">
+<ul class="org-ul">
+<li>Primero construimos un <code>data.frame</code> de ejemplo
+</li>
 </ul>
 <div class="org-src-container">
 
-<pre  class="src src-R">  USStates <span class="org-constant">&lt;-</span> as.data.frame(state.x77)
-  USStates$Name <span class="org-constant">&lt;-</span> rownames(USStates)
-  rownames(USStates) <span class="org-constant">&lt;-</span> <span class="org-type">NULL</span>
+<pre class="src src-R">USStates <span class="org-constant">&lt;-</span> as.data.frame(state.x77)
+USStates$Name <span class="org-constant">&lt;-</span> rownames(USStates)
+rownames(USStates) <span class="org-constant">&lt;-</span> <span class="org-type">NULL</span>
 </pre>
 </div>
 
-<ul>
-<li>Lo partimos en estados &laquo;fríos&raquo; y estados &laquo;grandes&raquo;</li>
-
+<ul class="org-ul">
+<li>Lo partimos en estados &laquo;fríos&raquo; y estados &laquo;grandes&raquo;
+</li>
 </ul>
 <div class="org-src-container">
 
-<pre  class="src src-R">  coldStates <span class="org-constant">&lt;-</span> USStates[USStates$Frost&gt;150,
-                         c(<span class="org-string">'Name'</span>, <span class="org-string">'Frost'</span>)]
-  largeStates <span class="org-constant">&lt;-</span> USStates[USStates$Area&gt;1e5,
-                          c(<span class="org-string">'Name'</span>, <span class="org-string">'Area'</span>)]
+<pre class="src src-R">coldStates <span class="org-constant">&lt;-</span> USStates[USStates$Frost&gt;150,
+                       c(<span class="org-string">'Name'</span>, <span class="org-string">'Frost'</span>)]
+largeStates <span class="org-constant">&lt;-</span> USStates[USStates$Area&gt;1e5,
+                        c(<span class="org-string">'Name'</span>, <span class="org-string">'Area'</span>)]
 </pre>
 </div>
+</div>
+</div>
 
-</section>
-<section id="slide-sec-5-2">
+<div id="outline-container-sec-5-2" class="outline-3">
 <h3 id="sec-5-2"><span class="section-number-3">5.2</span> Con <code>merge</code></h3>
-<ul>
-<li>Unimos los dos conjuntos (estados &laquo;fríos&raquo; y &laquo;grandes&raquo;)</li>
-
+<div class="outline-text-3" id="text-5-2">
+<ul class="org-ul">
+<li>Unimos los dos conjuntos (estados &laquo;fríos&raquo; y &laquo;grandes&raquo;)
+</li>
 </ul>
 <div class="org-src-container">
 
-<pre  class="src src-R">  merge(coldStates, largeStates)
+<pre class="src src-R">merge(coldStates, largeStates)
 </pre>
 </div>
 
@@ -592,20 +893,22 @@ aggregate(Radiation ~ tempClass, data = aranjuez,
 3  Montana   155 145587
 4   Nevada   188 109889
 </pre>
+</div>
+</div>
 
-</section>
-<section id="slide-sec-5-3">
+<div id="outline-container-sec-5-3" class="outline-3">
 <h3 id="sec-5-3"><span class="section-number-3">5.3</span> <code>merge</code> usa <code>match</code></h3>
-<ul>
-<li>Estados grandes que también son fríos</li>
-
+<div class="outline-text-3" id="text-5-3">
+<ul class="org-ul">
+<li>Estados grandes que también son fríos
+</li>
 </ul>
 <div class="org-src-container">
 
-<pre  class="src src-R">  idxLarge <span class="org-constant">&lt;-</span> match(largeStates$Name,
-                    coldStates$Name,
-                    nomatch=0)
-  idxLarge
+<pre class="src src-R">idxLarge <span class="org-constant">&lt;-</span> match(largeStates$Name,
+                  coldStates$Name,
+                  nomatch=0)
+idxLarge
 </pre>
 </div>
 
@@ -615,7 +918,7 @@ aggregate(Radiation ~ tempClass, data = aranjuez,
 
 <div class="org-src-container">
 
-<pre  class="src src-R">  coldStates[idxLarge,]
+<pre class="src src-R">coldStates[idxLarge,]
 </pre>
 </div>
 
@@ -626,20 +929,22 @@ aggregate(Radiation ~ tempClass, data = aranjuez,
 26  Montana   155
 28   Nevada   188
 </pre>
+</div>
+</div>
 
-</section>
-<section id="slide-sec-5-4">
+<div id="outline-container-sec-5-4" class="outline-3">
 <h3 id="sec-5-4"><span class="section-number-3">5.4</span> <code>merge</code> usa <code>match</code></h3>
-<ul>
-<li>Estados frios que también son grandes</li>
-
+<div class="outline-text-3" id="text-5-4">
+<ul class="org-ul">
+<li>Estados frios que también son grandes
+</li>
 </ul>
 <div class="org-src-container">
 
-<pre  class="src src-R">  idxCold <span class="org-constant">&lt;-</span> match(coldStates$Name,
-                   largeStates$Name,
-                   nomatch=0)
-  idxCold
+<pre class="src src-R">idxCold <span class="org-constant">&lt;-</span> match(coldStates$Name,
+                 largeStates$Name,
+                 nomatch=0)
+idxCold
 </pre>
 </div>
 
@@ -649,7 +954,7 @@ aggregate(Radiation ~ tempClass, data = aranjuez,
 
 <div class="org-src-container">
 
-<pre  class="src src-R">  largeStates[idxCold,]
+<pre class="src src-R">largeStates[idxCold,]
 </pre>
 </div>
 
@@ -660,47 +965,15 @@ aggregate(Radiation ~ tempClass, data = aranjuez,
 26  Montana 145587
 28   Nevada 109889
 </pre>
-</section>
-</section>
 </div>
 </div>
-
-<script src="http://cdn.jsdelivr.net/reveal.js/2.5.0/lib/js/head.min.js"></script>
-<script src="http://cdn.jsdelivr.net/reveal.js/2.5.0/js/reveal.js"></script>
-
-<script>
-// Full list of configuration options available here:
-// https://github.com/hakimel/reveal.js#configuration
-Reveal.initialize({
-
-controls: true,
-progress: true,
-history: false,
-center: true,
-slideNumber: true,
-rollingLinks: false,
-keyboard: true,
-overview: true,
-
-theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
-transitionSpeed: 'default',
-multiplex: {
-    secret: '', // null if client
-    id: '', // id, obtained from socket.io server
-    url: '' // Location of socket.io server
-},
-
-// Optional libraries used to extend on reveal.js
-dependencies: [
- { src: 'http://cdn.jsdelivr.net/reveal.js/2.5.0/lib/js/classList.js', condition: function() { return !document.body.classList; } },
- { src: 'http://cdn.jsdelivr.net/reveal.js/2.5.0/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
- { src: 'http://cdn.jsdelivr.net/reveal.js/2.5.0/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
- { src: 'http://cdn.jsdelivr.net/reveal.js/2.5.0/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
- { src: 'http://cdn.jsdelivr.net/reveal.js/2.5.0/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
- { src: 'http://cdn.jsdelivr.net/reveal.js/2.5.0/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
-]
-});
-</script>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Autor: Oscar Perpiñán Lamigueiro \\ <a href="http://oscarperpinan.github.io">http://oscarperpinan.github.io</a></p>
+<p class="date">Created: 2015-04-26 dom 16:42</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.4.1 (<a href="http://orgmode.org">Org</a> mode 8.2.7c)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
 </body>
 </html>
