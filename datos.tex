@@ -1,4 +1,4 @@
-% Created 2015-04-19 dom 19:35
+% Created 2015-04-26 dom 16:29
 \documentclass[xcolor={usenames,svgnames,dvipsnames}]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -18,6 +18,12 @@
 \tolerance=1000
 \usepackage{color}
 \usepackage{listings}
+\usecolortheme{rose}
+\setbeamercolor{alerted text}{fg=Blue}
+\setbeamerfont{alerted text}{series=\bfseries}
+\setbeamercolor{block title}{bg=structure.fg!20!bg!50!bg}
+\setbeamercolor{block body}{use=block title,bg=block title.bg}
+\setbeamertemplate{navigation symbols}{}
 \AtBeginSubsection[]{\begin{frame}[plain]\tableofcontents[currentsubsection,sectionstyle=show/shaded,subsectionstyle=show/shaded/hide]\end{frame}}
 \lstset{keywordstyle=\color{blue}, commentstyle=\color{gray!90}, basicstyle=\ttfamily\small, columns=fullflexible, breaklines=true,linewidth=\textwidth, backgroundcolor=\color{gray!23}, basewidth={0.5em,0.4em}, literate={á}{{\'a}}1 {ñ}{{\~n}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {º}{{\textordmasculine}}1}
 \usepackage{mathpazo}
@@ -26,7 +32,6 @@
 \DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\tiny, formatcom = {\color{black!70}}}
 \AtBeginSection[]{\begin{frame}[plain]\tableofcontents[currentsection,sectionstyle=show/shaded]\end{frame}}
 \usetheme{Goettingen}
-\usecolortheme{rose}
 \usefonttheme{serif}
 \author{Oscar Perpiñán Lamigueiro \\ \url{http://oscarperpinan.github.io}}
 \date{}
@@ -42,37 +47,42 @@
 \section{Lectura de datos}
 \label{sec-1}
 \begin{frame}[fragile,label=sec-1-1]{\texttt{setwd}, \texttt{getwd}, \texttt{dir}}
- \lstset{language=R,label= ,caption= ,numbers=none}
+ En \texttt{setwd} hay que especificar el directorio que contiene el repositorio.
+\lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-  getwd()
-  old <- setwd("~/github/r-intro-eoi")
-  dir()
+getwd()
+old <- setwd("~/github/intro")
+dir()
 \end{lstlisting}
 
 \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-  dir(pattern='.R')
+dir(pattern='.R')
 \end{lstlisting}
 
 \begin{verbatim}
-[1] "intro.R"
+[1] "ClasesMetodos.R"       "datos.R"               "estadistica.R"        
+[4] "factorDateCharacter.R" "Funciones.R"           "graficos.R"           
+[7] "intro.R"               "raster.R"              "zoo.R"
 \end{verbatim}
 
 \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-  dir('data')
+dir('data')
 \end{lstlisting}
 
 \begin{verbatim}
-[1] "aranjuez.csv"
+[1] "aranjuez.csv"        "aranjuez.RData"      "CO2_GNI_BM.csv"     
+[4] "El.Arenosillo.txt"   "InformeDatos.zip"    "NREL-Hawaii.csv"    
+[7] "radiacion_datas.csv" "SIAR.csv"            "SISmm2008_CMSAF.zip"
 \end{verbatim}
 \end{frame}
 
 \begin{frame}[fragile,label=sec-1-2]{Lectura de datos con \texttt{read.table}}
  \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-  dats <- read.table('data/aranjuez.csv', sep=',', header=TRUE)
-  head(dats)
+dats <- read.table('data/aranjuez.csv', sep=',', header=TRUE)
+head(dats)
 \end{lstlisting}
 
 \begin{verbatim}
@@ -98,6 +108,31 @@
 \begin{lstlisting}
 aranjuez <- read.csv('data/aranjuez.csv')
 names(aranjuez)[1] <- 'Date'
+\end{lstlisting}
+
+\lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+class(aranjuez)
+\end{lstlisting}
+
+\begin{verbatim}
+[1] "data.frame"
+\end{verbatim}
+
+\lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+names(aranjuez)
+\end{lstlisting}
+
+\begin{verbatim}
+[1] "Date"      "TempAvg"   "TempMax"   "TempMin"   "HumidAvg"  "HumidMax" 
+[7] "WindAvg"   "WindMax"   "Rain"      "Radiation" "ET"
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile,label=sec-1-4]{Inspeccionamos el resultado}
+ \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
 head(aranjuez)
 \end{lstlisting}
 
@@ -120,21 +155,135 @@ head(aranjuez)
 
 \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-  class(aranjuez)
+tail(aranjuez)
 \end{lstlisting}
 
 \begin{verbatim}
-[1] "data.frame"
+           Date TempAvg TempMax TempMin HumidAvg HumidMax WindAvg WindMax  Rain
+2893 2011-12-26   3.366   13.88  -3.397     81.5      100   0.556   3.263 0.000
+2894 2011-12-27   2.222   13.33  -4.005     87.0      100   0.369   1.842 0.000
+2895 2011-12-28   1.810   12.33  -4.682     85.0      100   0.540   3.401 0.203
+2896 2011-12-29   2.512   11.92  -4.682     77.2      100   0.546   4.420 0.203
+2897 2011-12-30   1.006   11.05  -5.822     79.7      100   0.446   2.832 0.000
+2898 2011-12-31   2.263   12.67  -3.938     80.3      100   0.270   1.950 0.000
+     Radiation        ET
+2893      9.44 0.5358751
+2894      9.52 0.4386931
+2895      9.59 0.5183545
+2896      9.72 0.5428373
+2897      9.74 0.4614953
+2898      8.11 0.4246270
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile,label=sec-1-5]{Inspeccionamos el resultado}
+ \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+summary(aranjuez)
+\end{lstlisting}
+
+\begin{verbatim}
+         Date         TempAvg          TempMax          TempMin       
+ 2004-01-01:   1   Min.   :-5.309   Min.   :-2.362   Min.   :-12.980  
+ 2004-01-02:   1   1st Qu.: 7.692   1st Qu.:14.530   1st Qu.:  1.515  
+ 2004-01-03:   1   Median :13.810   Median :21.670   Median :  7.170  
+ 2004-01-04:   1   Mean   :14.405   Mean   :22.531   Mean   :  6.888  
+ 2004-01-05:   1   3rd Qu.:21.615   3rd Qu.:30.875   3rd Qu.: 12.590  
+ 2004-01-06:   1   Max.   :30.680   Max.   :41.910   Max.   : 22.710  
+ (Other)   :2892                                     NA's   :4        
+    HumidAvg         HumidMax         WindAvg         WindMax      
+ Min.   : 19.89   Min.   : 35.88   Min.   :0.251   Min.   : 0.000  
+ 1st Qu.: 47.04   1st Qu.: 81.60   1st Qu.:0.667   1st Qu.: 3.783  
+ Median : 62.58   Median : 90.90   Median :0.920   Median : 5.027  
+ Mean   : 62.16   Mean   : 87.22   Mean   :1.174   Mean   : 5.208  
+ 3rd Qu.: 77.38   3rd Qu.: 94.90   3rd Qu.:1.431   3rd Qu.: 6.537  
+ Max.   :100.00   Max.   :100.00   Max.   :8.260   Max.   :10.000  
+                  NA's   :13       NA's   :8       NA's   :128     
+      Rain          Radiation            ET       
+ Min.   : 0.000   Min.   : 0.277   Min.   :0.000  
+ 1st Qu.: 0.000   1st Qu.: 9.370   1st Qu.:1.168  
+ Median : 0.000   Median :16.660   Median :2.758  
+ Mean   : 1.094   Mean   :16.742   Mean   :3.091  
+ 3rd Qu.: 0.200   3rd Qu.:24.650   3rd Qu.:4.926  
+ Max.   :49.730   Max.   :32.740   Max.   :8.564  
+ NA's   :4        NA's   :13       NA's   :18
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile,label=sec-1-6]{Valores ausentes}
+ \begin{itemize}
+\item \texttt{NA} está definido como \texttt{logical}
+\end{itemize}
+\lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+class(NA)
+\end{lstlisting}
+
+\begin{verbatim}
+[1] "logical"
+\end{verbatim}
+
+\begin{itemize}
+\item Operar con \texttt{NA} siempre produce un \texttt{NA}
+\end{itemize}
+\lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+1 + NA
+\end{lstlisting}
+
+\begin{verbatim}
+[1] NA
+\end{verbatim}
+
+\begin{itemize}
+\item Esto es un \guillemotleft{}problema\guillemotright{} al usar funciones
+\end{itemize}
+\lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+mean(aranjuez$Radiation)
+\end{lstlisting}
+
+\begin{verbatim}
+[1] NA
 \end{verbatim}
 
 \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-  names(aranjuez)
+mean(aranjuez$Radiation, na.rm =  TRUE)
 \end{lstlisting}
 
 \begin{verbatim}
-[1] "Date"      "TempAvg"   "TempMax"   "TempMin"   "HumidAvg"  "HumidMax" 
-[7] "WindAvg"   "WindMax"   "Rain"      "Radiation" "ET"
+[1] 16.74176
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile,label=sec-1-7]{Valores ausentes}
+ Las funciones \texttt{is.na} y \texttt{anyNA} los identifican 
+\lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+anyNA(aranjuez)
+\end{lstlisting}
+
+\begin{verbatim}
+[1] TRUE
+\end{verbatim}
+
+\lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+which(is.na(aranjuez$Radiation))
+\end{lstlisting}
+
+\begin{verbatim}
+[1] 1861 1867 1873 1896 1897 1908 1923 2153 2413 2587 2600 2603 2684
+\end{verbatim}
+
+\lstset{language=R,label= ,caption= ,numbers=none}
+\begin{lstlisting}
+sum(is.na(aranjuez$Radiation))
+\end{lstlisting}
+
+\begin{verbatim}
+[1] 13
 \end{verbatim}
 \end{frame}
 
@@ -498,9 +647,9 @@ aggregate(Value ~ Variable, data = aranjuezLong2,
 \end{itemize}
 \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-  USStates <- as.data.frame(state.x77)
-  USStates$Name <- rownames(USStates)
-  rownames(USStates) <- NULL
+USStates <- as.data.frame(state.x77)
+USStates$Name <- rownames(USStates)
+rownames(USStates) <- NULL
 \end{lstlisting}
 
 \begin{itemize}
@@ -508,10 +657,10 @@ aggregate(Value ~ Variable, data = aranjuezLong2,
 \end{itemize}
 \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-  coldStates <- USStates[USStates$Frost>150,
-                         c('Name', 'Frost')]
-  largeStates <- USStates[USStates$Area>1e5,
-                          c('Name', 'Area')]
+coldStates <- USStates[USStates$Frost>150,
+                       c('Name', 'Frost')]
+largeStates <- USStates[USStates$Area>1e5,
+                        c('Name', 'Area')]
 \end{lstlisting}
 \end{frame}
 
@@ -521,7 +670,7 @@ aggregate(Value ~ Variable, data = aranjuezLong2,
 \end{itemize}
 \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-  merge(coldStates, largeStates)
+merge(coldStates, largeStates)
 \end{lstlisting}
 
 \begin{verbatim}
@@ -539,10 +688,10 @@ aggregate(Value ~ Variable, data = aranjuezLong2,
 \end{itemize}
 \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-  idxLarge <- match(largeStates$Name,
-                    coldStates$Name,
-                    nomatch=0)
-  idxLarge
+idxLarge <- match(largeStates$Name,
+                  coldStates$Name,
+                  nomatch=0)
+idxLarge
 \end{lstlisting}
 
 \begin{verbatim}
@@ -551,7 +700,7 @@ aggregate(Value ~ Variable, data = aranjuezLong2,
 
 \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-  coldStates[idxLarge,]
+coldStates[idxLarge,]
 \end{lstlisting}
 
 \begin{verbatim}
@@ -569,10 +718,10 @@ aggregate(Value ~ Variable, data = aranjuezLong2,
 \end{itemize}
 \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-  idxCold <- match(coldStates$Name,
-                   largeStates$Name,
-                   nomatch=0)
-  idxCold
+idxCold <- match(coldStates$Name,
+                 largeStates$Name,
+                 nomatch=0)
+idxCold
 \end{lstlisting}
 
 \begin{verbatim}
@@ -581,7 +730,7 @@ aggregate(Value ~ Variable, data = aranjuezLong2,
 
 \lstset{language=R,label= ,caption= ,numbers=none}
 \begin{lstlisting}
-  largeStates[idxCold,]
+largeStates[idxCold,]
 \end{lstlisting}
 
 \begin{verbatim}

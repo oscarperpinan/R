@@ -8,39 +8,86 @@
 
 * Lectura de datos
 ** =setwd=, =getwd=, =dir=
+En =setwd= hay que especificar el directorio que contiene el repositorio.
 #+begin_src R :exports code
-  getwd()
-  old <- setwd("~/github/r-intro-eoi")
-  dir()
+getwd()
+old <- setwd("~/github/intro")
+dir()
 #+end_src
 
 #+begin_src R
-  dir(pattern='.R')
+dir(pattern='.R')
 #+end_src
 
 #+begin_src R
-  dir('data')
+dir('data')
 #+end_src
 
 ** Lectura de datos con =read.table=
 #+begin_src R
-  
-  dats <- read.table('data/aranjuez.csv', sep=',', header=TRUE)
-  head(dats)
+dats <- read.table('data/aranjuez.csv', sep=',', header=TRUE)
+head(dats)
 #+end_src
 ** Lectura de datos con =read.csv=
 #+begin_src R
 aranjuez <- read.csv('data/aranjuez.csv')
 names(aranjuez)[1] <- 'Date'
+#+end_src
+
+#+begin_src R
+class(aranjuez)
+#+end_src
+
+#+begin_src R
+names(aranjuez)
+#+end_src
+
+** Inspeccionamos el resultado
+#+begin_src R
 head(aranjuez)
 #+end_src
 
 #+begin_src R
-  class(aranjuez)
+tail(aranjuez)
+#+end_src
+
+** Inspeccionamos el resultado
+#+begin_src R
+summary(aranjuez)
+#+end_src
+
+** Valores ausentes
+- =NA= está definido como =logical=
+#+begin_src R
+class(NA)
+#+end_src
+
+- Operar con =NA= siempre produce un =NA=
+#+begin_src R
+1 + NA
+#+end_src
+
+- Esto es un "problema" al usar funciones
+#+begin_src R
+mean(aranjuez$Radiation)
+#+end_src 
+
+#+begin_src R
+mean(aranjuez$Radiation, na.rm =  TRUE)
+#+end_src
+** Valores ausentes
+
+Las funciones =is.na= y =anyNA= los identifican 
+#+begin_src R
+anyNA(aranjuez)
 #+end_src
 
 #+begin_src R
-  names(aranjuez)
+which(is.na(aranjuez$Radiation))
+#+end_src
+
+#+begin_src R
+sum(is.na(aranjuez$Radiation))
 #+end_src
 
 * Indexado
@@ -164,43 +211,43 @@ aggregate(Value ~ Variable, data = aranjuezLong2,
 ** Con =merge=
 - Primero construimos un =data.frame= de ejemplo
 #+begin_src R 
-  USStates <- as.data.frame(state.x77)
-  USStates$Name <- rownames(USStates)
-  rownames(USStates) <- NULL
+USStates <- as.data.frame(state.x77)
+USStates$Name <- rownames(USStates)
+rownames(USStates) <- NULL
 #+end_src
 - Lo partimos en estados "fríos" y estados "grandes"
 #+begin_src R 
-  coldStates <- USStates[USStates$Frost>150,
-                         c('Name', 'Frost')]
-  largeStates <- USStates[USStates$Area>1e5,
-                          c('Name', 'Area')]
+coldStates <- USStates[USStates$Frost>150,
+                       c('Name', 'Frost')]
+largeStates <- USStates[USStates$Area>1e5,
+                        c('Name', 'Area')]
 #+end_src
 ** Con =merge=
 - Unimos los dos conjuntos (estados "fríos" y "grandes")
 #+begin_src R 
-  merge(coldStates, largeStates)
+merge(coldStates, largeStates)
 #+end_src
 
 ** =merge= usa =match=
 - Estados grandes que también son fríos
 #+begin_src R 
-  idxLarge <- match(largeStates$Name,
-                    coldStates$Name,
-                    nomatch=0)
-  idxLarge
+idxLarge <- match(largeStates$Name,
+                  coldStates$Name,
+                  nomatch=0)
+idxLarge
 #+end_src  
 #+begin_src R
-  coldStates[idxLarge,]
+coldStates[idxLarge,]
 #+end_src
 ** =merge= usa =match=
 - Estados frios que también son grandes
 #+begin_src R 
-  idxCold <- match(coldStates$Name,
-                   largeStates$Name,
-                   nomatch=0)
-  idxCold
+idxCold <- match(coldStates$Name,
+                 largeStates$Name,
+                 nomatch=0)
+idxCold
 #+end_src  
 
 #+begin_src R
-  largeStates[idxCold,]
+largeStates[idxCold,]
 #+end_src
