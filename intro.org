@@ -1,5 +1,6 @@
 #+TITLE:     Introducción a R
 
+#+STARTUP: beamer
 #+SETUPFILE: config.org
 #+OPTIONS: H:3
 #+PROPERTY: results output
@@ -55,7 +56,7 @@ Es un entorno de programación orientado al cálculo, manipulación de datos, y 
 
 *** R es un proyecto colaborativo
 - Una de las grandes riquezas de R es la cantidad de paquetes (más
-  de 6000 actualmente) que amplían sus funcionalidades.  
+  de 6500 actualmente) que amplían sus funcionalidades.  
 - La lista completa está en http://cran.es.r-project.org/web/packages/.
 - Las CRAN Task Views agrupan por temáticas:
   [[http://cran.r-project.org/web/views/]]
@@ -87,6 +88,10 @@ Es un entorno de programación orientado al cálculo, manipulación de datos, y 
 ** Guía para usar el curso
 
 *** Interfaz gráfica: RStudio
+    :PROPERTIES:
+    :beamer_opt: plain
+    :END:
+#+ATTR_LATEX: :width 1.05\textwidth
 [[file:figs/rstudio-ubuntu.png]]
 
 *** Interfaz gráfica: RStudio
@@ -217,7 +222,7 @@ z
 
 
 
-*** Tu turno
+
 ** Matrices
 *** Construir una matriz
 #+begin_src R 
@@ -252,7 +257,6 @@ M
 #+end_src
 
 
-*** Tu turno
 ** Listas
 *** Para crear una lista usamos la función =list=
 #+begin_src R 
@@ -314,7 +318,6 @@ length(lista)
   tail(df)
 #+end_src
 
-*** Tu turno
 ** Funciones
 
 *** Para definir una función usamos la función =function=
@@ -356,8 +359,54 @@ foo(1:10)
 foo(rnorm(1e5))
 #+end_src
 
-*** Tu turno
 * Indexado
+
+** Condiciones lógicas
+*** Condiciones simples
+#+begin_src R
+x <- seq(-1, 1, .1)
+x
+#+end_src
+
+#+begin_src R
+x < 0
+#+end_src
+
+#+begin_src R
+x >= 0
+#+end_src
+
+#+begin_src R
+x != 0
+#+end_src
+
+*** Condiciones múltiples
+
+#+begin_src R 
+cond  <-  (x > 0) & (x < .5)
+cond
+#+end_src
+
+#+begin_src R
+cond  <-  (x >= .5) | (x <= -.5)
+cond
+#+end_src
+
+
+*** Con las condiciones se pueden hacer operaciones
+#+begin_src R 
+sum(cond)
+#+end_src
+
+#+begin_src R
+sum(!cond)
+#+end_src
+
+#+begin_src R
+as.numeric(cond)
+#+end_src
+
+
 ** Vectores
 *** Indexado numérico
 
@@ -413,7 +462,6 @@ cond
 z[cond]
 #+end_src
 
-*** Tu turno
 ** Matrices
 *** Indexado de matrices
 #+begin_src R
@@ -437,7 +485,6 @@ M[-1,]
 M[-c(1, 2),]
 #+end_src
 
-*** Tu turno
 ** Listas
 *** Podemos acceder a los elementos...
 - Por su nombre
@@ -477,7 +524,6 @@ df[1,]
 df[,1]
 #+end_src
 
-*** Tu turno
 * Bucles
 ** Matrices
 *** La función =apply=
@@ -497,7 +543,6 @@ apply(M, 2, mean)
 colMeans(M)
 #+end_src
 
-*** Tu turno
 ** Listas / =data.frame=
 *** =lapply= y =sapply=
 #+begin_src R
@@ -511,7 +556,6 @@ lapply(lista, sum)
 sapply(lista, sum)
 #+end_src
 
-*** Tu turno
 ** Bucles =for=
 *** =for=
 - En =R= suele usarse más la familia de funciones =*apply= con funciones vectorizadas.
