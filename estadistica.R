@@ -5,90 +5,127 @@ data(swiss)
 
 summary(swiss)
 
-## **
-## #+ATTR_LATEX: width=0.6\textwidth
-
-pdf(file="splomSwiss.pdf")
+pdf(file="figs/splomSwiss.pdf")
+library(lattice)
 splom(swiss, pscale=0, type=c('p', 'smooth'),
       groups=swiss$Catholic > 50, xlab='')
 dev.off()
 
-## Resumir información
+## Resumen de  información
 
 summary(swiss)
+
+## Media
 
 mean(swiss$Fertility)
 
 colMeans(swiss)
 
-## Resumir información
+## Desviación Estándar
 
 sd(swiss$Fertility)
 
 sapply(swiss, sd)
 
-## Generar datos aleatorios
+## Otras
 
-rnorm(10, mean=1, sd=.4)
+median(swiss$Fertility)
+
+mad(swiss$Fertility)
+
+IQR(swiss$Fertility)
+
+## Distribución Normal
+
+rnorm(10, mean = 1, sd = .4)
+
+pdf(file="figs/rnorm.pdf")
+hist(rnorm(1e6, mean = 1, sd = .4))
+dev.off()
+
+## Distribución Normal
+
+pdf(file="figs/dnorm.pdf")
+x <- seq( -5, 5, by =.01)
+plot(x, dnorm(x), type = 'l')
+dev.off()
+
+## Distribución Uniforme
 
 runif(10, min=-3, max=3)
 
-rweibull(n=10, shape=3, scale=2)
+pdf(file="figs/runif.pdf")
+hist(runif(1e6, min = -3, max = 3))
+dev.off()
 
-## Generar datos aleatorios
+## Distribución de Weibull
 
-x <- seq(1, 100, length=10)
+rweibull(n=10, shape = 3, scale = 2)
+
+pdf(file="figs/rweibull.pdf")
+hist(rweibull(1e6, shape = 3, scale = 2))
+dev.off()
+
+## Muestreo aleatorio
+
+x <- seq(1, 100, length = 10)
 x
+
+## - Sin reemplazo
 
 sample(x)
 
 sample(x, 5)
 
-sample(x, 5, replace=TRUE)
+## - Con reemplazo
 
-## Tests
+sample(x, 5, replace = TRUE)
+
+## Para muestra única
+
+## - t de Student
 
 t.test(swiss$Fertility, mu=70)
 
+## - Wilcoxon (no paramétrico)
+
 wilcox.test(swiss$Fertility, mu=70)
 
-## Tests
-
-A <- rnorm(1000)
-B <- rnorm(1000)
-C <- rnorm(1000, sd=3)
-
-t.test(A, B)
-
-wilcox.test(A, B)
-
-## Tests
-
-t.test(A, C)
-
-wilcox.test(A, C)
-
-## Tests
+## Para muestras pareadas
 
 Religion <- ifelse(swiss$Catholic > 50,
                    'Catholic', 'Protestant')
 
+## - t de Student
+
 t.test(Fertility ~ Religion, data=swiss)
+
+## Para muestras pareadas
+## - Wilcoxon
 
 wilcox.test(Fertility ~ Religion, data=swiss)
 
 ## Fertilidad y educación
 
-lmFertEdu <- lm(Fertility ~ Education, data = swiss)
+lmFertEdu <- lm(Fertility ~ Education,
+              data = swiss)
 summary(lmFertEdu)
 
 ## Fertilidad y educación
 
 coef(lmFertEdu)
 
+fitted.values(lmFertEdu)
+
+## Fertilidad y educación
+
 residuals(lmFertEdu)
 
-fitted.values(lmFertEdu)
+## Fertilidad y educación
+
+pdf(file="figs/lmFertEdu.pdf")
+plot(lmFertEdu, which = 1)
+dev.off()
 
 ## Fertilidad, educación y religión
 
@@ -110,17 +147,19 @@ summary(lmFertEduCatAgr)
 
 ## Lo mismo con =update=
 
-lmFertEduCatAgr <- update(lmFertEduCat, . ~ . + Agriculture,
+lmFertEduCatAgr <- update(lmFertEduCat,
+                          . ~ . + Agriculture,
                           data = swiss)
 summary(lmFertEduCatAgr)
 
 ## Lo mismo con =update=
 
-lmFertEduCatAgr <- update(lmFertEdu, . ~ . + Catholic + Agriculture,
+lmFertEduCatAgr <- update(lmFertEdu,
+                          . ~ . + Catholic + Agriculture,
                           data = swiss)
 summary(lmFertEduCatAgr)
 
-## anova
+## Comparamos modelos con =anova=
 
 anova(lmFertEdu, lmFertEduCat, lmFertEduCatAgr)
 
@@ -130,11 +169,11 @@ lmFert <- lm(Fertility ~ ., data=swiss)
 
 summary(lmFert)
 
-## Elegir un modelo
+## Elegir un modelo con =anova=
 
 anova(lmFert)
 
-## Elegir un modelo
+## Elegir un modelo con =step=
 
 stepFert <- step(lmFert)
 
