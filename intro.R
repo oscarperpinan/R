@@ -168,6 +168,33 @@ foo(1:10)
 
 foo(rnorm(1e5))
 
+## Condiciones simples
+
+x <- seq(-1, 1, .1)
+x
+
+x < 0
+
+x >= 0
+
+x != 0
+
+## Condiciones múltiples
+
+cond  <-  (x > 0) & (x < .5)
+cond
+
+cond  <-  (x >= .5) | (x <= -.5)
+cond
+
+## Con las condiciones se pueden hacer operaciones
+
+sum(cond)
+
+sum(!cond)
+
+as.numeric(cond)
+
 ## Indexado numérico
 
   x <- seq(1, 100, 2)
