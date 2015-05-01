@@ -7,6 +7,64 @@
 #+PROPERTY: exports both
 
 * Introducción
+
+
+** Guía para usar el curso
+
+*** Interfaz gráfica: RStudio
+    :PROPERTIES:
+    :beamer_opt: plain
+    :END:
+#+ATTR_LATEX: :width 1.05\textwidth
+[[file:figs/rstudio-ubuntu.png]]
+
+*** Interfaz gráfica: RStudio
+- La consola de R es el área en la que se ejecuta código (=Ctrl + 2=)
+  - Indica con =>= que está listo para aceptar comandos.
+  - Indica con =+= que está a la espera de completar comando (salir con =Esc=).
+  - Permite recuperar comandos antiguos con flechas arriba y abajo.
+- El área de código es donde se edita y almacena código (=Ctrl + 1=)
+  - Escribir (y grabar) en área de código y enviar a consola (=Ctrl + Enter=)
+  - Permite completar comandos con =TAB=
+- Para la asignación =<-= usar =Alt + -=
+
+*** Material
+- Primero obtenemos una copia local del repositorio. Opciones:
+
+  - Descargando el repositorio en formato [[https://github.com/oscarperpinan/intro/archive/master.zip][ZIP]]: descomprímelo en una ruta sencilla (por ejemplo, =C:\cursoR\= o =/home/miusuario/cursoR/=).
+
+  - Usando =git=:
+#+BEGIN_SRC sh :eval no
+git clone git://github.com/oscarperpinan/intro.git
+#+END_SRC
+
+*** Material
+- Todo el código del curso asume que la ruta de trabajo coincide con la carpeta local: definimos la ruta de trabajo con =setwd=
+#+begin_src R :eval no
+setwd('/ruta/de/copia/local/del/repositorio/')
+#+end_src
+
+- Comprobamos que todo ha ido bien. El resultado de la siguiente instrucción debe ser la estructura de carpetas y ficheros del repositorio:
+#+begin_src R :eval no
+dir()
+#+end_src
+
+*** Material
+- Finalmente hay que instalar los paquetes que se emplean a lo largo del curso. Algunos ya vendrán instalados con tu distribución de R por ser paquetes recomendados. En la siguiente instrucción usamos el /CRAN mirror/ de la Oficina de Software Libre (CIXUG). 
+#+begin_src R :eval no
+install.packages(c('lattice', 'latticeExtra',
+                   'RColorBrewer',
+                   'zoo',
+                   'reshape2', 'ggplot2'),
+                 repos = 'http://ftp.cixug.es/CRAN')
+#+end_src
+
+*** Bloc de Notas
+
+- Usaremos un bloc de notas colaborativo para escribir código juntos y resolver dudas. Está accesible en: https://etsidifv.titanpad.com/r-ice-upm
+
+- La clave será comunicada al inicio de las clases.
+
 ** ¿Qué es =R=?
 *** ¿Qué es =R=?						    
 Es un entorno de programación orientado al cálculo, manipulación de datos, y representación gráfica, publicado como software libre con licencia GNU-GPL.
@@ -78,68 +136,11 @@ Es un entorno de programación orientado al cálculo, manipulación de datos, y 
 
 *** Más de 6000 paquetes disponibles
 - Otros hay que instalarlos y después cargarlos:
-#+begin_src R :eval no
+#+begin_src R :eval no :exports no
   install.packages('data.table')
   library('data.table')
   packageDescription('data.table')
 #+end_src
-
-
-** Guía para usar el curso
-
-*** Interfaz gráfica: RStudio
-    :PROPERTIES:
-    :beamer_opt: plain
-    :END:
-#+ATTR_LATEX: :width 1.05\textwidth
-[[file:figs/rstudio-ubuntu.png]]
-
-*** Interfaz gráfica: RStudio
-- La consola de R es el área en la que se ejecuta código (=Ctrl + 2=)
-  - Indica con =>= que está listo para aceptar comandos.
-  - Indica con =+= que está a la espera de completar comando (salir con =Esc=).
-  - Permite recuperar comandos antiguos con flechas arriba y abajo.
-- El área de código es donde se edita y almacena código (=Ctrl + 1=)
-  - Escribir (y grabar) en área de código y enviar a consola (=Ctrl + Enter=)
-  - Permite completar comandos con =TAB=
-- Para la asignación =<-= usar =Alt + -=
-
-*** Material
-- Primero obtenemos una copia local del repositorio. Opciones:
-
-  - Descargando el repositorio en formato [[https://github.com/oscarperpinan/intro/archive/master.zip][ZIP]]: descomprímelo en una ruta sencilla (por ejemplo, =C:\cursoR\= o =/home/miusuario/cursoR/=).
-
-  - Usando =git=:
-#+BEGIN_SRC sh :eval no
-git clone git://github.com/oscarperpinan/intro.git
-#+END_SRC
-
-*** Material
-- Todo el código del curso asume que la ruta de trabajo coincide con la carpeta local: definimos la ruta de trabajo con =setwd=
-#+begin_src R :eval no
-setwd('/ruta/de/copia/local/del/repositorio/')
-#+end_src
-
-- Comprobamos que todo ha ido bien. El resultado de la siguiente instrucción debe ser la estructura de carpetas y ficheros del repositorio:
-#+begin_src R :eval no
-dir()
-#+end_src
-
-*** Material
-- Finalmente hay que instalar los paquetes que se emplean a lo largo del curso. Algunos ya vendrán instalados con tu distribución de R por ser paquetes recomendados. En la siguiente instrucción usamos el /CRAN mirror/ de la Oficina de Software Libre (CIXUG). 
-#+begin_src R :eval no
-install.packages(c('lattice', 'latticeExtra',
-                   'RColorBrewer',
-                   'zoo',
-                   'reshape2', 'ggplot2'),
-                 repos = 'http://ftp.cixug.es/CRAN')
-#+end_src
-
-*** Bloc de Notas
-
-- Usaremos un bloc de notas colaborativo para escribir código juntos y resolver dudas. Está accesible en: https://etsidifv.titanpad.com/r-ice-upm
-
-- La clave será comunicada al inicio de las clases.
 
 * Objetos en R
 
@@ -307,7 +308,7 @@ length(lista)
 
 #+begin_src R 
   x <- y <- seq(-4*pi, 4*pi, len=200)
-  df <- expand.grid(x = x, y = y)
+  df <- expand.grid(A = x, B = y)
 #+end_src
 
 #+begin_src R
@@ -377,6 +378,10 @@ x >= 0
 #+end_src
 
 #+begin_src R
+x == 0
+#+end_src
+
+#+begin_src R
 x != 0
 #+end_src
 
@@ -425,14 +430,6 @@ as.numeric(cond)
 
 *** Indexado con condiciones lógicas
 
-#+begin_src R 
-  x == 37
-#+end_src
-
-#+begin_src R
-  x[x == 37]
-#+end_src
-
 #+begin_src R
   x[x != 9]
 #+end_src
@@ -441,6 +438,9 @@ as.numeric(cond)
   x[x > 20]
 #+end_src
      
+#+begin_src R
+x[x %in% seq(0, 10, .5)]
+#+end_src
 
 *** Indexado con condiciones múltiples
 

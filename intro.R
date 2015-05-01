@@ -1,4 +1,22 @@
 
+## Material
+## - Todo el código del curso asume que la ruta de trabajo coincide con la carpeta local: definimos la ruta de trabajo con =setwd=
+
+setwd('/ruta/de/copia/local/del/repositorio/')
+
+## - Comprobamos que todo ha ido bien. El resultado de la siguiente instrucción debe ser la estructura de carpetas y ficheros del repositorio:
+
+dir()
+
+## Material
+## - Finalmente hay que instalar los paquetes que se emplean a lo largo del curso. Algunos ya vendrán instalados con tu distribución de R por ser paquetes recomendados. En la siguiente instrucción usamos el /CRAN mirror/ de la Oficina de Software Libre (CIXUG).
+
+install.packages(c('lattice', 'latticeExtra',
+                   'RColorBrewer',
+                   'zoo',
+                   'reshape2', 'ggplot2'),
+                 repos = 'http://ftp.cixug.es/CRAN')
+
 ## Más de 6000 paquetes disponibles
 ## - Algunos vienen instalados y se cargan al empezar:
 
@@ -18,24 +36,6 @@
   install.packages('data.table')
   library('data.table')
   packageDescription('data.table')
-
-## Material
-## - Todo el código del curso asume que la ruta de trabajo coincide con la carpeta local: definimos la ruta de trabajo con =setwd=
-
-setwd('/ruta/de/copia/local/del/repositorio/')
-
-## - Comprobamos que todo ha ido bien. El resultado de la siguiente instrucción debe ser la estructura de carpetas y ficheros del repositorio:
-
-dir()
-
-## Material
-## - Finalmente hay que instalar los paquetes que se emplean a lo largo del curso. Algunos ya vendrán instalados con tu distribución de R por ser paquetes recomendados. En la siguiente instrucción usamos el /CRAN mirror/ de la Oficina de Software Libre (CIXUG).
-
-install.packages(c('lattice', 'latticeExtra',
-                   'RColorBrewer',
-                   'zoo',
-                   'reshape2', 'ggplot2'),
-                 repos = 'http://ftp.cixug.es/CRAN')
 
 ## Primeros pasos
 
@@ -134,7 +134,7 @@ length(lista)
 ## La función =expand.grid=
 
   x <- y <- seq(-4*pi, 4*pi, len=200)
-  df <- expand.grid(x = x, y = y)
+  df <- expand.grid(A = x, B = y)
 
   head(df)
 
@@ -177,6 +177,8 @@ x < 0
 
 x >= 0
 
+x == 0
+
 x != 0
 
 ## Condiciones múltiples
@@ -206,13 +208,11 @@ as.numeric(cond)
 
 ## Indexado con condiciones lógicas
 
-  x == 37
-
-  x[x == 37]
-
   x[x != 9]
 
   x[x > 20]
+
+x[x %in% seq(0, 10, .5)]
 
 ## Indexado con condiciones múltiples
 
