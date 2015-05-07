@@ -32,7 +32,7 @@ summary(swiss)
 ** 
 
 
-#+begin_src R :results output graphics :file figs/splomSwiss.pdf
+#+begin_src R :results output graphics :file figs/splomSwiss.png
 library(lattice)
 splom(swiss, pscale=0, type=c('p', 'smooth'),
       groups=swiss$Catholic > 50, xlab='')
@@ -40,7 +40,7 @@ splom(swiss, pscale=0, type=c('p', 'smooth'),
 
 #+ATTR_LATEX: :height 0.5\textheight
 #+RESULTS:
-[[file:figs/splomSwiss.pdf]]
+[[file:figs/splomSwiss.png]]
 
 * Estadística Univariante
 
@@ -125,23 +125,23 @@ IQR(swiss$Fertility)
 rnorm(10, mean = 1, sd = .4)
 #+end_src
 
-#+begin_src R :results output graphics :file figs/rnorm.pdf
+#+begin_src R :results output graphics :file figs/rnorm.png
 hist(rnorm(1e6, mean = 1, sd = .4))
 #+end_src
 
 #+ATTR_LATEX: :height 0.6\textheight
 #+RESULTS:
-[[file:figs/rnorm.pdf]]
+[[file:figs/rnorm.png]]
 
 ** Distribución Normal
-#+begin_src R :results output graphics :file figs/dnorm.pdf
+#+begin_src R :results output graphics :file figs/dnorm.png
 x <- seq( -5, 5, by =.01)
 plot(x, dnorm(x), type = 'l')
 #+end_src
 
 #+ATTR_LATEX: :height 0.6\textheight
 #+RESULTS:
-[[file:figs/dnorm.pdf]]
+[[file:figs/dnorm.png]]
 
 ** Distribución Uniforme
 
@@ -150,13 +150,13 @@ runif(10, min=-3, max=3)
 #+end_src
 
 
-#+begin_src R :results output graphics :file figs/runif.pdf
+#+begin_src R :results output graphics :file figs/runif.png
 hist(runif(1e6, min = -3, max = 3))
 #+end_src
 
 #+ATTR_LATEX: :height 0.6\textheight
 #+RESULTS:
-[[file:figs/runif.pdf]]
+[[file:figs/runif.png]]
 
 ** Distribución de Weibull
 #+begin_src R 
@@ -164,13 +164,13 @@ rweibull(n=10, shape = 3, scale = 2)
 #+end_src
 
 
-#+begin_src R :results output graphics :file figs/rweibull.pdf
+#+begin_src R :results output graphics :file figs/rweibull.png
 hist(rweibull(1e6, shape = 3, scale = 2))
 #+end_src
 
 #+ATTR_LATEX: :height 0.6\textheight
 #+RESULTS:
-[[file:figs/rweibull.pdf]]
+[[file:figs/rweibull.png]]
 
 ** Muestreo aleatorio
 
@@ -248,13 +248,13 @@ residuals(lmFertEdu)
 #+end_src
 
 ** Fertilidad y educación
-#+begin_src R :results output graphics :file figs/lmFertEdu.pdf
+#+begin_src R :results output graphics :file figs/lmFertEdu.png
 plot(lmFertEdu, which = 1)
 #+end_src
 
 #+ATTR_LATEX: :height 0.85\textheight
 #+RESULTS:
-[[file:figs/lmFertEdu.pdf]]
+[[file:figs/lmFertEdu.png]]
 
 
 

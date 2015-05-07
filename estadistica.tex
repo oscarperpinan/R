@@ -1,4 +1,4 @@
-% Created 2015-04-26 dom 16:34
+% Created 2015-05-07 jue 12:41
 \documentclass[xcolor={usenames,svgnames,dvipsnames}]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -43,6 +43,10 @@
 \begin{document}
 
 \maketitle
+\begin{frame}{Outline}
+\tableofcontents
+\end{frame}
+
 
 \section{Conjunto de datos}
 \label{sec-1}
@@ -96,7 +100,7 @@ splom(swiss, pscale=0, type=c('p', 'smooth'),
       groups=swiss$Catholic > 50, xlab='')
 \end{lstlisting}
 
-\includegraphics[height=0.5\textheight]{figs/splomSwiss.pdf}
+\includegraphics[height=0.5\textheight]{figs/splomSwiss.png}
 \end{frame}
 
 \section{Estadística Univariante}
@@ -252,8 +256,8 @@ rnorm(10, mean = 1, sd = .4)
 \end{lstlisting}
 
 \begin{verbatim}
-[1] 0.8771976 0.6711058 1.0370528 0.9713614 1.4191467 0.5592264 1.2446147
-[8] 1.3479398 0.6343920 0.9619446
+[1] -0.1354755  0.3463266  0.7636284  1.0476774  0.9566199  0.4151977
+[7]  1.1456710  1.3189940  1.3406831  1.1603679
 \end{verbatim}
 
 \lstset{language=R,label= ,caption= ,numbers=none}
@@ -261,7 +265,7 @@ rnorm(10, mean = 1, sd = .4)
 hist(rnorm(1e6, mean = 1, sd = .4))
 \end{lstlisting}
 
-\includegraphics[height=0.6\textheight]{figs/rnorm.pdf}
+\includegraphics[height=0.6\textheight]{figs/rnorm.png}
 \end{frame}
 
 \begin{frame}[fragile,label=sec-3-4]{Distribución Normal}
@@ -271,7 +275,7 @@ x <- seq( -5, 5, by =.01)
 plot(x, dnorm(x), type = 'l')
 \end{lstlisting}
 
-\includegraphics[height=0.6\textheight]{figs/dnorm.pdf}
+\includegraphics[height=0.6\textheight]{figs/dnorm.png}
 \end{frame}
 
 \begin{frame}[fragile,label=sec-3-5]{Distribución Uniforme}
@@ -281,8 +285,8 @@ runif(10, min=-3, max=3)
 \end{lstlisting}
 
 \begin{verbatim}
-[1] -0.5172275  0.0746579  1.5251689 -2.9837615  2.2648276  2.2573877
-[7] -2.7557856  2.2283720  1.5449668  1.3472533
+[1] -1.5823854 -1.8617752 -0.2233338  0.9459900  2.4939212 -2.9993913
+[7] -1.3921531 -2.8677664  1.6486454 -1.4627291
 \end{verbatim}
 
 
@@ -291,7 +295,7 @@ runif(10, min=-3, max=3)
 hist(runif(1e6, min = -3, max = 3))
 \end{lstlisting}
 
-\includegraphics[height=0.6\textheight]{figs/runif.pdf}
+\includegraphics[height=0.6\textheight]{figs/runif.png}
 \end{frame}
 
 \begin{frame}[fragile,label=sec-3-6]{Distribución de Weibull}
@@ -301,8 +305,8 @@ rweibull(n=10, shape = 3, scale = 2)
 \end{lstlisting}
 
 \begin{verbatim}
-[1] 0.5215050 0.2465308 1.0577757 2.1687742 2.4100942 1.6981758 0.9385434
-[8] 2.2155586 2.0311359 1.7091862
+[1] 1.8163282 1.8996633 2.4716128 0.8522703 1.9081448 1.3089783 2.0341622
+[8] 0.4629481 0.6528668 0.8457854
 \end{verbatim}
 
 
@@ -311,7 +315,7 @@ rweibull(n=10, shape = 3, scale = 2)
 hist(rweibull(1e6, shape = 3, scale = 2))
 \end{lstlisting}
 
-\includegraphics[height=0.6\textheight]{figs/rweibull.pdf}
+\includegraphics[height=0.6\textheight]{figs/rweibull.png}
 \end{frame}
 
 \begin{frame}[fragile,label=sec-3-7]{Muestreo aleatorio}
@@ -334,7 +338,7 @@ sample(x)
 \end{lstlisting}
 
 \begin{verbatim}
-[1]  78  45  56  34   1  67  89  12  23 100
+[1]  78  12  67  23   1  34  56  89  45 100
 \end{verbatim}
 
 \lstset{language=R,label= ,caption= ,numbers=none}
@@ -343,7 +347,7 @@ sample(x, 5)
 \end{lstlisting}
 
 \begin{verbatim}
-[1] 67 78 89  1 56
+[1]  34  56   1  78 100
 \end{verbatim}
 
 \begin{itemize}
@@ -355,7 +359,7 @@ sample(x, 5, replace = TRUE)
 \end{lstlisting}
 
 \begin{verbatim}
-[1] 78 89  1 89 56
+[1]   1  34  23  89 100
 \end{verbatim}
 \end{frame}
 
@@ -375,7 +379,7 @@ t.test(swiss$Fertility, mu=70)
 	One Sample t-test
 
 data:  swiss$Fertility
-t = 0.0782, df = 46, p-value = 0.938
+t = 0.078236, df = 46, p-value = 0.938
 alternative hypothesis: true mean is not equal to 70
 95 percent confidence interval:
  66.47485 73.81025
@@ -399,7 +403,7 @@ data:  swiss$Fertility
 V = 592.5, p-value = 0.767
 alternative hypothesis: true location is not equal to 70
 
-Mensajes de aviso perdidos
+Warning message:
 In wilcox.test.default(swiss$Fertility, mu = 70) :
   cannot compute exact p-value with ties
 \end{verbatim}
@@ -450,7 +454,7 @@ data:  Fertility by Religion
 W = 409.5, p-value = 0.0012
 alternative hypothesis: true location shift is not equal to 0
 
-Mensajes de aviso perdidos
+Warning message:
 In wilcox.test.default(x = c(83.1, 92.5, 76.1, 83.8, 92.4, 82.4,  :
   cannot compute exact p-value with ties
 \end{verbatim}
@@ -556,7 +560,7 @@ residuals(lmFertEdu)
 plot(lmFertEdu, which = 1)
 \end{lstlisting}
 
-\includegraphics[height=0.85\textheight]{figs/lmFertEdu.pdf}
+\includegraphics[height=0.85\textheight]{figs/lmFertEdu.png}
 \end{frame}
 
 

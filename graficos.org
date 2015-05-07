@@ -1,7 +1,7 @@
 #+TITLE:     Gráficos con R
 
 #+SETUPFILE: config.org
-#+OPTIONS: H:3
+#+OPTIONS: H:2
 #+PROPERTY: exports both 
 #+PROPERTY: results output graphics
 #+PROPERTY: eval no
@@ -13,17 +13,16 @@
 #+end_src
 
 ** Base y grid
-*** Base y grid
 - En =R= existen dos formas de generar gráficos:
   - Base graphics
   - Grid graphics
 - Los gráficos base sólo producen un resultado gráfico, pero no un objeto.
 - Los gráficos =grid= generan un resultado gráfico *y* un objeto.
 
-*** Gráficos =grid=
+** Gráficos =lattice=
 Dentro del conjunto =grid= existen dos grandes paquetes:
 
-**** =lattice=
+*** =lattice=
 
   - Implementación de los gráficos /trellis/, /The Elements of Graphing Data/ de Cleveland)
 
@@ -33,10 +32,10 @@ Dentro del conjunto =grid= existen dos grandes paquetes:
 xyplot(wt ~ mpg | am, data = mtcars, groups = cyl)
 #+end_src
 
-*** Gráficos =grid=
+** Gráficos =ggplot2=
 Dentro del conjunto =grid= existen dos grandes paquetes:
 
-**** =ggplot2=
+*** =ggplot2=
 
   - Implementación de /The Grammar of Graphics/ de Wilkinson.
 
@@ -48,15 +47,15 @@ ggplot(mtcars, aes(mpg, wt)) +
     facet_grid(. ~ am)
 #+end_src
 
-** Datos de ejemplo
-*** Leemos desde el archivo local 
+* Datos de ejemplo
+** Leemos desde el archivo local 
 #+begin_src R 
   aranjuez <- read.csv('data/aranjuez.csv')
 
   summary(aranjuez)
 #+end_src
 
-*** Añadimos algunas columnas
+** Añadimos algunas columnas
 #+begin_src R
 aranjuez$date <- as.Date(aranjuez$X)
 #+end_src
@@ -74,94 +73,92 @@ aranjuez$date <- as.Date(aranjuez$X)
       
 #+end_src
 
-* Gráficos Grid
 
-** Lattice
+* lattice
 
-*** Lattice
-
+** lattice
 - Documentación: [[http://lmdvr.r-forge.r-project.org/figures/figures.html][Código y Figuras del libro]]
 
 #+begin_src R 
   library(lattice)
 #+end_src
 
-*** =xyplot=
+** =xyplot=
 
-#+begin_src R  :file figs/xyplot.pdf
+#+begin_src R  :file figs/xyplot.png
   xyplot(Radiation ~ TempAvg, data=aranjuez)
 #+end_src
 
-*** 
+** 
 #+RESULTS:
-[[file:figs/xyplot.pdf]]
+[[file:figs/xyplot.png]]
 
     
-*** Añadimos rejilla
+** Añadimos rejilla
 
-#+begin_src R :file figs/xyplotPG.pdf
+#+begin_src R :file figs/xyplotPG.png
   xyplot(Radiation ~ TempAvg, data=aranjuez,
          grid = TRUE)
 #+end_src
 
-*** 
+** 
 #+RESULTS:
-[[file:figs/xyplotPG.pdf]]
+[[file:figs/xyplotPG.png]]
 
 
-*** Añadimos regresión lineal
+** Añadimos regresión lineal
 
-#+begin_src R :file figs/xyplotPRG.pdf
+#+begin_src R :file figs/xyplotPRG.png
   xyplot(Radiation ~ TempAvg, data=aranjuez,
          type=c('p', 'r'), grid = TRUE,
          lwd=2, col.line='black')
   
 #+end_src
 
-*** 
+** 
 #+RESULTS:
-[[file:figs/xyplotPRG.pdf]]
+[[file:figs/xyplotPRG.png]]
 
     
 
-*** Añadimos ajuste local
+** Añadimos ajuste local
 
-#+begin_src R :file figs/xyplotSmooth.pdf
+#+begin_src R :file figs/xyplotSmooth.png
   xyplot(Radiation ~ TempAvg, data=aranjuez,
          type=c('p', 'smooth'), grid = TRUE,
          lwd=2, col.line='black')
 #+end_src
 
-*** 
+** 
 #+RESULTS:
-[[file:figs/xyplotSmooth.pdf]]
+[[file:figs/xyplotSmooth.png]]
 
 
-*** Paneles
+** Paneles
 
-#+begin_src R :file figs/xyplotYear.pdf
+#+begin_src R :file figs/xyplotYear.png
   xyplot(Radiation ~ TempAvg|factor(year),
          data=aranjuez)
 #+end_src
 
-*** 
+** 
 #+RESULTS:
-[[file:figs/xyplotYear.pdf]]
+[[file:figs/xyplotYear.png]]
 
-*** Grupos
+** Grupos
 
-#+begin_src R :file figs/xyplotQuarter.pdf
+#+begin_src R :file figs/xyplotQuarter.png
   xyplot(Radiation ~ TempAvg, groups=quarter,
          data=aranjuez, auto.key=list(space='right'))
 #+end_src
 
-*** 
+** 
 #+RESULTS:
-[[file:figs/xyplotQuarter.pdf]]
+[[file:figs/xyplotQuarter.png]]
 
-*** Paneles y grupos
+** Paneles y grupos
 
-#+begin_src R :file figs/xyplotQuarterYear.pdf
+#+begin_src R :file figs/xyplotQuarterYear.png
   xyplot(Radiation ~ TempAvg|factor(year),
          groups=quarter,
          data=aranjuez,
@@ -169,12 +166,12 @@ aranjuez$date <- as.Date(aranjuez$X)
          auto.key=list(space='right'))
 #+end_src
 
-*** 
+** 
 #+RESULTS:
-[[file:figs/xyplotQuarterYear.pdf]]
+[[file:figs/xyplotQuarterYear.png]]
 
-*** Paneles y grupos
-#+begin_src R :file figs/xyplotQuarterYearSmooth.pdf
+** Paneles y grupos
+#+begin_src R :file figs/xyplotQuarterYearSmooth.png
   xyplot(Radiation ~ TempAvg|factor(year),
          groups=quarter,
          data=aranjuez,
@@ -183,12 +180,12 @@ aranjuez$date <- as.Date(aranjuez$X)
          auto.key=list(space='right'))
 #+end_src
 
-*** 
+** 
 #+RESULTS:
-[[file:figs/xyplotQuarterYearSmooth.pdf]]
+[[file:figs/xyplotQuarterYearSmooth.png]]
 
-*** Colores y tamaños
-#+begin_src R :file figs/xyplotColors.pdf
+** Colores y tamaños
+#+begin_src R :file figs/xyplotColors.png
   xyplot(Radiation ~ TempAvg,
          type=c('p', 'r'),
          cex=2, col='blue',
@@ -197,13 +194,13 @@ aranjuez$date <- as.Date(aranjuez$X)
          data=aranjuez)
 #+end_src
 
-*** 
+** 
 #+RESULTS:
-[[file:figs/xyplotColors.pdf]]
+[[file:figs/xyplotColors.png]]
 
-*** Colores con grupos
+** Colores con grupos
 
-#+begin_src R :file figs/xyplotColorGroups.pdf
+#+begin_src R :file figs/xyplotColorGroups.png
   xyplot(Radiation ~ TempAvg,
          group=quarter,
          col=c('red', 'blue', 'green', 'yellow'),
@@ -212,11 +209,11 @@ aranjuez$date <- as.Date(aranjuez$X)
          data=aranjuez)
 #+end_src
 
-*** 
+** 
 #+RESULTS:
-[[file:figs/xyplotColorGroups.pdf]]
+[[file:figs/xyplotColorGroups.png]]
 
-*** Colores con grupos: =par.settings= y =simpleTheme=
+** Colores con grupos: =par.settings= y =simpleTheme=
 - Primero definimos el tema con =simpleTheme=
 #+begin_src R 
   myTheme <- simpleTheme(col=c('red', 'blue',
@@ -224,9 +221,9 @@ aranjuez$date <- as.Date(aranjuez$X)
                           pch=19, alpha=.6)
 #+end_src
 
-*** Colores con grupos: =par.settings= y =simpleTheme=
+** Colores con grupos: =par.settings= y =simpleTheme=
 - Aplicamos el resultado en =par.settings=
-#+begin_src R :file figs/myTheme.pdf
+#+begin_src R :file figs/myTheme.png
   xyplot(Radiation ~ TempAvg,
          groups=quarter,
          par.settings=myTheme,
@@ -234,11 +231,11 @@ aranjuez$date <- as.Date(aranjuez$X)
          data=aranjuez)
 #+end_src
 
-*** 
+** 
 #+RESULTS:
-[[file:figs/myTheme.pdf]]
+[[file:figs/myTheme.png]]
 
-*** Colores: brewer.pal
+** Colores: brewer.pal
 
 #+begin_src R 
 library(RColorBrewer)
@@ -249,10 +246,10 @@ myTheme <- simpleTheme(col = myPal,
                        pch=19, alpha=.6)
 #+end_src
 
-**** ColorBrewer: [[http://colorbrewer2.org/]]
+*** ColorBrewer: [[http://colorbrewer2.org/]]
 
-*** Asignamos paleta con =par.settings=
-#+begin_src R :file figs/brewer.pdf
+** Asignamos paleta con =par.settings=
+#+begin_src R :file figs/brewer.png
 xyplot(Radiation ~ TempAvg,
        groups=quarter,
        par.settings=myTheme,
@@ -260,13 +257,13 @@ xyplot(Radiation ~ TempAvg,
        data=aranjuez)
 #+end_src
 
-*** 
+** 
 #+RESULTS:
-[[file:figs/brewer.pdf]]
+[[file:figs/brewer.png]]
 
-*** Paneles a medida
+** Paneles a medida
 
-#+begin_src R :file figs/panel.pdf
+#+begin_src R :file figs/panel.png
   xyplot(Radiation ~ TempAvg, data=aranjuez,
          panel=function(x, y, ...){
              panel.xyplot(x, y, ...)
@@ -280,11 +277,11 @@ xyplot(Radiation ~ TempAvg,
              })
 #+end_src
 
-*** 
+** 
 #+RESULTS:
-[[file:figs/panel.pdf]]
+[[file:figs/panel.png]]
 
-*** Matriz de gráficos de dispersión
+** Matriz de gráficos de dispersión
 
 #+begin_src R :file figs/splom.png
   splom(aranjuez[,c("TempAvg", "HumidAvg", "WindAvg",
@@ -292,11 +289,11 @@ xyplot(Radiation ~ TempAvg,
         pscale=0, alpha=0.6, cex=0.3, pch=19)
 #+end_src
 
-*** 
+** 
 #+RESULTS:
 [[file:figs/splom.png]]
 
-*** Matriz de gráficos de dispersión
+** Matriz de gráficos de dispersión
 
 #+begin_src R :file figs/splomGroup.png
   splom(aranjuez[,c("TempAvg", "HumidAvg", "WindAvg",
@@ -306,21 +303,21 @@ xyplot(Radiation ~ TempAvg,
         pscale=0, alpha=0.6, cex=0.3, pch=19)
 #+end_src
 
-*** 
+** 
 #+RESULTS:
 [[file:figs/splomGroup.png]]
 
-*** =levelplot=
+** =levelplot=
 
-#+begin_src R :file figs/levelplot.pdf
+#+begin_src R :file figs/levelplot.png
   levelplot(TempAvg ~ year * day, data = aranjuez)
 #+end_src
 
-*** 
+** 
 #+RESULTS:
-[[file:figs/levelplot.pdf]]
+[[file:figs/levelplot.png]]
 
-*** =levelplot= con una paleta mejor
+** =levelplot= con una paleta mejor
 - Usamos =colorRampPalette= para generar una función que interpola colores a partir de una paleta
 #+begin_src R
 levelPal <- colorRampPalette(
@@ -337,18 +334,18 @@ levelPal(14)
 :  [8] "#F9812F" "#F16B16" "#E45709" "#D14501" "#B13A02" "#973003" "#7F2704"
 
 - Usamos esta función con =col.regions=
-#+begin_src R :file figs/levelplotPal.pdf
+#+begin_src R :file figs/levelplotPal.png
   levelplot(TempAvg ~ year * day,
             col.regions = levelPal,
             data = aranjuez)
 #+end_src
 
-*** 
+** 
 #+RESULTS:
-[[file:figs/levelplotPal.pdf]]
+[[file:figs/levelplotPal.png]]
 
-*** =contourplot=
-#+begin_src R :file figs/contourplot.pdf
+** =contourplot=
+#+begin_src R :file figs/contourplot.png
   contourplot(TempAvg ~ year * day,
               data = aranjuez,
               lwd = .5,
@@ -358,110 +355,109 @@ levelPal(14)
               
 #+end_src
 
-*** 
+** 
 #+RESULTS:
-[[file:figs/contourplot.pdf]]
+[[file:figs/contourplot.png]]
 
-*** Box-and-Whiskers
+** Box-and-Whiskers
 
-#+begin_src R :file figs/bwplot.pdf
+#+begin_src R :file figs/bwplot.png
   bwplot(Radiation ~ month, data=aranjuez,
          horizontal=FALSE, pch='|')
 #+end_src
 
-*** 
+** 
 #+RESULTS:
-[[file:figs/bwplot.pdf]]
+[[file:figs/bwplot.png]]
 
-*** Box-and-Whiskers
+** Box-and-Whiskers
 
-#+begin_src R :file figs/violin.pdf
+#+begin_src R :file figs/violin.png
   bwplot(Radiation ~ month, data=aranjuez,
          horizontal=FALSE,
          panel=panel.violin)
 #+end_src
 
-*** 
+** 
 #+RESULTS:
-[[file:figs/violin.pdf]]
+[[file:figs/violin.png]]
 
     
-*** Histogramas
+** Histogramas
 
-#+begin_src R :file figs/histogram.pdf
+#+begin_src R :file figs/histogram.png
   histogram(~ Radiation|factor(year), data=aranjuez)
 #+end_src
 
-*** 
+** 
 #+RESULTS:
-[[file:figs/histogram.pdf]]
+[[file:figs/histogram.png]]
 
-*** Gráficos de densidad
+** Gráficos de densidad
 
-#+begin_src R :file figs/density.pdf
+#+begin_src R :file figs/density.png
 densityplot(~ Radiation, groups=quarter,
             data=aranjuez,
             auto.key=list(space='right'))
 #+end_src
 
-*** 
+** 
 #+RESULTS:
-[[file:figs/density.pdf]]
+[[file:figs/density.png]]
 
-*** =dotplot=
+** =dotplot=
 #+begin_src R 
   avRad <- aggregate(Radiation ~ month * year,
                      data=aranjuez, FUN=mean)
 #+end_src
 
-#+begin_src R :file figs/dotplot.pdf
+#+begin_src R :file figs/dotplot.png
   dotplot(month ~ Radiation|factor(year), data=avRad)
 #+end_src
 
-*** 
+** 
 #+RESULTS:
-[[file:figs/dotplot.pdf]]
+[[file:figs/dotplot.png]]
 
 
-*** Quantile-Quantile
+** Quantile-Quantile
 
-#+begin_src R :file figs/qqHalf.pdf
+#+begin_src R :file figs/qqHalf.png
   firstHalf <- aranjuez$quarter %in% c('Q1', 'Q2')
   
   qq(firstHalf ~ Radiation, data=aranjuez)
 #+end_src
 
-*** 
+** 
 #+RESULTS:
-[[file:figs/qqHalf.pdf]]
+[[file:figs/qqHalf.png]]
 
-*** Quantile-quantile
+** Quantile-quantile
 
-#+begin_src R :file figs/qqWinter.pdf
+#+begin_src R :file figs/qqWinter.png
   winter <- aranjuez$quarter %in% c('Q1', 'Q4')
   
   qq(winter ~ Radiation, data=aranjuez)
 #+end_src
 
-*** 
+** 
 #+RESULTS:
-[[file:figs/qqWinter.pdf]]
+[[file:figs/qqWinter.png]]
 
-*** Quantile-Quantile
+** Quantile-Quantile
 
-#+begin_src R :file figs/qqNorm.pdf
+#+begin_src R :file figs/qqNorm.png
   qqmath(~TempAvg, data=aranjuez,
          groups=year, distribution=qnorm)
 #+end_src
 
-*** 
+** 
 #+RESULTS:
-[[file:figs/qqNorm.pdf]]
+[[file:figs/qqNorm.png]]
 
 
+* ggplot2
 ** ggplot2
-
-*** ggplot2
 - [[http://docs.ggplot2.org/current/][Documentación de ggplot2]]
 - [[http://ggplot2.org/book/][Codigo del libro]]
 - [[http://learnr.wordpress.com/2009/06/28/ggplot2-version-of-figures-in-lattice-multivariate-data-visualization-with-r-part-1/][ggplot2 desde lattice]] ([[http://learnr.files.wordpress.com/2009/08/latbook.pdf][PDF]])
