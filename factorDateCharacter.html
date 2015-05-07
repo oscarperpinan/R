@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
 <head>
 <title>Factores, fechas y caracteres</title>
-<!-- 2015-04-26 dom 16:43 -->
+<!-- 2015-05-07 jue 12:27 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Oscar Perpiñán Lamigueiro \\ [[http://oscarperpinan.github.io]]" />
@@ -88,6 +88,11 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   /*]]>*/-->
 </style>
+<link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://www.pirilampo.org/styles/readtheorg/js/readtheorg.js"></script>
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -138,6 +143,43 @@ for the JavaScript code in this tag.
 <body>
 <div id="content">
 <h1 class="title">Factores, fechas y caracteres</h1>
+<div id="table-of-contents">
+<h2>&Iacute;ndice</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. <code>factor</code></a>
+<ul>
+<li><a href="#sec-1-1">1.1. Construimos un ejemplo</a></li>
+<li><a href="#sec-1-2">1.2. Una variable cualitativa se define con <code>factor</code></a></li>
+<li><a href="#sec-1-3">1.3. Los <code>factor</code> sirven para agrupar</a></li>
+<li><a href="#sec-1-4">1.4. Los <code>factor</code> sirven para agrupar</a></li>
+<li><a href="#sec-1-5">1.5. Los factores sirven para separar</a></li>
+<li><a href="#sec-1-6">1.6. Los <code>factor</code> se pueden generar a partir de variables numéricas</a></li>
+</ul>
+</li>
+<li><a href="#sec-2">2. Fechas</a>
+<ul>
+<li><a href="#sec-2-1">2.1. <code>Date</code></a></li>
+<li><a href="#sec-2-2">2.2. Secuencias temporales con <code>Date</code></a></li>
+<li><a href="#sec-2-3">2.3. POSIXct</a></li>
+<li><a href="#sec-2-4">2.4. <code>POSIxct</code></a></li>
+<li><a href="#sec-2-5">2.5. Secuencias temporales con <code>POSIXct</code></a></li>
+<li><a href="#sec-2-6">2.6. Zonas horarias</a></li>
+</ul>
+</li>
+<li><a href="#sec-3">3. Caracteres</a>
+<ul>
+<li><a href="#sec-3-1">3.1. Bastan unas simples comillas</a></li>
+<li><a href="#sec-3-2">3.2. Un vector de <code>character</code></a></li>
+<li><a href="#sec-3-3">3.3. Para mostrarlos usamos <code>cat</code> o <code>print</code></a></li>
+<li><a href="#sec-3-4">3.4. Los <code>character</code> se pueden unir&#x2026;</a></li>
+<li><a href="#sec-3-5">3.5. &#x2026; y también se pueden separar&#x2026;</a></li>
+<li><a href="#sec-3-6">3.6. &#x2026; y, por supuesto, manipular</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
 
 
 <div id="outline-container-sec-1" class="outline-2">
@@ -156,7 +198,7 @@ for the JavaScript code in this tag.
 
 <pre class="example">
  Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-18.00   23.00   27.00   28.05   34.00   40.00
+18.00   24.00   27.50   28.35   33.00   40.00
 </pre>
 
 <div class="org-src-container">
@@ -202,7 +244,7 @@ for the JavaScript code in this tag.
 
 <pre class="example">
  H  M 
-62 38
+46 54
 </pre>
 
 <div class="org-src-container">
@@ -243,8 +285,8 @@ for the JavaScript code in this tag.
 <pre class="example">
      sexo
        H  M
-FALSE 38 24
-TRUE  24 14
+FALSE 29 37
+TRUE  17 17
 </pre>
 
 <div class="org-src-container">
@@ -256,8 +298,8 @@ TRUE  24 14
 <pre class="example">
      sexo
        H  M
-FALSE 27 23
-TRUE  35 15
+FALSE 21 20
+TRUE  25 34
 </pre>
 </div>
 </div>
@@ -277,7 +319,7 @@ TRUE  35 15
 
 <pre class="example">
        H        M 
-28.46774 27.36842
+28.97826 27.81481
 </pre>
 
 <div class="org-src-container">
@@ -288,8 +330,8 @@ TRUE  35 15
 
 <pre class="example">
   sexo edad
-1    H 27.0
-2    M 26.5
+1    H   29
+2    M   27
 </pre>
 </div>
 </div>
@@ -316,7 +358,7 @@ TRUE  35 15
 
 <pre class="example">
        H        M 
-28.46774 27.36842
+28.97826 27.81481
 </pre>
 </div>
 </div>
@@ -362,7 +404,7 @@ TRUE  35 15
 <pre class="example">
 gEdad
 (18,23.5] (23.5,29] (29,34.5] (34.5,40] 
-       31        26        20        23
+       22        41        16        21
 </pre>
 
 <div class="org-src-container">
@@ -374,10 +416,10 @@ gEdad
 <pre class="example">
            sexo
 gEdad        H  M
-  (18,23.5] 18 13
-  (23.5,29] 17  9
-  (29,34.5] 13  7
-  (34.5,40] 14  9
+  (18,23.5] 10 12
+  (23.5,29] 16 25
+  (29,34.5]  8  8
+  (34.5,40] 12  9
 </pre>
 </div>
 </div>
@@ -416,7 +458,7 @@ gEdad        H  M
 </div>
 
 <pre class="example">
-Error en charToDate(x) : 
+Error in charToDate(x) : 
   character string is not in a standard unambiguous format
 </pre>
 
@@ -572,7 +614,7 @@ format(hoy, <span class="org-string">'%Y'</span>)
 </div>
 
 <pre class="example">
-[1] "2015-04-26 16:42:57 CEST"
+[1] "2015-05-07 12:27:21 CEST"
 </pre>
 
 <div class="org-src-container">
@@ -582,7 +624,7 @@ format(hoy, <span class="org-string">'%Y'</span>)
 </div>
 
 <pre class="example">
-[1] "16:42:57"
+[1] "12:27:21"
 </pre>
 
 <div class="org-src-container">
@@ -592,7 +634,7 @@ format(hoy, <span class="org-string">'%Y'</span>)
 </div>
 
 <pre class="example">
-[1] "16 horas, 42 minutos y 57 segundos"
+[1] "12 horas, 27 minutos y 21 segundos"
 </pre>
 </div>
 </div>
@@ -948,7 +990,7 @@ La multiplicación de 2 por 3 es 6
 </div>
 <div id="postamble" class="status">
 <p class="author">Autor: Oscar Perpiñán Lamigueiro \\ <a href="http://oscarperpinan.github.io">http://oscarperpinan.github.io</a></p>
-<p class="date">Created: 2015-04-26 dom 16:43</p>
+<p class="date">Created: 2015-05-07 jue 12:27</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.4.1 (<a href="http://orgmode.org">Org</a> mode 8.2.7c)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

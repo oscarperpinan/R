@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
 <head>
 <title>Introducción a R</title>
-<!-- 2015-05-01 vie 19:13 -->
+<!-- 2015-05-07 jue 12:26 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Oscar Perpiñán Lamigueiro \\ [[http://oscarperpinan.github.io]]" />
@@ -88,6 +88,11 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   /*]]>*/-->
 </style>
+<link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://www.pirilampo.org/styles/readtheorg/js/readtheorg.js"></script>
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -138,6 +143,141 @@ for the JavaScript code in this tag.
 <body>
 <div id="content">
 <h1 class="title">Introducción a R</h1>
+<div id="table-of-contents">
+<h2>&Iacute;ndice</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Introducción</a>
+<ul>
+<li><a href="#sec-1-1">1.1. Guía para usar el curso</a>
+<ul>
+<li><a href="#sec-1-1-1">1.1.1. Interfaz gráfica: RStudio</a></li>
+<li><a href="#sec-1-1-2">1.1.2. Interfaz gráfica: RStudio</a></li>
+<li><a href="#sec-1-1-3">1.1.3. Material</a></li>
+<li><a href="#sec-1-1-4">1.1.4. Material</a></li>
+<li><a href="#sec-1-1-5">1.1.5. Material</a></li>
+<li><a href="#sec-1-1-6">1.1.6. Bloc de Notas</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-2">1.2. ¿Qué es <code>R</code>?</a>
+<ul>
+<li><a href="#sec-1-2-1">1.2.1. ¿Qué es <code>R</code>?</a></li>
+<li><a href="#sec-1-2-2">1.2.2. Para instalar <code>R</code></a></li>
+<li><a href="#sec-1-2-3">1.2.3. Interfaces para R</a></li>
+<li><a href="#sec-1-2-4">1.2.4. R está muy bien documentado</a></li>
+<li><a href="#sec-1-2-5">1.2.5. Otros recursos de información</a></li>
+<li><a href="#sec-1-2-6">1.2.6. R es un proyecto colaborativo</a></li>
+<li><a href="#sec-1-2-7">1.2.7. Más de 6000 paquetes disponibles</a></li>
+<li><a href="#sec-1-2-8">1.2.8. Más de 6000 paquetes disponibles</a></li>
+<li><a href="#sec-1-2-9">1.2.9. Más de 6000 paquetes disponibles</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-2">2. Objetos en R</a>
+<ul>
+<li>
+<ul>
+<li><a href="#sec-2-0-1">2.0.1. Objetos en R</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-1">2.1. Vectores</a>
+<ul>
+<li><a href="#sec-2-1-1">2.1.1. Primeros pasos</a></li>
+<li><a href="#sec-2-1-2">2.1.2. Generar vectores con <code>seq</code></a></li>
+<li><a href="#sec-2-1-3">2.1.3. Unir vectores con <code>c</code></a></li>
+<li><a href="#sec-2-1-4">2.1.4. Operaciones sencillas con vectores</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-2">2.2. Matrices</a>
+<ul>
+<li><a href="#sec-2-2-1">2.2.1. Construir una matriz</a></li>
+<li><a href="#sec-2-2-2">2.2.2. Matrices a partir de vectores: <code>rbind</code> y <code>cbind</code></a></li>
+</ul>
+</li>
+<li><a href="#sec-2-3">2.3. Listas</a>
+<ul>
+<li><a href="#sec-2-3-1">2.3.1. Para crear una lista usamos la función <code>list</code></a></li>
+</ul>
+</li>
+<li><a href="#sec-2-4">2.4. Data.frame</a>
+<ul>
+<li><a href="#sec-2-4-1">2.4.1. Para crear un <code>data.frame</code>&#x2026;</a></li>
+<li><a href="#sec-2-4-2">2.4.2. La regla del reciclaje</a></li>
+<li><a href="#sec-2-4-3">2.4.3. La función <code>expand.grid</code></a></li>
+</ul>
+</li>
+<li><a href="#sec-2-5">2.5. Funciones</a>
+<ul>
+<li><a href="#sec-2-5-1">2.5.1. Para definir una función usamos la función <code>function</code></a></li>
+<li><a href="#sec-2-5-2">2.5.2. Podemos construir a partir de funciones</a></li>
+<li><a href="#sec-2-5-3">2.5.3. Y ahora usamos la función con vectores</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-3">3. Indexado</a>
+<ul>
+<li><a href="#sec-3-1">3.1. Condiciones lógicas</a>
+<ul>
+<li><a href="#sec-3-1-1">3.1.1. Condiciones simples</a></li>
+<li><a href="#sec-3-1-2">3.1.2. Condiciones múltiples</a></li>
+<li><a href="#sec-3-1-3">3.1.3. Con las condiciones se pueden hacer operaciones</a></li>
+</ul>
+</li>
+<li><a href="#sec-3-2">3.2. Vectores</a>
+<ul>
+<li><a href="#sec-3-2-1">3.2.1. Indexado numérico</a></li>
+<li><a href="#sec-3-2-2">3.2.2. Indexado con condiciones lógicas</a></li>
+<li><a href="#sec-3-2-3">3.2.3. Indexado con condiciones múltiples</a></li>
+</ul>
+</li>
+<li><a href="#sec-3-3">3.3. Matrices</a>
+<ul>
+<li><a href="#sec-3-3-1">3.3.1. Indexado de matrices</a></li>
+<li><a href="#sec-3-3-2">3.3.2. Indexado de matrices</a></li>
+</ul>
+</li>
+<li><a href="#sec-3-4">3.4. Listas</a>
+<ul>
+<li><a href="#sec-3-4-1">3.4.1. Podemos acceder a los elementos&#x2026;</a></li>
+</ul>
+</li>
+<li><a href="#sec-3-5">3.5. Data Frame</a>
+<ul>
+<li><a href="#sec-3-5-1">3.5.1. Podemos acceder a los elementos</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-4">4. Bucles</a>
+<ul>
+<li><a href="#sec-4-1">4.1. Matrices</a>
+<ul>
+<li><a href="#sec-4-1-1">4.1.1. La función <code>apply</code></a></li>
+</ul>
+</li>
+<li><a href="#sec-4-2">4.2. Listas / <code>data.frame</code></a>
+<ul>
+<li><a href="#sec-4-2-1">4.2.1. <code>lapply</code> y <code>sapply</code></a></li>
+</ul>
+</li>
+<li><a href="#sec-4-3">4.3. Bucles <code>for</code></a>
+<ul>
+<li><a href="#sec-4-3-1">4.3.1. <code>for</code></a></li>
+</ul>
+</li>
+<li><a href="#sec-4-4">4.4. Condiciones con <code>if</code>, <code>else</code> e <code>ifelse</code></a>
+<ul>
+<li><a href="#sec-4-4-1">4.4.1. <code>if</code></a></li>
+<li><a href="#sec-4-4-2">4.4.2. <code>ifelse</code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
 
 <div id="outline-container-sec-1" class="outline-2">
 <h2 id="sec-1"><span class="section-number-2">1</span> Introducción</h2>
@@ -809,16 +949,16 @@ $c
 
 <pre class="example">
    x          y z
-1  1  0.5115934 0
-2  2 -0.8662154 0
-3  3  1.8870671 0
-4  4  1.0473130 0
-5  5 -0.7387080 0
-6  1 -1.8911549 0
-7  2 -0.3766637 0
-8  3 -0.3066357 0
-9  4 -0.2273578 0
-10 5 -1.4762056 0
+1  1 -2.7283054 0
+2  2  1.4156236 0
+3  3 -0.2315671 0
+4  4 -0.6166823 0
+5  5  1.0852694 0
+6  1 -0.7155091 0
+7  2  0.8265395 0
+8  3  0.3214463 0
+9  4 -2.0422648 0
+10 5  0.8228647 0
 </pre>
 
 <div class="org-src-container">
@@ -859,19 +999,19 @@ $c
 </div>
 
 <pre class="example">
-   year month class        vals
-1  2011     1     A  0.43793800
-2  2011     2     B -0.49402347
-3  2011     3     C  0.43719668
-4  2011     4     A  0.88581929
-5  2011     5     B -0.03140626
-6  2011     6     C -0.94326189
-7  2011     7     A  0.07562425
-8  2011     8     B -0.43563977
-9  2011     9     C  0.02947251
-10 2011    10     A -0.93934727
-11 2011    11     B -0.14654492
-12 2011    12     C -0.49478782
+   year month class       vals
+1  2011     1     A  0.4477581
+2  2011     2     B  0.9739690
+3  2011     3     C -0.1770161
+4  2011     4     A  0.7144084
+5  2011     5     B -3.0307005
+6  2011     6     C -0.9031348
+7  2011     7     A  0.9608130
+8  2011     8     B -0.9358359
+9  2011     9     C  1.7238623
+10 2011    10     A -1.1207740
+11 2011    11     B  0.7309602
+12 2011    12     C -0.1732607
 </pre>
 </div>
 </div>
@@ -1007,7 +1147,7 @@ O en forma resumida:
 </div>
 
 <pre class="example">
-[1] 0.0001764167 0.0049284216 0.9991051813
+[1] -0.003541819 -0.001354939  0.998922178
 </pre>
 </div>
 </div>
@@ -1439,8 +1579,8 @@ $a
 </div>
 
 <pre class="example">
-  x         y z
-1 1 0.1203424 0
+  x          y z
+1 1 -0.9716499 0
 </pre>
 
 <div class="org-src-container">
@@ -1534,7 +1674,7 @@ $y
 [1] 30
 
 $z
-[1] 8.140854
+[1] 5.919147
 </pre>
 
 <div class="org-src-container">
@@ -1545,7 +1685,7 @@ $z
 
 <pre class="example">
         x         y         z 
-55.000000 30.000000  8.140854
+55.000000 30.000000  5.919147
 </pre>
 </div>
 </div>
@@ -1571,11 +1711,11 @@ $z
 </div>
 
 <pre class="example">
-2 : 3.80476 
-5 : 4.720104 
-10 : 16.41361 
-20 : 18.12853 
-50 : 56.24803
+2 : 1.81796 
+5 : 10.08221 
+10 : 16.20478 
+20 : 13.0567 
+50 : 30.24742
 </pre>
 </div>
 </div>
@@ -1604,16 +1744,16 @@ $z
 
 <pre class="example">
                 x x2
- [1,] -2.19227355  0
- [2,]  0.24625427  1
- [3,] -2.09992151  0
- [4,]  1.21495893  1
- [5,]  0.36108779  1
- [6,] -0.37112139  0
- [7,]  0.03882051  1
- [8,]  0.18107687  1
- [9,] -0.81197040  0
-[10,]  2.03309929  1
+ [1,] -0.61713868  0
+ [2,]  1.62113243  1
+ [3,] -0.09094713  0
+ [4,]  1.60346162  1
+ [5,]  0.48580919  1
+ [6,]  1.28214789  1
+ [7,] -0.58522086  0
+ [8,] -0.55576331  0
+ [9,] -0.01541961  0
+[10,]  1.01974623  1
 </pre>
 </div>
 </div>
@@ -1629,8 +1769,8 @@ x
 </div>
 
 <pre class="example">
-[1]  0.67120834  0.18550979  1.82716041 -2.44424411 -1.35694826  1.16415457
-[7] -0.12462798  0.05335303  0.21059781 -2.19882611
+[1]  0.07835239 -0.72978951  2.27365231 -0.06266307  1.07762294  0.70830953
+[7]  0.89276101  0.00163513 -0.97493330  0.42811100
 </pre>
 
 <div class="org-src-container">
@@ -1640,7 +1780,7 @@ x
 </div>
 
 <pre class="example">
-[1] 1 1 1 0 0 1 0 1 1 0
+[1] 1 0 1 0 1 1 1 1 0 1
 </pre>
 </div>
 </div>
@@ -1649,7 +1789,7 @@ x
 </div>
 <div id="postamble" class="status">
 <p class="author">Autor: Oscar Perpiñán Lamigueiro \\ <a href="http://oscarperpinan.github.io">http://oscarperpinan.github.io</a></p>
-<p class="date">Created: 2015-05-01 vie 19:13</p>
+<p class="date">Created: 2015-05-07 jue 12:26</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.4.1 (<a href="http://orgmode.org">Org</a> mode 8.2.7c)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

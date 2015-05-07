@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
 <head>
 <title>Estadística básica con R</title>
-<!-- 2015-04-26 dom 16:43 -->
+<!-- 2015-05-07 jue 12:34 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Oscar Perpiñán Lamigueiro \\ [[http://oscarperpinan.github.io]]" />
@@ -88,6 +88,11 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   /*]]>*/-->
 </style>
+<link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://www.pirilampo.org/styles/readtheorg/js/readtheorg.js"></script>
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -138,6 +143,65 @@ for the JavaScript code in this tag.
 <body>
 <div id="content">
 <h1 class="title">Estadística básica con R</h1>
+<div id="table-of-contents">
+<h2>&Iacute;ndice</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Conjunto de datos</a>
+<ul>
+<li><a href="#sec-1-1">1.1. Conjunto de datos: swiss</a></li>
+<li><a href="#sec-1-2">1.2. Conjunto de datos: swiss</a></li>
+<li><a href="#sec-1-3">1.3. </a></li>
+</ul>
+</li>
+<li><a href="#sec-2">2. Estadística Univariante</a>
+<ul>
+<li><a href="#sec-2-1">2.1. Resumen de  información</a></li>
+<li><a href="#sec-2-2">2.2. Media</a></li>
+<li><a href="#sec-2-3">2.3. Desviación Estándar</a></li>
+<li><a href="#sec-2-4">2.4. Otras</a></li>
+</ul>
+</li>
+<li><a href="#sec-3">3. Generar datos aleatorios</a>
+<ul>
+<li><a href="#sec-3-1">3.1. Distribuciones disponibles</a></li>
+<li><a href="#sec-3-2">3.2. Densidad, CDF, Cuantiles, y Números aleatorios</a></li>
+<li><a href="#sec-3-3">3.3. Distribución Normal</a></li>
+<li><a href="#sec-3-4">3.4. Distribución Normal</a></li>
+<li><a href="#sec-3-5">3.5. Distribución Uniforme</a></li>
+<li><a href="#sec-3-6">3.6. Distribución de Weibull</a></li>
+<li><a href="#sec-3-7">3.7. Muestreo aleatorio</a></li>
+</ul>
+</li>
+<li><a href="#sec-4">4. Tests de Hipótesis</a>
+<ul>
+<li><a href="#sec-4-1">4.1. Para muestra única</a></li>
+<li><a href="#sec-4-2">4.2. Para muestras pareadas</a></li>
+<li><a href="#sec-4-3">4.3. Para muestras pareadas</a></li>
+</ul>
+</li>
+<li><a href="#sec-5">5. Regresión lineal</a>
+<ul>
+<li><a href="#sec-5-1">5.1. Fertilidad y educación</a></li>
+<li><a href="#sec-5-2">5.2. Fertilidad y educación</a></li>
+<li><a href="#sec-5-3">5.3. Fertilidad y educación</a></li>
+<li><a href="#sec-5-4">5.4. Fertilidad y educación</a></li>
+<li><a href="#sec-5-5">5.5. Fertilidad, educación y religión</a></li>
+<li><a href="#sec-5-6">5.6. Lo mismo con <code>update</code></a></li>
+<li><a href="#sec-5-7">5.7. Fertilidad, educación, religión y agricultura</a></li>
+<li><a href="#sec-5-8">5.8. Lo mismo con <code>update</code></a></li>
+<li><a href="#sec-5-9">5.9. Lo mismo con <code>update</code></a></li>
+<li><a href="#sec-5-10">5.10. Comparamos modelos con <code>anova</code></a></li>
+<li><a href="#sec-5-11">5.11. Fertilidad contra todo</a></li>
+<li><a href="#sec-5-12">5.12. Elegir un modelo con <code>anova</code></a></li>
+<li><a href="#sec-5-13">5.13. Elegir un modelo con <code>step</code></a></li>
+<li><a href="#sec-5-14">5.14. Elegir un modelo</a></li>
+<li><a href="#sec-5-15">5.15. Elegir un modelo</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
 
 <div id="outline-container-sec-1" class="outline-2">
 <h2 id="sec-1"><span class="section-number-2">1</span> Conjunto de datos</h2>
@@ -209,9 +273,11 @@ splom(swiss, pscale=0, type=c(<span class="org-string">'p'</span>, <span class="
 </pre>
 </div>
 
-<p>
-<a href="figs/splomSwiss.pdf">figs/splomSwiss.pdf</a>
+
+<div class="figure">
+<p><img src="figs/splomSwiss.png" alt="splomSwiss.png" />
 </p>
+</div>
 </div>
 </div>
 </div>
@@ -421,8 +487,8 @@ Fertility      Agriculture      Examination        Education
 </div>
 
 <pre class="example">
-[1] 0.7596640 1.6227235 0.7690355 1.6152069 1.0758294 1.2351868 0.8769146
-[8] 1.0554571 0.6236272 0.7464615
+[1] 0.5987165 0.7374486 1.0635955 0.2232172 1.0509421 0.9659542 0.5948662
+[8] 0.8766249 1.0982419 0.9985146
 </pre>
 
 <div class="org-src-container">
@@ -431,9 +497,11 @@ Fertility      Agriculture      Examination        Education
 </pre>
 </div>
 
-<p>
-<a href="figs/rnorm.pdf">figs/rnorm.pdf</a>
+
+<div class="figure">
+<p><img src="figs/rnorm.png" alt="rnorm.png" />
 </p>
+</div>
 </div>
 </div>
 
@@ -447,9 +515,11 @@ plot(x, dnorm(x), type = <span class="org-string">'l'</span>)
 </pre>
 </div>
 
-<p>
-<a href="figs/dnorm.pdf">figs/dnorm.pdf</a>
+
+<div class="figure">
+<p><img src="figs/dnorm.png" alt="dnorm.png" />
 </p>
+</div>
 </div>
 </div>
 
@@ -463,8 +533,8 @@ plot(x, dnorm(x), type = <span class="org-string">'l'</span>)
 </div>
 
 <pre class="example">
-[1]  2.8311801  1.9392367 -0.9544909 -0.4151637  1.7751946  2.4700545
-[7] -1.1330366 -0.7559636 -2.5577494  1.6317470
+[1]  1.2153711 -2.8451359  0.8235075 -1.0147079 -1.7177479 -1.3571362
+[7]  2.7228768  0.2771958  0.7458442 -1.8732231
 </pre>
 
 
@@ -474,9 +544,11 @@ plot(x, dnorm(x), type = <span class="org-string">'l'</span>)
 </pre>
 </div>
 
-<p>
-<a href="figs/runif.pdf">figs/runif.pdf</a>
+
+<div class="figure">
+<p><img src="figs/runif.png" alt="runif.png" />
 </p>
+</div>
 </div>
 </div>
 
@@ -490,8 +562,8 @@ plot(x, dnorm(x), type = <span class="org-string">'l'</span>)
 </div>
 
 <pre class="example">
-[1] 0.9320972 1.8356600 1.2623346 1.6102741 2.0972990 1.5986501 1.3430171
-[8] 2.6008020 2.3811822 1.3551277
+[1] 0.7661914 1.3502844 0.9237997 1.8538150 1.8644202 2.5229566 1.6498369
+[8] 1.8534614 1.9982788 2.7837383
 </pre>
 
 
@@ -501,9 +573,11 @@ plot(x, dnorm(x), type = <span class="org-string">'l'</span>)
 </pre>
 </div>
 
-<p>
-<a href="figs/rweibull.pdf">figs/rweibull.pdf</a>
+
+<div class="figure">
+<p><img src="figs/rweibull.png" alt="rweibull.png" />
 </p>
+</div>
 </div>
 </div>
 
@@ -532,7 +606,7 @@ x
 </div>
 
 <pre class="example">
-[1]  56  45  78  89   1  34  12  23  67 100
+[1]  12  23  45  78   1 100  34  89  67  56
 </pre>
 
 <div class="org-src-container">
@@ -542,7 +616,7 @@ x
 </div>
 
 <pre class="example">
-[1] 45 78 89 56 34
+[1]  89 100  56  23  12
 </pre>
 
 <ul class="org-ul">
@@ -556,7 +630,7 @@ x
 </div>
 
 <pre class="example">
-[1]  1 45  1 34  1
+[1]  1 56 89 45 89
 </pre>
 </div>
 </div>
@@ -583,7 +657,7 @@ x
 	One Sample t-test
 
 data:  swiss$Fertility
-t = 0.0782, df = 46, p-value = 0.938
+t = 0.078236, df = 46, p-value = 0.938
 alternative hypothesis: true mean is not equal to 70
 95 percent confidence interval:
  66.47485 73.81025
@@ -609,7 +683,7 @@ data:  swiss$Fertility
 V = 592.5, p-value = 0.767
 alternative hypothesis: true location is not equal to 70
 
-Mensajes de aviso perdidos
+Warning message:
 In wilcox.test.default(swiss$Fertility, mu = 70) :
   cannot compute exact p-value with ties
 </pre>
@@ -671,7 +745,7 @@ data:  Fertility by Religion
 W = 409.5, p-value = 0.0012
 alternative hypothesis: true location shift is not equal to 0
 
-Mensajes de aviso perdidos
+Warning message:
 In wilcox.test.default(x = c(83.1, 92.5, 76.1, 83.8, 92.4, 82.4,  :
   cannot compute exact p-value with ties
 </pre>
@@ -795,9 +869,11 @@ F-statistic: 35.45 on 1 and 45 DF,  p-value: 3.659e-07
 </pre>
 </div>
 
-<p>
-<a href="figs/lmFertEdu.pdf">figs/lmFertEdu.pdf</a>
+
+<div class="figure">
+<p><img src="figs/lmFertEdu.png" alt="lmFertEdu.png" />
 </p>
+</div>
 </div>
 </div>
 
@@ -1162,7 +1238,7 @@ F-statistic: 24.42 on 4 and 42 DF,  p-value: 1.717e-10
 </div>
 <div id="postamble" class="status">
 <p class="author">Autor: Oscar Perpiñán Lamigueiro \\ <a href="http://oscarperpinan.github.io">http://oscarperpinan.github.io</a></p>
-<p class="date">Created: 2015-04-26 dom 16:43</p>
+<p class="date">Created: 2015-05-07 jue 12:34</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.4.1 (<a href="http://orgmode.org">Org</a> mode 8.2.7c)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
