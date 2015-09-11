@@ -1,4 +1,4 @@
-% Created 2015-05-01 vie 19:12
+% Created 2015-09-11 vie 13:00
 \documentclass[xcolor={usenames,svgnames,dvipsnames}]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -38,10 +38,14 @@
 \hypersetup{
   pdfkeywords={},
   pdfsubject={},
-  pdfcreator={Emacs 24.4.1 (Org mode 8.2.7c)}}
+  pdfcreator={Emacs 24.5.1 (Org mode 8.2.7c)}}
 \begin{document}
 
 \maketitle
+\begin{frame}{Outline}
+\tableofcontents
+\end{frame}
+
 
 \section{Introducción}
 \label{sec-1}
@@ -194,14 +198,14 @@ install.packages(c('lattice', 'latticeExtra',
 \begin{frame}[label=sec-1-2-6]{R es un proyecto colaborativo}
 \begin{itemize}
 \item Una de las grandes riquezas de R es la cantidad de paquetes (más
-de 6500 actualmente) que amplían sus funcionalidades.
+de 7000 actualmente) que amplían sus funcionalidades.
 \item La lista completa está en \url{http://cran.es.r-project.org/web/packages/}.
 \item Las CRAN Task Views agrupan por temáticas:
 \url{http://cran.r-project.org/web/views/}
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-1-2-7]{Más de 6000 paquetes disponibles}
+\begin{frame}[fragile,label=sec-1-2-7]{Más de 7000 paquetes disponibles}
  \begin{itemize}
 \item Algunos vienen instalados y se cargan al empezar:
 \end{itemize}
@@ -210,7 +214,7 @@ de 6500 actualmente) que amplían sus funcionalidades.
   sessionInfo()
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile,label=sec-1-2-8]{Más de 6000 paquetes disponibles}
+\begin{frame}[fragile,label=sec-1-2-8]{Más de 7000 paquetes disponibles}
  \begin{itemize}
 \item Otros vienen instalados pero hay que cargarlos:
 \end{itemize}
@@ -225,7 +229,7 @@ de 6500 actualmente) que amplían sus funcionalidades.
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-1-2-9]{Más de 6000 paquetes disponibles}
+\begin{frame}[fragile,label=sec-1-2-9]{Más de 7000 paquetes disponibles}
  \begin{itemize}
 \item Otros hay que instalarlos y después cargarlos:
 \end{itemize}
@@ -541,17 +545,17 @@ length(lista)
 \end{lstlisting}
 
 \begin{verbatim}
-   x          y z
-1  1 -0.5864477 0
-2  2  0.4958892 0
-3  3  1.3632128 0
-4  4  0.9017172 0
-5  5 -0.4990299 0
-6  1  0.4272516 0
-7  2  0.5145196 0
-8  3 -0.4337191 0
-9  4 -1.9385636 0
-10 5 -0.8251932 0
+   x           y z
+1  1 -2.04327922 0
+2  2 -1.14083239 0
+3  3 -0.08732426 0
+4  4 -0.83930767 0
+5  5  1.15221686 0
+6  1 -0.66033515 0
+7  2 -1.13471474 0
+8  3 -1.05708721 0
+9  4 -0.67407802 0
+10 5 -1.04138086 0
 \end{verbatim}
 
 \lstset{language=R,label= ,caption= ,numbers=none}
@@ -587,18 +591,18 @@ length(lista)
 
 \begin{verbatim}
    year month class        vals
-1  2011     1     A -0.34358317
-2  2011     2     B  0.48294871
-3  2011     3     C -0.07901334
-4  2011     4     A  1.89254051
-5  2011     5     B  0.35951666
-6  2011     6     C -0.99598243
-7  2011     7     A -0.38636710
-8  2011     8     B  0.96084690
-9  2011     9     C -0.25232228
-10 2011    10     A  1.32905819
-11 2011    11     B -1.43533769
-12 2011    12     C -0.62912080
+1  2011     1     A -0.05271147
+2  2011     2     B -0.51441962
+3  2011     3     C -1.00838473
+4  2011     4     A -1.59543313
+5  2011     5     B  0.98230478
+6  2011     6     C  0.40463818
+7  2011     7     A -0.38603650
+8  2011     8     B -0.12024510
+9  2011     9     C -1.29392603
+10 2011    10     A -0.75120501
+11 2011    11     B -1.90872417
+12 2011    12     C  0.30574968
 \end{verbatim}
 \end{frame}
 
@@ -709,7 +713,7 @@ foo(rnorm(1e5))
 \end{lstlisting}
 
 \begin{verbatim}
-[1] -0.003809421 -0.003904140  1.000131182
+[1] -0.005395453 -0.001147925  0.997132143
 \end{verbatim}
 \end{frame}
 
@@ -1065,8 +1069,8 @@ df[1,]
 \end{lstlisting}
 
 \begin{verbatim}
-  x        y z
-1 1 1.271439 0
+  x          y z
+1 1 -0.4421544 0
 \end{verbatim}
 
 \lstset{language=R,label= ,caption= ,numbers=none}
@@ -1142,7 +1146,7 @@ $y
 [1] 30
 
 $z
-[1] 1.211529
+[1] 2.419564
 \end{verbatim}
 
 \lstset{language=R,label= ,caption= ,numbers=none}
@@ -1152,7 +1156,7 @@ sapply(lista, sum)
 
 \begin{verbatim}
         x         y         z 
-55.000000 30.000000  1.211529
+55.000000 30.000000  2.419564
 \end{verbatim}
 \end{frame}
 
@@ -1171,11 +1175,11 @@ for(n in c(2,5,10,20,50)) {
 \end{lstlisting}
 
 \begin{verbatim}
-2 : 2.842293 
-5 : 1.309975 
-10 : 6.914618 
-20 : 19.89221 
-50 : 48.87962
+2 : 2.475277 
+5 : 0.9078726 
+10 : 11.53767 
+20 : 24.29035 
+50 : 48.94954
 \end{verbatim}
 \end{frame}
 
@@ -1197,16 +1201,16 @@ for(n in c(2,5,10,20,50)) {
 
 \begin{verbatim}
                x x2
- [1,]  0.4008498  1
- [2,]  0.2905819  1
- [3,] -1.0783213  0
- [4,] -0.2695120  0
- [5,]  0.2361635  1
- [6,]  0.6229271  1
- [7,] -0.9369963  0
- [8,] -1.7145365  0
- [9,] -1.3937854  0
-[10,]  0.5086152  1
+ [1,]  1.1477830  1
+ [2,] -0.3085277  0
+ [3,] -0.5303659  0
+ [4,] -0.1565503  0
+ [5,]  1.2528223  1
+ [6,]  0.8823026  1
+ [7,] -0.3483652  0
+ [8,] -0.4456942  0
+ [9,] -0.7532346  0
+[10,]  0.6517239  1
 \end{verbatim}
 \end{frame}
 
@@ -1218,8 +1222,8 @@ x
 \end{lstlisting}
 
 \begin{verbatim}
-[1] -0.17403905  1.53508668  0.02968978 -0.07082425  0.98205913  0.41577163
-[7]  1.52808255  0.18571891  0.66252019 -0.22876407
+[1] -1.93236913  0.02645601 -0.50939199 -0.16986912 -0.96690574 -0.46963070
+[7]  0.20149154  0.19742025  0.34661441 -0.47492386
 \end{verbatim}
 
 \lstset{language=R,label= ,caption= ,numbers=none}
@@ -1228,8 +1232,8 @@ ifelse(x>0, 1, 0)
 \end{lstlisting}
 
 \begin{verbatim}
-[1] 0 1 1 0 1 1 1 1 1 0
+[1] 0 1 0 0 0 0 1 1 1 0
 \end{verbatim}
 \end{frame}
-% Emacs 24.4.1 (Org mode 8.2.7c)
+% Emacs 24.5.1 (Org mode 8.2.7c)
 \end{document}
