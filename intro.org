@@ -119,12 +119,12 @@ Es un entorno de programación orientado al cálculo, manipulación de datos, y 
 - Las CRAN Task Views agrupan por temáticas:
   [[http://cran.r-project.org/web/views/]]
 
-*** Más de 7000 paquetes disponibles
+*** Más de 7900 paquetes disponibles
 - Algunos vienen instalados y se cargan al empezar:
 #+begin_src R :eval no
   sessionInfo()
 #+end_src
-*** Más de 7000 paquetes disponibles
+*** Más de 7900 paquetes disponibles
 - Otros vienen instalados pero hay que cargarlos:
 #+begin_src R :eval no 
   library(lattice)
@@ -134,7 +134,7 @@ Es un entorno de programación orientado al cálculo, manipulación de datos, y 
   packageDescription('lattice')
 #+end_src
 
-*** Más de 7000 paquetes disponibles
+*** Más de 7900 paquetes disponibles
 - Otros hay que instalarlos y después cargarlos:
 #+begin_src R :eval no :exports no
   install.packages('data.table')

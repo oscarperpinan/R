@@ -1,21 +1,19 @@
-% Created 2015-09-11 vie 13:00
+% Created 2016-02-22 lun 18:06
 \documentclass[xcolor={usenames,svgnames,dvipsnames}]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{fixltx2e}
 \usepackage{graphicx}
+\usepackage{grffile}
 \usepackage{longtable}
-\usepackage{float}
 \usepackage{wrapfig}
 \usepackage{rotating}
 \usepackage[normalem]{ulem}
 \usepackage{amsmath}
 \usepackage{textcomp}
-\usepackage{marvosym}
-\usepackage{wasysym}
 \usepackage{amssymb}
+\usepackage{capt-of}
 \usepackage{hyperref}
-\tolerance=1000
 \usepackage{color}
 \usepackage{listings}
 \usecolortheme{rose}
@@ -32,13 +30,16 @@
 \DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\tiny, formatcom = {\color{black!70}}}
 \usetheme{Goettingen}
 \usefonttheme{serif}
-\author{Oscar Perpiñán Lamigueiro \\ \url{http://oscarperpinan.github.io}}
+\author{Oscar Perpiñán Lamigueiro $\backslash$\ \url{http://oscarperpinan.github.io}}
 \date{}
 \title{Introducción a R}
 \hypersetup{
-  pdfkeywords={},
-  pdfsubject={},
-  pdfcreator={Emacs 24.5.1 (Org mode 8.2.7c)}}
+ pdfauthor={Oscar Perpiñán Lamigueiro $\backslash$\ \url{http://oscarperpinan.github.io}},
+ pdftitle={Introducción a R},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 24.5.1 (Org mode 8.3.3)}, 
+ pdflang={Spanish}}
 \begin{document}
 
 \maketitle
@@ -48,17 +49,17 @@
 
 
 \section{Introducción}
-\label{sec-1}
+\label{sec:orgheadline18}
 
 
 \subsection{Guía para usar el curso}
-\label{sec-1-1}
+\label{sec:orgheadline7}
 
-\begin{frame}[plain,label=sec-1-1-1]{Interfaz gráfica: RStudio}
+\begin{frame}[plain,label={sec:orgheadline1}]{Interfaz gráfica: RStudio}
 \includegraphics[width=1.05\textwidth]{figs/rstudio-ubuntu.png}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-1-1-2]{Interfaz gráfica: RStudio}
+\begin{frame}[fragile,label={sec:orgheadline2}]{Interfaz gráfica: RStudio}
  \begin{itemize}
 \item La consola de R es el área en la que se ejecuta código (\texttt{Ctrl + 2})
 \begin{itemize}
@@ -75,7 +76,7 @@
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-1-1-3]{Material}
+\begin{frame}[fragile,label={sec:orgheadline3}]{Material}
  \begin{itemize}
 \item Primero obtenemos una copia local del repositorio. Opciones:
 
@@ -85,17 +86,17 @@
 \item Usando \texttt{git}:
 \end{itemize}
 \end{itemize}
-\lstset{language=sh,label= ,caption= ,numbers=none}
+\lstset{language=sh,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 git clone git://github.com/oscarperpinan/intro.git
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-1-1-4]{Material}
+\begin{frame}[fragile,label={sec:orgheadline4}]{Material}
  \begin{itemize}
 \item Todo el código del curso asume que la ruta de trabajo coincide con la carpeta local: definimos la ruta de trabajo con \texttt{setwd}
 \end{itemize}
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 setwd('/ruta/de/copia/local/del/repositorio/')
 \end{lstlisting}
@@ -103,17 +104,17 @@ setwd('/ruta/de/copia/local/del/repositorio/')
 \begin{itemize}
 \item Comprobamos que todo ha ido bien. El resultado de la siguiente instrucción debe ser la estructura de carpetas y ficheros del repositorio:
 \end{itemize}
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 dir()
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-1-1-5]{Material}
+\begin{frame}[fragile,label={sec:orgheadline5}]{Material}
  \begin{itemize}
 \item Finalmente hay que instalar los paquetes que se emplean a lo largo del curso. Algunos ya vendrán instalados con tu distribución de R por ser paquetes recomendados. En la siguiente instrucción usamos el \emph{CRAN mirror} de la Oficina de Software Libre (CIXUG).
 \end{itemize}
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 install.packages(c('lattice', 'latticeExtra',
                    'RColorBrewer',
@@ -123,7 +124,7 @@ install.packages(c('lattice', 'latticeExtra',
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label=sec-1-1-6]{Bloc de Notas}
+\begin{frame}[label={sec:orgheadline6}]{Bloc de Notas}
 \begin{itemize}
 \item Usaremos un bloc de notas colaborativo para escribir código juntos y resolver dudas. Está accesible en: \url{https://etsidifv.titanpad.com/r-ice-upm}
 
@@ -132,15 +133,15 @@ install.packages(c('lattice', 'latticeExtra',
 \end{frame}
 
 \subsection{¿Qué es \texttt{R}?}
-\label{sec-1-2}
-\begin{frame}[fragile,label=sec-1-2-1]{¿Qué es \texttt{R}?}
+\label{sec:orgheadline17}
+\begin{frame}[fragile,label={sec:orgheadline8}]{¿Qué es \texttt{R}?}
  Es un entorno de programación orientado al cálculo, manipulación de datos, y representación gráfica, publicado como software libre con licencia GNU-GPL.
 \begin{center}
 \url{http://www.R-project.org} 
 \end{center}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-1-2-2]{Para instalar \texttt{R}}
+\begin{frame}[fragile,label={sec:orgheadline9}]{Para instalar \texttt{R}}
  \begin{itemize}
 \item Windows: \url{http://cran.es.r-project.org/bin/windows/base/}
 \item Mac: \url{http://cran.es.r-project.org/bin/macosx/}
@@ -148,7 +149,7 @@ install.packages(c('lattice', 'latticeExtra',
 \end{itemize}
 \end{frame}
 
-\begin{frame}[label=sec-1-2-3]{Interfaces para R}
+\begin{frame}[label={sec:orgheadline10}]{Interfaces para R}
 \begin{itemize}
 \item En mi opinión, la mejor interfaz para R es \href{http://ess.r-project.org/}{ESS} con \href{http://www.gnu.org/software/emacs/}{Emacs}.
 \item Para los que prefieren una interfaz gráfica es recomendable \href{http://www.rstudio.com/ide/}{RStudio}:
@@ -161,7 +162,7 @@ install.packages(c('lattice', 'latticeExtra',
 
 
 
-\begin{frame}[label=sec-1-2-4]{R está muy bien documentado}
+\begin{frame}[label={sec:orgheadline11}]{R está muy bien documentado}
 \begin{itemize}
 \item \href{http://cran.r-project.org/manuals.html}{Manuales Oficiales}
 
@@ -183,7 +184,7 @@ install.packages(c('lattice', 'latticeExtra',
 \end{itemize}
 \end{frame}
 
-\begin{frame}[label=sec-1-2-5]{Otros recursos de información}
+\begin{frame}[label={sec:orgheadline12}]{Otros recursos de información}
 \begin{itemize}
 \item \href{http://www.r-project.org/mail.html}{Listas de correo} (sin olvidar respetar \href{http://www.r-project.org/posting-guide.html}{estos consejos})
 \begin{itemize}
@@ -195,7 +196,7 @@ install.packages(c('lattice', 'latticeExtra',
 \end{itemize}
 \end{frame}
 
-\begin{frame}[label=sec-1-2-6]{R es un proyecto colaborativo}
+\begin{frame}[label={sec:orgheadline13}]{R es un proyecto colaborativo}
 \begin{itemize}
 \item Una de las grandes riquezas de R es la cantidad de paquetes (más
 de 7000 actualmente) que amplían sus funcionalidades.
@@ -205,35 +206,35 @@ de 7000 actualmente) que amplían sus funcionalidades.
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-1-2-7]{Más de 7000 paquetes disponibles}
+\begin{frame}[fragile,label={sec:orgheadline14}]{Más de 7900 paquetes disponibles}
  \begin{itemize}
 \item Algunos vienen instalados y se cargan al empezar:
 \end{itemize}
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   sessionInfo()
 \end{lstlisting}
 \end{frame}
-\begin{frame}[fragile,label=sec-1-2-8]{Más de 7000 paquetes disponibles}
+\begin{frame}[fragile,label={sec:orgheadline15}]{Más de 7900 paquetes disponibles}
  \begin{itemize}
 \item Otros vienen instalados pero hay que cargarlos:
 \end{itemize}
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   library(lattice)
   packageVersion('lattice')
 \end{lstlisting}
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   packageDescription('lattice')
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-1-2-9]{Más de 7000 paquetes disponibles}
+\begin{frame}[fragile,label={sec:orgheadline16}]{Más de 7900 paquetes disponibles}
  \begin{itemize}
 \item Otros hay que instalarlos y después cargarlos:
 \end{itemize}
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   install.packages('data.table')
   library('data.table')
@@ -242,9 +243,9 @@ de 7000 actualmente) que amplían sus funcionalidades.
 \end{frame}
 
 \section{Objetos en R}
-\label{sec-2}
+\label{sec:orgheadline38}
 
-\begin{frame}[fragile,label=sec-2-0-1]{Objetos en R}
+\begin{frame}[fragile,label={sec:orgheadline19}]{Objetos en R}
  \begin{itemize}
 \item Existen varios objetos en R:
 \begin{itemize}
@@ -265,10 +266,10 @@ de 7000 actualmente) que amplían sus funcionalidades.
 \end{frame}
 
 \subsection{Vectores}
-\label{sec-2-1}
+\label{sec:orgheadline24}
 
-\begin{frame}[fragile,label=sec-2-1-1]{Primeros pasos}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:orgheadline20}]{Primeros pasos}
+ \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 x <- 1:5
 x
@@ -278,7 +279,7 @@ x
 [1] 1 2 3 4 5
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 length(x)
 \end{lstlisting}
@@ -287,7 +288,7 @@ length(x)
 [1] 5
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 class(x)
 \end{lstlisting}
@@ -298,8 +299,8 @@ class(x)
 \end{frame}
 
 
-\begin{frame}[fragile,label=sec-2-1-2]{Generar vectores con \texttt{seq}}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:orgheadline21}]{Generar vectores con \texttt{seq}}
+ \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 x1 <- seq(1, 100, by=2)
 x1
@@ -310,7 +311,7 @@ x1
 [26] 51 53 55 57 59 61 63 65 67 69 71 73 75 77 79 81 83 85 87 89 91 93 95 97 99
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 seq(1, 100, length=10)
 \end{lstlisting}
@@ -321,8 +322,8 @@ seq(1, 100, length=10)
 \end{frame}
 
 
-\begin{frame}[fragile,label=sec-2-1-3]{Unir vectores con \texttt{c}}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:orgheadline22}]{Unir vectores con \texttt{c}}
+ \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 x <- c(1, 2, 3)
 x
@@ -332,7 +333,7 @@ x
 [1] 1 2 3
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 x <- seq(1, 100, length=10)
 y <- seq(2, 100, length=50)
@@ -349,8 +350,8 @@ z
 \end{frame}
 
 
-\begin{frame}[fragile,label=sec-2-1-4]{Operaciones sencillas con vectores}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:orgheadline23}]{Operaciones sencillas con vectores}
+ \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   x <- 1:5
   x + 1
@@ -360,7 +361,7 @@ z
 [1] 2 3 4 5 6
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   x^2
 \end{lstlisting}
@@ -369,7 +370,7 @@ z
 [1]  1  4  9 16 25
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   y <- 1:10
   x + y
@@ -379,7 +380,7 @@ z
 [1]  2  4  6  8 10  7  9 11 13 15
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   x * y
 \end{lstlisting}
@@ -388,7 +389,7 @@ z
 [1]  1  4  9 16 25  6 14 24 36 50
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   x^2 + y^3
 \end{lstlisting}
@@ -402,9 +403,9 @@ z
 
 
 \subsection{Matrices}
-\label{sec-2-2}
-\begin{frame}[fragile,label=sec-2-2-1]{Construir una matriz}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\label{sec:orgheadline27}
+\begin{frame}[fragile,label={sec:orgheadline25}]{Construir una matriz}
+ \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   z <- 1:12
   M  <-  matrix(z, nrow=3)
@@ -418,7 +419,7 @@ z
 [3,]    3    6    9   12
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   class(M)
 \end{lstlisting}
@@ -427,7 +428,7 @@ z
 [1] "matrix"
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   dim(M)
 \end{lstlisting}
@@ -436,7 +437,7 @@ z
 [1] 3 4
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   summary(M)
 \end{lstlisting}
@@ -452,8 +453,8 @@ Max.   :3.0   Max.   :6.0   Max.   :9.0   Max.   :12.0
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-2-2-2]{Matrices a partir de vectores: \texttt{rbind} y \texttt{cbind}}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:orgheadline26}]{Matrices a partir de vectores: \texttt{rbind} y \texttt{cbind}}
+ \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 z <- y <- x <- 1:10
 
@@ -475,7 +476,7 @@ M
 [10,] 10 10 10
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 M <- rbind(x, y, z)
 M
@@ -491,9 +492,9 @@ z    1    2    3    4    5    6    7    8    9    10
 
 
 \subsection{Listas}
-\label{sec-2-3}
-\begin{frame}[fragile,label=sec-2-3-1]{Para crear una lista usamos la función \texttt{list}}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\label{sec:orgheadline29}
+\begin{frame}[fragile,label={sec:orgheadline28}]{Para crear una lista usamos la función \texttt{list}}
+ \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 lista <- list(a=c(1,3,5),
               b=c('l', 'p', 'r', 's'),
@@ -512,7 +513,7 @@ $c
 [1] 3
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 class(lista)
 \end{lstlisting}
@@ -521,7 +522,7 @@ class(lista)
 [1] "list"
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 length(lista)
 \end{lstlisting}
@@ -534,9 +535,9 @@ length(lista)
 
 
 \subsection{Data.frame}
-\label{sec-2-4}
-\begin{frame}[fragile,label=sec-2-4-1]{Para crear un \texttt{data.frame}\ldots{}}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\label{sec:orgheadline33}
+\begin{frame}[fragile,label={sec:orgheadline30}]{Para crear un \texttt{data.frame}\ldots{}}
+ \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   df <- data.frame(x = 1:5,
                    y = rnorm(10),
@@ -545,20 +546,20 @@ length(lista)
 \end{lstlisting}
 
 \begin{verbatim}
-   x           y z
-1  1 -2.04327922 0
-2  2 -1.14083239 0
-3  3 -0.08732426 0
-4  4 -0.83930767 0
-5  5  1.15221686 0
-6  1 -0.66033515 0
-7  2 -1.13471474 0
-8  3 -1.05708721 0
-9  4 -0.67407802 0
-10 5 -1.04138086 0
+   x          y z
+1  1  0.3558367 0
+2  2  0.6107839 0
+3  3 -1.0774375 0
+4  4 -0.3410327 0
+5  5 -0.8194895 0
+6  1 -0.3642443 0
+7  2 -1.1762612 0
+8  3  0.4345370 0
+9  4 -0.1260969 0
+10 5  0.2276444 0
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   length(df)
 \end{lstlisting}
@@ -567,7 +568,7 @@ length(lista)
 [1] 3
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   dim(df)
 \end{lstlisting}
@@ -577,8 +578,8 @@ length(lista)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-2-4-2]{La regla del reciclaje}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:orgheadline31}]{La regla del reciclaje}
+ \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   year <- 2011
   month <- 1:12
@@ -591,29 +592,29 @@ length(lista)
 
 \begin{verbatim}
    year month class        vals
-1  2011     1     A -0.05271147
-2  2011     2     B -0.51441962
-3  2011     3     C -1.00838473
-4  2011     4     A -1.59543313
-5  2011     5     B  0.98230478
-6  2011     6     C  0.40463818
-7  2011     7     A -0.38603650
-8  2011     8     B -0.12024510
-9  2011     9     C -1.29392603
-10 2011    10     A -0.75120501
-11 2011    11     B -1.90872417
-12 2011    12     C  0.30574968
+1  2011     1     A -0.03859373
+2  2011     2     B  0.41703244
+3  2011     3     C -1.04403522
+4  2011     4     A  1.20273279
+5  2011     5     B -0.74400657
+6  2011     6     C  0.20712846
+7  2011     7     A  0.37017749
+8  2011     8     B  1.19959594
+9  2011     9     C  1.56935753
+10 2011    10     A  0.03511901
+11 2011    11     B -0.15433483
+12 2011    12     C -0.59557762
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-2-4-3]{La función \texttt{expand.grid}}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:orgheadline32}]{La función \texttt{expand.grid}}
+ \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   x <- y <- seq(-4*pi, 4*pi, len=200)
   df <- expand.grid(A = x, B = y)
 \end{lstlisting}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   head(df)
 \end{lstlisting}
@@ -628,7 +629,7 @@ length(lista)
 6 -11.93489 -12.56637
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   tail(df)
 \end{lstlisting}
@@ -645,10 +646,10 @@ length(lista)
 \end{frame}
 
 \subsection{Funciones}
-\label{sec-2-5}
+\label{sec:orgheadline37}
 
-\begin{frame}[fragile,label=sec-2-5-1]{Para definir una función usamos la función \texttt{function}}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:orgheadline34}]{Para definir una función usamos la función \texttt{function}}
+ \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 myFun <- function(x, y) x + y
 myFun
@@ -658,7 +659,7 @@ myFun
 function(x, y) x + y
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   class(myFun)
 \end{lstlisting}
@@ -668,7 +669,7 @@ function(x, y) x + y
 \end{verbatim}
 
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   myFun(3, 4)
 \end{lstlisting}
@@ -678,8 +679,8 @@ function(x, y) x + y
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-2-5-2]{Podemos construir a partir de funciones}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:orgheadline35}]{Podemos construir a partir de funciones}
+ \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 foo  <-  function(x, ...){
   mx <- mean(x, ...)
@@ -690,15 +691,15 @@ foo  <-  function(x, ...){
 \end{lstlisting}
 
 O en forma resumida:
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 foo <- function(x, ...){c(mean(x, ...), median(x, ...), sd(x, ...))}
 \end{lstlisting}
 \end{frame}
 
 
-\begin{frame}[fragile,label=sec-2-5-3]{Y ahora usamos la función con vectores}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:orgheadline36}]{Y ahora usamos la función con vectores}
+ \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 foo(1:10)
 \end{lstlisting}
@@ -707,23 +708,23 @@ foo(1:10)
 [1] 5.50000 5.50000 3.02765
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 foo(rnorm(1e5))
 \end{lstlisting}
 
 \begin{verbatim}
-[1] -0.005395453 -0.001147925  0.997132143
+[1] -1.145688e-03 -5.007747e-05  9.991883e-01
 \end{verbatim}
 \end{frame}
 
 \section{Indexado}
-\label{sec-3}
+\label{sec:orgheadline54}
 
 \subsection{Condiciones lógicas}
-\label{sec-3-1}
-\begin{frame}[fragile,label=sec-3-1-1]{Condiciones simples}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\label{sec:orgheadline42}
+\begin{frame}[fragile,label={sec:orgheadline39}]{Condiciones simples}
+ \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 x <- seq(-1, 1, .1)
 x
@@ -734,7 +735,7 @@ x
 [16]  0.5  0.6  0.7  0.8  0.9  1.0
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 x < 0
 \end{lstlisting}
@@ -744,7 +745,7 @@ x < 0
 [13] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 x >= 0
 \end{lstlisting}
@@ -754,7 +755,7 @@ x >= 0
 [13]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 x == 0
 \end{lstlisting}
@@ -764,7 +765,7 @@ x == 0
 [13] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 x != 0
 \end{lstlisting}
@@ -775,8 +776,8 @@ x != 0
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-3-1-2]{Condiciones múltiples}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:orgheadline40}]{Condiciones múltiples}
+ \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 cond  <-  (x > 0) & (x < .5)
 cond
@@ -787,7 +788,7 @@ cond
 [13]  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 cond  <-  (x >= .5) | (x <= -.5)
 cond
@@ -800,8 +801,8 @@ cond
 \end{frame}
 
 
-\begin{frame}[fragile,label=sec-3-1-3]{Con las condiciones se pueden hacer operaciones}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:orgheadline41}]{Con las condiciones se pueden hacer operaciones}
+ \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 sum(cond)
 \end{lstlisting}
@@ -810,7 +811,7 @@ sum(cond)
 [1] 12
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 sum(!cond)
 \end{lstlisting}
@@ -819,7 +820,7 @@ sum(!cond)
 [1] 9
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 as.numeric(cond)
 \end{lstlisting}
@@ -831,9 +832,9 @@ as.numeric(cond)
 
 
 \subsection{Vectores}
-\label{sec-3-2}
-\begin{frame}[fragile,label=sec-3-2-1]{Indexado numérico}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\label{sec:orgheadline46}
+\begin{frame}[fragile,label={sec:orgheadline43}]{Indexado numérico}
+ \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   x <- seq(1, 100, 2)
   x
@@ -844,7 +845,7 @@ as.numeric(cond)
 [26] 51 53 55 57 59 61 63 65 67 69 71 73 75 77 79 81 83 85 87 89 91 93 95 97 99
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   x[1:5]
 \end{lstlisting}
@@ -853,7 +854,7 @@ as.numeric(cond)
 [1] 1 3 5 7 9
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   x[10:5]
 \end{lstlisting}
@@ -863,8 +864,8 @@ as.numeric(cond)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-3-2-2]{Indexado con condiciones lógicas}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:orgheadline44}]{Indexado con condiciones lógicas}
+ \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   x[x != 9]
 \end{lstlisting}
@@ -874,7 +875,7 @@ as.numeric(cond)
 [26] 53 55 57 59 61 63 65 67 69 71 73 75 77 79 81 83 85 87 89 91 93 95 97 99
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   x[x > 20]
 \end{lstlisting}
@@ -885,7 +886,7 @@ as.numeric(cond)
 \end{verbatim}
 
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 x[x %in% seq(0, 10, .5)]
 \end{lstlisting}
@@ -895,8 +896,8 @@ x[x %in% seq(0, 10, .5)]
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-3-2-3]{Indexado con condiciones múltiples}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:orgheadline45}]{Indexado con condiciones múltiples}
+ \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 z <- seq(-10, 10, by = .5)
 z
@@ -909,7 +910,7 @@ z
 [37]   8.0   8.5   9.0   9.5  10.0
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 z[z < -5 | z > 5]
 \end{lstlisting}
@@ -919,7 +920,7 @@ z[z < -5 | z > 5]
 [13]   6.5   7.0   7.5   8.0   8.5   9.0   9.5  10.0
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 cond <- (z >= 0 & z <= 5)
 cond
@@ -932,7 +933,7 @@ cond
 [37] FALSE FALSE FALSE FALSE FALSE
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 z[cond]
 \end{lstlisting}
@@ -943,9 +944,9 @@ z[cond]
 \end{frame}
 
 \subsection{Matrices}
-\label{sec-3-3}
-\begin{frame}[fragile,label=sec-3-3-1]{Indexado de matrices}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\label{sec:orgheadline49}
+\begin{frame}[fragile,label={sec:orgheadline47}]{Indexado de matrices}
+ \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 M[1:2, ]
 \end{lstlisting}
@@ -956,7 +957,7 @@ x    1    2    3    4    5    6    7    8    9    10
 y    1    2    3    4    5    6    7    8    9    10
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 M[1:2, 2:3]
 \end{lstlisting}
@@ -967,7 +968,7 @@ x    2    3
 y    2    3
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 M[1, c(1, 4)]
 \end{lstlisting}
@@ -977,8 +978,8 @@ M[1, c(1, 4)]
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-3-3-2]{Indexado de matrices}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:orgheadline48}]{Indexado de matrices}
+ \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 M[-1,]
 \end{lstlisting}
@@ -989,7 +990,7 @@ y    1    2    3    4    5    6    7    8    9    10
 z    1    2    3    4    5    6    7    8    9    10
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 M[-c(1, 2),]
 \end{lstlisting}
@@ -1000,12 +1001,12 @@ M[-c(1, 2),]
 \end{frame}
 
 \subsection{Listas}
-\label{sec-3-4}
-\begin{frame}[fragile,label=sec-3-4-1]{Podemos acceder a los elementos\ldots{}}
+\label{sec:orgheadline51}
+\begin{frame}[fragile,label={sec:orgheadline50}]{Podemos acceder a los elementos\ldots{}}
  \begin{itemize}
 \item Por su nombre
 \end{itemize}
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 lista$a
 \end{lstlisting}
@@ -1017,7 +1018,7 @@ lista$a
 \begin{itemize}
 \item o por su índice
 \end{itemize}
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   lista[1]
 \end{lstlisting}
@@ -1027,7 +1028,7 @@ $a
 [1] 1 3 5
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   lista[[1]]
 \end{lstlisting}
@@ -1039,9 +1040,9 @@ $a
 
 
 \subsection{Data Frame}
-\label{sec-3-5}
-\begin{frame}[fragile,label=sec-3-5-1]{Podemos acceder a los elementos}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\label{sec:orgheadline53}
+\begin{frame}[fragile,label={sec:orgheadline52}]{Podemos acceder a los elementos}
+ \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   df <- data.frame(x = 1:5,
                    y = rnorm(10),
@@ -1051,7 +1052,7 @@ $a
 \begin{itemize}
 \item Por su nombre (como una lista)
 \end{itemize}
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 df$x
 \end{lstlisting}
@@ -1063,17 +1064,17 @@ df$x
 \begin{itemize}
 \item Por su índice (como una matriz)
 \end{itemize}
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 df[1,]
 \end{lstlisting}
 
 \begin{verbatim}
-  x          y z
-1 1 -0.4421544 0
+  x        y z
+1 1 1.391136 0
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 df[,1]
 \end{lstlisting}
@@ -1084,11 +1085,11 @@ df[,1]
 \end{frame}
 
 \section{Bucles}
-\label{sec-4}
+\label{sec:orgheadline64}
 \subsection{Matrices}
-\label{sec-4-1}
-\begin{frame}[fragile,label=sec-4-1-1]{La función \texttt{apply}}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\label{sec:orgheadline56}
+\begin{frame}[fragile,label={sec:orgheadline55}]{La función \texttt{apply}}
+ \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 apply(M, 1, sum)
 \end{lstlisting}
@@ -1098,7 +1099,7 @@ apply(M, 1, sum)
 55 55 55
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 rowSums(M)
 \end{lstlisting}
@@ -1108,7 +1109,7 @@ rowSums(M)
 55 55 55
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 apply(M, 2, mean)
 \end{lstlisting}
@@ -1117,7 +1118,7 @@ apply(M, 2, mean)
 [1]  1  2  3  4  5  6  7  8  9 10
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 colMeans(M)
 \end{lstlisting}
@@ -1128,9 +1129,9 @@ colMeans(M)
 \end{frame}
 
 \subsection{Listas / \texttt{data.frame}}
-\label{sec-4-2}
-\begin{frame}[fragile,label=sec-4-2-1]{\texttt{lapply} y \texttt{sapply}}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\label{sec:orgheadline58}
+\begin{frame}[fragile,label={sec:orgheadline57}]{\texttt{lapply} y \texttt{sapply}}
+ \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 lista <- list(x = 1:10,
               y = seq(0, 10, 2),
@@ -1146,27 +1147,27 @@ $y
 [1] 30
 
 $z
-[1] 2.419564
+[1] -8.774606
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 sapply(lista, sum)
 \end{lstlisting}
 
 \begin{verbatim}
         x         y         z 
-55.000000 30.000000  2.419564
+55.000000 30.000000 -8.774606
 \end{verbatim}
 \end{frame}
 
 \subsection{Bucles \texttt{for}}
-\label{sec-4-3}
-\begin{frame}[fragile,label=sec-4-3-1]{\texttt{for}}
+\label{sec:orgheadline60}
+\begin{frame}[fragile,label={sec:orgheadline59}]{\texttt{for}}
  \begin{itemize}
 \item En \texttt{R} suele usarse más la familia de funciones \texttt{*apply} con funciones vectorizadas.
 \end{itemize}
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 for(n in c(2,5,10,20,50)) {
     x <- rnorm(n)
@@ -1175,21 +1176,21 @@ for(n in c(2,5,10,20,50)) {
 \end{lstlisting}
 
 \begin{verbatim}
-2 : 2.475277 
-5 : 0.9078726 
-10 : 11.53767 
-20 : 24.29035 
-50 : 48.94954
+2 : 2.131788 
+5 : 9.239797 
+10 : 7.339049 
+20 : 23.11973 
+50 : 67.17951
 \end{verbatim}
 \end{frame}
 
 \subsection{Condiciones con \texttt{if}, \texttt{else} e \texttt{ifelse}}
-\label{sec-4-4}
-\begin{frame}[fragile,label=sec-4-4-1]{\texttt{if}}
+\label{sec:orgheadline63}
+\begin{frame}[fragile,label={sec:orgheadline61}]{\texttt{if}}
  \begin{itemize}
 \item En \texttt{R} suele usarse más el indexado lógico (vectorizado).
 \end{itemize}
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   x <- rnorm(10)
   x2 <- numeric(length(x))
@@ -1200,40 +1201,39 @@ for(n in c(2,5,10,20,50)) {
 \end{lstlisting}
 
 \begin{verbatim}
-               x x2
- [1,]  1.1477830  1
- [2,] -0.3085277  0
- [3,] -0.5303659  0
- [4,] -0.1565503  0
- [5,]  1.2528223  1
- [6,]  0.8823026  1
- [7,] -0.3483652  0
- [8,] -0.4456942  0
- [9,] -0.7532346  0
-[10,]  0.6517239  1
+                x x2
+ [1,] -1.34113363  0
+ [2,]  0.98823089  1
+ [3,] -0.65044526  0
+ [4,]  1.81290696  1
+ [5,] -1.67305974  0
+ [6,]  1.34113008  1
+ [7,] -0.57839913  0
+ [8,] -0.05156131  0
+ [9,]  0.63855238  1
+[10,]  0.51697800  1
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-4-4-2]{\texttt{ifelse}}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:orgheadline62}]{\texttt{ifelse}}
+ \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 x <- rnorm(10)
 x
 \end{lstlisting}
 
 \begin{verbatim}
-[1] -1.93236913  0.02645601 -0.50939199 -0.16986912 -0.96690574 -0.46963070
-[7]  0.20149154  0.19742025  0.34661441 -0.47492386
+[1]  1.24672946  1.09325784  1.72540151 -0.31906985 -0.30174246 -0.75498812
+[7]  1.58495008 -0.06716802  0.56734646 -0.34485213
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 ifelse(x>0, 1, 0)
 \end{lstlisting}
 
 \begin{verbatim}
-[1] 0 1 0 0 0 0 1 1 1 0
+[1] 1 1 1 0 0 0 1 0 1 0
 \end{verbatim}
 \end{frame}
-% Emacs 24.5.1 (Org mode 8.2.7c)
 \end{document}
