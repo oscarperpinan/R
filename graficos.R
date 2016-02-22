@@ -5,6 +5,8 @@
 ##   - Estructura matricial de paneles definida a través de una fórmula.
 
 
+library(lattice)
+
 xyplot(wt ~ mpg | am, data = mtcars, groups = cyl)
 
 ## =ggplot2=
@@ -13,6 +15,8 @@ xyplot(wt ~ mpg | am, data = mtcars, groups = cyl)
 
 ##   - Combinación de funciones que proporcionan los componentes (capas) del gráfico.
 
+
+library(ggplot2)
 
 ggplot(mtcars, aes(mpg, wt)) +
     geom_point(aes(colour=factor(cyl))) +

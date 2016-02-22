@@ -29,6 +29,8 @@ Dentro del conjunto =grid= existen dos grandes paquetes:
   - Estructura matricial de paneles definida a través de una fórmula.
 
 #+begin_src R
+library(lattice)
+
 xyplot(wt ~ mpg | am, data = mtcars, groups = cyl)
 #+end_src
 
@@ -42,6 +44,8 @@ Dentro del conjunto =grid= existen dos grandes paquetes:
   - Combinación de funciones que proporcionan los componentes (capas) del gráfico.
 
 #+begin_src R
+library(ggplot2)
+
 ggplot(mtcars, aes(mpg, wt)) +
     geom_point(aes(colour=factor(cyl))) +
     facet_grid(. ~ am)
