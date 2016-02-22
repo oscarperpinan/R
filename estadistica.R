@@ -1,15 +1,13 @@
-
 ## Conjunto de datos: swiss
+
 
 data(swiss)
 
 summary(swiss)
 
-pdf(file="figs/splomSwiss.pdf")
 library(lattice)
 splom(swiss, pscale=0, type=c('p', 'smooth'),
       groups=swiss$Catholic > 50, xlab='')
-dev.off()
 
 ## Resumen de  información
 
@@ -23,11 +21,13 @@ colMeans(swiss)
 
 ## Desviación Estándar
 
+
 sd(swiss$Fertility)
 
 sapply(swiss, sd)
 
 ## Otras
+
 
 median(swiss$Fertility)
 
@@ -39,43 +39,41 @@ IQR(swiss$Fertility)
 
 rnorm(10, mean = 1, sd = .4)
 
-pdf(file="figs/rnorm.pdf")
 hist(rnorm(1e6, mean = 1, sd = .4))
-dev.off()
 
 ## Distribución Normal
 
-pdf(file="figs/dnorm.pdf")
 x <- seq( -5, 5, by =.01)
 plot(x, dnorm(x), type = 'l')
-dev.off()
 
 ## Distribución Uniforme
 
+
 runif(10, min=-3, max=3)
 
-pdf(file="figs/runif.pdf")
 hist(runif(1e6, min = -3, max = 3))
-dev.off()
 
 ## Distribución de Weibull
 
 rweibull(n=10, shape = 3, scale = 2)
 
-pdf(file="figs/rweibull.pdf")
 hist(rweibull(1e6, shape = 3, scale = 2))
-dev.off()
 
 ## Muestreo aleatorio
 
+
 x <- seq(1, 100, length = 10)
 x
+
+
 
 ## - Sin reemplazo
 
 sample(x)
 
 sample(x, 5)
+
+
 
 ## - Con reemplazo
 
@@ -87,6 +85,8 @@ sample(x, 5, replace = TRUE)
 
 t.test(swiss$Fertility, mu=70)
 
+
+
 ## - Wilcoxon (no paramétrico)
 
 wilcox.test(swiss$Fertility, mu=70)
@@ -95,6 +95,8 @@ wilcox.test(swiss$Fertility, mu=70)
 
 Religion <- ifelse(swiss$Catholic > 50,
                    'Catholic', 'Protestant')
+
+
 
 ## - t de Student
 
@@ -123,9 +125,7 @@ residuals(lmFertEdu)
 
 ## Fertilidad y educación
 
-pdf(file="figs/lmFertEdu.pdf")
 plot(lmFertEdu, which = 1)
-dev.off()
 
 ## Fertilidad, educación y religión
 
