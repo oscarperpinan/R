@@ -1,4 +1,4 @@
-% Created 2016-03-06 dom 16:35
+% Created 2016-03-06 dom 16:56
 \documentclass[xcolor={usenames,svgnames,dvipsnames}]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -438,7 +438,7 @@ anidada(1:3, 2:4)
 \end{lstlisting}
 
 \begin{verbatim}
-<environment: 0x61bb4e0>
+<environment: 0x428b178>
 [1] 113
 \end{verbatim}
 
@@ -503,7 +503,7 @@ function(x)
     {
         m*x + n
     }
-<environment: 0x40600f0>
+<environment: 0x4285600>
 \end{verbatim}
 
 \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
@@ -533,7 +533,7 @@ environment(myFoo)
 \end{lstlisting}
 
 \begin{verbatim}
-<environment: 0x40600f0>
+<environment: 0x4285600>
 \end{verbatim}
 
 \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
@@ -579,8 +579,8 @@ get('n', env = environment(myFoo))
 \end{verbatim}
 \end{frame}
 
-\section{Debug y profiling}
-\label{sec:orgheadline27}
+\section{Debug}
+\label{sec:orgheadline25}
 
 \begin{frame}[fragile,label={sec:orgheadline20}]{Post-mortem: \texttt{traceback}}
  \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
@@ -602,7 +602,7 @@ sumProd(rnorm(10), runif(10))
 \end{lstlisting}
 
 \begin{verbatim}
-[1] 144.2569
+[1] 87.69971
 \end{verbatim}
 
 \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
@@ -722,7 +722,20 @@ untrace(sumProd)
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline24}]{¿Cuánto tarda mi función? \texttt{system.time}}
+\begin{frame}[label={sec:orgheadline24}]{Más recursos}
+\begin{itemize}
+\item Debugging en RStudio
+\begin{itemize}
+\item \href{https://support.rstudio.com/hc/en-us/articles/205612627-Debugging-with-RStudio}{Artículo}
+\item \href{https://vimeo.com/97831988}{Vídeo}
+\end{itemize}
+\item \href{http://adv-r.had.co.nz/Exceptions-Debugging.html}{\emph{Debugging} explicado por H. Wickham}
+\end{itemize}
+\end{frame}
+
+\section{Profiling}
+\label{sec:orgheadline29}
+\begin{frame}[fragile,label={sec:orgheadline26}]{¿Cuánto tarda mi función? \texttt{system.time}}
  \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 noise <- function(sd)rnorm(1000, mean=0, sd=sd)
@@ -743,11 +756,11 @@ system.time(sumNoise(1000))
 
 \begin{verbatim}
  user  system elapsed 
-0.160   0.004   0.167
+0.176   0.008   0.181
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline25}]{¿Cuánto tarda cada parte de mi función?: \texttt{Rprof}}
+\begin{frame}[fragile,label={sec:orgheadline27}]{¿Cuánto tarda cada parte de mi función?: \texttt{Rprof}}
  \begin{itemize}
 \item Usaremos un fichero temporal
 \end{itemize}
@@ -774,7 +787,7 @@ zz <- sumNoise(1000)
 \end{frame}
 
 
-\begin{frame}[fragile,label={sec:orgheadline26}]{¿Cuánto tarda cada parte de mi función?: \texttt{Rprof}}
+\begin{frame}[fragile,label={sec:orgheadline28}]{¿Cuánto tarda cada parte de mi función?: \texttt{Rprof}}
  \begin{itemize}
 \item Paramos el análisis
 \end{itemize}
@@ -794,31 +807,31 @@ summaryRprof(tmp)
 \begin{verbatim}
 $by.self
         self.time self.pct total.time total.pct
-"rnorm"      0.16    88.89       0.16     88.89
-"array"      0.02    11.11       0.02     11.11
+"rnorm"      0.18       75       0.18        75
+"array"      0.06       25       0.06        25
 
 $by.total
                  total.time total.pct self.time self.pct
-"sapply"               0.18    100.00      0.00     0.00
-"sumNoise"             0.18    100.00      0.00     0.00
-"rnorm"                0.16     88.89      0.16    88.89
-"FUN"                  0.16     88.89      0.00     0.00
-"lapply"               0.16     88.89      0.00     0.00
-"array"                0.02     11.11      0.02    11.11
-"simplify2array"       0.02     11.11      0.00     0.00
+"sapply"               0.24       100      0.00        0
+"sumNoise"             0.24       100      0.00        0
+"rnorm"                0.18        75      0.18       75
+"FUN"                  0.18        75      0.00        0
+"lapply"               0.18        75      0.00        0
+"array"                0.06        25      0.06       25
+"simplify2array"       0.06        25      0.00        0
 
 $sample.interval
 [1] 0.02
 
 $sampling.time
-[1] 0.18
+[1] 0.24
 \end{verbatim}
 \end{frame}
 
 
 \section{Miscelánea}
-\label{sec:orgheadline33}
-\begin{frame}[fragile,label={sec:orgheadline28}]{\texttt{do.call}}
+\label{sec:orgheadline35}
+\begin{frame}[fragile,label={sec:orgheadline30}]{\texttt{do.call}}
  \begin{itemize}
 \item Ejemplo: sumar los componentes de una lista
 \end{itemize}
@@ -831,7 +844,7 @@ with(lista, sum(a + b + c))
 \end{lstlisting}
 
 \begin{verbatim}
-[1] 165.9007
+[1] 147.4239
 \end{verbatim}
 
 \begin{itemize}
@@ -844,11 +857,11 @@ do.call(sum, lista)
 \end{lstlisting}
 
 \begin{verbatim}
-[1] 165.9007
+[1] 147.4239
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline29}]{\texttt{do.call}}
+\begin{frame}[fragile,label={sec:orgheadline31}]{\texttt{do.call}}
  \begin{itemize}
 \item Se emplea frecuentemente con el resultado de \texttt{lapply}
 \end{itemize}
@@ -860,12 +873,12 @@ do.call(sum, lista)
 \end{lstlisting}
 
 \begin{verbatim}
-           [,1]          [,2]          [,3]        [,4]     [,5]
-[1,]  -1.757885 -7.653230e-02 -1.285828e-02 -0.54431229 1.033313
-[2,]   3.090160  5.857193e-03  1.653355e-04  0.29627587 1.067736
-[3,]  -5.432145 -4.482645e-04 -2.125930e-06 -0.16126660 1.103306
-[4,]   9.549087  3.430671e-05  2.733581e-08  0.08777939 1.140061
-[5,] -16.786196 -2.625572e-06 -3.514916e-10 -0.04777940 1.178040
+             [,1]      [,2]      [,3]        [,4]       [,5]
+[1,] -0.385555865 -1.186135 -1.215231 0.326677461 -0.6441565
+[2,]  0.148653325  1.406916  1.476786 0.106718163  0.4149377
+[3,] -0.057314161 -1.668792 -1.794635 0.034862419 -0.2672848
+[4,]  0.022097811  1.979413  2.180896 0.011388766  0.1721733
+[5,] -0.008519941 -2.347850 -2.650292 0.003720453 -0.1109065
 \end{verbatim}
 
 \begin{itemize}
@@ -877,16 +890,16 @@ do.call(sum, lista)
 \end{lstlisting}
 
 \begin{verbatim}
-            [,1]         [,2]          [,3]         [,4]          [,5]
-[1,] -1.75788499 3.0901596396 -5.432145e+00 9.549087e+00 -1.678620e+01
-[2,] -0.07653230 0.0058571931 -4.482645e-04 3.430671e-05 -2.625572e-06
-[3,] -0.01285828 0.0001653355 -2.125930e-06 2.733581e-08 -3.514916e-10
-[4,] -0.54431229 0.2962758677 -1.612666e-01 8.777939e-02 -4.777940e-02
-[5,]  1.03331327 1.0677363119  1.103306e+00 1.140061e+00  1.178040e+00
+           [,1]      [,2]        [,3]       [,4]         [,5]
+[1,] -0.3855559 0.1486533 -0.05731416 0.02209781 -0.008519941
+[2,] -1.1861349 1.4069160 -1.66879215 1.97941261 -2.347850369
+[3,] -1.2152307 1.4767856 -1.79463525 2.18089584 -2.650291569
+[4,]  0.3266775 0.1067182  0.03486242 0.01138877  0.003720453
+[5,] -0.6441565 0.4149377 -0.26728481 0.17217326 -0.110906533
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline30}]{\texttt{Reduce}}
+\begin{frame}[fragile,label={sec:orgheadline32}]{\texttt{Reduce}}
  \begin{itemize}
 \item Combina sucesivamente los elementos de un objeto aplicando una
 función binaria
@@ -904,7 +917,7 @@ Reduce('+', 1:5)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline31}]{\texttt{Reduce}}
+\begin{frame}[fragile,label={sec:orgheadline33}]{\texttt{Reduce}}
  \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 ## (((1/2)/3)/4)/5
@@ -939,7 +952,7 @@ Reduce(foo, c(3, 7, 15, 1, 292), right=TRUE)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline32}]{Funciones recursivas}
+\begin{frame}[fragile,label={sec:orgheadline34}]{Funciones recursivas}
  \begin{itemize}
 \item \href{http://en.wikibooks.org/wiki/R_Programming/Working_with_functions#Functions_as_Objects}{Serie de Fibonnaci}
 \end{itemize}

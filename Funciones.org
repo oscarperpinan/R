@@ -268,7 +268,7 @@ get('m', env = environment(myFoo))
 get('n', env = environment(myFoo))
 #+end_src
 
-* Debug y profiling
+* Debug
 
 ** Post-mortem: =traceback=
 #+begin_src R 
@@ -308,6 +308,7 @@ debug(sumProd)
 #+begin_src R
 undebug(sumProd)
 #+end_src
+
 ** Analizar antes de que ocurra: =trace=
 - =trace= permite mayor control que =debug=
 #+begin_src R
@@ -331,6 +332,13 @@ body(sumProd)
 untrace(sumProd)
 #+end_src
 
+** Más recursos
+- Debugging en RStudio
+  - [[https://support.rstudio.com/hc/en-us/articles/205612627-Debugging-with-RStudio][Artículo]]
+  - [[https://vimeo.com/97831988][Vídeo]]
+- [[http://adv-r.had.co.nz/Exceptions-Debugging.html][/Debugging/ explicado por H. Wickham]]
+ 
+* Profiling
 ** ¿Cuánto tarda mi función? =system.time=
 
 #+begin_src R 
