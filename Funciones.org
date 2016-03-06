@@ -25,9 +25,10 @@
 ** Mi primera función
 - Definición
 #+begin_src R 
-myFun <- function(x, y){
+myFun <- function(x, y)
+{
     x + y
-    }
+}
 #+end_src
 - Argumentos
 #+begin_src R 
@@ -40,46 +41,48 @@ body(myFun)
 
 ** Mi primera función
 #+begin_src R 
-  myFun(1, 2)
+myFun(1, 2)
 #+end_src
 #+begin_src R 
-  myFun(1:10, 21:30)
+myFun(1:10, 21:30)
 #+end_src
 #+begin_src R 
-  myFun(1:10, 3)
+myFun(1:10, 3)
 #+end_src
 
 ** Argumentos: nombre y orden
 
-- Una función identifica sus argumentos por su nombre y por su orden (sin nombre)
+Una función identifica sus argumentos por su nombre y por su orden (sin nombre)
 
 #+begin_src R 
-  power <- function(x, exp){
-      x^exp
-      }
+power <- function(x, exp)
+{
+    x^exp
+}
 #+end_src
 
 #+begin_src R 
-  power(x=1:10, exp=2)
+power(x=1:10, exp=2)
 #+end_src
 
 #+begin_src R 
-  power(1:10, exp=2)
+power(1:10, exp=2)
 #+end_src
 
 #+begin_src R 
-  power(exp=2, x=1:10)
+power(exp=2, x=1:10)
 #+end_src
 
 ** Argumentos: valores por defecto
 - Se puede asignar un valor por defecto a los argumentos
 #+begin_src R 
-  power <- function(x, exp=2){
-      x ^ exp
-      }
+power <- function(x, exp = 2)
+{
+    x ^ exp
+}
 #+end_src
 #+begin_src R 
-  power(1:10)
+power(1:10)
 #+end_src
 #+begin_src R 
 power(1:10, 2)
@@ -87,9 +90,10 @@ power(1:10, 2)
 
 ** Funciones sin argumentos
 #+begin_src R 
-  hello <- function(){
-      print('Hello world!')
-      }
+hello <- function()
+{
+    print('Hello world!')
+}
 #+end_src 
 #+begin_src R 
 hello()
@@ -97,63 +101,65 @@ hello()
 
 ** Argumentos sin nombre: =...=
 #+begin_src R 
-  pwrSum <- function(x, power, ...){
-      sum(x ^ power, ...)
-      }
+pwrSum <- function(x, power, ...)
+{
+    sum(x ^ power, ...)
+}
 #+end_src
 #+begin_src R 
-  x <- 1:10
-  pwrSum(x, 2)
+x <- 1:10
+pwrSum(x, 2)
 #+end_src
 #+begin_src R 
-  x <- c(1:5, NA, 6:9, NA, 10)
-  pwrSum(x, 2)
+x <- c(1:5, NA, 6:9, NA, 10)
+pwrSum(x, 2)
 #+end_src
 #+begin_src R 
-  pwrSum(x, 2, na.rm=TRUE)
+pwrSum(x, 2, na.rm=TRUE)
 #+end_src
 
 ** Argumentos ausentes: =missing=
 #+begin_src R 
-  suma10 <- function(x, y){
-      if (missing(y)) y <- 10
-      x + y
-      }
+suma10 <- function(x, y)
+{
+    if (missing(y)) y <- 10
+    x + y
+}
 #+end_src
 #+begin_src R 
-  suma10(1:10)
+suma10(1:10)
 #+end_src
 
 ** Control de errores: =stopifnot=
 #+begin_src R 
-  foo <- function(x, y){
-      stopifnot(is.numeric(x) & is.numeric(y))
-      x + y
-      }
+foo <- function(x, y)
+{
+    stopifnot(is.numeric(x) & is.numeric(y))
+    x + y
+}
 #+end_src
 
 #+begin_src R 
-  foo(1:10, 21:30)
+foo(1:10, 21:30)
 #+end_src
 
 #+begin_src R 
-  foo(1:10, 'a')
+foo(1:10, 'a')
 #+end_src
 
 ** Control de errores: =stop=
 #+begin_src R 
-  foo <- function(x, y){
-      if (!(is.numeric(x) & is.numeric(y))){
-          stop('arguments must be numeric.')
-          } else { x + y }
-      }
-  
+foo <- function(x, y){
+    if (!(is.numeric(x) & is.numeric(y))){
+        stop('arguments must be numeric.')
+    } else { x + y }
+} 
 #+end_src
 #+begin_src R 
-  foo(2, 3)
+foo(2, 3)
 #+end_src
 #+begin_src R 
-  foo(2, 'a')
+foo(2, 'a')
 #+end_src
 
 * Lexical scope
@@ -165,17 +171,17 @@ hello()
   - Variables locales (definiciones internas): =z=, =w=, =m=
   - Variables libres: =a=, =b=
 #+begin_src R 
-  myFun <- function(x, y){
-      z <- x^2
-      w <- y^3
-      m <- a*z + b*w
-      m
-      }
+myFun <- function(x, y){
+    z <- x^2
+    w <- y^3
+    m <- a*z + b*w
+    m
+}
 #+end_src
 #+begin_src R 
-  a <- 10
-  b <- 20
-  myFun(2, 3)
+a <- 10
+b <- 20
+myFun(2, 3)
 #+end_src
 
 ** Lexical scope
@@ -183,106 +189,113 @@ hello()
 - Las variables libres deben estar disponibles en el entorno
   (=environment=) en el que la función ha sido creada.
 #+begin_src R 
-  environment(myFun) 
+environment(myFun) 
 #+end_src
 #+begin_src R 
-  ls()
+ls()
 #+end_src
 
 ** Lexical scope: funciones anidadas
 #+begin_src R 
-  anidada <- function(x, y){
-      xn <- 2
-      yn <- 3
-      interna <- function(x, y){
-          sum(x^xn, y^yn)
-          }
-      print(environment(interna))
-      interna(x, y)
-      }
+anidada <- function(x, y){
+    xn <- 2
+    yn <- 3
+    interna <- function(x, y)
+    {
+        sum(x^xn, y^yn)
+    }
+    print(environment(interna))
+    interna(x, y)
+}
 #+end_src
 
 #+begin_src R 
-  anidada(1:3, 2:4)
+anidada(1:3, 2:4)
 #+end_src
 
 #+begin_src R 
-  sum((1:3)^2, (2:4)^3)
+sum((1:3)^2, (2:4)^3)
 #+end_src
 ** Lexical scope: funciones anidadas
 #+begin_src R 
-  xn
+xn
 #+end_src
 
 #+begin_src R 
-  yn
+yn
 #+end_src
 
 #+begin_src R 
-  interna
+interna
 #+end_src
 
 ** Funciones que devuelven funciones
 #+begin_src R 
-  constructor <- function(m, n){
-      function(x){
-          m*x + n
-          }
-      }
+constructor <- function(m, n){
+    function(x)
+    {
+        m*x + n
+    }
+}
 #+end_src
 
 #+begin_src R 
-  myFoo <- constructor(10, 3)
-  myFoo
+myFoo <- constructor(10, 3)
+myFoo
+#+end_src
+
+#+begin_src R
+## 10*5 + 3
+myFoo(5)
 #+end_src
 ** Funciones que devuelven funciones
 #+begin_src R 
-  class(myFoo)
+class(myFoo)
 #+end_src
 #+begin_src R 
-  environment(myFoo)
+environment(myFoo)
 #+end_src
 #+begin_src R 
 ls()
 #+end_src
 #+begin_src R 
-  ls(env=environment(myFoo))
+ls(env = environment(myFoo))
 #+end_src
 #+begin_src R 
-  get('m', env=environment(myFoo))
+get('m', env = environment(myFoo))
 #+end_src
 #+begin_src R 
-get('n', env=environment(myFoo))
+get('n', env = environment(myFoo))
 #+end_src
 
 * Debug y profiling
 
 ** Post-mortem: =traceback=
 #+begin_src R 
-  sumSq <- function(x, ...){
-      sum(x ^ 2, ...)
-      }
-  
-  sumProd <- function(x, y, ...){
-      xs <- sumSq(x, ...)
-      ys <- sumSq(y, ...)
-      xs * ys
-      }
+sumSq <- function(x, ...){
+    sum(x ^ 2, ...)
+}
+
+sumProd <- function(x, y, ...){
+    xs <- sumSq(x, ...)
+    ys <- sumSq(y, ...)
+    xs * ys
+}
 #+end_src
 #+begin_src R 
-  sumProd(rnorm(10), runif(10))
+sumProd(rnorm(10), runif(10))
 #+end_src
 #+begin_src R 
-  sumProd(rnorm(10), letters[1:10])
+sumProd(rnorm(10), letters[1:10])
 #+end_src
 #+begin_src R 
-  traceback()
+traceback()
 #+end_src
 
 ** Analizar antes de que ocurra: =debug=
 - Activa la ejecución paso a paso de una función
 #+begin_src R
-  debug(sumProd)
+debug(sumProd)
 #+end_src
 - Cada vez que se llame a la función, su cuerpo se ejecuta línea a línea y los resultados de cada paso pueden ser inspeccionados.
 - Los comandos disponibles son:
@@ -298,11 +311,11 @@ undebug(sumProd)
 ** Analizar antes de que ocurra: =trace=
 - =trace= permite mayor control que =debug=
 #+begin_src R
-  trace(sumProd, tracer=browser, exit=browser)
+trace(sumProd, tracer=browser, exit=browser)
 #+end_src
 - La función queda modificada
 #+begin_src R
-  sumProd
+sumProd
 #+end_src
 #+begin_src R
 body(sumProd)
@@ -321,35 +334,35 @@ untrace(sumProd)
 ** ¿Cuánto tarda mi función? =system.time=
 
 #+begin_src R 
-  noise <- function(sd)rnorm(1000, mean=0, sd=sd)
+noise <- function(sd)rnorm(1000, mean=0, sd=sd)
 #+end_src
 #+begin_src R 
-  sumNoise <- function(nComponents){
-      vals <- sapply(seq_len(nComponents), noise)
-      rowSums(vals)
-      }
+sumNoise <- function(nComponents){
+    vals <- sapply(seq_len(nComponents), noise)
+    rowSums(vals)
+}
 #+end_src
 #+begin_src R 
-  system.time(sumNoise(1000))
+system.time(sumNoise(1000))
 #+end_src
 ** ¿Cuánto tarda cada parte de mi función?: =Rprof=
 - Usaremos un fichero temporal
 #+begin_src R 
-  tmp <- tempfile()
+tmp <- tempfile()
 #+end_src
 - Activamos la toma de información
 #+begin_src R 
-  Rprof(tmp)
+Rprof(tmp)
 #+end_src
 - Ejecutamos el código a analizar
 #+begin_src R 
-  zz <- sumNoise(1000)
+zz <- sumNoise(1000)
 #+end_src
    
 ** ¿Cuánto tarda cada parte de mi función?: =Rprof=
 - Paramos el análisis
 #+begin_src R 
-  Rprof()
+Rprof()
 #+end_src
 - Extraemos el resumen
 #+begin_src R 
@@ -361,8 +374,10 @@ summaryRprof(tmp)
 ** =do.call= 
 - Ejemplo: sumar los componentes de una lista
 #+begin_src R 
-  lista <- list(a=rnorm(100), b=runif(100), c=rexp(100))
-  with(lista, sum(a + b + c))
+lista <- list(a = rnorm(100),
+              b = runif(100),
+              c = rexp(100))
+with(lista, sum(a + b + c))
 #+end_src
 - En lugar de nombrar los componentes, creamos una llamada a una
   función con =do.call=
@@ -392,27 +407,27 @@ Reduce('+', 1:10)
 #+end_src
 ** =Reduce=
 #+begin_src R 
-  Reduce('/', 1:10)
+Reduce('/', 1:10)
 #+end_src
 #+begin_src R 
 Reduce(paste, LETTERS[1:5])
 #+end_src
 #+begin_src R 
-  foo <- function(u, v)u + 1 /v
-  Reduce(foo, c(3, 7, 15, 1, 292), right=TRUE)
-  ## equivalente a
-  ## foo(3, foo(7, foo(15, foo(1, 292))))
+foo <- function(u, v)u + 1 /v
+Reduce(foo, c(3, 7, 15, 1, 292), right=TRUE)
+## equivalente a
+## foo(3, foo(7, foo(15, foo(1, 292))))
 #+end_src
 
 ** Funciones recursivas
 - [[http://en.wikibooks.org/wiki/R_Programming/Working_with_functions#Functions_as_Objects][Serie de Fibonnaci]]
 #+begin_src R 
-  fib <- function(n){
-      if (n>2) {
-          c(fib(n-1),
-            sum(tail(fib(n-1),2)))
-      } else if (n>=0) rep(1,n)
-      }
+fib <- function(n){
+    if (n>2) {
+        c(fib(n-1),
+          sum(tail(fib(n-1),2)))
+    } else if (n>=0) rep(1,n)
+}
 #+end_src
 #+begin_src R 
 fib(10)

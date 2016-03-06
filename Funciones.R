@@ -1,14 +1,16 @@
-
 ## Mi primera función
 ## - Definición
 
-myFun <- function(x, y){
+myFun <- function(x, y)
+{
     x + y
-    }
+}
+
 
 ## - Argumentos
 
 formals(myFun)
+
 
 ## - Cuerpo
 
@@ -24,11 +26,13 @@ myFun(1:10, 3)
 
 ## Argumentos: nombre y orden
 
-## - Una función identifica sus argumentos por su nombre y por su orden (sin nombre)
+## Una función identifica sus argumentos por su nombre y por su orden (sin nombre)
 
-power <- function(x, exp){
+
+power <- function(x, exp)
+{
     x^exp
-    }
+}
 
 power(x=1:10, exp=2)
 
@@ -39,9 +43,10 @@ power(exp=2, x=1:10)
 ## Argumentos: valores por defecto
 ## - Se puede asignar un valor por defecto a los argumentos
 
-power <- function(x, exp=2){
+power <- function(x, exp = 2)
+{
     x ^ exp
-    }
+}
 
 power(1:10)
 
@@ -49,17 +54,19 @@ power(1:10, 2)
 
 ## Funciones sin argumentos
 
-hello <- function(){
+hello <- function()
+{
     print('Hello world!')
-    }
+}
 
 hello()
 
 ## Argumentos sin nombre: =...=
 
-pwrSum <- function(x, power, ...){
+pwrSum <- function(x, power, ...)
+{
     sum(x ^ power, ...)
-    }
+}
 
 x <- 1:10
 pwrSum(x, 2)
@@ -71,19 +78,21 @@ pwrSum(x, 2, na.rm=TRUE)
 
 ## Argumentos ausentes: =missing=
 
-suma10 <- function(x, y){
+suma10 <- function(x, y)
+{
     if (missing(y)) y <- 10
     x + y
-    }
+}
 
 suma10(1:10)
 
 ## Control de errores: =stopifnot=
 
-foo <- function(x, y){
+foo <- function(x, y)
+{
     stopifnot(is.numeric(x) & is.numeric(y))
     x + y
-    }
+}
 
 foo(1:10, 21:30)
 
@@ -94,8 +103,8 @@ foo(1:10, 'a')
 foo <- function(x, y){
     if (!(is.numeric(x) & is.numeric(y))){
         stop('arguments must be numeric.')
-        } else { x + y }
-    }
+    } else { x + y }
+} 
 
 foo(2, 3)
 
@@ -113,7 +122,7 @@ myFun <- function(x, y){
     w <- y^3
     m <- a*z + b*w
     m
-    }
+}
 
 a <- 10
 b <- 20
@@ -124,7 +133,7 @@ myFun(2, 3)
 ## - Las variables libres deben estar disponibles en el entorno
 ##   (=environment=) en el que la función ha sido creada.
 
-environment(myFun)
+environment(myFun) 
 
 ls()
 
@@ -133,12 +142,13 @@ ls()
 anidada <- function(x, y){
     xn <- 2
     yn <- 3
-    interna <- function(x, y){
+    interna <- function(x, y)
+    {
         sum(x^xn, y^yn)
-        }
+    }
     print(environment(interna))
     interna(x, y)
-    }
+}
 
 anidada(1:3, 2:4)
 
@@ -155,13 +165,17 @@ interna
 ## Funciones que devuelven funciones
 
 constructor <- function(m, n){
-    function(x){
+    function(x)
+    {
         m*x + n
-        }
     }
+}
 
 myFoo <- constructor(10, 3)
 myFoo
+
+## 10*5 + 3
+myFoo(5)
 
 ## Funciones que devuelven funciones
 
@@ -171,23 +185,23 @@ environment(myFoo)
 
 ls()
 
-ls(env=environment(myFoo))
+ls(env = environment(myFoo))
 
-get('m', env=environment(myFoo))
+get('m', env = environment(myFoo))
 
-get('n', env=environment(myFoo))
+get('n', env = environment(myFoo))
 
 ## Post-mortem: =traceback=
 
 sumSq <- function(x, ...){
     sum(x ^ 2, ...)
-    }
+}
 
 sumProd <- function(x, y, ...){
     xs <- sumSq(x, ...)
     ys <- sumSq(y, ...)
     xs * ys
-    }
+}
 
 sumProd(rnorm(10), runif(10))
 
@@ -199,6 +213,7 @@ traceback()
 ## - Activa la ejecución paso a paso de una función
 
 debug(sumProd)
+
 
 ## - Cada vez que se llame a la función, su cuerpo se ejecuta línea a línea y los resultados de cada paso pueden ser inspeccionados.
 ## - Los comandos disponibles son:
@@ -215,6 +230,7 @@ undebug(sumProd)
 ## - =trace= permite mayor control que =debug=
 
 trace(sumProd, tracer=browser, exit=browser)
+
 
 ## - La función queda modificada
 
@@ -233,12 +249,13 @@ untrace(sumProd)
 
 ## ¿Cuánto tarda mi función? =system.time=
 
+
 noise <- function(sd)rnorm(1000, mean=0, sd=sd)
 
 sumNoise <- function(nComponents){
     vals <- sapply(seq_len(nComponents), noise)
     rowSums(vals)
-    }
+}
 
 system.time(sumNoise(1000))
 
@@ -247,9 +264,11 @@ system.time(sumNoise(1000))
 
 tmp <- tempfile()
 
+
 ## - Activamos la toma de información
 
 Rprof(tmp)
+
 
 ## - Ejecutamos el código a analizar
 
@@ -260,6 +279,7 @@ zz <- sumNoise(1000)
 
 Rprof()
 
+
 ## - Extraemos el resumen
 
 summaryRprof(tmp)
@@ -267,8 +287,11 @@ summaryRprof(tmp)
 ## =do.call= 
 ## - Ejemplo: sumar los componentes de una lista
 
-lista <- list(a=rnorm(100), b=runif(100), c=rexp(100))
+lista <- list(a = rnorm(100),
+              b = runif(100),
+              c = rexp(100))
 with(lista, sum(a + b + c))
+
 
 ## - En lugar de nombrar los componentes, creamos una llamada a una
 ##   función con =do.call=
@@ -279,13 +302,14 @@ do.call(sum, lista)
 
 ## - Se emplea frecuentemente con el resultado de =lapply=
 
-x <- rnorm(5)
-ll <- lapply(1:5, function(i)x^i)
-do.call(rbind, ll)
+  x <- rnorm(5)
+  ll <- lapply(1:5, function(i)x^i)
+  do.call(rbind, ll)
+
 
 ## - Este mismo ejemplo puede resolverse con =sapply=
 
-sapply(1:5, function(i)x^i)
+  sapply(1:5, function(i)x^i)
 
 ## =Reduce=
 ## - Combina sucesivamente los elementos de un objeto aplicando una
@@ -314,6 +338,6 @@ fib <- function(n){
         c(fib(n-1),
           sum(tail(fib(n-1),2)))
     } else if (n>=0) rep(1,n)
-    }
+}
 
 fib(10)
