@@ -149,10 +149,10 @@ methods(class='task3')
 ## Definición de una nueva clase
 
 setClass('task',
-         representation=list(
-             what='character',
-             when='Date',
-             priority='character')
+         slots = c(
+             what = 'character',
+             when = 'Date',
+             priority = 'character')
          )
 
 getClass('task')
@@ -192,7 +192,7 @@ createTask('Oops', 'Hoy', 3)
 ## Definición de la clase =ToDo=
 
 setClass('ToDo',
-         representation = list(tasks = 'list')
+         slots = c(tasks = 'list')
          )
 
 myList <- new('ToDo',
@@ -237,7 +237,7 @@ valida <- function (object) {
 }
 
 setClass('ToDo',
-         representation = list(tasks = 'list'),
+         slots = c(tasks = 'list'),
          validity=valida
          )
 

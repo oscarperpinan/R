@@ -1,4 +1,4 @@
-% Created 2016-03-06 dom 16:01
+% Created 2016-03-06 dom 16:04
 \documentclass[xcolor={usenames,svgnames,dvipsnames}]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -439,8 +439,8 @@ myFun(x)
 
 \begin{verbatim}
 Funcion genérica
- [1] -0.2759839 -0.2127198 -0.2704182 -0.6664946 -0.3999290  0.8440444
- [7]  0.4738678 -2.3345084 -0.8451605 -0.1267038
+ [1]  0.6437852  1.4682065 -0.2987696  1.8849804 -1.5855122 -1.1160481
+ [7] -0.4445475 -0.3007572  1.1219381  1.3219057
 attr(,"class")
 [1] "myNumeric"
 \end{verbatim}
@@ -535,9 +535,9 @@ see '?methods' for accessing help and source code
 \item Se construyen con \texttt{setClass}, que acepta varios argumentos
 \begin{itemize}
 \item \texttt{Class}: nombre de la clase.
-\item \texttt{representation}: una lista con las clases de cada componente. Los nombres de este vector corresponden a los nombres de los componentes (\texttt{slot}).
+\item \texttt{slots}: una lista con las clases de cada componente. Los nombres de este vector corresponden a los nombres de los componentes (\texttt{slot}).
 \item \texttt{contains}: un vector con las clases que esta nueva clase extiende.
-\item \texttt{prototype}: un objeto proporcionando el contenido por defecto para los componentes definidos en \texttt{representation}.
+\item \texttt{prototype}: un objeto proporcionando el contenido por defecto para los componentes definidos en \texttt{slots}.
 \item \texttt{validity}: a función que comprueba la validez de la clase creada con la información suministrada.
 \end{itemize}
 \end{itemize}
@@ -546,10 +546,10 @@ see '?methods' for accessing help and source code
  \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 setClass('task',
-         representation=list(
-             what='character',
-             when='Date',
-             priority='character')
+         slots = c(
+             what = 'character',
+             when = 'Date',
+             priority = 'character')
          )
 \end{lstlisting}
 
@@ -653,7 +653,7 @@ invalid class “task” object: 2: invalid object for slot "priority" in class 
  \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 setClass('ToDo',
-         representation = list(tasks = 'list')
+         slots = c(tasks = 'list')
          )
 \end{lstlisting}
 
@@ -765,7 +765,7 @@ valida <- function (object) {
 }
 
 setClass('ToDo',
-         representation = list(tasks = 'list'),
+         slots = c(tasks = 'list'),
          validity=valida
          )
 \end{lstlisting}

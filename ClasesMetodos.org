@@ -231,17 +231,17 @@ methods(class='task3')
 *** Clases en =S4=
 - Se construyen con =setClass=, que acepta varios argumentos
   - =Class=: nombre de la clase.
-  - =representation=: una lista con las clases de cada componente. Los nombres de este vector corresponden a los nombres de los componentes (=slot=).
+  - =slots=: una lista con las clases de cada componente. Los nombres de este vector corresponden a los nombres de los componentes (=slot=).
   - =contains=: un vector con las clases que esta nueva clase extiende.
-  - =prototype=: un objeto proporcionando el contenido por defecto para los componentes definidos en =representation=.
+  - =prototype=: un objeto proporcionando el contenido por defecto para los componentes definidos en =slots=.
   - =validity=: a función que comprueba la validez de la clase creada con la información suministrada.
 *** Definición de una nueva clase
 #+begin_src R
 setClass('task',
-         representation=list(
-             what='character',
-             when='Date',
-             priority='character')
+         slots = c(
+             what = 'character',
+             when = 'Date',
+             priority = 'character')
          )
 #+end_src
 #+begin_src R
@@ -291,7 +291,7 @@ createTask('Oops', 'Hoy', 3)
 *** Definición de la clase =ToDo=
 #+begin_src R
 setClass('ToDo',
-         representation = list(tasks = 'list')
+         slots = c(tasks = 'list')
          )
 #+end_src
 #+begin_src R
@@ -339,7 +339,7 @@ valida <- function (object) {
 }
 
 setClass('ToDo',
-         representation = list(tasks = 'list'),
+         slots = c(tasks = 'list'),
          validity=valida
          )
 #+end_src
