@@ -1,4 +1,4 @@
-% Created 2016-03-06 dom 16:28
+% Created 2016-03-06 dom 16:35
 \documentclass[xcolor={usenames,svgnames,dvipsnames}]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -438,7 +438,7 @@ anidada(1:3, 2:4)
 \end{lstlisting}
 
 \begin{verbatim}
-<environment: 0x43650f0>
+<environment: 0x61bb4e0>
 [1] 113
 \end{verbatim}
 
@@ -503,7 +503,7 @@ function(x)
     {
         m*x + n
     }
-<environment: 0x435c158>
+<environment: 0x40600f0>
 \end{verbatim}
 
 \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
@@ -533,7 +533,7 @@ environment(myFoo)
 \end{lstlisting}
 
 \begin{verbatim}
-<environment: 0x435c158>
+<environment: 0x40600f0>
 \end{verbatim}
 
 \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
@@ -602,7 +602,7 @@ sumProd(rnorm(10), runif(10))
 \end{lstlisting}
 
 \begin{verbatim}
-[1] 12.12551
+[1] 144.2569
 \end{verbatim}
 
 \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
@@ -743,7 +743,7 @@ system.time(sumNoise(1000))
 
 \begin{verbatim}
  user  system elapsed 
-0.208   0.000   0.210
+0.160   0.004   0.167
 \end{verbatim}
 \end{frame}
 
@@ -793,28 +793,25 @@ summaryRprof(tmp)
 
 \begin{verbatim}
 $by.self
-          self.time self.pct total.time total.pct
-"rnorm"        0.20    83.33       0.20     83.33
-"rowSums"      0.02     8.33       0.02      8.33
-"unlist"       0.02     8.33       0.02      8.33
+        self.time self.pct total.time total.pct
+"rnorm"      0.16    88.89       0.16     88.89
+"array"      0.02    11.11       0.02     11.11
 
 $by.total
                  total.time total.pct self.time self.pct
-"sumNoise"             0.24    100.00      0.00     0.00
-"sapply"               0.22     91.67      0.00     0.00
-"rnorm"                0.20     83.33      0.20    83.33
-"FUN"                  0.20     83.33      0.00     0.00
-"lapply"               0.20     83.33      0.00     0.00
-"rowSums"              0.02      8.33      0.02     8.33
-"unlist"               0.02      8.33      0.02     8.33
-"as.vector"            0.02      8.33      0.00     0.00
-"simplify2array"       0.02      8.33      0.00     0.00
+"sapply"               0.18    100.00      0.00     0.00
+"sumNoise"             0.18    100.00      0.00     0.00
+"rnorm"                0.16     88.89      0.16    88.89
+"FUN"                  0.16     88.89      0.00     0.00
+"lapply"               0.16     88.89      0.00     0.00
+"array"                0.02     11.11      0.02    11.11
+"simplify2array"       0.02     11.11      0.00     0.00
 
 $sample.interval
 [1] 0.02
 
 $sampling.time
-[1] 0.24
+[1] 0.18
 \end{verbatim}
 \end{frame}
 
@@ -834,7 +831,7 @@ with(lista, sum(a + b + c))
 \end{lstlisting}
 
 \begin{verbatim}
-[1] 131.3329
+[1] 165.9007
 \end{verbatim}
 
 \begin{itemize}
@@ -847,7 +844,7 @@ do.call(sum, lista)
 \end{lstlisting}
 
 \begin{verbatim}
-[1] 131.3329
+[1] 165.9007
 \end{verbatim}
 \end{frame}
 
@@ -863,12 +860,12 @@ do.call(sum, lista)
 \end{lstlisting}
 
 \begin{verbatim}
-         [,1]      [,2]         [,3]       [,4]       [,5]
-[1,] 1.133913 -1.569015 0.1692925509 0.47742379 0.53882889
-[2,] 1.285759  2.461807 0.0286599678 0.22793347 0.29033658
-[3,] 1.457939 -3.862611 0.0048519191 0.10882086 0.15644174
-[4,] 1.653176  6.060493 0.0008213938 0.05195367 0.08429533
-[5,] 1.874557 -9.509003 0.0001390558 0.02480392 0.04542076
+           [,1]          [,2]          [,3]        [,4]     [,5]
+[1,]  -1.757885 -7.653230e-02 -1.285828e-02 -0.54431229 1.033313
+[2,]   3.090160  5.857193e-03  1.653355e-04  0.29627587 1.067736
+[3,]  -5.432145 -4.482645e-04 -2.125930e-06 -0.16126660 1.103306
+[4,]   9.549087  3.430671e-05  2.733581e-08  0.08777939 1.140061
+[5,] -16.786196 -2.625572e-06 -3.514916e-10 -0.04777940 1.178040
 \end{verbatim}
 
 \begin{itemize}
@@ -880,12 +877,12 @@ do.call(sum, lista)
 \end{lstlisting}
 
 \begin{verbatim}
-           [,1]       [,2]         [,3]         [,4]          [,5]
-[1,]  1.1339130 1.28575873  1.457938567 1.6531755212  1.8745572454
-[2,] -1.5690146 2.46180694 -3.862611136 6.0604934246 -9.5090029137
-[3,]  0.1692926 0.02865997  0.004851919 0.0008213938  0.0001390558
-[4,]  0.4774238 0.22793347  0.108820861 0.0519536675  0.0248039167
-[5,]  0.5388289 0.29033658  0.156441736 0.0842953276  0.0454207581
+            [,1]         [,2]          [,3]         [,4]          [,5]
+[1,] -1.75788499 3.0901596396 -5.432145e+00 9.549087e+00 -1.678620e+01
+[2,] -0.07653230 0.0058571931 -4.482645e-04 3.430671e-05 -2.625572e-06
+[3,] -0.01285828 0.0001653355 -2.125930e-06 2.733581e-08 -3.514916e-10
+[4,] -0.54431229 0.2962758677 -1.612666e-01 8.777939e-02 -4.777940e-02
+[5,]  1.03331327 1.0677363119  1.103306e+00 1.140061e+00  1.178040e+00
 \end{verbatim}
 \end{frame}
 
@@ -896,38 +893,42 @@ función binaria
 \end{itemize}
 \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
-Reduce('+', 1:10)
+## (((1+2)+3)+4)+5
+Reduce('+', 1:5)
 ## equivalente a 
 ## sum(1:10)
 \end{lstlisting}
 
 \begin{verbatim}
-[1] 55
+[1] 15
 \end{verbatim}
 \end{frame}
 
 \begin{frame}[fragile,label={sec:orgheadline31}]{\texttt{Reduce}}
  \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
-Reduce('/', 1:10)
+## (((1/2)/3)/4)/5
+Reduce('/', 1:5)
 \end{lstlisting}
 
 \begin{verbatim}
-[1] 2.755732e-07
-\end{verbatim}
-
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
-\begin{lstlisting}
-Reduce(paste, LETTERS[1:5])
-\end{lstlisting}
-
-\begin{verbatim}
-[1] "A B C D E"
+[1] 0.008333333
 \end{verbatim}
 
 \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 foo <- function(u, v)u + 1 /v
+Reduce(foo, c(3, 7, 15, 1, 292))
+## equivalente a
+## foo(foo(foo(foo(3, 7), 15), 1), 292)
+\end{lstlisting}
+
+\begin{verbatim}
+[1] 4.212948
+\end{verbatim}
+
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
 Reduce(foo, c(3, 7, 15, 1, 292), right=TRUE)
 ## equivalente a
 ## foo(3, foo(7, foo(15, foo(1, 292))))

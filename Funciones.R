@@ -315,17 +315,21 @@ do.call(sum, lista)
 ## - Combina sucesivamente los elementos de un objeto aplicando una
 ##   función binaria
 
-Reduce('+', 1:10)
+## (((1+2)+3)+4)+5
+Reduce('+', 1:5)
 ## equivalente a 
 ## sum(1:10)
 
 ## =Reduce=
 
-Reduce('/', 1:10)
-
-Reduce(paste, LETTERS[1:5])
+## (((1/2)/3)/4)/5
+Reduce('/', 1:5)
 
 foo <- function(u, v)u + 1 /v
+Reduce(foo, c(3, 7, 15, 1, 292))
+## equivalente a
+## foo(foo(foo(foo(3, 7), 15), 1), 292)
+
 Reduce(foo, c(3, 7, 15, 1, 292), right=TRUE)
 ## equivalente a
 ## foo(3, foo(7, foo(15, foo(1, 292))))

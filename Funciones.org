@@ -401,24 +401,28 @@ do.call(sum, lista)
 - Combina sucesivamente los elementos de un objeto aplicando una
   función binaria
 #+begin_src R 
-Reduce('+', 1:10)
+## (((1+2)+3)+4)+5
+Reduce('+', 1:5)
 ## equivalente a 
 ## sum(1:10)
 #+end_src
 ** =Reduce=
 #+begin_src R 
-Reduce('/', 1:10)
+## (((1/2)/3)/4)/5
+Reduce('/', 1:5)
 #+end_src
-#+begin_src R 
-Reduce(paste, LETTERS[1:5])
-#+end_src
+
 #+begin_src R 
 foo <- function(u, v)u + 1 /v
+Reduce(foo, c(3, 7, 15, 1, 292))
+## equivalente a
+## foo(foo(foo(foo(3, 7), 15), 1), 292)
+#+end_src
+#+begin_src R
 Reduce(foo, c(3, 7, 15, 1, 292), right=TRUE)
 ## equivalente a
 ## foo(3, foo(7, foo(15, foo(1, 292))))
 #+end_src
-
 ** Funciones recursivas
 - [[http://en.wikibooks.org/wiki/R_Programming/Working_with_functions#Functions_as_Objects][Serie de Fibonnaci]]
 #+begin_src R 
