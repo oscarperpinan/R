@@ -174,6 +174,8 @@ Este apartado agrupa material apropiado para trabajar con R desde el rol de desa
    #+ATTR_HTML: :class btn btn-info btn-sm :role button
    [[file:Funciones.pdf][PDF]]
    #+ATTR_HTML: :class btn btn-info btn-sm :role button
+   [[file:Funciones.html][HTML]] 
+   #+ATTR_HTML: :class btn btn-info btn-sm :role button
    [[https://github.com/oscarperpinan/intro/blob/master/Funciones.R][Código]]
 *** Clases y métodos
    :PROPERTIES:
@@ -181,6 +183,8 @@ Este apartado agrupa material apropiado para trabajar con R desde el rol de desa
    :END:
    #+ATTR_HTML: :class btn btn-info btn-sm :role button
    [[FILE:ClasesMetodos.pdf][PDF]] 
+   #+ATTR_HTML: :class btn btn-info btn-sm :role button
+   [[file:ClasesMetodos.html][HTML]] 
    #+ATTR_HTML: :class btn btn-info btn-sm :role button
    [[https://github.com/oscarperpinan/intro/blob/master/ClasesMetodos.R][Código]]
 *** Paquetes
