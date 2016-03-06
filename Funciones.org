@@ -12,7 +12,7 @@
 ** Fuentes de información
 - [[http://cran.r-project.org/doc/manuals/R-intro.html][R introduction]]
 - [[http://cran.r-project.org/doc/manuals/R-lang.html][R Language Definition]]
-- [[http://books.google.es/books/about/Software_for_Data_Analysis.html][Software for Data Analysis]]
+- [[http://www.springer.com/gb/book/9780387759357][Software for Data Analysis]]
 ** Componentes de una función
 - Una función se define con =function=
 #+BEGIN_CENTER
