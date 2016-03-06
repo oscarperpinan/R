@@ -1,4 +1,4 @@
-% Created 2016-03-06 dom 16:56
+% Created 2016-03-06 dom 16:57
 \documentclass[xcolor={usenames,svgnames,dvipsnames}]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -28,6 +28,7 @@
 \hypersetup{colorlinks=true, linkcolor=Blue, urlcolor=Blue}
 \usepackage{fancyvrb}
 \DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\tiny, formatcom = {\color{black!70}}}
+\AtBeginSection[]{\begin{frame}[plain]\tableofcontents[currentsection,sectionstyle=show/shaded]\end{frame}}
 \usetheme{Goettingen}
 \usefonttheme{serif}
 \author{Oscar Perpiñán Lamigueiro $\backslash$\ \url{http://oscarperpinan.github.io}}
@@ -503,7 +504,7 @@ function(x)
     {
         m*x + n
     }
-<environment: 0x4285600>
+<environment: 0x4285478>
 \end{verbatim}
 
 \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
@@ -533,7 +534,7 @@ environment(myFoo)
 \end{lstlisting}
 
 \begin{verbatim}
-<environment: 0x4285600>
+<environment: 0x4285478>
 \end{verbatim}
 
 \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
@@ -602,7 +603,7 @@ sumProd(rnorm(10), runif(10))
 \end{lstlisting}
 
 \begin{verbatim}
-[1] 87.69971
+[1] 33.25611
 \end{verbatim}
 
 \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
@@ -756,7 +757,7 @@ system.time(sumNoise(1000))
 
 \begin{verbatim}
  user  system elapsed 
-0.176   0.008   0.181
+0.164   0.000   0.167
 \end{verbatim}
 \end{frame}
 
@@ -806,25 +807,28 @@ summaryRprof(tmp)
 
 \begin{verbatim}
 $by.self
-        self.time self.pct total.time total.pct
-"rnorm"      0.18       75       0.18        75
-"array"      0.06       25       0.06        25
+          self.time self.pct total.time total.pct
+"rnorm"        0.12     75.0       0.12      75.0
+"rowSums"      0.02     12.5       0.02      12.5
+"unlist"       0.02     12.5       0.02      12.5
 
 $by.total
                  total.time total.pct self.time self.pct
-"sapply"               0.24       100      0.00        0
-"sumNoise"             0.24       100      0.00        0
-"rnorm"                0.18        75      0.18       75
-"FUN"                  0.18        75      0.00        0
-"lapply"               0.18        75      0.00        0
-"array"                0.06        25      0.06       25
-"simplify2array"       0.06        25      0.00        0
+"sumNoise"             0.16     100.0      0.00      0.0
+"sapply"               0.14      87.5      0.00      0.0
+"rnorm"                0.12      75.0      0.12     75.0
+"FUN"                  0.12      75.0      0.00      0.0
+"lapply"               0.12      75.0      0.00      0.0
+"rowSums"              0.02      12.5      0.02     12.5
+"unlist"               0.02      12.5      0.02     12.5
+"as.vector"            0.02      12.5      0.00      0.0
+"simplify2array"       0.02      12.5      0.00      0.0
 
 $sample.interval
 [1] 0.02
 
 $sampling.time
-[1] 0.24
+[1] 0.16
 \end{verbatim}
 \end{frame}
 
@@ -844,7 +848,7 @@ with(lista, sum(a + b + c))
 \end{lstlisting}
 
 \begin{verbatim}
-[1] 147.4239
+[1] 111.9635
 \end{verbatim}
 
 \begin{itemize}
@@ -857,7 +861,7 @@ do.call(sum, lista)
 \end{lstlisting}
 
 \begin{verbatim}
-[1] 147.4239
+[1] 111.9635
 \end{verbatim}
 \end{frame}
 
@@ -873,12 +877,12 @@ do.call(sum, lista)
 \end{lstlisting}
 
 \begin{verbatim}
-             [,1]      [,2]      [,3]        [,4]       [,5]
-[1,] -0.385555865 -1.186135 -1.215231 0.326677461 -0.6441565
-[2,]  0.148653325  1.406916  1.476786 0.106718163  0.4149377
-[3,] -0.057314161 -1.668792 -1.794635 0.034862419 -0.2672848
-[4,]  0.022097811  1.979413  2.180896 0.011388766  0.1721733
-[5,] -0.008519941 -2.347850 -2.650292 0.003720453 -0.1109065
+          [,1]      [,2]       [,3]       [,4]       [,5]
+[1,] -1.394973 0.8983775 -0.7619893 -0.8995668 -0.7206908
+[2,]  1.945949 0.8070822  0.5806276  0.8092204  0.5193952
+[3,] -2.714545 0.7250645 -0.4424320 -0.7279478 -0.3743233
+[4,]  3.786716 0.6513816  0.3371284  0.6548376  0.2697714
+[5,] -5.282366 0.5851866 -0.2568883 -0.5890702 -0.1944217
 \end{verbatim}
 
 \begin{itemize}
@@ -890,12 +894,12 @@ do.call(sum, lista)
 \end{lstlisting}
 
 \begin{verbatim}
-           [,1]      [,2]        [,3]       [,4]         [,5]
-[1,] -0.3855559 0.1486533 -0.05731416 0.02209781 -0.008519941
-[2,] -1.1861349 1.4069160 -1.66879215 1.97941261 -2.347850369
-[3,] -1.2152307 1.4767856 -1.79463525 2.18089584 -2.650291569
-[4,]  0.3266775 0.1067182  0.03486242 0.01138877  0.003720453
-[5,] -0.6441565 0.4149377 -0.26728481 0.17217326 -0.110906533
+           [,1]      [,2]       [,3]      [,4]       [,5]
+[1,] -1.3949727 1.9459487 -2.7145452 3.7867163 -5.2823657
+[2,]  0.8983775 0.8070822  0.7250645 0.6513816  0.5851866
+[3,] -0.7619893 0.5806276 -0.4424320 0.3371284 -0.2568883
+[4,] -0.8995668 0.8092204 -0.7279478 0.6548376 -0.5890702
+[5,] -0.7206908 0.5193952 -0.3743233 0.2697714 -0.1944217
 \end{verbatim}
 \end{frame}
 
