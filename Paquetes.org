@@ -10,9 +10,13 @@
   documentation in standardized format.
 - *Library*: A directory containing installed packages.
 - *Repository*: A website providing packages for installation.
+
+** Definiciones previas ([[http://cran.r-project.org/doc/contrib/Leisch-CreatingPackages.pdf][Creating R Packages: a tutorial]])
 - *Source*: The original version of a package with human-readable text and code.
 - *Binary*: A compiled version of a package with computer-readable
   text and code, may work only on a specific platform.
+
+** Definiciones previas ([[http://cran.r-project.org/doc/contrib/Leisch-CreatingPackages.pdf][Creating R Packages: a tutorial]])
 - *Base packages*: Part of the R source tree, maintained by R Core.
 - *Recommended packages*: Part of every R installation, but not
   necessarily maintained by R Core.
@@ -56,6 +60,8 @@ Extraído de [[http://arxiv.org/abs/1210.0530][Best Practices for Scientific Com
     :END:
 - [[http://cran.r-project.org/doc/manuals/r-release/R-exts.html][Writing R Extensions]]
 - [[http://cran.r-project.org/doc/contrib/Leisch-CreatingPackages.pdf][Creating R Packages: a tutorial]]
+- [[http://kbroman.org/pkg_primer/][R package primer]]
+- [[http://portal.stats.ox.ac.uk/userdata/ruth/APTS2012/Rcourse10.pdf][Making an R package]]
 
 * Crear un paquete en R
 
@@ -103,11 +109,11 @@ Extraído de [[http://arxiv.org/abs/1210.0530][Best Practices for Scientific Com
 - Este mecanismo queda definido en el contenido del fichero
   =NAMESPACE=.
 ** NAMESPACE
-- El =NAMESPACE= controla la estrategia de busqueda de variables
+- El =NAMESPACE= controla la estrategia de búsqueda de variables
   que utilizan las funciones del paquete:
   - En primer lugar busca entre las creadas localmente (por el código de la carpeta =R/=).
   - En segundo lugar busca entre las variables importadas
-    explicitamente de otros paquetes.
+    explícitamente de otros paquetes.
   - En tercer lugar busca en el =NAMESPACE= del paquete =base=.
   - Por último busca siguiendo el camino habitual (ver el
     resultado de =search()=)
@@ -128,9 +134,9 @@ importFrom(pkgExt, var1, var2)
 #+end_src
 
 ** NAMESPACE
-- Para registar el método =S3= =print= para la clase =myClass=:
+- Para registrar el método =S3= =print= para la clase =myClass=:
 #+begin_src R 
-S3method(print, foo)
+S3method(print, myClass)
 #+end_src
 - Para registrar las clases =S4= =class1= y =class2=:
 #+begin_src R 
@@ -155,8 +161,7 @@ importMethodsFrom(package, ...)
   - =promptClass= y =promptMethods=: [[http://cran.r-project.org/doc/manuals/r-release/R-exts.html\#Documenting-S4-classes-and-methods][clases y métodos]].
   - =promptPackage=: [[http://cran.r-project.org/doc/manuals/r-release/R-exts.html\#Documenting-packages][paquete]]
   - =promptData=: [[http://cran.r-project.org/doc/manuals/r-release/R-exts.html\#Documenting-data-sets][datos]]
-- Todos los comandos disponibles están en el documento [[http://developer.r-project.org/parseRd.pdf][Parsing Rd
-  files]].
+- Todos los comandos disponibles están en el documento [[http://developer.r-project.org/parseRd.pdf][Parsing Rd files]].
 
 ** 
 #+begin_example
@@ -228,14 +233,12 @@ R CMD check myPackage.tar.gz
     :PROPERTIES:
     :BEAMER_env: ignoreheading
     :END:
-- Fuente en formato /tarball/
-  - El resultado es un fichero /tarball/ =myPackage.tar.gz= que
+- Fuente en formato /tarball/: el resultado es un fichero /tarball/ =myPackage.tar.gz= que
      se puede distribuir a cualquier sistema.
 #+begin_example
 R CMD build myPackage/
 #+end_example
-- Comprimido binario
-   - El resultado es una copia comprimida de la versión
+- Comprimido binario: el resultado es una copia comprimida de la versión
      *instalada* del paquete: depende del sistema operativo.
 #+begin_example
 R CMD INSTALL --build myPackage/
