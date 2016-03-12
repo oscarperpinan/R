@@ -282,4 +282,13 @@ Otros repositorios destacables son:
 
   - [[http://rforge.net/][RForge]] (versiones de desarrollo)
 
-  - [[http://www.bioconductor.org/][Bioconductor]] (paquetes de bioinformática) 
+  - [[http://www.bioconductor.org/][Bioconductor]] (paquetes de bioinformática)
+
+** Repositorios: GitHub
+
+- GitHub es actualmente el repositorio de código más importante por número de usuarios y proyectos alojados.
+  - Documentación: [[https://guides.github.com/][Guías sobre GitHub]] y [[https://training.github.com/kit/courses/github-for-everyone.html][GitHub for everyone]].
+  - Existe una [[https://desktop.github.com/][aplicación de escritorio]] ([[https://help.github.com/desktop/guides/getting-started/][guía introductoria]])
+- Emplea =git= para realizar control de versiones.
+  - [[https://help.github.com/articles/good-resources-for-learning-git-and-github/][Recursos]] para aprender a usar =git=.
+- [[https://github.com/search?o=desc&q=language:R&ref=searchresults&s=stars&type=Repositories][Proyectos de =R= en GitHub]]. 
