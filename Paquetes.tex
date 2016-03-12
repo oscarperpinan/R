@@ -1,4 +1,4 @@
-% Created 2016-03-12 sáb 17:34
+% Created 2016-03-12 sáb 18:01
 \documentclass[xcolor={usenames,svgnames,dvipsnames}]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -139,7 +139,7 @@ directorio que contiene al menos:
 contenidos en el paquete.
 \end{itemize}
 \end{itemize}
-\item Esta escructura puede ser generada con \texttt{package.skeleton}.
+\item Esta estructura puede ser generada con \texttt{package.skeleton}.
 \end{itemize}
 \end{frame}
 
@@ -187,9 +187,8 @@ accesibles a los usuarios)
 \end{itemize}
 \end{frame}
 \begin{frame}[fragile,label={sec:orgheadline11}]{NAMESPACE}
- \begin{itemize}
-\item El \texttt{NAMESPACE} controla la estrategia de búsqueda de variables
-que utilizan las funciones del paquete:
+ El \texttt{NAMESPACE} controla la estrategia de búsqueda de variables
+  que utilizan las funciones del paquete:
 \begin{itemize}
 \item En primer lugar busca entre las creadas localmente (por el código de la carpeta \texttt{R/}).
 \item En segundo lugar busca entre las variables importadas
@@ -197,7 +196,6 @@ explícitamente de otros paquetes.
 \item En tercer lugar busca en el \texttt{NAMESPACE} del paquete \texttt{base}.
 \item Por último busca siguiendo el camino habitual (ver el
 resultado de \texttt{search()})
-\end{itemize}
 \end{itemize}
 \end{frame}
 
@@ -389,38 +387,33 @@ install.packages(myPackage.tar.gz, type='source')
 \end{frame}
 
 
-\begin{frame}[fragile,label={sec:orgheadline21}]{Repositorios}
- \begin{itemize}
-\item El principal repositorio de paquetes estables es \href{http://cran.r-project.org/}{CRAN}.
+\begin{frame}[fragile,label={sec:orgheadline21}]{Repositorios: CRAN}
+ El principal repositorio de paquetes estables es \href{http://cran.r-project.org/}{CRAN}.
 \begin{itemize}
 \item Publicar en este repositorio conlleva la aceptación de unas \href{http://cran.r-project.org/web/packages/policies.html}{condiciones}.
-\item Para publicar en CRAN hay que subir el fichero fuente
-\emph{tarball} resultado de \texttt{R CMD build} via FTP anónimo a la
-dirección \url{ftp://CRAN.R-project.org/incoming/} y enviar un
-correo en texto plano a CRAN@R-project.org.
+\item Para publicar en CRAN hay que subir el fichero fuente \emph{tarball}
+resultado de \texttt{R CMD build} mediante el formulario web
+\url{https://cran.r-project.org/submit.html} siguiendo los pasos que
+allí se indican.
 \item Es imprescindible haber comprobado el fichero con \texttt{R CMD check
-    -{}-as-cran} antes de subirlo al servidor FTP. El resultado de
-esta comprobación \alert{no} debe contener errores ni advertencias
-(\texttt{warnings}).
-\item Más detalle en el apartado Submission de las \href{http://cran.r-project.org/web/packages/policies.html}{condiciones de
+    -{}-as-cran} antes de subirlo al formulario. El resultado de
+esta comprobación \alert{no} debe contener errores, advertencias o notas.
+\item Más detalle en el apartado \emph{Submission} de las \href{http://cran.r-project.org/web/packages/policies.html}{condiciones de
 CRAN} y en el manual \href{http://cran.r-project.org/doc/manuals/R-exts.html\#Submitting-a-package-to-CRAN}{R Extensions}.
-\end{itemize}
 \end{itemize}
 \end{frame}
 
 \begin{frame}[label={sec:orgheadline22}]{Repositorios}
-\begin{itemize}
-\item Otros repositorios destacables son:
+Otros repositorios destacables son:
 
 \begin{itemize}
+\item \href{https://github.com/}{GitHub} (versiones de desarrollo)
+
 \item \href{http://r-forge.r-project.org/}{R-Forge} (versiones de desarrollo)
 
-\item \href{http://www.bioconductor.org/}{Bioconductor} (paquetes de bioinformática)
-
-\item \href{https://github.com/languages/R}{Proyectos R en Github} (versiones de desarrollo)
-
 \item \href{http://rforge.net/}{RForge} (versiones de desarrollo)
-\end{itemize}
+
+\item \href{http://www.bioconductor.org/}{Bioconductor} (paquetes de bioinformática)
 \end{itemize}
 \end{frame}
 \end{document}

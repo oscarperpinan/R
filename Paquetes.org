@@ -73,7 +73,7 @@ Extraído de [[http://arxiv.org/abs/1210.0530][Best Practices for Scientific Com
     - =R=: código en ficheros .R
     - =man=: páginas de ayuda de las funciones, métodos y clases
       contenidos en el paquete.
-- Esta escructura puede ser generada con =package.skeleton=.
+- Esta estructura puede ser generada con =package.skeleton=.
 
 ** DESCRIPTION
 - El fichero DESCRIPTION contiene la información básica sobre el
@@ -109,7 +109,7 @@ Extraído de [[http://arxiv.org/abs/1210.0530][Best Practices for Scientific Com
 - Este mecanismo queda definido en el contenido del fichero
   =NAMESPACE=.
 ** NAMESPACE
-- El =NAMESPACE= controla la estrategia de búsqueda de variables
+El =NAMESPACE= controla la estrategia de búsqueda de variables
   que utilizan las funciones del paquete:
   - En primer lugar busca entre las creadas localmente (por el código de la carpeta =R/=).
   - En segundo lugar busca entre las variables importadas
@@ -259,29 +259,27 @@ install.packages(myPackage.tar.gz, type='source')
 #+end_example
 
 
-** Repositorios
-- El principal repositorio de paquetes estables es [[http://cran.r-project.org/][CRAN]].
+** Repositorios: CRAN
+El principal repositorio de paquetes estables es [[http://cran.r-project.org/][CRAN]].
   - Publicar en este repositorio conlleva la aceptación de unas [[http://cran.r-project.org/web/packages/policies.html][condiciones]].
-  - Para publicar en CRAN hay que subir el fichero fuente
-    /tarball/ resultado de =R CMD build= via FTP anónimo a la
-    dirección ftp://CRAN.R-project.org/incoming/ y enviar un
-    correo en texto plano a CRAN@R-project.org.
+  - Para publicar en CRAN hay que subir el fichero fuente /tarball/
+    resultado de =R CMD build= mediante el formulario web
+    https://cran.r-project.org/submit.html siguiendo los pasos que
+    allí se indican.
   - Es imprescindible haber comprobado el fichero con =R CMD check
-    --as-cran= antes de subirlo al servidor FTP. El resultado de
-    esta comprobación *no* debe contener errores ni advertencias
-    (=warnings=).
-  - Más detalle en el apartado Submission de las [[http://cran.r-project.org/web/packages/policies.html][condiciones de
+    --as-cran= antes de subirlo al formulario. El resultado de
+    esta comprobación *no* debe contener errores, advertencias o notas.
+  - Más detalle en el apartado /Submission/ de las [[http://cran.r-project.org/web/packages/policies.html][condiciones de
     CRAN]] y en el manual [[http://cran.r-project.org/doc/manuals/R-exts.html\#Submitting-a-package-to-CRAN][R Extensions]].
 
 ** Repositorios
 
-- Otros repositorios destacables son:
+Otros repositorios destacables son:
+
+  - [[https://github.com/][GitHub]] (versiones de desarrollo)
 
   - [[http://r-forge.r-project.org/][R-Forge]] (versiones de desarrollo)
 
-  - [[http://www.bioconductor.org/][Bioconductor]] (paquetes de bioinformática)
-
-  - [[https://github.com/languages/R][Proyectos R en Github]] (versiones de desarrollo)
-
   - [[http://rforge.net/][RForge]] (versiones de desarrollo)
 
+  - [[http://www.bioconductor.org/][Bioconductor]] (paquetes de bioinformática) 

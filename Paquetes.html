@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
 <head>
-<!-- 2016-03-12 sáb 17:36 -->
+<!-- 2016-03-12 sáb 18:01 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>Crear paquetes en R</title>
@@ -181,7 +181,7 @@ for the JavaScript code in this tag.
 <li><a href="#orgheadline19">3.2. Comprobar</a></li>
 <li><a href="#orgheadline22">3.3. Construir</a></li>
 <li><a href="#orgheadline23">3.4. Comprobar y construir en sistemas Windows</a></li>
-<li><a href="#orgheadline24">3.5. Repositorios</a></li>
+<li><a href="#orgheadline24">3.5. Repositorios: CRAN</a></li>
 <li><a href="#orgheadline25">3.6. Repositorios</a></li>
 </ul>
 </li>
@@ -302,7 +302,7 @@ directorio que contiene al menos:
 contenidos en el paquete.</li>
 </ul></li>
 </ul></li>
-<li>Esta escructura puede ser generada con <code>package.skeleton</code>.</li>
+<li>Esta estructura puede ser generada con <code>package.skeleton</code>.</li>
 </ul>
 </div>
 </div>
@@ -359,9 +359,10 @@ accesibles a los usuarios)</li>
 <div id="outline-container-orgheadline12" class="outline-3">
 <h3 id="orgheadline12"><span class="section-number-3">2.4</span> NAMESPACE</h3>
 <div class="outline-text-3" id="text-2-4">
-<ul class="org-ul">
-<li>El <code>NAMESPACE</code> controla la estrategia de búsqueda de variables
-que utilizan las funciones del paquete:
+<p>
+El <code>NAMESPACE</code> controla la estrategia de búsqueda de variables
+  que utilizan las funciones del paquete:
+</p>
 <ul class="org-ul">
 <li>En primer lugar busca entre las creadas localmente (por el código de la carpeta <code>R/</code>).</li>
 <li>En segundo lugar busca entre las variables importadas
@@ -369,7 +370,6 @@ explícitamente de otros paquetes.</li>
 <li>En tercer lugar busca en el <code>NAMESPACE</code> del paquete <code>base</code>.</li>
 <li>Por último busca siguiendo el camino habitual (ver el
 resultado de <code>search()</code>)</li>
-</ul></li>
 </ul>
 </div>
 </div>
@@ -598,23 +598,22 @@ install.packages(myPackage.tar.gz, type='source')
 
 
 <div id="outline-container-orgheadline24" class="outline-3">
-<h3 id="orgheadline24"><span class="section-number-3">3.5</span> Repositorios</h3>
+<h3 id="orgheadline24"><span class="section-number-3">3.5</span> Repositorios: CRAN</h3>
 <div class="outline-text-3" id="text-3-5">
-<ul class="org-ul">
-<li>El principal repositorio de paquetes estables es <a href="http://cran.r-project.org/">CRAN</a>.
+<p>
+El principal repositorio de paquetes estables es <a href="http://cran.r-project.org/">CRAN</a>.
+</p>
 <ul class="org-ul">
 <li>Publicar en este repositorio conlleva la aceptación de unas <a href="http://cran.r-project.org/web/packages/policies.html">condiciones</a>.</li>
-<li>Para publicar en CRAN hay que subir el fichero fuente
-<i>tarball</i> resultado de <code>R CMD build</code> via FTP anónimo a la
-dirección <a href="ftp://cran.r-project.org/incoming/">ftp://cran.r-project.org/incoming/</a> y enviar un
-correo en texto plano a CRAN@R-project.org.</li>
+<li>Para publicar en CRAN hay que subir el fichero fuente <i>tarball</i>
+resultado de <code>R CMD build</code> mediante el formulario web
+<a href="https://cran.r-project.org/submit.html">https://cran.r-project.org/submit.html</a> siguiendo los pasos que
+allí se indican.</li>
 <li>Es imprescindible haber comprobado el fichero con <code>R CMD check
-    --as-cran</code> antes de subirlo al servidor FTP. El resultado de
-esta comprobación <b>no</b> debe contener errores ni advertencias
-(<code>warnings</code>).</li>
-<li>Más detalle en el apartado Submission de las <a href="http://cran.r-project.org/web/packages/policies.html">condiciones de
+    --as-cran</code> antes de subirlo al formulario. El resultado de
+esta comprobación <b>no</b> debe contener errores, advertencias o notas.</li>
+<li>Más detalle en el apartado <i>Submission</i> de las <a href="http://cran.r-project.org/web/packages/policies.html">condiciones de
 CRAN</a> y en el manual <a href="http://cran.r-project.org/doc/manuals/R-exts.html%5C#Submitting-a-package-to-CRAN">R Extensions</a>.</li>
-</ul></li>
 </ul>
 </div>
 </div>
@@ -622,18 +621,18 @@ CRAN</a> y en el manual <a href="http://cran.r-project.org/doc/manuals/R-exts.ht
 <div id="outline-container-orgheadline25" class="outline-3">
 <h3 id="orgheadline25"><span class="section-number-3">3.6</span> Repositorios</h3>
 <div class="outline-text-3" id="text-3-6">
-<ul class="org-ul">
-<li>Otros repositorios destacables son:
+<p>
+Otros repositorios destacables son:
+</p>
 
 <ul class="org-ul">
+<li><a href="https://github.com/">GitHub</a> (versiones de desarrollo)</li>
+
 <li><a href="http://r-forge.r-project.org/">R-Forge</a> (versiones de desarrollo)</li>
 
-<li><a href="http://www.bioconductor.org/">Bioconductor</a> (paquetes de bioinformática)</li>
-
-<li><a href="https://github.com/languages/R">Proyectos R en Github</a> (versiones de desarrollo)</li>
-
 <li><a href="http://rforge.net/">RForge</a> (versiones de desarrollo)</li>
-</ul></li>
+
+<li><a href="http://www.bioconductor.org/">Bioconductor</a> (paquetes de bioinformática)</li>
 </ul>
 </div>
 </div>
@@ -641,7 +640,7 @@ CRAN</a> y en el manual <a href="http://cran.r-project.org/doc/manuals/R-exts.ht
 </div>
 <div id="postamble" class="status">
 <p class="author">Autor: Oscar Perpiñán Lamigueiro \\ <a href="http://oscarperpinan.github.io/">http://oscarperpinan.github.io/</a></p>
-<p class="date">Created: 2016-03-12 sáb 17:36</p>
+<p class="date">Created: 2016-03-12 sáb 18:01</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
