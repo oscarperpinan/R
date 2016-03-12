@@ -25,9 +25,10 @@ por [[http://oscarperpinan.github.io][Oscar Perpiñán Lamigueiro]] empleando [[
 [[http://creativecommons.org/licenses/by-sa/4.0/][https://i.creativecommons.org/l/by-sa/4.0/88x31.png]] Este material está
 bajo una licencia [[http://creativecommons.org/licenses/by-sa/4.0/][Creative Commons CC-BY-SA 4.0]].
 
-* <<instalacion>>Instalar R
+* Instalar R
   :PROPERTIES:
   :HTML_CONTAINER_CLASS: container
+  :CUSTOM_ID: instalacion
   :END:
 
 - Si utilizáis Windows, podéis descargar el instalador desde [[http://cran.es.r-project.org/bin/windows/base/][aquí]].
@@ -35,9 +36,10 @@ bajo una licencia [[http://creativecommons.org/licenses/by-sa/4.0/][Creative Com
 - Y si utilizáis Linux, posiblemente lo tengáis disponible en vuestro
   gestor de aplicaciones. En todo caso, la página para Linux está [[http://cran.es.r-project.org/bin/linux/][aquí]].
 
-* <<gui>>Interfaces para R
+* Interfaces para R
   :PROPERTIES:
   :HTML_CONTAINER_CLASS: container
+  :CUSTOM_ID: gui
   :END:
 
 En mi opinión, la mejor interfaz para R es [[http://ess.r-project.org/][ESS]] con [[http://www.gnu.org/software/emacs/][Emacs]], aunque
@@ -46,9 +48,10 @@ posiblemente no es lo más recomendable para un principiante.
 La alternativa más recomendable es [[http://www.rstudio.com/ide/][RStudio]]. Podéis descargar el
 instalador desde [[http://www.rstudio.com/ide/download/desktop][aquí]]. Es aconsejable la lectura de esta [[http://www.rstudio.com/ide/docs/using/source][introducción]].
 
-* <<uso>>Cómo usar el material
+* Cómo usar el material
   :PROPERTIES:
   :HTML_CONTAINER_CLASS: container
+  :CUSTOM_ID: uso
   :END:
 
 Para trabajar con este material es recomendable obtener una copia
@@ -92,14 +95,16 @@ install.packages(c('lattice', 'latticeExtra', 'RColorBrewer',
 Ya está todo listo para empezar a trabajar con el material.
 
 
-* <<contenido>>Contenido
+* Contenido
   :PROPERTIES:
   :HTML_CONTAINER_CLASS: container
+  :CUSTOM_ID: contenido
   :END:
 
-** <<usuario>>Usuario
+** Usuario
   :PROPERTIES:
   :HTML_CONTAINER_CLASS: container
+  :CUSTOM_ID: usuario
   :END:
 ------
 #+ATTR_HTML: :class lead
@@ -157,9 +162,10 @@ Este apartado agrupa el material apropiado para trabajar con R desde el rol de u
    [[https://github.com/oscarperpinan/intro/blob/master/factorDateCharacter.R][Código]]
   
 
-** <<desarrollador>>Desarrollador
+** Desarrollador
   :PROPERTIES:
   :HTML_CONTAINER_CLASS: container
+  :CUSTOM_ID: desarrollador
   :END:
  
 ------
@@ -193,15 +199,19 @@ Este apartado agrupa material apropiado para trabajar con R desde el rol de desa
    :END:
    #+ATTR_HTML: :class btn btn-info btn-sm :role button
    [[FILE:Paquetes.pdf][PDF]]
+   #+ATTR_HTML: :class btn btn-info btn-sm :role button
+   [[file:Paquetes.html][HTML]] 
 
 
-** <<misc>>Miscelánea
+** Miscelánea
   :PROPERTIES:
   :HTML_CONTAINER_CLASS: container
+  :CUSTOM_ID: misc
   :END:
 ------
 #+ATTR_HTML: :class lead
 Este apartado agrupa material sobre series temporales y datos espaciales.
+Si trabajas con series temporales y datos espaciales te puede interesar mi libro "[[http://oscarperpinan.github.io/spacetime-vis/][Displaying time series, spatial and space-time data with R]]".
 
 *** Series temporales
    :PROPERTIES:
@@ -220,13 +230,6 @@ Este apartado agrupa material sobre series temporales y datos espaciales.
    #+ATTR_HTML: :class btn btn-info btn-sm :role button
    [[https://github.com/oscarperpinan/intro/blob/master/raster.R][Código]]
 ------
-**  
-   :PROPERTIES:
-   :HTML_CONTAINER_CLASS:
-   :END:
-
-#+ATTR_HTML: :class lead
-Si trabajas con series temporales y datos espaciales te puede interesar mi libro "[[http://oscarperpinan.github.io/spacetime-vis/][Displaying time series, spatial and space-time data with R]]".
 ------
 
 
