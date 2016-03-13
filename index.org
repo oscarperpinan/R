@@ -2,7 +2,7 @@
 #+EMAIL:     oscar.perpinan@gmail.com
 #+TITLE:     Introducción a R
 #+LANGUAGE:  es
-#+OPTIONS:   H:3 num:nil toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t TeX:t LaTeX:nil skip:nil d:t tags:not-in-toc
+#+OPTIONS:   H:3 num:nil toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t TeX:t LaTeX:nil skip:nil d:t tags:not-in-toc
 #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
 #+LINK_UP:
 #+LINK_HOME:
@@ -11,12 +11,15 @@
 #+HTML_HEAD:    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 #+HTML_HEAD:    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootswatch/3.2.0/readable/bootstrap.min.css">
 #+HTML_HEAD:    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/>
+
+#+HTML_HEAD: <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+#+HTML_HEAD: <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+#+HTML_HEAD: <script type="text/javascript" src="http://www.pirilampo.org/styles/lib/js/jquery.stickytableheaders.js"></script>
+#+HTML_HEAD: <script type="text/javascript" src="http://www.pirilampo.org/styles/readtheorg/js/readtheorg.js"></script>
 #+BIND: org-html-postamble nil
 
-* 
-  :PROPERTIES:
-  :HTML_CONTAINER_CLASS: container jumbotron
-  :END:
 Esta página publica material didáctico (diapositivas, datos y código)
 adecuado a cursos introductorios a R. Este material ha sido elaborado
 por [[http://oscarperpinan.github.io][Oscar Perpiñán Lamigueiro]] empleando [[http://orgmode.org/][org-mode]] y [[http://ess.r-project.org/][ESS]] sobre
@@ -27,7 +30,6 @@ bajo una licencia [[http://creativecommons.org/licenses/by-sa/4.0/][Creative Com
 
 * Instalar R
   :PROPERTIES:
-  :HTML_CONTAINER_CLASS: container
   :CUSTOM_ID: instalacion
   :END:
 
@@ -38,7 +40,6 @@ bajo una licencia [[http://creativecommons.org/licenses/by-sa/4.0/][Creative Com
 
 * Interfaces para R
   :PROPERTIES:
-  :HTML_CONTAINER_CLASS: container
   :CUSTOM_ID: gui
   :END:
 
@@ -50,7 +51,6 @@ instalador desde [[http://www.rstudio.com/ide/download/desktop][aquí]]. Es acon
 
 * Cómo usar el material
   :PROPERTIES:
-  :HTML_CONTAINER_CLASS: container
   :CUSTOM_ID: uso
   :END:
 
@@ -94,142 +94,106 @@ install.packages(c('lattice', 'latticeExtra', 'RColorBrewer',
 
 Ya está todo listo para empezar a trabajar con el material.
 
-
+------
 * Contenido
   :PROPERTIES:
-  :HTML_CONTAINER_CLASS: container
   :CUSTOM_ID: contenido
   :END:
 
 ** Usuario
   :PROPERTIES:
-  :HTML_CONTAINER_CLASS: container
   :CUSTOM_ID: usuario
   :END:
-------
-#+ATTR_HTML: :class lead
+
 Este apartado agrupa el material apropiado para trabajar con R desde el rol de usuario.
 
 *** Introducción
-   :PROPERTIES:
-   :HTML_CONTAINER_CLASS: col-md-4
-   :END:
-   #+ATTR_HTML: :class btn btn-info btn-sm :role button
-   [[file:intro.pdf][PDF]] 
-   #+ATTR_HTML: :class btn btn-info btn-sm :role button
-   [[file:intro.html][HTML]] 
-   #+ATTR_HTML: :class btn btn-info btn-sm :role button
-   [[https://github.com/oscarperpinan/intro/blob/master/intro.R][Código]]
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[file:intro.pdf][*PDF*]] 
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[file:intro.html][*HTML*]] 
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[https://github.com/oscarperpinan/intro/blob/master/intro.R][*Código*]]
 *** Manejo de datos
-   :PROPERTIES:
-   :HTML_CONTAINER_CLASS: col-md-4
-   :END:
-   #+ATTR_HTML: :class btn btn-info btn-sm :role button
-   [[FILE:datos.pdf][PDF]]
-   #+ATTR_HTML: :class btn btn-info btn-sm :role button
-   [[file:datos.html][HTML]] 
-   #+ATTR_HTML: :class btn btn-info btn-sm :role button
-   [[https://github.com/oscarperpinan/intro/blob/master/datos.R][Código]]
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[FILE:datos.pdf][*PDF*]]
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[file:datos.html][*HTML*]] 
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[https://github.com/oscarperpinan/intro/blob/master/datos.R][*Código*]]
 *** Gráficos
-   :PROPERTIES:
-   :HTML_CONTAINER_CLASS: col-md-4
-   :END:
-   #+ATTR_HTML: :class btn btn-info btn-sm :role button
-   [[file:graficos.pdf][PDF]]
-   #+ATTR_HTML: :class btn btn-info btn-sm :role button
-   [[file:graficos.html][HTML]] 
-   #+ATTR_HTML: :class btn btn-info btn-sm :role button
-   [[https://github.com/oscarperpinan/intro/blob/master/graficos.R][Código]]
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[file:graficos.pdf][*PDF*]]
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[file:graficos.html][*HTML*]] 
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[https://github.com/oscarperpinan/intro/blob/master/graficos.R][*Código*]]
 *** Estadística
-   :PROPERTIES:
-   :HTML_CONTAINER_CLASS: col-md-4
-   :END:
-   #+ATTR_HTML: :class btn btn-info btn-sm :role button
-   [[file:estadistica.pdf][PDF]]
-   #+ATTR_HTML: :class btn btn-info btn-sm :role button
-   [[file:estadistica.html][HTML]] 
-   #+ATTR_HTML: :class btn btn-info btn-sm :role button
-   [[https://github.com/oscarperpinan/intro/blob/master/estadistica.R][Código]]
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[file:estadistica.pdf][*PDF*]]
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[file:estadistica.html][*HTML*]] 
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[https://github.com/oscarperpinan/intro/blob/master/estadistica.R][*Código*]]
 *** Factores, Fechas, Caracteres
-   :PROPERTIES:
-   :HTML_CONTAINER_CLASS: col-md-4
-   :END:
-   #+ATTR_HTML: :class btn btn-info btn-sm :role button
-   [[file:factorDateCharacter.pdf][PDF]] 
-   #+ATTR_HTML: :class btn btn-info btn-sm :role button
-   [[file:factorDateCharacter.html][HTML]] 
-   #+ATTR_HTML: :class btn btn-info btn-sm :role button
-   [[https://github.com/oscarperpinan/intro/blob/master/factorDateCharacter.R][Código]]
-  
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[file:factorDateCharacter.pdf][*PDF*]] 
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[file:factorDateCharacter.html][*HTML*]] 
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[https://github.com/oscarperpinan/intro/blob/master/factorDateCharacter.R][*Código*]]
+
+------  
 
 ** Desarrollador
   :PROPERTIES:
-  :HTML_CONTAINER_CLASS: container
   :CUSTOM_ID: desarrollador
   :END:
  
-------
-#+ATTR_HTML: :class lead
 Este apartado agrupa material apropiado para trabajar con R desde el rol de desarrollador.
 
 
 *** Funciones
-   :PROPERTIES:
-   :HTML_CONTAINER_CLASS: col-md-4
-   :END:
-   #+ATTR_HTML: :class btn btn-info btn-sm :role button
-   [[file:Funciones.pdf][PDF]]
-   #+ATTR_HTML: :class btn btn-info btn-sm :role button
-   [[file:Funciones.html][HTML]] 
-   #+ATTR_HTML: :class btn btn-info btn-sm :role button
-   [[https://github.com/oscarperpinan/intro/blob/master/Funciones.R][Código]]
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[file:Funciones.pdf][*PDF*]]
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[file:Funciones.html][*HTML*]] 
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[https://github.com/oscarperpinan/intro/blob/master/Funciones.R][*Código*]]
 *** Clases y métodos
-   :PROPERTIES:
-   :HTML_CONTAINER_CLASS: col-md-4
-   :END:
-   #+ATTR_HTML: :class btn btn-info btn-sm :role button
-   [[FILE:ClasesMetodos.pdf][PDF]] 
-   #+ATTR_HTML: :class btn btn-info btn-sm :role button
-   [[file:ClasesMetodos.html][HTML]] 
-   #+ATTR_HTML: :class btn btn-info btn-sm :role button
-   [[https://github.com/oscarperpinan/intro/blob/master/ClasesMetodos.R][Código]]
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[FILE:ClasesMetodos.pdf][*PDF*]] 
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[file:ClasesMetodos.html][*HTML*]] 
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[https://github.com/oscarperpinan/intro/blob/master/ClasesMetodos.R][*Código*]]
 *** Paquetes
-   :PROPERTIES:
-   :HTML_CONTAINER_CLASS: col-md-4
-   :END:
-   #+ATTR_HTML: :class btn btn-info btn-sm :role button
-   [[FILE:Paquetes.pdf][PDF]]
-   #+ATTR_HTML: :class btn btn-info btn-sm :role button
-   [[file:Paquetes.html][HTML]] 
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[FILE:Paquetes.pdf][*PDF*]]
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[file:Paquetes.html][*HTML*]] 
 
+------
 
 ** Miscelánea
   :PROPERTIES:
-  :HTML_CONTAINER_CLASS: container
   :CUSTOM_ID: misc
   :END:
-------
-#+ATTR_HTML: :class lead
+
 Este apartado agrupa material sobre series temporales y datos espaciales.
 Si trabajas con series temporales y datos espaciales te puede interesar mi libro "[[http://oscarperpinan.github.io/spacetime-vis/][Displaying time series, spatial and space-time data with R]]".
 
 *** Series temporales
-   :PROPERTIES:
-   :HTML_CONTAINER_CLASS: col-md-4
-   :END:
-   #+ATTR_HTML: :class btn btn-info btn-sm :role button
-   [[file:zoo.pdf][PDF]]
-   #+ATTR_HTML: :class btn btn-info btn-sm :role button
-   [[https://github.com/oscarperpinan/intro/blob/master/zoo.R][Código]]
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[file:zoo.pdf][*PDF*]]
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[https://github.com/oscarperpinan/intro/blob/master/zoo.R][*Código*]]
 *** Datos espaciales
-   :PROPERTIES:
-   :HTML_CONTAINER_CLASS: col-md-4
-   :END:
-   #+ATTR_HTML: :class btn btn-info btn-sm :role button
-   [[file:raster.pdf][PDF]]
-   #+ATTR_HTML: :class btn btn-info btn-sm :role button
-   [[https://github.com/oscarperpinan/intro/blob/master/raster.R][Código]]
-------
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[file:raster.pdf][*PDF*]] 
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[https://github.com/oscarperpinan/intro/blob/master/raster.R][*Código*]]
+
 ------
 
 
