@@ -108,6 +108,9 @@ Ya está todo listo para empezar a trabajar con el material.
 Este apartado agrupa el material apropiado para trabajar con R desde el rol de usuario.
 
 *** Introducción
+    :PROPERTIES:
+    :CUSTOM_ID: intro
+    :END:
    #+ATTR_HTML: :class btn btn-default btn-sm :type button
    [[file:intro.pdf][*PDF*]] 
    #+ATTR_HTML: :class btn btn-default btn-sm :type button
@@ -115,6 +118,9 @@ Este apartado agrupa el material apropiado para trabajar con R desde el rol de u
    #+ATTR_HTML: :class btn btn-default btn-sm :type button
    [[https://github.com/oscarperpinan/intro/blob/master/intro.R][*Código*]]
 *** Manejo de datos
+    :PROPERTIES:
+    :CUSTOM_ID: datos
+    :END:
    #+ATTR_HTML: :class btn btn-default btn-sm :type button
    [[FILE:datos.pdf][*PDF*]]
    #+ATTR_HTML: :class btn btn-default btn-sm :type button
@@ -122,6 +128,9 @@ Este apartado agrupa el material apropiado para trabajar con R desde el rol de u
    #+ATTR_HTML: :class btn btn-default btn-sm :type button
    [[https://github.com/oscarperpinan/intro/blob/master/datos.R][*Código*]]
 *** Gráficos
+    :PROPERTIES:
+    :CUSTOM_ID: graficos
+    :END:
    #+ATTR_HTML: :class btn btn-default btn-sm :type button
    [[file:graficos.pdf][*PDF*]]
    #+ATTR_HTML: :class btn btn-default btn-sm :type button
@@ -129,6 +138,9 @@ Este apartado agrupa el material apropiado para trabajar con R desde el rol de u
    #+ATTR_HTML: :class btn btn-default btn-sm :type button
    [[https://github.com/oscarperpinan/intro/blob/master/graficos.R][*Código*]]
 *** Estadística
+    :PROPERTIES:
+    :CUSTOM_ID: estadistica
+    :END:
    #+ATTR_HTML: :class btn btn-default btn-sm :type button
    [[file:estadistica.pdf][*PDF*]]
    #+ATTR_HTML: :class btn btn-default btn-sm :type button
@@ -136,6 +148,9 @@ Este apartado agrupa el material apropiado para trabajar con R desde el rol de u
    #+ATTR_HTML: :class btn btn-default btn-sm :type button
    [[https://github.com/oscarperpinan/intro/blob/master/estadistica.R][*Código*]]
 *** Factores, Fechas, Caracteres
+    :PROPERTIES:
+    :CUSTOM_ID: factores
+    :END:
    #+ATTR_HTML: :class btn btn-default btn-sm :type button
    [[file:factorDateCharacter.pdf][*PDF*]] 
    #+ATTR_HTML: :class btn btn-default btn-sm :type button
@@ -154,6 +169,9 @@ Este apartado agrupa material apropiado para trabajar con R desde el rol de desa
 
 
 *** Funciones
+    :PROPERTIES:
+    :CUSTOM_ID: funciones
+    :END:
    #+ATTR_HTML: :class btn btn-default btn-sm :type button
    [[file:Funciones.pdf][*PDF*]]
    #+ATTR_HTML: :class btn btn-default btn-sm :type button
@@ -161,6 +179,9 @@ Este apartado agrupa material apropiado para trabajar con R desde el rol de desa
    #+ATTR_HTML: :class btn btn-default btn-sm :type button
    [[https://github.com/oscarperpinan/intro/blob/master/Funciones.R][*Código*]]
 *** Clases y métodos
+    :PROPERTIES:
+    :CUSTOM_ID: oop
+    :END:
    #+ATTR_HTML: :class btn btn-default btn-sm :type button
    [[FILE:ClasesMetodos.pdf][*PDF*]] 
    #+ATTR_HTML: :class btn btn-default btn-sm :type button
@@ -168,6 +189,9 @@ Este apartado agrupa material apropiado para trabajar con R desde el rol de desa
    #+ATTR_HTML: :class btn btn-default btn-sm :type button
    [[https://github.com/oscarperpinan/intro/blob/master/ClasesMetodos.R][*Código*]]
 *** Paquetes
+    :PROPERTIES:
+    :CUSTOM_ID: paquetes
+    :END:
    #+ATTR_HTML: :class btn btn-default btn-sm :type button
    [[FILE:Paquetes.pdf][*PDF*]]
    #+ATTR_HTML: :class btn btn-default btn-sm :type button
@@ -184,11 +208,17 @@ Este apartado agrupa material sobre series temporales y datos espaciales.
 Si trabajas con series temporales y datos espaciales te puede interesar mi libro "[[http://oscarperpinan.github.io/spacetime-vis/][Displaying time series, spatial and space-time data with R]]".
 
 *** Series temporales
+    :PROPERTIES:
+    :CUSTOM_ID: series
+    :END:
    #+ATTR_HTML: :class btn btn-default btn-sm :type button
    [[file:zoo.pdf][*PDF*]]
    #+ATTR_HTML: :class btn btn-default btn-sm :type button
    [[https://github.com/oscarperpinan/intro/blob/master/zoo.R][*Código*]]
 *** Datos espaciales
+    :PROPERTIES:
+    :CUSTOM_ID: espacial
+    :END:
    #+ATTR_HTML: :class btn btn-default btn-sm :type button
    [[file:raster.pdf][*PDF*]] 
    #+ATTR_HTML: :class btn btn-default btn-sm :type button
