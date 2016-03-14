@@ -36,12 +36,12 @@
 
 ** Clases
 *** Clases
-- Los objetos básicos en =R= tienen una clase implícita definida en =S3=. Es accesible con =class=.
+Los objetos básicos en =R= tienen una clase implícita definida en =S3=. Es accesible con =class=.
 #+begin_src R
   x <- rnorm(10)
   class(x)
 #+end_src
-- Pero no tienen atributo ni se consideran formalmente objetos:
+Pero no tienen atributo ni se consideran formalmente objetos:
 #+begin_src R
 attr(x, 'class')
 #+end_src
@@ -51,19 +51,19 @@ is.object(x)
 
 
 *** Clases
-- Se puede redefinir la clase de un objecto =S3= con =class=
+Se puede redefinir la clase de un objecto =S3= con =class=
 #+begin_src R
   class(x) <- 'myNumeric'
   class(x)
 #+end_src
-- Ahora sí es un objeto y su atributo está definido:
+Ahora sí es un objeto y su atributo está definido:
 #+begin_src R
 attr(x, 'class')
 #+end_src
 #+begin_src R
 is.object(x)
 #+end_src
-- Sin embargo, su modo de almacenamiento (clase intrínseca) no cambia:
+Sin embargo, su modo de almacenamiento (clase intrínseca) no cambia:
 #+begin_src R
   mode(x)
 #+end_src
@@ -195,7 +195,7 @@ myFun(task1)
 #+end_src
 
 *** =methods=
-- Con =methods= podemos averiguar los métodos que hay definidos para una función particular:
+Con =methods= podemos averiguar los métodos que hay definidos para una función particular:
 #+begin_src R
 methods('myFun')
 #+end_src
@@ -229,7 +229,7 @@ methods(class='task3')
 
 ** Clases en =S4=
 *** Clases en =S4=
-- Se construyen con =setClass=, que acepta varios argumentos
+Se construyen con =setClass=, que acepta varios argumentos
   - =Class=: nombre de la clase.
   - =slots=: una lista con las clases de cada componente. Los nombres de este vector corresponden a los nombres de los componentes (=slot=).
   - =contains=: un vector con las clases que esta nueva clase extiende.
@@ -267,8 +267,8 @@ task1
 #+end_src
 
 *** Funciones para crear objetos
-- Es habitual definir funciones que construyen y modifican objetos
-  para evitar el uso de =new=:
+Es habitual definir funciones que construyen y modifican objetos
+para evitar el uso de =new=:
 #+begin_src R
 createTask <- function(what, when, priority){
     new('task',
@@ -302,25 +302,25 @@ myList <- new('ToDo',
 #+end_src   
 
 *** Acceso a los slots
-- Para extraer información de los /slots/ hay que emplear =@= (a
-  diferencia de =$= en listas y =data.frame=)
+Para extraer información de los /slots/ hay que emplear =@= (a
+diferencia de =$= en listas y =data.frame=)
 #+begin_src R 
 myList@tasks
 #+end_src
 *** Acceso a los slots
-- El /slot/ =tasks= es una lista: empleamos =$= para acceder a sus elementos
+El /slot/ =tasks= es una lista: empleamos =$= para acceder a sus elementos
 #+begin_src R 
 myList@tasks$t1
 #+end_src
-- Cada elemento de =tasks= es un objeto de clase =task=: empleamos
-  =@= para extraer sus /slots/.
+Cada elemento de =tasks= es un objeto de clase =task=: empleamos
+=@= para extraer sus /slots/.
 #+begin_src R 
 myList@tasks$t1@what
 #+end_src
 
 *** Problema con los slots definidos como =list=
-- Dado que el slot =tasks= es una =list=, podemos añadir cualquier
-  cosa. 
+Dado que el slot =tasks= es una =list=, podemos añadir cualquier
+cosa. 
 #+begin_src R
   myListOops <- new('ToDo',
                     tasks=list(t1='Tarea1',
@@ -328,8 +328,8 @@ myList@tasks$t1@what
 #+end_src
 
 *** Validación
-- Para obligar a que sus elementos sean de clase =task= debemos añadir
-  una función de validación.
+Para obligar a que sus elementos sean de clase =task= debemos añadir
+una función de validación.
 #+begin_src R
 valida <- function (object) {
     if (any(sapply(object@tasks,
@@ -379,25 +379,29 @@ addTask <- function(object, task){
     método)
   - la función a ejecutar (=definition=).
 - Es necesario que exista un método genérico ya definido. Si no
-  existe, se define con =setGeneric=.
-#+begin_src R :tangle no :exports none
-  ## print NO tiene generico en R --vanilla
-  if (isGeneric('print')) removeGeneric('print')
+  existe, se define con =setGeneric= y =standardGeneric=
+#+begin_src R
+setGeneric('myMethod',
+           function(x, y, ...)
+               standardGeneric('myMethod')
+           )
 #+end_src
 
 #+begin_src R
-  isGeneric('print')
-#+end_src
-
-#+begin_src R 
-  setGeneric('print')
+setGeneric('print')
 #+end_src
 
 *** Métodos en =S4=: =setGeneric= y =getGeneric=
-- Si ya existe un método genérico, la función =definition= debe tener
-  todos los argumentos de la función genérica y en el mismo orden.
+Si ya existe un método genérico, la función =definition= debe tener
+todos los argumentos de la función genérica y en el mismo orden.
+
 #+begin_src R
-  getGeneric('print')
+library(lattice)  
+isGeneric('xyplot')
+#+end_src
+
+#+begin_src R
+getGeneric('xyplot')
 #+end_src
 
 *** Definición de un método =print= para =task=
@@ -438,9 +442,9 @@ setMethod('print', signature='ToDo',
 ** Clases =S3= con clases y métodos =S4=
 
 *** Clases =S3= con clases y métodos =S4=
-- Para usar objetos de clase =S3= en =signatures= de métodos =S4= o
-  como contenido de =slots= de una clase =S4= hay que registrarlos con
-  =setOldClass=:
+Para usar objetos de clase =S3= en =signatures= de métodos =S4= o
+como contenido de =slots= de una clase =S4= hay que registrarlos con
+=setOldClass=:
 #+begin_src R
 setOldClass('lm')
 #+end_src
@@ -450,12 +454,12 @@ getClass('lm')
 #+end_src
 
 *** Ejemplo con =lm= y =xyplot=
-- Definimos un método genérico para =xyplot=
+Definimos un método genérico para =xyplot=
 #+begin_src R
 library(lattice)
 setGeneric('xyplot')
 #+end_src
-- Definimos un método para la clase =lm= usando =xyplot=.
+Definimos un método para la clase =lm= usando =xyplot=.
 #+begin_src R
 setMethod('xyplot',
           signature = c(x = 'lm',
@@ -471,7 +475,7 @@ setMethod('xyplot',
 #+end_src
 
 *** Ejemplo con =lm= y =xyplot=
-- Recuperamos la regresión que empleamos en el apartado de Estadística:
+Recuperamos la regresión que empleamos en el apartado de Estadística:
 #+begin_src R
 lmFertEdu <- lm(Fertility ~ Education, data = swiss)
 summary(lmFertEdu)

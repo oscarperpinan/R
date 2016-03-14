@@ -1,4 +1,4 @@
-% Created 2016-03-06 dom 16:04
+% Created 2016-03-15 mar 00:54
 \documentclass[xcolor={usenames,svgnames,dvipsnames}]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -90,9 +90,7 @@ clase de uno (o varios) de sus argumentos (\emph{polymorphism}).
 \subsection{Clases}
 \label{sec:orgheadline9}
 \begin{frame}[fragile,label={sec:orgheadline5}]{Clases}
- \begin{itemize}
-\item Los objetos básicos en \texttt{R} tienen una clase implícita definida en \texttt{S3}. Es accesible con \texttt{class}.
-\end{itemize}
+ Los objetos básicos en \texttt{R} tienen una clase implícita definida en \texttt{S3}. Es accesible con \texttt{class}.
 \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   x <- rnorm(10)
@@ -103,9 +101,7 @@ clase de uno (o varios) de sus argumentos (\emph{polymorphism}).
 [1] "numeric"
 \end{verbatim}
 
-\begin{itemize}
-\item Pero no tienen atributo ni se consideran formalmente objetos:
-\end{itemize}
+Pero no tienen atributo ni se consideran formalmente objetos:
 \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 attr(x, 'class')
@@ -127,9 +123,7 @@ is.object(x)
 
 
 \begin{frame}[fragile,label={sec:orgheadline6}]{Clases}
- \begin{itemize}
-\item Se puede redefinir la clase de un objecto \texttt{S3} con \texttt{class}
-\end{itemize}
+ Se puede redefinir la clase de un objecto \texttt{S3} con \texttt{class}
 \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   class(x) <- 'myNumeric'
@@ -140,9 +134,7 @@ is.object(x)
 [1] "myNumeric"
 \end{verbatim}
 
-\begin{itemize}
-\item Ahora sí es un objeto y su atributo está definido:
-\end{itemize}
+Ahora sí es un objeto y su atributo está definido:
 \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 attr(x, 'class')
@@ -161,9 +153,7 @@ is.object(x)
 [1] TRUE
 \end{verbatim}
 
-\begin{itemize}
-\item Sin embargo, su modo de almacenamiento (clase intrínseca) no cambia:
-\end{itemize}
+Sin embargo, su modo de almacenamiento (clase intrínseca) no cambia:
 \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   mode(x)
@@ -439,8 +429,8 @@ myFun(x)
 
 \begin{verbatim}
 Funcion genérica
- [1]  0.6437852  1.4682065 -0.2987696  1.8849804 -1.5855122 -1.1160481
- [7] -0.4445475 -0.3007572  1.1219381  1.3219057
+ [1] -0.05734565  0.01815590 -0.49606701 -0.02219242  1.50708402 -1.17367738
+ [7]  0.99807024  2.03091756 -0.67987217 -1.20713363
 attr(,"class")
 [1] "myNumeric"
 \end{verbatim}
@@ -457,9 +447,7 @@ What:  Write an email - When: 2013-01-01 - Priority: Low
 \end{frame}
 
 \begin{frame}[fragile,label={sec:orgheadline17}]{\texttt{methods}}
- \begin{itemize}
-\item Con \texttt{methods} podemos averiguar los métodos que hay definidos para una función particular:
-\end{itemize}
+ Con \texttt{methods} podemos averiguar los métodos que hay definidos para una función particular:
 \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 methods('myFun')
@@ -531,15 +519,13 @@ see '?methods' for accessing help and source code
 \subsection{Clases en \texttt{S4}}
 \label{sec:orgheadline31}
 \begin{frame}[fragile,label={sec:orgheadline21}]{Clases en \texttt{S4}}
- \begin{itemize}
-\item Se construyen con \texttt{setClass}, que acepta varios argumentos
+ Se construyen con \texttt{setClass}, que acepta varios argumentos
 \begin{itemize}
 \item \texttt{Class}: nombre de la clase.
 \item \texttt{slots}: una lista con las clases de cada componente. Los nombres de este vector corresponden a los nombres de los componentes (\texttt{slot}).
 \item \texttt{contains}: un vector con las clases que esta nueva clase extiende.
 \item \texttt{prototype}: un objeto proporcionando el contenido por defecto para los componentes definidos en \texttt{slots}.
 \item \texttt{validity}: a función que comprueba la validez de la clase creada con la información suministrada.
-\end{itemize}
 \end{itemize}
 \end{frame}
 \begin{frame}[fragile,label={sec:orgheadline22}]{Definición de una nueva clase}
@@ -616,10 +602,8 @@ Slot "priority":
 \end{frame}
 
 \begin{frame}[fragile,label={sec:orgheadline24}]{Funciones para crear objetos}
- \begin{itemize}
-\item Es habitual definir funciones que construyen y modifican objetos
+ Es habitual definir funciones que construyen y modifican objetos
 para evitar el uso de \texttt{new}:
-\end{itemize}
 \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 createTask <- function(what, when, priority){
@@ -667,10 +651,8 @@ myList <- new('ToDo',
 \end{frame}
 
 \begin{frame}[fragile,label={sec:orgheadline26}]{Acceso a los slots}
- \begin{itemize}
-\item Para extraer información de los \emph{slots} hay que emplear \texttt{@} (a
+ Para extraer información de los \emph{slots} hay que emplear \texttt{@} (a
 diferencia de \texttt{\$} en listas y \texttt{data.frame})
-\end{itemize}
 \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 myList@tasks
@@ -703,9 +685,7 @@ Slot "priority":
 \end{frame}
 
 \begin{frame}[fragile,label={sec:orgheadline27}]{Acceso a los slots}
- \begin{itemize}
-\item El \emph{slot} \texttt{tasks} es una lista: empleamos \texttt{\$} para acceder a sus elementos
-\end{itemize}
+ El \emph{slot} \texttt{tasks} es una lista: empleamos \texttt{\$} para acceder a sus elementos
 \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 myList@tasks$t1
@@ -723,10 +703,8 @@ Slot "priority":
 [1] "High"
 \end{verbatim}
 
-\begin{itemize}
-\item Cada elemento de \texttt{tasks} es un objeto de clase \texttt{task}: empleamos
+Cada elemento de \texttt{tasks} es un objeto de clase \texttt{task}: empleamos
 \texttt{@} para extraer sus \emph{slots}.
-\end{itemize}
 \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 myList@tasks$t1@what
@@ -738,10 +716,8 @@ myList@tasks$t1@what
 \end{frame}
 
 \begin{frame}[fragile,label={sec:orgheadline28}]{Problema con los slots definidos como \texttt{list}}
- \begin{itemize}
-\item Dado que el slot \texttt{tasks} es una \texttt{list}, podemos añadir cualquier
-cosa.
-\end{itemize}
+ Dado que el slot \texttt{tasks} es una \texttt{list}, podemos añadir cualquier
+cosa. 
 \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   myListOops <- new('ToDo',
@@ -751,10 +727,8 @@ cosa.
 \end{frame}
 
 \begin{frame}[fragile,label={sec:orgheadline29}]{Validación}
- \begin{itemize}
-\item Para obligar a que sus elementos sean de clase \texttt{task} debemos añadir
+ Para obligar a que sus elementos sean de clase \texttt{task} debemos añadir
 una función de validación.
-\end{itemize}
 \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 valida <- function (object) {
@@ -817,45 +791,65 @@ método)
 \item la función a ejecutar (\texttt{definition}).
 \end{itemize}
 \item Es necesario que exista un método genérico ya definido. Si no
-existe, se define con \texttt{setGeneric}.
+existe, se define con \texttt{setGeneric} y \texttt{standardGeneric}
 \end{itemize}
 \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
-  isGeneric('print')
+setGeneric('myMethod',
+           function(x, y, ...)
+               standardGeneric('myMethod')
+           )
 \end{lstlisting}
 
 \begin{verbatim}
-[1] FALSE
+[1] "myMethod"
 \end{verbatim}
 
 \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
-  setGeneric('print')
+setGeneric('print')
+getGeneric('print')
 \end{lstlisting}
 
 \begin{verbatim}
 [1] "print"
-\end{verbatim}
-\end{frame}
-
-\begin{frame}[fragile,label={sec:orgheadline33}]{Métodos en \texttt{S4}: \texttt{setGeneric} y \texttt{getGeneric}}
- \begin{itemize}
-\item Si ya existe un método genérico, la función \texttt{definition} debe tener
-todos los argumentos de la función genérica y en el mismo orden.
-\end{itemize}
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
-\begin{lstlisting}
-  getGeneric('print')
-\end{lstlisting}
-
-\begin{verbatim}
 standardGeneric for "print" defined from package "base"
 
 function (x, ...) 
 standardGeneric("print")
-<environment: 0x2f6d8c0>
+<environment: 0x376ebe0>
 Methods may be defined for arguments: x
 Use  showMethods("print")  for currently available ones.
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile,label={sec:orgheadline33}]{Métodos en \texttt{S4}: \texttt{setGeneric} y \texttt{getGeneric}}
+ Si ya existe un método genérico, la función \texttt{definition} debe tener
+todos los argumentos de la función genérica y en el mismo orden.
+
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+library(lattice)  
+isGeneric('xyplot')
+\end{lstlisting}
+
+\begin{verbatim}
+[1] TRUE
+\end{verbatim}
+
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+getGeneric('xyplot')
+\end{lstlisting}
+
+\begin{verbatim}
+standardGeneric for "xyplot" defined from package "lattice"
+
+function (x, data, ...) 
+standardGeneric("xyplot")
+<environment: 0x42bd068>
+Methods may be defined for arguments: x, data
+Use  showMethods("xyplot")  for currently available ones.
 \end{verbatim}
 \end{frame}
 
@@ -922,11 +916,9 @@ No. 2 :What:  Write an email - When: 2013-01-01 - Priority: Low
 \label{sec:orgheadline41}
 
 \begin{frame}[fragile,label={sec:orgheadline37}]{Clases \texttt{S3} con clases y métodos \texttt{S4}}
- \begin{itemize}
-\item Para usar objetos de clase \texttt{S3} en \texttt{signatures} de métodos \texttt{S4} o
+ Para usar objetos de clase \texttt{S3} en \texttt{signatures} de métodos \texttt{S4} o
 como contenido de \texttt{slots} de una clase \texttt{S4} hay que registrarlos con
 \texttt{setOldClass}:
-\end{itemize}
 \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 setOldClass('lm')
@@ -957,9 +949,7 @@ Class "glm.null", by class "glm", distance 2
 \end{frame}
 
 \begin{frame}[fragile,label={sec:orgheadline38}]{Ejemplo con \texttt{lm} y \texttt{xyplot}}
- \begin{itemize}
-\item Definimos un método genérico para \texttt{xyplot}
-\end{itemize}
+ Definimos un método genérico para \texttt{xyplot}
 \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 library(lattice)
@@ -970,9 +960,7 @@ setGeneric('xyplot')
 [1] "xyplot"
 \end{verbatim}
 
-\begin{itemize}
-\item Definimos un método para la clase \texttt{lm} usando \texttt{xyplot}.
-\end{itemize}
+Definimos un método para la clase \texttt{lm} usando \texttt{xyplot}.
 \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 setMethod('xyplot',
@@ -993,9 +981,7 @@ setMethod('xyplot',
 \end{frame}
 
 \begin{frame}[fragile,label={sec:orgheadline39}]{Ejemplo con \texttt{lm} y \texttt{xyplot}}
- \begin{itemize}
-\item Recuperamos la regresión que empleamos en el apartado de Estadística:
-\end{itemize}
+ Recuperamos la regresión que empleamos en el apartado de Estadística:
 \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 lmFertEdu <- lm(Fertility ~ Education, data = swiss)

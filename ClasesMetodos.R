@@ -1,31 +1,31 @@
 ## Clases
-## - Los objetos básicos en =R= tienen una clase implícita definida en =S3=. Es accesible con =class=.
+## Los objetos básicos en =R= tienen una clase implícita definida en =S3=. Es accesible con =class=.
 
   x <- rnorm(10)
   class(x)
 
 
-## - Pero no tienen atributo ni se consideran formalmente objetos:
+## Pero no tienen atributo ni se consideran formalmente objetos:
 
 attr(x, 'class')
 
 is.object(x)
 
 ## Clases
-## - Se puede redefinir la clase de un objecto =S3= con =class=
+## Se puede redefinir la clase de un objecto =S3= con =class=
 
   class(x) <- 'myNumeric'
   class(x)
 
 
-## - Ahora sí es un objeto y su atributo está definido:
+## Ahora sí es un objeto y su atributo está definido:
 
 attr(x, 'class')
 
 is.object(x)
 
 
-## - Sin embargo, su modo de almacenamiento (clase intrínseca) no cambia:
+## Sin embargo, su modo de almacenamiento (clase intrínseca) no cambia:
 
   mode(x)
 
@@ -122,7 +122,7 @@ myFun(x)
 myFun(task1)
 
 ## =methods=
-## - Con =methods= podemos averiguar los métodos que hay definidos para una función particular:
+## Con =methods= podemos averiguar los métodos que hay definidos para una función particular:
 
 methods('myFun')
 
@@ -172,8 +172,8 @@ task1 <- new('task',
 task1
 
 ## Funciones para crear objetos
-## - Es habitual definir funciones que construyen y modifican objetos
-##   para evitar el uso de =new=:
+## Es habitual definir funciones que construyen y modifican objetos
+## para evitar el uso de =new=:
 
 createTask <- function(what, when, priority){
     new('task',
@@ -201,33 +201,33 @@ myList <- new('ToDo',
                   t2 = task2))
 
 ## Acceso a los slots
-## - Para extraer información de los /slots/ hay que emplear =@= (a
-##   diferencia de =$= en listas y =data.frame=)
+## Para extraer información de los /slots/ hay que emplear =@= (a
+## diferencia de =$= en listas y =data.frame=)
 
 myList@tasks
 
 ## Acceso a los slots
-## - El /slot/ =tasks= es una lista: empleamos =$= para acceder a sus elementos
+## El /slot/ =tasks= es una lista: empleamos =$= para acceder a sus elementos
 
 myList@tasks$t1
 
 
-## - Cada elemento de =tasks= es un objeto de clase =task=: empleamos
-##   =@= para extraer sus /slots/.
+## Cada elemento de =tasks= es un objeto de clase =task=: empleamos
+## =@= para extraer sus /slots/.
 
 myList@tasks$t1@what
 
 ## Problema con los slots definidos como =list=
-## - Dado que el slot =tasks= es una =list=, podemos añadir cualquier
-##   cosa. 
+## Dado que el slot =tasks= es una =list=, podemos añadir cualquier
+## cosa. 
 
   myListOops <- new('ToDo',
                     tasks=list(t1='Tarea1',
                       task1, task2))
 
 ## Validación
-## - Para obligar a que sus elementos sean de clase =task= debemos añadir
-##   una función de validación.
+## Para obligar a que sus elementos sean de clase =task= debemos añadir
+## una función de validación.
 
 valida <- function (object) {
     if (any(sapply(object@tasks,
@@ -261,15 +261,31 @@ addTask <- function(object, task){
 }
   
 
-  isGeneric('print')
+## Métodos en =S4=: =setMethod=
+## - Normalmente se definen con =setMethod=.
+## - Hay que definir:
+##   - la =signature= (clase de los argumentos para /esta/ definición del
+##     método)
+##   - la función a ejecutar (=definition=).
+## - Es necesario que exista un método genérico ya definido. Si no
+##   existe, se define con =setGeneric= y =standardGeneric=
 
-  setGeneric('print')
+setGeneric('myMethod',
+           function(x, y, ...)
+               standardGeneric('myMethod')
+           )
+
+setGeneric('print')
 
 ## Métodos en =S4=: =setGeneric= y =getGeneric=
-## - Si ya existe un método genérico, la función =definition= debe tener
-##   todos los argumentos de la función genérica y en el mismo orden.
+## Si ya existe un método genérico, la función =definition= debe tener
+## todos los argumentos de la función genérica y en el mismo orden.
 
-  getGeneric('print')
+
+library(lattice)  
+isGeneric('xyplot')
+
+getGeneric('xyplot')
 
 ## Definición de un método =print= para =task=
 
@@ -300,22 +316,22 @@ setMethod('print', signature='ToDo',
   print(myList)
 
 ## Clases =S3= con clases y métodos =S4=
-## - Para usar objetos de clase =S3= en =signatures= de métodos =S4= o
-##   como contenido de =slots= de una clase =S4= hay que registrarlos con
-##   =setOldClass=:
+## Para usar objetos de clase =S3= en =signatures= de métodos =S4= o
+## como contenido de =slots= de una clase =S4= hay que registrarlos con
+## =setOldClass=:
 
 setOldClass('lm')
 
 getClass('lm')
 
 ## Ejemplo con =lm= y =xyplot=
-## - Definimos un método genérico para =xyplot=
+## Definimos un método genérico para =xyplot=
 
 library(lattice)
 setGeneric('xyplot')
 
 
-## - Definimos un método para la clase =lm= usando =xyplot=.
+## Definimos un método para la clase =lm= usando =xyplot=.
 
 setMethod('xyplot',
           signature = c(x = 'lm',
@@ -329,7 +345,7 @@ setMethod('xyplot',
           })
 
 ## Ejemplo con =lm= y =xyplot=
-## - Recuperamos la regresión que empleamos en el apartado de Estadística:
+## Recuperamos la regresión que empleamos en el apartado de Estadística:
 
 lmFertEdu <- lm(Fertility ~ Education, data = swiss)
 summary(lmFertEdu)
