@@ -1,4 +1,4 @@
-% Created 2016-03-06 dom 16:57
+% Created 2016-03-15 mar 07:48
 \documentclass[xcolor={usenames,svgnames,dvipsnames}]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -51,7 +51,7 @@
 
 
 \section{Conceptos Básicos}
-\label{sec:orgheadline12}
+\label{sec:orgheadline13}
 
 \begin{frame}[label={sec:orgheadline1}]{Fuentes de información}
 \begin{itemize}
@@ -353,18 +353,49 @@ Error in foo(2, "a") (from #3) : arguments must be numeric.
 \end{verbatim}
 \end{frame}
 
-\section{Lexical scope}
-\label{sec:orgheadline19}
+\begin{frame}[fragile,label={sec:orgheadline12}]{Mensajes para el usuario}
+ \texttt{stop} para la ejecución y emite un mensaje de error
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+stop('Algo no ha ido bien.')
+\end{lstlisting}
 
-\begin{frame}[fragile,label={sec:orgheadline13}]{Clases de variables}
- \begin{itemize}
-\item Las variables que se emplean en el cuerpo de una función pueden
+\begin{verbatim}
+Error: Algo no ha ido bien.
+\end{verbatim}
+
+\texttt{warning} no interfiere en la ejecución pero añade un mensaje a la cola de advertencias
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+warning('Quizás algo no es como debiera...')
+\end{lstlisting}
+
+\begin{verbatim}
+Warning message:
+Quizás algo no es como debiera...
+\end{verbatim}
+
+\texttt{message} emite un mensaje (\alert{no usar \texttt{cat} o \texttt{print}})
+\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+message('Todo en orden por estos lares.')
+\end{lstlisting}
+
+\begin{verbatim}
+Todo en orden por estos lares.
+\end{verbatim}
+\end{frame}
+
+\section{Lexical scope}
+\label{sec:orgheadline20}
+
+\begin{frame}[fragile,label={sec:orgheadline14}]{Clases de variables}
+ Las variables que se emplean en el cuerpo de una función pueden
 dividirse en:
 \begin{itemize}
 \item Parámetros formales (argumentos): \texttt{x}, \texttt{y}
 \item Variables locales (definiciones internas): \texttt{z}, \texttt{w}, \texttt{m}
 \item Variables libres: \texttt{a}, \texttt{b}
-\end{itemize}
 \end{itemize}
 \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
@@ -388,7 +419,7 @@ myFun(2, 3)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline14}]{Lexical scope}
+\begin{frame}[fragile,label={sec:orgheadline15}]{Lexical scope}
  \begin{itemize}
 \item Las variables libres deben estar disponibles en el entorno
 (\texttt{environment}) en el que la función ha sido creada.
@@ -408,17 +439,15 @@ ls()
 \end{lstlisting}
 
 \begin{verbatim}
- [1] "a"           "addTask"     "anidada"     "b"           "constructor"
- [6] "createTask"  "createToDo"  "fib"         "foo"         "hello"      
-[11] "lista"       "ll"          "lmFertEdu"   "myFoo"       "myFun"      
-[16] "myList"      "myListOops"  "myToDo"      "noise"       "power"      
-[21] "print"       "pwrSum"      "suma10"      "sumNoise"    "sumProd"    
-[26] "sumSq"       "task1"       "task2"       "tmp"         "valida"     
-[31] "x"           "xyplot"      "zz"
+ [1] "a"           "anidada"     "b"           "constructor" "fib"        
+ [6] "foo"         "hello"       "lista"       "ll"          "myFoo"      
+[11] "myFun"       "noise"       "power"       "pwrSum"      "suma10"     
+[16] "sumNoise"    "sumProd"     "sumSq"       "tmp"         "x"          
+[21] "zz"
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline15}]{Lexical scope: funciones anidadas}
+\begin{frame}[fragile,label={sec:orgheadline16}]{Lexical scope: funciones anidadas}
  \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 anidada <- function(x, y){
@@ -439,7 +468,7 @@ anidada(1:3, 2:4)
 \end{lstlisting}
 
 \begin{verbatim}
-<environment: 0x428b178>
+<environment: 0xacfef0>
 [1] 113
 \end{verbatim}
 
@@ -453,7 +482,7 @@ sum((1:3)^2, (2:4)^3)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline16}]{Lexical scope: funciones anidadas}
+\begin{frame}[fragile,label={sec:orgheadline17}]{Lexical scope: funciones anidadas}
  \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 xn
@@ -482,7 +511,7 @@ Error: objeto 'interna' no encontrado
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline17}]{Funciones que devuelven funciones}
+\begin{frame}[fragile,label={sec:orgheadline18}]{Funciones que devuelven funciones}
  \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 constructor <- function(m, n){
@@ -504,7 +533,7 @@ function(x)
     {
         m*x + n
     }
-<environment: 0x4285478>
+<environment: 0x1caaf38>
 \end{verbatim}
 
 \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
@@ -518,7 +547,7 @@ myFoo(5)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline18}]{Funciones que devuelven funciones}
+\begin{frame}[fragile,label={sec:orgheadline19}]{Funciones que devuelven funciones}
  \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 class(myFoo)
@@ -534,7 +563,7 @@ environment(myFoo)
 \end{lstlisting}
 
 \begin{verbatim}
-<environment: 0x4285478>
+<environment: 0x1caaf38>
 \end{verbatim}
 
 \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
@@ -543,13 +572,11 @@ ls()
 \end{lstlisting}
 
 \begin{verbatim}
- [1] "a"           "addTask"     "anidada"     "b"           "constructor"
- [6] "createTask"  "createToDo"  "fib"         "foo"         "hello"      
-[11] "lista"       "ll"          "lmFertEdu"   "myFoo"       "myFun"      
-[16] "myList"      "myListOops"  "myToDo"      "noise"       "power"      
-[21] "print"       "pwrSum"      "suma10"      "sumNoise"    "sumProd"    
-[26] "sumSq"       "task1"       "task2"       "tmp"         "valida"     
-[31] "x"           "xyplot"      "zz"
+ [1] "a"           "anidada"     "b"           "constructor" "fib"        
+ [6] "foo"         "hello"       "lista"       "ll"          "myFoo"      
+[11] "myFun"       "noise"       "power"       "pwrSum"      "suma10"     
+[16] "sumNoise"    "sumProd"     "sumSq"       "tmp"         "x"          
+[21] "zz"
 \end{verbatim}
 
 \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
@@ -581,9 +608,9 @@ get('n', env = environment(myFoo))
 \end{frame}
 
 \section{Debug}
-\label{sec:orgheadline25}
+\label{sec:orgheadline26}
 
-\begin{frame}[fragile,label={sec:orgheadline20}]{Post-mortem: \texttt{traceback}}
+\begin{frame}[fragile,label={sec:orgheadline21}]{Post-mortem: \texttt{traceback}}
  \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 sumSq <- function(x, ...){
@@ -603,7 +630,7 @@ sumProd(rnorm(10), runif(10))
 \end{lstlisting}
 
 \begin{verbatim}
-[1] 33.25611
+[1] 9.629438
 \end{verbatim}
 
 \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
@@ -627,7 +654,7 @@ traceback()
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline21}]{Analizar antes de que ocurra: \texttt{debug}}
+\begin{frame}[fragile,label={sec:orgheadline22}]{Analizar antes de que ocurra: \texttt{debug}}
  \begin{itemize}
 \item Activa la ejecución paso a paso de una función
 \end{itemize}
@@ -654,7 +681,7 @@ undebug(sumProd)
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline22}]{Analizar antes de que ocurra: \texttt{trace}}
+\begin{frame}[fragile,label={sec:orgheadline23}]{Analizar antes de que ocurra: \texttt{trace}}
  \begin{itemize}
 \item \texttt{trace} permite mayor control que \texttt{debug}
 \end{itemize}
@@ -707,7 +734,7 @@ body(sumProd)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline23}]{Analizar antes de que ocurra: \texttt{trace}}
+\begin{frame}[fragile,label={sec:orgheadline24}]{Analizar antes de que ocurra: \texttt{trace}}
  \begin{itemize}
 \item Los comandos \texttt{n} y \texttt{c} cambian respecto a \texttt{debug}:
 \begin{itemize}
@@ -723,7 +750,7 @@ untrace(sumProd)
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:orgheadline24}]{Más recursos}
+\begin{frame}[label={sec:orgheadline25}]{Más recursos}
 \begin{itemize}
 \item Debugging en RStudio
 \begin{itemize}
@@ -735,8 +762,8 @@ untrace(sumProd)
 \end{frame}
 
 \section{Profiling}
-\label{sec:orgheadline29}
-\begin{frame}[fragile,label={sec:orgheadline26}]{¿Cuánto tarda mi función? \texttt{system.time}}
+\label{sec:orgheadline30}
+\begin{frame}[fragile,label={sec:orgheadline27}]{¿Cuánto tarda mi función? \texttt{system.time}}
  \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 noise <- function(sd)rnorm(1000, mean=0, sd=sd)
@@ -757,11 +784,11 @@ system.time(sumNoise(1000))
 
 \begin{verbatim}
  user  system elapsed 
-0.164   0.000   0.167
+0.160   0.008   0.167
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline27}]{¿Cuánto tarda cada parte de mi función?: \texttt{Rprof}}
+\begin{frame}[fragile,label={sec:orgheadline28}]{¿Cuánto tarda cada parte de mi función?: \texttt{Rprof}}
  \begin{itemize}
 \item Usaremos un fichero temporal
 \end{itemize}
@@ -788,7 +815,7 @@ zz <- sumNoise(1000)
 \end{frame}
 
 
-\begin{frame}[fragile,label={sec:orgheadline28}]{¿Cuánto tarda cada parte de mi función?: \texttt{Rprof}}
+\begin{frame}[fragile,label={sec:orgheadline29}]{¿Cuánto tarda cada parte de mi función?: \texttt{Rprof}}
  \begin{itemize}
 \item Paramos el análisis
 \end{itemize}
@@ -807,22 +834,22 @@ summaryRprof(tmp)
 
 \begin{verbatim}
 $by.self
-          self.time self.pct total.time total.pct
-"rnorm"        0.12     75.0       0.12      75.0
-"rowSums"      0.02     12.5       0.02      12.5
-"unlist"       0.02     12.5       0.02      12.5
+         self.time self.pct total.time total.pct
+"rnorm"       0.12     75.0       0.12      75.0
+"array"       0.02     12.5       0.02      12.5
+"unlist"      0.02     12.5       0.02      12.5
 
 $by.total
                  total.time total.pct self.time self.pct
+"sapply"               0.16     100.0      0.00      0.0
 "sumNoise"             0.16     100.0      0.00      0.0
-"sapply"               0.14      87.5      0.00      0.0
 "rnorm"                0.12      75.0      0.12     75.0
 "FUN"                  0.12      75.0      0.00      0.0
 "lapply"               0.12      75.0      0.00      0.0
-"rowSums"              0.02      12.5      0.02     12.5
+"simplify2array"       0.04      25.0      0.00      0.0
+"array"                0.02      12.5      0.02     12.5
 "unlist"               0.02      12.5      0.02     12.5
 "as.vector"            0.02      12.5      0.00      0.0
-"simplify2array"       0.02      12.5      0.00      0.0
 
 $sample.interval
 [1] 0.02
@@ -834,8 +861,8 @@ $sampling.time
 
 
 \section{Miscelánea}
-\label{sec:orgheadline35}
-\begin{frame}[fragile,label={sec:orgheadline30}]{\texttt{do.call}}
+\label{sec:orgheadline36}
+\begin{frame}[fragile,label={sec:orgheadline31}]{\texttt{do.call}}
  \begin{itemize}
 \item Ejemplo: sumar los componentes de una lista
 \end{itemize}
@@ -848,7 +875,7 @@ with(lista, sum(a + b + c))
 \end{lstlisting}
 
 \begin{verbatim}
-[1] 111.9635
+[1] 155.2168
 \end{verbatim}
 
 \begin{itemize}
@@ -861,11 +888,11 @@ do.call(sum, lista)
 \end{lstlisting}
 
 \begin{verbatim}
-[1] 111.9635
+[1] 155.2168
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline31}]{\texttt{do.call}}
+\begin{frame}[fragile,label={sec:orgheadline32}]{\texttt{do.call}}
  \begin{itemize}
 \item Se emplea frecuentemente con el resultado de \texttt{lapply}
 \end{itemize}
@@ -877,12 +904,12 @@ do.call(sum, lista)
 \end{lstlisting}
 
 \begin{verbatim}
-          [,1]      [,2]       [,3]       [,4]       [,5]
-[1,] -1.394973 0.8983775 -0.7619893 -0.8995668 -0.7206908
-[2,]  1.945949 0.8070822  0.5806276  0.8092204  0.5193952
-[3,] -2.714545 0.7250645 -0.4424320 -0.7279478 -0.3743233
-[4,]  3.786716 0.6513816  0.3371284  0.6548376  0.2697714
-[5,] -5.282366 0.5851866 -0.2568883 -0.5890702 -0.1944217
+          [,1]        [,2]        [,3]       [,4]       [,5]
+[1,] 0.6957676 -0.47175880 -0.56271345 -0.8144094  -1.791272
+[2,] 0.4840925  0.22255636  0.31664643  0.6632627   3.208656
+[3,] 0.3368159 -0.10499292 -0.17818121 -0.5401674  -5.747578
+[4,] 0.2343456  0.04953133  0.10026496  0.4399174  10.295476
+[5,] 0.1630501 -0.02336684 -0.05642044 -0.3582729 -18.442002
 \end{verbatim}
 
 \begin{itemize}
@@ -894,16 +921,16 @@ do.call(sum, lista)
 \end{lstlisting}
 
 \begin{verbatim}
-           [,1]      [,2]       [,3]      [,4]       [,5]
-[1,] -1.3949727 1.9459487 -2.7145452 3.7867163 -5.2823657
-[2,]  0.8983775 0.8070822  0.7250645 0.6513816  0.5851866
-[3,] -0.7619893 0.5806276 -0.4424320 0.3371284 -0.2568883
-[4,] -0.8995668 0.8092204 -0.7279478 0.6548376 -0.5890702
-[5,] -0.7206908 0.5193952 -0.3743233 0.2697714 -0.1944217
+           [,1]      [,2]       [,3]        [,4]         [,5]
+[1,]  0.6957676 0.4840925  0.3368159  0.23434559   0.16305007
+[2,] -0.4717588 0.2225564 -0.1049929  0.04953133  -0.02336684
+[3,] -0.5627135 0.3166464 -0.1781812  0.10026496  -0.05642044
+[4,] -0.8144094 0.6632627 -0.5401674  0.43991745  -0.35827292
+[5,] -1.7912723 3.2086565 -5.7475775 10.29547648 -18.44200195
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline32}]{\texttt{Reduce}}
+\begin{frame}[fragile,label={sec:orgheadline33}]{\texttt{Reduce}}
  \begin{itemize}
 \item Combina sucesivamente los elementos de un objeto aplicando una
 función binaria
@@ -921,7 +948,7 @@ Reduce('+', 1:5)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline33}]{\texttt{Reduce}}
+\begin{frame}[fragile,label={sec:orgheadline34}]{\texttt{Reduce}}
  \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 ## (((1/2)/3)/4)/5
@@ -956,7 +983,7 @@ Reduce(foo, c(3, 7, 15, 1, 292), right=TRUE)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline34}]{Funciones recursivas}
+\begin{frame}[fragile,label={sec:orgheadline35}]{Funciones recursivas}
  \begin{itemize}
 \item \href{http://en.wikibooks.org/wiki/R_Programming/Working_with_functions#Functions_as_Objects}{Serie de Fibonnaci}
 \end{itemize}

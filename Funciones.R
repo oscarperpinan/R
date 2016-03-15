@@ -110,9 +110,24 @@ foo(2, 3)
 
 foo(2, 'a')
 
+## Mensajes para el usuario
+## =stop= para la ejecución y emite un mensaje de error
+
+stop('Algo no ha ido bien.')
+
+
+## =warning= no interfiere en la ejecución pero añade un mensaje a la cola de advertencias
+
+warning('Quizás algo no es como debiera...')
+
+
+## =message= emite un mensaje (*no usar =cat= o =print=*)
+
+message('Todo en orden por estos lares.')
+
 ## Clases de variables
-## - Las variables que se emplean en el cuerpo de una función pueden
-##   dividirse en:
+## Las variables que se emplean en el cuerpo de una función pueden
+## dividirse en:
 ##   - Parámetros formales (argumentos): =x=, =y=
 ##   - Variables locales (definiciones internas): =z=, =w=, =m=
 ##   - Variables libres: =a=, =b=
