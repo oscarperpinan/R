@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
 <head>
-<!-- 2016-03-06 dom 17:02 -->
+<!-- 2016-03-15 mar 07:48 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>Funciones</title>
@@ -153,7 +153,7 @@ for the JavaScript code in this tag.
 <h2>&Iacute;ndice</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline12">1. Conceptos Básicos</a>
+<li><a href="#orgheadline13">1. Conceptos Básicos</a>
 <ul>
 <li><a href="#orgheadline1">1.1. Fuentes de información</a></li>
 <li><a href="#orgheadline2">1.2. Componentes de una función</a></li>
@@ -166,41 +166,42 @@ for the JavaScript code in this tag.
 <li><a href="#orgheadline9">1.9. Argumentos ausentes: <code>missing</code></a></li>
 <li><a href="#orgheadline10">1.10. Control de errores: <code>stopifnot</code></a></li>
 <li><a href="#orgheadline11">1.11. Control de errores: <code>stop</code></a></li>
+<li><a href="#orgheadline12">1.12. Mensajes para el usuario</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline19">2. Lexical scope</a>
+<li><a href="#orgheadline20">2. Lexical scope</a>
 <ul>
-<li><a href="#orgheadline13">2.1. Clases de variables</a></li>
-<li><a href="#orgheadline14">2.2. Lexical scope</a></li>
-<li><a href="#orgheadline15">2.3. Lexical scope: funciones anidadas</a></li>
-<li><a href="#orgheadline16">2.4. Lexical scope: funciones anidadas</a></li>
-<li><a href="#orgheadline17">2.5. Funciones que devuelven funciones</a></li>
-<li><a href="#orgheadline18">2.6. Funciones que devuelven funciones</a></li>
+<li><a href="#orgheadline14">2.1. Clases de variables</a></li>
+<li><a href="#orgheadline15">2.2. Lexical scope</a></li>
+<li><a href="#orgheadline16">2.3. Lexical scope: funciones anidadas</a></li>
+<li><a href="#orgheadline17">2.4. Lexical scope: funciones anidadas</a></li>
+<li><a href="#orgheadline18">2.5. Funciones que devuelven funciones</a></li>
+<li><a href="#orgheadline19">2.6. Funciones que devuelven funciones</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline25">3. Debug</a>
+<li><a href="#orgheadline26">3. Debug</a>
 <ul>
-<li><a href="#orgheadline20">3.1. Post-mortem: <code>traceback</code></a></li>
-<li><a href="#orgheadline21">3.2. Analizar antes de que ocurra: <code>debug</code></a></li>
-<li><a href="#orgheadline22">3.3. Analizar antes de que ocurra: <code>trace</code></a></li>
-<li><a href="#orgheadline23">3.4. Analizar antes de que ocurra: <code>trace</code></a></li>
-<li><a href="#orgheadline24">3.5. Más recursos</a></li>
+<li><a href="#orgheadline21">3.1. Post-mortem: <code>traceback</code></a></li>
+<li><a href="#orgheadline22">3.2. Analizar antes de que ocurra: <code>debug</code></a></li>
+<li><a href="#orgheadline23">3.3. Analizar antes de que ocurra: <code>trace</code></a></li>
+<li><a href="#orgheadline24">3.4. Analizar antes de que ocurra: <code>trace</code></a></li>
+<li><a href="#orgheadline25">3.5. Más recursos</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline29">4. Profiling</a>
+<li><a href="#orgheadline30">4. Profiling</a>
 <ul>
-<li><a href="#orgheadline26">4.1. ¿Cuánto tarda mi función? <code>system.time</code></a></li>
-<li><a href="#orgheadline27">4.2. ¿Cuánto tarda cada parte de mi función?: <code>Rprof</code></a></li>
-<li><a href="#orgheadline28">4.3. ¿Cuánto tarda cada parte de mi función?: <code>Rprof</code></a></li>
+<li><a href="#orgheadline27">4.1. ¿Cuánto tarda mi función? <code>system.time</code></a></li>
+<li><a href="#orgheadline28">4.2. ¿Cuánto tarda cada parte de mi función?: <code>Rprof</code></a></li>
+<li><a href="#orgheadline29">4.3. ¿Cuánto tarda cada parte de mi función?: <code>Rprof</code></a></li>
 </ul>
 </li>
-<li><a href="#orgheadline35">5. Miscelánea</a>
+<li><a href="#orgheadline36">5. Miscelánea</a>
 <ul>
-<li><a href="#orgheadline30">5.1. <code>do.call</code></a></li>
-<li><a href="#orgheadline31">5.2. <code>do.call</code></a></li>
-<li><a href="#orgheadline32">5.3. <code>Reduce</code></a></li>
-<li><a href="#orgheadline33">5.4. <code>Reduce</code></a></li>
-<li><a href="#orgheadline34">5.5. Funciones recursivas</a></li>
+<li><a href="#orgheadline31">5.1. <code>do.call</code></a></li>
+<li><a href="#orgheadline32">5.2. <code>do.call</code></a></li>
+<li><a href="#orgheadline33">5.3. <code>Reduce</code></a></li>
+<li><a href="#orgheadline34">5.4. <code>Reduce</code></a></li>
+<li><a href="#orgheadline35">5.5. Funciones recursivas</a></li>
 </ul>
 </li>
 </ul>
@@ -208,8 +209,8 @@ for the JavaScript code in this tag.
 </div>
 
 
-<div id="outline-container-orgheadline12" class="outline-2">
-<h2 id="orgheadline12"><span class="section-number-2">1</span> Conceptos Básicos</h2>
+<div id="outline-container-orgheadline13" class="outline-2">
+<h2 id="orgheadline13"><span class="section-number-2">1</span> Conceptos Básicos</h2>
 <div class="outline-text-2" id="text-1">
 </div><div id="outline-container-orgheadline1" class="outline-3">
 <h3 id="orgheadline1"><span class="section-number-3">1.1</span> Fuentes de información</h3>
@@ -574,22 +575,67 @@ Error in foo(2, "a") (from #3) : arguments must be numeric.
 </pre>
 </div>
 </div>
+
+<div id="outline-container-orgheadline12" class="outline-3">
+<h3 id="orgheadline12"><span class="section-number-3">1.12</span> Mensajes para el usuario</h3>
+<div class="outline-text-3" id="text-1-12">
+<p>
+<code>stop</code> para la ejecución y emite un mensaje de error
+</p>
+<div class="org-src-container">
+
+<pre class="src src-R"><span class="org-keyword">stop</span>(<span class="org-string">'Algo no ha ido bien.'</span>)
+</pre>
 </div>
 
-<div id="outline-container-orgheadline19" class="outline-2">
-<h2 id="orgheadline19"><span class="section-number-2">2</span> Lexical scope</h2>
+<pre class="example">
+Error: Algo no ha ido bien.
+</pre>
+
+<p>
+<code>warning</code> no interfiere en la ejecución pero añade un mensaje a la cola de advertencias
+</p>
+<div class="org-src-container">
+
+<pre class="src src-R"><span class="org-keyword">warning</span>(<span class="org-string">'Quiz&#225;s algo no es como debiera...'</span>)
+</pre>
+</div>
+
+<pre class="example">
+Warning message:
+Quizás algo no es como debiera...
+</pre>
+
+<p>
+<code>message</code> emite un mensaje (<b>no usar <code>cat</code> o <code>print</code></b>)
+</p>
+<div class="org-src-container">
+
+<pre class="src src-R"><span class="org-keyword">message</span>(<span class="org-string">'Todo en orden por estos lares.'</span>)
+</pre>
+</div>
+
+<pre class="example">
+Todo en orden por estos lares.
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline20" class="outline-2">
+<h2 id="orgheadline20"><span class="section-number-2">2</span> Lexical scope</h2>
 <div class="outline-text-2" id="text-2">
-</div><div id="outline-container-orgheadline13" class="outline-3">
-<h3 id="orgheadline13"><span class="section-number-3">2.1</span> Clases de variables</h3>
+</div><div id="outline-container-orgheadline14" class="outline-3">
+<h3 id="orgheadline14"><span class="section-number-3">2.1</span> Clases de variables</h3>
 <div class="outline-text-3" id="text-2-1">
-<ul class="org-ul">
-<li>Las variables que se emplean en el cuerpo de una función pueden
+<p>
+Las variables que se emplean en el cuerpo de una función pueden
 dividirse en:
+</p>
 <ul class="org-ul">
 <li>Parámetros formales (argumentos): <code>x</code>, <code>y</code></li>
 <li>Variables locales (definiciones internas): <code>z</code>, <code>w</code>, <code>m</code></li>
 <li>Variables libres: <code>a</code>, <code>b</code></li>
-</ul></li>
 </ul>
 <div class="org-src-container">
 
@@ -616,8 +662,8 @@ myFun(2, 3)
 </div>
 </div>
 
-<div id="outline-container-orgheadline14" class="outline-3">
-<h3 id="orgheadline14"><span class="section-number-3">2.2</span> Lexical scope</h3>
+<div id="outline-container-orgheadline15" class="outline-3">
+<h3 id="orgheadline15"><span class="section-number-3">2.2</span> Lexical scope</h3>
 <div class="outline-text-3" id="text-2-2">
 <ul class="org-ul">
 <li>Las variables libres deben estar disponibles en el entorno
@@ -640,17 +686,17 @@ myFun(2, 3)
 </div>
 
 <pre class="example">
- [1] "a"          "addTask"    "b"          "createTask" "createToDo"
- [6] "foo"        "hello"      "lmFertEdu"  "myFun"      "myList"    
-[11] "myListOops" "myToDo"     "power"      "print"      "pwrSum"    
-[16] "suma10"     "task1"      "task2"      "valida"     "x"         
-[21] "xyplot"
+ [1] "a"           "anidada"     "b"           "constructor" "fib"        
+ [6] "foo"         "hello"       "lista"       "ll"          "myFoo"      
+[11] "myFun"       "noise"       "power"       "pwrSum"      "suma10"     
+[16] "sumNoise"    "sumProd"     "sumSq"       "tmp"         "x"          
+[21] "zz"
 </pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline15" class="outline-3">
-<h3 id="orgheadline15"><span class="section-number-3">2.3</span> Lexical scope: funciones anidadas</h3>
+<div id="outline-container-orgheadline16" class="outline-3">
+<h3 id="orgheadline16"><span class="section-number-3">2.3</span> Lexical scope: funciones anidadas</h3>
 <div class="outline-text-3" id="text-2-3">
 <div class="org-src-container">
 
@@ -674,7 +720,7 @@ myFun(2, 3)
 </div>
 
 <pre class="example">
-&lt;environment: 0x2575760&gt;
+&lt;environment: 0xacf688&gt;
 [1] 113
 </pre>
 
@@ -690,8 +736,8 @@ myFun(2, 3)
 </div>
 </div>
 
-<div id="outline-container-orgheadline16" class="outline-3">
-<h3 id="orgheadline16"><span class="section-number-3">2.4</span> Lexical scope: funciones anidadas</h3>
+<div id="outline-container-orgheadline17" class="outline-3">
+<h3 id="orgheadline17"><span class="section-number-3">2.4</span> Lexical scope: funciones anidadas</h3>
 <div class="outline-text-3" id="text-2-4">
 <div class="org-src-container">
 
@@ -725,8 +771,8 @@ Error: objeto 'interna' no encontrado
 </div>
 </div>
 
-<div id="outline-container-orgheadline17" class="outline-3">
-<h3 id="orgheadline17"><span class="section-number-3">2.5</span> Funciones que devuelven funciones</h3>
+<div id="outline-container-orgheadline18" class="outline-3">
+<h3 id="orgheadline18"><span class="section-number-3">2.5</span> Funciones que devuelven funciones</h3>
 <div class="outline-text-3" id="text-2-5">
 <div class="org-src-container">
 
@@ -751,7 +797,7 @@ function(x)
     {
         m*x + n
     }
-&lt;environment: 0x272cef8&gt;
+&lt;environment: 0xbb3488&gt;
 </pre>
 
 <div class="org-src-container">
@@ -767,8 +813,8 @@ myFoo(5)
 </div>
 </div>
 
-<div id="outline-container-orgheadline18" class="outline-3">
-<h3 id="orgheadline18"><span class="section-number-3">2.6</span> Funciones que devuelven funciones</h3>
+<div id="outline-container-orgheadline19" class="outline-3">
+<h3 id="orgheadline19"><span class="section-number-3">2.6</span> Funciones que devuelven funciones</h3>
 <div class="outline-text-3" id="text-2-6">
 <div class="org-src-container">
 
@@ -787,7 +833,7 @@ myFoo(5)
 </div>
 
 <pre class="example">
-&lt;environment: 0x272cef8&gt;
+&lt;environment: 0xbb3488&gt;
 </pre>
 
 <div class="org-src-container">
@@ -797,11 +843,11 @@ myFoo(5)
 </div>
 
 <pre class="example">
- [1] "a"           "addTask"     "anidada"     "b"           "constructor"
- [6] "createTask"  "createToDo"  "foo"         "hello"       "lmFertEdu"  
-[11] "myFoo"       "myFun"       "myList"      "myListOops"  "myToDo"     
-[16] "power"       "print"       "pwrSum"      "suma10"      "task1"      
-[21] "task2"       "valida"      "x"           "xyplot"
+ [1] "a"           "anidada"     "b"           "constructor" "fib"        
+ [6] "foo"         "hello"       "lista"       "ll"          "myFoo"      
+[11] "myFun"       "noise"       "power"       "pwrSum"      "suma10"     
+[16] "sumNoise"    "sumProd"     "sumSq"       "tmp"         "x"          
+[21] "zz"
 </pre>
 
 <div class="org-src-container">
@@ -837,11 +883,11 @@ myFoo(5)
 </div>
 </div>
 
-<div id="outline-container-orgheadline25" class="outline-2">
-<h2 id="orgheadline25"><span class="section-number-2">3</span> Debug</h2>
+<div id="outline-container-orgheadline26" class="outline-2">
+<h2 id="orgheadline26"><span class="section-number-2">3</span> Debug</h2>
 <div class="outline-text-2" id="text-3">
-</div><div id="outline-container-orgheadline20" class="outline-3">
-<h3 id="orgheadline20"><span class="section-number-3">3.1</span> Post-mortem: <code>traceback</code></h3>
+</div><div id="outline-container-orgheadline21" class="outline-3">
+<h3 id="orgheadline21"><span class="section-number-3">3.1</span> Post-mortem: <code>traceback</code></h3>
 <div class="outline-text-3" id="text-3-1">
 <div class="org-src-container">
 
@@ -864,7 +910,7 @@ myFoo(5)
 </div>
 
 <pre class="example">
-[1] 15.79409
+[1] 54.05381
 </pre>
 
 <div class="org-src-container">
@@ -884,14 +930,15 @@ Error in x^2 (from #2) : argumento no-numérico para operador binario
 </div>
 
 <pre class="example">
+3: x^2 at #2
 2: sumSq(y, ...) at #3
 1: sumProd(rnorm(10), letters[1:10])
 </pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline21" class="outline-3">
-<h3 id="orgheadline21"><span class="section-number-3">3.2</span> Analizar antes de que ocurra: <code>debug</code></h3>
+<div id="outline-container-orgheadline22" class="outline-3">
+<h3 id="orgheadline22"><span class="section-number-3">3.2</span> Analizar antes de que ocurra: <code>debug</code></h3>
 <div class="outline-text-3" id="text-3-2">
 <ul class="org-ul">
 <li>Activa la ejecución paso a paso de una función</li>
@@ -922,8 +969,8 @@ terminar un bucle).</li>
 </div>
 </div>
 
-<div id="outline-container-orgheadline22" class="outline-3">
-<h3 id="orgheadline22"><span class="section-number-3">3.3</span> Analizar antes de que ocurra: <code>trace</code></h3>
+<div id="outline-container-orgheadline23" class="outline-3">
+<h3 id="orgheadline23"><span class="section-number-3">3.3</span> Analizar antes de que ocurra: <code>trace</code></h3>
 <div class="outline-text-3" id="text-3-3">
 <ul class="org-ul">
 <li><code>trace</code> permite mayor control que <code>debug</code></li>
@@ -981,8 +1028,8 @@ function(x, y, ...){
 </div>
 </div>
 
-<div id="outline-container-orgheadline23" class="outline-3">
-<h3 id="orgheadline23"><span class="section-number-3">3.4</span> Analizar antes de que ocurra: <code>trace</code></h3>
+<div id="outline-container-orgheadline24" class="outline-3">
+<h3 id="orgheadline24"><span class="section-number-3">3.4</span> Analizar antes de que ocurra: <code>trace</code></h3>
 <div class="outline-text-3" id="text-3-4">
 <ul class="org-ul">
 <li>Los comandos <code>n</code> y <code>c</code> cambian respecto a <code>debug</code>:
@@ -1001,8 +1048,8 @@ terminar un bucle).</li>
 </div>
 </div>
 
-<div id="outline-container-orgheadline24" class="outline-3">
-<h3 id="orgheadline24"><span class="section-number-3">3.5</span> Más recursos</h3>
+<div id="outline-container-orgheadline25" class="outline-3">
+<h3 id="orgheadline25"><span class="section-number-3">3.5</span> Más recursos</h3>
 <div class="outline-text-3" id="text-3-5">
 <ul class="org-ul">
 <li>Debugging en RStudio
@@ -1016,11 +1063,11 @@ terminar un bucle).</li>
 </div>
 </div>
 
-<div id="outline-container-orgheadline29" class="outline-2">
-<h2 id="orgheadline29"><span class="section-number-2">4</span> Profiling</h2>
+<div id="outline-container-orgheadline30" class="outline-2">
+<h2 id="orgheadline30"><span class="section-number-2">4</span> Profiling</h2>
 <div class="outline-text-2" id="text-4">
-</div><div id="outline-container-orgheadline26" class="outline-3">
-<h3 id="orgheadline26"><span class="section-number-3">4.1</span> ¿Cuánto tarda mi función? <code>system.time</code></h3>
+</div><div id="outline-container-orgheadline27" class="outline-3">
+<h3 id="orgheadline27"><span class="section-number-3">4.1</span> ¿Cuánto tarda mi función? <code>system.time</code></h3>
 <div class="outline-text-3" id="text-4-1">
 <div class="org-src-container">
 
@@ -1045,13 +1092,13 @@ terminar un bucle).</li>
 
 <pre class="example">
  user  system elapsed 
-0.284   0.012   0.298
+0.212   0.004   0.218
 </pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline27" class="outline-3">
-<h3 id="orgheadline27"><span class="section-number-3">4.2</span> ¿Cuánto tarda cada parte de mi función?: <code>Rprof</code></h3>
+<div id="outline-container-orgheadline28" class="outline-3">
+<h3 id="orgheadline28"><span class="section-number-3">4.2</span> ¿Cuánto tarda cada parte de mi función?: <code>Rprof</code></h3>
 <div class="outline-text-3" id="text-4-2">
 <ul class="org-ul">
 <li>Usaremos un fichero temporal</li>
@@ -1083,8 +1130,8 @@ terminar un bucle).</li>
 </div>
 
 
-<div id="outline-container-orgheadline28" class="outline-3">
-<h3 id="orgheadline28"><span class="section-number-3">4.3</span> ¿Cuánto tarda cada parte de mi función?: <code>Rprof</code></h3>
+<div id="outline-container-orgheadline29" class="outline-3">
+<h3 id="orgheadline29"><span class="section-number-3">4.3</span> ¿Cuánto tarda cada parte de mi función?: <code>Rprof</code></h3>
 <div class="outline-text-3" id="text-4-3">
 <ul class="org-ul">
 <li>Paramos el análisis</li>
@@ -1107,35 +1154,35 @@ terminar un bucle).</li>
 <pre class="example">
 $by.self
         self.time self.pct total.time total.pct
-"rnorm"      0.22    91.67       0.22     91.67
-"array"      0.02     8.33       0.02      8.33
+"rnorm"      0.20    90.91       0.20     90.91
+"array"      0.02     9.09       0.02      9.09
 
 $by.total
                  total.time total.pct self.time self.pct
-"sapply"               0.24    100.00      0.00     0.00
-"sumNoise"             0.24    100.00      0.00     0.00
-"rnorm"                0.22     91.67      0.22    91.67
-"FUN"                  0.22     91.67      0.00     0.00
-"lapply"               0.22     91.67      0.00     0.00
-"array"                0.02      8.33      0.02     8.33
-"simplify2array"       0.02      8.33      0.00     0.00
+"sapply"               0.22    100.00      0.00     0.00
+"sumNoise"             0.22    100.00      0.00     0.00
+"rnorm"                0.20     90.91      0.20    90.91
+"FUN"                  0.20     90.91      0.00     0.00
+"lapply"               0.20     90.91      0.00     0.00
+"array"                0.02      9.09      0.02     9.09
+"simplify2array"       0.02      9.09      0.00     0.00
 
 $sample.interval
 [1] 0.02
 
 $sampling.time
-[1] 0.24
+[1] 0.22
 </pre>
 </div>
 </div>
 </div>
 
 
-<div id="outline-container-orgheadline35" class="outline-2">
-<h2 id="orgheadline35"><span class="section-number-2">5</span> Miscelánea</h2>
+<div id="outline-container-orgheadline36" class="outline-2">
+<h2 id="orgheadline36"><span class="section-number-2">5</span> Miscelánea</h2>
 <div class="outline-text-2" id="text-5">
-</div><div id="outline-container-orgheadline30" class="outline-3">
-<h3 id="orgheadline30"><span class="section-number-3">5.1</span> <code>do.call</code></h3>
+</div><div id="outline-container-orgheadline31" class="outline-3">
+<h3 id="orgheadline31"><span class="section-number-3">5.1</span> <code>do.call</code></h3>
 <div class="outline-text-3" id="text-5-1">
 <ul class="org-ul">
 <li>Ejemplo: sumar los componentes de una lista</li>
@@ -1150,7 +1197,7 @@ with(lista, sum(a + b + c))
 </div>
 
 <pre class="example">
-[1] 146.3971
+[1] 140.0761
 </pre>
 
 <ul class="org-ul">
@@ -1164,13 +1211,13 @@ función con <code>do.call</code></li>
 </div>
 
 <pre class="example">
-[1] 146.3971
+[1] 140.0761
 </pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline31" class="outline-3">
-<h3 id="orgheadline31"><span class="section-number-3">5.2</span> <code>do.call</code></h3>
+<div id="outline-container-orgheadline32" class="outline-3">
+<h3 id="orgheadline32"><span class="section-number-3">5.2</span> <code>do.call</code></h3>
 <div class="outline-text-3" id="text-5-2">
 <ul class="org-ul">
 <li>Se emplea frecuentemente con el resultado de <code>lapply</code></li>
@@ -1184,12 +1231,12 @@ función con <code>do.call</code></li>
 </div>
 
 <pre class="example">
-            [,1]      [,2]         [,3]     [,4]      [,5]
-[1,] -0.50831978 -1.286748 -0.396631080 1.321257 -1.320122
-[2,]  0.25838900  1.655719  0.157316213 1.745721  1.742722
-[3,] -0.13134424 -2.130493 -0.062396500 2.306546 -2.300605
-[4,]  0.06676487  2.741407  0.024748391 3.047541  3.037079
-[5,] -0.03393791 -3.527498 -0.009815981 4.026586 -4.009314
+           [,1]          [,2]       [,3]       [,4]      [,5]
+[1,] -0.7489004 -1.029051e-01 0.43214166 0.50982034 -1.188273
+[2,]  0.5608518  1.058946e-02 0.18674641 0.25991678  1.411993
+[3,] -0.4200222 -1.089709e-03 0.08070090 0.13251086 -1.677833
+[4,]  0.3145548  1.121366e-04 0.03487422 0.06755673  1.993723
+[5,] -0.2355702 -1.153943e-05 0.01507060 0.03444180 -2.369087
 </pre>
 
 <ul class="org-ul">
@@ -1202,18 +1249,18 @@ función con <code>do.call</code></li>
 </div>
 
 <pre class="example">
-           [,1]      [,2]       [,3]       [,4]         [,5]
-[1,] -0.5083198 0.2583890 -0.1313442 0.06676487 -0.033937906
-[2,] -1.2867476 1.6557194 -2.1304929 2.74140660 -3.527498342
-[3,] -0.3966311 0.1573162 -0.0623965 0.02474839 -0.009815981
-[4,]  1.3212573 1.7457208  2.3065463 3.04754115  4.026585945
-[5,] -1.3201219 1.7427217 -2.3006050 3.03707893 -4.009314257
+           [,1]       [,2]         [,3]         [,4]          [,5]
+[1,] -0.7489004 0.56085185 -0.420022187 0.3145547942 -2.355702e-01
+[2,] -0.1029051 0.01058946 -0.001089709 0.0001121366 -1.153943e-05
+[3,]  0.4321417 0.18674641  0.080700904 0.0348742226  1.507060e-02
+[4,]  0.5098203 0.25991678  0.132510860 0.0675567316  3.444180e-02
+[5,] -1.1882730 1.41199262 -1.677832642 1.9937231533 -2.369087e+00
 </pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline32" class="outline-3">
-<h3 id="orgheadline32"><span class="section-number-3">5.3</span> <code>Reduce</code></h3>
+<div id="outline-container-orgheadline33" class="outline-3">
+<h3 id="orgheadline33"><span class="section-number-3">5.3</span> <code>Reduce</code></h3>
 <div class="outline-text-3" id="text-5-3">
 <ul class="org-ul">
 <li>Combina sucesivamente los elementos de un objeto aplicando una
@@ -1234,8 +1281,8 @@ Reduce(<span class="org-string">'+'</span>, 1:5)
 </div>
 </div>
 
-<div id="outline-container-orgheadline33" class="outline-3">
-<h3 id="orgheadline33"><span class="section-number-3">5.4</span> <code>Reduce</code></h3>
+<div id="outline-container-orgheadline34" class="outline-3">
+<h3 id="orgheadline34"><span class="section-number-3">5.4</span> <code>Reduce</code></h3>
 <div class="outline-text-3" id="text-5-4">
 <div class="org-src-container">
 
@@ -1275,8 +1322,8 @@ Reduce(foo, c(3, 7, 15, 1, 292))
 </div>
 </div>
 
-<div id="outline-container-orgheadline34" class="outline-3">
-<h3 id="orgheadline34"><span class="section-number-3">5.5</span> Funciones recursivas</h3>
+<div id="outline-container-orgheadline35" class="outline-3">
+<h3 id="orgheadline35"><span class="section-number-3">5.5</span> Funciones recursivas</h3>
 <div class="outline-text-3" id="text-5-5">
 <ul class="org-ul">
 <li><a href="http://en.wikibooks.org/wiki/R_Programming/Working_with_functions#Functions_as_Objects">Serie de Fibonnaci</a></li>
@@ -1307,7 +1354,7 @@ Reduce(foo, c(3, 7, 15, 1, 292))
 </div>
 <div id="postamble" class="status">
 <p class="author">Autor: Oscar Perpiñán Lamigueiro \\ <a href="http://oscarperpinan.github.io/">http://oscarperpinan.github.io/</a></p>
-<p class="date">Created: 2016-03-06 dom 17:02</p>
+<p class="date">Created: 2016-03-15 mar 07:48</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
