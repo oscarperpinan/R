@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
 <head>
-<!-- 2016-03-06 dom 17:01 -->
+<!-- 2016-03-15 mar 00:55 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>Clases y Métodos</title>
@@ -282,9 +282,9 @@ clase de uno (o varios) de sus argumentos (<i>polymorphism</i>).</li>
 </div><div id="outline-container-orgheadline6" class="outline-4">
 <h4 id="orgheadline6"><span class="section-number-4">2.1.1</span> Clases</h4>
 <div class="outline-text-4" id="text-2-1-1">
-<ul class="org-ul">
-<li>Los objetos básicos en <code>R</code> tienen una clase implícita definida en <code>S3</code>. Es accesible con <code>class</code>.</li>
-</ul>
+<p>
+Los objetos básicos en <code>R</code> tienen una clase implícita definida en <code>S3</code>. Es accesible con <code>class</code>.
+</p>
 <div class="org-src-container">
 
 <pre class="src src-R">  x <span class="org-constant">&lt;-</span> rnorm(10)
@@ -296,9 +296,9 @@ clase de uno (o varios) de sus argumentos (<i>polymorphism</i>).</li>
 [1] "numeric"
 </pre>
 
-<ul class="org-ul">
-<li>Pero no tienen atributo ni se consideran formalmente objetos:</li>
-</ul>
+<p>
+Pero no tienen atributo ni se consideran formalmente objetos:
+</p>
 <div class="org-src-container">
 
 <pre class="src src-R">attr(x, <span class="org-string">'class'</span>)
@@ -325,9 +325,9 @@ NULL
 <div id="outline-container-orgheadline7" class="outline-4">
 <h4 id="orgheadline7"><span class="section-number-4">2.1.2</span> Clases</h4>
 <div class="outline-text-4" id="text-2-1-2">
-<ul class="org-ul">
-<li>Se puede redefinir la clase de un objecto <code>S3</code> con <code>class</code></li>
-</ul>
+<p>
+Se puede redefinir la clase de un objecto <code>S3</code> con <code>class</code>
+</p>
 <div class="org-src-container">
 
 <pre class="src src-R">  class(x) <span class="org-constant">&lt;-</span> <span class="org-string">'myNumeric'</span>
@@ -339,9 +339,9 @@ NULL
 [1] "myNumeric"
 </pre>
 
-<ul class="org-ul">
-<li>Ahora sí es un objeto y su atributo está definido:</li>
-</ul>
+<p>
+Ahora sí es un objeto y su atributo está definido:
+</p>
 <div class="org-src-container">
 
 <pre class="src src-R">attr(x, <span class="org-string">'class'</span>)
@@ -362,9 +362,9 @@ NULL
 [1] TRUE
 </pre>
 
-<ul class="org-ul">
-<li>Sin embargo, su modo de almacenamiento (clase intrínseca) no cambia:</li>
-</ul>
+<p>
+Sin embargo, su modo de almacenamiento (clase intrínseca) no cambia:
+</p>
 <div class="org-src-container">
 
 <pre class="src src-R">  mode(x)
@@ -684,8 +684,8 @@ What:  Find and fix bugs - When: 2013-03-15 - Priority: High
 
 <pre class="example">
 Funcion genérica
- [1]  0.6927493  0.6421523 -0.6136266  0.2311216 -0.9405805 -1.5465231
- [7]  1.6599934 -0.3228313  0.5897246  0.2304692
+ [1] -1.0150401 -1.3588711 -0.7431709  1.5055015  0.3545570 -0.6970846
+ [7] -1.2575174  0.4191753  0.5577365  0.6741115
 attr(,"class")
 [1] "myNumeric"
 </pre>
@@ -706,9 +706,9 @@ What:  Write an email - When: 2013-01-01 - Priority: Low
 <div id="outline-container-orgheadline18" class="outline-4">
 <h4 id="orgheadline18"><span class="section-number-4">2.3.2</span> <code>methods</code></h4>
 <div class="outline-text-4" id="text-2-3-2">
-<ul class="org-ul">
-<li>Con <code>methods</code> podemos averiguar los métodos que hay definidos para una función particular:</li>
-</ul>
+<p>
+Con <code>methods</code> podemos averiguar los métodos que hay definidos para una función particular:
+</p>
 <div class="org-src-container">
 
 <pre class="src src-R">methods(<span class="org-string">'myFun'</span>)
@@ -727,8 +727,8 @@ see '?methods' for accessing help and source code
 </div>
 
 <pre class="example">
-[1] "print.acf"     "print.anova"   "print.aov"     "print.aovlist"
-[5] "print.ar"      "print.Arima"
+[1] "print.acf"        "print.anova"      "print,ANY-method" "print.aov"       
+[5] "print.aovlist"    "print.ar"
 </pre>
 </div>
 </div>
@@ -795,15 +795,15 @@ see '?methods' for accessing help and source code
 </div><div id="outline-container-orgheadline22" class="outline-4">
 <h4 id="orgheadline22"><span class="section-number-4">3.1.1</span> Clases en <code>S4</code></h4>
 <div class="outline-text-4" id="text-3-1-1">
-<ul class="org-ul">
-<li>Se construyen con <code>setClass</code>, que acepta varios argumentos
+<p>
+Se construyen con <code>setClass</code>, que acepta varios argumentos
+</p>
 <ul class="org-ul">
 <li><code>Class</code>: nombre de la clase.</li>
 <li><code>slots</code>: una lista con las clases de cada componente. Los nombres de este vector corresponden a los nombres de los componentes (<code>slot</code>).</li>
 <li><code>contains</code>: un vector con las clases que esta nueva clase extiende.</li>
 <li><code>prototype</code>: un objeto proporcionando el contenido por defecto para los componentes definidos en <code>slots</code>.</li>
 <li><code>validity</code>: a función que comprueba la validez de la clase creada con la información suministrada.</li>
-</ul></li>
 </ul>
 </div>
 </div>
@@ -897,10 +897,10 @@ Slot "priority":
 <div id="outline-container-orgheadline25" class="outline-4">
 <h4 id="orgheadline25"><span class="section-number-4">3.1.4</span> Funciones para crear objetos</h4>
 <div class="outline-text-4" id="text-3-1-4">
-<ul class="org-ul">
-<li>Es habitual definir funciones que construyen y modifican objetos
-para evitar el uso de <code>new</code>:</li>
-</ul>
+<p>
+Es habitual definir funciones que construyen y modifican objetos
+para evitar el uso de <code>new</code>:
+</p>
 <div class="org-src-container">
 
 <pre class="src src-R"><span class="org-function-name">createTask</span> <span class="org-constant">&lt;-</span> <span class="org-keyword">function</span>(what, when, priority){
@@ -959,10 +959,10 @@ invalid class “task” object: 2: invalid object for slot "priority" in class 
 <div id="outline-container-orgheadline27" class="outline-4">
 <h4 id="orgheadline27"><span class="section-number-4">3.1.6</span> Acceso a los slots</h4>
 <div class="outline-text-4" id="text-3-1-6">
-<ul class="org-ul">
-<li>Para extraer información de los <i>slots</i> hay que emplear <code>@</code> (a
-diferencia de <code>$</code> en listas y <code>data.frame</code>)</li>
-</ul>
+<p>
+Para extraer información de los <i>slots</i> hay que emplear <code>@</code> (a
+diferencia de <code>$</code> en listas y <code>data.frame</code>)
+</p>
 <div class="org-src-container">
 
 <pre class="src src-R">myList@tasks
@@ -999,9 +999,9 @@ Slot "priority":
 <div id="outline-container-orgheadline28" class="outline-4">
 <h4 id="orgheadline28"><span class="section-number-4">3.1.7</span> Acceso a los slots</h4>
 <div class="outline-text-4" id="text-3-1-7">
-<ul class="org-ul">
-<li>El <i>slot</i> <code>tasks</code> es una lista: empleamos <code>$</code> para acceder a sus elementos</li>
-</ul>
+<p>
+El <i>slot</i> <code>tasks</code> es una lista: empleamos <code>$</code> para acceder a sus elementos
+</p>
 <div class="org-src-container">
 
 <pre class="src src-R">myList@tasks$t1
@@ -1020,10 +1020,10 @@ Slot "priority":
 [1] "High"
 </pre>
 
-<ul class="org-ul">
-<li>Cada elemento de <code>tasks</code> es un objeto de clase <code>task</code>: empleamos
-<code>@</code> para extraer sus <i>slots</i>.</li>
-</ul>
+<p>
+Cada elemento de <code>tasks</code> es un objeto de clase <code>task</code>: empleamos
+<code>@</code> para extraer sus <i>slots</i>.
+</p>
 <div class="org-src-container">
 
 <pre class="src src-R">myList@tasks$t1@what
@@ -1039,10 +1039,10 @@ Slot "priority":
 <div id="outline-container-orgheadline29" class="outline-4">
 <h4 id="orgheadline29"><span class="section-number-4">3.1.8</span> Problema con los slots definidos como <code>list</code></h4>
 <div class="outline-text-4" id="text-3-1-8">
-<ul class="org-ul">
-<li>Dado que el slot <code>tasks</code> es una <code>list</code>, podemos añadir cualquier
-cosa.</li>
-</ul>
+<p>
+Dado que el slot <code>tasks</code> es una <code>list</code>, podemos añadir cualquier
+cosa. 
+</p>
 <div class="org-src-container">
 
 <pre class="src src-R">  myListOops <span class="org-constant">&lt;-</span> new(<span class="org-string">'ToDo'</span>,
@@ -1056,10 +1056,10 @@ cosa.</li>
 <div id="outline-container-orgheadline30" class="outline-4">
 <h4 id="orgheadline30"><span class="section-number-4">3.1.9</span> Validación</h4>
 <div class="outline-text-4" id="text-3-1-9">
-<ul class="org-ul">
-<li>Para obligar a que sus elementos sean de clase <code>task</code> debemos añadir
-una función de validación.</li>
-</ul>
+<p>
+Para obligar a que sus elementos sean de clase <code>task</code> debemos añadir
+una función de validación.
+</p>
 <div class="org-src-container">
 
 <pre class="src src-R"><span class="org-function-name">valida</span> <span class="org-constant">&lt;-</span> <span class="org-keyword">function</span> (object) {
@@ -1133,21 +1133,24 @@ método)</li>
 <li>la función a ejecutar (<code>definition</code>).</li>
 </ul></li>
 <li>Es necesario que exista un método genérico ya definido. Si no
-existe, se define con <code>setGeneric</code>.</li>
+existe, se define con <code>setGeneric</code> y <code>standardGeneric</code></li>
 </ul>
 <div class="org-src-container">
 
-<pre class="src src-R">  isGeneric(<span class="org-string">'print'</span>)
+<pre class="src src-R">setGeneric(<span class="org-string">'myMethod'</span>,
+           <span class="org-keyword">function</span>(x, y, ...)
+               standardGeneric(<span class="org-string">'myMethod'</span>)
+           )
 </pre>
 </div>
 
 <pre class="example">
-[1] FALSE
+[1] "myMethod"
 </pre>
 
 <div class="org-src-container">
 
-<pre class="src src-R">  setGeneric(<span class="org-string">'print'</span>)
+<pre class="src src-R">setGeneric(<span class="org-string">'print'</span>)
 </pre>
 </div>
 
@@ -1160,24 +1163,36 @@ existe, se define con <code>setGeneric</code>.</li>
 <div id="outline-container-orgheadline34" class="outline-4">
 <h4 id="orgheadline34"><span class="section-number-4">3.2.2</span> Métodos en <code>S4</code>: <code>setGeneric</code> y <code>getGeneric</code></h4>
 <div class="outline-text-4" id="text-3-2-2">
-<ul class="org-ul">
-<li>Si ya existe un método genérico, la función <code>definition</code> debe tener
-todos los argumentos de la función genérica y en el mismo orden.</li>
-</ul>
+<p>
+Si ya existe un método genérico, la función <code>definition</code> debe tener
+todos los argumentos de la función genérica y en el mismo orden.
+</p>
+
 <div class="org-src-container">
 
-<pre class="src src-R">  getGeneric(<span class="org-string">'print'</span>)
+<pre class="src src-R"><span class="org-constant">library</span>(lattice)  
+isGeneric(<span class="org-string">'xyplot'</span>)
 </pre>
 </div>
 
 <pre class="example">
-standardGeneric for "print" defined from package "base"
+[1] TRUE
+</pre>
 
-function (x, ...) 
-standardGeneric("print")
-&lt;environment: 0x2203a60&gt;
-Methods may be defined for arguments: x
-Use  showMethods("print")  for currently available ones.
+<div class="org-src-container">
+
+<pre class="src src-R">getGeneric(<span class="org-string">'xyplot'</span>)
+</pre>
+</div>
+
+<pre class="example">
+standardGeneric for "xyplot" defined from package "lattice"
+
+function (x, data, ...) 
+standardGeneric("xyplot")
+&lt;environment: 0x42bd068&gt;
+Methods may be defined for arguments: x, data
+Use  showMethods("xyplot")  for currently available ones.
 </pre>
 </div>
 </div>
@@ -1258,11 +1273,11 @@ No. 2 :What:  Write an email - When: 2013-01-01 - Priority: Low
 </div><div id="outline-container-orgheadline38" class="outline-4">
 <h4 id="orgheadline38"><span class="section-number-4">3.3.1</span> Clases <code>S3</code> con clases y métodos <code>S4</code></h4>
 <div class="outline-text-4" id="text-3-3-1">
-<ul class="org-ul">
-<li>Para usar objetos de clase <code>S3</code> en <code>signatures</code> de métodos <code>S4</code> o
+<p>
+Para usar objetos de clase <code>S3</code> en <code>signatures</code> de métodos <code>S4</code> o
 como contenido de <code>slots</code> de una clase <code>S4</code> hay que registrarlos con
-<code>setOldClass</code>:</li>
-</ul>
+<code>setOldClass</code>:
+</p>
 <div class="org-src-container">
 
 <pre class="src src-R">setOldClass(<span class="org-string">'lm'</span>)
@@ -1298,9 +1313,9 @@ Class "glm.null", by class "glm", distance 2
 <div id="outline-container-orgheadline39" class="outline-4">
 <h4 id="orgheadline39"><span class="section-number-4">3.3.2</span> Ejemplo con <code>lm</code> y <code>xyplot</code></h4>
 <div class="outline-text-4" id="text-3-3-2">
-<ul class="org-ul">
-<li>Definimos un método genérico para <code>xyplot</code></li>
-</ul>
+<p>
+Definimos un método genérico para <code>xyplot</code>
+</p>
 <div class="org-src-container">
 
 <pre class="src src-R"><span class="org-constant">library</span>(lattice)
@@ -1312,9 +1327,9 @@ setGeneric(<span class="org-string">'xyplot'</span>)
 [1] "xyplot"
 </pre>
 
-<ul class="org-ul">
-<li>Definimos un método para la clase <code>lm</code> usando <code>xyplot</code>.</li>
-</ul>
+<p>
+Definimos un método para la clase <code>lm</code> usando <code>xyplot</code>.
+</p>
 <div class="org-src-container">
 
 <pre class="src src-R">setMethod(<span class="org-string">'xyplot'</span>,
@@ -1339,9 +1354,9 @@ setGeneric(<span class="org-string">'xyplot'</span>)
 <div id="outline-container-orgheadline40" class="outline-4">
 <h4 id="orgheadline40"><span class="section-number-4">3.3.3</span> Ejemplo con <code>lm</code> y <code>xyplot</code></h4>
 <div class="outline-text-4" id="text-3-3-3">
-<ul class="org-ul">
-<li>Recuperamos la regresión que empleamos en el apartado de Estadística:</li>
-</ul>
+<p>
+Recuperamos la regresión que empleamos en el apartado de Estadística:
+</p>
 <div class="org-src-container">
 
 <pre class="src src-R">lmFertEdu <span class="org-constant">&lt;-</span> lm(Fertility ~ Education, data = swiss)
@@ -1391,7 +1406,7 @@ F-statistic: 35.45 on 1 and 45 DF,  p-value: 3.659e-07
 </div>
 <div id="postamble" class="status">
 <p class="author">Autor: Oscar Perpiñán Lamigueiro \\ <a href="http://oscarperpinan.github.io/">http://oscarperpinan.github.io/</a></p>
-<p class="date">Created: 2016-03-06 dom 17:01</p>
+<p class="date">Created: 2016-03-15 mar 00:55</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
