@@ -1,4 +1,5 @@
 ## emacs
+=======
 # -*- mode: gitignore; -*-
 *~
 \#*\#
@@ -112,3 +113,25 @@ sympy-plots-for-*.tex/
 *.tdo
 # xindy
 *.xdy
+=======
+
+# Org-mode
+.org-id-locations
+*_archive
+
+# flymake-mode
+*_flymake.*
+
+# eshell files
+/eshell/history
+/eshell/lastdir
+
+# elpa packages
+/elpa/
+
+# reftex files
+*.rel
+
+# AUCTeX auto folder
+/auto/
+/index.html~
