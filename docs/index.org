@@ -1,0 +1,229 @@
+#+AUTHOR:    Oscar Perpiñán Lamigueiro
+#+EMAIL:     oscar.perpinan@gmail.com
+#+TITLE:     Introducción a R
+#+LANGUAGE:  es
+#+OPTIONS:   H:3 num:nil toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t TeX:t LaTeX:nil skip:nil d:t tags:not-in-toc
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+LINK_UP:
+#+LINK_HOME:
+#+OPTIONS: html-style:nil
+#+HTML_HEAD: <link rel="icon" type="image/ico" href="favicon.ico">
+#+HTML_HEAD:    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+#+HTML_HEAD:    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootswatch/3.2.0/readable/bootstrap.min.css">
+#+HTML_HEAD:    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/>
+
+#+HTML_HEAD: <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+#+HTML_HEAD: <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+#+HTML_HEAD: <script type="text/javascript" src="http://www.pirilampo.org/styles/lib/js/jquery.stickytableheaders.js"></script>
+#+HTML_HEAD: <script type="text/javascript" src="http://www.pirilampo.org/styles/readtheorg/js/readtheorg.js"></script>
+#+BIND: org-html-postamble nil
+
+Esta página publica material didáctico (diapositivas, datos y código)
+adecuado a cursos introductorios a R. Este material ha sido elaborado
+por [[http://oscarperpinan.github.io][Oscar Perpiñán Lamigueiro]] empleando [[http://orgmode.org/][org-mode]] y [[http://ess.r-project.org/][ESS]] sobre
+[[http://www.gnu.org/software/emacs/][Emacs]]. 
+
+[[http://creativecommons.org/licenses/by-sa/4.0/][https://i.creativecommons.org/l/by-sa/4.0/88x31.png]] Este material está
+bajo una licencia [[http://creativecommons.org/licenses/by-sa/4.0/][Creative Commons CC-BY-SA 4.0]].
+
+* Instalar R
+  :PROPERTIES:
+  :CUSTOM_ID: instalacion
+  :END:
+
+- Si utilizáis Windows, podéis descargar el instalador desde [[http://cran.es.r-project.org/bin/windows/base/][aquí]].
+- Si utilizáis Mac debéis ir a esta [[http://cran.es.r-project.org/bin/macosx/][página]].
+- Y si utilizáis Linux, posiblemente lo tengáis disponible en vuestro
+  gestor de aplicaciones. En todo caso, la página para Linux está [[http://cran.es.r-project.org/bin/linux/][aquí]].
+
+* Interfaces para R
+  :PROPERTIES:
+  :CUSTOM_ID: gui
+  :END:
+
+En mi opinión, la mejor interfaz para R es [[http://ess.r-project.org/][ESS]] con [[http://www.gnu.org/software/emacs/][Emacs]], aunque
+posiblemente no es lo más recomendable para un principiante.
+
+La alternativa más recomendable es [[http://www.rstudio.com/ide/][RStudio]]. Podéis descargar el
+instalador desde [[http://www.rstudio.com/ide/download/desktop][aquí]]. Es aconsejable la lectura de esta [[http://www.rstudio.com/ide/docs/using/source][introducción]].
+
+* Cómo usar el material
+  :PROPERTIES:
+  :CUSTOM_ID: uso
+  :END:
+
+Para trabajar con este material es recomendable obtener una copia
+local del [[https://github.com/oscarperpinan/R][repositorio]]. Puedes hacerlo descargando el repositorio en
+formato [[https://github.com/oscarperpinan/R/archive/master.zip][ZIP]]. Es recomendable descomprimirlo en una ruta sencilla (por
+ejemplo, en Windows =C:\cursoR\= y en Linux/Mac
+=/home/miusuario/cursoR/=). Si tienes [[http://git-scm.com/][=git=]] en tu ordenador, puedes
+hacer una copia de forma aún más sencilla:
+
+#+BEGIN_SRC bash
+  git clone git://github.com/oscarperpinan/R.git
+#+END_SRC
+
+Una vez realizado el paso anterior, existirá una carpeta en tu
+ordenador con el contenido del curso. Todo el código asume que la ruta
+de trabajo coincide con esa carpeta. Por tanto, el primer paso a dar
+en =R= es definir la ruta de trabajo con =setwd=:
+#+begin_src R
+setwd('/ruta/de/copia/local/del/repositorio/')
+#+end_src
+Puedes comprobar que todo ha ido bien con =dir=. El resultado de la
+siguiente instrucción debe ser la estructura de carpetas y ficheros
+del repositorio:
+#+begin_src R
+dir()
+#+end_src
+
+A continuación, debes instalar los paquetes que se emplean a lo largo
+del curso. Algunos ya vendrán instalados con tu distribución de R por
+ser paquetes recomendados. En =R= debes usar =install.packages=. En la
+siguiente instrucción usamos el /CRAN mirror/ de la Oficina de
+Software Libre (CIXUG). Consulta [[http://cran.r-project.org/mirrors.html][esta lista]] para elegir un /CRAN
+mirror/ diferente.
+
+#+begin_src R
+install.packages(c('lattice', 'latticeExtra', 'RColorBrewer',
+                   'zoo', 'reshape2', 'ggplot2'),
+                 repos = 'http://ftp.cixug.es/CRAN')
+#+end_src
+
+Ya está todo listo para empezar a trabajar con el material.
+
+------
+* Contenido
+  :PROPERTIES:
+  :CUSTOM_ID: contenido
+  :END:
+
+** Usuario
+  :PROPERTIES:
+  :CUSTOM_ID: usuario
+  :END:
+
+Este apartado agrupa el material apropiado para trabajar con R desde el rol de usuario.
+
+*** Introducción
+    :PROPERTIES:
+    :CUSTOM_ID: intro
+    :END:
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[file:intro.pdf][*PDF*]] 
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[file:intro.html][*HTML*]] 
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[https://github.com/oscarperpinan/R/blob/master/intro.R][*Código*]]
+*** Manejo de datos
+    :PROPERTIES:
+    :CUSTOM_ID: datos
+    :END:
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[FILE:datos.pdf][*PDF*]]
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[file:datos.html][*HTML*]] 
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[https://github.com/oscarperpinan/R/blob/master/datos.R][*Código*]]
+*** Gráficos
+    :PROPERTIES:
+    :CUSTOM_ID: graficos
+    :END:
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[file:graficos.pdf][*PDF*]]
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[file:graficos.html][*HTML*]] 
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[https://github.com/oscarperpinan/R/blob/master/graficos.R][*Código*]]
+*** Estadística
+    :PROPERTIES:
+    :CUSTOM_ID: estadistica
+    :END:
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[file:estadistica.pdf][*PDF*]]
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[file:estadistica.html][*HTML*]] 
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[https://github.com/oscarperpinan/R/blob/master/estadistica.R][*Código*]]
+*** Factores, Fechas, Caracteres
+    :PROPERTIES:
+    :CUSTOM_ID: factores
+    :END:
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[file:factorDateCharacter.pdf][*PDF*]] 
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[file:factorDateCharacter.html][*HTML*]] 
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[https://github.com/oscarperpinan/R/blob/master/factorDateCharacter.R][*Código*]]
+
+------  
+
+** Desarrollador
+  :PROPERTIES:
+  :CUSTOM_ID: desarrollador
+  :END:
+ 
+Este apartado agrupa material apropiado para trabajar con R desde el rol de desarrollador.
+
+
+*** Funciones
+    :PROPERTIES:
+    :CUSTOM_ID: funciones
+    :END:
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[file:Funciones.pdf][*PDF*]]
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[file:Funciones.html][*HTML*]] 
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[https://github.com/oscarperpinan/R/blob/master/Funciones.R][*Código*]]
+*** Clases y métodos
+    :PROPERTIES:
+    :CUSTOM_ID: oop
+    :END:
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[FILE:ClasesMetodos.pdf][*PDF*]] 
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[file:ClasesMetodos.html][*HTML*]] 
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[https://github.com/oscarperpinan/R/blob/master/ClasesMetodos.R][*Código*]]
+*** Paquetes
+    :PROPERTIES:
+    :CUSTOM_ID: paquetes
+    :END:
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[FILE:Paquetes.pdf][*PDF*]]
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[file:Paquetes.html][*HTML*]] 
+
+------
+
+** Miscelánea
+  :PROPERTIES:
+  :CUSTOM_ID: misc
+  :END:
+
+Este apartado agrupa material sobre series temporales y datos espaciales.
+Si trabajas con series temporales y datos espaciales te puede interesar mi libro "[[http://oscarperpinan.github.io/spacetime-vis/][Displaying time series, spatial and space-time data with R]]".
+
+*** Series temporales
+    :PROPERTIES:
+    :CUSTOM_ID: series
+    :END:
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[file:zoo.pdf][*PDF*]]
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[https://github.com/oscarperpinan/R/blob/master/zoo.R][*Código*]]
+*** Datos espaciales
+    :PROPERTIES:
+    :CUSTOM_ID: espacial
+    :END:
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[file:raster.pdf][*PDF*]] 
+   #+ATTR_HTML: :class btn btn-default btn-sm :type button
+   [[https://github.com/oscarperpinan/R/blob/master/raster.R][*Código*]]
+
+------
+
+

@@ -3,12 +3,12 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
 <head>
-<!-- 2016-03-13 dom 13:52 -->
-<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<!-- 2016-11-17 jue 13:16 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Introducción a R</title>
-<meta  name="generator" content="Org-mode" />
-<meta  name="author" content="Oscar Perpiñán Lamigueiro" />
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Oscar Perpiñán Lamigueiro" />
 <link rel="icon" type="image/ico" href="favicon.ico">
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootswatch/3.2.0/readable/bootstrap.min.css">
@@ -117,8 +117,8 @@ por <a href="http://oscarperpinan.github.io/">Oscar Perpiñán Lamigueiro</a> em
 bajo una licencia <a href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons CC-BY-SA 4.0</a>.
 </p>
 
-<div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="instalacion"><a id="orgheadline1"></a>Instalar R</h2>
+<div id="outline-container-orgbd5ff06" class="outline-2">
+<h2 id="instalacion"><a id="orgbd5ff06"></a>Instalar R</h2>
 <div class="outline-text-2" id="text-instalacion">
 <ul class="org-ul">
 <li>Si utilizáis Windows, podéis descargar el instalador desde <a href="http://cran.es.r-project.org/bin/windows/base/">aquí</a>.</li>
@@ -129,8 +129,8 @@ gestor de aplicaciones. En todo caso, la página para Linux está <a href="http:
 </div>
 </div>
 
-<div id="outline-container-orgheadline2" class="outline-2">
-<h2 id="gui"><a id="orgheadline2"></a>Interfaces para R</h2>
+<div id="outline-container-org0bdf8e4" class="outline-2">
+<h2 id="gui"><a id="org0bdf8e4"></a>Interfaces para R</h2>
 <div class="outline-text-2" id="text-gui">
 <p>
 En mi opinión, la mejor interfaz para R es <a href="http://ess.r-project.org/">ESS</a> con <a href="http://www.gnu.org/software/emacs/">Emacs</a>, aunque
@@ -144,21 +144,20 @@ instalador desde <a href="http://www.rstudio.com/ide/download/desktop">aquí</a>
 </div>
 </div>
 
-<div id="outline-container-orgheadline3" class="outline-2">
-<h2 id="uso"><a id="orgheadline3"></a>Cómo usar el material</h2>
+<div id="outline-container-orgcf97b57" class="outline-2">
+<h2 id="uso"><a id="orgcf97b57"></a>Cómo usar el material</h2>
 <div class="outline-text-2" id="text-uso">
 <p>
 Para trabajar con este material es recomendable obtener una copia
-local del <a href="https://github.com/oscarperpinan/intro">repositorio</a>. Puedes hacerlo descargando el repositorio en
-formato <a href="https://github.com/oscarperpinan/intro/archive/master.zip">ZIP</a>. Es recomendable descomprimirlo en una ruta sencilla (por
+local del <a href="https://github.com/oscarperpinan/R">repositorio</a>. Puedes hacerlo descargando el repositorio en
+formato <a href="https://github.com/oscarperpinan/R/archive/master.zip">ZIP</a>. Es recomendable descomprimirlo en una ruta sencilla (por
 ejemplo, en Windows <code>C:\cursoR\</code> y en Linux/Mac
 <code>/home/miusuario/cursoR/</code>). Si tienes <a href="http://git-scm.com/"><code>git</code></a> en tu ordenador, puedes
 hacer una copia de forma aún más sencilla:
 </p>
 
 <div class="org-src-container">
-
-<pre class="src src-bash">  git clone git://github.com/oscarperpinan/intro.git
+<pre class="src src-bash">  git clone git://github.com/oscarperpinan/R.git
 </pre>
 </div>
 
@@ -169,7 +168,6 @@ de trabajo coincide con esa carpeta. Por tanto, el primer paso a dar
 en <code>R</code> es definir la ruta de trabajo con <code>setwd</code>:
 </p>
 <div class="org-src-container">
-
 <pre class="src src-R">setwd(<span class="org-string">'/ruta/de/copia/local/del/repositorio/'</span>)
 </pre>
 </div>
@@ -179,7 +177,6 @@ siguiente instrucción debe ser la estructura de carpetas y ficheros
 del repositorio:
 </p>
 <div class="org-src-container">
-
 <pre class="src src-R">dir()
 </pre>
 </div>
@@ -194,7 +191,6 @@ mirror</i> diferente.
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-R">install.packages(c(<span class="org-string">'lattice'</span>, <span class="org-string">'latticeExtra'</span>, <span class="org-string">'RColorBrewer'</span>,
                    <span class="org-string">'zoo'</span>, <span class="org-string">'reshape2'</span>, <span class="org-string">'ggplot2'</span>),
                  repos = <span class="org-string">'http://ftp.cixug.es/CRAN'</span>)
@@ -208,21 +204,21 @@ Ya está todo listo para empezar a trabajar con el material.
 <hr  />
 </div>
 </div>
-<div id="outline-container-orgheadline17" class="outline-2">
-<h2 id="contenido"><a id="orgheadline17"></a>Contenido</h2>
+<div id="outline-container-org5aa2ee7" class="outline-2">
+<h2 id="contenido"><a id="org5aa2ee7"></a>Contenido</h2>
 <div class="outline-text-2" id="text-contenido">
 </div>
 
-<div id="outline-container-orgheadline9" class="outline-3">
-<h3 id="usuario"><a id="orgheadline9"></a>Usuario</h3>
+<div id="outline-container-org9b9a7e8" class="outline-3">
+<h3 id="usuario"><a id="org9b9a7e8"></a>Usuario</h3>
 <div class="outline-text-3" id="text-usuario">
 <p>
 Este apartado agrupa el material apropiado para trabajar con R desde el rol de usuario.
 </p>
 </div>
 
-<div id="outline-container-orgheadline4" class="outline-4">
-<h4 id="intro"><a id="orgheadline4"></a>Introducción</h4>
+<div id="outline-container-org7cfdfe1" class="outline-4">
+<h4 id="intro"><a id="org7cfdfe1"></a>Introducción</h4>
 <div class="outline-text-4" id="text-intro">
 <p class="btn btn-default btn-sm" type="button">
 <a href="intro.pdf" class="btn btn-default btn-sm" type="button"><b>PDF</b></a> 
@@ -231,12 +227,12 @@ Este apartado agrupa el material apropiado para trabajar con R desde el rol de u
 <a href="intro.html" class="btn btn-default btn-sm" type="button"><b>HTML</b></a> 
 </p>
 <p class="btn btn-default btn-sm" type="button">
-<a href="https://github.com/oscarperpinan/intro/blob/master/intro.R" class="btn btn-default btn-sm" type="button"><b>Código</b></a>
+<a href="https://github.com/oscarperpinan/R/blob/master/intro.R" class="btn btn-default btn-sm" type="button"><b>Código</b></a>
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline5" class="outline-4">
-<h4 id="datos"><a id="orgheadline5"></a>Manejo de datos</h4>
+<div id="outline-container-orgab01427" class="outline-4">
+<h4 id="datos"><a id="orgab01427"></a>Manejo de datos</h4>
 <div class="outline-text-4" id="text-datos">
 <p class="btn btn-default btn-sm" type="button">
 <a href="datos.pdf" class="btn btn-default btn-sm" type="button"><b>PDF</b></a>
@@ -245,12 +241,12 @@ Este apartado agrupa el material apropiado para trabajar con R desde el rol de u
 <a href="datos.html" class="btn btn-default btn-sm" type="button"><b>HTML</b></a> 
 </p>
 <p class="btn btn-default btn-sm" type="button">
-<a href="https://github.com/oscarperpinan/intro/blob/master/datos.R" class="btn btn-default btn-sm" type="button"><b>Código</b></a>
+<a href="https://github.com/oscarperpinan/R/blob/master/datos.R" class="btn btn-default btn-sm" type="button"><b>Código</b></a>
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline6" class="outline-4">
-<h4 id="graficos"><a id="orgheadline6"></a>Gráficos</h4>
+<div id="outline-container-org8883f83" class="outline-4">
+<h4 id="graficos"><a id="org8883f83"></a>Gráficos</h4>
 <div class="outline-text-4" id="text-graficos">
 <p class="btn btn-default btn-sm" type="button">
 <a href="graficos.pdf" class="btn btn-default btn-sm" type="button"><b>PDF</b></a>
@@ -259,12 +255,12 @@ Este apartado agrupa el material apropiado para trabajar con R desde el rol de u
 <a href="graficos.html" class="btn btn-default btn-sm" type="button"><b>HTML</b></a> 
 </p>
 <p class="btn btn-default btn-sm" type="button">
-<a href="https://github.com/oscarperpinan/intro/blob/master/graficos.R" class="btn btn-default btn-sm" type="button"><b>Código</b></a>
+<a href="https://github.com/oscarperpinan/R/blob/master/graficos.R" class="btn btn-default btn-sm" type="button"><b>Código</b></a>
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline7" class="outline-4">
-<h4 id="estadistica"><a id="orgheadline7"></a>Estadística</h4>
+<div id="outline-container-org9a023e7" class="outline-4">
+<h4 id="estadistica"><a id="org9a023e7"></a>Estadística</h4>
 <div class="outline-text-4" id="text-estadistica">
 <p class="btn btn-default btn-sm" type="button">
 <a href="estadistica.pdf" class="btn btn-default btn-sm" type="button"><b>PDF</b></a>
@@ -273,12 +269,12 @@ Este apartado agrupa el material apropiado para trabajar con R desde el rol de u
 <a href="estadistica.html" class="btn btn-default btn-sm" type="button"><b>HTML</b></a> 
 </p>
 <p class="btn btn-default btn-sm" type="button">
-<a href="https://github.com/oscarperpinan/intro/blob/master/estadistica.R" class="btn btn-default btn-sm" type="button"><b>Código</b></a>
+<a href="https://github.com/oscarperpinan/R/blob/master/estadistica.R" class="btn btn-default btn-sm" type="button"><b>Código</b></a>
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline8" class="outline-4">
-<h4 id="factores"><a id="orgheadline8"></a>Factores, Fechas, Caracteres</h4>
+<div id="outline-container-orgd57f242" class="outline-4">
+<h4 id="factores"><a id="orgd57f242"></a>Factores, Fechas, Caracteres</h4>
 <div class="outline-text-4" id="text-factores">
 <p class="btn btn-default btn-sm" type="button">
 <a href="factorDateCharacter.pdf" class="btn btn-default btn-sm" type="button"><b>PDF</b></a> 
@@ -287,7 +283,7 @@ Este apartado agrupa el material apropiado para trabajar con R desde el rol de u
 <a href="factorDateCharacter.html" class="btn btn-default btn-sm" type="button"><b>HTML</b></a> 
 </p>
 <p class="btn btn-default btn-sm" type="button">
-<a href="https://github.com/oscarperpinan/intro/blob/master/factorDateCharacter.R" class="btn btn-default btn-sm" type="button"><b>Código</b></a>
+<a href="https://github.com/oscarperpinan/R/blob/master/factorDateCharacter.R" class="btn btn-default btn-sm" type="button"><b>Código</b></a>
 </p>
 
 <hr  />
@@ -295,8 +291,8 @@ Este apartado agrupa el material apropiado para trabajar con R desde el rol de u
 </div>
 </div>
 
-<div id="outline-container-orgheadline13" class="outline-3">
-<h3 id="desarrollador"><a id="orgheadline13"></a>Desarrollador</h3>
+<div id="outline-container-org18cbe42" class="outline-3">
+<h3 id="desarrollador"><a id="org18cbe42"></a>Desarrollador</h3>
 <div class="outline-text-3" id="text-desarrollador">
 <p>
 Este apartado agrupa material apropiado para trabajar con R desde el rol de desarrollador.
@@ -304,8 +300,8 @@ Este apartado agrupa material apropiado para trabajar con R desde el rol de desa
 </div>
 
 
-<div id="outline-container-orgheadline10" class="outline-4">
-<h4 id="funciones"><a id="orgheadline10"></a>Funciones</h4>
+<div id="outline-container-org7361c19" class="outline-4">
+<h4 id="funciones"><a id="org7361c19"></a>Funciones</h4>
 <div class="outline-text-4" id="text-funciones">
 <p class="btn btn-default btn-sm" type="button">
 <a href="Funciones.pdf" class="btn btn-default btn-sm" type="button"><b>PDF</b></a>
@@ -314,12 +310,12 @@ Este apartado agrupa material apropiado para trabajar con R desde el rol de desa
 <a href="Funciones.html" class="btn btn-default btn-sm" type="button"><b>HTML</b></a> 
 </p>
 <p class="btn btn-default btn-sm" type="button">
-<a href="https://github.com/oscarperpinan/intro/blob/master/Funciones.R" class="btn btn-default btn-sm" type="button"><b>Código</b></a>
+<a href="https://github.com/oscarperpinan/R/blob/master/Funciones.R" class="btn btn-default btn-sm" type="button"><b>Código</b></a>
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline11" class="outline-4">
-<h4 id="oop"><a id="orgheadline11"></a>Clases y métodos</h4>
+<div id="outline-container-orgb3de282" class="outline-4">
+<h4 id="oop"><a id="orgb3de282"></a>Clases y métodos</h4>
 <div class="outline-text-4" id="text-oop">
 <p class="btn btn-default btn-sm" type="button">
 <a href="ClasesMetodos.pdf" class="btn btn-default btn-sm" type="button"><b>PDF</b></a> 
@@ -328,12 +324,12 @@ Este apartado agrupa material apropiado para trabajar con R desde el rol de desa
 <a href="ClasesMetodos.html" class="btn btn-default btn-sm" type="button"><b>HTML</b></a> 
 </p>
 <p class="btn btn-default btn-sm" type="button">
-<a href="https://github.com/oscarperpinan/intro/blob/master/ClasesMetodos.R" class="btn btn-default btn-sm" type="button"><b>Código</b></a>
+<a href="https://github.com/oscarperpinan/R/blob/master/ClasesMetodos.R" class="btn btn-default btn-sm" type="button"><b>Código</b></a>
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline12" class="outline-4">
-<h4 id="paquetes"><a id="orgheadline12"></a>Paquetes</h4>
+<div id="outline-container-orgedca367" class="outline-4">
+<h4 id="paquetes"><a id="orgedca367"></a>Paquetes</h4>
 <div class="outline-text-4" id="text-paquetes">
 <p class="btn btn-default btn-sm" type="button">
 <a href="Paquetes.pdf" class="btn btn-default btn-sm" type="button"><b>PDF</b></a>
@@ -347,8 +343,8 @@ Este apartado agrupa material apropiado para trabajar con R desde el rol de desa
 </div>
 </div>
 
-<div id="outline-container-orgheadline16" class="outline-3">
-<h3 id="misc"><a id="orgheadline16"></a>Miscelánea</h3>
+<div id="outline-container-org22507f0" class="outline-3">
+<h3 id="misc"><a id="org22507f0"></a>Miscelánea</h3>
 <div class="outline-text-3" id="text-misc">
 <p>
 Este apartado agrupa material sobre series temporales y datos espaciales.
@@ -356,25 +352,25 @@ Si trabajas con series temporales y datos espaciales te puede interesar mi libro
 </p>
 </div>
 
-<div id="outline-container-orgheadline14" class="outline-4">
-<h4 id="series"><a id="orgheadline14"></a>Series temporales</h4>
+<div id="outline-container-org1ce6758" class="outline-4">
+<h4 id="series"><a id="org1ce6758"></a>Series temporales</h4>
 <div class="outline-text-4" id="text-series">
 <p class="btn btn-default btn-sm" type="button">
 <a href="zoo.pdf" class="btn btn-default btn-sm" type="button"><b>PDF</b></a>
 </p>
 <p class="btn btn-default btn-sm" type="button">
-<a href="https://github.com/oscarperpinan/intro/blob/master/zoo.R" class="btn btn-default btn-sm" type="button"><b>Código</b></a>
+<a href="https://github.com/oscarperpinan/R/blob/master/zoo.R" class="btn btn-default btn-sm" type="button"><b>Código</b></a>
 </p>
 </div>
 </div>
-<div id="outline-container-orgheadline15" class="outline-4">
-<h4 id="espacial"><a id="orgheadline15"></a>Datos espaciales</h4>
+<div id="outline-container-orgdb5eeff" class="outline-4">
+<h4 id="espacial"><a id="orgdb5eeff"></a>Datos espaciales</h4>
 <div class="outline-text-4" id="text-espacial">
 <p class="btn btn-default btn-sm" type="button">
 <a href="raster.pdf" class="btn btn-default btn-sm" type="button"><b>PDF</b></a> 
 </p>
 <p class="btn btn-default btn-sm" type="button">
-<a href="https://github.com/oscarperpinan/intro/blob/master/raster.R" class="btn btn-default btn-sm" type="button"><b>Código</b></a>
+<a href="https://github.com/oscarperpinan/R/blob/master/raster.R" class="btn btn-default btn-sm" type="button"><b>Código</b></a>
 </p>
 
 <hr  />
