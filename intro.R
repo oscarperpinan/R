@@ -1,42 +1,3 @@
-
-## Material
-## - Todo el código del curso asume que la ruta de trabajo coincide con la carpeta local: definimos la ruta de trabajo con =setwd=
-
-setwd('/ruta/de/copia/local/del/repositorio/')
-
-## - Comprobamos que todo ha ido bien. El resultado de la siguiente instrucción debe ser la estructura de carpetas y ficheros del repositorio:
-
-dir()
-
-## Material
-## - Finalmente hay que instalar los paquetes que se emplean a lo largo del curso. Algunos ya vendrán instalados con tu distribución de R por ser paquetes recomendados. En la siguiente instrucción usamos el /CRAN mirror/ de la Oficina de Software Libre (CIXUG).
-
-install.packages(c('lattice', 'latticeExtra',
-                   'RColorBrewer',
-                   'zoo',
-                   'reshape2', 'ggplot2'),
-                 repos = 'http://ftp.cixug.es/CRAN')
-
-## Más de 6000 paquetes disponibles
-## - Algunos vienen instalados y se cargan al empezar:
-
-  sessionInfo()
-
-## Más de 6000 paquetes disponibles
-## - Otros vienen instalados pero hay que cargarlos:
-
-  library(lattice)
-  packageVersion('lattice')
-
-  packageDescription('lattice')
-
-## Más de 6000 paquetes disponibles
-## - Otros hay que instalarlos y después cargarlos:
-
-  install.packages('data.table')
-  library('data.table')
-  packageDescription('data.table')
-
 ## Primeros pasos
 
 x <- 1:5
@@ -121,52 +82,33 @@ length(lista)
 
   dim(df)
 
-## La regla del reciclaje
+## A partir de ficheros
 
-  year <- 2011
-  month <- 1:12
-  class <- c('A', 'B', 'C')
-  vals <- rnorm(12)
-  
-  dats <- data.frame(year, month, class, vals)
-  dats
+dats <- read.table('data/aranjuez.csv',
+                   sep=',',
+                   header=TRUE)
+
+head(dats)
+
+## A partir de ficheros remotos
+
+remoto <- read.table('https://raw.githubusercontent.com/oscarperpinan/R/master/data/aranjuez.csv',
+                     sep=',',
+                     header=TRUE)
+
+head(remoto)
+
+identical(dats, remoto)
 
 ## La función =expand.grid=
 
-  x <- y <- seq(-4*pi, 4*pi, len=200)
-  df <- expand.grid(A = x, B = y)
 
-  head(df)
+x <- y <- seq(-4, 4, len = 200)
+df <- expand.grid(A = x, B = y)
+df$z <- sqrt(df$A^2 + df$B^2)
 
-  tail(df)
-
-## Para definir una función usamos la función =function=
-
-myFun <- function(x, y) x + y
-myFun
-
-  class(myFun)
-
-  myFun(3, 4)
-
-## Podemos construir a partir de funciones
-
-foo  <-  function(x, ...){
-  mx <- mean(x, ...)
-  medx <- median(x, ...)
-  sdx <- sd(x, ...)
-  c(mx, medx, sdx)
-  }
-
-## O en forma resumida:
-
-foo <- function(x, ...){c(mean(x, ...), median(x, ...), sd(x, ...))}
-
-## Y ahora usamos la función con vectores
-
-foo(1:10)
-
-foo(rnorm(1e5))
+library(lattice)
+contourplot(z ~ A + B, data = df)
 
 ## Condiciones simples
 
@@ -182,6 +124,7 @@ x == 0
 x != 0
 
 ## Condiciones múltiples
+
 
 cond  <-  (x > 0) & (x < .5)
 cond
@@ -199,6 +142,7 @@ as.numeric(cond)
 
 ## Indexado numérico
 
+
   x <- seq(1, 100, 2)
   x
 
@@ -208,6 +152,7 @@ as.numeric(cond)
 
 ## Indexado con condiciones lógicas
 
+
   x[x != 9]
 
   x[x > 20]
@@ -215,6 +160,7 @@ as.numeric(cond)
 x[x %in% seq(0, 10, .5)]
 
 ## Indexado con condiciones múltiples
+
 
 z <- seq(-10, 10, by = .5)
 z
@@ -245,6 +191,8 @@ M[-c(1, 2),]
 
 lista$a
 
+
+
 ## - o por su índice
 
   lista[1]
@@ -257,15 +205,120 @@ lista$a
                    y = rnorm(10),
                    z = 0)
 
+
+
 ## - Por su nombre (como una lista)
 
 df$x
+
+
 
 ## - Por su índice (como una matriz)
 
 df[1,]
 
 df[,1]
+
+## Indexado lógico
+## - Hay que explicitar dos veces el =data.frame=:
+
+df[df$y > 0,]
+
+
+## - La función =subset= simplifica el código:
+
+subset(df, y > 0)
+
+## Uso de =with= 
+## - Problema: el código con varias variables puede ser ilegible
+
+df$x^2 + df$y^2
+
+
+## - La función =with= permite acceder a varias variables con una única llamada:
+
+with(df, x^2 + y^2)
+
+with(df, x[y > 0])
+
+## Argumentos: nombre y orden
+
+## Una función identifica sus argumentos por su nombre y por su orden (sin nombre)
+
+
+eleva <- function(x, p)
+{
+    x ^ p
+}
+
+eleva(x = 1:10, p = 2)
+
+eleva(1:10, p = 2)
+
+eleva(p = 2, x = 1:10)
+
+## Argumentos: valores por defecto
+## - Se puede asignar un valor por defecto a los argumentos
+
+eleva <- function(x, p = 2)
+{
+    x ^ p
+}
+
+eleva(1:10)
+
+eleva(1:10, 2)
+
+## Argumentos sin nombre: =...=
+
+pwrSum <- function(x, p, ...)
+{
+    sum(x ^ p, ...)
+}
+
+x <- 1:10
+pwrSum(x, 2)
+
+x <- c(1:5, NA, 6:9, NA, 10)
+pwrSum(x, 2)
+
+pwrSum(x, 2, na.rm=TRUE)
+
+## Podemos construir a partir de funciones
+
+foo  <-  function(x, ...){
+  mx <- mean(x, ...)
+  medx <- median(x, ...)
+  sdx <- sd(x, ...)
+  c(mx, medx, sdx)
+  }
+
+foo(1:10)
+
+foo(rnorm(1e5))
+
+## Funciones en paquetes
+
+## - =R= proporciona un amplio conjunto de funciones predefinidas agrupadas en paquetes
+
+##   - Algunos paquetes vienen instalados y se cargan al empezar (/base/):
+
+  sessionInfo()
+
+
+## - Otros vienen instalados pero hay que cargarlos (/recommended/):
+
+  library(lattice)
+
+  packageDescription('lattice')
+
+
+## - Otros hay que instalarlos y después cargarlos (/contributed/):
+
+  install.packages('data.table')
+
+  library('data.table')
+  packageDescription('data.table')
 
 ## La función =apply=
 
@@ -288,6 +341,7 @@ sapply(lista, sum)
 
 ## =for=
 ## - En =R= suele usarse más la familia de funciones =*apply= con funciones vectorizadas.
+## - No obstante, =for= puede tener su utilidad:
 
 for(n in c(2,5,10,20,50)) {
     x <- rnorm(n)
@@ -296,6 +350,7 @@ for(n in c(2,5,10,20,50)) {
 
 ## =if=
 ## - En =R= suele usarse más el indexado lógico (vectorizado).
+## - ¿Cuál es el equivalente a este bucle for-if?
 
   x <- rnorm(10)
   x2 <- numeric(length(x))
@@ -305,6 +360,7 @@ for(n in c(2,5,10,20,50)) {
   cbind(x, x2)
 
 ## =ifelse=
+
 
 x <- rnorm(10)
 x

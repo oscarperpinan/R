@@ -3,89 +3,19 @@
 #+STARTUP: beamer
 #+SETUPFILE: config.org
 #+OPTIONS: H:3
-#+PROPERTY: results output
-#+PROPERTY: exports both
+#+PROPERTY: header-args :results output :exports both :session R:intro :tangle yes :comments org
+
+*** Índice de Contenidos
+#+TOC: headlines 1
 
 * Introducción
 
-
-** Guía para usar el curso
-
-*** Interfaz gráfica: RStudio
-    :PROPERTIES:
-    :beamer_opt: plain
-    :END:
-#+ATTR_LATEX: :width 1.05\textwidth
-[[file:figs/rstudio-ubuntu.png]]
-
-*** Interfaz gráfica: RStudio
-- La consola de R es el área en la que se ejecuta código (=Ctrl + 2=)
-  - Indica con =>= que está listo para aceptar comandos.
-  - Indica con =+= que está a la espera de completar comando (salir con =Esc=).
-  - Permite recuperar comandos antiguos con flechas arriba y abajo.
-- El área de código es donde se edita y almacena código (=Ctrl + 1=)
-  - Escribir (y grabar) en área de código y enviar a consola (=Ctrl + Enter=)
-  - Permite completar comandos con =TAB=
-- Para la asignación =<-= usar =Alt + -=
-
-*** Material
-- Primero obtenemos una copia local del repositorio. Opciones:
-
-  - Descargando el repositorio en formato [[https://github.com/oscarperpinan/intro/archive/master.zip][ZIP]]: descomprímelo en una ruta sencilla (por ejemplo, =C:\cursoR\= o =/home/miusuario/cursoR/=).
-
-  - Usando =git=:
-#+BEGIN_SRC sh :eval no
-git clone git://github.com/oscarperpinan/R.git
-#+END_SRC
-
-*** Material
-- Todo el código del curso asume que la ruta de trabajo coincide con la carpeta local: definimos la ruta de trabajo con =setwd=
-#+begin_src R :eval no
-setwd('/ruta/de/copia/local/del/repositorio/')
-#+end_src
-
-- Comprobamos que todo ha ido bien. El resultado de la siguiente instrucción debe ser la estructura de carpetas y ficheros del repositorio:
-#+begin_src R :eval no
-dir()
-#+end_src
-
-*** Material
-- Finalmente hay que instalar los paquetes que se emplean a lo largo del curso. Algunos ya vendrán instalados con tu distribución de R por ser paquetes recomendados. En la siguiente instrucción usamos el /CRAN mirror/ de la Oficina de Software Libre (CIXUG). 
-#+begin_src R :eval no
-install.packages(c('lattice', 'latticeExtra',
-                   'RColorBrewer',
-                   'zoo',
-                   'reshape2', 'ggplot2'),
-                 repos = 'http://ftp.cixug.es/CRAN')
-#+end_src
-
-*** Bloc de Notas
-
-- Usaremos un bloc de notas colaborativo para escribir código juntos y resolver dudas. Está accesible en: https://etsidifv.titanpad.com/r-ice-upm
-
-- La clave será comunicada al inicio de las clases.
-
-** ¿Qué es =R=?
+** ¿Qué es R?
 *** ¿Qué es =R=?						    
 Es un entorno de programación orientado al cálculo, manipulación de datos, y representación gráfica, publicado como software libre con licencia GNU-GPL.
 #+BEGIN_CENTER
  [[http://www.R-project.org]] 
 #+END_CENTER
-
-*** Para instalar =R=
-
-- Windows: http://cran.es.r-project.org/bin/windows/base/
-- Mac: http://cran.es.r-project.org/bin/macosx/
-- Linux: http://cran.es.r-project.org/bin/linux/
-
-*** Interfaces para R
-
-- En mi opinión, la mejor interfaz para R es [[http://ess.r-project.org/][ESS]] con [[http://www.gnu.org/software/emacs/][Emacs]]. 
-- Para los que prefieren una interfaz gráfica es recomendable [[http://www.rstudio.com/ide/][RStudio]]:
-  - Instalador: http://www.rstudio.com/ide/download/desktop
-  - Introducción: http://www.rstudio.com/ide/docs/using/source
-
-
 
 *** R está muy bien documentado
 - [[http://cran.r-project.org/manuals.html][Manuales Oficiales]]
@@ -113,34 +43,10 @@ Es un entorno de programación orientado al cálculo, manipulación de datos, y 
 - [[http://stackoverflow.com/questions/tagged/r][stackoverflow]]
 
 *** R es un proyecto colaborativo
-- Una de las grandes riquezas de R es la cantidad de paquetes (más
-  de 7000 actualmente) que amplían sus funcionalidades.  
+- Una de las grandes riquezas de R es la cantidad de paquetes que amplían sus funcionalidades.  
 - La lista completa está en http://cran.es.r-project.org/web/packages/.
 - Las CRAN Task Views agrupan por temáticas:
   [[http://cran.r-project.org/web/views/]]
-
-*** Más de 7900 paquetes disponibles
-- Algunos vienen instalados y se cargan al empezar:
-#+begin_src R :eval no
-  sessionInfo()
-#+end_src
-*** Más de 7900 paquetes disponibles
-- Otros vienen instalados pero hay que cargarlos:
-#+begin_src R :eval no 
-  library(lattice)
-  packageVersion('lattice')
-#+end_src
-#+begin_src R :eval no
-  packageDescription('lattice')
-#+end_src
-
-*** Más de 7900 paquetes disponibles
-- Otros hay que instalarlos y después cargarlos:
-#+begin_src R :eval no :exports no
-  install.packages('data.table')
-  library('data.table')
-  packageDescription('data.table')
-#+end_src
 
 * Objetos en R
 
@@ -294,71 +200,50 @@ length(lista)
   dim(df)
 #+end_src
 
-*** La regla del reciclaje
-#+begin_src R 
-  year <- 2011
-  month <- 1:12
-  class <- c('A', 'B', 'C')
-  vals <- rnorm(12)
-  
-  dats <- data.frame(year, month, class, vals)
-  dats
+*** A partir de ficheros
+#+begin_src R
+dats <- read.table('data/aranjuez.csv',
+                   sep=',',
+                   header=TRUE)
 #+end_src
+
+#+begin_src R
+head(dats)
+#+end_src
+
+**** Atención: usa =setwd= para configurar ruta
+
+*** A partir de ficheros remotos
+#+begin_src R
+remoto <- read.table('https://raw.githubusercontent.com/oscarperpinan/R/master/data/aranjuez.csv',
+                     sep=',',
+                     header=TRUE)
+#+end_src
+
+#+begin_src R
+head(remoto)
+#+end_src
+
+#+begin_src R
+identical(dats, remoto)
+#+end_src
+
 *** La función =expand.grid=
 
 #+begin_src R 
-  x <- y <- seq(-4*pi, 4*pi, len=200)
-  df <- expand.grid(A = x, B = y)
+x <- y <- seq(-4, 4, len = 200)
+df <- expand.grid(A = x, B = y)
+df$z <- sqrt(df$A^2 + df$B^2)
 #+end_src
 
-#+begin_src R
-  head(df)
+#+begin_src R :exports results :results output graphics :file figs/expand_grid.png
+library(lattice)
+contourplot(z ~ A + B, data = df)
 #+end_src
 
-#+begin_src R
-  tail(df)
-#+end_src
-
-** Funciones
-
-*** Para definir una función usamos la función =function=
-#+begin_src R 
-myFun <- function(x, y) x + y
-myFun
-#+end_src
-
-#+begin_src R
-  class(myFun)
-#+end_src
-
-
-#+begin_src R
-  myFun(3, 4)
-#+end_src
-
-*** Podemos construir a partir de funciones
-#+begin_src R 
-foo  <-  function(x, ...){
-  mx <- mean(x, ...)
-  medx <- median(x, ...)
-  sdx <- sd(x, ...)
-  c(mx, medx, sdx)
-  }
-#+end_src
-O en forma resumida:
-#+begin_src R 
-foo <- function(x, ...){c(mean(x, ...), median(x, ...), sd(x, ...))}
-#+end_src
-
-
-*** Y ahora usamos la función con vectores
-#+begin_src R 
-foo(1:10)
-#+end_src
-
-#+begin_src R
-foo(rnorm(1e5))
-#+end_src
+#+ATTR_LATEX: :height 0.6\textheight
+#+RESULTS:
+[[file:figs/expand_grid.png]]
 
 * Indexado
 
@@ -523,6 +408,142 @@ df[1,]
 #+begin_src R
 df[,1]
 #+end_src
+*** Indexado lógico
+- Hay que explicitar dos veces el =data.frame=:
+#+begin_src R
+df[df$y > 0,]
+#+end_src
+- La función =subset= simplifica el código:
+#+begin_src R
+subset(df, y > 0)
+#+end_src
+*** Uso de =with= 
+- Problema: el código con varias variables puede ser ilegible
+#+begin_src R :eval no :exports no
+df$x^2 + df$y^2
+#+end_src
+- La función =with= permite acceder a varias variables con una única llamada:
+#+begin_src R
+with(df, x^2 + y^2)
+#+end_src
+
+#+begin_src R
+with(df, x[y > 0])
+#+end_src
+
+* Funciones
+** Definición de funciones
+*** Componentes de una función
+- Una función se define con =function=
+#+BEGIN_CENTER
+=name <- function(arg_1, arg_2, ...) expression=
+#+END_CENTER
+- Está compuesta por:
+  - Nombre de la función (=name=)
+  - Argumentos (=arg_1=, =arg_2=, =...=)
+  - Cuerpo (=expression=): emplea los argumentos para generar un resultado
+
+
+*** Argumentos: nombre y orden
+
+Una función identifica sus argumentos por su nombre y por su orden (sin nombre)
+
+#+begin_src R 
+eleva <- function(x, p)
+{
+    x ^ p
+}
+#+end_src
+
+#+begin_src R 
+eleva(x = 1:10, p = 2)
+#+end_src
+
+#+begin_src R 
+eleva(1:10, p = 2)
+#+end_src
+
+#+begin_src R 
+eleva(p = 2, x = 1:10)
+#+end_src
+
+*** Argumentos: valores por defecto
+- Se puede asignar un valor por defecto a los argumentos
+#+begin_src R 
+eleva <- function(x, p = 2)
+{
+    x ^ p
+}
+#+end_src
+#+begin_src R 
+eleva(1:10)
+#+end_src
+#+begin_src R 
+eleva(1:10, 2)
+#+end_src
+
+*** Argumentos sin nombre: =...=
+#+begin_src R 
+pwrSum <- function(x, p, ...)
+{
+    sum(x ^ p, ...)
+}
+#+end_src
+#+begin_src R 
+x <- 1:10
+pwrSum(x, 2)
+#+end_src
+#+begin_src R 
+x <- c(1:5, NA, 6:9, NA, 10)
+pwrSum(x, 2)
+#+end_src
+#+begin_src R 
+pwrSum(x, 2, na.rm=TRUE)
+#+end_src
+
+*** Podemos construir a partir de funciones
+#+begin_src R 
+foo  <-  function(x, ...){
+  mx <- mean(x, ...)
+  medx <- median(x, ...)
+  sdx <- sd(x, ...)
+  c(mx, medx, sdx)
+  }
+#+end_src
+
+#+begin_src R 
+foo(1:10)
+#+end_src
+
+#+begin_src R
+foo(rnorm(1e5))
+#+end_src
+
+** Funciones predefinidas
+
+*** Funciones en paquetes
+
+- =R= proporciona un amplio conjunto de funciones predefinidas agrupadas en paquetes
+
+  - Algunos paquetes vienen instalados y se cargan al empezar (/base/):
+#+begin_src R :eval no
+  sessionInfo()
+#+end_src
+  - Otros vienen instalados pero hay que cargarlos (/recommended/):
+#+begin_src R :eval no 
+  library(lattice)
+
+  packageDescription('lattice')
+#+end_src
+  - Otros hay que instalarlos y después cargarlos (/contributed/):
+#+begin_src R :eval no :exports no
+  install.packages('data.table')
+#+end_src
+
+#+begin_src R :eval no :exports no
+  library('data.table')
+  packageDescription('data.table')
+#+end_src
 
 * Bucles
 ** Matrices
@@ -559,6 +580,7 @@ sapply(lista, sum)
 ** Bucles =for=
 *** =for=
 - En =R= suele usarse más la familia de funciones =*apply= con funciones vectorizadas.
+- No obstante, =for= puede tener su utilidad:
 #+begin_src R
 for(n in c(2,5,10,20,50)) {
     x <- rnorm(n)
@@ -568,6 +590,7 @@ for(n in c(2,5,10,20,50)) {
 ** Condiciones con =if=, =else= e =ifelse=
 *** =if=
 - En =R= suele usarse más el indexado lógico (vectorizado).
+- ¿Cuál es el equivalente a este bucle for-if?
 #+begin_src R 
   x <- rnorm(10)
   x2 <- numeric(length(x))
@@ -577,6 +600,7 @@ for(n in c(2,5,10,20,50)) {
   cbind(x, x2)
 #+end_src
 *** =ifelse=
+
 #+begin_src R 
 x <- rnorm(10)
 x
