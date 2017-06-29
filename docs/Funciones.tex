@@ -1,8 +1,8 @@
-% Created 2016-03-15 mar 07:48
+% Created 2017-06-29 jue 09:07
+% Intended LaTeX compiler: pdflatex
 \documentclass[xcolor={usenames,svgnames,dvipsnames}]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{fixltx2e}
 \usepackage{graphicx}
 \usepackage{grffile}
 \usepackage{longtable}
@@ -16,6 +16,7 @@
 \usepackage{hyperref}
 \usepackage{color}
 \usepackage{listings}
+\usepackage[spanish]{babel}
 \usecolortheme{rose}
 \setbeamercolor{alerted text}{fg=Blue}
 \setbeamerfont{alerted text}{series=\bfseries}
@@ -23,7 +24,7 @@
 \setbeamercolor{block body}{use=block title,bg=block title.bg}
 \setbeamertemplate{navigation symbols}{}
 \AtBeginSubsection[]{\begin{frame}[plain]\tableofcontents[currentsubsection,sectionstyle=show/shaded,subsectionstyle=show/shaded/hide]\end{frame}}
-\lstset{keywordstyle=\color{blue}, commentstyle=\color{gray!90}, basicstyle=\ttfamily\small, columns=fullflexible, breaklines=true,linewidth=\textwidth, backgroundcolor=\color{gray!23}, basewidth={0.5em,0.4em}, literate={á}{{\'a}}1 {ñ}{{\~n}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {º}{{\textordmasculine}}1}
+\lstset{keywordstyle=\color{blue}, commentstyle=\color{gray!90}, basicstyle=\ttfamily\small, columns=fullflexible, breaklines=true,linewidth=\textwidth, backgroundcolor=\color{gray!23}, basewidth={0.5em,0.4em}, literate={á}{{\'a}}1 {ñ}{{\~n}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {º}{{\textordmasculine}}1, showstringspaces=false}
 \usepackage{mathpazo}
 \hypersetup{colorlinks=true, linkcolor=Blue, urlcolor=Blue}
 \usepackage{fancyvrb}
@@ -39,28 +40,24 @@
  pdftitle={Funciones},
  pdfkeywords={},
  pdfsubject={},
- pdfcreator={Emacs 24.5.1 (Org mode 8.3.3)}, 
+ pdfcreator={Emacs 24.5.1 (Org mode 9.0.5)}, 
  pdflang={Spanish}}
 \begin{document}
 
 \maketitle
-\begin{frame}{Outline}
-\tableofcontents
-\end{frame}
-
 
 
 \section{Conceptos Básicos}
-\label{sec:orgheadline13}
+\label{sec:orgdf7c3d3}
 
-\begin{frame}[label={sec:orgheadline1}]{Fuentes de información}
+\begin{frame}[label={sec:org1c1630f}]{Fuentes de información}
 \begin{itemize}
 \item \href{http://cran.r-project.org/doc/manuals/R-intro.html}{R introduction}
 \item \href{http://cran.r-project.org/doc/manuals/R-lang.html}{R Language Definition}
 \item \href{http://www.springer.com/gb/book/9780387759357}{Software for Data Analysis}
 \end{itemize}
 \end{frame}
-\begin{frame}[fragile,label={sec:orgheadline2}]{Componentes de una función}
+\begin{frame}[fragile,label={sec:org882aa46}]{Componentes de una función}
  \begin{itemize}
 \item Una función se define con \texttt{function}
 \end{itemize}
@@ -76,11 +73,11 @@
 \end{itemize}
 \end{itemize}
 \end{frame}
-\begin{frame}[fragile,label={sec:orgheadline3}]{Mi primera función}
+\begin{frame}[fragile,label={sec:org7acf5bd}]{Mi primera función}
  \begin{itemize}
 \item Definición
 \end{itemize}
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 myFun <- function(x, y)
 {
@@ -91,7 +88,7 @@ myFun <- function(x, y)
 \begin{itemize}
 \item Argumentos
 \end{itemize}
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 formals(myFun)
 \end{lstlisting}
@@ -106,7 +103,7 @@ $y
 \begin{itemize}
 \item Cuerpo
 \end{itemize}
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 body(myFun)
 \end{lstlisting}
@@ -118,8 +115,8 @@ body(myFun)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline4}]{Mi primera función}
- \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\begin{frame}[fragile,label={sec:org6f93e61}]{Mi primera función}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 myFun(1, 2)
 \end{lstlisting}
@@ -128,7 +125,7 @@ myFun(1, 2)
 [1] 3
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 myFun(1:10, 21:30)
 \end{lstlisting}
@@ -137,7 +134,7 @@ myFun(1:10, 21:30)
 [1] 22 24 26 28 30 32 34 36 38 40
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 myFun(1:10, 3)
 \end{lstlisting}
@@ -147,10 +144,10 @@ myFun(1:10, 3)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline5}]{Argumentos: nombre y orden}
+\begin{frame}[fragile,label={sec:org30ce366}]{Argumentos: nombre y orden}
  Una función identifica sus argumentos por su nombre y por su orden (sin nombre)
 
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 power <- function(x, exp)
 {
@@ -158,7 +155,7 @@ power <- function(x, exp)
 }
 \end{lstlisting}
 
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 power(x=1:10, exp=2)
 \end{lstlisting}
@@ -167,7 +164,7 @@ power(x=1:10, exp=2)
 [1]   1   4   9  16  25  36  49  64  81 100
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 power(1:10, exp=2)
 \end{lstlisting}
@@ -176,7 +173,7 @@ power(1:10, exp=2)
 [1]   1   4   9  16  25  36  49  64  81 100
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 power(exp=2, x=1:10)
 \end{lstlisting}
@@ -186,11 +183,11 @@ power(exp=2, x=1:10)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline6}]{Argumentos: valores por defecto}
+\begin{frame}[fragile,label={sec:org1124e43}]{Argumentos: valores por defecto}
  \begin{itemize}
 \item Se puede asignar un valor por defecto a los argumentos
 \end{itemize}
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 power <- function(x, exp = 2)
 {
@@ -198,7 +195,7 @@ power <- function(x, exp = 2)
 }
 \end{lstlisting}
 
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 power(1:10)
 \end{lstlisting}
@@ -207,7 +204,7 @@ power(1:10)
 [1]   1   4   9  16  25  36  49  64  81 100
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 power(1:10, 2)
 \end{lstlisting}
@@ -217,8 +214,8 @@ power(1:10, 2)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline7}]{Funciones sin argumentos}
- \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\begin{frame}[fragile,label={sec:org7c05457}]{Funciones sin argumentos}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 hello <- function()
 {
@@ -226,7 +223,7 @@ hello <- function()
 }
 \end{lstlisting}
 
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 hello()
 \end{lstlisting}
@@ -236,8 +233,8 @@ hello()
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline8}]{Argumentos sin nombre: \texttt{...}}
- \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\begin{frame}[fragile,label={sec:org4e94fa8}]{Argumentos sin nombre: \texttt{...}}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 pwrSum <- function(x, power, ...)
 {
@@ -245,7 +242,7 @@ pwrSum <- function(x, power, ...)
 }
 \end{lstlisting}
 
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 x <- 1:10
 pwrSum(x, 2)
@@ -255,7 +252,7 @@ pwrSum(x, 2)
 [1] 385
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 x <- c(1:5, NA, 6:9, NA, 10)
 pwrSum(x, 2)
@@ -265,7 +262,7 @@ pwrSum(x, 2)
 [1] NA
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 pwrSum(x, 2, na.rm=TRUE)
 \end{lstlisting}
@@ -275,8 +272,8 @@ pwrSum(x, 2, na.rm=TRUE)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline9}]{Argumentos ausentes: \texttt{missing}}
- \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\begin{frame}[fragile,label={sec:org86e5780}]{Argumentos ausentes: \texttt{missing}}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 suma10 <- function(x, y)
 {
@@ -285,7 +282,7 @@ suma10 <- function(x, y)
 }
 \end{lstlisting}
 
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 suma10(1:10)
 \end{lstlisting}
@@ -295,8 +292,8 @@ suma10(1:10)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline10}]{Control de errores: \texttt{stopifnot}}
- \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\begin{frame}[fragile,label={sec:org1e12cc9}]{Control de errores: \texttt{stopifnot}}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 foo <- function(x, y)
 {
@@ -305,7 +302,7 @@ foo <- function(x, y)
 }
 \end{lstlisting}
 
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 foo(1:10, 21:30)
 \end{lstlisting}
@@ -314,7 +311,7 @@ foo(1:10, 21:30)
 [1] 22 24 26 28 30 32 34 36 38 40
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 foo(1:10, 'a')
 \end{lstlisting}
@@ -324,8 +321,8 @@ Error: is.numeric(x) & is.numeric(y) is not TRUE
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline11}]{Control de errores: \texttt{stop}}
- \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\begin{frame}[fragile,label={sec:orgcd53aa4}]{Control de errores: \texttt{stop}}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 foo <- function(x, y){
     if (!(is.numeric(x) & is.numeric(y))){
@@ -334,7 +331,7 @@ foo <- function(x, y){
 }
 \end{lstlisting}
 
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 foo(2, 3)
 \end{lstlisting}
@@ -343,19 +340,19 @@ foo(2, 3)
 [1] 5
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 foo(2, 'a')
 \end{lstlisting}
 
 \begin{verbatim}
-Error in foo(2, "a") (from #3) : arguments must be numeric.
+Error in foo(2, "a") : arguments must be numeric.
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline12}]{Mensajes para el usuario}
+\begin{frame}[fragile,label={sec:orga1f76b7}]{Mensajes para el usuario}
  \texttt{stop} para la ejecución y emite un mensaje de error
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 stop('Algo no ha ido bien.')
 \end{lstlisting}
@@ -365,7 +362,7 @@ Error: Algo no ha ido bien.
 \end{verbatim}
 
 \texttt{warning} no interfiere en la ejecución pero añade un mensaje a la cola de advertencias
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 warning('Quizás algo no es como debiera...')
 \end{lstlisting}
@@ -376,7 +373,7 @@ Quizás algo no es como debiera...
 \end{verbatim}
 
 \texttt{message} emite un mensaje (\alert{no usar \texttt{cat} o \texttt{print}})
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 message('Todo en orden por estos lares.')
 \end{lstlisting}
@@ -387,9 +384,9 @@ Todo en orden por estos lares.
 \end{frame}
 
 \section{Lexical scope}
-\label{sec:orgheadline20}
+\label{sec:org4dbb409}
 
-\begin{frame}[fragile,label={sec:orgheadline14}]{Clases de variables}
+\begin{frame}[fragile,label={sec:org78093aa}]{Clases de variables}
  Las variables que se emplean en el cuerpo de una función pueden
 dividirse en:
 \begin{itemize}
@@ -397,7 +394,7 @@ dividirse en:
 \item Variables locales (definiciones internas): \texttt{z}, \texttt{w}, \texttt{m}
 \item Variables libres: \texttt{a}, \texttt{b}
 \end{itemize}
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 myFun <- function(x, y){
     z <- x^2
@@ -407,7 +404,7 @@ myFun <- function(x, y){
 }
 \end{lstlisting}
 
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 a <- 10
 b <- 20
@@ -419,12 +416,12 @@ myFun(2, 3)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline15}]{Lexical scope}
+\begin{frame}[fragile,label={sec:org8efb5c1}]{Lexical scope}
  \begin{itemize}
 \item Las variables libres deben estar disponibles en el entorno
 (\texttt{environment}) en el que la función ha sido creada.
 \end{itemize}
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 environment(myFun)
 \end{lstlisting}
@@ -433,22 +430,19 @@ environment(myFun)
 <environment: R_GlobalEnv>
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 ls()
 \end{lstlisting}
 
 \begin{verbatim}
- [1] "a"           "anidada"     "b"           "constructor" "fib"        
- [6] "foo"         "hello"       "lista"       "ll"          "myFoo"      
-[11] "myFun"       "noise"       "power"       "pwrSum"      "suma10"     
-[16] "sumNoise"    "sumProd"     "sumSq"       "tmp"         "x"          
-[21] "zz"
+[1] "a"      "b"      "foo"    "hello"  "myFun"  "power"  "pwrSum" "suma10"
+[9] "x"
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline16}]{Lexical scope: funciones anidadas}
- \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\begin{frame}[fragile,label={sec:org104c124}]{Lexical scope: funciones anidadas}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 anidada <- function(x, y){
     xn <- 2
@@ -462,17 +456,17 @@ anidada <- function(x, y){
 }
 \end{lstlisting}
 
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 anidada(1:3, 2:4)
 \end{lstlisting}
 
 \begin{verbatim}
-<environment: 0xacfef0>
+<environment: 0x55cfbe05dd48>
 [1] 113
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 sum((1:3)^2, (2:4)^3)
 \end{lstlisting}
@@ -482,8 +476,8 @@ sum((1:3)^2, (2:4)^3)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline17}]{Lexical scope: funciones anidadas}
- \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\begin{frame}[fragile,label={sec:org9d96654}]{Lexical scope: funciones anidadas}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 xn
 \end{lstlisting}
@@ -492,7 +486,7 @@ xn
 Error: objeto 'xn' no encontrado
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 yn
 \end{lstlisting}
@@ -501,7 +495,7 @@ yn
 Error: objeto 'yn' no encontrado
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 interna
 \end{lstlisting}
@@ -511,8 +505,8 @@ Error: objeto 'interna' no encontrado
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline18}]{Funciones que devuelven funciones}
- \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\begin{frame}[fragile,label={sec:org7456e09}]{Funciones que devuelven funciones}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 constructor <- function(m, n){
     function(x)
@@ -522,7 +516,7 @@ constructor <- function(m, n){
 }
 \end{lstlisting}
 
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 myFoo <- constructor(10, 3)
 myFoo
@@ -533,10 +527,11 @@ function(x)
     {
         m*x + n
     }
-<environment: 0x1caaf38>
+<bytecode: 0x55cfbddeef90>
+<environment: 0x55cfbddb1af8>
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 ## 10*5 + 3
 myFoo(5)
@@ -547,8 +542,8 @@ myFoo(5)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline19}]{Funciones que devuelven funciones}
- \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\begin{frame}[fragile,label={sec:org4ba6aaf}]{Funciones que devuelven funciones}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 class(myFoo)
 \end{lstlisting}
@@ -557,29 +552,27 @@ class(myFoo)
 [1] "function"
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 environment(myFoo)
 \end{lstlisting}
 
 \begin{verbatim}
-<environment: 0x1caaf38>
+<environment: 0x55cfbddb1af8>
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 ls()
 \end{lstlisting}
 
 \begin{verbatim}
- [1] "a"           "anidada"     "b"           "constructor" "fib"        
- [6] "foo"         "hello"       "lista"       "ll"          "myFoo"      
-[11] "myFun"       "noise"       "power"       "pwrSum"      "suma10"     
-[16] "sumNoise"    "sumProd"     "sumSq"       "tmp"         "x"          
-[21] "zz"
+ [1] "a"           "anidada"     "b"           "constructor" "foo"        
+ [6] "hello"       "myFoo"       "myFun"       "power"       "pwrSum"     
+[11] "suma10"      "x"
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 ls(env = environment(myFoo))
 \end{lstlisting}
@@ -588,7 +581,7 @@ ls(env = environment(myFoo))
 [1] "m" "n"
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 get('m', env = environment(myFoo))
 \end{lstlisting}
@@ -597,7 +590,7 @@ get('m', env = environment(myFoo))
 [1] 10
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 get('n', env = environment(myFoo))
 \end{lstlisting}
@@ -608,10 +601,10 @@ get('n', env = environment(myFoo))
 \end{frame}
 
 \section{Debug}
-\label{sec:orgheadline26}
+\label{sec:orgb55c601}
 
-\begin{frame}[fragile,label={sec:orgheadline21}]{Post-mortem: \texttt{traceback}}
- \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\begin{frame}[fragile,label={sec:org1a0513d}]{Post-mortem: \texttt{traceback}}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 sumSq <- function(x, ...){
     sum(x ^ 2, ...)
@@ -624,41 +617,40 @@ sumProd <- function(x, y, ...){
 }
 \end{lstlisting}
 
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 sumProd(rnorm(10), runif(10))
 \end{lstlisting}
 
 \begin{verbatim}
-[1] 9.629438
+[1] 18.70681
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 sumProd(rnorm(10), letters[1:10])
 \end{lstlisting}
 
 \begin{verbatim}
-Error in x^2 (from #2) : argumento no-numérico para operador binario
+Error in x^2 : argumento no-numérico para operador binario
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 traceback()
 \end{lstlisting}
 
 \begin{verbatim}
-3: x^2 at #2
 2: sumSq(y, ...) at #3
 1: sumProd(rnorm(10), letters[1:10])
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline22}]{Analizar antes de que ocurra: \texttt{debug}}
+\begin{frame}[fragile,label={sec:orgb812bb5}]{Analizar antes de que ocurra: \texttt{debug}}
  \begin{itemize}
 \item Activa la ejecución paso a paso de una función
 \end{itemize}
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 debug(sumProd)
 \end{lstlisting}
@@ -675,17 +667,17 @@ terminar un bucle).
 \end{itemize}
 \item Para desactivar el análisis:
 \end{itemize}
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 undebug(sumProd)
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline23}]{Analizar antes de que ocurra: \texttt{trace}}
+\begin{frame}[fragile,label={sec:orgd0c15b8}]{Analizar antes de que ocurra: \texttt{trace}}
  \begin{itemize}
 \item \texttt{trace} permite mayor control que \texttt{debug}
 \end{itemize}
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 trace(sumProd, tracer=browser, exit=browser)
 \end{lstlisting}
@@ -697,7 +689,7 @@ trace(sumProd, tracer=browser, exit=browser)
 \begin{itemize}
 \item La función queda modificada
 \end{itemize}
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 sumProd
 \end{lstlisting}
@@ -710,11 +702,12 @@ function(x, y, ...){
     ys <- sumSq(y, ...)
     xs * ys
 }
+<bytecode: 0x55cfbe53c910>
 
 ## (to see the tracing code, look at body(object))
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 body(sumProd)
 \end{lstlisting}
@@ -734,7 +727,7 @@ body(sumProd)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline24}]{Analizar antes de que ocurra: \texttt{trace}}
+\begin{frame}[fragile,label={sec:org9582e38}]{Analizar antes de que ocurra: \texttt{trace}}
  \begin{itemize}
 \item Los comandos \texttt{n} y \texttt{c} cambian respecto a \texttt{debug}:
 \begin{itemize}
@@ -744,13 +737,13 @@ terminar un bucle).
 \end{itemize}
 \item Para desactivar
 \end{itemize}
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 untrace(sumProd)
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:orgheadline25}]{Más recursos}
+\begin{frame}[label={sec:org2cdcfbd}]{Más recursos}
 \begin{itemize}
 \item Debugging en RStudio
 \begin{itemize}
@@ -762,14 +755,14 @@ untrace(sumProd)
 \end{frame}
 
 \section{Profiling}
-\label{sec:orgheadline30}
-\begin{frame}[fragile,label={sec:orgheadline27}]{¿Cuánto tarda mi función? \texttt{system.time}}
- \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\label{sec:orgc88c0c5}
+\begin{frame}[fragile,label={sec:org75d7c23}]{¿Cuánto tarda mi función? \texttt{system.time}}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 noise <- function(sd)rnorm(1000, mean=0, sd=sd)
 \end{lstlisting}
 
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 sumNoise <- function(nComponents){
     vals <- sapply(seq_len(nComponents), noise)
@@ -777,22 +770,22 @@ sumNoise <- function(nComponents){
 }
 \end{lstlisting}
 
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 system.time(sumNoise(1000))
 \end{lstlisting}
 
 \begin{verbatim}
  user  system elapsed 
-0.160   0.008   0.167
+0.248   0.008   0.258
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline28}]{¿Cuánto tarda cada parte de mi función?: \texttt{Rprof}}
+\begin{frame}[fragile,label={sec:org014ecb8}]{¿Cuánto tarda cada parte de mi función?: \texttt{Rprof}}
  \begin{itemize}
 \item Usaremos un fichero temporal
 \end{itemize}
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 tmp <- tempfile()
 \end{lstlisting}
@@ -800,7 +793,7 @@ tmp <- tempfile()
 \begin{itemize}
 \item Activamos la toma de información
 \end{itemize}
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 Rprof(tmp)
 \end{lstlisting}
@@ -808,18 +801,17 @@ Rprof(tmp)
 \begin{itemize}
 \item Ejecutamos el código a analizar
 \end{itemize}
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 zz <- sumNoise(1000)
 \end{lstlisting}
 \end{frame}
 
-
-\begin{frame}[fragile,label={sec:orgheadline29}]{¿Cuánto tarda cada parte de mi función?: \texttt{Rprof}}
+\begin{frame}[fragile,label={sec:orgf76c0f1}]{¿Cuánto tarda cada parte de mi función?: \texttt{Rprof}}
  \begin{itemize}
 \item Paramos el análisis
 \end{itemize}
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 Rprof()
 \end{lstlisting}
@@ -827,7 +819,7 @@ Rprof()
 \begin{itemize}
 \item Extraemos el resumen
 \end{itemize}
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 summaryRprof(tmp)
 \end{lstlisting}
@@ -835,38 +827,35 @@ summaryRprof(tmp)
 \begin{verbatim}
 $by.self
          self.time self.pct total.time total.pct
-"rnorm"       0.12     75.0       0.12      75.0
-"array"       0.02     12.5       0.02      12.5
-"unlist"      0.02     12.5       0.02      12.5
+"rnorm"       0.14    77.78       0.14     77.78
+"unlist"      0.04    22.22       0.04     22.22
 
 $by.total
                  total.time total.pct self.time self.pct
-"sapply"               0.16     100.0      0.00      0.0
-"sumNoise"             0.16     100.0      0.00      0.0
-"rnorm"                0.12      75.0      0.12     75.0
-"FUN"                  0.12      75.0      0.00      0.0
-"lapply"               0.12      75.0      0.00      0.0
-"simplify2array"       0.04      25.0      0.00      0.0
-"array"                0.02      12.5      0.02     12.5
-"unlist"               0.02      12.5      0.02     12.5
-"as.vector"            0.02      12.5      0.00      0.0
+"sapply"               0.18    100.00      0.00     0.00
+"sumNoise"             0.18    100.00      0.00     0.00
+"rnorm"                0.14     77.78      0.14    77.78
+"FUN"                  0.14     77.78      0.00     0.00
+"lapply"               0.14     77.78      0.00     0.00
+"unlist"               0.04     22.22      0.04    22.22
+"simplify2array"       0.04     22.22      0.00     0.00
 
 $sample.interval
 [1] 0.02
 
 $sampling.time
-[1] 0.16
+[1] 0.18
 \end{verbatim}
 \end{frame}
 
 
 \section{Miscelánea}
-\label{sec:orgheadline36}
-\begin{frame}[fragile,label={sec:orgheadline31}]{\texttt{do.call}}
+\label{sec:orgd2bcd9b}
+\begin{frame}[fragile,label={sec:orgb9ab77a}]{\texttt{do.call}}
  \begin{itemize}
 \item Ejemplo: sumar los componentes de una lista
 \end{itemize}
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 lista <- list(a = rnorm(100),
               b = runif(100),
@@ -875,28 +864,28 @@ with(lista, sum(a + b + c))
 \end{lstlisting}
 
 \begin{verbatim}
-[1] 155.2168
+[1] 150.7289
 \end{verbatim}
 
 \begin{itemize}
 \item En lugar de nombrar los componentes, creamos una llamada a una
 función con \texttt{do.call}
 \end{itemize}
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 do.call(sum, lista)
 \end{lstlisting}
 
 \begin{verbatim}
-[1] 155.2168
+[1] 150.7289
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline32}]{\texttt{do.call}}
+\begin{frame}[fragile,label={sec:orgf68dc68}]{\texttt{do.call}}
  \begin{itemize}
 \item Se emplea frecuentemente con el resultado de \texttt{lapply}
 \end{itemize}
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   x <- rnorm(5)
   ll <- lapply(1:5, function(i)x^i)
@@ -904,43 +893,41 @@ do.call(sum, lista)
 \end{lstlisting}
 
 \begin{verbatim}
-          [,1]        [,2]        [,3]       [,4]       [,5]
-[1,] 0.6957676 -0.47175880 -0.56271345 -0.8144094  -1.791272
-[2,] 0.4840925  0.22255636  0.31664643  0.6632627   3.208656
-[3,] 0.3368159 -0.10499292 -0.17818121 -0.5401674  -5.747578
-[4,] 0.2343456  0.04953133  0.10026496  0.4399174  10.295476
-[5,] 0.1630501 -0.02336684 -0.05642044 -0.3582729 -18.442002
+          [,1]       [,2]      [,3]       [,4]        [,5]
+[1,] 0.7533039 -0.9398690 0.6944476 0.40232224 -0.41850226
+[2,] 0.5674668  0.8833537 0.4822575 0.16186319  0.17514414
+[3,] 0.4274750 -0.8302367 0.3349026 0.06512116 -0.07329822
+[4,] 0.3220186  0.7803137 0.2325723 0.02619969  0.03067547
+[5,] 0.2425779 -0.7333926 0.1615093 0.01054072 -0.01283775
 \end{verbatim}
 
 \begin{itemize}
 \item Este mismo ejemplo puede resolverse con \texttt{sapply}
 \end{itemize}
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   sapply(1:5, function(i)x^i)
 \end{lstlisting}
 
 \begin{verbatim}
-           [,1]      [,2]       [,3]        [,4]         [,5]
-[1,]  0.6957676 0.4840925  0.3368159  0.23434559   0.16305007
-[2,] -0.4717588 0.2225564 -0.1049929  0.04953133  -0.02336684
-[3,] -0.5627135 0.3166464 -0.1781812  0.10026496  -0.05642044
-[4,] -0.8144094 0.6632627 -0.5401674  0.43991745  -0.35827292
-[5,] -1.7912723 3.2086565 -5.7475775 10.29547648 -18.44200195
+           [,1]      [,2]        [,3]       [,4]        [,5]
+[1,]  0.7533039 0.5674668  0.42747500 0.32201860  0.24257788
+[2,] -0.9398690 0.8833537 -0.83023671 0.78031372 -0.73339265
+[3,]  0.6944476 0.4822575  0.33490259 0.23257231  0.16150929
+[4,]  0.4023222 0.1618632  0.06512116 0.02619969  0.01054072
+[5,] -0.4185023 0.1751441 -0.07329822 0.03067547 -0.01283775
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline33}]{\texttt{Reduce}}
+\begin{frame}[fragile,label={sec:org1376570}]{\texttt{Reduce}}
  \begin{itemize}
 \item Combina sucesivamente los elementos de un objeto aplicando una
 función binaria
 \end{itemize}
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 ## (((1+2)+3)+4)+5
 Reduce('+', 1:5)
-## equivalente a 
-## sum(1:10)
 \end{lstlisting}
 
 \begin{verbatim}
@@ -948,8 +935,8 @@ Reduce('+', 1:5)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline34}]{\texttt{Reduce}}
- \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\begin{frame}[fragile,label={sec:orgfcb4193}]{\texttt{Reduce}}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 ## (((1/2)/3)/4)/5
 Reduce('/', 1:5)
@@ -959,7 +946,7 @@ Reduce('/', 1:5)
 [1] 0.008333333
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 foo <- function(u, v)u + 1 /v
 Reduce(foo, c(3, 7, 15, 1, 292))
@@ -971,7 +958,7 @@ Reduce(foo, c(3, 7, 15, 1, 292))
 [1] 4.212948
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 Reduce(foo, c(3, 7, 15, 1, 292), right=TRUE)
 ## equivalente a
@@ -983,11 +970,11 @@ Reduce(foo, c(3, 7, 15, 1, 292), right=TRUE)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline35}]{Funciones recursivas}
+\begin{frame}[fragile,label={sec:org75f3ff9}]{Funciones recursivas}
  \begin{itemize}
-\item \href{http://en.wikibooks.org/wiki/R_Programming/Working_with_functions#Functions_as_Objects}{Serie de Fibonnaci}
+\item \href{http://en.wikibooks.org/wiki/R\_Programming/Working\_with\_functions\#Functions\_as\_Objects}{Serie de Fibonnaci}
 \end{itemize}
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 fib <- function(n){
     if (n>2) {
@@ -997,7 +984,7 @@ fib <- function(n){
 }
 \end{lstlisting}
 
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 fib(10)
 \end{lstlisting}

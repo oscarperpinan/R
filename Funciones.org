@@ -1,10 +1,8 @@
 #+TITLE:     Funciones
 
 #+SETUPFILE: config.org
-
 #+OPTIONS: H:2
-#+PROPERTY: results output
-#+PROPERTY: exports both
+#+PROPERTY: header-args :results output :exports both :session R:funciones :tangle yes :comments org
 #+LATEX_HEADER: \AtBeginSection[]{\begin{frame}[plain]\tableofcontents[currentsection,sectionstyle=show/shaded]\end{frame}}
 
 
@@ -426,8 +424,6 @@ do.call(sum, lista)
 #+begin_src R 
 ## (((1+2)+3)+4)+5
 Reduce('+', 1:5)
-## equivalente a 
-## sum(1:10)
 #+end_src
 ** =Reduce=
 #+begin_src R 
