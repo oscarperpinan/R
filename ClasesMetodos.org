@@ -3,8 +3,7 @@
 #+STARTUP: beamer
 #+SETUPFILE: config.org
 #+OPTIONS: H:3
-#+PROPERTY: results output
-#+PROPERTY: exports both
+#+PROPERTY: header-args :results output :exports both :session R:class :tangle yes :comments org
 
 * OOP en R
 ** Programación Orientada a Objetos (OOP)
@@ -73,14 +72,14 @@ Sin embargo, su modo de almacenamiento (clase intrínseca) no cambia:
   task1 <- list(what='Write an email',
                 when=as.Date('2013-01-01'),
                 priority='Low')
-  class(task1) <- 'task3'
+  class(task1) <- 'Task'
   task1
 #+end_src
 #+begin_src R
   task2 <- list(what='Find and fix bugs',
                 when=as.Date('2013-03-15'),
                 priority='High')
-  class(task2) <- 'task3'
+  class(task2) <- 'Task'
 #+end_src
 
 *** Definición de Clases
@@ -92,7 +91,7 @@ Sin embargo, su modo de almacenamiento (clase intrínseca) no cambia:
 
 # ** Herencia entre clases
 # #+begin_src R
-#   inherits(myToDo, 'task3')
+#   inherits(myToDo, 'Task')
 # #+end_src
 
 # - Atención: cuando un vector se transforma en matriz no hereda =numeric=:
@@ -102,20 +101,94 @@ Sin embargo, su modo de almacenamiento (clase intrínseca) no cambia:
 #   inherits(x, 'numeric')
 # #+end_src
 
-** Métodos con =S3=
+** Métodos
+*** Métodos con =S3=
 
-*** Métodos con =S3=: =NextMethod=
+- Sencillos de usar e implementar.
+- Poco robustos.
+- Se definen a partir de un método genérico, añadiendo a la función el nombre de la clase con un punto como separador. 
+  - =print= :: =print.data.frame=
+  - =summary= :: =summary.lm=
+		 
+*** Métodos genéricos: =UseMethod=
+- =UseMethod= sirve para elegir el método correspondiente a la clase
+  del objeto empleado como argumento en la función.
+
+- Se debe definir un método genérico, incluyendo llamada a
+  =UseMethod=.
 #+begin_src R
-  print.task3 <- function(x, ...){
+summary
+#+end_src
+
+- Si no hay un método definido para la clase del objeto, =UseMethod= ejecuta la función por defecto:
+#+begin_src R
+summary.default
+#+end_src
+
+*** Métodos genéricos: =UseMethod=
+
+#+begin_src R
+  myFun <- function(x, ...)UseMethod('myFun')
+  myFun.default <- function(x, ...){
+    cat('Funcion genérica\n')
+    print(x)
+    }
+#+end_src
+
+#+begin_src R
+x <- rnorm(10)
+myFun(x)
+#+end_src
+
+#+begin_src R
+myFun(task1)
+#+end_src
+
+*** =methods=
+Con =methods= podemos averiguar los métodos que hay definidos para una función particular:
+#+begin_src R
+methods('myFun')
+#+end_src
+#+begin_src R
+methods('summary')
+#+end_src
+
+*** Definición del método para =Task=
+#+begin_src R
+myFun.Task <- function(x, number,...)
+{
+    if (!missing(number))
+        cat('Task no.', number,':\n')
+    cat('What: ', x$what,
+        '- When:', as.character(x$when),
+        '- Priority:', x$priority,
+        '\n')
+}
+#+end_src
+#+begin_src R
+myFun(task1)
+#+end_src
+#+begin_src R
+methods(myFun)
+#+end_src
+#+begin_src R
+methods(class='Task')
+#+end_src
+
+
+*** =NextMethod=
+Incluyendo =NextMethod= en un método específico llamamos al método genérico (=default=).
+#+begin_src R
+  print.Task <- function(x, ...){
     cat('Task:\n')
-    NextMethod(x, ...)
+    NextMethod(x, ...) ## Ejecuta print.default
   }
 #+end_src
 #+begin_src R
   print(task1)
 #+end_src
 
-*** Métodos con =S3=: =NextMethod=
+*** =NextMethod=
 #+begin_src R
   print.ToDo3 <- function(x, ...){
     cat('This is my ToDo list:\n')
@@ -127,9 +200,28 @@ Sin embargo, su modo de almacenamiento (clase intrínseca) no cambia:
 print(myToDo)
 #+end_src
 
+*** Definición de un método =S3= para =Task=
+#+begin_src R
+print.Task <- function(x, number,...){
+    if (!missing(number))
+        cat('Task no.', number,':\n')
+    cat('What: ', x$what,
+        '- When:', as.character(x$when),
+        '- Priority:', x$priority,
+        '\n')
+} 
+#+end_src
+#+begin_src R
+print(task1)
+#+end_src
+#+begin_src R
+print(myToDo[[2]])
+#+end_src
+
 
 *** Definición de un método =S3= para =ToDo3=
-
+- Definimos un método más sofisticado para la clase =ToDo3= *sin*
+  tener en cuenta el método definido para la clase =Task=.
 #+begin_src R
   print.ToDo3 <- function(x, ...){
     cat('This is my ToDo list:\n')
@@ -147,82 +239,23 @@ print(myToDo)
   print(myToDo)
 #+end_src
 
-*** Definición de un método =S3= para =task3=
-#+begin_src R
-print.task3 <- function(x, number,...){
-    if (!missing(number))
-        cat('Task no.', number,':\n')
-    cat('What: ', x$what,
-        '- When:', as.character(x$when),
-        '- Priority:', x$priority,
-        '\n')
-} 
-#+end_src
-#+begin_src R
-print(task1)
-#+end_src
-#+begin_src R
-print(myToDo[[2]])
-#+end_src
-
 *** Redefinición del método para =ToDo3=
+
+- Podemos aligerar el código teniendo en cuenta el método definido para la clase =Task=.
 #+begin_src R
   print.ToDo3 <- function(x, ...){
-    cat('This is my ToDo list:\n')
+      cat('This is my ToDo list:\n')
+      ## Cada uno de los elementos de un
+      ## objeto ToDo3 son Task.  Por tanto,
+      ## x[[i]] es de clase Task y
+      ## print(x[[i]]) ejecuta el metodo
+      ## print.Task
     for (i in seq_along(x)) print(x[[i]], i)
       cat('--------------------\n')
   }
 #+end_src
 #+begin_src R
 print(myToDo)
-#+end_src
-
-** Métodos genéricos con =S3=
-*** Métodos genéricos con =S3=: =UseMethod=
-#+begin_src R
-  myFun <- function(x, ...)UseMethod('myFun')
-  myFun.default <- function(x, ...){
-    cat('Funcion genérica\n')
-    print(x)
-    }
-#+end_src
-
-#+begin_src R
-myFun(x)
-#+end_src
-#+begin_src R
-myFun(task1)
-#+end_src
-
-*** =methods=
-Con =methods= podemos averiguar los métodos que hay definidos para una función particular:
-#+begin_src R
-methods('myFun')
-#+end_src
-#+begin_src R
-head(methods('print'))
-#+end_src
-
-*** Definición del método para =task3= con =UseMethod=
-#+begin_src R
-myFun.task3 <- function(x, number,...)
-{
-    if (!missing(number))
-        cat('Task no.', number,':\n')
-    cat('What: ', x$what,
-        '- When:', as.character(x$when),
-        '- Priority:', x$priority,
-        '\n')
-}
-#+end_src
-#+begin_src R
-myFun(task1)
-#+end_src
-#+begin_src R
-methods(myFun)
-#+end_src
-#+begin_src R
-methods(class='task3')
 #+end_src
 
 * Clases y métodos S4
@@ -493,7 +526,7 @@ xyplot(lmFertEdu, col='red', pch = 19,
 [[file:figs/xyplotS4.pdf]]
 
 #+begin_src R :exports none :tangle no
-remove(print.task3, print.ToDo3, myFun, myFun.default, myFun.task3)
+remove(print.Task, print.ToDo3, myFun, myFun.default, myFun.Task)
 removeMethod(print, 'task')
 removeMethod(print, 'ToDo')
 #+end_src

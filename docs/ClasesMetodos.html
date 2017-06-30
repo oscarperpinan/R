@@ -3,12 +3,12 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
 <head>
-<!-- 2016-03-15 mar 00:55 -->
-<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<!-- 2017-06-30 vie 15:40 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Clases y Métodos</title>
-<meta  name="generator" content="Org-mode" />
-<meta  name="author" content="Oscar Perpiñán Lamigueiro \\ [[http://oscarperpinan.github.io]]" />
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Oscar Perpiñán Lamigueiro \\ http://oscarperpinan.github.io" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center;
@@ -53,13 +53,97 @@
     border: 1px solid black;
   }
   pre.src:hover:before { display: inline;}
-  pre.src-sh:before    { content: 'sh'; }
-  pre.src-bash:before  { content: 'sh'; }
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
   pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-R:before     { content: 'R'; }
-  pre.src-perl:before  { content: 'Perl'; }
-  pre.src-java:before  { content: 'Java'; }
-  pre.src-sql:before   { content: 'SQL'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
 
   table { border-collapse:collapse; }
   caption.t-above { caption-side: top; }
@@ -92,6 +176,7 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
 <link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
@@ -149,94 +234,15 @@ for the JavaScript code in this tag.
 <body>
 <div id="content">
 <h1 class="title">Clases y Métodos</h1>
-<div id="table-of-contents">
-<h2>&Iacute;ndice</h2>
-<div id="text-table-of-contents">
-<ul>
-<li><a href="#orgheadline5">1. OOP en R</a>
-<ul>
-<li><a href="#orgheadline4">1.1. Programación Orientada a Objetos (OOP)</a>
-<ul>
-<li><a href="#orgheadline1">1.1.1. Programación Orientada a Objetos (OOP)</a></li>
-<li><a href="#orgheadline3">1.1.2. OOP en R</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#orgheadline21">2. Clases y métodos S3</a>
-<ul>
-<li><a href="#orgheadline10">2.1. Clases</a>
-<ul>
-<li><a href="#orgheadline6">2.1.1. Clases</a></li>
-<li><a href="#orgheadline7">2.1.2. Clases</a></li>
-<li><a href="#orgheadline8">2.1.3. Definición de Clases</a></li>
-<li><a href="#orgheadline9">2.1.4. Definición de Clases</a></li>
-</ul>
-</li>
-<li><a href="#orgheadline16">2.2. Métodos con <code>S3</code></a>
-<ul>
-<li><a href="#orgheadline11">2.2.1. Métodos con <code>S3</code>: <code>NextMethod</code></a></li>
-<li><a href="#orgheadline12">2.2.2. Métodos con <code>S3</code>: <code>NextMethod</code></a></li>
-<li><a href="#orgheadline13">2.2.3. Definición de un método <code>S3</code> para <code>ToDo3</code></a></li>
-<li><a href="#orgheadline14">2.2.4. Definición de un método <code>S3</code> para <code>task3</code></a></li>
-<li><a href="#orgheadline15">2.2.5. Redefinición del método para <code>ToDo3</code></a></li>
-</ul>
-</li>
-<li><a href="#orgheadline20">2.3. Métodos genéricos con <code>S3</code></a>
-<ul>
-<li><a href="#orgheadline17">2.3.1. Métodos genéricos con <code>S3</code>: <code>UseMethod</code></a></li>
-<li><a href="#orgheadline18">2.3.2. <code>methods</code></a></li>
-<li><a href="#orgheadline19">2.3.3. Definición del método para <code>task3</code> con <code>UseMethod</code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#orgheadline43">3. Clases y métodos S4</a>
-<ul>
-<li><a href="#orgheadline32">3.1. Clases en <code>S4</code></a>
-<ul>
-<li><a href="#orgheadline22">3.1.1. Clases en <code>S4</code></a></li>
-<li><a href="#orgheadline23">3.1.2. Definición de una nueva clase</a></li>
-<li><a href="#orgheadline24">3.1.3. Creación de un objeto con la clase definida: <code>new</code></a></li>
-<li><a href="#orgheadline25">3.1.4. Funciones para crear objetos</a></li>
-<li><a href="#orgheadline26">3.1.5. Definición de la clase <code>ToDo</code></a></li>
-<li><a href="#orgheadline27">3.1.6. Acceso a los slots</a></li>
-<li><a href="#orgheadline28">3.1.7. Acceso a los slots</a></li>
-<li><a href="#orgheadline29">3.1.8. Problema con los slots definidos como <code>list</code></a></li>
-<li><a href="#orgheadline30">3.1.9. Validación</a></li>
-<li><a href="#orgheadline31">3.1.10. Funciones para crear y modificar objetos</a></li>
-</ul>
-</li>
-<li><a href="#orgheadline37">3.2. Métodos en <code>S4</code></a>
-<ul>
-<li><a href="#orgheadline33">3.2.1. Métodos en <code>S4</code>: <code>setMethod</code></a></li>
-<li><a href="#orgheadline34">3.2.2. Métodos en <code>S4</code>: <code>setGeneric</code> y <code>getGeneric</code></a></li>
-<li><a href="#orgheadline35">3.2.3. Definición de un método <code>print</code> para <code>task</code></a></li>
-<li><a href="#orgheadline36">3.2.4. Definición de un método <code>print</code> para <code>ToDo</code></a></li>
-</ul>
-</li>
-<li><a href="#orgheadline42">3.3. Clases <code>S3</code> con clases y métodos <code>S4</code></a>
-<ul>
-<li><a href="#orgheadline38">3.3.1. Clases <code>S3</code> con clases y métodos <code>S4</code></a></li>
-<li><a href="#orgheadline39">3.3.2. Ejemplo con <code>lm</code> y <code>xyplot</code></a></li>
-<li><a href="#orgheadline40">3.3.3. Ejemplo con <code>lm</code> y <code>xyplot</code></a></li>
-<li><a href="#orgheadline41">3.3.4. Ejemplo con <code>lm</code> y <code>xyplot</code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</div>
-</div>
 
-<div id="outline-container-orgheadline5" class="outline-2">
-<h2 id="orgheadline5"><span class="section-number-2">1</span> OOP en R</h2>
+<div id="outline-container-org599bb21" class="outline-2">
+<h2 id="org599bb21"><span class="section-number-2">1</span> OOP en R</h2>
 <div class="outline-text-2" id="text-1">
-</div><div id="outline-container-orgheadline4" class="outline-3">
-<h3 id="orgheadline4"><span class="section-number-3">1.1</span> Programación Orientada a Objetos (OOP)</h3>
+</div><div id="outline-container-orgc7a481a" class="outline-3">
+<h3 id="orgc7a481a"><span class="section-number-3">1.1</span> Programación Orientada a Objetos (OOP)</h3>
 <div class="outline-text-3" id="text-1-1">
-</div><div id="outline-container-orgheadline1" class="outline-4">
-<h4 id="orgheadline1"><span class="section-number-4">1.1.1</span> Programación Orientada a Objetos (OOP)</h4>
+</div><div id="outline-container-org7abc3b7" class="outline-4">
+<h4 id="org7abc3b7"><span class="section-number-4">1.1.1</span> Programación Orientada a Objetos (OOP)</h4>
 <div class="outline-text-4" id="text-1-1-1">
 <ul class="org-ul">
 <li>Características básicas del paradigma OOP:
@@ -255,10 +261,10 @@ clase de uno (o varios) de sus argumentos (<i>polymorphism</i>).</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgheadline3" class="outline-4">
-<h4 id="orgheadline3"><span class="section-number-4">1.1.2</span> OOP en R</h4>
+<div id="outline-container-org134aa8d" class="outline-4">
+<h4 id="org134aa8d"><span class="section-number-4">1.1.2</span> OOP en R</h4>
 <div class="outline-text-4" id="text-1-1-2">
-</div><ol class="org-ol"><li><a id="orgheadline2"></a>Referencias&#xa0;&#xa0;&#xa0;<span class="tag"><span class="B_block">B_block</span></span><br  /><div class="outline-text-5" id="text-1-1-2-1">
+</div><ol class="org-ol"><li><a id="orgcd02b41"></a>Referencias&#xa0;&#xa0;&#xa0;<span class="tag"><span class="B_block">B_block</span></span><br /><div class="outline-text-5" id="text-1-1-2-1">
 <div class="org-center">
 <ul class="org-ul">
 <li><a href="http://www.springer.com/gb/book/9780387759357">Software for Data Analysis</a></li>
@@ -273,20 +279,19 @@ clase de uno (o varios) de sus argumentos (<i>polymorphism</i>).</li>
 </div>
 </div>
 
-<div id="outline-container-orgheadline21" class="outline-2">
-<h2 id="orgheadline21"><span class="section-number-2">2</span> Clases y métodos S3</h2>
+<div id="outline-container-org4e9ed4c" class="outline-2">
+<h2 id="org4e9ed4c"><span class="section-number-2">2</span> Clases y métodos S3</h2>
 <div class="outline-text-2" id="text-2">
-</div><div id="outline-container-orgheadline10" class="outline-3">
-<h3 id="orgheadline10"><span class="section-number-3">2.1</span> Clases</h3>
+</div><div id="outline-container-orgdc347c6" class="outline-3">
+<h3 id="orgdc347c6"><span class="section-number-3">2.1</span> Clases</h3>
 <div class="outline-text-3" id="text-2-1">
-</div><div id="outline-container-orgheadline6" class="outline-4">
-<h4 id="orgheadline6"><span class="section-number-4">2.1.1</span> Clases</h4>
+</div><div id="outline-container-org62bc515" class="outline-4">
+<h4 id="org62bc515"><span class="section-number-4">2.1.1</span> Clases</h4>
 <div class="outline-text-4" id="text-2-1-1">
 <p>
 Los objetos básicos en <code>R</code> tienen una clase implícita definida en <code>S3</code>. Es accesible con <code>class</code>.
 </p>
 <div class="org-src-container">
-
 <pre class="src src-R">  x <span class="org-constant">&lt;-</span> rnorm(10)
   class(x)
 </pre>
@@ -300,7 +305,6 @@ Los objetos básicos en <code>R</code> tienen una clase implícita definida en <
 Pero no tienen atributo ni se consideran formalmente objetos:
 </p>
 <div class="org-src-container">
-
 <pre class="src src-R">attr(x, <span class="org-string">'class'</span>)
 </pre>
 </div>
@@ -310,7 +314,6 @@ NULL
 </pre>
 
 <div class="org-src-container">
-
 <pre class="src src-R">is.object(x)
 </pre>
 </div>
@@ -322,14 +325,13 @@ NULL
 </div>
 
 
-<div id="outline-container-orgheadline7" class="outline-4">
-<h4 id="orgheadline7"><span class="section-number-4">2.1.2</span> Clases</h4>
+<div id="outline-container-orga64457b" class="outline-4">
+<h4 id="orga64457b"><span class="section-number-4">2.1.2</span> Clases</h4>
 <div class="outline-text-4" id="text-2-1-2">
 <p>
 Se puede redefinir la clase de un objecto <code>S3</code> con <code>class</code>
 </p>
 <div class="org-src-container">
-
 <pre class="src src-R">  class(x) <span class="org-constant">&lt;-</span> <span class="org-string">'myNumeric'</span>
   class(x)
 </pre>
@@ -343,7 +345,6 @@ Se puede redefinir la clase de un objecto <code>S3</code> con <code>class</code>
 Ahora sí es un objeto y su atributo está definido:
 </p>
 <div class="org-src-container">
-
 <pre class="src src-R">attr(x, <span class="org-string">'class'</span>)
 </pre>
 </div>
@@ -353,7 +354,6 @@ Ahora sí es un objeto y su atributo está definido:
 </pre>
 
 <div class="org-src-container">
-
 <pre class="src src-R">is.object(x)
 </pre>
 </div>
@@ -366,7 +366,6 @@ Ahora sí es un objeto y su atributo está definido:
 Sin embargo, su modo de almacenamiento (clase intrínseca) no cambia:
 </p>
 <div class="org-src-container">
-
 <pre class="src src-R">  mode(x)
 </pre>
 </div>
@@ -377,15 +376,14 @@ Sin embargo, su modo de almacenamiento (clase intrínseca) no cambia:
 </div>
 </div>
 
-<div id="outline-container-orgheadline8" class="outline-4">
-<h4 id="orgheadline8"><span class="section-number-4">2.1.3</span> Definición de Clases</h4>
+<div id="outline-container-org2dfd599" class="outline-4">
+<h4 id="org2dfd599"><span class="section-number-4">2.1.3</span> Definición de Clases</h4>
 <div class="outline-text-4" id="text-2-1-3">
 <div class="org-src-container">
-
 <pre class="src src-R">  task1 <span class="org-constant">&lt;-</span> list(what=<span class="org-string">'Write an email'</span>,
                 when=as.Date(<span class="org-string">'2013-01-01'</span>),
                 priority=<span class="org-string">'Low'</span>)
-  class(task1) <span class="org-constant">&lt;-</span> <span class="org-string">'task3'</span>
+  class(task1) <span class="org-constant">&lt;-</span> <span class="org-string">'Task'</span>
   task1
 </pre>
 </div>
@@ -401,25 +399,23 @@ $priority
 [1] "Low"
 
 attr(,"class")
-[1] "task3"
+[1] "Task"
 </pre>
 
 <div class="org-src-container">
-
 <pre class="src src-R">  task2 <span class="org-constant">&lt;-</span> list(what=<span class="org-string">'Find and fix bugs'</span>,
                 when=as.Date(<span class="org-string">'2013-03-15'</span>),
                 priority=<span class="org-string">'High'</span>)
-  class(task2) <span class="org-constant">&lt;-</span> <span class="org-string">'task3'</span>
+  class(task2) <span class="org-constant">&lt;-</span> <span class="org-string">'Task'</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgheadline9" class="outline-4">
-<h4 id="orgheadline9"><span class="section-number-4">2.1.4</span> Definición de Clases</h4>
+<div id="outline-container-org7e523a2" class="outline-4">
+<h4 id="org7e523a2"><span class="section-number-4">2.1.4</span> Definición de Clases</h4>
 <div class="outline-text-4" id="text-2-1-4">
 <div class="org-src-container">
-
 <pre class="src src-R">  myToDo <span class="org-constant">&lt;-</span> list(task1, task2)
   class(myToDo) <span class="org-constant">&lt;-</span> c(<span class="org-string">'ToDo3'</span>)
   myToDo
@@ -438,7 +434,7 @@ $priority
 [1] "Low"
 
 attr(,"class")
-[1] "task3"
+[1] "Task"
 
 [[2]]
 $what
@@ -451,7 +447,7 @@ $priority
 [1] "High"
 
 attr(,"class")
-[1] "task3"
+[1] "Task"
 
 attr(,"class")
 [1] "ToDo3"
@@ -460,23 +456,264 @@ attr(,"class")
 </div>
 </div>
 
-<div id="outline-container-orgheadline16" class="outline-3">
-<h3 id="orgheadline16"><span class="section-number-3">2.2</span> Métodos con <code>S3</code></h3>
+<div id="outline-container-org9c7e2db" class="outline-3">
+<h3 id="org9c7e2db"><span class="section-number-3">2.2</span> Métodos</h3>
 <div class="outline-text-3" id="text-2-2">
-</div><div id="outline-container-orgheadline11" class="outline-4">
-<h4 id="orgheadline11"><span class="section-number-4">2.2.1</span> Métodos con <code>S3</code>: <code>NextMethod</code></h4>
+</div><div id="outline-container-org6ef03c7" class="outline-4">
+<h4 id="org6ef03c7"><span class="section-number-4">2.2.1</span> Métodos con <code>S3</code></h4>
 <div class="outline-text-4" id="text-2-2-1">
-<div class="org-src-container">
+<ul class="org-ul">
+<li>Sencillos de usar e implementar.</li>
+<li>Poco robustos.</li>
+<li>Se definen a partir de un método genérico, añadiendo a la función el nombre de la clase con un punto como separador. 
+<dl class="org-dl">
+<dt><code>print</code></dt><dd><code>print.data.frame</code></dd>
+<dt><code>summary</code></dt><dd><code>summary.lm</code></dd>
+</dl></li>
+</ul>
+</div>
+</div>
 
-<pre class="src src-R">  <span class="org-function-name">print.task3</span> <span class="org-constant">&lt;-</span> <span class="org-keyword">function</span>(x, ...){
+<div id="outline-container-org8acac39" class="outline-4">
+<h4 id="org8acac39"><span class="section-number-4">2.2.2</span> Métodos genéricos: <code>UseMethod</code></h4>
+<div class="outline-text-4" id="text-2-2-2">
+<ul class="org-ul">
+<li><code>UseMethod</code> sirve para elegir el método correspondiente a la clase
+del objeto empleado como argumento en la función.</li>
+
+<li>Se debe definir un método genérico, incluyendo llamada a
+<code>UseMethod</code>.</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-R">summary
+</pre>
+</div>
+
+<pre class="example">
+function (object, ...) 
+UseMethod("summary")
+&lt;bytecode: 0x5640bb025728&gt;
+&lt;environment: namespace:base&gt;
+</pre>
+
+<ul class="org-ul">
+<li>Si no hay un método definido para la clase del objeto, <code>UseMethod</code> ejecuta la función por defecto:</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-R">summary.default
+</pre>
+</div>
+
+<pre class="example">
+function (object, ..., digits) 
+{
+    if (is.factor(object)) 
+        return(summary.factor(object, ...))
+    else if (is.matrix(object)) {
+        if (missing(digits)) 
+            return(summary.matrix(object, ...))
+        else return(summary.matrix(object, digits = digits, ...))
+    }
+    value &lt;- if (is.logical(object)) 
+        c(Mode = "logical", {
+            tb &lt;- table(object, exclude = NULL, useNA = "ifany")
+            if (!is.null(n &lt;- dimnames(tb)[[1L]]) &amp;&amp; any(iN &lt;- is.na(n))) dimnames(tb)[[1L]][iN] &lt;- "NA's"
+            tb
+        })
+    else if (is.numeric(object)) {
+        nas &lt;- is.na(object)
+        object &lt;- object[!nas]
+        qq &lt;- stats::quantile(object)
+        qq &lt;- c(qq[1L:3L], mean(object), qq[4L:5L])
+        if (!missing(digits)) 
+            qq &lt;- signif(qq, digits)
+        names(qq) &lt;- c("Min.", "1st Qu.", "Median", "Mean", "3rd Qu.", 
+            "Max.")
+        if (any(nas)) 
+            c(qq, `NA's` = sum(nas))
+        else qq
+    }
+    else if (is.recursive(object) &amp;&amp; !is.language(object) &amp;&amp; 
+        (n &lt;- length(object))) {
+        sumry &lt;- array("", c(n, 3L), list(names(object), c("Length", 
+            "Class", "Mode")))
+        ll &lt;- numeric(n)
+        for (i in 1L:n) {
+            ii &lt;- object[[i]]
+            ll[i] &lt;- length(ii)
+            cls &lt;- oldClass(ii)
+            sumry[i, 2L] &lt;- if (length(cls)) 
+                cls[1L]
+            else "-none-"
+            sumry[i, 3L] &lt;- mode(ii)
+        }
+        sumry[, 1L] &lt;- format(as.integer(ll))
+        sumry
+    }
+    else c(Length = length(object), Class = class(object), Mode = mode(object))
+    class(value) &lt;- c("summaryDefault", "table")
+    value
+}
+&lt;bytecode: 0x5640bcab7308&gt;
+&lt;environment: namespace:base&gt;
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgf0f1d25" class="outline-4">
+<h4 id="orgf0f1d25"><span class="section-number-4">2.2.3</span> Métodos genéricos: <code>UseMethod</code></h4>
+<div class="outline-text-4" id="text-2-2-3">
+<div class="org-src-container">
+<pre class="src src-R">  <span class="org-function-name">myFun</span> <span class="org-constant">&lt;-</span> <span class="org-keyword">function</span>(x, ...)UseMethod(<span class="org-string">'myFun'</span>)
+  <span class="org-function-name">myFun.default</span> <span class="org-constant">&lt;-</span> <span class="org-keyword">function</span>(x, ...){
+    cat(<span class="org-string">'Funcion gen&#233;rica\n'</span>)
+    print(x)
+    }
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-R">x <span class="org-constant">&lt;-</span> rnorm(10)
+myFun(x)
+</pre>
+</div>
+
+<pre class="example">
+Funcion genérica
+ [1] -0.1721878  1.0248296  0.8441502  1.2490418 -2.3967756 -0.6923997
+ [7]  0.4439748  1.4463690  0.7784784 -2.1970668
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-R">myFun(task1)
+</pre>
+</div>
+
+<pre class="example">
+Funcion genérica
+$what
+[1] "Write an email"
+
+$when
+[1] "2013-01-01"
+
+$priority
+[1] "Low"
+
+attr(,"class")
+[1] "Task"
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org4821cc0" class="outline-4">
+<h4 id="org4821cc0"><span class="section-number-4">2.2.4</span> <code>methods</code></h4>
+<div class="outline-text-4" id="text-2-2-4">
+<p>
+Con <code>methods</code> podemos averiguar los métodos que hay definidos para una función particular:
+</p>
+<div class="org-src-container">
+<pre class="src src-R">methods(<span class="org-string">'myFun'</span>)
+</pre>
+</div>
+
+<pre class="example">
+[1] myFun.default
+see '?methods' for accessing help and source code
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-R">methods(<span class="org-string">'summary'</span>)
+</pre>
+</div>
+
+<pre class="example">
+ [1] summary.aov                    summary.aovlist*              
+ [3] summary.aspell*                summary.check_packages_in_dir*
+ [5] summary.connection             summary.data.frame            
+ [7] summary.Date                   summary.default               
+ [9] summary.ecdf*                  summary.factor                
+[11] summary.glm                    summary.infl*                 
+[13] summary.lm                     summary.loess*                
+[15] summary.manova                 summary.matrix                
+[17] summary.mlm*                   summary.nls*                  
+[19] summary.packageStatus*         summary.PDF_Dictionary*       
+[21] summary.PDF_Stream*            summary.POSIXct               
+[23] summary.POSIXlt                summary.ppr*                  
+[25] summary.prcomp*                summary.princomp*             
+[27] summary.proc_time              summary.shingle*              
+[29] summary.srcfile                summary.srcref                
+[31] summary.stepfun                summary.stl*                  
+[33] summary.table                  summary.trellis*              
+[35] summary.tukeysmooth*          
+see '?methods' for accessing help and source code
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgd3b9d66" class="outline-4">
+<h4 id="orgd3b9d66"><span class="section-number-4">2.2.5</span> Definición del método para <code>Task</code></h4>
+<div class="outline-text-4" id="text-2-2-5">
+<div class="org-src-container">
+<pre class="src src-R"><span class="org-function-name">myFun.Task</span> <span class="org-constant">&lt;-</span> <span class="org-keyword">function</span>(x, number,...)
+{
+    <span class="org-keyword">if</span> (!missing(number))
+        cat(<span class="org-string">'Task no.'</span>, number,<span class="org-string">':\n'</span>)
+    cat(<span class="org-string">'What: '</span>, x$what,
+        <span class="org-string">'- When:'</span>, as.character(x$when),
+        <span class="org-string">'- Priority:'</span>, x$priority,
+        <span class="org-string">'\n'</span>)
+}
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-R">myFun(task1)
+</pre>
+</div>
+
+<pre class="example">
+What:  Write an email - When: 2013-01-01 - Priority: Low
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-R">methods(myFun)
+</pre>
+</div>
+
+<pre class="example">
+[1] myFun.default myFun.Task   
+see '?methods' for accessing help and source code
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-R">methods(class=<span class="org-string">'Task'</span>)
+</pre>
+</div>
+
+<pre class="example">
+[1] myFun
+see '?methods' for accessing help and source code
+</pre>
+</div>
+</div>
+
+
+<div id="outline-container-orgc6af5a6" class="outline-4">
+<h4 id="orgc6af5a6"><span class="section-number-4">2.2.6</span> <code>NextMethod</code></h4>
+<div class="outline-text-4" id="text-2-2-6">
+<p>
+Incluyendo <code>NextMethod</code> en un método específico llamamos al método genérico (<code>default</code>).
+</p>
+<div class="org-src-container">
+<pre class="src src-R">  <span class="org-function-name">print.Task</span> <span class="org-constant">&lt;-</span> <span class="org-keyword">function</span>(x, ...){
     cat(<span class="org-string">'Task:\n'</span>)
-    NextMethod(x, ...)
+    NextMethod(x, ...) <span class="org-comment-delimiter">## </span><span class="org-comment">Ejecuta print.default</span>
   }
 </pre>
 </div>
 
 <div class="org-src-container">
-
 <pre class="src src-R">  print(task1)
 </pre>
 </div>
@@ -493,16 +730,15 @@ $priority
 [1] "Low"
 
 attr(,"class")
-[1] "task3"
+[1] "Task"
 </pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline12" class="outline-4">
-<h4 id="orgheadline12"><span class="section-number-4">2.2.2</span> Métodos con <code>S3</code>: <code>NextMethod</code></h4>
-<div class="outline-text-4" id="text-2-2-2">
+<div id="outline-container-orgd00bd60" class="outline-4">
+<h4 id="orgd00bd60"><span class="section-number-4">2.2.7</span> <code>NextMethod</code></h4>
+<div class="outline-text-4" id="text-2-2-7">
 <div class="org-src-container">
-
 <pre class="src src-R">  <span class="org-function-name">print.ToDo3</span> <span class="org-constant">&lt;-</span> <span class="org-keyword">function</span>(x, ...){
     cat(<span class="org-string">'This is my ToDo list:\n'</span>)
     NextMethod(x, ...)
@@ -512,7 +748,6 @@ attr(,"class")
 </div>
 
 <div class="org-src-container">
-
 <pre class="src src-R">print(myToDo)
 </pre>
 </div>
@@ -531,7 +766,7 @@ $priority
 [1] "Low"
 
 attr(,"class")
-[1] "task3"
+[1] "Task"
 
 [[2]]
 Task:
@@ -545,7 +780,7 @@ $priority
 [1] "High"
 
 attr(,"class")
-[1] "task3"
+[1] "Task"
 
 attr(,"class")
 [1] "ToDo3"
@@ -554,12 +789,50 @@ attr(,"class")
 </div>
 </div>
 
-
-<div id="outline-container-orgheadline13" class="outline-4">
-<h4 id="orgheadline13"><span class="section-number-4">2.2.3</span> Definición de un método <code>S3</code> para <code>ToDo3</code></h4>
-<div class="outline-text-4" id="text-2-2-3">
+<div id="outline-container-org1f3b538" class="outline-4">
+<h4 id="org1f3b538"><span class="section-number-4">2.2.8</span> Definición de un método <code>S3</code> para <code>Task</code></h4>
+<div class="outline-text-4" id="text-2-2-8">
 <div class="org-src-container">
+<pre class="src src-R"><span class="org-function-name">print.Task</span> <span class="org-constant">&lt;-</span> <span class="org-keyword">function</span>(x, number,...){
+    <span class="org-keyword">if</span> (!missing(number))
+        cat(<span class="org-string">'Task no.'</span>, number,<span class="org-string">':\n'</span>)
+    cat(<span class="org-string">'What: '</span>, x$what,
+        <span class="org-string">'- When:'</span>, as.character(x$when),
+        <span class="org-string">'- Priority:'</span>, x$priority,
+        <span class="org-string">'\n'</span>)
+}
+</pre>
+</div>
 
+<div class="org-src-container">
+<pre class="src src-R">print(task1)
+</pre>
+</div>
+
+<pre class="example">
+What:  Write an email - When: 2013-01-01 - Priority: Low
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-R">print(myToDo[[2]])
+</pre>
+</div>
+
+<pre class="example">
+What:  Find and fix bugs - When: 2013-03-15 - Priority: High
+</pre>
+</div>
+</div>
+
+
+<div id="outline-container-org79c6975" class="outline-4">
+<h4 id="org79c6975"><span class="section-number-4">2.2.9</span> Definición de un método <code>S3</code> para <code>ToDo3</code></h4>
+<div class="outline-text-4" id="text-2-2-9">
+<ul class="org-ul">
+<li>Definimos un método más sofisticado para la clase <code>ToDo3</code> <b>sin</b>
+tener en cuenta el método definido para la clase <code>Task</code>.</li>
+</ul>
+<div class="org-src-container">
 <pre class="src src-R">  <span class="org-function-name">print.ToDo3</span> <span class="org-constant">&lt;-</span> <span class="org-keyword">function</span>(x, ...){
     cat(<span class="org-string">'This is my ToDo list:\n'</span>)
     <span class="org-keyword">for</span> (i <span class="org-keyword">in</span> seq_along(x)){
@@ -575,7 +848,6 @@ attr(,"class")
 </div>
 
 <div class="org-src-container">
-
 <pre class="src src-R">  print(myToDo)
 </pre>
 </div>
@@ -591,51 +863,20 @@ What:  Find and fix bugs - When: 2013-03-15 - Priority: High
 </div>
 </div>
 
-<div id="outline-container-orgheadline14" class="outline-4">
-<h4 id="orgheadline14"><span class="section-number-4">2.2.4</span> Definición de un método <code>S3</code> para <code>task3</code></h4>
-<div class="outline-text-4" id="text-2-2-4">
+<div id="outline-container-org093525b" class="outline-4">
+<h4 id="org093525b"><span class="section-number-4">2.2.10</span> Redefinición del método para <code>ToDo3</code></h4>
+<div class="outline-text-4" id="text-2-2-10">
+<ul class="org-ul">
+<li>Podemos aligerar el código teniendo en cuenta el método definido para la clase <code>Task</code>.</li>
+</ul>
 <div class="org-src-container">
-
-<pre class="src src-R"><span class="org-function-name">print.task3</span> <span class="org-constant">&lt;-</span> <span class="org-keyword">function</span>(x, number,...){
-    <span class="org-keyword">if</span> (!missing(number))
-        cat(<span class="org-string">'Task no.'</span>, number,<span class="org-string">':\n'</span>)
-    cat(<span class="org-string">'What: '</span>, x$what,
-        <span class="org-string">'- When:'</span>, as.character(x$when),
-        <span class="org-string">'- Priority:'</span>, x$priority,
-        <span class="org-string">'\n'</span>)
-}
-</pre>
-</div>
-
-<div class="org-src-container">
-
-<pre class="src src-R">print(task1)
-</pre>
-</div>
-
-<pre class="example">
-What:  Write an email - When: 2013-01-01 - Priority: Low
-</pre>
-
-<div class="org-src-container">
-
-<pre class="src src-R">print(myToDo[[2]])
-</pre>
-</div>
-
-<pre class="example">
-What:  Find and fix bugs - When: 2013-03-15 - Priority: High
-</pre>
-</div>
-</div>
-
-<div id="outline-container-orgheadline15" class="outline-4">
-<h4 id="orgheadline15"><span class="section-number-4">2.2.5</span> Redefinición del método para <code>ToDo3</code></h4>
-<div class="outline-text-4" id="text-2-2-5">
-<div class="org-src-container">
-
 <pre class="src src-R">  <span class="org-function-name">print.ToDo3</span> <span class="org-constant">&lt;-</span> <span class="org-keyword">function</span>(x, ...){
-    cat(<span class="org-string">'This is my ToDo list:\n'</span>)
+      cat(<span class="org-string">'This is my ToDo list:\n'</span>)
+      <span class="org-comment-delimiter">## </span><span class="org-comment">Cada uno de los elementos de un</span>
+      <span class="org-comment-delimiter">## </span><span class="org-comment">objeto ToDo3 son Task.  Por tanto,</span>
+      <span class="org-comment-delimiter">## </span><span class="org-comment">x[[i]] es de clase Task y</span>
+      <span class="org-comment-delimiter">## </span><span class="org-comment">print(x[[i]]) ejecuta el metodo</span>
+      <span class="org-comment-delimiter">## </span><span class="org-comment">print.Task</span>
     <span class="org-keyword">for</span> (i <span class="org-keyword">in</span> seq_along(x)) print(x[[i]], i)
       cat(<span class="org-string">'--------------------\n'</span>)
   }
@@ -643,7 +884,6 @@ What:  Find and fix bugs - When: 2013-03-15 - Priority: High
 </div>
 
 <div class="org-src-container">
-
 <pre class="src src-R">print(myToDo)
 </pre>
 </div>
@@ -659,141 +899,16 @@ What:  Find and fix bugs - When: 2013-03-15 - Priority: High
 </div>
 </div>
 </div>
-
-<div id="outline-container-orgheadline20" class="outline-3">
-<h3 id="orgheadline20"><span class="section-number-3">2.3</span> Métodos genéricos con <code>S3</code></h3>
-<div class="outline-text-3" id="text-2-3">
-</div><div id="outline-container-orgheadline17" class="outline-4">
-<h4 id="orgheadline17"><span class="section-number-4">2.3.1</span> Métodos genéricos con <code>S3</code>: <code>UseMethod</code></h4>
-<div class="outline-text-4" id="text-2-3-1">
-<div class="org-src-container">
-
-<pre class="src src-R">  <span class="org-function-name">myFun</span> <span class="org-constant">&lt;-</span> <span class="org-keyword">function</span>(x, ...)UseMethod(<span class="org-string">'myFun'</span>)
-  <span class="org-function-name">myFun.default</span> <span class="org-constant">&lt;-</span> <span class="org-keyword">function</span>(x, ...){
-    cat(<span class="org-string">'Funcion gen&#233;rica\n'</span>)
-    print(x)
-    }
-</pre>
 </div>
 
-<div class="org-src-container">
-
-<pre class="src src-R">myFun(x)
-</pre>
-</div>
-
-<pre class="example">
-Funcion genérica
- [1] -1.0150401 -1.3588711 -0.7431709  1.5055015  0.3545570 -0.6970846
- [7] -1.2575174  0.4191753  0.5577365  0.6741115
-attr(,"class")
-[1] "myNumeric"
-</pre>
-
-<div class="org-src-container">
-
-<pre class="src src-R">myFun(task1)
-</pre>
-</div>
-
-<pre class="example">
-Funcion genérica
-What:  Write an email - When: 2013-01-01 - Priority: Low
-</pre>
-</div>
-</div>
-
-<div id="outline-container-orgheadline18" class="outline-4">
-<h4 id="orgheadline18"><span class="section-number-4">2.3.2</span> <code>methods</code></h4>
-<div class="outline-text-4" id="text-2-3-2">
-<p>
-Con <code>methods</code> podemos averiguar los métodos que hay definidos para una función particular:
-</p>
-<div class="org-src-container">
-
-<pre class="src src-R">methods(<span class="org-string">'myFun'</span>)
-</pre>
-</div>
-
-<pre class="example">
-[1] myFun.default
-see '?methods' for accessing help and source code
-</pre>
-
-<div class="org-src-container">
-
-<pre class="src src-R">head(methods(<span class="org-string">'print'</span>))
-</pre>
-</div>
-
-<pre class="example">
-[1] "print.acf"        "print.anova"      "print,ANY-method" "print.aov"       
-[5] "print.aovlist"    "print.ar"
-</pre>
-</div>
-</div>
-
-<div id="outline-container-orgheadline19" class="outline-4">
-<h4 id="orgheadline19"><span class="section-number-4">2.3.3</span> Definición del método para <code>task3</code> con <code>UseMethod</code></h4>
-<div class="outline-text-4" id="text-2-3-3">
-<div class="org-src-container">
-
-<pre class="src src-R"><span class="org-function-name">myFun.task3</span> <span class="org-constant">&lt;-</span> <span class="org-keyword">function</span>(x, number,...)
-{
-    <span class="org-keyword">if</span> (!missing(number))
-        cat(<span class="org-string">'Task no.'</span>, number,<span class="org-string">':\n'</span>)
-    cat(<span class="org-string">'What: '</span>, x$what,
-        <span class="org-string">'- When:'</span>, as.character(x$when),
-        <span class="org-string">'- Priority:'</span>, x$priority,
-        <span class="org-string">'\n'</span>)
-}
-</pre>
-</div>
-
-<div class="org-src-container">
-
-<pre class="src src-R">myFun(task1)
-</pre>
-</div>
-
-<pre class="example">
-What:  Write an email - When: 2013-01-01 - Priority: Low
-</pre>
-
-<div class="org-src-container">
-
-<pre class="src src-R">methods(myFun)
-</pre>
-</div>
-
-<pre class="example">
-[1] myFun.default myFun.task3  
-see '?methods' for accessing help and source code
-</pre>
-
-<div class="org-src-container">
-
-<pre class="src src-R">methods(class=<span class="org-string">'task3'</span>)
-</pre>
-</div>
-
-<pre class="example">
-[1] myFun print
-see '?methods' for accessing help and source code
-</pre>
-</div>
-</div>
-</div>
-</div>
-
-<div id="outline-container-orgheadline43" class="outline-2">
-<h2 id="orgheadline43"><span class="section-number-2">3</span> Clases y métodos S4</h2>
+<div id="outline-container-orgf5ca79d" class="outline-2">
+<h2 id="orgf5ca79d"><span class="section-number-2">3</span> Clases y métodos S4</h2>
 <div class="outline-text-2" id="text-3">
-</div><div id="outline-container-orgheadline32" class="outline-3">
-<h3 id="orgheadline32"><span class="section-number-3">3.1</span> Clases en <code>S4</code></h3>
+</div><div id="outline-container-org3f5fa99" class="outline-3">
+<h3 id="org3f5fa99"><span class="section-number-3">3.1</span> Clases en <code>S4</code></h3>
 <div class="outline-text-3" id="text-3-1">
-</div><div id="outline-container-orgheadline22" class="outline-4">
-<h4 id="orgheadline22"><span class="section-number-4">3.1.1</span> Clases en <code>S4</code></h4>
+</div><div id="outline-container-org43f2731" class="outline-4">
+<h4 id="org43f2731"><span class="section-number-4">3.1.1</span> Clases en <code>S4</code></h4>
 <div class="outline-text-4" id="text-3-1-1">
 <p>
 Se construyen con <code>setClass</code>, que acepta varios argumentos
@@ -807,11 +922,10 @@ Se construyen con <code>setClass</code>, que acepta varios argumentos
 </ul>
 </div>
 </div>
-<div id="outline-container-orgheadline23" class="outline-4">
-<h4 id="orgheadline23"><span class="section-number-4">3.1.2</span> Definición de una nueva clase</h4>
+<div id="outline-container-org21ab266" class="outline-4">
+<h4 id="org21ab266"><span class="section-number-4">3.1.2</span> Definición de una nueva clase</h4>
 <div class="outline-text-4" id="text-3-1-2">
 <div class="org-src-container">
-
 <pre class="src src-R">setClass(<span class="org-string">'task'</span>,
          slots = c(
              what = <span class="org-string">'character'</span>,
@@ -822,7 +936,6 @@ Se construyen con <code>setClass</code>, que acepta varios argumentos
 </div>
 
 <div class="org-src-container">
-
 <pre class="src src-R">getClass(<span class="org-string">'task'</span>)
 </pre>
 </div>
@@ -837,7 +950,6 @@ Class: character      Date character
 </pre>
 
 <div class="org-src-container">
-
 <pre class="src src-R">getSlots(<span class="org-string">'task'</span>)
 </pre>
 </div>
@@ -848,7 +960,6 @@ Class: character      Date character
 </pre>
 
 <div class="org-src-container">
-
 <pre class="src src-R">slotNames(<span class="org-string">'task'</span>)
 </pre>
 </div>
@@ -859,14 +970,13 @@ Class: character      Date character
 </div>
 </div>
 
-<div id="outline-container-orgheadline24" class="outline-4">
-<h4 id="orgheadline24"><span class="section-number-4">3.1.3</span> Creación de un objeto con la clase definida: <code>new</code></h4>
+<div id="outline-container-orgea309ef" class="outline-4">
+<h4 id="orgea309ef"><span class="section-number-4">3.1.3</span> Creación de un objeto con la clase definida: <code>new</code></h4>
 <div class="outline-text-4" id="text-3-1-3">
 <p>
 Una vez que la clase ha sido definida con <code>setClass</code>, se puede crear un objeto nuevo con <code>new</code>.
 </p>
 <div class="org-src-container">
-
 <pre class="src src-R">task1 <span class="org-constant">&lt;-</span> new(<span class="org-string">'task'</span>,
              what=<span class="org-string">'Find and fix bugs'</span>,
              when=as.Date(<span class="org-string">'2013-03-15'</span>),
@@ -875,7 +985,6 @@ Una vez que la clase ha sido definida con <code>setClass</code>, se puede crear 
 </div>
 
 <div class="org-src-container">
-
 <pre class="src src-R">task1
 </pre>
 </div>
@@ -894,15 +1003,14 @@ Slot "priority":
 </div>
 </div>
 
-<div id="outline-container-orgheadline25" class="outline-4">
-<h4 id="orgheadline25"><span class="section-number-4">3.1.4</span> Funciones para crear objetos</h4>
+<div id="outline-container-org08c0598" class="outline-4">
+<h4 id="org08c0598"><span class="section-number-4">3.1.4</span> Funciones para crear objetos</h4>
 <div class="outline-text-4" id="text-3-1-4">
 <p>
 Es habitual definir funciones que construyen y modifican objetos
 para evitar el uso de <code>new</code>:
 </p>
 <div class="org-src-container">
-
 <pre class="src src-R"><span class="org-function-name">createTask</span> <span class="org-constant">&lt;-</span> <span class="org-keyword">function</span>(what, when, priority){
     new(<span class="org-string">'task'</span>,
         what = what,
@@ -913,7 +1021,6 @@ para evitar el uso de <code>new</code>:
 </div>
 
 <div class="org-src-container">
-
 <pre class="src src-R">task2 <span class="org-constant">&lt;-</span> createTask(what = <span class="org-string">'Write an email'</span>,
                     when = as.Date(<span class="org-string">'2013-01-01'</span>),
                     priority = <span class="org-string">'Low'</span>)
@@ -921,24 +1028,22 @@ para evitar el uso de <code>new</code>:
 </div>
 
 <div class="org-src-container">
-
 <pre class="src src-R">createTask(<span class="org-string">'Oops'</span>, <span class="org-string">'Hoy'</span>, 3)
 </pre>
 </div>
 
 <pre class="example">
-Error in validObject(.Object) (from #2) : 
+Error in validObject(.Object) : 
   invalid class “task” object: 1: invalid object for slot "when" in class "task": got class "character", should be or extend class "Date"
 invalid class “task” object: 2: invalid object for slot "priority" in class "task": got class "numeric", should be or extend class "character"
 </pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline26" class="outline-4">
-<h4 id="orgheadline26"><span class="section-number-4">3.1.5</span> Definición de la clase <code>ToDo</code></h4>
+<div id="outline-container-org1f7d902" class="outline-4">
+<h4 id="org1f7d902"><span class="section-number-4">3.1.5</span> Definición de la clase <code>ToDo</code></h4>
 <div class="outline-text-4" id="text-3-1-5">
 <div class="org-src-container">
-
 <pre class="src src-R">setClass(<span class="org-string">'ToDo'</span>,
          slots = c(tasks = <span class="org-string">'list'</span>)
          )
@@ -946,7 +1051,6 @@ invalid class “task” object: 2: invalid object for slot "priority" in class 
 </div>
 
 <div class="org-src-container">
-
 <pre class="src src-R">myList <span class="org-constant">&lt;-</span> new(<span class="org-string">'ToDo'</span>,
               tasks = list(
                   t1 = task1,
@@ -956,15 +1060,14 @@ invalid class “task” object: 2: invalid object for slot "priority" in class 
 </div>
 </div>
 
-<div id="outline-container-orgheadline27" class="outline-4">
-<h4 id="orgheadline27"><span class="section-number-4">3.1.6</span> Acceso a los slots</h4>
+<div id="outline-container-orgcde339d" class="outline-4">
+<h4 id="orgcde339d"><span class="section-number-4">3.1.6</span> Acceso a los slots</h4>
 <div class="outline-text-4" id="text-3-1-6">
 <p>
 Para extraer información de los <i>slots</i> hay que emplear <code>@</code> (a
 diferencia de <code>$</code> en listas y <code>data.frame</code>)
 </p>
 <div class="org-src-container">
-
 <pre class="src src-R">myList@tasks
 </pre>
 </div>
@@ -996,14 +1099,13 @@ Slot "priority":
 </div>
 </div>
 
-<div id="outline-container-orgheadline28" class="outline-4">
-<h4 id="orgheadline28"><span class="section-number-4">3.1.7</span> Acceso a los slots</h4>
+<div id="outline-container-orgcfe489d" class="outline-4">
+<h4 id="orgcfe489d"><span class="section-number-4">3.1.7</span> Acceso a los slots</h4>
 <div class="outline-text-4" id="text-3-1-7">
 <p>
 El <i>slot</i> <code>tasks</code> es una lista: empleamos <code>$</code> para acceder a sus elementos
 </p>
 <div class="org-src-container">
-
 <pre class="src src-R">myList@tasks$t1
 </pre>
 </div>
@@ -1025,7 +1127,6 @@ Cada elemento de <code>tasks</code> es un objeto de clase <code>task</code>: emp
 <code>@</code> para extraer sus <i>slots</i>.
 </p>
 <div class="org-src-container">
-
 <pre class="src src-R">myList@tasks$t1@what
 </pre>
 </div>
@@ -1036,15 +1137,14 @@ Cada elemento de <code>tasks</code> es un objeto de clase <code>task</code>: emp
 </div>
 </div>
 
-<div id="outline-container-orgheadline29" class="outline-4">
-<h4 id="orgheadline29"><span class="section-number-4">3.1.8</span> Problema con los slots definidos como <code>list</code></h4>
+<div id="outline-container-org91bba95" class="outline-4">
+<h4 id="org91bba95"><span class="section-number-4">3.1.8</span> Problema con los slots definidos como <code>list</code></h4>
 <div class="outline-text-4" id="text-3-1-8">
 <p>
 Dado que el slot <code>tasks</code> es una <code>list</code>, podemos añadir cualquier
 cosa. 
 </p>
 <div class="org-src-container">
-
 <pre class="src src-R">  myListOops <span class="org-constant">&lt;-</span> new(<span class="org-string">'ToDo'</span>,
                     tasks=list(t1=<span class="org-string">'Tarea1'</span>,
                       task1, task2))
@@ -1053,15 +1153,14 @@ cosa.
 </div>
 </div>
 
-<div id="outline-container-orgheadline30" class="outline-4">
-<h4 id="orgheadline30"><span class="section-number-4">3.1.9</span> Validación</h4>
+<div id="outline-container-org25ef647" class="outline-4">
+<h4 id="org25ef647"><span class="section-number-4">3.1.9</span> Validación</h4>
 <div class="outline-text-4" id="text-3-1-9">
 <p>
 Para obligar a que sus elementos sean de clase <code>task</code> debemos añadir
 una función de validación.
 </p>
 <div class="org-src-container">
-
 <pre class="src src-R"><span class="org-function-name">valida</span> <span class="org-constant">&lt;-</span> <span class="org-keyword">function</span> (object) {
     <span class="org-keyword">if</span> (any(sapply(object@tasks,
                    <span class="org-keyword">function</span>(x) !is(x, <span class="org-string">"task"</span>)))) 
@@ -1077,7 +1176,6 @@ setClass(<span class="org-string">'ToDo'</span>,
 </div>
 
 <div class="org-src-container">
-
 <pre class="src src-R">myListOops <span class="org-constant">&lt;-</span> new(<span class="org-string">'ToDo'</span>,
                   tasks=list(t1=<span class="org-string">'Tarea1'</span>,
                              task1, task2))
@@ -1085,16 +1183,15 @@ setClass(<span class="org-string">'ToDo'</span>,
 </div>
 
 <pre class="example">
-Error in validityMethod(object) (from #2) : not a list of task objects
+Error in validityMethod(object) : not a list of task objects
 </pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline31" class="outline-4">
-<h4 id="orgheadline31"><span class="section-number-4">3.1.10</span> Funciones para crear y modificar objetos</h4>
+<div id="outline-container-orgc8ae1e7" class="outline-4">
+<h4 id="orgc8ae1e7"><span class="section-number-4">3.1.10</span> Funciones para crear y modificar objetos</h4>
 <div class="outline-text-4" id="text-3-1-10">
 <div class="org-src-container">
-
 <pre class="src src-R"><span class="org-function-name">createToDo</span> <span class="org-constant">&lt;-</span> <span class="org-keyword">function</span>(){
     new(<span class="org-string">'ToDo'</span>)
 }
@@ -1102,7 +1199,6 @@ Error in validityMethod(object) (from #2) : not a list of task objects
 </div>
 
 <div class="org-src-container">
-
 <pre class="src src-R"><span class="org-function-name">addTask</span> <span class="org-constant">&lt;-</span> <span class="org-keyword">function</span>(object, task){
     <span class="org-comment-delimiter">## </span><span class="org-comment">La siguiente comprobaci&#243;n s&#243;lo es necesaria si la</span>
     <span class="org-comment-delimiter">## </span><span class="org-comment">definici&#243;n de la clase *no* incorpora una funci&#243;n </span>
@@ -1118,11 +1214,11 @@ Error in validityMethod(object) (from #2) : not a list of task objects
 </div>
 
 
-<div id="outline-container-orgheadline37" class="outline-3">
-<h3 id="orgheadline37"><span class="section-number-3">3.2</span> Métodos en <code>S4</code></h3>
+<div id="outline-container-org497cac0" class="outline-3">
+<h3 id="org497cac0"><span class="section-number-3">3.2</span> Métodos en <code>S4</code></h3>
 <div class="outline-text-3" id="text-3-2">
-</div><div id="outline-container-orgheadline33" class="outline-4">
-<h4 id="orgheadline33"><span class="section-number-4">3.2.1</span> Métodos en <code>S4</code>: <code>setMethod</code></h4>
+</div><div id="outline-container-orgf012893" class="outline-4">
+<h4 id="orgf012893"><span class="section-number-4">3.2.1</span> Métodos en <code>S4</code>: <code>setMethod</code></h4>
 <div class="outline-text-4" id="text-3-2-1">
 <ul class="org-ul">
 <li>Normalmente se definen con <code>setMethod</code>.</li>
@@ -1136,7 +1232,6 @@ método)</li>
 existe, se define con <code>setGeneric</code> y <code>standardGeneric</code></li>
 </ul>
 <div class="org-src-container">
-
 <pre class="src src-R">setGeneric(<span class="org-string">'myMethod'</span>,
            <span class="org-keyword">function</span>(x, y, ...)
                standardGeneric(<span class="org-string">'myMethod'</span>)
@@ -1149,7 +1244,6 @@ existe, se define con <code>setGeneric</code> y <code>standardGeneric</code></li
 </pre>
 
 <div class="org-src-container">
-
 <pre class="src src-R">setGeneric(<span class="org-string">'print'</span>)
 </pre>
 </div>
@@ -1160,8 +1254,8 @@ existe, se define con <code>setGeneric</code> y <code>standardGeneric</code></li
 </div>
 </div>
 
-<div id="outline-container-orgheadline34" class="outline-4">
-<h4 id="orgheadline34"><span class="section-number-4">3.2.2</span> Métodos en <code>S4</code>: <code>setGeneric</code> y <code>getGeneric</code></h4>
+<div id="outline-container-org9cdd57c" class="outline-4">
+<h4 id="org9cdd57c"><span class="section-number-4">3.2.2</span> Métodos en <code>S4</code>: <code>setGeneric</code> y <code>getGeneric</code></h4>
 <div class="outline-text-4" id="text-3-2-2">
 <p>
 Si ya existe un método genérico, la función <code>definition</code> debe tener
@@ -1169,7 +1263,6 @@ todos los argumentos de la función genérica y en el mismo orden.
 </p>
 
 <div class="org-src-container">
-
 <pre class="src src-R"><span class="org-constant">library</span>(lattice)  
 isGeneric(<span class="org-string">'xyplot'</span>)
 </pre>
@@ -1180,7 +1273,6 @@ isGeneric(<span class="org-string">'xyplot'</span>)
 </pre>
 
 <div class="org-src-container">
-
 <pre class="src src-R">getGeneric(<span class="org-string">'xyplot'</span>)
 </pre>
 </div>
@@ -1190,18 +1282,18 @@ standardGeneric for "xyplot" defined from package "lattice"
 
 function (x, data, ...) 
 standardGeneric("xyplot")
-&lt;environment: 0x42bd068&gt;
+&lt;bytecode: 0x5640bc7712d0&gt;
+&lt;environment: 0x5640bc58d960&gt;
 Methods may be defined for arguments: x, data
 Use  showMethods("xyplot")  for currently available ones.
 </pre>
 </div>
 </div>
 
-<div id="outline-container-orgheadline35" class="outline-4">
-<h4 id="orgheadline35"><span class="section-number-4">3.2.3</span> Definición de un método <code>print</code> para <code>task</code></h4>
+<div id="outline-container-org206a5cd" class="outline-4">
+<h4 id="org206a5cd"><span class="section-number-4">3.2.3</span> Definición de un método <code>print</code> para <code>task</code></h4>
 <div class="outline-text-4" id="text-3-2-3">
 <div class="org-src-container">
-
 <pre class="src src-R">setMethod(<span class="org-string">'print'</span>, signature = <span class="org-string">'task'</span>,
           definition = <span class="org-keyword">function</span>(x, ...){
               cat(<span class="org-string">'What: '</span>, x@what,
@@ -1218,7 +1310,6 @@ Use  showMethods("xyplot")  for currently available ones.
 
 
 <div class="org-src-container">
-
 <pre class="src src-R">  print(task1)
 </pre>
 </div>
@@ -1229,11 +1320,10 @@ What:  Find and fix bugs - When: 2013-03-15 - Priority: High
 </div>
 </div>
 
-<div id="outline-container-orgheadline36" class="outline-4">
-<h4 id="orgheadline36"><span class="section-number-4">3.2.4</span> Definición de un método <code>print</code> para <code>ToDo</code></h4>
+<div id="outline-container-org4059734" class="outline-4">
+<h4 id="org4059734"><span class="section-number-4">3.2.4</span> Definición de un método <code>print</code> para <code>ToDo</code></h4>
 <div class="outline-text-4" id="text-3-2-4">
 <div class="org-src-container">
-
 <pre class="src src-R">setMethod(<span class="org-string">'print'</span>, signature=<span class="org-string">'ToDo'</span>,
           definition = <span class="org-keyword">function</span>(x, ...){
               cat(<span class="org-string">'This is my ToDo list:\n'</span>)
@@ -1252,7 +1342,6 @@ What:  Find and fix bugs - When: 2013-03-15 - Priority: High
 </pre>
 
 <div class="org-src-container">
-
 <pre class="src src-R">  print(myList)
 </pre>
 </div>
@@ -1267,11 +1356,11 @@ No. 2 :What:  Write an email - When: 2013-01-01 - Priority: Low
 </div>
 </div>
 
-<div id="outline-container-orgheadline42" class="outline-3">
-<h3 id="orgheadline42"><span class="section-number-3">3.3</span> Clases <code>S3</code> con clases y métodos <code>S4</code></h3>
+<div id="outline-container-orge685bc6" class="outline-3">
+<h3 id="orge685bc6"><span class="section-number-3">3.3</span> Clases <code>S3</code> con clases y métodos <code>S4</code></h3>
 <div class="outline-text-3" id="text-3-3">
-</div><div id="outline-container-orgheadline38" class="outline-4">
-<h4 id="orgheadline38"><span class="section-number-4">3.3.1</span> Clases <code>S3</code> con clases y métodos <code>S4</code></h4>
+</div><div id="outline-container-org302c07c" class="outline-4">
+<h4 id="org302c07c"><span class="section-number-4">3.3.1</span> Clases <code>S3</code> con clases y métodos <code>S4</code></h4>
 <div class="outline-text-4" id="text-3-3-1">
 <p>
 Para usar objetos de clase <code>S3</code> en <code>signatures</code> de métodos <code>S4</code> o
@@ -1279,13 +1368,11 @@ como contenido de <code>slots</code> de una clase <code>S4</code> hay que regist
 <code>setOldClass</code>:
 </p>
 <div class="org-src-container">
-
 <pre class="src src-R">setOldClass(<span class="org-string">'lm'</span>)
 </pre>
 </div>
 
 <div class="org-src-container">
-
 <pre class="src src-R">getClass(<span class="org-string">'lm'</span>)
 </pre>
 </div>
@@ -1310,14 +1397,13 @@ Class "glm.null", by class "glm", distance 2
 </div>
 </div>
 
-<div id="outline-container-orgheadline39" class="outline-4">
-<h4 id="orgheadline39"><span class="section-number-4">3.3.2</span> Ejemplo con <code>lm</code> y <code>xyplot</code></h4>
+<div id="outline-container-org1bf9c68" class="outline-4">
+<h4 id="org1bf9c68"><span class="section-number-4">3.3.2</span> Ejemplo con <code>lm</code> y <code>xyplot</code></h4>
 <div class="outline-text-4" id="text-3-3-2">
 <p>
 Definimos un método genérico para <code>xyplot</code>
 </p>
 <div class="org-src-container">
-
 <pre class="src src-R"><span class="org-constant">library</span>(lattice)
 setGeneric(<span class="org-string">'xyplot'</span>)
 </pre>
@@ -1331,7 +1417,6 @@ setGeneric(<span class="org-string">'xyplot'</span>)
 Definimos un método para la clase <code>lm</code> usando <code>xyplot</code>.
 </p>
 <div class="org-src-container">
-
 <pre class="src src-R">setMethod(<span class="org-string">'xyplot'</span>,
           signature = c(x = <span class="org-string">'lm'</span>,
                         data = <span class="org-string">'missing'</span>),
@@ -1351,14 +1436,13 @@ Definimos un método para la clase <code>lm</code> usando <code>xyplot</code>.
 </div>
 </div>
 
-<div id="outline-container-orgheadline40" class="outline-4">
-<h4 id="orgheadline40"><span class="section-number-4">3.3.3</span> Ejemplo con <code>lm</code> y <code>xyplot</code></h4>
+<div id="outline-container-orgd61a7c6" class="outline-4">
+<h4 id="orgd61a7c6"><span class="section-number-4">3.3.3</span> Ejemplo con <code>lm</code> y <code>xyplot</code></h4>
 <div class="outline-text-4" id="text-3-3-3">
 <p>
 Recuperamos la regresión que empleamos en el apartado de Estadística:
 </p>
 <div class="org-src-container">
-
 <pre class="src src-R">lmFertEdu <span class="org-constant">&lt;-</span> lm(Fertility ~ Education, data = swiss)
 summary(lmFertEdu)
 </pre>
@@ -1387,11 +1471,10 @@ F-statistic: 35.45 on 1 and 45 DF,  p-value: 3.659e-07
 </div>
 
 
-<div id="outline-container-orgheadline41" class="outline-4">
-<h4 id="orgheadline41"><span class="section-number-4">3.3.4</span> Ejemplo con <code>lm</code> y <code>xyplot</code></h4>
+<div id="outline-container-org0ab7013" class="outline-4">
+<h4 id="org0ab7013"><span class="section-number-4">3.3.4</span> Ejemplo con <code>lm</code> y <code>xyplot</code></h4>
 <div class="outline-text-4" id="text-3-3-4">
 <div class="org-src-container">
-
 <pre class="src src-R">xyplot(lmFertEdu, col=<span class="org-string">'red'</span>, pch = 19,
        type = c(<span class="org-string">'p'</span>, <span class="org-string">'g'</span>))
 </pre>
@@ -1406,7 +1489,7 @@ F-statistic: 35.45 on 1 and 45 DF,  p-value: 3.659e-07
 </div>
 <div id="postamble" class="status">
 <p class="author">Autor: Oscar Perpiñán Lamigueiro \\ <a href="http://oscarperpinan.github.io/">http://oscarperpinan.github.io/</a></p>
-<p class="date">Created: 2016-03-15 mar 00:55</p>
+<p class="date">Created: 2017-06-30 vie 15:40</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

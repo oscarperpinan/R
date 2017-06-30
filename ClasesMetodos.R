@@ -34,13 +34,13 @@ is.object(x)
   task1 <- list(what='Write an email',
                 when=as.Date('2013-01-01'),
                 priority='Low')
-  class(task1) <- 'task3'
+  class(task1) <- 'Task'
   task1
 
   task2 <- list(what='Find and fix bugs',
                 when=as.Date('2013-03-15'),
                 priority='High')
-  class(task2) <- 'task3'
+  class(task2) <- 'Task'
 
 ## Definición de Clases
 
@@ -48,16 +48,71 @@ is.object(x)
   class(myToDo) <- c('ToDo3')
   myToDo
 
-## Métodos con =S3=: =NextMethod=
+## Métodos genéricos: =UseMethod=
+## - =UseMethod= sirve para elegir el método correspondiente a la clase
+##   del objeto empleado como argumento en la función.
 
-  print.task3 <- function(x, ...){
+## - Se debe definir un método genérico, incluyendo llamada a
+##   =UseMethod=.
+
+summary
+
+
+
+## - Si no hay un método definido para la clase del objeto, =UseMethod= ejecuta la función por defecto:
+
+summary.default
+
+## Métodos genéricos: =UseMethod=
+
+
+  myFun <- function(x, ...)UseMethod('myFun')
+  myFun.default <- function(x, ...){
+    cat('Funcion genérica\n')
+    print(x)
+    }
+
+x <- rnorm(10)
+myFun(x)
+
+myFun(task1)
+
+## =methods=
+## Con =methods= podemos averiguar los métodos que hay definidos para una función particular:
+
+methods('myFun')
+
+methods('summary')
+
+## Definición del método para =Task=
+
+myFun.Task <- function(x, number,...)
+{
+    if (!missing(number))
+        cat('Task no.', number,':\n')
+    cat('What: ', x$what,
+        '- When:', as.character(x$when),
+        '- Priority:', x$priority,
+        '\n')
+}
+
+myFun(task1)
+
+methods(myFun)
+
+methods(class='Task')
+
+## =NextMethod=
+## Incluyendo =NextMethod= en un método específico llamamos al método genérico (=default=).
+
+  print.Task <- function(x, ...){
     cat('Task:\n')
-    NextMethod(x, ...)
+    NextMethod(x, ...) ## Ejecuta print.default
   }
 
   print(task1)
 
-## Métodos con =S3=: =NextMethod=
+## =NextMethod=
 
   print.ToDo3 <- function(x, ...){
     cat('This is my ToDo list:\n')
@@ -67,8 +122,24 @@ is.object(x)
 
 print(myToDo)
 
-## Definición de un método =S3= para =ToDo3=
+## Definición de un método =S3= para =Task=
 
+print.Task <- function(x, number,...){
+    if (!missing(number))
+        cat('Task no.', number,':\n')
+    cat('What: ', x$what,
+        '- When:', as.character(x$when),
+        '- Priority:', x$priority,
+        '\n')
+}
+
+print(task1)
+
+print(myToDo[[2]])
+
+## Definición de un método =S3= para =ToDo3=
+## - Definimos un método más sofisticado para la clase =ToDo3= *sin*
+##   tener en cuenta el método definido para la clase =Task=.
 
   print.ToDo3 <- function(x, ...){
     cat('This is my ToDo list:\n')
@@ -84,67 +155,22 @@ print(myToDo)
 
   print(myToDo)
 
-## Definición de un método =S3= para =task3=
-
-print.task3 <- function(x, number,...){
-    if (!missing(number))
-        cat('Task no.', number,':\n')
-    cat('What: ', x$what,
-        '- When:', as.character(x$when),
-        '- Priority:', x$priority,
-        '\n')
-} 
-
-print(task1)
-
-print(myToDo[[2]])
-
 ## Redefinición del método para =ToDo3=
 
+## - Podemos aligerar el código teniendo en cuenta el método definido para la clase =Task=.
+
   print.ToDo3 <- function(x, ...){
-    cat('This is my ToDo list:\n')
+      cat('This is my ToDo list:\n')
+      ## Cada uno de los elementos de un
+      ## objeto ToDo3 son Task.  Por tanto,
+      ## x[[i]] es de clase Task y
+      ## print(x[[i]]) ejecuta el metodo
+      ## print.Task
     for (i in seq_along(x)) print(x[[i]], i)
       cat('--------------------\n')
   }
 
 print(myToDo)
-
-## Métodos genéricos con =S3=: =UseMethod=
-
-  myFun <- function(x, ...)UseMethod('myFun')
-  myFun.default <- function(x, ...){
-    cat('Funcion genérica\n')
-    print(x)
-    }
-
-myFun(x)
-
-myFun(task1)
-
-## =methods=
-## Con =methods= podemos averiguar los métodos que hay definidos para una función particular:
-
-methods('myFun')
-
-head(methods('print'))
-
-## Definición del método para =task3= con =UseMethod=
-
-myFun.task3 <- function(x, number,...)
-{
-    if (!missing(number))
-        cat('Task no.', number,':\n')
-    cat('What: ', x$what,
-        '- When:', as.character(x$when),
-        '- Priority:', x$priority,
-        '\n')
-}
-
-myFun(task1)
-
-methods(myFun)
-
-methods(class='task3')
 
 ## Definición de una nueva clase
 
@@ -180,12 +206,11 @@ createTask <- function(what, when, priority){
         what = what,
         when = when,
         priority = priority)
-    }  
+    }
 
 task2 <- createTask(what = 'Write an email',
                     when = as.Date('2013-01-01'),
                     priority = 'Low')
-  
 
 createTask('Oops', 'Hoy', 3)
 
@@ -259,7 +284,6 @@ addTask <- function(object, task){
     object@tasks <- c(object@tasks, task)
     object
 }
-  
 
 ## Métodos en =S4=: =setMethod=
 ## - Normalmente se definen con =setMethod=.
@@ -296,7 +320,6 @@ setMethod('print', signature = 'task',
                   '- Priority:', x@priority,
                   '\n')
           })
-  
 
   print(task1)
 
