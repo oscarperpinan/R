@@ -1,0 +1,91 @@
+% Created 2017-07-01 sáb 10:29
+% Intended LaTeX compiler: pdflatex
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{color}
+\usepackage{listings}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[spanish]{babel}
+\usepackage[usenames,svgnames,dvipsnames]{xcolor}
+\usepackage{listings}
+\lstset{keywordstyle=\color{blue}, commentstyle=\color{gray!90}, basicstyle=\ttfamily\small, columns=fullflexible, breaklines=true,linewidth=\textwidth, backgroundcolor=\color{gray!23}, basewidth={0.5em,0.4em}, literate={¡}{{\textexclamdown}}1 {á}{{\'a}}1 {ñ}{{\~n}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {í}{{\'i}}1 {ú}{{\'u}}1 {º}{{\textordmasculine}}1, showstringspaces=false}
+\usepackage{mathpazo}
+\hypersetup{colorlinks=true, linkcolor=Blue, urlcolor=Blue}
+\usepackage{fancyvrb}
+\DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\tiny, formatcom = {\color{black!70}}}
+\date{}
+\title{Funciones: ejercicios propuestos}
+\hypersetup{
+ pdfauthor={},
+ pdftitle={Funciones: ejercicios propuestos},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 24.5.1 (Org mode 9.0.5)}, 
+ pdflang={Spanish}}
+\begin{document}
+
+\maketitle
+
+\section{Áreas de figuras geométricas}
+\label{sec:orgacdb165}
+Escribe una función que calcule el área de un círculo, un triángulo o un cuadrado. La función empleará, a su vez, una función diferente definida para cada caso.
+
+\section{Conversión de temperaturas}
+\label{sec:org201f189}
+Escribe una función para realizar la conversión de temperaturas. La función trabajará a partir de un valor (número real) y una letra. La letra indica la escala en la que se introduce esa temperatura. Si la letra es 'C', la temperatura se convertirá de grados centígrados a Fahrenheit. Si la letra es 'F' la temperatura se convertirá de grados Fahrenheit a grados Centígrados. Se usarán 2 funciones auxiliares, \texttt{cent2fahr} y \texttt{fahr2cent} para convertir de una escala a otra. Estas funciones aceptan un parámetro (la temperatura en una escala) y devuelven el valor en la otra escala. 
+
+Nota: La relación entre ambas escalas es \(T_F = 9/5 * T_C + 32\)
+
+\section{Tablas de multiplicar}
+\label{sec:orge1565f2}
+Construye un programa que muestre por pantalla las tablas de multiplicar del 1 al 10, a partir de dos funciones específicas. La primera función debe devolver el producto de dos valores numéricos enteros dados como parámetros. La segunda función debe mostrar por pantalla la tabla de multiplicar de un número dado como parámetro.
+
+\section{Números combinatorios}
+\label{sec:org6f5ecb5}
+
+Escribe una función que calcule y muestre en pantalla el número combinatorio a partir de los valores \texttt{n} y \texttt{k}.
+
+\[
+nk = \frac{n!}{(n - k)! \cdot k!}
+\]
+
+Esta función debe estar construida en base a dos funciones auxiliares, una para calcular el factorial de un número, y otra para calcular el número combinatorio.
+
+\section{Fibonacci}
+\label{sec:org064ed8c}
+
+Escribe una \textbf{función recursiva} que genere los \texttt{n} primeros términos de la serie de Fibonacci. Esta función aceptará el número entero \texttt{n} como argumento. Este valor debe ser positivo, de forma que si el usuario introduce un valor negativo la función devolverá un error.
+
+Nota: En la serie de Fibonacci los dos primeros números son 1, y el resto se obtiene sumando los dos anteriores: \(1, 1, 2, 3, 5, 8, 13, 21, \ldots\)
+
+\section{Serie de Taylor}
+\label{sec:orgdb1cac5}
+
+Escribe un conjunto de funciones para calcular la aproximación de \(e ^ {-x}\) mediante el desarrollo de Taylor:
+
+\[
+ e^{-x} = 1 + \sum_{i = 1}^\infty \frac{(-x)^n}{n!}
+ \]
+
+La función principal acepta como argumentos el valor del número real \texttt{x} y el número de términos deseados. Se basará en otras tres funciones: 
+
+\begin{itemize}
+\item \texttt{factorial} calcula el factorial de un número entero \texttt{n}.
+
+\item \texttt{potencia} calcula la potencia \texttt{n} de un número real \texttt{x}.
+
+\item \texttt{exponencial} calcula la aproximación anterior de un número real \texttt{x} usando \texttt{n} términos de la serie de Taylor.
+\end{itemize}
+\end{document}
