@@ -271,7 +271,7 @@ El principal repositorio de paquetes estables es [[http://cran.r-project.org/][C
     --as-cran= antes de subirlo al formulario. El resultado de
     esta comprobación *no* debe contener errores, advertencias o notas.
   - Más detalle en el apartado /Submission/ de las [[http://cran.r-project.org/web/packages/policies.html][condiciones de
-    CRAN]] y en el manual [[http://cran.r-project.org/doc/manuals/R-exts.html\#Submitting-a-package-to-CRAN][R Extensions]].
+    CRAN]].
 
 ** Repositorios
 
@@ -293,3 +293,10 @@ Otros repositorios destacables son:
 - Emplea =git= para realizar control de versiones.
   - [[https://help.github.com/articles/good-resources-for-learning-git-and-github/][Recursos]] para aprender a usar =git=.
 - [[https://github.com/search?o=desc&q=language:R&ref=searchresults&s=stars&type=Repositories][Proyectos de =R= en GitHub]]. 
+- Instalar paquete desde GitHub:
+#+begin_src R
+install.packages('remotes') ## solo primera vez
+library(remotes)
+## https://github.com/oscarperpinan/tdr
+install_github("oscarperpinan/tdr") 
+#+end_src

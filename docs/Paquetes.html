@@ -3,12 +3,12 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
 <head>
-<!-- 2016-03-12 sáb 18:11 -->
-<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<!-- 2017-07-03 lun 10:29 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Crear paquetes en R</title>
-<meta  name="generator" content="Org-mode" />
-<meta  name="author" content="Oscar Perpiñán Lamigueiro \\ [[http://oscarperpinan.github.io]]" />
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Oscar Perpiñán Lamigueiro \\ http://oscarperpinan.github.io" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center;
@@ -53,13 +53,97 @@
     border: 1px solid black;
   }
   pre.src:hover:before { display: inline;}
-  pre.src-sh:before    { content: 'sh'; }
-  pre.src-bash:before  { content: 'sh'; }
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
   pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-R:before     { content: 'R'; }
-  pre.src-perl:before  { content: 'Perl'; }
-  pre.src-java:before  { content: 'Java'; }
-  pre.src-sql:before   { content: 'SQL'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
 
   table { border-collapse:collapse; }
   caption.t-above { caption-side: top; }
@@ -92,6 +176,7 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
 <link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
@@ -149,52 +234,13 @@ for the JavaScript code in this tag.
 <body>
 <div id="content">
 <h1 class="title">Crear paquetes en R</h1>
-<div id="table-of-contents">
-<h2>&Iacute;ndice</h2>
-<div id="text-table-of-contents">
-<ul>
-<li><a href="#orgheadline8">1. Introducción</a>
-<ul>
-<li><a href="#orgheadline1">1.1. Definiciones previas (Creating R Packages: a tutorial)</a></li>
-<li><a href="#orgheadline2">1.2. Definiciones previas (Creating R Packages: a tutorial)</a></li>
-<li><a href="#orgheadline3">1.3. Definiciones previas (Creating R Packages: a tutorial)</a></li>
-<li><a href="#orgheadline4">1.4. ¿Por qué crear y publicar un paquete para <code>R</code>?</a></li>
-<li><a href="#orgheadline5">1.5. Algunos consejos genéricos</a></li>
-<li><a href="#orgheadline7">1.6. </a></li>
-</ul>
-</li>
-<li><a href="#orgheadline17">2. Crear un paquete en R</a>
-<ul>
-<li><a href="#orgheadline9">2.1. Estructura</a></li>
-<li><a href="#orgheadline10">2.2. DESCRIPTION</a></li>
-<li><a href="#orgheadline11">2.3. NAMESPACE</a></li>
-<li><a href="#orgheadline12">2.4. NAMESPACE</a></li>
-<li><a href="#orgheadline13">2.5. NAMESPACE</a></li>
-<li><a href="#orgheadline14">2.6. NAMESPACE</a></li>
-<li><a href="#orgheadline15">2.7. Documentación</a></li>
-<li><a href="#orgheadline16">2.8. </a></li>
-</ul>
-</li>
-<li><a href="#orgheadline27">3. Publicar un paquete</a>
-<ul>
-<li><a href="#orgheadline18">3.1. Itinerario</a></li>
-<li><a href="#orgheadline19">3.2. Comprobar</a></li>
-<li><a href="#orgheadline22">3.3. Construir</a></li>
-<li><a href="#orgheadline23">3.4. Comprobar y construir en sistemas Windows</a></li>
-<li><a href="#orgheadline24">3.5. Repositorios: CRAN</a></li>
-<li><a href="#orgheadline25">3.6. Repositorios</a></li>
-<li><a href="#orgheadline26">3.7. Repositorios: GitHub</a></li>
-</ul>
-</li>
-</ul>
-</div>
-</div>
 
-<div id="outline-container-orgheadline8" class="outline-2">
-<h2 id="orgheadline8"><span class="section-number-2">1</span> Introducción</h2>
+
+<div id="outline-container-org755dc8a" class="outline-2">
+<h2 id="org755dc8a"><span class="section-number-2">1</span> Introducción</h2>
 <div class="outline-text-2" id="text-1">
-</div><div id="outline-container-orgheadline1" class="outline-3">
-<h3 id="orgheadline1"><span class="section-number-3">1.1</span> Definiciones previas (<a href="http://cran.r-project.org/doc/contrib/Leisch-CreatingPackages.pdf">Creating R Packages: a tutorial</a>)</h3>
+</div><div id="outline-container-orga9c9b33" class="outline-3">
+<h3 id="orga9c9b33"><span class="section-number-3">1.1</span> Definiciones previas (<a href="http://cran.r-project.org/doc/contrib/Leisch-CreatingPackages.pdf">Creating R Packages: a tutorial</a>)</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li><b>Package</b>: An extension of the R base system with code, data and
@@ -205,8 +251,8 @@ documentation in standardized format.</li>
 </div>
 </div>
 
-<div id="outline-container-orgheadline2" class="outline-3">
-<h3 id="orgheadline2"><span class="section-number-3">1.2</span> Definiciones previas (<a href="http://cran.r-project.org/doc/contrib/Leisch-CreatingPackages.pdf">Creating R Packages: a tutorial</a>)</h3>
+<div id="outline-container-orgd3a771a" class="outline-3">
+<h3 id="orgd3a771a"><span class="section-number-3">1.2</span> Definiciones previas (<a href="http://cran.r-project.org/doc/contrib/Leisch-CreatingPackages.pdf">Creating R Packages: a tutorial</a>)</h3>
 <div class="outline-text-3" id="text-1-2">
 <ul class="org-ul">
 <li><b>Source</b>: The original version of a package with human-readable text and code.</li>
@@ -216,8 +262,8 @@ text and code, may work only on a specific platform.</li>
 </div>
 </div>
 
-<div id="outline-container-orgheadline3" class="outline-3">
-<h3 id="orgheadline3"><span class="section-number-3">1.3</span> Definiciones previas (<a href="http://cran.r-project.org/doc/contrib/Leisch-CreatingPackages.pdf">Creating R Packages: a tutorial</a>)</h3>
+<div id="outline-container-orga318272" class="outline-3">
+<h3 id="orga318272"><span class="section-number-3">1.3</span> Definiciones previas (<a href="http://cran.r-project.org/doc/contrib/Leisch-CreatingPackages.pdf">Creating R Packages: a tutorial</a>)</h3>
 <div class="outline-text-3" id="text-1-3">
 <ul class="org-ul">
 <li><b>Base packages</b>: Part of the R source tree, maintained by R Core.</li>
@@ -228,8 +274,8 @@ necessarily maintained by R Core.</li>
 </div>
 </div>
 
-<div id="outline-container-orgheadline4" class="outline-3">
-<h3 id="orgheadline4"><span class="section-number-3">1.4</span> ¿Por qué crear y publicar un paquete para <code>R</code>?</h3>
+<div id="outline-container-org6a9b003" class="outline-3">
+<h3 id="org6a9b003"><span class="section-number-3">1.4</span> ¿Por qué crear y publicar un paquete para <code>R</code>?</h3>
 <div class="outline-text-3" id="text-1-4">
 <ul class="org-ul">
 <li>Es una herramienta cómoda para mantener colecciones coherentes de funciones
@@ -249,8 +295,8 @@ invention of ours, and this we should do freely and generously.&raquo;</li>
 </div>
 </div>
 
-<div id="outline-container-orgheadline5" class="outline-3">
-<h3 id="orgheadline5"><span class="section-number-3">1.5</span> Algunos consejos genéricos</h3>
+<div id="outline-container-org349c238" class="outline-3">
+<h3 id="org349c238"><span class="section-number-3">1.5</span> Algunos consejos genéricos</h3>
 <div class="outline-text-3" id="text-1-5">
 <p>
 Extraído de <a href="http://arxiv.org/abs/1210.0530">Best Practices for Scientific Computing</a>
@@ -271,10 +317,10 @@ Extraído de <a href="http://arxiv.org/abs/1210.0530">Best Practices for Scienti
 </div>
 </div>
 
-<div id="outline-container-orgheadline7" class="outline-3">
-<h3 id="orgheadline7"><span class="section-number-3">1.6</span> </h3>
+<div id="outline-container-orgb2370c9" class="outline-3">
+<h3 id="orgb2370c9"><span class="section-number-3">1.6</span> </h3>
 <div class="outline-text-3" id="text-1-6">
-</div><ol class="org-ol"><li><a id="orgheadline6"></a>Referencias&#xa0;&#xa0;&#xa0;<span class="tag"><span class="B_block">B_block</span></span><br  /><div class="outline-text-4" id="text-1-6-1">
+</div><ol class="org-ol"><li><a id="orgeeaaed0"></a>Referencias&#xa0;&#xa0;&#xa0;<span class="tag"><span class="B_block">B_block</span></span><br /><div class="outline-text-4" id="text-1-6-1">
 <ul class="org-ul">
 <li><a href="http://cran.r-project.org/doc/manuals/r-release/R-exts.html">Writing R Extensions</a></li>
 <li><a href="http://cran.r-project.org/doc/contrib/Leisch-CreatingPackages.pdf">Creating R Packages: a tutorial</a></li>
@@ -285,11 +331,11 @@ Extraído de <a href="http://arxiv.org/abs/1210.0530">Best Practices for Scienti
 </div>
 </div>
 
-<div id="outline-container-orgheadline17" class="outline-2">
-<h2 id="orgheadline17"><span class="section-number-2">2</span> Crear un paquete en R</h2>
+<div id="outline-container-org348456e" class="outline-2">
+<h2 id="org348456e"><span class="section-number-2">2</span> Crear un paquete en R</h2>
 <div class="outline-text-2" id="text-2">
-</div><div id="outline-container-orgheadline9" class="outline-3">
-<h3 id="orgheadline9"><span class="section-number-3">2.1</span> Estructura</h3>
+</div><div id="outline-container-orgbb218d6" class="outline-3">
+<h3 id="orgbb218d6"><span class="section-number-3">2.1</span> Estructura</h3>
 <div class="outline-text-3" id="text-2-1">
 <ul class="org-ul">
 <li>Las fuentes de un paquete de <code>R</code> están contenidas en un
@@ -308,8 +354,8 @@ contenidos en el paquete.</li>
 </div>
 </div>
 
-<div id="outline-container-orgheadline10" class="outline-3">
-<h3 id="orgheadline10"><span class="section-number-3">2.2</span> DESCRIPTION</h3>
+<div id="outline-container-org0c5db45" class="outline-3">
+<h3 id="org0c5db45"><span class="section-number-3">2.2</span> DESCRIPTION</h3>
 <div class="outline-text-3" id="text-2-2">
 <ul class="org-ul">
 <li>El fichero DESCRIPTION contiene la información básica sobre el
@@ -340,8 +386,8 @@ paquete con un formato preestablecido:</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgheadline11" class="outline-3">
-<h3 id="orgheadline11"><span class="section-number-3">2.3</span> NAMESPACE</h3>
+<div id="outline-container-org46d2571" class="outline-3">
+<h3 id="org46d2571"><span class="section-number-3">2.3</span> NAMESPACE</h3>
 <div class="outline-text-3" id="text-2-3">
 <ul class="org-ul">
 <li><code>R</code> usa un sistema de gestión de <i>espacio de nombres</i> que
@@ -357,8 +403,8 @@ accesibles a los usuarios)</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgheadline12" class="outline-3">
-<h3 id="orgheadline12"><span class="section-number-3">2.4</span> NAMESPACE</h3>
+<div id="outline-container-orga34a021" class="outline-3">
+<h3 id="orga34a021"><span class="section-number-3">2.4</span> NAMESPACE</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 El <code>NAMESPACE</code> controla la estrategia de búsqueda de variables
@@ -375,14 +421,13 @@ resultado de <code>search()</code>)</li>
 </div>
 </div>
 
-<div id="outline-container-orgheadline13" class="outline-3">
-<h3 id="orgheadline13"><span class="section-number-3">2.5</span> NAMESPACE</h3>
+<div id="outline-container-orgb0b305e" class="outline-3">
+<h3 id="orgb0b305e"><span class="section-number-3">2.5</span> NAMESPACE</h3>
 <div class="outline-text-3" id="text-2-5">
 <ul class="org-ul">
 <li>Para exportar las variables <code>f</code> y <code>g</code>:</li>
 </ul>
 <div class="org-src-container">
-
 <pre class="src src-R">export(f, g)
 </pre>
 </div>
@@ -390,7 +435,6 @@ resultado de <code>search()</code>)</li>
 <li>Para importar <b>todas</b> las variables del paquete <code>pkgExt</code>:</li>
 </ul>
 <div class="org-src-container">
-
 <pre class="src src-R">import(pkgExt)
 </pre>
 </div>
@@ -399,21 +443,19 @@ resultado de <code>search()</code>)</li>
 <code>pkgExt</code>:</li>
 </ul>
 <div class="org-src-container">
-
 <pre class="src src-R">importFrom(pkgExt, var1, var2)
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgheadline14" class="outline-3">
-<h3 id="orgheadline14"><span class="section-number-3">2.6</span> NAMESPACE</h3>
+<div id="outline-container-orga3e42fb" class="outline-3">
+<h3 id="orga3e42fb"><span class="section-number-3">2.6</span> NAMESPACE</h3>
 <div class="outline-text-3" id="text-2-6">
 <ul class="org-ul">
 <li>Para registrar el método <code>S3</code> <code>print</code> para la clase <code>myClass</code>:</li>
 </ul>
 <div class="org-src-container">
-
 <pre class="src src-R">S3method(print, myClass)
 </pre>
 </div>
@@ -421,7 +463,6 @@ resultado de <code>search()</code>)</li>
 <li>Para registrar las clases <code>S4</code> <code>class1</code> y <code>class2</code>:</li>
 </ul>
 <div class="org-src-container">
-
 <pre class="src src-R">exportClasses(class1, class2)
 </pre>
 </div>
@@ -429,7 +470,6 @@ resultado de <code>search()</code>)</li>
 <li>Para registrar los métodos <code>S4</code> <code>method1</code> y <code>method2</code>:</li>
 </ul>
 <div class="org-src-container">
-
 <pre class="src src-R">exportMethods(method1, method2)
 </pre>
 </div>
@@ -437,7 +477,6 @@ resultado de <code>search()</code>)</li>
 <li>Para importar métodos y clases <code>S4</code> de otro paquete:</li>
 </ul>
 <div class="org-src-container">
-
 <pre class="src src-R">importClassesFrom(package, ...)
 importMethodsFrom(package, ...)
 </pre>
@@ -445,8 +484,8 @@ importMethodsFrom(package, ...)
 </div>
 </div>
 
-<div id="outline-container-orgheadline15" class="outline-3">
-<h3 id="orgheadline15"><span class="section-number-3">2.7</span> Documentación</h3>
+<div id="outline-container-org6dac881" class="outline-3">
+<h3 id="org6dac881"><span class="section-number-3">2.7</span> Documentación</h3>
 <div class="outline-text-3" id="text-2-7">
 <ul class="org-ul">
 <li>Las páginas de ayuda de los objetos <code>R</code> se escriben usando el
@@ -464,8 +503,8 @@ formato “R documentation” (Rd), un lenguaje similar a LaTeX.</li>
 </div>
 </div>
 
-<div id="outline-container-orgheadline16" class="outline-3">
-<h3 id="orgheadline16"><span class="section-number-3">2.8</span> </h3>
+<div id="outline-container-orga16bca8" class="outline-3">
+<h3 id="orga16bca8"><span class="section-number-3">2.8</span> </h3>
 <div class="outline-text-3" id="text-2-8">
 <pre class="example">
   \name{load}
@@ -503,11 +542,11 @@ formato “R documentation” (Rd), un lenguaje similar a LaTeX.</li>
 </div>
 </div>
 
-<div id="outline-container-orgheadline27" class="outline-2">
-<h2 id="orgheadline27"><span class="section-number-2">3</span> Publicar un paquete</h2>
+<div id="outline-container-orgda3b7a5" class="outline-2">
+<h2 id="orgda3b7a5"><span class="section-number-2">3</span> Publicar un paquete</h2>
 <div class="outline-text-2" id="text-3">
-</div><div id="outline-container-orgheadline18" class="outline-3">
-<h3 id="orgheadline18"><span class="section-number-3">3.1</span> Itinerario</h3>
+</div><div id="outline-container-org33be750" class="outline-3">
+<h3 id="org33be750"><span class="section-number-3">3.1</span> Itinerario</h3>
 <div class="outline-text-3" id="text-3-1">
 <ul class="org-ul">
 <li>Comprobar</li>
@@ -527,8 +566,8 @@ R CMD build myPackage/
 </div>
 </div>
 
-<div id="outline-container-orgheadline19" class="outline-3">
-<h3 id="orgheadline19"><span class="section-number-3">3.2</span> Comprobar</h3>
+<div id="outline-container-org33b7ac9" class="outline-3">
+<h3 id="org33b7ac9"><span class="section-number-3">3.2</span> Comprobar</h3>
 <div class="outline-text-3" id="text-3-2">
 <ul class="org-ul">
 <li>Comprobar un directorio (desde línea de comandos):</li>
@@ -548,17 +587,17 @@ en el manual <a href="http://cran.r-project.org/doc/manuals/R-exts.html#Checking
 </ul>
 </div>
 </div>
-<div id="outline-container-orgheadline22" class="outline-3">
-<h3 id="orgheadline22"><span class="section-number-3">3.3</span> Construir</h3>
+<div id="outline-container-orge58441a" class="outline-3">
+<h3 id="orge58441a"><span class="section-number-3">3.3</span> Construir</h3>
 <div class="outline-text-3" id="text-3-3">
-</div><ol class="org-ol"><li><a id="orgheadline20"></a>Fuente o binario&#xa0;&#xa0;&#xa0;<span class="tag"><span class="B_block">B_block</span></span><br  /><div class="outline-text-4" id="text-3-3-1">
+</div><ol class="org-ol"><li><a id="org9dd90e1"></a>Fuente o binario&#xa0;&#xa0;&#xa0;<span class="tag"><span class="B_block">B_block</span></span><br /><div class="outline-text-4" id="text-3-3-1">
 <p>
 Se puede construir un fichero fuente en formato <i>tarball</i>
 (independiente de la plataforma, habitual en sistemas Unix) o en
 forma binaria (dependiente de la plataforma, habitual para Windows y Mac).
 </p>
 </div></li>
-<li><a id="orgheadline21"></a>Cómo hacerlo&#xa0;&#xa0;&#xa0;<span class="tag"><span class="B_ignoreheading">B_ignoreheading</span></span><br  /><div class="outline-text-4" id="text-3-3-2">
+<li><a id="org64bd1c2"></a>Cómo hacerlo&#xa0;&#xa0;&#xa0;<span class="tag"><span class="B_ignoreheading">B_ignoreheading</span></span><br /><div class="outline-text-4" id="text-3-3-2">
 <ul class="org-ul">
 <li>Fuente en formato <i>tarball</i>: el resultado es un fichero <i>tarball</i> <code>myPackage.tar.gz</code> que
 se puede distribuir a cualquier sistema.</li>
@@ -576,8 +615,8 @@ R CMD INSTALL --build myPackage/
 </div></li></ol>
 </div>
 
-<div id="outline-container-orgheadline23" class="outline-3">
-<h3 id="orgheadline23"><span class="section-number-3">3.4</span> Comprobar y construir en sistemas Windows</h3>
+<div id="outline-container-org5812261" class="outline-3">
+<h3 id="org5812261"><span class="section-number-3">3.4</span> Comprobar y construir en sistemas Windows</h3>
 <div class="outline-text-3" id="text-3-4">
 <ul class="org-ul">
 <li>Para paquetes sin código compilado (C, Fortran), también se puede usar
@@ -598,8 +637,8 @@ install.packages(myPackage.tar.gz, type='source')
 </div>
 
 
-<div id="outline-container-orgheadline24" class="outline-3">
-<h3 id="orgheadline24"><span class="section-number-3">3.5</span> Repositorios: CRAN</h3>
+<div id="outline-container-orgc050d21" class="outline-3">
+<h3 id="orgc050d21"><span class="section-number-3">3.5</span> Repositorios: CRAN</h3>
 <div class="outline-text-3" id="text-3-5">
 <p>
 El principal repositorio de paquetes estables es <a href="http://cran.r-project.org/">CRAN</a>.
@@ -614,13 +653,13 @@ allí se indican.</li>
     --as-cran</code> antes de subirlo al formulario. El resultado de
 esta comprobación <b>no</b> debe contener errores, advertencias o notas.</li>
 <li>Más detalle en el apartado <i>Submission</i> de las <a href="http://cran.r-project.org/web/packages/policies.html">condiciones de
-CRAN</a> y en el manual <a href="http://cran.r-project.org/doc/manuals/R-exts.html%5C#Submitting-a-package-to-CRAN">R Extensions</a>.</li>
+CRAN</a>.</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgheadline25" class="outline-3">
-<h3 id="orgheadline25"><span class="section-number-3">3.6</span> Repositorios</h3>
+<div id="outline-container-orgbc21d24" class="outline-3">
+<h3 id="orgbc21d24"><span class="section-number-3">3.6</span> Repositorios</h3>
 <div class="outline-text-3" id="text-3-6">
 <p>
 Otros repositorios destacables son:
@@ -638,13 +677,13 @@ Otros repositorios destacables son:
 </div>
 </div>
 
-<div id="outline-container-orgheadline26" class="outline-3">
-<h3 id="orgheadline26"><span class="section-number-3">3.7</span> Repositorios: GitHub</h3>
+<div id="outline-container-orgb2730d4" class="outline-3">
+<h3 id="orgb2730d4"><span class="section-number-3">3.7</span> Repositorios: GitHub</h3>
 <div class="outline-text-3" id="text-3-7">
 <ul class="org-ul">
 <li>GitHub es actualmente el repositorio de código más importante por número de usuarios y proyectos alojados.
 <ul class="org-ul">
-<li>Documentación: <a href="https://guides.github.com/">Guías sobre GitHub</a> y <a href="https://training.github.com/kit/courses/github-for-everyone.html">GitHub for everyone</a>.</li>
+<li>Documentación: <a href="https://guides.github.com/">Guías sobre GitHub</a>.</li>
 <li>Existe una <a href="https://desktop.github.com/">aplicación de escritorio</a> (<a href="https://help.github.com/desktop/guides/getting-started/">guía introductoria</a>)</li>
 </ul></li>
 <li>Emplea <code>git</code> para realizar control de versiones.
@@ -652,14 +691,22 @@ Otros repositorios destacables son:
 <li><a href="https://help.github.com/articles/good-resources-for-learning-git-and-github/">Recursos</a> para aprender a usar <code>git</code>.</li>
 </ul></li>
 <li><a href="https://github.com/search?o=desc&amp;q=language:R&amp;ref=searchresults&amp;s=stars&amp;type=Repositories">Proyectos de <code>R</code> en GitHub</a>.</li>
+<li>Instalar paquete desde GitHub:</li>
 </ul>
+<div class="org-src-container">
+<pre class="src src-R">install.packages(<span class="org-string">'remotes'</span>) <span class="org-comment-delimiter">## </span><span class="org-comment">solo primera vez</span>
+<span class="org-constant">library</span>(remotes)
+<span class="org-comment-delimiter">## </span><span class="org-comment">https://github.com/oscarperpinan/tdr</span>
+install_github(<span class="org-string">"oscarperpinan/tdr"</span>)
+</pre>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Autor: Oscar Perpiñán Lamigueiro \\ <a href="http://oscarperpinan.github.io/">http://oscarperpinan.github.io/</a></p>
-<p class="date">Created: 2016-03-12 sáb 18:11</p>
+<p class="date">Created: 2017-07-03 lun 10:29</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
