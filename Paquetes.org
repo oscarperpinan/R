@@ -77,8 +77,7 @@ Extraído de [[http://arxiv.org/abs/1210.0530][Best Practices for Scientific Com
 - Esta estructura puede ser generada con =package.skeleton=.
 
 ** DESCRIPTION
-- El fichero DESCRIPTION contiene la información básica sobre el
-  paquete con un formato preestablecido:
+- El fichero DESCRIPTION contiene la información básica:
 #+begin_example
      Package: pkgname
      Version: 0.5-1
@@ -100,6 +99,7 @@ Extraído de [[http://arxiv.org/abs/1210.0530][Best Practices for Scientific Com
 #+end_example
 - Los campos =Package=, =Version=, =License=, =Title=, =Author= y
   =Maintainer= son obligatorios.
+- Si usa métodos =S4= debe incluir =Depends: methods=
 ** NAMESPACE
 - =R= usa un sistema de gestión de /espacio de nombres/ que
   permite al autor del paquete especificar:
@@ -139,6 +139,10 @@ importFrom(pkgExt, var1, var2)
 #+begin_src R 
 S3method(print, myClass)
 #+end_src
+- Para usar clases y métodos =S4=
+#+begin_src R
+import("methods")
+#+end_src
 - Para registrar las clases =S4= =class1= y =class2=:
 #+begin_src R 
 exportClasses(class1, class2)
@@ -158,10 +162,10 @@ importMethodsFrom(package, ...)
   formato “R documentation” (Rd), un lenguaje similar a LaTeX.
 - Es aconsejable seguir estas orientaciones: [[http://developer.r-project.org/Rds.html][Guidelines for Rd files]]
 - Para generar el esqueleto de un fichero Rd es aconsejable usar:
-  - =prompt=: [[http://cran.r-project.org/doc/manuals/r-release/R-exts.html\#Documenting-functions][genérica]]
-  - =promptClass= y =promptMethods=: [[http://cran.r-project.org/doc/manuals/r-release/R-exts.html\#Documenting-S4-classes-and-methods][clases y métodos]].
-  - =promptPackage=: [[http://cran.r-project.org/doc/manuals/r-release/R-exts.html\#Documenting-packages][paquete]]
-  - =promptData=: [[http://cran.r-project.org/doc/manuals/r-release/R-exts.html\#Documenting-data-sets][datos]]
+  - =prompt=: [[http://cran.r-project.org/doc/manuals/r-release/R-exts.html#Documenting-functions][genérica]]
+  - =promptClass= y =promptMethods=: [[http://cran.r-project.org/doc/manuals/r-release/R-exts.html#Documenting-S4-classes-and-methods][clases y métodos]].
+  - =promptPackage=: [[http://cran.r-project.org/doc/manuals/r-release/R-exts.html#Documenting-packages][paquete]]
+  - =promptData=: [[http://cran.r-project.org/doc/manuals/r-release/R-exts.html#Documenting-data-sets][datos]]
 - Todos los comandos disponibles están en el documento [[http://developer.r-project.org/parseRd.pdf][Parsing Rd files]].
 
 ** 
@@ -197,6 +201,11 @@ importMethodsFrom(package, ...)
   }
   \keyword{file}
 #+end_example
+
+** Ejemplos
+
+- Paquete simple: https://github.com/oscarperpinan/pkgEx
+- Paquete con métodos S4: https://github.com/oscarperpinan/pkgMethods
 
 * Publicar un paquete
 
@@ -300,3 +309,9 @@ library(remotes)
 ## https://github.com/oscarperpinan/tdr
 install_github("oscarperpinan/tdr") 
 #+end_src
+
+** Ejemplos
+
+- Paquete simple: https://github.com/oscarperpinan/pkgEx
+- Paquete con métodos S4: https://github.com/oscarperpinan/pkgMethods
+
