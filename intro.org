@@ -130,6 +130,15 @@ z
 
 
 
+*** Ejercicio
+
+***** Dibuja una circunferencia
+
+Sabiendo que la función =plot(x, y)= dibuja el vector =y= frente al
+vector =x=, ¿qué código es necesario para dibujar una circunferencia
+de un radio determinado?
+
+
 ** Matrices
 *** Construir una matriz
 #+begin_src R 
@@ -163,7 +172,14 @@ M <- rbind(x, y, z)
 M
 #+end_src
 
+*** Álgebra matricial
 
+- =t()= :: Transpuesta de una matriz
+- =*= :: Multiplicación elemento a elemento
+- =%*%= :: Multiplicación de matrices
+- =solve(A)= :: Inversa de una matriz (cuadrada)
+- ...
+ 
 ** Listas
 *** Para crear una lista usamos la función =list=
 #+begin_src R 
@@ -211,7 +227,7 @@ dats <- read.table('data/aranjuez.csv',
 head(dats)
 #+end_src
 
-**** Atención: usa =setwd= para configurar ruta
+*Atención: usa =setwd= para configurar ruta*
 
 *** A partir de ficheros remotos
 #+begin_src R
@@ -228,22 +244,14 @@ head(remoto)
 identical(dats, remoto)
 #+end_src
 
-*** La función =expand.grid=
 
-#+begin_src R 
-x <- y <- seq(-4, 4, len = 200)
-df <- expand.grid(A = x, B = y)
-df$z <- sqrt(df$A^2 + df$B^2)
-#+end_src
+*** Ejercicio
 
-#+begin_src R :exports results :results output graphics :file figs/expand_grid.png
-library(lattice)
-contourplot(z ~ A + B, data = df)
-#+end_src
+***** Dibuja una circunferencia
 
-#+ATTR_LATEX: :height 0.6\textheight
-#+RESULTS:
-[[file:figs/expand_grid.png]]
+¿Qué código hay que emplear para dibujar una circunferencia de forma
+que todos los vectores implicados sean columnas de un =data.frame=?
+
 
 * Indexado
 
@@ -519,6 +527,17 @@ foo(1:10)
 foo(rnorm(1e5))
 #+end_src
 
+*** Ejercicio
+
+***** Dibuja una circunferencia
+
+Define una función de dos argumentos, =theta= (vector de ángulos) y
+=r= (radio), que entregue un =data.frame= de dos columnas, =x= e =y=,
+con las coordenadas del arco de circunferencia que corresponde a los
+argumentos de la función, y emplea esta función para dibujar una
+circunferencia completa.
+
+
 ** Funciones predefinidas
 
 *** Funciones en paquetes
@@ -576,6 +595,19 @@ lapply(lista, sum)
 #+begin_src R
 sapply(lista, sum)
 #+end_src
+
+*** Ejercicio
+
+**** 
+- Calcula la media de cada una de las columnas de =remoto=.
+- Calcula la media, mediana y desviación estándar de cada una de las columnas de =remoto=.
+- Calcula la media de los valores positivos de cada una de las columnas de =remoto=.
+
+**** 
+#+begin_src R
+remoto <- read.csv('https://raw.githubusercontent.com/oscarperpinan/R/master/data/aranjuez.csv')
+#+end_src
+
 
 ** Bucles =for=
 *** =for=

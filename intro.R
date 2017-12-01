@@ -100,16 +100,6 @@ head(remoto)
 
 identical(dats, remoto)
 
-## La función =expand.grid=
-
-
-x <- y <- seq(-4, 4, len = 200)
-df <- expand.grid(A = x, B = y)
-df$z <- sqrt(df$A^2 + df$B^2)
-
-library(lattice)
-contourplot(z ~ A + B, data = df)
-
 ## Condiciones simples
 
 x <- seq(-1, 1, .1)
@@ -338,6 +328,8 @@ lista <- list(x = 1:10,
 lapply(lista, sum)
 
 sapply(lista, sum)
+
+remoto <- read.csv('https://raw.githubusercontent.com/oscarperpinan/R/master/data/aranjuez.csv')
 
 ## =for=
 ## - En =R= suele usarse más la familia de funciones =*apply= con funciones vectorizadas.

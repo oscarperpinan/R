@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
 <head>
-<!-- 2016-11-27 dom 20:14 -->
+<!-- 2017-12-01 vie 19:06 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Introducción a R</title>
@@ -68,6 +68,7 @@
   pre.src-fortran:before { content: 'Fortran'; }
   pre.src-gnuplot:before { content: 'gnuplot'; }
   pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
   pre.src-java:before { content: 'Java'; }
   pre.src-js:before { content: 'Javascript'; }
   pre.src-latex:before { content: 'LaTeX'; }
@@ -189,7 +190,7 @@
 @licstart  The following is the entire license notice for the
 JavaScript code in this tag.
 
-Copyright (C) 2012-2013 Free Software Foundation, Inc.
+Copyright (C) 2012-2017 Free Software Foundation, Inc.
 
 The JavaScript code in this tag is free software: you can
 redistribute it and/or modify it under the terms of the GNU
@@ -235,46 +236,48 @@ for the JavaScript code in this tag.
 <div id="content">
 <h1 class="title">Introducción a R</h1>
 
-<div id="outline-container-orgb929e1e" class="outline-4">
-<h4 id="orgb929e1e"><span class="section-number-4">0.0.1</span> Índice de Contenidos</h4>
+<div id="outline-container-orge4e72bb" class="outline-4">
+<h4 id="orge4e72bb"><span class="section-number-4">0.0.1</span> Índice de Contenidos</h4>
 <div class="outline-text-4" id="text-0-0-1">
 <div id="table-of-contents">
 <h2>&Iacute;ndice</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org9f21bb4">1. Introducción</a></li>
-<li><a href="#orgc0b08d3">2. Objetos en R</a></li>
-<li><a href="#org7e6a140">3. Indexado</a></li>
-<li><a href="#orgf82522d">4. Funciones</a></li>
-<li><a href="#org66587af">5. Bucles</a></li>
+<li><a href="#org1c9791e">1. Introducción</a></li>
+<li><a href="#org7a3d27d">2. Objetos en R</a></li>
+<li><a href="#org3ebe287">3. Indexado</a></li>
+<li><a href="#org84516ef">4. Funciones</a></li>
+<li><a href="#org65cb113">5. Bucles</a></li>
 </ul>
 </div>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org9f21bb4" class="outline-2">
-<h2 id="org9f21bb4"><span class="section-number-2">1</span> Introducción</h2>
+<div id="outline-container-org1c9791e" class="outline-2">
+<h2 id="org1c9791e"><span class="section-number-2">1</span> Introducción</h2>
 <div class="outline-text-2" id="text-1">
-</div><div id="outline-container-orgf8d1ac2" class="outline-3">
-<h3 id="orgf8d1ac2"><span class="section-number-3">1.1</span> ¿Qué es R?</h3>
+</div>
+<div id="outline-container-org16a1302" class="outline-3">
+<h3 id="org16a1302"><span class="section-number-3">1.1</span> ¿Qué es R?</h3>
 <div class="outline-text-3" id="text-1-1">
-</div><div id="outline-container-orga6dbe0e" class="outline-4">
-<h4 id="orga6dbe0e"><span class="section-number-4">1.1.1</span> ¿Qué es <code>R</code>?</h4>
+</div>
+<div id="outline-container-org416f5ba" class="outline-4">
+<h4 id="org416f5ba"><span class="section-number-4">1.1.1</span> ¿Qué es <code>R</code>?</h4>
 <div class="outline-text-4" id="text-1-1-1">
 <p>
 Es un entorno de programación orientado al cálculo, manipulación de datos, y representación gráfica, publicado como software libre con licencia GNU-GPL.
 </p>
 <div class="org-center">
 <p>
-<a href="http://www.r-project.org/">http://www.r-project.org/</a> 
+<a href="http://www.r-project.org">http://www.r-project.org</a> 
 </p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgc0ff959" class="outline-4">
-<h4 id="orgc0ff959"><span class="section-number-4">1.1.2</span> R está muy bien documentado</h4>
+<div id="outline-container-org71f651a" class="outline-4">
+<h4 id="org71f651a"><span class="section-number-4">1.1.2</span> R está muy bien documentado</h4>
 <div class="outline-text-4" id="text-1-1-2">
 <ul class="org-ul">
 <li><a href="http://cran.r-project.org/manuals.html">Manuales Oficiales</a>
@@ -298,8 +301,8 @@ Es un entorno de programación orientado al cálculo, manipulación de datos, y 
 </div>
 </div>
 
-<div id="outline-container-org741ba5b" class="outline-4">
-<h4 id="org741ba5b"><span class="section-number-4">1.1.3</span> Otros recursos de información</h4>
+<div id="outline-container-org10f6103" class="outline-4">
+<h4 id="org10f6103"><span class="section-number-4">1.1.3</span> Otros recursos de información</h4>
 <div class="outline-text-4" id="text-1-1-3">
 <ul class="org-ul">
 <li><a href="http://www.r-project.org/mail.html">Listas de correo</a> (sin olvidar respetar <a href="http://www.r-project.org/posting-guide.html">estos consejos</a>)
@@ -307,14 +310,14 @@ Es un entorno de programación orientado al cálculo, manipulación de datos, y 
 <li>Generales: R-announce, R-help, R-devel</li>
 <li>Special Interest Group (SIG) mailing lists</li>
 </ul></li>
-<li><a href="http://www.r-bloggers.com/">R-bloggers</a></li>
+<li><a href="http://www.r-bloggers.com">R-bloggers</a></li>
 <li><a href="http://stackoverflow.com/questions/tagged/r">stackoverflow</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgccf9280" class="outline-4">
-<h4 id="orgccf9280"><span class="section-number-4">1.1.4</span> R es un proyecto colaborativo</h4>
+<div id="outline-container-org00f2328" class="outline-4">
+<h4 id="org00f2328"><span class="section-number-4">1.1.4</span> R es un proyecto colaborativo</h4>
 <div class="outline-text-4" id="text-1-1-4">
 <ul class="org-ul">
 <li>Una de las grandes riquezas de R es la cantidad de paquetes que amplían sus funcionalidades.</li>
@@ -327,11 +330,12 @@ Es un entorno de programación orientado al cálculo, manipulación de datos, y 
 </div>
 </div>
 
-<div id="outline-container-orgc0b08d3" class="outline-2">
-<h2 id="orgc0b08d3"><span class="section-number-2">2</span> Objetos en R</h2>
+<div id="outline-container-org7a3d27d" class="outline-2">
+<h2 id="org7a3d27d"><span class="section-number-2">2</span> Objetos en R</h2>
 <div class="outline-text-2" id="text-2">
-</div><div id="outline-container-org772c1b3" class="outline-4">
-<h4 id="org772c1b3"><span class="section-number-4">2.0.1</span> Objetos en R</h4>
+</div>
+<div id="outline-container-org9a8ed0d" class="outline-4">
+<h4 id="org9a8ed0d"><span class="section-number-4">2.0.1</span> Objetos en R</h4>
 <div class="outline-text-4" id="text-2-0-1">
 <ul class="org-ul">
 <li>Existen varios objetos en R:
@@ -353,11 +357,12 @@ Es un entorno de programación orientado al cálculo, manipulación de datos, y 
 </div>
 </div>
 
-<div id="outline-container-orgdf11106" class="outline-3">
-<h3 id="orgdf11106"><span class="section-number-3">2.1</span> Vectores</h3>
+<div id="outline-container-org1c08545" class="outline-3">
+<h3 id="org1c08545"><span class="section-number-3">2.1</span> Vectores</h3>
 <div class="outline-text-3" id="text-2-1">
-</div><div id="outline-container-org63b1ddf" class="outline-4">
-<h4 id="org63b1ddf"><span class="section-number-4">2.1.1</span> Primeros pasos</h4>
+</div>
+<div id="outline-container-orgb029a50" class="outline-4">
+<h4 id="orgb029a50"><span class="section-number-4">2.1.1</span> Primeros pasos</h4>
 <div class="outline-text-4" id="text-2-1-1">
 <div class="org-src-container">
 <pre class="src src-R">x <span class="org-constant">&lt;-</span> 1:5
@@ -367,6 +372,7 @@ x
 
 <pre class="example">
 [1] 1 2 3 4 5
+
 </pre>
 
 <div class="org-src-container">
@@ -376,6 +382,7 @@ x
 
 <pre class="example">
 [1] 5
+
 </pre>
 
 <div class="org-src-container">
@@ -385,13 +392,14 @@ x
 
 <pre class="example">
 [1] "integer"
+
 </pre>
 </div>
 </div>
 
 
-<div id="outline-container-org69303c6" class="outline-4">
-<h4 id="org69303c6"><span class="section-number-4">2.1.2</span> Generar vectores con <code>seq</code></h4>
+<div id="outline-container-org809bdfe" class="outline-4">
+<h4 id="org809bdfe"><span class="section-number-4">2.1.2</span> Generar vectores con <code>seq</code></h4>
 <div class="outline-text-4" id="text-2-1-2">
 <div class="org-src-container">
 <pre class="src src-R">x1 <span class="org-constant">&lt;-</span> seq(1, 100, by=2)
@@ -402,6 +410,7 @@ x1
 <pre class="example">
  [1]  1  3  5  7  9 11 13 15 17 19 21 23 25 27 29 31 33 35 37 39 41 43 45 47 49
 [26] 51 53 55 57 59 61 63 65 67 69 71 73 75 77 79 81 83 85 87 89 91 93 95 97 99
+
 </pre>
 
 <div class="org-src-container">
@@ -411,13 +420,14 @@ x1
 
 <pre class="example">
 [1]   1  12  23  34  45  56  67  78  89 100
+
 </pre>
 </div>
 </div>
 
 
-<div id="outline-container-org493a1aa" class="outline-4">
-<h4 id="org493a1aa"><span class="section-number-4">2.1.3</span> Unir vectores con <code>c</code></h4>
+<div id="outline-container-org024592c" class="outline-4">
+<h4 id="org024592c"><span class="section-number-4">2.1.3</span> Unir vectores con <code>c</code></h4>
 <div class="outline-text-4" id="text-2-1-3">
 <div class="org-src-container">
 <pre class="src src-R">x <span class="org-constant">&lt;-</span> c(1, 2, 3)
@@ -427,6 +437,7 @@ x
 
 <pre class="example">
 [1] 1 2 3
+
 </pre>
 
 <div class="org-src-container">
@@ -442,13 +453,14 @@ z
 [20]  20  22  24  26  28  30  32  34  36  38  40  42  44  46  48  50  52  54  56
 [39]  58  60  62  64  66  68  70  72  74  76  78  80  82  84  86  88  90  92  94
 [58]  96  98 100
+
 </pre>
 </div>
 </div>
 
 
-<div id="outline-container-org19e61bc" class="outline-4">
-<h4 id="org19e61bc"><span class="section-number-4">2.1.4</span> Operaciones sencillas con vectores</h4>
+<div id="outline-container-orga6ed2bb" class="outline-4">
+<h4 id="orga6ed2bb"><span class="section-number-4">2.1.4</span> Operaciones sencillas con vectores</h4>
 <div class="outline-text-4" id="text-2-1-4">
 <div class="org-src-container">
 <pre class="src src-R">  x <span class="org-constant">&lt;-</span> 1:5
@@ -458,6 +470,7 @@ z
 
 <pre class="example">
 [1] 2 3 4 5 6
+
 </pre>
 
 <div class="org-src-container">
@@ -467,6 +480,7 @@ z
 
 <pre class="example">
 [1]  1  4  9 16 25
+
 </pre>
 
 <div class="org-src-container">
@@ -477,6 +491,7 @@ z
 
 <pre class="example">
 [1]  2  4  6  8 10  7  9 11 13 15
+
 </pre>
 
 <div class="org-src-container">
@@ -486,6 +501,7 @@ z
 
 <pre class="example">
 [1]  1  4  9 16 25  6 14 24 36 50
+
 </pre>
 
 <div class="org-src-container">
@@ -495,19 +511,39 @@ z
 
 <pre class="example">
 [1]    2   12   36   80  150  217  347  521  745 1025
+
 </pre>
 </div>
 </div>
+
+
+
+
+<div id="outline-container-org887c78b" class="outline-4">
+<h4 id="org887c78b"><span class="section-number-4">2.1.5</span> Ejercicio</h4>
+<div class="outline-text-4" id="text-2-1-5">
+</div>
+<ol class="org-ol">
+<li><a id="org2b313ff"></a>Dibuja una circunferencia<br />
+<div class="outline-text-6" id="text-2-1-5-0-1">
+<p>
+Sabiendo que la función <code>plot(x, y)</code> dibuja el vector <code>y</code> frente al
+vector <code>x</code>, ¿qué código es necesario para dibujar una circunferencia
+de un radio determinado?
+</p>
+</div>
+</li>
+</ol>
+</div>
 </div>
 
 
-
-
-<div id="outline-container-org668c754" class="outline-3">
-<h3 id="org668c754"><span class="section-number-3">2.2</span> Matrices</h3>
+<div id="outline-container-org55eab93" class="outline-3">
+<h3 id="org55eab93"><span class="section-number-3">2.2</span> Matrices</h3>
 <div class="outline-text-3" id="text-2-2">
-</div><div id="outline-container-orgaf4edd2" class="outline-4">
-<h4 id="orgaf4edd2"><span class="section-number-4">2.2.1</span> Construir una matriz</h4>
+</div>
+<div id="outline-container-org1a2cf20" class="outline-4">
+<h4 id="org1a2cf20"><span class="section-number-4">2.2.1</span> Construir una matriz</h4>
 <div class="outline-text-4" id="text-2-2-1">
 <div class="org-src-container">
 <pre class="src src-R">  z <span class="org-constant">&lt;-</span> 1:12
@@ -521,6 +557,7 @@ z
 [1,]    1    4    7   10
 [2,]    2    5    8   11
 [3,]    3    6    9   12
+
 </pre>
 
 <div class="org-src-container">
@@ -530,6 +567,7 @@ z
 
 <pre class="example">
 [1] "matrix"
+
 </pre>
 
 <div class="org-src-container">
@@ -539,6 +577,7 @@ z
 
 <pre class="example">
 [1] 3 4
+
 </pre>
 
 <div class="org-src-container">
@@ -554,12 +593,13 @@ Median :2.0   Median :5.0   Median :8.0   Median :11.0
 Mean   :2.0   Mean   :5.0   Mean   :8.0   Mean   :11.0  
 3rd Qu.:2.5   3rd Qu.:5.5   3rd Qu.:8.5   3rd Qu.:11.5  
 Max.   :3.0   Max.   :6.0   Max.   :9.0   Max.   :12.0
+
 </pre>
 </div>
 </div>
 
-<div id="outline-container-org51d7dbf" class="outline-4">
-<h4 id="org51d7dbf"><span class="section-number-4">2.2.2</span> Matrices a partir de vectores: <code>rbind</code> y <code>cbind</code></h4>
+<div id="outline-container-org9c1cee7" class="outline-4">
+<h4 id="org9c1cee7"><span class="section-number-4">2.2.2</span> Matrices a partir de vectores: <code>rbind</code> y <code>cbind</code></h4>
 <div class="outline-text-4" id="text-2-2-2">
 <div class="org-src-container">
 <pre class="src src-R">z <span class="org-constant">&lt;-</span> y <span class="org-constant">&lt;-</span> x <span class="org-constant">&lt;-</span> 1:10
@@ -594,17 +634,31 @@ M
 x    1    2    3    4    5    6    7    8    9    10
 y    1    2    3    4    5    6    7    8    9    10
 z    1    2    3    4    5    6    7    8    9    10
+
 </pre>
 </div>
 </div>
+
+<div id="outline-container-orgd98a919" class="outline-4">
+<h4 id="orgd98a919"><span class="section-number-4">2.2.3</span> Álgebra matricial</h4>
+<div class="outline-text-4" id="text-2-2-3">
+<dl class="org-dl">
+<dt><code>t()</code></dt><dd>Transpuesta de una matriz</dd>
+<dt><code>*</code></dt><dd>Multiplicación elemento a elemento</dd>
+<dt><code>%*%</code></dt><dd>Multiplicación de matrices</dd>
+<dt><code>solve(A)</code></dt><dd>Inversa de una matriz (cuadrada)</dd>
+<dt>(no term)</dt><dd>&#x2026;</dd>
+</dl>
+</div>
+</div>
 </div>
 
-
-<div id="outline-container-orgf77e2e0" class="outline-3">
-<h3 id="orgf77e2e0"><span class="section-number-3">2.3</span> Listas</h3>
+<div id="outline-container-orgd23c1ff" class="outline-3">
+<h3 id="orgd23c1ff"><span class="section-number-3">2.3</span> Listas</h3>
 <div class="outline-text-3" id="text-2-3">
-</div><div id="outline-container-orgbb5ef33" class="outline-4">
-<h4 id="orgbb5ef33"><span class="section-number-4">2.3.1</span> Para crear una lista usamos la función <code>list</code></h4>
+</div>
+<div id="outline-container-org251699e" class="outline-4">
+<h4 id="org251699e"><span class="section-number-4">2.3.1</span> Para crear una lista usamos la función <code>list</code></h4>
 <div class="outline-text-4" id="text-2-3-1">
 <div class="org-src-container">
 <pre class="src src-R">lista <span class="org-constant">&lt;-</span> list(a=c(1,3,5),
@@ -623,6 +677,7 @@ $b
 
 $c
 [1] 3
+
 </pre>
 
 <div class="org-src-container">
@@ -632,6 +687,7 @@ $c
 
 <pre class="example">
 [1] "list"
+
 </pre>
 
 <div class="org-src-container">
@@ -641,6 +697,7 @@ $c
 
 <pre class="example">
 [1] 3
+
 </pre>
 </div>
 </div>
@@ -648,11 +705,12 @@ $c
 
 
 
-<div id="outline-container-org2ecfbcd" class="outline-3">
-<h3 id="org2ecfbcd"><span class="section-number-3">2.4</span> Data.frame</h3>
+<div id="outline-container-orgd9ccbf8" class="outline-3">
+<h3 id="orgd9ccbf8"><span class="section-number-3">2.4</span> Data.frame</h3>
 <div class="outline-text-3" id="text-2-4">
-</div><div id="outline-container-org790cced" class="outline-4">
-<h4 id="org790cced"><span class="section-number-4">2.4.1</span> Para crear un <code>data.frame</code>&#x2026;</h4>
+</div>
+<div id="outline-container-orgf3c11b7" class="outline-4">
+<h4 id="orgf3c11b7"><span class="section-number-4">2.4.1</span> Para crear un <code>data.frame</code>&#x2026;</h4>
 <div class="outline-text-4" id="text-2-4-1">
 <div class="org-src-container">
 <pre class="src src-R">  df <span class="org-constant">&lt;-</span> data.frame(x = 1:5,
@@ -664,16 +722,16 @@ $c
 
 <pre class="example">
    x           y z
-1  1  1.66892840 0
-2  2  0.29115155 0
-3  3  0.84512284 0
-4  4  0.82370914 0
-5  5  0.36146096 0
-6  1  0.45801513 0
-7  2 -0.20902427 0
-8  3 -1.50144130 0
-9  4  1.14336496 0
-10 5 -0.05937068 0
+1  1 -1.77926028 0
+2  2  1.18030392 0
+3  3  0.47916055 0
+4  4  0.55394921 0
+5  5 -0.49318683 0
+6  1 -0.27036026 0
+7  2  1.23014963 0
+8  3  0.10126461 0
+9  4  0.43176120 0
+10 5  0.07015643 0
 </pre>
 
 <div class="org-src-container">
@@ -683,6 +741,7 @@ $c
 
 <pre class="example">
 [1] 3
+
 </pre>
 
 <div class="org-src-container">
@@ -692,12 +751,13 @@ $c
 
 <pre class="example">
 [1] 10  3
+
 </pre>
 </div>
 </div>
 
-<div id="outline-container-org73b7762" class="outline-4">
-<h4 id="org73b7762"><span class="section-number-4">2.4.2</span> A partir de ficheros</h4>
+<div id="outline-container-orge02ab7f" class="outline-4">
+<h4 id="orge02ab7f"><span class="section-number-4">2.4.2</span> A partir de ficheros</h4>
 <div class="outline-text-4" id="text-2-4-2">
 <div class="org-src-container">
 <pre class="src src-R">dats <span class="org-constant">&lt;-</span> read.table(<span class="org-string">'data/aranjuez.csv'</span>,
@@ -727,13 +787,15 @@ $c
 5    10.300 0.5152422
 6     9.940 0.4886631
 </pre>
+
+<p>
+<b>Atención: usa <code>setwd</code> para configurar ruta</b>
+</p>
+</div>
 </div>
 
-<ol class="org-ol"><li><a id="org45cc27c"></a>Atención: usa <code>setwd</code> para configurar ruta<br  /></li></ol>
-</div>
-
-<div id="outline-container-org80c8016" class="outline-4">
-<h4 id="org80c8016"><span class="section-number-4">2.4.3</span> A partir de ficheros remotos</h4>
+<div id="outline-container-org0f5c455" class="outline-4">
+<h4 id="org0f5c455"><span class="section-number-4">2.4.3</span> A partir de ficheros remotos</h4>
 <div class="outline-text-4" id="text-2-4-3">
 <div class="org-src-container">
 <pre class="src src-R">remoto <span class="org-constant">&lt;-</span> read.table(<span class="org-string">'https://raw.githubusercontent.com/oscarperpinan/R/master/data/aranjuez.csv'</span>,
@@ -771,38 +833,41 @@ $c
 
 <pre class="example">
 [1] TRUE
+
 </pre>
 </div>
 </div>
 
-<div id="outline-container-org344c3b2" class="outline-4">
-<h4 id="org344c3b2"><span class="section-number-4">2.4.4</span> La función <code>expand.grid</code></h4>
+
+<div id="outline-container-org0deec59" class="outline-4">
+<h4 id="org0deec59"><span class="section-number-4">2.4.4</span> Ejercicio</h4>
 <div class="outline-text-4" id="text-2-4-4">
-<div class="org-src-container">
-<pre class="src src-R">x <span class="org-constant">&lt;-</span> y <span class="org-constant">&lt;-</span> seq(-4, 4, len = 200)
-df <span class="org-constant">&lt;-</span> expand.grid(A = x, B = y)
-df$z <span class="org-constant">&lt;-</span> sqrt(df$A^2 + df$B^2)
-</pre>
 </div>
-
-
-<div class="figure">
-<p><img src="figs/expand_grid.png" alt="expand_grid.png" />
+<ol class="org-ol">
+<li><a id="org2327134"></a>Dibuja una circunferencia<br />
+<div class="outline-text-6" id="text-2-4-4-0-1">
+<p>
+¿Qué código hay que emplear para dibujar una circunferencia de forma
+que todos los vectores implicados sean columnas de un <code>data.frame</code>?
 </p>
 </div>
-</div>
+</li>
+</ol>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org7e6a140" class="outline-2">
-<h2 id="org7e6a140"><span class="section-number-2">3</span> Indexado</h2>
+
+<div id="outline-container-org3ebe287" class="outline-2">
+<h2 id="org3ebe287"><span class="section-number-2">3</span> Indexado</h2>
 <div class="outline-text-2" id="text-3">
-</div><div id="outline-container-orgdebfd83" class="outline-3">
-<h3 id="orgdebfd83"><span class="section-number-3">3.1</span> Condiciones lógicas</h3>
+</div>
+<div id="outline-container-org9243368" class="outline-3">
+<h3 id="org9243368"><span class="section-number-3">3.1</span> Condiciones lógicas</h3>
 <div class="outline-text-3" id="text-3-1">
-</div><div id="outline-container-orgce68261" class="outline-4">
-<h4 id="orgce68261"><span class="section-number-4">3.1.1</span> Condiciones simples</h4>
+</div>
+<div id="outline-container-org22eba10" class="outline-4">
+<h4 id="org22eba10"><span class="section-number-4">3.1.1</span> Condiciones simples</h4>
 <div class="outline-text-4" id="text-3-1-1">
 <div class="org-src-container">
 <pre class="src src-R">x <span class="org-constant">&lt;-</span> seq(-1, 1, .1)
@@ -813,6 +878,7 @@ x
 <pre class="example">
  [1] -1.0 -0.9 -0.8 -0.7 -0.6 -0.5 -0.4 -0.3 -0.2 -0.1  0.0  0.1  0.2  0.3  0.4
 [16]  0.5  0.6  0.7  0.8  0.9  1.0
+
 </pre>
 
 <div class="org-src-container">
@@ -823,6 +889,7 @@ x
 <pre class="example">
  [1]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE
 [13] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+
 </pre>
 
 <div class="org-src-container">
@@ -833,6 +900,7 @@ x
 <pre class="example">
  [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE
 [13]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+
 </pre>
 
 <div class="org-src-container">
@@ -843,6 +911,7 @@ x
 <pre class="example">
  [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE
 [13] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+
 </pre>
 
 <div class="org-src-container">
@@ -853,12 +922,13 @@ x
 <pre class="example">
  [1]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE
 [13]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+
 </pre>
 </div>
 </div>
 
-<div id="outline-container-org396b140" class="outline-4">
-<h4 id="org396b140"><span class="section-number-4">3.1.2</span> Condiciones múltiples</h4>
+<div id="outline-container-org3aedba0" class="outline-4">
+<h4 id="org3aedba0"><span class="section-number-4">3.1.2</span> Condiciones múltiples</h4>
 <div class="outline-text-4" id="text-3-1-2">
 <div class="org-src-container">
 <pre class="src src-R">cond  <span class="org-constant">&lt;-</span>  (x &gt; 0) &amp; (x &lt; .5)
@@ -869,6 +939,7 @@ cond
 <pre class="example">
  [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE
 [13]  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE
+
 </pre>
 
 <div class="org-src-container">
@@ -880,13 +951,14 @@ cond
 <pre class="example">
  [1]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE
 [13] FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+
 </pre>
 </div>
 </div>
 
 
-<div id="outline-container-orge62b104" class="outline-4">
-<h4 id="orge62b104"><span class="section-number-4">3.1.3</span> Con las condiciones se pueden hacer operaciones</h4>
+<div id="outline-container-orgf848422" class="outline-4">
+<h4 id="orgf848422"><span class="section-number-4">3.1.3</span> Con las condiciones se pueden hacer operaciones</h4>
 <div class="outline-text-4" id="text-3-1-3">
 <div class="org-src-container">
 <pre class="src src-R">sum(cond)
@@ -895,6 +967,7 @@ cond
 
 <pre class="example">
 [1] 12
+
 </pre>
 
 <div class="org-src-container">
@@ -904,6 +977,7 @@ cond
 
 <pre class="example">
 [1] 9
+
 </pre>
 
 <div class="org-src-container">
@@ -913,17 +987,19 @@ cond
 
 <pre class="example">
 [1] 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1
+
 </pre>
 </div>
 </div>
 </div>
 
 
-<div id="outline-container-orgb8b1aa6" class="outline-3">
-<h3 id="orgb8b1aa6"><span class="section-number-3">3.2</span> Vectores</h3>
+<div id="outline-container-org24c31c1" class="outline-3">
+<h3 id="org24c31c1"><span class="section-number-3">3.2</span> Vectores</h3>
 <div class="outline-text-3" id="text-3-2">
-</div><div id="outline-container-org68b58e9" class="outline-4">
-<h4 id="org68b58e9"><span class="section-number-4">3.2.1</span> Indexado numérico</h4>
+</div>
+<div id="outline-container-org66860ef" class="outline-4">
+<h4 id="org66860ef"><span class="section-number-4">3.2.1</span> Indexado numérico</h4>
 <div class="outline-text-4" id="text-3-2-1">
 <div class="org-src-container">
 <pre class="src src-R">  x <span class="org-constant">&lt;-</span> seq(1, 100, 2)
@@ -934,6 +1010,7 @@ cond
 <pre class="example">
  [1]  1  3  5  7  9 11 13 15 17 19 21 23 25 27 29 31 33 35 37 39 41 43 45 47 49
 [26] 51 53 55 57 59 61 63 65 67 69 71 73 75 77 79 81 83 85 87 89 91 93 95 97 99
+
 </pre>
 
 <div class="org-src-container">
@@ -943,6 +1020,7 @@ cond
 
 <pre class="example">
 [1] 1 3 5 7 9
+
 </pre>
 
 <div class="org-src-container">
@@ -952,12 +1030,13 @@ cond
 
 <pre class="example">
 [1] 19 17 15 13 11  9
+
 </pre>
 </div>
 </div>
 
-<div id="outline-container-orgb66104a" class="outline-4">
-<h4 id="orgb66104a"><span class="section-number-4">3.2.2</span> Indexado con condiciones lógicas</h4>
+<div id="outline-container-orgd82e95f" class="outline-4">
+<h4 id="orgd82e95f"><span class="section-number-4">3.2.2</span> Indexado con condiciones lógicas</h4>
 <div class="outline-text-4" id="text-3-2-2">
 <div class="org-src-container">
 <pre class="src src-R">  x[x != 9]
@@ -967,6 +1046,7 @@ cond
 <pre class="example">
  [1]  1  3  5  7 11 13 15 17 19 21 23 25 27 29 31 33 35 37 39 41 43 45 47 49 51
 [26] 53 55 57 59 61 63 65 67 69 71 73 75 77 79 81 83 85 87 89 91 93 95 97 99
+
 </pre>
 
 <div class="org-src-container">
@@ -977,6 +1057,7 @@ cond
 <pre class="example">
  [1] 21 23 25 27 29 31 33 35 37 39 41 43 45 47 49 51 53 55 57 59 61 63 65 67 69
 [26] 71 73 75 77 79 81 83 85 87 89 91 93 95 97 99
+
 </pre>
 
 <div class="org-src-container">
@@ -986,12 +1067,13 @@ cond
 
 <pre class="example">
 [1] 1 3 5 7 9
+
 </pre>
 </div>
 </div>
 
-<div id="outline-container-org3d42e58" class="outline-4">
-<h4 id="org3d42e58"><span class="section-number-4">3.2.3</span> Indexado con condiciones múltiples</h4>
+<div id="outline-container-org67447b4" class="outline-4">
+<h4 id="org67447b4"><span class="section-number-4">3.2.3</span> Indexado con condiciones múltiples</h4>
 <div class="outline-text-4" id="text-3-2-3">
 <div class="org-src-container">
 <pre class="src src-R">z <span class="org-constant">&lt;-</span> seq(-10, 10, by = .5)
@@ -1004,6 +1086,7 @@ z
 [13]  -4.0  -3.5  -3.0  -2.5  -2.0  -1.5  -1.0  -0.5   0.0   0.5   1.0   1.5
 [25]   2.0   2.5   3.0   3.5   4.0   4.5   5.0   5.5   6.0   6.5   7.0   7.5
 [37]   8.0   8.5   9.0   9.5  10.0
+
 </pre>
 
 <div class="org-src-container">
@@ -1014,6 +1097,7 @@ z
 <pre class="example">
  [1] -10.0  -9.5  -9.0  -8.5  -8.0  -7.5  -7.0  -6.5  -6.0  -5.5   5.5   6.0
 [13]   6.5   7.0   7.5   8.0   8.5   9.0   9.5  10.0
+
 </pre>
 
 <div class="org-src-container">
@@ -1027,6 +1111,7 @@ cond
 [13] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE
 [25]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE
 [37] FALSE FALSE FALSE FALSE FALSE
+
 </pre>
 
 <div class="org-src-container">
@@ -1036,16 +1121,18 @@ cond
 
 <pre class="example">
 [1] 0.0 0.5 1.0 1.5 2.0 2.5 3.0 3.5 4.0 4.5 5.0
+
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgcb2c2da" class="outline-3">
-<h3 id="orgcb2c2da"><span class="section-number-3">3.3</span> Matrices</h3>
+<div id="outline-container-org52ec5b8" class="outline-3">
+<h3 id="org52ec5b8"><span class="section-number-3">3.3</span> Matrices</h3>
 <div class="outline-text-3" id="text-3-3">
-</div><div id="outline-container-org9cd0bbb" class="outline-4">
-<h4 id="org9cd0bbb"><span class="section-number-4">3.3.1</span> Indexado de matrices</h4>
+</div>
+<div id="outline-container-orgc1fcd12" class="outline-4">
+<h4 id="orgc1fcd12"><span class="section-number-4">3.3.1</span> Indexado de matrices</h4>
 <div class="outline-text-4" id="text-3-3-1">
 <div class="org-src-container">
 <pre class="src src-R">M[1:2, ]
@@ -1056,6 +1143,7 @@ cond
   [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
 x    1    2    3    4    5    6    7    8    9    10
 y    1    2    3    4    5    6    7    8    9    10
+
 </pre>
 
 <div class="org-src-container">
@@ -1067,6 +1155,7 @@ y    1    2    3    4    5    6    7    8    9    10
   [,1] [,2]
 x    2    3
 y    2    3
+
 </pre>
 
 <div class="org-src-container">
@@ -1076,12 +1165,13 @@ y    2    3
 
 <pre class="example">
 [1] 1 4
+
 </pre>
 </div>
 </div>
 
-<div id="outline-container-orgf51ee33" class="outline-4">
-<h4 id="orgf51ee33"><span class="section-number-4">3.3.2</span> Indexado de matrices</h4>
+<div id="outline-container-org2175dda" class="outline-4">
+<h4 id="org2175dda"><span class="section-number-4">3.3.2</span> Indexado de matrices</h4>
 <div class="outline-text-4" id="text-3-3-2">
 <div class="org-src-container">
 <pre class="src src-R">M[-1,]
@@ -1092,6 +1182,7 @@ y    2    3
   [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
 y    1    2    3    4    5    6    7    8    9    10
 z    1    2    3    4    5    6    7    8    9    10
+
 </pre>
 
 <div class="org-src-container">
@@ -1101,16 +1192,18 @@ z    1    2    3    4    5    6    7    8    9    10
 
 <pre class="example">
 [1]  1  2  3  4  5  6  7  8  9 10
+
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgb7f776a" class="outline-3">
-<h3 id="orgb7f776a"><span class="section-number-3">3.4</span> Listas</h3>
+<div id="outline-container-orgb0f1b20" class="outline-3">
+<h3 id="orgb0f1b20"><span class="section-number-3">3.4</span> Listas</h3>
 <div class="outline-text-3" id="text-3-4">
-</div><div id="outline-container-orgb6b4bfa" class="outline-4">
-<h4 id="orgb6b4bfa"><span class="section-number-4">3.4.1</span> Podemos acceder a los elementos&#x2026;</h4>
+</div>
+<div id="outline-container-orgbe4cbf0" class="outline-4">
+<h4 id="orgbe4cbf0"><span class="section-number-4">3.4.1</span> Podemos acceder a los elementos&#x2026;</h4>
 <div class="outline-text-4" id="text-3-4-1">
 <ul class="org-ul">
 <li>Por su nombre</li>
@@ -1122,6 +1215,7 @@ z    1    2    3    4    5    6    7    8    9    10
 
 <pre class="example">
 [1] 1 3 5
+
 </pre>
 
 <ul class="org-ul">
@@ -1135,6 +1229,7 @@ z    1    2    3    4    5    6    7    8    9    10
 <pre class="example">
 $a
 [1] 1 3 5
+
 </pre>
 
 <div class="org-src-container">
@@ -1144,17 +1239,19 @@ $a
 
 <pre class="example">
 [1] 1 3 5
+
 </pre>
 </div>
 </div>
 </div>
 
 
-<div id="outline-container-orgd2f5ebf" class="outline-3">
-<h3 id="orgd2f5ebf"><span class="section-number-3">3.5</span> Data Frame</h3>
+<div id="outline-container-org12d5f83" class="outline-3">
+<h3 id="org12d5f83"><span class="section-number-3">3.5</span> Data Frame</h3>
 <div class="outline-text-3" id="text-3-5">
-</div><div id="outline-container-orgd313d3c" class="outline-4">
-<h4 id="orgd313d3c"><span class="section-number-4">3.5.1</span> Podemos acceder a los elementos</h4>
+</div>
+<div id="outline-container-orge4cda6c" class="outline-4">
+<h4 id="orge4cda6c"><span class="section-number-4">3.5.1</span> Podemos acceder a los elementos</h4>
 <div class="outline-text-4" id="text-3-5-1">
 <div class="org-src-container">
 <pre class="src src-R">  df <span class="org-constant">&lt;-</span> data.frame(x = 1:5,
@@ -1173,6 +1270,7 @@ $a
 
 <pre class="example">
 [1] 1 2 3 4 5 1 2 3 4 5
+
 </pre>
 
 <ul class="org-ul">
@@ -1184,8 +1282,9 @@ $a
 </div>
 
 <pre class="example">
-  x          y z
-1 1 -0.1119815 0
+  x         y z
+1 1 0.1511153 0
+
 </pre>
 
 <div class="org-src-container">
@@ -1195,12 +1294,13 @@ $a
 
 <pre class="example">
 [1] 1 2 3 4 5 1 2 3 4 5
+
 </pre>
 </div>
 </div>
 
-<div id="outline-container-org4149ef3" class="outline-4">
-<h4 id="org4149ef3"><span class="section-number-4">3.5.2</span> Indexado lógico</h4>
+<div id="outline-container-orgb6d722f" class="outline-4">
+<h4 id="orgb6d722f"><span class="section-number-4">3.5.2</span> Indexado lógico</h4>
 <div class="outline-text-4" id="text-3-5-2">
 <ul class="org-ul">
 <li>Hay que explicitar dos veces el <code>data.frame</code>:</li>
@@ -1211,10 +1311,13 @@ $a
 </div>
 
 <pre class="example">
-  x         y z
-3 3 0.6242292 0
-5 5 0.3896525 0
-8 3 0.7652364 0
+   x         y z
+1  1 0.1511153 0
+4  4 0.8337642 0
+5  5 1.0076730 0
+9  4 0.4055800 0
+10 5 0.4368694 0
+
 </pre>
 
 <ul class="org-ul">
@@ -1226,16 +1329,19 @@ $a
 </div>
 
 <pre class="example">
-  x         y z
-3 3 0.6242292 0
-5 5 0.3896525 0
-8 3 0.7652364 0
+   x         y z
+1  1 0.1511153 0
+4  4 0.8337642 0
+5  5 1.0076730 0
+9  4 0.4055800 0
+10 5 0.4368694 0
+
 </pre>
 </div>
 </div>
 
-<div id="outline-container-orgbb5b284" class="outline-4">
-<h4 id="orgbb5b284"><span class="section-number-4">3.5.3</span> Uso de <code>with</code></h4>
+<div id="outline-container-org0322d24" class="outline-4">
+<h4 id="org0322d24"><span class="section-number-4">3.5.3</span> Uso de <code>with</code></h4>
 <div class="outline-text-4" id="text-3-5-3">
 <ul class="org-ul">
 <li>Problema: el código con varias variables puede ser ilegible</li>
@@ -1253,8 +1359,9 @@ $a
 </div>
 
 <pre class="example">
-[1]  1.012540  4.076420  9.389662 16.474003 25.151829  4.078496  4.155333
-[8]  9.585587 18.696310 25.145404
+[1]  1.022836  4.315125  9.397178 16.695163 26.015405  1.328288  4.268280
+[8]  9.000642 16.164495 25.190855
+
 </pre>
 
 <div class="org-src-container">
@@ -1263,21 +1370,24 @@ $a
 </div>
 
 <pre class="example">
-[1] 3 5 3
+[1] 1 4 5 4 5
+
 </pre>
 </div>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgf82522d" class="outline-2">
-<h2 id="orgf82522d"><span class="section-number-2">4</span> Funciones</h2>
+<div id="outline-container-org84516ef" class="outline-2">
+<h2 id="org84516ef"><span class="section-number-2">4</span> Funciones</h2>
 <div class="outline-text-2" id="text-4">
-</div><div id="outline-container-orgfdbda75" class="outline-3">
-<h3 id="orgfdbda75"><span class="section-number-3">4.1</span> Definición de funciones</h3>
+</div>
+<div id="outline-container-org4aa82dd" class="outline-3">
+<h3 id="org4aa82dd"><span class="section-number-3">4.1</span> Definición de funciones</h3>
 <div class="outline-text-3" id="text-4-1">
-</div><div id="outline-container-org8512214" class="outline-4">
-<h4 id="org8512214"><span class="section-number-4">4.1.1</span> Componentes de una función</h4>
+</div>
+<div id="outline-container-org4a82e7b" class="outline-4">
+<h4 id="org4a82e7b"><span class="section-number-4">4.1.1</span> Componentes de una función</h4>
 <div class="outline-text-4" id="text-4-1-1">
 <ul class="org-ul">
 <li>Una función se define con <code>function</code></li>
@@ -1299,8 +1409,8 @@ $a
 </div>
 
 
-<div id="outline-container-org52251ba" class="outline-4">
-<h4 id="org52251ba"><span class="section-number-4">4.1.2</span> Argumentos: nombre y orden</h4>
+<div id="outline-container-org11c3ca3" class="outline-4">
+<h4 id="org11c3ca3"><span class="section-number-4">4.1.2</span> Argumentos: nombre y orden</h4>
 <div class="outline-text-4" id="text-4-1-2">
 <p>
 Una función identifica sus argumentos por su nombre y por su orden (sin nombre)
@@ -1321,6 +1431,7 @@ Una función identifica sus argumentos por su nombre y por su orden (sin nombre)
 
 <pre class="example">
 [1]   1   4   9  16  25  36  49  64  81 100
+
 </pre>
 
 <div class="org-src-container">
@@ -1330,6 +1441,7 @@ Una función identifica sus argumentos por su nombre y por su orden (sin nombre)
 
 <pre class="example">
 [1]   1   4   9  16  25  36  49  64  81 100
+
 </pre>
 
 <div class="org-src-container">
@@ -1339,12 +1451,13 @@ Una función identifica sus argumentos por su nombre y por su orden (sin nombre)
 
 <pre class="example">
 [1]   1   4   9  16  25  36  49  64  81 100
+
 </pre>
 </div>
 </div>
 
-<div id="outline-container-orgcbcf7b6" class="outline-4">
-<h4 id="orgcbcf7b6"><span class="section-number-4">4.1.3</span> Argumentos: valores por defecto</h4>
+<div id="outline-container-orgb9ea1eb" class="outline-4">
+<h4 id="orgb9ea1eb"><span class="section-number-4">4.1.3</span> Argumentos: valores por defecto</h4>
 <div class="outline-text-4" id="text-4-1-3">
 <ul class="org-ul">
 <li>Se puede asignar un valor por defecto a los argumentos</li>
@@ -1364,6 +1477,7 @@ Una función identifica sus argumentos por su nombre y por su orden (sin nombre)
 
 <pre class="example">
 [1]   1   4   9  16  25  36  49  64  81 100
+
 </pre>
 
 <div class="org-src-container">
@@ -1373,12 +1487,13 @@ Una función identifica sus argumentos por su nombre y por su orden (sin nombre)
 
 <pre class="example">
 [1]   1   4   9  16  25  36  49  64  81 100
+
 </pre>
 </div>
 </div>
 
-<div id="outline-container-org475bf65" class="outline-4">
-<h4 id="org475bf65"><span class="section-number-4">4.1.4</span> Argumentos sin nombre: <code>...</code></h4>
+<div id="outline-container-org723061e" class="outline-4">
+<h4 id="org723061e"><span class="section-number-4">4.1.4</span> Argumentos sin nombre: <code>...</code></h4>
 <div class="outline-text-4" id="text-4-1-4">
 <div class="org-src-container">
 <pre class="src src-R"><span class="org-function-name">pwrSum</span> <span class="org-constant">&lt;-</span> <span class="org-keyword">function</span>(x, p, ...)
@@ -1396,6 +1511,7 @@ pwrSum(x, 2)
 
 <pre class="example">
 [1] 385
+
 </pre>
 
 <div class="org-src-container">
@@ -1406,6 +1522,7 @@ pwrSum(x, 2)
 
 <pre class="example">
 [1] NA
+
 </pre>
 
 <div class="org-src-container">
@@ -1415,12 +1532,13 @@ pwrSum(x, 2)
 
 <pre class="example">
 [1] 385
+
 </pre>
 </div>
 </div>
 
-<div id="outline-container-orgd2f5aa7" class="outline-4">
-<h4 id="orgd2f5aa7"><span class="section-number-4">4.1.5</span> Podemos construir a partir de funciones</h4>
+<div id="outline-container-org61fab08" class="outline-4">
+<h4 id="org61fab08"><span class="section-number-4">4.1.5</span> Podemos construir a partir de funciones</h4>
 <div class="outline-text-4" id="text-4-1-5">
 <div class="org-src-container">
 <pre class="src src-R"><span class="org-function-name">foo</span>  <span class="org-constant">&lt;-</span>  <span class="org-keyword">function</span>(x, ...){
@@ -1439,6 +1557,7 @@ pwrSum(x, 2)
 
 <pre class="example">
 [1] 5.50000 5.50000 3.02765
+
 </pre>
 
 <div class="org-src-container">
@@ -1447,17 +1566,39 @@ pwrSum(x, 2)
 </div>
 
 <pre class="example">
-[1] 0.000859375 0.002659321 1.000992640
+[1] -0.006946130 -0.005603224  1.001553615
+
 </pre>
 </div>
 </div>
+
+<div id="outline-container-org9f66b97" class="outline-4">
+<h4 id="org9f66b97"><span class="section-number-4">4.1.6</span> Ejercicio</h4>
+<div class="outline-text-4" id="text-4-1-6">
+</div>
+<ol class="org-ol">
+<li><a id="org5db7a3c"></a>Dibuja una circunferencia<br />
+<div class="outline-text-6" id="text-4-1-6-0-1">
+<p>
+Define una función de dos argumentos, <code>theta</code> (vector de ángulos) y
+<code>r</code> (radio), que entregue un <code>data.frame</code> de dos columnas, <code>x</code> e <code>y</code>,
+con las coordenadas del arco de circunferencia que corresponde a los
+argumentos de la función, y emplea esta función para dibujar una
+circunferencia completa.
+</p>
+</div>
+</li>
+</ol>
+</div>
 </div>
 
-<div id="outline-container-org5e18701" class="outline-3">
-<h3 id="org5e18701"><span class="section-number-3">4.2</span> Funciones predefinidas</h3>
+
+<div id="outline-container-org682aa99" class="outline-3">
+<h3 id="org682aa99"><span class="section-number-3">4.2</span> Funciones predefinidas</h3>
 <div class="outline-text-3" id="text-4-2">
-</div><div id="outline-container-org8478b4c" class="outline-4">
-<h4 id="org8478b4c"><span class="section-number-4">4.2.1</span> Funciones en paquetes</h4>
+</div>
+<div id="outline-container-orgcd873ba" class="outline-4">
+<h4 id="orgcd873ba"><span class="section-number-4">4.2.1</span> Funciones en paquetes</h4>
 <div class="outline-text-4" id="text-4-2-1">
 <ul class="org-ul">
 <li><code>R</code> proporciona un amplio conjunto de funciones predefinidas agrupadas en paquetes
@@ -1497,14 +1638,16 @@ pwrSum(x, 2)
 </div>
 </div>
 
-<div id="outline-container-org66587af" class="outline-2">
-<h2 id="org66587af"><span class="section-number-2">5</span> Bucles</h2>
+<div id="outline-container-org65cb113" class="outline-2">
+<h2 id="org65cb113"><span class="section-number-2">5</span> Bucles</h2>
 <div class="outline-text-2" id="text-5">
-</div><div id="outline-container-orgfd03f6b" class="outline-3">
-<h3 id="orgfd03f6b"><span class="section-number-3">5.1</span> Matrices</h3>
+</div>
+<div id="outline-container-org2d45e0e" class="outline-3">
+<h3 id="org2d45e0e"><span class="section-number-3">5.1</span> Matrices</h3>
 <div class="outline-text-3" id="text-5-1">
-</div><div id="outline-container-orgba32cf0" class="outline-4">
-<h4 id="orgba32cf0"><span class="section-number-4">5.1.1</span> La función <code>apply</code></h4>
+</div>
+<div id="outline-container-org7e8c8f8" class="outline-4">
+<h4 id="org7e8c8f8"><span class="section-number-4">5.1.1</span> La función <code>apply</code></h4>
 <div class="outline-text-4" id="text-5-1-1">
 <div class="org-src-container">
 <pre class="src src-R">apply(M, 1, sum)
@@ -1514,6 +1657,7 @@ pwrSum(x, 2)
 <pre class="example">
  x  y  z 
 55 55 55
+
 </pre>
 
 <div class="org-src-container">
@@ -1524,6 +1668,7 @@ pwrSum(x, 2)
 <pre class="example">
  x  y  z 
 55 55 55
+
 </pre>
 
 <div class="org-src-container">
@@ -1533,6 +1678,7 @@ pwrSum(x, 2)
 
 <pre class="example">
 [1]  1  2  3  4  5  6  7  8  9 10
+
 </pre>
 
 <div class="org-src-container">
@@ -1542,16 +1688,18 @@ pwrSum(x, 2)
 
 <pre class="example">
 [1]  1  2  3  4  5  6  7  8  9 10
+
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org34c1255" class="outline-3">
-<h3 id="org34c1255"><span class="section-number-3">5.2</span> Listas / <code>data.frame</code></h3>
+<div id="outline-container-org0e2a650" class="outline-3">
+<h3 id="org0e2a650"><span class="section-number-3">5.2</span> Listas / <code>data.frame</code></h3>
 <div class="outline-text-3" id="text-5-2">
-</div><div id="outline-container-orgfb72551" class="outline-4">
-<h4 id="orgfb72551"><span class="section-number-4">5.2.1</span> <code>lapply</code> y <code>sapply</code></h4>
+</div>
+<div id="outline-container-orgdce1faf" class="outline-4">
+<h4 id="orgdce1faf"><span class="section-number-4">5.2.1</span> <code>lapply</code> y <code>sapply</code></h4>
 <div class="outline-text-4" id="text-5-2-1">
 <div class="org-src-container">
 <pre class="src src-R">lista <span class="org-constant">&lt;-</span> list(x = 1:10,
@@ -1569,7 +1717,8 @@ $y
 [1] 30
 
 $z
-[1] 3.059437
+[1] 5.344004
+
 </pre>
 
 <div class="org-src-container">
@@ -1579,17 +1728,46 @@ $z
 
 <pre class="example">
         x         y         z 
-55.000000 30.000000  3.059437
+55.000000 30.000000  5.344004
+
 </pre>
 </div>
 </div>
+
+<div id="outline-container-org7c55685" class="outline-4">
+<h4 id="org7c55685"><span class="section-number-4">5.2.2</span> Ejercicio</h4>
+<div class="outline-text-4" id="text-5-2-2">
+</div>
+<ol class="org-ol">
+<li><a id="orgadf5ddb"></a><br />
+<div class="outline-text-5" id="text-5-2-2-1">
+<ul class="org-ul">
+<li>Calcula la media de cada una de las columnas de <code>remoto</code>.</li>
+<li>Calcula la media, mediana y desviación estándar de cada una de las columnas de <code>remoto</code>.</li>
+<li>Calcula la media de los valores positivos de cada una de las columnas de <code>remoto</code>.</li>
+</ul>
+</div>
+</li>
+
+<li><a id="org621ddc0"></a><br />
+<div class="outline-text-5" id="text-5-2-2-2">
+<div class="org-src-container">
+<pre class="src src-R">remoto <span class="org-constant">&lt;-</span> read.csv(<span class="org-string">'https://raw.githubusercontent.com/oscarperpinan/R/master/data/aranjuez.csv'</span>)
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
 </div>
 
-<div id="outline-container-org75493d7" class="outline-3">
-<h3 id="org75493d7"><span class="section-number-3">5.3</span> Bucles <code>for</code></h3>
+
+<div id="outline-container-orgb955d1a" class="outline-3">
+<h3 id="orgb955d1a"><span class="section-number-3">5.3</span> Bucles <code>for</code></h3>
 <div class="outline-text-3" id="text-5-3">
-</div><div id="outline-container-org1d2b9cc" class="outline-4">
-<h4 id="org1d2b9cc"><span class="section-number-4">5.3.1</span> <code>for</code></h4>
+</div>
+<div id="outline-container-org84ce78d" class="outline-4">
+<h4 id="org84ce78d"><span class="section-number-4">5.3.1</span> <code>for</code></h4>
 <div class="outline-text-4" id="text-5-3-1">
 <ul class="org-ul">
 <li>En <code>R</code> suele usarse más la familia de funciones <code>*apply</code> con funciones vectorizadas.</li>
@@ -1604,21 +1782,23 @@ $z
 </div>
 
 <pre class="example">
-2 : 2.470144 
-5 : 4.31435 
-10 : 24.5793 
-20 : 13.60142 
-50 : 46.76868
+2 : 0.4177285 
+5 : 4.15227 
+10 : 11.52158 
+20 : 19.15928 
+50 : 59.51391
+
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgb409aae" class="outline-3">
-<h3 id="orgb409aae"><span class="section-number-3">5.4</span> Condiciones con <code>if</code>, <code>else</code> e <code>ifelse</code></h3>
+<div id="outline-container-org2566c2a" class="outline-3">
+<h3 id="org2566c2a"><span class="section-number-3">5.4</span> Condiciones con <code>if</code>, <code>else</code> e <code>ifelse</code></h3>
 <div class="outline-text-3" id="text-5-4">
-</div><div id="outline-container-org1b08430" class="outline-4">
-<h4 id="org1b08430"><span class="section-number-4">5.4.1</span> <code>if</code></h4>
+</div>
+<div id="outline-container-org5dd0cb4" class="outline-4">
+<h4 id="org5dd0cb4"><span class="section-number-4">5.4.1</span> <code>if</code></h4>
 <div class="outline-text-4" id="text-5-4-1">
 <ul class="org-ul">
 <li>En <code>R</code> suele usarse más el indexado lógico (vectorizado).</li>
@@ -1636,22 +1816,22 @@ $z
 
 <pre class="example">
                 x x2
- [1,]  0.35215225  1
- [2,]  0.08039662  1
- [3,]  0.79402706  1
- [4,] -0.34692003  0
- [5,]  0.46651414  1
- [6,]  0.49674988  1
- [7,] -0.98410399  0
- [8,]  0.76568604  1
- [9,]  1.07343333  1
-[10,] -1.68582073  0
+ [1,] -0.94147451  0
+ [2,]  0.53212219  1
+ [3,] -1.58760925  0
+ [4,] -0.34708439  0
+ [5,] -0.06312525  0
+ [6,]  0.60392700  1
+ [7,]  0.36077097  1
+ [8,] -0.31432566  0
+ [9,]  1.20138827  1
+[10,]  1.42943784  1
 </pre>
 </div>
 </div>
 
-<div id="outline-container-org58f6dba" class="outline-4">
-<h4 id="org58f6dba"><span class="section-number-4">5.4.2</span> <code>ifelse</code></h4>
+<div id="outline-container-orgd5fec04" class="outline-4">
+<h4 id="orgd5fec04"><span class="section-number-4">5.4.2</span> <code>ifelse</code></h4>
 <div class="outline-text-4" id="text-5-4-2">
 <div class="org-src-container">
 <pre class="src src-R">x <span class="org-constant">&lt;-</span> rnorm(10)
@@ -1660,8 +1840,9 @@ x
 </div>
 
 <pre class="example">
-[1]  0.9818063 -2.1490751 -1.1546350 -1.1577240  1.3696758 -0.8510360
-[7] -0.7244265  0.9221373  0.4294010 -0.7228978
+[1]  0.5033678  1.2135855 -1.0889263 -0.8089075 -1.0118653  1.4291519
+[7] -0.5039579 -1.2884280 -0.6019872  0.8972718
+
 </pre>
 
 <div class="org-src-container">
@@ -1670,7 +1851,8 @@ x
 </div>
 
 <pre class="example">
-[1] 1 0 0 0 1 0 0 1 1 0
+[1] 1 1 0 0 0 1 0 0 0 1
+
 </pre>
 </div>
 </div>
@@ -1678,8 +1860,8 @@ x
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="author">Autor: Oscar Perpiñán Lamigueiro \\ <a href="http://oscarperpinan.github.io/">http://oscarperpinan.github.io/</a></p>
-<p class="date">Created: 2016-11-27 dom 20:14</p>
+<p class="author">Autor: Oscar Perpiñán Lamigueiro \\ <a href="http://oscarperpinan.github.io">http://oscarperpinan.github.io</a></p>
+<p class="date">Created: 2017-12-01 vie 19:06</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
