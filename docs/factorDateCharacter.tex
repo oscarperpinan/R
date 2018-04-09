@@ -1,23 +1,22 @@
-% Created 2015-04-26 dom 16:35
+% Created 2018-04-09 lun 18:37
+% Intended LaTeX compiler: pdflatex
 \documentclass[xcolor={usenames,svgnames,dvipsnames}]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{fixltx2e}
 \usepackage{graphicx}
+\usepackage{grffile}
 \usepackage{longtable}
-\usepackage{float}
 \usepackage{wrapfig}
 \usepackage{rotating}
 \usepackage[normalem]{ulem}
 \usepackage{amsmath}
 \usepackage{textcomp}
-\usepackage{marvosym}
-\usepackage{wasysym}
 \usepackage{amssymb}
+\usepackage{capt-of}
 \usepackage{hyperref}
-\tolerance=1000
 \usepackage{color}
 \usepackage{listings}
+\usepackage[spanish]{babel}
 \usecolortheme{rose}
 \setbeamercolor{alerted text}{fg=Blue}
 \setbeamerfont{alerted text}{series=\bfseries}
@@ -25,11 +24,13 @@
 \setbeamercolor{block body}{use=block title,bg=block title.bg}
 \setbeamertemplate{navigation symbols}{}
 \AtBeginSubsection[]{\begin{frame}[plain]\tableofcontents[currentsubsection,sectionstyle=show/shaded,subsectionstyle=show/shaded/hide]\end{frame}}
-\lstset{keywordstyle=\color{blue}, commentstyle=\color{gray!90}, basicstyle=\ttfamily\small, columns=fullflexible, breaklines=true,linewidth=\textwidth, backgroundcolor=\color{gray!23}, basewidth={0.5em,0.4em}, literate={á}{{\'a}}1 {ñ}{{\~n}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {º}{{\textordmasculine}}1}
+\lstset{keywordstyle=\color{blue}, commentstyle=\color{gray!90}, basicstyle=\ttfamily\small, columns=fullflexible, breaklines=true,linewidth=\textwidth, backgroundcolor=\color{gray!23}, basewidth={0.5em,0.4em}, literate={á}{{\'a}}1 {ñ}{{\~n}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {º}{{\textordmasculine}}1, showstringspaces=false}
 \usepackage{mathpazo}
 \hypersetup{colorlinks=true, linkcolor=Blue, urlcolor=Blue}
 \usepackage{fancyvrb}
 \DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\tiny, formatcom = {\color{black!70}}}
+\beamertemplatenavigationsymbolsempty
+\setbeamertemplate{footline}[frame number]
 \AtBeginSection[]{\begin{frame}[plain]\tableofcontents[currentsection,sectionstyle=show/shaded]\end{frame}}
 \usetheme{Goettingen}
 \usefonttheme{serif}
@@ -37,18 +38,21 @@
 \date{}
 \title{Factores, fechas y caracteres}
 \hypersetup{
-  pdfkeywords={},
-  pdfsubject={},
-  pdfcreator={Emacs 24.4.1 (Org mode 8.2.7c)}}
+ pdfauthor={Oscar Perpiñán Lamigueiro \\ \url{http://oscarperpinan.github.io}},
+ pdftitle={Factores, fechas y caracteres},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 25.2.2 (Org mode 9.1.9)}, 
+ pdflang={Spanish}}
 \begin{document}
 
 \maketitle
 
 
 \section{\texttt{factor}}
-\label{sec-1}
-\begin{frame}[fragile,label=sec-1-1]{Construimos un ejemplo}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\label{sec:org9843d92}
+\begin{frame}[fragile,label={sec:orgcd2c6eb}]{Construimos un ejemplo}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   N <- 100
   edad <- sample(seq(18, 40, 1), N, replace=TRUE)
@@ -57,10 +61,10 @@
 
 \begin{verbatim}
  Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-18.00   23.00   28.50   28.63   34.00   40.00
+18.00   25.00   29.00   29.36   35.00   40.00
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   sexo <- sample(c('H', 'M'), N, replace=TRUE)
   class(sexo)
@@ -74,13 +78,13 @@
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-1-2]{Una variable cualitativa se define con \texttt{factor}}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:org6c4d0a8}]{Una variable cualitativa se define con \texttt{factor}}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   sexo <- factor(sexo)
 \end{lstlisting}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   class(sexo)
 \end{lstlisting}
@@ -89,17 +93,17 @@
 [1] "factor"
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   summary(sexo)
 \end{lstlisting}
 
 \begin{verbatim}
  H  M 
-52 48
+56 44
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   levels(sexo)
 \end{lstlisting}
@@ -108,7 +112,7 @@
 [1] "H" "M"
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   nlevels(sexo)
 \end{lstlisting}
@@ -118,11 +122,11 @@
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-1-3]{Los \texttt{factor} sirven para agrupar}
+\begin{frame}[fragile,label={sec:org08bd5e7}]{Los \texttt{factor} sirven para agrupar}
  \begin{itemize}
 \item Con la función \texttt{table}
 \end{itemize}
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   table(edad > 30, sexo)
 \end{lstlisting}
@@ -130,11 +134,11 @@
 \begin{verbatim}
      sexo
        H  M
-FALSE 29 25
-TRUE  23 23
+FALSE 33 26
+TRUE  23 18
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   table(edad %in% 20:30, sexo)
 \end{lstlisting}
@@ -142,39 +146,39 @@ TRUE  23 23
 \begin{verbatim}
      sexo
        H  M
-FALSE 25 31
-TRUE  27 17
+FALSE 28 22
+TRUE  28 22
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-1-4]{Los \texttt{factor} sirven para agrupar}
+\begin{frame}[fragile,label={sec:org3d660f4}]{Los \texttt{factor} sirven para agrupar}
  \begin{itemize}
 \item Con \texttt{tapply} o \texttt{aggregate}
 \end{itemize}
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 tapply(edad, sexo, mean)
 \end{lstlisting}
 
 \begin{verbatim}
        H        M 
-28.82692 28.41667
+29.28571 29.45455
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 aggregate(edad ~ sexo, FUN=median)
 \end{lstlisting}
 
 \begin{verbatim}
   sexo edad
-1    H 28.5
-2    M 28.5
+1    H   29
+2    M   30
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-1-5]{Los factores sirven para separar}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:orgda3c5ae}]{Los factores sirven para separar}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   edadSexo <- split(edad, sexo)
   class(edadSexo)
@@ -184,22 +188,22 @@ aggregate(edad ~ sexo, FUN=median)
 [1] "list"
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   sapply(edadSexo, mean)
 \end{lstlisting}
 
 \begin{verbatim}
        H        M 
-28.82692 28.41667
+29.28571 29.45455
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-1-6]{Los \texttt{factor} se pueden generar a partir de variables numéricas}
+\begin{frame}[fragile,label={sec:org9e98f84}]{Los \texttt{factor} se pueden generar a partir de variables numéricas}
  \begin{itemize}
 \item Por ejemplo, con \texttt{cut}
 \end{itemize}
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   gEdad <- cut(edad, breaks=4)
   class(gEdad)
@@ -209,7 +213,7 @@ aggregate(edad ~ sexo, FUN=median)
 [1] "factor"
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   levels(gEdad)
 \end{lstlisting}
@@ -221,7 +225,7 @@ aggregate(edad ~ sexo, FUN=median)
 \begin{itemize}
 \item Nuevamente \texttt{table}
 \end{itemize}
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   table(gEdad)
 \end{lstlisting}
@@ -229,10 +233,10 @@ aggregate(edad ~ sexo, FUN=median)
 \begin{verbatim}
 gEdad
 (18,23.5] (23.5,29] (29,34.5] (34.5,40] 
-       26        26        26        22
+       18        34        22        26
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   table(gEdad, sexo)
 \end{lstlisting}
@@ -240,17 +244,17 @@ gEdad
 \begin{verbatim}
            sexo
 gEdad        H  M
-  (18,23.5] 14 12
-  (23.5,29] 13 13
-  (29,34.5] 13 13
-  (34.5,40] 12 10
+  (18,23.5]  9  9
+  (23.5,29] 22 12
+  (29,34.5] 11 11
+  (34.5,40] 14 12
 \end{verbatim}
 \end{frame}
 
 \section{Fechas}
-\label{sec-2}
-\begin{frame}[fragile,label=sec-2-1]{\texttt{Date}}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\label{sec:org587eff4}
+\begin{frame}[fragile,label={sec:orga0fa92c}]{\texttt{Date}}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   as.Date('2013-02-06')
 \end{lstlisting}
@@ -259,7 +263,7 @@ gEdad        H  M
 [1] "2013-02-06"
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   as.Date('2013/02/06')
 \end{lstlisting}
@@ -268,17 +272,17 @@ gEdad        H  M
 [1] "2013-02-06"
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   as.Date('06.02.2013')
 \end{lstlisting}
 
 \begin{verbatim}
-Error en charToDate(x) : 
+Error in charToDate(x) : 
   character string is not in a standard unambiguous format
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   as.Date('06.02.2013', format='%d.%m.%Y')
 \end{lstlisting}
@@ -287,7 +291,7 @@ Error en charToDate(x) :
 [1] "2013-02-06"
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   as.Date(37, origin='2013-01-01')
 \end{lstlisting}
@@ -297,8 +301,8 @@ Error en charToDate(x) :
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-2-2]{Secuencias temporales con \texttt{Date}}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:org4ac0e7f}]{Secuencias temporales con \texttt{Date}}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   seq(as.Date('2004-01-01'), by='day', length=10)
 \end{lstlisting}
@@ -308,7 +312,7 @@ Error en charToDate(x) :
 [6] "2004-01-06" "2004-01-07" "2004-01-08" "2004-01-09" "2004-01-10"
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   seq(as.Date('2004-01-01'), by='month', length=10)
 \end{lstlisting}
@@ -318,7 +322,7 @@ Error en charToDate(x) :
 [6] "2004-06-01" "2004-07-01" "2004-08-01" "2004-09-01" "2004-10-01"
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   seq(as.Date('2004-01-01'), by='10 day', length=10)
 \end{lstlisting}
@@ -329,11 +333,11 @@ Error en charToDate(x) :
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-2-3]{POSIXct}
+\begin{frame}[fragile,label={sec:org9ac4811}]{POSIXct}
  \begin{itemize}
 \item \texttt{help(format.POSIXct)}
 \end{itemize}
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   as.POSIXct('2013-02-06')
 \end{lstlisting}
@@ -342,7 +346,7 @@ Error en charToDate(x) :
 [1] "2013-02-06 CET"
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   ISOdate(2013, 2, 7)
 \end{lstlisting}
@@ -351,7 +355,7 @@ Error en charToDate(x) :
 [1] "2013-02-07 12:00:00 GMT"
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 hoy <- as.POSIXct('2013-02-06')
 
@@ -362,7 +366,7 @@ format(hoy, '%Y')
 [1] "2013"
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 format(hoy, '%d')
 \end{lstlisting}
@@ -371,7 +375,7 @@ format(hoy, '%d')
 [1] "06"
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 format(hoy, '%m')
 \end{lstlisting}
@@ -380,7 +384,7 @@ format(hoy, '%m')
 [1] "02"
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 format(hoy, '%b')
 \end{lstlisting}
@@ -389,7 +393,7 @@ format(hoy, '%b')
 [1] "feb"
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 format(hoy, '%d de %B de %Y')
 \end{lstlisting}
@@ -399,38 +403,38 @@ format(hoy, '%d de %B de %Y')
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-2-4]{\texttt{POSIxct}}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:org580513d}]{\texttt{POSIxct}}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   hora <- Sys.time()
   hora
 \end{lstlisting}
 
 \begin{verbatim}
-[1] "2015-04-26 16:35:44 CEST"
+[1] "2018-04-09 18:37:09 CEST"
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   format(hora, '%H:%M:%S')
 \end{lstlisting}
 
 \begin{verbatim}
-[1] "16:35:44"
+[1] "18:37:09"
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   format(hora, '%H horas, %M minutos y %S segundos')
 \end{lstlisting}
 
 \begin{verbatim}
-[1] "16 horas, 35 minutos y 44 segundos"
+[1] "18 horas, 37 minutos y 09 segundos"
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-2-5]{Secuencias temporales con \texttt{POSIXct}}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:orgb7bdebe}]{Secuencias temporales con \texttt{POSIXct}}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 seq(as.POSIXct('2004-01-01'), by='month', length=10)
 \end{lstlisting}
@@ -441,7 +445,7 @@ seq(as.POSIXct('2004-01-01'), by='month', length=10)
 [9] "2004-09-01 CEST" "2004-10-01 CEST"
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 seq(as.POSIXct('2004-01-01 10:00:00'), by='15 min', length=10)
 \end{lstlisting}
@@ -455,8 +459,8 @@ seq(as.POSIXct('2004-01-01 10:00:00'), by='15 min', length=10)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-2-6]{Zonas horarias}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:org93e3f40}]{Zonas horarias}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   as.POSIXct('2013-02-06 15:30:00',
              tz='GMT')
@@ -466,7 +470,7 @@ seq(as.POSIXct('2004-01-01 10:00:00'), by='15 min', length=10)
 [1] "2013-02-06 15:30:00 GMT"
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   as.POSIXct('2013-02-06 15:30:00',
              tz='Europe/Madrid')
@@ -476,7 +480,7 @@ seq(as.POSIXct('2004-01-01 10:00:00'), by='15 min', length=10)
 [1] "2013-02-06 15:30:00 CET"
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 hawaii <- as.POSIXct('2013-02-06 15:30:00', tz='HST')
 ## Character
@@ -487,7 +491,7 @@ format(hawaii, tz='GMT')
 [1] "2013-02-07 01:30:00"
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 ## POSIXct
 as.POSIXct(format(hawaii, tz='GMT'), tz='GMT')
@@ -499,10 +503,10 @@ as.POSIXct(format(hawaii, tz='GMT'), tz='GMT')
 \end{frame}
 
 \section{Caracteres}
-\label{sec-3}
+\label{sec:orgf8229cf}
 
-\begin{frame}[fragile,label=sec-3-1]{Bastan unas simples comillas}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:org16918f5}]{Bastan unas simples comillas}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   cadena <- "Hola mundo"
   class(cadena)
@@ -512,7 +516,7 @@ as.POSIXct(format(hawaii, tz='GMT'), tz='GMT')
 [1] "character"
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   nchar(cadena)
 \end{lstlisting}
@@ -522,8 +526,8 @@ as.POSIXct(format(hawaii, tz='GMT'), tz='GMT')
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-3-2]{Un vector de \texttt{character}}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:org29b672e}]{Un vector de \texttt{character}}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   cadenaVec <- c("Hola mundo", "Hello world")
   nchar(cadenaVec)
@@ -533,7 +537,7 @@ as.POSIXct(format(hawaii, tz='GMT'), tz='GMT')
 [1] 10 11
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   length(cadenaVec)
 \end{lstlisting}
@@ -542,7 +546,7 @@ as.POSIXct(format(hawaii, tz='GMT'), tz='GMT')
 [1] 2
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 cadenaVec[1]
 \end{lstlisting}
@@ -552,14 +556,14 @@ cadenaVec[1]
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-3-3]{Para mostrarlos usamos \texttt{cat} o \texttt{print}}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:org5bf6808}]{Para mostrarlos usamos \texttt{cat} o \texttt{print}}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   a <- 2
   b <- 3
 \end{lstlisting}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   cat('La suma de', a, 'y', b, 'es', a + b, fill=TRUE)
 \end{lstlisting}
@@ -568,7 +572,7 @@ cadenaVec[1]
 La suma de 2 y 3 es 5
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   cat('La suma de', a, 'y', b, 'es', a + b, '\n',
       'La multiplicación de', a, 'por', b, 'es', a*b, '\n')
@@ -576,12 +580,12 @@ La suma de 2 y 3 es 5
 
 \begin{verbatim}
 La suma de 2 y 3 es 5 
-La multiplicación de 2 por 3 es 6
+ La multiplicación de 2 por 3 es 6
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-3-4]{Los \texttt{character} se pueden unir\ldots{}}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:org329f850}]{Los \texttt{character} se pueden unir\ldots{}}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   paste('Hello', 'World', sep='_')
 \end{lstlisting}
@@ -590,7 +594,7 @@ La multiplicación de 2 por 3 es 6
 [1] "Hello_World"
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   paste('X', 1:5, sep='.')
 \end{lstlisting}
@@ -599,7 +603,7 @@ La multiplicación de 2 por 3 es 6
 [1] "X.1" "X.2" "X.3" "X.4" "X.5"
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   paste(c('A', 'B'), 1:5, sep='.')
 \end{lstlisting}
@@ -608,7 +612,7 @@ La multiplicación de 2 por 3 es 6
 [1] "A.1" "B.2" "A.3" "B.4" "A.5"
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   paste(c('A', 'B'), 1:5, sep='.', collapse='|')
 \end{lstlisting}
@@ -618,8 +622,8 @@ La multiplicación de 2 por 3 es 6
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-3-5]{\ldots{} y también se pueden separar\ldots{}}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:org90184d1}]{\ldots{} y también se pueden separar\ldots{}}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   strsplit(cadenaVec, split=' ')
 \end{lstlisting}
@@ -632,7 +636,7 @@ La multiplicación de 2 por 3 es 6
 [1] "Hello" "world"
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   strsplit(cadenaVec, split='')
 \end{lstlisting}
@@ -645,7 +649,7 @@ La multiplicación de 2 por 3 es 6
  [1] "H" "e" "l" "l" "o" " " "w" "o" "r" "l" "d"
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   chSep <- strsplit(cadenaVec, split=' ')
   class(chSep)
@@ -655,7 +659,7 @@ La multiplicación de 2 por 3 es 6
 [1] "list"
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   length(chSep)
 \end{lstlisting}
@@ -664,7 +668,7 @@ La multiplicación de 2 por 3 es 6
 [1] 2
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   sapply(chSep, nchar)
 \end{lstlisting}
@@ -676,8 +680,8 @@ La multiplicación de 2 por 3 es 6
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-3-6]{\ldots{} y, por supuesto, manipular}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:orgbb8d965}]{\ldots{} y, por supuesto, manipular}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   sub('o', '0', 'Hola Mundo')
 \end{lstlisting}
@@ -686,7 +690,7 @@ La multiplicación de 2 por 3 es 6
 [1] "H0la Mundo"
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   gsub('o', '0', 'Hola Mundo')
 \end{lstlisting}
@@ -695,7 +699,7 @@ La multiplicación de 2 por 3 es 6
 [1] "H0la Mund0"
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   substring(cadena, 1) <- 'HOLA'
   cadena
@@ -705,7 +709,7 @@ La multiplicación de 2 por 3 es 6
 [1] "HOLA mundo"
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   tolower(cadena)
 \end{lstlisting}
@@ -714,7 +718,7 @@ La multiplicación de 2 por 3 es 6
 [1] "hola mundo"
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   toupper(cadena)
 \end{lstlisting}
@@ -723,5 +727,4 @@ La multiplicación de 2 por 3 es 6
 [1] "HOLA MUNDO"
 \end{verbatim}
 \end{frame}
-% Emacs 24.4.1 (Org mode 8.2.7c)
 \end{document}

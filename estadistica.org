@@ -1,10 +1,8 @@
 #+TITLE:     Estadística básica con R
 
 #+SETUPFILE: config.org
-
 #+OPTIONS: H:2
-#+PROPERTY: results output
-#+PROPERTY: exports both
+#+PROPERTY: header-args :results output :exports both :session R:stats :tangle yes :comments org
 #+LATEX_HEADER: \AtBeginSection[]{\begin{frame}[plain]\tableofcontents[currentsection,sectionstyle=show/shaded]\end{frame}}
 
 * Conjunto de datos

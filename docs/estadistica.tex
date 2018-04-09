@@ -1,23 +1,22 @@
-% Created 2015-05-07 jue 12:41
+% Created 2018-04-09 lun 18:36
+% Intended LaTeX compiler: pdflatex
 \documentclass[xcolor={usenames,svgnames,dvipsnames}]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{fixltx2e}
 \usepackage{graphicx}
+\usepackage{grffile}
 \usepackage{longtable}
-\usepackage{float}
 \usepackage{wrapfig}
 \usepackage{rotating}
 \usepackage[normalem]{ulem}
 \usepackage{amsmath}
 \usepackage{textcomp}
-\usepackage{marvosym}
-\usepackage{wasysym}
 \usepackage{amssymb}
+\usepackage{capt-of}
 \usepackage{hyperref}
-\tolerance=1000
 \usepackage{color}
 \usepackage{listings}
+\usepackage[spanish]{babel}
 \usecolortheme{rose}
 \setbeamercolor{alerted text}{fg=Blue}
 \setbeamerfont{alerted text}{series=\bfseries}
@@ -25,11 +24,13 @@
 \setbeamercolor{block body}{use=block title,bg=block title.bg}
 \setbeamertemplate{navigation symbols}{}
 \AtBeginSubsection[]{\begin{frame}[plain]\tableofcontents[currentsubsection,sectionstyle=show/shaded,subsectionstyle=show/shaded/hide]\end{frame}}
-\lstset{keywordstyle=\color{blue}, commentstyle=\color{gray!90}, basicstyle=\ttfamily\small, columns=fullflexible, breaklines=true,linewidth=\textwidth, backgroundcolor=\color{gray!23}, basewidth={0.5em,0.4em}, literate={á}{{\'a}}1 {ñ}{{\~n}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {º}{{\textordmasculine}}1}
+\lstset{keywordstyle=\color{blue}, commentstyle=\color{gray!90}, basicstyle=\ttfamily\small, columns=fullflexible, breaklines=true,linewidth=\textwidth, backgroundcolor=\color{gray!23}, basewidth={0.5em,0.4em}, literate={á}{{\'a}}1 {ñ}{{\~n}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {º}{{\textordmasculine}}1, showstringspaces=false}
 \usepackage{mathpazo}
 \hypersetup{colorlinks=true, linkcolor=Blue, urlcolor=Blue}
 \usepackage{fancyvrb}
 \DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\tiny, formatcom = {\color{black!70}}}
+\beamertemplatenavigationsymbolsempty
+\setbeamertemplate{footline}[frame number]
 \AtBeginSection[]{\begin{frame}[plain]\tableofcontents[currentsection,sectionstyle=show/shaded]\end{frame}}
 \usetheme{Goettingen}
 \usefonttheme{serif}
@@ -37,21 +38,20 @@
 \date{}
 \title{Estadística básica con R}
 \hypersetup{
-  pdfkeywords={},
-  pdfsubject={},
-  pdfcreator={Emacs 24.4.1 (Org mode 8.2.7c)}}
+ pdfauthor={Oscar Perpiñán Lamigueiro \\ \url{http://oscarperpinan.github.io}},
+ pdftitle={Estadística básica con R},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 25.2.2 (Org mode 9.1.9)}, 
+ pdflang={Spanish}}
 \begin{document}
 
 \maketitle
-\begin{frame}{Outline}
-\tableofcontents
-\end{frame}
-
 
 \section{Conjunto de datos}
-\label{sec-1}
+\label{sec:org02f5090}
 
-\begin{frame}[label=sec-1-1]{Conjunto de datos: swiss}
+\begin{frame}[label={sec:org86c1e12}]{Conjunto de datos: swiss}
 Standardized fertility measure and socio-economic indicators for
 each of 47 French-speaking provinces of Switzerland at
 about 1888. 6 variables in percent [0, 100]:
@@ -66,8 +66,8 @@ about 1888. 6 variables in percent [0, 100]:
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-1-2]{Conjunto de datos: swiss}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:org3f5e32c}]{Conjunto de datos: swiss}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 data(swiss)
 
@@ -92,22 +92,24 @@ summary(swiss)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-1-3]{}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:org1aaf05d}]{}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 library(lattice)
 splom(swiss, pscale=0, type=c('p', 'smooth'),
       groups=swiss$Catholic > 50, xlab='')
 \end{lstlisting}
 
+\begin{center}
 \includegraphics[height=0.5\textheight]{figs/splomSwiss.png}
+\end{center}
 \end{frame}
 
 \section{Estadística Univariante}
-\label{sec-2}
+\label{sec:org4316fbc}
 
-\begin{frame}[fragile,label=sec-2-1]{Resumen de  información}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:orgf2f83a9}]{Resumen de  información}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 summary(swiss)
 \end{lstlisting}
@@ -130,8 +132,8 @@ summary(swiss)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-2-2]{Media}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:orgb285293}]{Media}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 mean(swiss$Fertility)
 \end{lstlisting}
@@ -140,7 +142,7 @@ mean(swiss$Fertility)
 [1] 70.14255
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 colMeans(swiss)
 \end{lstlisting}
@@ -153,8 +155,8 @@ Fertility      Agriculture      Examination        Education
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-2-3]{Desviación Estándar}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:org3a946f9}]{Desviación Estándar}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 sd(swiss$Fertility)
 \end{lstlisting}
@@ -163,7 +165,7 @@ sd(swiss$Fertility)
 [1] 12.4917
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 sapply(swiss, sd)
 \end{lstlisting}
@@ -176,8 +178,8 @@ Fertility      Agriculture      Examination        Education
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-2-4]{Otras}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:orgdcd26a0}]{Otras}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 median(swiss$Fertility)
 \end{lstlisting}
@@ -186,7 +188,7 @@ median(swiss$Fertility)
 [1] 70.4
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 mad(swiss$Fertility)
 \end{lstlisting}
@@ -195,7 +197,7 @@ mad(swiss$Fertility)
 [1] 10.22994
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 IQR(swiss$Fertility)
 \end{lstlisting}
@@ -206,11 +208,11 @@ IQR(swiss$Fertility)
 \end{frame}
 
 \section{Generar datos aleatorios}
-\label{sec-3}
+\label{sec:orge5a453b}
 
-\begin{frame}[fragile,label=sec-3-1]{Distribuciones disponibles}
+\begin{frame}[fragile,label={sec:org67bf68f}]{Distribuciones disponibles}
  \begin{columns}
-\begin{column}{.5\textwidth}
+\begin{column}{.5\columnwidth}
 \begin{itemize}
 \item beta \texttt{beta}
 \item binomial \texttt{binom}
@@ -223,7 +225,7 @@ IQR(swiss$Fertility)
 \item hypergeometric \texttt{hyper}
 \end{itemize}
 \end{column}
-\begin{column}{.5\textwidth}
+\begin{column}{.5\columnwidth}
 \begin{itemize}
 \item log-normal \texttt{lnorm}
 \item logistic \texttt{logis}
@@ -240,7 +242,7 @@ IQR(swiss$Fertility)
 \end{columns}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-3-2]{Densidad, CDF, Cuantiles, y Números aleatorios}
+\begin{frame}[fragile,label={sec:orgc67efbb}]{Densidad, CDF, Cuantiles, y Números aleatorios}
  \begin{description}
 \item[{\texttt{dxxx}}] función de densidad de probabilidad
 \item[{\texttt{pxxx}}] función acumulada de probabilidad
@@ -249,77 +251,85 @@ IQR(swiss$Fertility)
 \end{description}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-3-3]{Distribución Normal}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:org716f272}]{Distribución Normal}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 rnorm(10, mean = 1, sd = .4)
 \end{lstlisting}
 
 \begin{verbatim}
-[1] -0.1354755  0.3463266  0.7636284  1.0476774  0.9566199  0.4151977
-[7]  1.1456710  1.3189940  1.3406831  1.1603679
+[1] 1.1074734 0.9546605 1.6954057 1.4686564 1.2811518 0.5590597 0.7941302
+[8] 1.0103583 0.4762850 1.3571223
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 hist(rnorm(1e6, mean = 1, sd = .4))
 \end{lstlisting}
 
+\begin{center}
 \includegraphics[height=0.6\textheight]{figs/rnorm.png}
+\end{center}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-3-4]{Distribución Normal}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:org99ef609}]{Distribución Normal}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 x <- seq( -5, 5, by =.01)
 plot(x, dnorm(x), type = 'l')
 \end{lstlisting}
 
+\begin{center}
 \includegraphics[height=0.6\textheight]{figs/dnorm.png}
+\end{center}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-3-5]{Distribución Uniforme}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:orgafe6f8c}]{Distribución Uniforme}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 runif(10, min=-3, max=3)
 \end{lstlisting}
 
 \begin{verbatim}
-[1] -1.5823854 -1.8617752 -0.2233338  0.9459900  2.4939212 -2.9993913
-[7] -1.3921531 -2.8677664  1.6486454 -1.4627291
+[1]  2.80044210  1.93678185  2.02776507  0.08118988  0.24301041  0.62181219
+[7]  0.57250231 -2.28872042 -2.22046950 -1.75565844
 \end{verbatim}
 
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 hist(runif(1e6, min = -3, max = 3))
 \end{lstlisting}
 
+\begin{center}
 \includegraphics[height=0.6\textheight]{figs/runif.png}
+\end{center}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-3-6]{Distribución de Weibull}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:org2c74955}]{Distribución de Weibull}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 rweibull(n=10, shape = 3, scale = 2)
 \end{lstlisting}
 
 \begin{verbatim}
-[1] 1.8163282 1.8996633 2.4716128 0.8522703 1.9081448 1.3089783 2.0341622
-[8] 0.4629481 0.6528668 0.8457854
+[1] 1.8779252 1.8438342 1.4712878 1.6678865 2.2109469 2.2213818 1.7035614
+[8] 0.9951536 1.1239665 2.0436414
 \end{verbatim}
 
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 hist(rweibull(1e6, shape = 3, scale = 2))
 \end{lstlisting}
 
+\begin{center}
 \includegraphics[height=0.6\textheight]{figs/rweibull.png}
+\end{center}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-3-7]{Muestreo aleatorio}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:orgf2b0814}]{Muestreo aleatorio}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 x <- seq(1, 100, length = 10)
 x
@@ -332,50 +342,51 @@ x
 \begin{itemize}
 \item Sin reemplazo
 \end{itemize}
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 sample(x)
 \end{lstlisting}
 
 \begin{verbatim}
-[1]  78  12  67  23   1  34  56  89  45 100
+[1]   1 100  34  23  67  78  56  45  89  12
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 sample(x, 5)
 \end{lstlisting}
 
 \begin{verbatim}
-[1]  34  56   1  78 100
+[1]  12  67  34 100  45
 \end{verbatim}
 
 \begin{itemize}
 \item Con reemplazo
 \end{itemize}
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 sample(x, 5, replace = TRUE)
 \end{lstlisting}
 
 \begin{verbatim}
-[1]   1  34  23  89 100
+[1]  23  67  89  34 100
 \end{verbatim}
 \end{frame}
 
 
 \section{Tests de Hipótesis}
-\label{sec-4}
-\begin{frame}[fragile,label=sec-4-1]{Para muestra única}
+\label{sec:org4629844}
+\begin{frame}[fragile,label={sec:org7a9217a}]{Para muestra única}
  \begin{itemize}
 \item t de Student
 \end{itemize}
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 t.test(swiss$Fertility, mu=70)
 \end{lstlisting}
 
 \begin{verbatim}
+
 	One Sample t-test
 
 data:  swiss$Fertility
@@ -391,12 +402,13 @@ mean of x
 \begin{itemize}
 \item Wilcoxon (no paramétrico)
 \end{itemize}
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 wilcox.test(swiss$Fertility, mu=70)
 \end{lstlisting}
 
 \begin{verbatim}
+
 	Wilcoxon signed rank test with continuity correction
 
 data:  swiss$Fertility
@@ -409,8 +421,8 @@ In wilcox.test.default(swiss$Fertility, mu = 70) :
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-4-2]{Para muestras pareadas}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:org2b84101}]{Para muestras pareadas}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 Religion <- ifelse(swiss$Catholic > 50,
                    'Catholic', 'Protestant')
@@ -419,12 +431,13 @@ Religion <- ifelse(swiss$Catholic > 50,
 \begin{itemize}
 \item t de Student
 \end{itemize}
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 t.test(Fertility ~ Religion, data=swiss)
 \end{lstlisting}
 
 \begin{verbatim}
+
 	Welch Two Sample t-test
 
 data:  Fertility by Religion
@@ -438,16 +451,17 @@ sample estimates:
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-4-3]{Para muestras pareadas}
+\begin{frame}[fragile,label={sec:org526a702}]{Para muestras pareadas}
  \begin{itemize}
 \item Wilcoxon
 \end{itemize}
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 wilcox.test(Fertility ~ Religion, data=swiss)
 \end{lstlisting}
 
 \begin{verbatim}
+
 	Wilcoxon rank sum test with continuity correction
 
 data:  Fertility by Religion
@@ -461,10 +475,10 @@ In wilcox.test.default(x = c(83.1, 92.5, 76.1, 83.8, 92.4, 82.4,  :
 \end{frame}
 
 \section{Regresión lineal}
-\label{sec-5}
+\label{sec:org26aa589}
 
-\begin{frame}[fragile,label=sec-5-1]{Fertilidad y educación}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:org83bf049}]{Fertilidad y educación}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 lmFertEdu <- lm(Fertility ~ Education,
               data = swiss)
@@ -472,6 +486,7 @@ summary(lmFertEdu)
 \end{lstlisting}
 
 \begin{verbatim}
+
 Call:
 lm(formula = Fertility ~ Education, data = swiss)
 
@@ -492,8 +507,8 @@ F-statistic: 35.45 on 1 and 45 DF,  p-value: 3.659e-07
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-5-2]{Fertilidad y educación}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:orga1748bf}]{Fertilidad y educación}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 coef(lmFertEdu)
 \end{lstlisting}
@@ -503,7 +518,7 @@ coef(lmFertEdu)
  79.6100585  -0.8623503
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 fitted.values(lmFertEdu)
 \end{lstlisting}
@@ -528,8 +543,8 @@ fitted.values(lmFertEdu)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-5-3]{Fertilidad y educación}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:org84c0b44}]{Fertilidad y educación}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 residuals(lmFertEdu)
 \end{lstlisting}
@@ -554,19 +569,21 @@ residuals(lmFertEdu)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-5-4]{Fertilidad y educación}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:orgbe5260d}]{Fertilidad y educación}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 plot(lmFertEdu, which = 1)
 \end{lstlisting}
 
+\begin{center}
 \includegraphics[height=0.85\textheight]{figs/lmFertEdu.png}
+\end{center}
 \end{frame}
 
 
 
-\begin{frame}[fragile,label=sec-5-5]{Fertilidad, educación y religión}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:org856ff27}]{Fertilidad, educación y religión}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 lmFertEduCat <- lm(Fertility ~ Education + Catholic,
                    data = swiss)
@@ -574,6 +591,7 @@ summary(lmFertEduCat)
 \end{lstlisting}
 
 \begin{verbatim}
+
 Call:
 lm(formula = Fertility ~ Education + Catholic, data = swiss)
 
@@ -595,9 +613,8 @@ F-statistic:  29.7 on 2 and 44 DF,  p-value: 6.849e-09
 \end{verbatim}
 \end{frame}
 
-
-\begin{frame}[fragile,label=sec-5-6]{Lo mismo con \texttt{update}}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:org29c8412}]{Lo mismo con \texttt{update}}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 lmFertEduCat <- update(lmFertEdu, . ~ . + Catholic,
                        data = swiss)
@@ -605,6 +622,7 @@ summary(lmFertEduCat)
 \end{lstlisting}
 
 \begin{verbatim}
+
 Call:
 lm(formula = Fertility ~ Education + Catholic, data = swiss)
 
@@ -627,8 +645,8 @@ F-statistic:  29.7 on 2 and 44 DF,  p-value: 6.849e-09
 \end{frame}
 
 
-\begin{frame}[fragile,label=sec-5-7]{Fertilidad, educación, religión y agricultura}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:org71c3d9e}]{Fertilidad, educación, religión y agricultura}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 lmFertEduCatAgr <- lm(Fertility ~ Education + Catholic + Agriculture,
                       data = swiss)
@@ -636,6 +654,7 @@ summary(lmFertEduCatAgr)
 \end{lstlisting}
 
 \begin{verbatim}
+
 Call:
 lm(formula = Fertility ~ Education + Catholic + Agriculture, 
     data = swiss)
@@ -660,8 +679,8 @@ F-statistic: 25.73 on 3 and 43 DF,  p-value: 1.089e-09
 \end{frame}
 
 
-\begin{frame}[fragile,label=sec-5-8]{Lo mismo con \texttt{update}}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:orgad97fb7}]{Lo mismo con \texttt{update}}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 lmFertEduCatAgr <- update(lmFertEduCat,
                           . ~ . + Agriculture,
@@ -670,6 +689,7 @@ summary(lmFertEduCatAgr)
 \end{lstlisting}
 
 \begin{verbatim}
+
 Call:
 lm(formula = Fertility ~ Education + Catholic + Agriculture, 
     data = swiss)
@@ -693,8 +713,8 @@ F-statistic: 25.73 on 3 and 43 DF,  p-value: 1.089e-09
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-5-9]{Lo mismo con \texttt{update}}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:org2c31c07}]{Lo mismo con \texttt{update}}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 lmFertEduCatAgr <- update(lmFertEdu,
                           . ~ . + Catholic + Agriculture,
@@ -703,6 +723,7 @@ summary(lmFertEduCatAgr)
 \end{lstlisting}
 
 \begin{verbatim}
+
 Call:
 lm(formula = Fertility ~ Education + Catholic + Agriculture, 
     data = swiss)
@@ -726,8 +747,8 @@ F-statistic: 25.73 on 3 and 43 DF,  p-value: 1.089e-09
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-5-10]{Comparamos modelos con \texttt{anova}}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:orge271e5b}]{Comparamos modelos con \texttt{anova}}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 anova(lmFertEdu, lmFertEduCat, lmFertEduCatAgr)
 \end{lstlisting}
@@ -747,8 +768,8 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-5-11]{Fertilidad contra todo}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:org288f909}]{Fertilidad contra todo}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 lmFert <- lm(Fertility ~ ., data=swiss)
 
@@ -756,6 +777,7 @@ summary(lmFert)
 \end{lstlisting}
 
 \begin{verbatim}
+
 Call:
 lm(formula = Fertility ~ ., data = swiss)
 
@@ -780,8 +802,8 @@ F-statistic: 19.76 on 5 and 41 DF,  p-value: 5.594e-10
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-5-12]{Elegir un modelo con \texttt{anova}}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:orgeea075a}]{Elegir un modelo con \texttt{anova}}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 anova(lmFert)
 \end{lstlisting}
@@ -802,8 +824,8 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-5-13]{Elegir un modelo con \texttt{step}}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:org3f4d00c}]{Elegir un modelo con \texttt{step}}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 stepFert <- step(lmFert)
 \end{lstlisting}
@@ -833,13 +855,14 @@ Fertility ~ Agriculture + Education + Catholic + Infant.Mortality
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-5-14]{Elegir un modelo}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:orgc5c0e15}]{Elegir un modelo}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 summary(stepFert)
 \end{lstlisting}
 
 \begin{verbatim}
+
 Call:
 lm(formula = Fertility ~ Agriculture + Education + Catholic + 
     Infant.Mortality, data = swiss)
@@ -864,8 +887,8 @@ F-statistic: 24.42 on 4 and 42 DF,  p-value: 1.717e-10
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-5-15]{Elegir un modelo}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:org5a00cff}]{Elegir un modelo}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 stepFert$anova
 \end{lstlisting}
@@ -876,5 +899,4 @@ stepFert$anova
 2 - Examination  1 53.02656        42   2158.069 189.8606
 \end{verbatim}
 \end{frame}
-% Emacs 24.4.1 (Org mode 8.2.7c)
 \end{document}

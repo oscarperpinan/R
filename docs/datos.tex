@@ -1,23 +1,22 @@
-% Created 2015-04-26 dom 16:29
+% Created 2018-04-09 lun 18:35
+% Intended LaTeX compiler: pdflatex
 \documentclass[xcolor={usenames,svgnames,dvipsnames}]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{fixltx2e}
 \usepackage{graphicx}
+\usepackage{grffile}
 \usepackage{longtable}
-\usepackage{float}
 \usepackage{wrapfig}
 \usepackage{rotating}
 \usepackage[normalem]{ulem}
 \usepackage{amsmath}
 \usepackage{textcomp}
-\usepackage{marvosym}
-\usepackage{wasysym}
 \usepackage{amssymb}
+\usepackage{capt-of}
 \usepackage{hyperref}
-\tolerance=1000
 \usepackage{color}
 \usepackage{listings}
+\usepackage[spanish]{babel}
 \usecolortheme{rose}
 \setbeamercolor{alerted text}{fg=Blue}
 \setbeamerfont{alerted text}{series=\bfseries}
@@ -25,11 +24,13 @@
 \setbeamercolor{block body}{use=block title,bg=block title.bg}
 \setbeamertemplate{navigation symbols}{}
 \AtBeginSubsection[]{\begin{frame}[plain]\tableofcontents[currentsubsection,sectionstyle=show/shaded,subsectionstyle=show/shaded/hide]\end{frame}}
-\lstset{keywordstyle=\color{blue}, commentstyle=\color{gray!90}, basicstyle=\ttfamily\small, columns=fullflexible, breaklines=true,linewidth=\textwidth, backgroundcolor=\color{gray!23}, basewidth={0.5em,0.4em}, literate={á}{{\'a}}1 {ñ}{{\~n}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {º}{{\textordmasculine}}1}
+\lstset{keywordstyle=\color{blue}, commentstyle=\color{gray!90}, basicstyle=\ttfamily\small, columns=fullflexible, breaklines=true,linewidth=\textwidth, backgroundcolor=\color{gray!23}, basewidth={0.5em,0.4em}, literate={á}{{\'a}}1 {ñ}{{\~n}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {º}{{\textordmasculine}}1, showstringspaces=false}
 \usepackage{mathpazo}
 \hypersetup{colorlinks=true, linkcolor=Blue, urlcolor=Blue}
 \usepackage{fancyvrb}
 \DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\tiny, formatcom = {\color{black!70}}}
+\beamertemplatenavigationsymbolsempty
+\setbeamertemplate{footline}[frame number]
 \AtBeginSection[]{\begin{frame}[plain]\tableofcontents[currentsection,sectionstyle=show/shaded]\end{frame}}
 \usetheme{Goettingen}
 \usefonttheme{serif}
@@ -37,25 +38,28 @@
 \date{}
 \title{Manejo de datos con R}
 \hypersetup{
-  pdfkeywords={},
-  pdfsubject={},
-  pdfcreator={Emacs 24.4.1 (Org mode 8.2.7c)}}
+ pdfauthor={Oscar Perpiñán Lamigueiro \\ \url{http://oscarperpinan.github.io}},
+ pdftitle={Manejo de datos con R},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 25.2.2 (Org mode 9.1.9)}, 
+ pdflang={Spanish}}
 \begin{document}
 
 \maketitle
 
 \section{Lectura de datos}
-\label{sec-1}
-\begin{frame}[fragile,label=sec-1-1]{\texttt{setwd}, \texttt{getwd}, \texttt{dir}}
+\label{sec:org8715787}
+\begin{frame}[fragile,label={sec:org6fe08b3}]{\texttt{setwd}, \texttt{getwd}, \texttt{dir}}
  En \texttt{setwd} hay que especificar el directorio que contiene el repositorio.
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 getwd()
 old <- setwd("~/github/intro")
 dir()
 \end{lstlisting}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 dir(pattern='.R')
 \end{lstlisting}
@@ -66,7 +70,7 @@ dir(pattern='.R')
 [7] "intro.R"               "raster.R"              "zoo.R"
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 dir('data')
 \end{lstlisting}
@@ -78,8 +82,8 @@ dir('data')
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-1-2]{Lectura de datos con \texttt{read.table}}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:org571387a}]{Lectura de datos con \texttt{read.table}}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 dats <- read.table('data/aranjuez.csv', sep=',', header=TRUE)
 head(dats)
@@ -103,14 +107,14 @@ head(dats)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-1-3]{Lectura de datos con \texttt{read.csv}}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:org81f8f7d}]{Lectura de datos con \texttt{read.csv}}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 aranjuez <- read.csv('data/aranjuez.csv')
 names(aranjuez)[1] <- 'Date'
 \end{lstlisting}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 class(aranjuez)
 \end{lstlisting}
@@ -119,7 +123,7 @@ class(aranjuez)
 [1] "data.frame"
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 names(aranjuez)
 \end{lstlisting}
@@ -130,8 +134,8 @@ names(aranjuez)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-1-4]{Inspeccionamos el resultado}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:org7d99e29}]{Inspeccionamos el resultado}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 head(aranjuez)
 \end{lstlisting}
@@ -153,7 +157,7 @@ head(aranjuez)
 6     9.940 0.4886631
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 tail(aranjuez)
 \end{lstlisting}
@@ -176,8 +180,8 @@ tail(aranjuez)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-1-5]{Inspeccionamos el resultado}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:org06191b3}]{Inspeccionamos el resultado}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 summary(aranjuez)
 \end{lstlisting}
@@ -210,11 +214,11 @@ summary(aranjuez)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-1-6]{Valores ausentes}
+\begin{frame}[fragile,label={sec:org9ac474e}]{Valores ausentes}
  \begin{itemize}
 \item \texttt{NA} está definido como \texttt{logical}
 \end{itemize}
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 class(NA)
 \end{lstlisting}
@@ -226,7 +230,7 @@ class(NA)
 \begin{itemize}
 \item Operar con \texttt{NA} siempre produce un \texttt{NA}
 \end{itemize}
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 1 + NA
 \end{lstlisting}
@@ -238,7 +242,7 @@ class(NA)
 \begin{itemize}
 \item Esto es un \guillemotleft{}problema\guillemotright{} al usar funciones
 \end{itemize}
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 mean(aranjuez$Radiation)
 \end{lstlisting}
@@ -247,7 +251,7 @@ mean(aranjuez$Radiation)
 [1] NA
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 mean(aranjuez$Radiation, na.rm =  TRUE)
 \end{lstlisting}
@@ -257,9 +261,9 @@ mean(aranjuez$Radiation, na.rm =  TRUE)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-1-7]{Valores ausentes}
+\begin{frame}[fragile,label={sec:orga70cf02}]{Valores ausentes}
  Las funciones \texttt{is.na} y \texttt{anyNA} los identifican 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 anyNA(aranjuez)
 \end{lstlisting}
@@ -268,7 +272,7 @@ anyNA(aranjuez)
 [1] TRUE
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 which(is.na(aranjuez$Radiation))
 \end{lstlisting}
@@ -277,7 +281,7 @@ which(is.na(aranjuez$Radiation))
 [1] 1861 1867 1873 1896 1897 1908 1923 2153 2413 2587 2600 2603 2684
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 sum(is.na(aranjuez$Radiation))
 \end{lstlisting}
@@ -288,13 +292,13 @@ sum(is.na(aranjuez$Radiation))
 \end{frame}
 
 \section{Indexado}
-\label{sec-2}
+\label{sec:orgc505ecd}
 
-\begin{frame}[fragile,label=sec-2-1]{Indexado con \texttt{[]}}
+\begin{frame}[fragile,label={sec:orgb987a8e}]{Indexado con \texttt{[]}}
  \begin{itemize}
 \item Filas
 \end{itemize}
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 aranjuez[1:5,]
 \end{lstlisting}
@@ -317,7 +321,7 @@ aranjuez[1:5,]
 \begin{itemize}
 \item Filas y Columnas
 \end{itemize}
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 aranjuez[10:14, 1:5]
 \end{lstlisting}
@@ -332,11 +336,11 @@ aranjuez[10:14, 1:5]
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-2-2]{Indexado con \texttt{[]}}
+\begin{frame}[fragile,label={sec:orgffa6a08}]{Indexado con \texttt{[]}}
  \begin{itemize}
 \item Condición basada en los datos
 \end{itemize}
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 idx <- with(aranjuez, Radiation > 20 & TempAvg < 10) 
 
@@ -361,8 +365,8 @@ head(aranjuez[idx, ])
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-2-3]{\texttt{subset}}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:orgd828aa1}]{\texttt{subset}}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 subset(aranjuez,
        subset = (Radiation > 20 & TempAvg < 10),
@@ -400,9 +404,9 @@ subset(aranjuez,
 
 
 \section{Cambio de formato}
-\label{sec-3}
-\begin{frame}[fragile,label=sec-3-1]{Forma simple con \texttt{stack}}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\label{sec:org9dc9fd1}
+\begin{frame}[fragile,label={sec:org29a83c6}]{Forma simple con \texttt{stack}}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 aranjuezWide <- aranjuez[, c('Radiation',
                              'TempAvg', 'TempMax',
@@ -412,7 +416,7 @@ aranjuezWide <- aranjuez[, c('Radiation',
 \begin{itemize}
 \item Pasamos de formato \texttt{wide} a \texttt{long}
 \end{itemize}
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 aranjuezLong <- stack(aranjuezWide)
 
@@ -429,7 +433,7 @@ head(aranjuezLong)
 6  9.940 Radiation
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 summary(aranjuezLong)
 \end{lstlisting}
@@ -446,19 +450,19 @@ NA's   :149
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-3-2]{Más flexible con \texttt{reshape2}}
+\begin{frame}[fragile,label={sec:orgb161378}]{Más flexible con \texttt{reshape2}}
  \begin{itemize}
 \item \texttt{reshape2} es un paquete que puede facilitar la transformación de \texttt{data.frame} y matrices.
 \end{itemize}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 library(reshape2)
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-3-3]{\texttt{melt} para cambiar de \emph{wide} a \emph{long}}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:orgce02042}]{\texttt{melt} para cambiar de \emph{wide} a \emph{long}}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 aranjuezLong2 <- melt(aranjuez, id.vars = 'Date',
                       variable.name = 'Variable',
@@ -478,8 +482,8 @@ head(aranjuezLong2)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-3-4]{\texttt{dcast} para cambiar de \emph{long} a \emph{wide}}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:orgc79e352}]{\texttt{dcast} para cambiar de \emph{long} a \emph{wide}}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 aranjuezWide2 <- dcast(aranjuezLong2,
                        Variable ~ Date)
@@ -487,7 +491,7 @@ head(aranjuezWide2[, 1:10])
 \end{lstlisting}
 
 \begin{verbatim}
- Using Value as value column: use value.var to override.
+Using Value as value column: use value.var to override.
   Variable 2004-01-01 2004-01-02 2004-01-03 2004-01-04 2004-01-05 2004-01-06
 1  TempAvg      4.044      5.777      5.850      4.408      3.081      2.304
 2  TempMax     10.710     11.520     13.320     15.590     14.580     11.830
@@ -507,10 +511,10 @@ head(aranjuezWide2[, 1:10])
 
 
 \section{Datos agregados}
-\label{sec-4}
+\label{sec:org1612f00}
 
-\begin{frame}[fragile,label=sec-4-1]{\texttt{aggregate}}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:org7ae741c}]{\texttt{aggregate}}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 aranjuez$rainy <- aranjuez$Rain > 0
 
@@ -525,8 +529,8 @@ aggregate(Radiation ~ rainy, data = aranjuez,
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-4-2]{Variable categórica con \texttt{cut}}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:orgb37d094}]{Variable categórica con \texttt{cut}}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 aranjuez$tempClass <- cut(aranjuez$TempAvg, 5)
 
@@ -543,7 +547,7 @@ aggregate(Radiation ~ tempClass, data = aranjuez,
 5  (23.5,30.7] 26.192742
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 aggregate(Radiation ~ tempClass + rainy,
           data = aranjuez, FUN = mean)
@@ -564,8 +568,8 @@ aggregate(Radiation ~ tempClass + rainy,
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-4-3]{Agregamos varias variables}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:org06157ab}]{Agregamos varias variables}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 aggregate(cbind(Radiation, TempAvg) ~ tempClass,
           data = aranjuez, FUN = mean)
@@ -580,7 +584,7 @@ aggregate(cbind(Radiation, TempAvg) ~ tempClass,
 5  (23.5,30.7] 26.192742 26.0496953
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 aggregate(cbind(Radiation, TempAvg) ~ tempClass + rainy,
           data = aranjuez, FUN = mean)
@@ -602,8 +606,8 @@ aggregate(cbind(Radiation, TempAvg) ~ tempClass + rainy,
 \end{frame}
 
 
-\begin{frame}[fragile,label=sec-4-4]{Agregamos a partir de un formato \texttt{long}}
- \lstset{language=R,label= ,caption= ,numbers=none}
+\begin{frame}[fragile,label={sec:orga04aa15}]{Agregamos a partir de un formato \texttt{long}}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 head(aranjuezLong2)
 \end{lstlisting}
@@ -618,7 +622,7 @@ head(aranjuezLong2)
 6 2004-01-06  TempAvg 2.304
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 aggregate(Value ~ Variable, data = aranjuezLong2,
           FUN = mean)
@@ -640,12 +644,12 @@ aggregate(Value ~ Variable, data = aranjuezLong2,
 \end{frame}
 
 \section{Unión de \texttt{data.frame}}
-\label{sec-5}
-\begin{frame}[fragile,label=sec-5-1]{Con \texttt{merge}}
+\label{sec:org59c161e}
+\begin{frame}[fragile,label={sec:org18d840c}]{Con \texttt{merge}}
  \begin{itemize}
 \item Primero construimos un \texttt{data.frame} de ejemplo
 \end{itemize}
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 USStates <- as.data.frame(state.x77)
 USStates$Name <- rownames(USStates)
@@ -655,7 +659,7 @@ rownames(USStates) <- NULL
 \begin{itemize}
 \item Lo partimos en estados \guillemotleft{}fríos\guillemotright{} y estados \guillemotleft{}grandes\guillemotright{}
 \end{itemize}
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 coldStates <- USStates[USStates$Frost>150,
                        c('Name', 'Frost')]
@@ -664,11 +668,11 @@ largeStates <- USStates[USStates$Area>1e5,
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-5-2]{Con \texttt{merge}}
+\begin{frame}[fragile,label={sec:org61f02c6}]{Con \texttt{merge}}
  \begin{itemize}
 \item Unimos los dos conjuntos (estados \guillemotleft{}fríos\guillemotright{} y \guillemotleft{}grandes\guillemotright{})
 \end{itemize}
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 merge(coldStates, largeStates)
 \end{lstlisting}
@@ -682,11 +686,11 @@ merge(coldStates, largeStates)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-5-3]{\texttt{merge} usa \texttt{match}}
+\begin{frame}[fragile,label={sec:orgf80ccec}]{\texttt{merge} usa \texttt{match}}
  \begin{itemize}
 \item Estados grandes que también son fríos
 \end{itemize}
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 idxLarge <- match(largeStates$Name,
                   coldStates$Name,
@@ -698,7 +702,7 @@ idxLarge
 [1] 1 0 0 2 5 6 0 0
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 coldStates[idxLarge,]
 \end{lstlisting}
@@ -712,11 +716,11 @@ coldStates[idxLarge,]
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-5-4]{\texttt{merge} usa \texttt{match}}
+\begin{frame}[fragile,label={sec:org39518aa}]{\texttt{merge} usa \texttt{match}}
  \begin{itemize}
 \item Estados frios que también son grandes
 \end{itemize}
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 idxCold <- match(coldStates$Name,
                  largeStates$Name,
@@ -728,7 +732,7 @@ idxCold
 [1] 1 4 0 0 5 6 0 0 0 0 0
 \end{verbatim}
 
-\lstset{language=R,label= ,caption= ,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 largeStates[idxCold,]
 \end{lstlisting}
@@ -741,5 +745,4 @@ largeStates[idxCold,]
 28   Nevada 109889
 \end{verbatim}
 \end{frame}
-% Emacs 24.4.1 (Org mode 8.2.7c)
 \end{document}

@@ -1,4 +1,4 @@
-% Created 2017-06-30 vie 15:40
+% Created 2018-04-09 lun 18:32
 % Intended LaTeX compiler: pdflatex
 \documentclass[xcolor={usenames,svgnames,dvipsnames}]{beamer}
 \usepackage[utf8]{inputenc}
@@ -29,28 +29,30 @@
 \hypersetup{colorlinks=true, linkcolor=Blue, urlcolor=Blue}
 \usepackage{fancyvrb}
 \DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\tiny, formatcom = {\color{black!70}}}
+\beamertemplatenavigationsymbolsempty
+\setbeamertemplate{footline}[frame number]
 \usetheme{Goettingen}
 \usefonttheme{serif}
-\author{Oscar Perpiñán Lamigueiro $\backslash$\ \url{http://oscarperpinan.github.io}}
+\author{Oscar Perpiñán Lamigueiro \\ \url{http://oscarperpinan.github.io}}
 \date{}
 \title{Clases y Métodos}
 \hypersetup{
- pdfauthor={Oscar Perpiñán Lamigueiro $\backslash$\ \url{http://oscarperpinan.github.io}},
+ pdfauthor={Oscar Perpiñán Lamigueiro \\ \url{http://oscarperpinan.github.io}},
  pdftitle={Clases y Métodos},
  pdfkeywords={},
  pdfsubject={},
- pdfcreator={Emacs 24.5.1 (Org mode 9.0.5)}, 
+ pdfcreator={Emacs 25.2.2 (Org mode 9.1.9)}, 
  pdflang={Spanish}}
 \begin{document}
 
 \maketitle
 
 \section{OOP en R}
-\label{sec:orgff3e80a}
+\label{sec:org00dee2c}
 \subsection{Programación Orientada a Objetos (OOP)}
-\label{sec:orgbc10655}
+\label{sec:org8e3429f}
 
-\begin{frame}[fragile,label={sec:orgca23043}]{Programación Orientada a Objetos (OOP)}
+\begin{frame}[fragile,label={sec:org6af6f1b}]{Programación Orientada a Objetos (OOP)}
  \begin{itemize}
 \item Características básicas del paradigma OOP:
 \begin{itemize}
@@ -67,7 +69,7 @@ clase de uno (o varios) de sus argumentos (\emph{polymorphism}).
 \end{itemize}
 \end{itemize}
 \end{frame}
-\begin{frame}[label={sec:orged4a92d}]{OOP en R}
+\begin{frame}[label={sec:org158f2cd}]{OOP en R}
 \begin{block}{Referencias}
 \begin{center}
 \begin{itemize}
@@ -82,11 +84,11 @@ clase de uno (o varios) de sus argumentos (\emph{polymorphism}).
 \end{frame}
 
 \section{Clases y métodos S3}
-\label{sec:org9c0e552}
+\label{sec:orgf563576}
 
 \subsection{Clases}
-\label{sec:org5f41c99}
-\begin{frame}[fragile,label={sec:orgeeefb8d}]{Clases}
+\label{sec:org89b09ac}
+\begin{frame}[fragile,label={sec:org9ef101c}]{Clases}
  Los objetos básicos en \texttt{R} tienen una clase implícita definida en \texttt{S3}. Es accesible con \texttt{class}.
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
@@ -119,7 +121,7 @@ is.object(x)
 \end{frame}
 
 
-\begin{frame}[fragile,label={sec:orga8c4339}]{Clases}
+\begin{frame}[fragile,label={sec:org96fb65d}]{Clases}
  Se puede redefinir la clase de un objecto \texttt{S3} con \texttt{class}
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
@@ -161,7 +163,7 @@ Sin embargo, su modo de almacenamiento (clase intrínseca) no cambia:
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:org2d526b2}]{Definición de Clases}
+\begin{frame}[fragile,label={sec:org1aa23d4}]{Definición de Clases}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   task1 <- list(what='Write an email',
@@ -194,7 +196,7 @@ attr(,"class")
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:org2bf7ed8}]{Definición de Clases}
+\begin{frame}[fragile,label={sec:org9b5b305}]{Definición de Clases}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   myToDo <- list(task1, task2)
@@ -235,8 +237,8 @@ attr(,"class")
 \end{frame}
 
 \subsection{Métodos}
-\label{sec:org7c4705b}
-\begin{frame}[fragile,label={sec:orgee68f03}]{Métodos con \texttt{S3}}
+\label{sec:org8924b85}
+\begin{frame}[fragile,label={sec:orgf8609c8}]{Métodos con \texttt{S3}}
  \begin{itemize}
 \item Sencillos de usar e implementar.
 \item Poco robustos.
@@ -248,7 +250,7 @@ attr(,"class")
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:org3d860a1}]{Métodos genéricos: \texttt{UseMethod}}
+\begin{frame}[fragile,label={sec:org88f9d2c}]{Métodos genéricos: \texttt{UseMethod}}
  \begin{itemize}
 \item \texttt{UseMethod} sirve para elegir el método correspondiente a la clase
 del objeto empleado como argumento en la función.
@@ -264,7 +266,7 @@ summary
 \begin{verbatim}
 function (object, ...) 
 UseMethod("summary")
-<bytecode: 0x5640bb025728>
+<bytecode: 0x559e1c0064e0>
 <environment: namespace:base>
 \end{verbatim}
 
@@ -326,12 +328,12 @@ function (object, ..., digits)
     class(value) <- c("summaryDefault", "table")
     value
 }
-<bytecode: 0x5640bcab7308>
+<bytecode: 0x559e1c0073f0>
 <environment: namespace:base>
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgad0f6e4}]{Métodos genéricos: \texttt{UseMethod}}
+\begin{frame}[fragile,label={sec:org4859c04}]{Métodos genéricos: \texttt{UseMethod}}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   myFun <- function(x, ...)UseMethod('myFun')
@@ -349,8 +351,8 @@ myFun(x)
 
 \begin{verbatim}
 Funcion genérica
- [1] -1.58026882 -1.61878387 -1.02965731  0.29374595 -0.40879692  2.27929624
- [7] -0.69849094 -0.45129074 -1.27135509  0.08937423
+ [1]  0.1238623 -0.0399555 -0.4117524  1.9261941 -1.3874771  1.1390935
+ [7] -1.0204294 -0.7786166 -1.2469967 -1.0883188
 \end{verbatim}
 
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
@@ -374,7 +376,7 @@ attr(,"class")
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:org040eef9}]{\texttt{methods}}
+\begin{frame}[fragile,label={sec:org14cf2f7}]{\texttt{methods}}
  Con \texttt{methods} podemos averiguar los métodos que hay definidos para una función particular:
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
@@ -414,7 +416,7 @@ see '?methods' for accessing help and source code
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:org49393f8}]{Definición del método para \texttt{Task}}
+\begin{frame}[fragile,label={sec:orgb06b709}]{Definición del método para \texttt{Task}}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 myFun.Task <- function(x, number,...)
@@ -459,7 +461,7 @@ see '?methods' for accessing help and source code
 \end{frame}
 
 
-\begin{frame}[fragile,label={sec:org5bbdaf2}]{\texttt{NextMethod}}
+\begin{frame}[fragile,label={sec:org6a1a320}]{\texttt{NextMethod}}
  Incluyendo \texttt{NextMethod} en un método específico llamamos al método genérico (\texttt{default}).
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
@@ -490,7 +492,7 @@ attr(,"class")
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:org9b3ea89}]{\texttt{NextMethod}}
+\begin{frame}[fragile,label={sec:org01f20c6}]{\texttt{NextMethod}}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   print.ToDo3 <- function(x, ...){
@@ -541,7 +543,7 @@ attr(,"class")
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:org2e7522d}]{Definición de un método \texttt{S3} para \texttt{Task}}
+\begin{frame}[fragile,label={sec:orge865559}]{Definición de un método \texttt{S3} para \texttt{Task}}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 print.Task <- function(x, number,...){
@@ -551,7 +553,7 @@ print.Task <- function(x, number,...){
         '- When:', as.character(x$when),
         '- Priority:', x$priority,
         '\n')
-}
+} 
 \end{lstlisting}
 
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
@@ -574,7 +576,7 @@ What:  Find and fix bugs - When: 2013-03-15 - Priority: High
 \end{frame}
 
 
-\begin{frame}[fragile,label={sec:orgd658a8c}]{Definición de un método \texttt{S3} para \texttt{ToDo3}}
+\begin{frame}[fragile,label={sec:orgd25dcb6}]{Definición de un método \texttt{S3} para \texttt{ToDo3}}
  \begin{itemize}
 \item Definimos un método más sofisticado para la clase \texttt{ToDo3} \alert{sin}
 tener en cuenta el método definido para la clase \texttt{Task}.
@@ -609,7 +611,7 @@ What:  Find and fix bugs - When: 2013-03-15 - Priority: High
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgf4d729f}]{Redefinición del método para \texttt{ToDo3}}
+\begin{frame}[fragile,label={sec:orgdc54707}]{Redefinición del método para \texttt{ToDo3}}
  \begin{itemize}
 \item Podemos aligerar el código teniendo en cuenta el método definido para la clase \texttt{Task}.
 \end{itemize}
@@ -643,11 +645,11 @@ What:  Find and fix bugs - When: 2013-03-15 - Priority: High
 \end{frame}
 
 \section{Clases y métodos S4}
-\label{sec:orgf4512c3}
+\label{sec:org27c53e9}
 
 \subsection{Clases en \texttt{S4}}
-\label{sec:org4593bca}
-\begin{frame}[fragile,label={sec:org6709b63}]{Clases en \texttt{S4}}
+\label{sec:orga483c45}
+\begin{frame}[fragile,label={sec:org13da45a}]{Clases en \texttt{S4}}
  Se construyen con \texttt{setClass}, que acepta varios argumentos
 \begin{itemize}
 \item \texttt{Class}: nombre de la clase.
@@ -657,7 +659,7 @@ What:  Find and fix bugs - When: 2013-03-15 - Priority: High
 \item \texttt{validity}: a función que comprueba la validez de la clase creada con la información suministrada.
 \end{itemize}
 \end{frame}
-\begin{frame}[fragile,label={sec:org8088db5}]{Definición de una nueva clase}
+\begin{frame}[fragile,label={sec:orga4bf2db}]{Definición de una nueva clase}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 setClass('task',
@@ -702,7 +704,7 @@ slotNames('task')
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgc177954}]{Creación de un objeto con la clase definida: \texttt{new}}
+\begin{frame}[fragile,label={sec:org5106f8d}]{Creación de un objeto con la clase definida: \texttt{new}}
  Una vez que la clase ha sido definida con \texttt{setClass}, se puede crear un objeto nuevo con \texttt{new}.
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
@@ -730,7 +732,7 @@ Slot "priority":
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:org25e62a4}]{Funciones para crear objetos}
+\begin{frame}[fragile,label={sec:orgcd9f611}]{Funciones para crear objetos}
  Es habitual definir funciones que construyen y modifican objetos
 para evitar el uso de \texttt{new}:
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
@@ -740,7 +742,7 @@ createTask <- function(what, when, priority){
         what = what,
         when = when,
         priority = priority)
-    }
+    }  
 \end{lstlisting}
 
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
@@ -748,6 +750,7 @@ createTask <- function(what, when, priority){
 task2 <- createTask(what = 'Write an email',
                     when = as.Date('2013-01-01'),
                     priority = 'Low')
+  
 \end{lstlisting}
 
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
@@ -762,7 +765,7 @@ invalid class “task” object: 2: invalid object for slot "priority" in class 
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:org3933d7e}]{Definición de la clase \texttt{ToDo}}
+\begin{frame}[fragile,label={sec:org8dd4e5f}]{Definición de la clase \texttt{ToDo}}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 setClass('ToDo',
@@ -779,7 +782,7 @@ myList <- new('ToDo',
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgc9b3570}]{Acceso a los slots}
+\begin{frame}[fragile,label={sec:org637be66}]{Acceso a los slots}
  Para extraer información de los \emph{slots} hay que emplear \texttt{@} (a
 diferencia de \texttt{\$} en listas y \texttt{data.frame})
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
@@ -813,7 +816,7 @@ Slot "priority":
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:org92e67d7}]{Acceso a los slots}
+\begin{frame}[fragile,label={sec:org216da52}]{Acceso a los slots}
  El \emph{slot} \texttt{tasks} es una lista: empleamos \texttt{\$} para acceder a sus elementos
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
@@ -844,7 +847,7 @@ myList@tasks$t1@what
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:org342472d}]{Problema con los slots definidos como \texttt{list}}
+\begin{frame}[fragile,label={sec:org76a77bc}]{Problema con los slots definidos como \texttt{list}}
  Dado que el slot \texttt{tasks} es una \texttt{list}, podemos añadir cualquier
 cosa. 
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
@@ -855,7 +858,7 @@ cosa.
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgf16ef07}]{Validación}
+\begin{frame}[fragile,label={sec:org7016034}]{Validación}
  Para obligar a que sus elementos sean de clase \texttt{task} debemos añadir
 una función de validación.
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
@@ -885,7 +888,7 @@ Error in validityMethod(object) : not a list of task objects
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgb3b3daa}]{Funciones para crear y modificar objetos}
+\begin{frame}[fragile,label={sec:org4841510}]{Funciones para crear y modificar objetos}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 createToDo <- function(){
@@ -903,14 +906,15 @@ addTask <- function(object, task){
     object@tasks <- c(object@tasks, task)
     object
 }
+  
 \end{lstlisting}
 \end{frame}
 
 
 \subsection{Métodos en \texttt{S4}}
-\label{sec:org81b1957}
+\label{sec:org2a5a259}
 
-\begin{frame}[fragile,label={sec:org51c4315}]{Métodos en \texttt{S4}: \texttt{setMethod}}
+\begin{frame}[fragile,label={sec:org1d1d045}]{Métodos en \texttt{S4}: \texttt{setMethod}}
  \begin{itemize}
 \item Normalmente se definen con \texttt{setMethod}.
 \item Hay que definir:
@@ -944,7 +948,7 @@ setGeneric('print')
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orge018b99}]{Métodos en \texttt{S4}: \texttt{setGeneric} y \texttt{getGeneric}}
+\begin{frame}[fragile,label={sec:org86eab04}]{Métodos en \texttt{S4}: \texttt{setGeneric} y \texttt{getGeneric}}
  Si ya existe un método genérico, la función \texttt{definition} debe tener
 todos los argumentos de la función genérica y en el mismo orden.
 
@@ -968,14 +972,13 @@ standardGeneric for "xyplot" defined from package "lattice"
 
 function (x, data, ...) 
 standardGeneric("xyplot")
-<bytecode: 0x5640bc7712d0>
-<environment: 0x5640bc58d960>
+<environment: 0x559e1d126ca8>
 Methods may be defined for arguments: x, data
 Use  showMethods("xyplot")  for currently available ones.
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:org11e26bb}]{Definición de un método \texttt{print} para \texttt{task}}
+\begin{frame}[fragile,label={sec:org0866156}]{Definición de un método \texttt{print} para \texttt{task}}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 setMethod('print', signature = 'task',
@@ -985,6 +988,7 @@ setMethod('print', signature = 'task',
                   '- Priority:', x@priority,
                   '\n')
           })
+  
 \end{lstlisting}
 
 \begin{verbatim}
@@ -1002,7 +1006,7 @@ What:  Find and fix bugs - When: 2013-03-15 - Priority: High
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:org7cf0dd8}]{Definición de un método \texttt{print} para \texttt{ToDo}}
+\begin{frame}[fragile,label={sec:orgfa05bc3}]{Definición de un método \texttt{print} para \texttt{ToDo}}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 setMethod('print', signature='ToDo',
@@ -1035,9 +1039,9 @@ No. 2 :What:  Write an email - When: 2013-01-01 - Priority: Low
 \end{frame}
 
 \subsection{Clases \texttt{S3} con clases y métodos \texttt{S4}}
-\label{sec:orgafa44d4}
+\label{sec:org270735c}
 
-\begin{frame}[fragile,label={sec:org7ddd2d8}]{Clases \texttt{S3} con clases y métodos \texttt{S4}}
+\begin{frame}[fragile,label={sec:orgfd02c96}]{Clases \texttt{S3} con clases y métodos \texttt{S4}}
  Para usar objetos de clase \texttt{S3} en \texttt{signatures} de métodos \texttt{S4} o
 como contenido de \texttt{slots} de una clase \texttt{S4} hay que registrarlos con
 \texttt{setOldClass}:
@@ -1070,7 +1074,7 @@ Class "glm.null", by class "glm", distance 2
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:org785eb14}]{Ejemplo con \texttt{lm} y \texttt{xyplot}}
+\begin{frame}[fragile,label={sec:org56411ff}]{Ejemplo con \texttt{lm} y \texttt{xyplot}}
  Definimos un método genérico para \texttt{xyplot}
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
@@ -1095,6 +1099,7 @@ setMethod('xyplot',
               residuals <- residuals(x)
               xyplot(residuals ~ fitted,...)
           })
+
 \end{lstlisting}
 
 \begin{verbatim}
@@ -1102,7 +1107,7 @@ setMethod('xyplot',
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgcbe1ef2}]{Ejemplo con \texttt{lm} y \texttt{xyplot}}
+\begin{frame}[fragile,label={sec:orgd681982}]{Ejemplo con \texttt{lm} y \texttt{xyplot}}
  Recuperamos la regresión que empleamos en el apartado de Estadística:
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
@@ -1111,6 +1116,7 @@ summary(lmFertEdu)
 \end{lstlisting}
 
 \begin{verbatim}
+
 Call:
 lm(formula = Fertility ~ Education, data = swiss)
 
@@ -1132,7 +1138,7 @@ F-statistic: 35.45 on 1 and 45 DF,  p-value: 3.659e-07
 \end{frame}
 
 
-\begin{frame}[fragile,label={sec:org381a072}]{Ejemplo con \texttt{lm} y \texttt{xyplot}}
+\begin{frame}[fragile,label={sec:org3b6f921}]{Ejemplo con \texttt{lm} y \texttt{xyplot}}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 xyplot(lmFertEdu, col='red', pch = 19,

@@ -1,4 +1,4 @@
-% Created 2017-06-29 jue 09:07
+% Created 2018-04-09 lun 18:32
 % Intended LaTeX compiler: pdflatex
 \documentclass[xcolor={usenames,svgnames,dvipsnames}]{beamer}
 \usepackage[utf8]{inputenc}
@@ -29,18 +29,20 @@
 \hypersetup{colorlinks=true, linkcolor=Blue, urlcolor=Blue}
 \usepackage{fancyvrb}
 \DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\tiny, formatcom = {\color{black!70}}}
+\beamertemplatenavigationsymbolsempty
+\setbeamertemplate{footline}[frame number]
 \AtBeginSection[]{\begin{frame}[plain]\tableofcontents[currentsection,sectionstyle=show/shaded]\end{frame}}
 \usetheme{Goettingen}
 \usefonttheme{serif}
-\author{Oscar Perpiñán Lamigueiro $\backslash$\ \url{http://oscarperpinan.github.io}}
+\author{Oscar Perpiñán Lamigueiro \\ \url{http://oscarperpinan.github.io}}
 \date{}
 \title{Funciones}
 \hypersetup{
- pdfauthor={Oscar Perpiñán Lamigueiro $\backslash$\ \url{http://oscarperpinan.github.io}},
+ pdfauthor={Oscar Perpiñán Lamigueiro \\ \url{http://oscarperpinan.github.io}},
  pdftitle={Funciones},
  pdfkeywords={},
  pdfsubject={},
- pdfcreator={Emacs 24.5.1 (Org mode 9.0.5)}, 
+ pdfcreator={Emacs 25.2.2 (Org mode 9.1.9)}, 
  pdflang={Spanish}}
 \begin{document}
 
@@ -48,16 +50,16 @@
 
 
 \section{Conceptos Básicos}
-\label{sec:orgdf7c3d3}
+\label{sec:org4859b94}
 
-\begin{frame}[label={sec:org1c1630f}]{Fuentes de información}
+\begin{frame}[label={sec:orgae0d9f2}]{Fuentes de información}
 \begin{itemize}
 \item \href{http://cran.r-project.org/doc/manuals/R-intro.html}{R introduction}
 \item \href{http://cran.r-project.org/doc/manuals/R-lang.html}{R Language Definition}
 \item \href{http://www.springer.com/gb/book/9780387759357}{Software for Data Analysis}
 \end{itemize}
 \end{frame}
-\begin{frame}[fragile,label={sec:org882aa46}]{Componentes de una función}
+\begin{frame}[fragile,label={sec:orgb9891dc}]{Componentes de una función}
  \begin{itemize}
 \item Una función se define con \texttt{function}
 \end{itemize}
@@ -73,7 +75,7 @@
 \end{itemize}
 \end{itemize}
 \end{frame}
-\begin{frame}[fragile,label={sec:org7acf5bd}]{Mi primera función}
+\begin{frame}[fragile,label={sec:org99976c6}]{Mi primera función}
  \begin{itemize}
 \item Definición
 \end{itemize}
@@ -115,7 +117,7 @@ body(myFun)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:org6f93e61}]{Mi primera función}
+\begin{frame}[fragile,label={sec:org29d6f2f}]{Mi primera función}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 myFun(1, 2)
@@ -144,7 +146,7 @@ myFun(1:10, 3)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:org30ce366}]{Argumentos: nombre y orden}
+\begin{frame}[fragile,label={sec:org19d267f}]{Argumentos: nombre y orden}
  Una función identifica sus argumentos por su nombre y por su orden (sin nombre)
 
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
@@ -183,7 +185,7 @@ power(exp=2, x=1:10)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:org1124e43}]{Argumentos: valores por defecto}
+\begin{frame}[fragile,label={sec:orga69552a}]{Argumentos: valores por defecto}
  \begin{itemize}
 \item Se puede asignar un valor por defecto a los argumentos
 \end{itemize}
@@ -214,7 +216,7 @@ power(1:10, 2)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:org7c05457}]{Funciones sin argumentos}
+\begin{frame}[fragile,label={sec:org48756a6}]{Funciones sin argumentos}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 hello <- function()
@@ -233,7 +235,7 @@ hello()
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:org4e94fa8}]{Argumentos sin nombre: \texttt{...}}
+\begin{frame}[fragile,label={sec:org05adb7a}]{Argumentos sin nombre: \texttt{...}}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 pwrSum <- function(x, power, ...)
@@ -272,7 +274,7 @@ pwrSum(x, 2, na.rm=TRUE)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:org86e5780}]{Argumentos ausentes: \texttt{missing}}
+\begin{frame}[fragile,label={sec:org3925900}]{Argumentos ausentes: \texttt{missing}}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 suma10 <- function(x, y)
@@ -292,7 +294,7 @@ suma10(1:10)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:org1e12cc9}]{Control de errores: \texttt{stopifnot}}
+\begin{frame}[fragile,label={sec:org2d08a55}]{Control de errores: \texttt{stopifnot}}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 foo <- function(x, y)
@@ -321,14 +323,14 @@ Error: is.numeric(x) & is.numeric(y) is not TRUE
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgcd53aa4}]{Control de errores: \texttt{stop}}
+\begin{frame}[fragile,label={sec:org72c445e}]{Control de errores: \texttt{stop}}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 foo <- function(x, y){
     if (!(is.numeric(x) & is.numeric(y))){
         stop('arguments must be numeric.')
     } else { x + y }
-}
+} 
 \end{lstlisting}
 
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
@@ -350,7 +352,7 @@ Error in foo(2, "a") : arguments must be numeric.
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orga1f76b7}]{Mensajes para el usuario}
+\begin{frame}[fragile,label={sec:orgd7190ff}]{Mensajes para el usuario}
  \texttt{stop} para la ejecución y emite un mensaje de error
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
@@ -384,9 +386,9 @@ Todo en orden por estos lares.
 \end{frame}
 
 \section{Lexical scope}
-\label{sec:org4dbb409}
+\label{sec:orgff27276}
 
-\begin{frame}[fragile,label={sec:org78093aa}]{Clases de variables}
+\begin{frame}[fragile,label={sec:org54c26da}]{Clases de variables}
  Las variables que se emplean en el cuerpo de una función pueden
 dividirse en:
 \begin{itemize}
@@ -416,14 +418,14 @@ myFun(2, 3)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:org8efb5c1}]{Lexical scope}
+\begin{frame}[fragile,label={sec:org9e8cac1}]{Lexical scope}
  \begin{itemize}
 \item Las variables libres deben estar disponibles en el entorno
 (\texttt{environment}) en el que la función ha sido creada.
 \end{itemize}
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
-environment(myFun)
+environment(myFun) 
 \end{lstlisting}
 
 \begin{verbatim}
@@ -441,7 +443,7 @@ ls()
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:org104c124}]{Lexical scope: funciones anidadas}
+\begin{frame}[fragile,label={sec:org893a61b}]{Lexical scope: funciones anidadas}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 anidada <- function(x, y){
@@ -462,7 +464,7 @@ anidada(1:3, 2:4)
 \end{lstlisting}
 
 \begin{verbatim}
-<environment: 0x55cfbe05dd48>
+<environment: 0x563619cd90d8>
 [1] 113
 \end{verbatim}
 
@@ -476,7 +478,7 @@ sum((1:3)^2, (2:4)^3)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:org9d96654}]{Lexical scope: funciones anidadas}
+\begin{frame}[fragile,label={sec:orgb740c0c}]{Lexical scope: funciones anidadas}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 xn
@@ -505,7 +507,7 @@ Error: objeto 'interna' no encontrado
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:org7456e09}]{Funciones que devuelven funciones}
+\begin{frame}[fragile,label={sec:orgb0922e3}]{Funciones que devuelven funciones}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 constructor <- function(m, n){
@@ -527,8 +529,7 @@ function(x)
     {
         m*x + n
     }
-<bytecode: 0x55cfbddeef90>
-<environment: 0x55cfbddb1af8>
+<environment: 0x563619cde4e8>
 \end{verbatim}
 
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
@@ -542,7 +543,7 @@ myFoo(5)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:org4ba6aaf}]{Funciones que devuelven funciones}
+\begin{frame}[fragile,label={sec:orgc6a2b3b}]{Funciones que devuelven funciones}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 class(myFoo)
@@ -558,7 +559,7 @@ environment(myFoo)
 \end{lstlisting}
 
 \begin{verbatim}
-<environment: 0x55cfbddb1af8>
+<environment: 0x563619cde4e8>
 \end{verbatim}
 
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
@@ -601,9 +602,9 @@ get('n', env = environment(myFoo))
 \end{frame}
 
 \section{Debug}
-\label{sec:orgb55c601}
+\label{sec:orge480d2c}
 
-\begin{frame}[fragile,label={sec:org1a0513d}]{Post-mortem: \texttt{traceback}}
+\begin{frame}[fragile,label={sec:org37cc471}]{Post-mortem: \texttt{traceback}}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 sumSq <- function(x, ...){
@@ -623,7 +624,7 @@ sumProd(rnorm(10), runif(10))
 \end{lstlisting}
 
 \begin{verbatim}
-[1] 18.70681
+[1] 22.99016
 \end{verbatim}
 
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
@@ -646,7 +647,7 @@ traceback()
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgb812bb5}]{Analizar antes de que ocurra: \texttt{debug}}
+\begin{frame}[fragile,label={sec:orge3824e9}]{Analizar antes de que ocurra: \texttt{debug}}
  \begin{itemize}
 \item Activa la ejecución paso a paso de una función
 \end{itemize}
@@ -673,7 +674,7 @@ undebug(sumProd)
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgd0c15b8}]{Analizar antes de que ocurra: \texttt{trace}}
+\begin{frame}[fragile,label={sec:org2973146}]{Analizar antes de que ocurra: \texttt{trace}}
  \begin{itemize}
 \item \texttt{trace} permite mayor control que \texttt{debug}
 \end{itemize}
@@ -702,7 +703,7 @@ function(x, y, ...){
     ys <- sumSq(y, ...)
     xs * ys
 }
-<bytecode: 0x55cfbe53c910>
+<bytecode: 0x563619ee0910>
 
 ## (to see the tracing code, look at body(object))
 \end{verbatim}
@@ -727,7 +728,7 @@ body(sumProd)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:org9582e38}]{Analizar antes de que ocurra: \texttt{trace}}
+\begin{frame}[fragile,label={sec:orgfff0947}]{Analizar antes de que ocurra: \texttt{trace}}
  \begin{itemize}
 \item Los comandos \texttt{n} y \texttt{c} cambian respecto a \texttt{debug}:
 \begin{itemize}
@@ -743,7 +744,7 @@ untrace(sumProd)
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:org2cdcfbd}]{Más recursos}
+\begin{frame}[label={sec:org8009fe2}]{Más recursos}
 \begin{itemize}
 \item Debugging en RStudio
 \begin{itemize}
@@ -755,8 +756,8 @@ untrace(sumProd)
 \end{frame}
 
 \section{Profiling}
-\label{sec:orgc88c0c5}
-\begin{frame}[fragile,label={sec:org75d7c23}]{¿Cuánto tarda mi función? \texttt{system.time}}
+\label{sec:org0b2d786}
+\begin{frame}[fragile,label={sec:orgb306455}]{¿Cuánto tarda mi función? \texttt{system.time}}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 noise <- function(sd)rnorm(1000, mean=0, sd=sd)
@@ -777,11 +778,11 @@ system.time(sumNoise(1000))
 
 \begin{verbatim}
  user  system elapsed 
-0.248   0.008   0.258
+0.125   0.003   0.128
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:org014ecb8}]{¿Cuánto tarda cada parte de mi función?: \texttt{Rprof}}
+\begin{frame}[fragile,label={sec:org4213693}]{¿Cuánto tarda cada parte de mi función?: \texttt{Rprof}}
  \begin{itemize}
 \item Usaremos un fichero temporal
 \end{itemize}
@@ -807,7 +808,7 @@ zz <- sumNoise(1000)
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgf76c0f1}]{¿Cuánto tarda cada parte de mi función?: \texttt{Rprof}}
+\begin{frame}[fragile,label={sec:orgf1c99cd}]{¿Cuánto tarda cada parte de mi función?: \texttt{Rprof}}
  \begin{itemize}
 \item Paramos el análisis
 \end{itemize}
@@ -827,31 +828,31 @@ summaryRprof(tmp)
 \begin{verbatim}
 $by.self
          self.time self.pct total.time total.pct
-"rnorm"       0.14    77.78       0.14     77.78
-"unlist"      0.04    22.22       0.04     22.22
+"rnorm"       0.06       75       0.06        75
+"unlist"      0.02       25       0.02        25
 
 $by.total
                  total.time total.pct self.time self.pct
-"sapply"               0.18    100.00      0.00     0.00
-"sumNoise"             0.18    100.00      0.00     0.00
-"rnorm"                0.14     77.78      0.14    77.78
-"FUN"                  0.14     77.78      0.00     0.00
-"lapply"               0.14     77.78      0.00     0.00
-"unlist"               0.04     22.22      0.04    22.22
-"simplify2array"       0.04     22.22      0.00     0.00
+"sapply"               0.08       100      0.00        0
+"sumNoise"             0.08       100      0.00        0
+"rnorm"                0.06        75      0.06       75
+"FUN"                  0.06        75      0.00        0
+"lapply"               0.06        75      0.00        0
+"unlist"               0.02        25      0.02       25
+"simplify2array"       0.02        25      0.00        0
 
 $sample.interval
 [1] 0.02
 
 $sampling.time
-[1] 0.18
+[1] 0.08
 \end{verbatim}
 \end{frame}
 
 
 \section{Miscelánea}
-\label{sec:orgd2bcd9b}
-\begin{frame}[fragile,label={sec:orgb9ab77a}]{\texttt{do.call}}
+\label{sec:orgde3aa07}
+\begin{frame}[fragile,label={sec:org423f4a9}]{\texttt{do.call}}
  \begin{itemize}
 \item Ejemplo: sumar los componentes de una lista
 \end{itemize}
@@ -864,7 +865,7 @@ with(lista, sum(a + b + c))
 \end{lstlisting}
 
 \begin{verbatim}
-[1] 150.7289
+[1] 143.0742
 \end{verbatim}
 
 \begin{itemize}
@@ -877,11 +878,11 @@ do.call(sum, lista)
 \end{lstlisting}
 
 \begin{verbatim}
-[1] 150.7289
+[1] 143.0742
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgf68dc68}]{\texttt{do.call}}
+\begin{frame}[fragile,label={sec:org1fdb16a}]{\texttt{do.call}}
  \begin{itemize}
 \item Se emplea frecuentemente con el resultado de \texttt{lapply}
 \end{itemize}
@@ -893,12 +894,12 @@ do.call(sum, lista)
 \end{lstlisting}
 
 \begin{verbatim}
-          [,1]       [,2]      [,3]       [,4]        [,5]
-[1,] 0.7533039 -0.9398690 0.6944476 0.40232224 -0.41850226
-[2,] 0.5674668  0.8833537 0.4822575 0.16186319  0.17514414
-[3,] 0.4274750 -0.8302367 0.3349026 0.06512116 -0.07329822
-[4,] 0.3220186  0.7803137 0.2325723 0.02619969  0.03067547
-[5,] 0.2425779 -0.7333926 0.1615093 0.01054072 -0.01283775
+          [,1]        [,2]       [,3]        [,4]      [,5]
+[1,] 0.6353627 -0.49157083  -1.598539 -0.59264536 -1.566159
+[2,] 0.4036858  0.24164188   2.555326  0.35122853  2.452854
+[3,] 0.2564869 -0.11878410  -4.084788 -0.20815396 -3.841559
+[4,] 0.1629622  0.05839080   6.529692  0.12336148  6.016492
+[5,] 0.1035401 -0.02870321 -10.437967 -0.07310961 -9.422782
 \end{verbatim}
 
 \begin{itemize}
@@ -910,16 +911,16 @@ do.call(sum, lista)
 \end{lstlisting}
 
 \begin{verbatim}
-           [,1]      [,2]        [,3]       [,4]        [,5]
-[1,]  0.7533039 0.5674668  0.42747500 0.32201860  0.24257788
-[2,] -0.9398690 0.8833537 -0.83023671 0.78031372 -0.73339265
-[3,]  0.6944476 0.4822575  0.33490259 0.23257231  0.16150929
-[4,]  0.4023222 0.1618632  0.06512116 0.02619969  0.01054072
-[5,] -0.4185023 0.1751441 -0.07329822 0.03067547 -0.01283775
+           [,1]      [,2]       [,3]      [,4]         [,5]
+[1,]  0.6353627 0.4036858  0.2564869 0.1629622   0.10354013
+[2,] -0.4915708 0.2416419 -0.1187841 0.0583908  -0.02870321
+[3,] -1.5985388 2.5553263 -4.0847882 6.5296925 -10.43796674
+[4,] -0.5926454 0.3512285 -0.2081540 0.1233615  -0.07310961
+[5,] -1.5661589 2.4528538 -3.8415588 6.0164917  -9.42278210
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:org1376570}]{\texttt{Reduce}}
+\begin{frame}[fragile,label={sec:orgc0cba00}]{\texttt{Reduce}}
  \begin{itemize}
 \item Combina sucesivamente los elementos de un objeto aplicando una
 función binaria
@@ -935,7 +936,7 @@ Reduce('+', 1:5)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgfcb4193}]{\texttt{Reduce}}
+\begin{frame}[fragile,label={sec:org56fd2bd}]{\texttt{Reduce}}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 ## (((1/2)/3)/4)/5
@@ -970,7 +971,7 @@ Reduce(foo, c(3, 7, 15, 1, 292), right=TRUE)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:org75f3ff9}]{Funciones recursivas}
+\begin{frame}[fragile,label={sec:org3cf7c05}]{Funciones recursivas}
  \begin{itemize}
 \item \href{http://en.wikibooks.org/wiki/R\_Programming/Working\_with\_functions\#Functions\_as\_Objects}{Serie de Fibonnaci}
 \end{itemize}

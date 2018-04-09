@@ -1,4 +1,5 @@
-#+AUTHOR:    Oscar Perpiñán Lamigueiro \\ http://oscarperpinan.github.io
+#+AUTHOR:    Oscar Perpiñán Lamigueiro @@latex:\\@@ http://oscarperpinan.github.io
+#+EMAIL:     oscar.perpinan@upm.es
 #+EMAIL:     
 #+DATE: 
 #+LANGUAGE:  es
@@ -22,6 +23,8 @@
 #+LATEX_HEADER: \hypersetup{colorlinks=true, linkcolor=Blue, urlcolor=Blue}
 #+LATEX_HEADER: \usepackage{fancyvrb}
 #+LATEX_HEADER: \DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\tiny, formatcom = {\color{black!70}}}
+#+LATEX_HEADER: \beamertemplatenavigationsymbolsempty
+#+LATEX_HEADER: \setbeamertemplate{footline}[frame number]
 
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/>
