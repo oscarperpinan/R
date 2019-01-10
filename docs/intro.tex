@@ -1,4 +1,4 @@
-% Created 2018-04-09 lun 18:39
+% Created 2019-01-10 jue 13:02
 % Intended LaTeX compiler: pdflatex
 \documentclass[xcolor={usenames,svgnames,dvipsnames}]{beamer}
 \usepackage[utf8]{inputenc}
@@ -23,6 +23,7 @@
 \setbeamercolor{block title}{bg=structure.fg!20!bg!50!bg}
 \setbeamercolor{block body}{use=block title,bg=block title.bg}
 \setbeamertemplate{navigation symbols}{}
+\AtBeginSection[]{\begin{frame}[plain]\tableofcontents[currentsection,hideallsubsections]\end{frame}}
 \AtBeginSubsection[]{\begin{frame}[plain]\tableofcontents[currentsubsection,sectionstyle=show/shaded,subsectionstyle=show/shaded/hide]\end{frame}}
 \lstset{keywordstyle=\color{blue}, commentstyle=\color{gray!90}, basicstyle=\ttfamily\small, columns=fullflexible, breaklines=true,linewidth=\textwidth, backgroundcolor=\color{gray!23}, basewidth={0.5em,0.4em}, literate={á}{{\'a}}1 {ñ}{{\~n}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {º}{{\textordmasculine}}1, showstringspaces=false}
 \usepackage{mathpazo}
@@ -41,30 +42,30 @@
  pdftitle={Introducción a R},
  pdfkeywords={},
  pdfsubject={},
- pdfcreator={Emacs 25.2.2 (Org mode 9.1.9)}, 
+ pdfcreator={Emacs 25.2.2 (Org mode 9.1.13)}, 
  pdflang={Spanish}}
 \begin{document}
 
 \maketitle
 
-\begin{frame}[label={sec:org561738b}]{Índice de Contenidos}
+\begin{frame}[label={sec:org2359ca2}]{Índice de Contenidos}
 \setcounter{tocdepth}{1}
 \tableofcontents
 \end{frame}
 
 \section{Introducción}
-\label{sec:orgef7c044}
+\label{sec:org2ad25a2}
 
 \subsection{¿Qué es R?}
-\label{sec:org0165145}
-\begin{frame}[fragile,label={sec:orgada7ed2}]{¿Qué es \texttt{R}?}
+\label{sec:org7efef81}
+\begin{frame}[fragile,label={sec:orgf84090c}]{¿Qué es \texttt{R}?}
  Es un entorno de programación orientado al cálculo, manipulación de datos, y representación gráfica, publicado como software libre con licencia GNU-GPL.
 \begin{center}
 \url{http://www.R-project.org} 
 \end{center}
 \end{frame}
 
-\begin{frame}[label={sec:org4a99da9}]{R está muy bien documentado}
+\begin{frame}[label={sec:orgd9eefb3}]{R está muy bien documentado}
 \begin{itemize}
 \item \href{http://cran.r-project.org/manuals.html}{Manuales Oficiales}
 
@@ -86,7 +87,7 @@
 \end{itemize}
 \end{frame}
 
-\begin{frame}[label={sec:org23a5824}]{Otros recursos de información}
+\begin{frame}[label={sec:orgbd062f8}]{Otros recursos de información}
 \begin{itemize}
 \item \href{http://www.r-project.org/mail.html}{Listas de correo} (sin olvidar respetar \href{http://www.r-project.org/posting-guide.html}{estos consejos})
 \begin{itemize}
@@ -98,7 +99,7 @@
 \end{itemize}
 \end{frame}
 
-\begin{frame}[label={sec:org06e9b69}]{R es un proyecto colaborativo}
+\begin{frame}[label={sec:org2c8cc76}]{R es un proyecto colaborativo}
 \begin{itemize}
 \item Una de las grandes riquezas de R es la cantidad de paquetes que amplían sus funcionalidades.
 \item La lista completa está en \url{http://cran.es.r-project.org/web/packages/}.
@@ -107,10 +108,106 @@
 \end{itemize}
 \end{frame}
 
-\section{Objetos en R}
-\label{sec:org4e66d3c}
 
-\begin{frame}[fragile,label={sec:org37b29bf}]{Objetos en R}
+\section{Ejemplo}
+\label{sec:org640ae78}
+
+\begin{frame}[fragile,label={sec:orged86736}]{Lectura de datos}
+ Importamos datos en formato tabular de un fichero disponible en un \href{https://raw.githubusercontent.com/oscarperpinan/R/master/data/aranjuez.csv}{enlace externo}. 
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+myURL <- "https://raw.githubusercontent.com/oscarperpinan/R/master/data/aranjuez.csv"
+
+## Las columnas están separadas por comas
+## La primera fila es la cabecera
+datos <- read.table(myURL,
+                    sep=',',
+                    header=TRUE)
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile,label={sec:org7cd0940}]{Accedemos al contenido}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+summary(datos)
+\end{lstlisting}
+
+\begin{verbatim}
+          X           TempAvg          TempMax          TempMin       
+ 2004-01-01:   1   Min.   :-5.309   Min.   :-2.362   Min.   :-12.980  
+ 2004-01-02:   1   1st Qu.: 7.692   1st Qu.:14.530   1st Qu.:  1.515  
+ 2004-01-03:   1   Median :13.810   Median :21.670   Median :  7.170  
+ 2004-01-04:   1   Mean   :14.405   Mean   :22.531   Mean   :  6.888  
+ 2004-01-05:   1   3rd Qu.:21.615   3rd Qu.:30.875   3rd Qu.: 12.590  
+ 2004-01-06:   1   Max.   :30.680   Max.   :41.910   Max.   : 22.710  
+ (Other)   :2892                                     NA's   :4        
+    HumidAvg         HumidMax         WindAvg         WindMax      
+ Min.   : 19.89   Min.   : 35.88   Min.   :0.251   Min.   : 0.000  
+ 1st Qu.: 47.04   1st Qu.: 81.60   1st Qu.:0.667   1st Qu.: 3.783  
+ Median : 62.58   Median : 90.90   Median :0.920   Median : 5.027  
+ Mean   : 62.16   Mean   : 87.22   Mean   :1.174   Mean   : 5.208  
+ 3rd Qu.: 77.38   3rd Qu.: 94.90   3rd Qu.:1.431   3rd Qu.: 6.537  
+ Max.   :100.00   Max.   :100.00   Max.   :8.260   Max.   :10.000  
+                  NA's   :13       NA's   :8       NA's   :128     
+      Rain          Radiation            ET       
+ Min.   : 0.000   Min.   : 0.277   Min.   :0.000  
+ 1st Qu.: 0.000   1st Qu.: 9.370   1st Qu.:1.168  
+ Median : 0.000   Median :16.660   Median :2.758  
+ Mean   : 1.094   Mean   :16.742   Mean   :3.091  
+ 3rd Qu.: 0.200   3rd Qu.:24.650   3rd Qu.:4.926  
+ Max.   :49.730   Max.   :32.740   Max.   :8.564  
+ NA's   :4        NA's   :13       NA's   :18
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile,label={sec:org8bc9307}]{Modificamos los datos}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+## Convertimos unidades (MJ -> kWh)
+datos$Radiation2 <- datos$Radiation / 3.6
+\end{lstlisting}
+
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+## 10 primeras filas de las dos variables
+datos[1:10,
+      c("Radiation", "Radiation2")]
+\end{lstlisting}
+
+\begin{verbatim}
+   Radiation Radiation2
+1      5.490   1.525000
+2      6.537   1.815833
+3      8.810   2.447222
+4      9.790   2.719444
+5     10.300   2.861111
+6      9.940   2.761111
+7      7.410   2.058333
+8      4.630   1.286111
+9      4.995   1.387500
+10     8.930   2.480556
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile,label={sec:org764e843}]{Representamos gráficamente los datos}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+library(lattice)
+
+xyplot(Radiation ~ TempAvg, data = datos,
+       type = c("p", "r"),
+       pch = 21, col = 'black', fill = 'gray')
+\end{lstlisting}
+
+\begin{center}
+\includegraphics[height=0.6\textheight]{figs/intro.pdf}
+\end{center}
+\end{frame}
+
+\section{Objetos en R}
+\label{sec:org610de28}
+
+\begin{frame}[fragile,label={sec:org33c73b1}]{Objetos en R}
  \begin{itemize}
 \item Existen varios objetos en R:
 \begin{itemize}
@@ -131,9 +228,9 @@
 \end{frame}
 
 \subsection{Vectores}
-\label{sec:orge86d141}
+\label{sec:org0d43ef7}
 
-\begin{frame}[fragile,label={sec:org252961f}]{Primeros pasos}
+\begin{frame}[fragile,label={sec:org5f70d74}]{Primeros pasos}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 x <- 1:5
@@ -164,7 +261,7 @@ class(x)
 \end{frame}
 
 
-\begin{frame}[fragile,label={sec:org6b8f699}]{Generar vectores con \texttt{seq}}
+\begin{frame}[fragile,label={sec:orgfc4eb12}]{Generar vectores con \texttt{seq}}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 x1 <- seq(1, 100, by=2)
@@ -187,7 +284,7 @@ seq(1, 100, length=10)
 \end{frame}
 
 
-\begin{frame}[fragile,label={sec:org15b8605}]{Unir vectores con \texttt{c}}
+\begin{frame}[fragile,label={sec:orge9bd969}]{Unir vectores con \texttt{c}}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 x <- c(1, 2, 3)
@@ -215,7 +312,7 @@ z
 \end{frame}
 
 
-\begin{frame}[fragile,label={sec:org7b68554}]{Operaciones sencillas con vectores}
+\begin{frame}[fragile,label={sec:org134a348}]{Operaciones sencillas con vectores}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   x <- 1:5
@@ -267,7 +364,7 @@ z
 
 
 
-\begin{frame}[fragile,label={sec:org3405274}]{Ejercicio}
+\begin{frame}[fragile,label={sec:orgb06fa53}]{Ejercicio}
  \begin{block}{Dibuja una circunferencia}
 Sabiendo que la función \texttt{plot(x, y)} dibuja el vector \texttt{y} frente al
 vector \texttt{x}, ¿qué código es necesario para dibujar una circunferencia
@@ -277,8 +374,8 @@ de un radio determinado?
 
 
 \subsection{Matrices}
-\label{sec:orgdeb5c8a}
-\begin{frame}[fragile,label={sec:org18a4024}]{Construir una matriz}
+\label{sec:org34ead66}
+\begin{frame}[fragile,label={sec:org588df76}]{Construir una matriz}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   z <- 1:12
@@ -327,7 +424,7 @@ Max.   :3.0   Max.   :6.0   Max.   :9.0   Max.   :12.0
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:org086b3e6}]{Matrices a partir de vectores: \texttt{rbind} y \texttt{cbind}}
+\begin{frame}[fragile,label={sec:org7e5d8db}]{Matrices a partir de vectores: \texttt{rbind} y \texttt{cbind}}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 z <- y <- x <- 1:10
@@ -364,7 +461,7 @@ z    1    2    3    4    5    6    7    8    9    10
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:org8c24482}]{Álgebra matricial}
+\begin{frame}[fragile,label={sec:orgc851889}]{Álgebra matricial}
  \begin{description}
 \item[{\texttt{t()}}] Transpuesta de una matriz
 \item[{\texttt{*}}] Multiplicación elemento a elemento
@@ -375,8 +472,8 @@ z    1    2    3    4    5    6    7    8    9    10
 \end{frame}
 
 \subsection{Listas}
-\label{sec:orgbda7b0d}
-\begin{frame}[fragile,label={sec:org59c1add}]{Para crear una lista usamos la función \texttt{list}}
+\label{sec:org0b0b216}
+\begin{frame}[fragile,label={sec:orgf0ced02}]{Para crear una lista usamos la función \texttt{list}}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 lista <- list(a=c(1,3,5),
@@ -418,8 +515,8 @@ length(lista)
 
 
 \subsection{Data.frame}
-\label{sec:orgffe350a}
-\begin{frame}[fragile,label={sec:orge2c6a14}]{Para crear un \texttt{data.frame}\ldots{}}
+\label{sec:orge6c545d}
+\begin{frame}[fragile,label={sec:org3742b00}]{Para crear un \texttt{data.frame}\ldots{}}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   df <- data.frame(x = 1:5,
@@ -429,17 +526,17 @@ length(lista)
 \end{lstlisting}
 
 \begin{verbatim}
-   x          y z
-1  1 -1.0604196 0
-2  2 -0.7751876 0
-3  3 -0.2740669 0
-4  4  2.5276639 0
-5  5 -0.2908190 0
-6  1  0.2380891 0
-7  2  0.2889129 0
-8  3 -0.7735831 0
-9  4 -0.3359813 0
-10 5  0.4851841 0
+   x           y z
+1  1 -0.33032097 0
+2  2  1.28167750 0
+3  3  1.32421907 0
+4  4  0.16471022 0
+5  5  0.23235819 0
+6  1 -0.60733133 0
+7  2  0.21083478 0
+8  3 -0.10171670 0
+9  4  0.09755398 0
+10 5  0.11925342 0
 \end{verbatim}
 
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
@@ -461,7 +558,7 @@ length(lista)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:org2fa86e1}]{A partir de ficheros}
+\begin{frame}[fragile,label={sec:orga5edc36}]{A partir de ficheros}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 dats <- read.table('data/aranjuez.csv',
@@ -494,7 +591,7 @@ head(dats)
 \alert{Atención: usa \texttt{setwd} para configurar ruta}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:org5ac018d}]{A partir de ficheros remotos}
+\begin{frame}[fragile,label={sec:org9e195da}]{A partir de ficheros remotos}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 remoto <- read.table('https://raw.githubusercontent.com/oscarperpinan/R/master/data/aranjuez.csv',
@@ -535,7 +632,7 @@ identical(dats, remoto)
 \end{frame}
 
 
-\begin{frame}[fragile,label={sec:orgb8f24d3}]{Ejercicio}
+\begin{frame}[fragile,label={sec:org9cf788e}]{Ejercicio}
  \begin{block}{Dibuja una circunferencia}
 ¿Qué código hay que emplear para dibujar una circunferencia de forma
 que todos los vectores implicados sean columnas de un \texttt{data.frame}?
@@ -544,11 +641,11 @@ que todos los vectores implicados sean columnas de un \texttt{data.frame}?
 
 
 \section{Indexado}
-\label{sec:org8ba709f}
+\label{sec:orgd9c1ecf}
 
 \subsection{Condiciones lógicas}
-\label{sec:orgc113764}
-\begin{frame}[fragile,label={sec:org9f37bf8}]{Condiciones simples}
+\label{sec:org699240b}
+\begin{frame}[fragile,label={sec:orgaf4b259}]{Condiciones simples}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 x <- seq(-1, 1, .1)
@@ -601,7 +698,7 @@ x != 0
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgfdd8cbe}]{Condiciones múltiples}
+\begin{frame}[fragile,label={sec:org404979d}]{Condiciones múltiples}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 cond  <-  (x > 0) & (x < .5)
@@ -626,7 +723,7 @@ cond
 \end{frame}
 
 
-\begin{frame}[fragile,label={sec:org3c1c973}]{Con las condiciones se pueden hacer operaciones}
+\begin{frame}[fragile,label={sec:org50a69fb}]{Con las condiciones se pueden hacer operaciones}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 sum(cond)
@@ -657,8 +754,8 @@ as.numeric(cond)
 
 
 \subsection{Vectores}
-\label{sec:org665be8b}
-\begin{frame}[fragile,label={sec:orgadb9126}]{Indexado numérico}
+\label{sec:org1692bbc}
+\begin{frame}[fragile,label={sec:org9369186}]{Indexado numérico}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   x <- seq(1, 100, 2)
@@ -689,7 +786,7 @@ as.numeric(cond)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgcf7fd37}]{Indexado con condiciones lógicas}
+\begin{frame}[fragile,label={sec:orga754310}]{Indexado con condiciones lógicas}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   x[x != 9]
@@ -720,7 +817,7 @@ x[x %in% seq(0, 10, .5)]
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:org1debe77}]{Indexado con condiciones múltiples}
+\begin{frame}[fragile,label={sec:org3bb5368}]{Indexado con condiciones múltiples}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 z <- seq(-10, 10, by = .5)
@@ -768,8 +865,8 @@ z[cond]
 \end{frame}
 
 \subsection{Matrices}
-\label{sec:org4c715b4}
-\begin{frame}[fragile,label={sec:org3145eb5}]{Indexado de matrices}
+\label{sec:orgb5aad98}
+\begin{frame}[fragile,label={sec:orgb958d04}]{Indexado de matrices}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 M[1:2, ]
@@ -802,7 +899,7 @@ M[1, c(1, 4)]
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:org44025b7}]{Indexado de matrices}
+\begin{frame}[fragile,label={sec:orga2128ec}]{Indexado de matrices}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 M[-1,]
@@ -825,8 +922,8 @@ M[-c(1, 2),]
 \end{frame}
 
 \subsection{Listas}
-\label{sec:org9f60663}
-\begin{frame}[fragile,label={sec:org976765e}]{Podemos acceder a los elementos\ldots{}}
+\label{sec:orgda01168}
+\begin{frame}[fragile,label={sec:org2a4192c}]{Podemos acceder a los elementos\ldots{}}
  \begin{itemize}
 \item Por su nombre
 \end{itemize}
@@ -864,8 +961,8 @@ $a
 
 
 \subsection{Data Frame}
-\label{sec:org069dd4f}
-\begin{frame}[fragile,label={sec:org7d9824b}]{Podemos acceder a los elementos}
+\label{sec:org820258a}
+\begin{frame}[fragile,label={sec:orgd35cb22}]{Podemos acceder a los elementos}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   df <- data.frame(x = 1:5,
@@ -895,7 +992,7 @@ df[1,]
 
 \begin{verbatim}
   x         y z
-1 1 0.7278778 0
+1 1 0.4638927 0
 \end{verbatim}
 
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
@@ -908,7 +1005,7 @@ df[,1]
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orga5c1fef}]{Indexado lógico}
+\begin{frame}[fragile,label={sec:orgc13df22}]{Indexado lógico}
  \begin{itemize}
 \item Hay que explicitar dos veces el \texttt{data.frame}:
 \end{itemize}
@@ -918,15 +1015,11 @@ df[df$y > 0,]
 \end{lstlisting}
 
 \begin{verbatim}
-   x          y z
-1  1 0.72787785 0
-2  2 0.02427294 0
-4  4 0.64399574 0
-5  5 1.16974067 0
-7  2 0.77933228 0
-8  3 1.69824044 0
-9  4 0.15919868 0
-10 5 0.06408469 0
+   x         y z
+1  1 0.4638927 0
+3  3 1.7401387 0
+4  4 0.8324874 0
+10 5 0.7390417 0
 \end{verbatim}
 
 \begin{itemize}
@@ -938,19 +1031,15 @@ subset(df, y > 0)
 \end{lstlisting}
 
 \begin{verbatim}
-   x          y z
-1  1 0.72787785 0
-2  2 0.02427294 0
-4  4 0.64399574 0
-5  5 1.16974067 0
-7  2 0.77933228 0
-8  3 1.69824044 0
-9  4 0.15919868 0
-10 5 0.06408469 0
+   x         y z
+1  1 0.4638927 0
+3  3 1.7401387 0
+4  4 0.8324874 0
+10 5 0.7390417 0
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:org3505ad5}]{Uso de \texttt{with}}
+\begin{frame}[fragile,label={sec:org6a2203e}]{Uso de \texttt{with}}
  \begin{itemize}
 \item Problema: el código con varias variables puede ser ilegible
 \end{itemize}
@@ -967,8 +1056,8 @@ with(df, x^2 + y^2)
 \end{lstlisting}
 
 \begin{verbatim}
-[1]  1.529806  4.000589 10.100748 16.414731 26.368293  1.402101  4.607359
-[8] 11.884021 16.025344 25.004107
+[1]  1.215196  9.081672 12.028083 16.693035 25.228874  1.000037  4.942512
+[8] 13.679944 16.082390 25.546183
 \end{verbatim}
 
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
@@ -977,15 +1066,15 @@ with(df, x[y > 0])
 \end{lstlisting}
 
 \begin{verbatim}
-[1] 1 2 4 5 2 3 4 5
+[1] 1 3 4 5
 \end{verbatim}
 \end{frame}
 
 \section{Funciones}
-\label{sec:org31c4d17}
+\label{sec:org9d31787}
 \subsection{Definición de funciones}
-\label{sec:org8fe732a}
-\begin{frame}[fragile,label={sec:orga1592b8}]{Componentes de una función}
+\label{sec:org6c45123}
+\begin{frame}[fragile,label={sec:org2792f02}]{Componentes de una función}
  \begin{itemize}
 \item Una función se define con \texttt{function}
 \end{itemize}
@@ -1003,7 +1092,7 @@ with(df, x[y > 0])
 \end{frame}
 
 
-\begin{frame}[fragile,label={sec:org4e5b573}]{Argumentos: nombre y orden}
+\begin{frame}[fragile,label={sec:org1a42eae}]{Argumentos: nombre y orden}
  Una función identifica sus argumentos por su nombre y por su orden (sin nombre)
 
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
@@ -1042,7 +1131,7 @@ eleva(p = 2, x = 1:10)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:org1132e4e}]{Argumentos: valores por defecto}
+\begin{frame}[fragile,label={sec:org418bb9a}]{Argumentos: valores por defecto}
  \begin{itemize}
 \item Se puede asignar un valor por defecto a los argumentos
 \end{itemize}
@@ -1073,7 +1162,7 @@ eleva(1:10, 2)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgdcf7b7e}]{Argumentos sin nombre: \texttt{...}}
+\begin{frame}[fragile,label={sec:org062ccb0}]{Argumentos sin nombre: \texttt{...}}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 pwrSum <- function(x, p, ...)
@@ -1112,7 +1201,7 @@ pwrSum(x, 2, na.rm=TRUE)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgebcef5a}]{Podemos construir a partir de funciones}
+\begin{frame}[fragile,label={sec:org340ed79}]{Podemos construir a partir de funciones}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 foo  <-  function(x, ...){
@@ -1138,11 +1227,11 @@ foo(rnorm(1e5))
 \end{lstlisting}
 
 \begin{verbatim}
-[1] 0.0008006133 0.0008874747 0.9993867436
+[1] 0.001531192 0.001289880 1.001371477
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:org33835a2}]{Ejercicio}
+\begin{frame}[fragile,label={sec:org430984a}]{Ejercicio}
  \begin{block}{Dibuja una circunferencia}
 Define una función de dos argumentos, \texttt{theta} (vector de ángulos) y
 \texttt{r} (radio), que entregue un \texttt{data.frame} de dos columnas, \texttt{x} e \texttt{y},
@@ -1154,9 +1243,9 @@ circunferencia completa.
 
 
 \subsection{Funciones predefinidas}
-\label{sec:org64361e0}
+\label{sec:org2401417}
 
-\begin{frame}[fragile,label={sec:org2d83d87}]{Funciones en paquetes}
+\begin{frame}[fragile,label={sec:orgfcd5ee0}]{Funciones en paquetes}
  \begin{itemize}
 \item \texttt{R} proporciona un amplio conjunto de funciones predefinidas agrupadas en paquetes
 
@@ -1193,10 +1282,10 @@ circunferencia completa.
 \end{frame}
 
 \section{Bucles}
-\label{sec:org2e546e5}
+\label{sec:org72dab04}
 \subsection{Matrices}
-\label{sec:org8650e1f}
-\begin{frame}[fragile,label={sec:orgbbae688}]{La función \texttt{apply}}
+\label{sec:org75de290}
+\begin{frame}[fragile,label={sec:org8b62386}]{La función \texttt{apply}}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 apply(M, 1, sum)
@@ -1237,8 +1326,8 @@ colMeans(M)
 \end{frame}
 
 \subsection{Listas / \texttt{data.frame}}
-\label{sec:org41356b2}
-\begin{frame}[fragile,label={sec:orga297592}]{\texttt{lapply} y \texttt{sapply}}
+\label{sec:org614354e}
+\begin{frame}[fragile,label={sec:orgdaadcf3}]{\texttt{lapply} y \texttt{sapply}}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 lista <- list(x = 1:10,
@@ -1255,7 +1344,7 @@ $y
 [1] 30
 
 $z
-[1] -2.961398
+[1] 10.17344
 \end{verbatim}
 
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
@@ -1264,12 +1353,12 @@ sapply(lista, sum)
 \end{lstlisting}
 
 \begin{verbatim}
-        x         y         z 
-55.000000 30.000000 -2.961398
+       x        y        z 
+55.00000 30.00000 10.17344
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:org6978996}]{Ejercicio}
+\begin{frame}[fragile,label={sec:orga122d1d}]{Ejercicio}
  \begin{block}{}
 \begin{itemize}
 \item Calcula la media de cada una de las columnas de \texttt{remoto}.
@@ -1288,8 +1377,8 @@ remoto <- read.csv('https://raw.githubusercontent.com/oscarperpinan/R/master/dat
 
 
 \subsection{Bucles \texttt{for}}
-\label{sec:org6d671ab}
-\begin{frame}[fragile,label={sec:org4ba4319}]{\texttt{for}}
+\label{sec:org7b10f89}
+\begin{frame}[fragile,label={sec:org760fe10}]{\texttt{for}}
  \begin{itemize}
 \item En \texttt{R} suele usarse más la familia de funciones \texttt{*apply} con funciones vectorizadas.
 \item No obstante, \texttt{for} puede tener su utilidad:
@@ -1303,17 +1392,17 @@ for(n in c(2,5,10,20,50)) {
 \end{lstlisting}
 
 \begin{verbatim}
-2 : 0.9254643 
-5 : 1.251625 
-10 : 13.01424 
-20 : 14.78298 
-50 : 56.05369
+2 : 0.1992612 
+5 : 12.71815 
+10 : 5.001255 
+20 : 13.64171 
+50 : 45.56089
 \end{verbatim}
 \end{frame}
 
 \subsection{Condiciones con \texttt{if}, \texttt{else} e \texttt{ifelse}}
-\label{sec:org32f5933}
-\begin{frame}[fragile,label={sec:org243e2e5}]{\texttt{if}}
+\label{sec:org33b7abd}
+\begin{frame}[fragile,label={sec:org24919c0}]{\texttt{if}}
  \begin{itemize}
 \item En \texttt{R} suele usarse más el indexado lógico (vectorizado).
 \item ¿Cuál es el equivalente a este bucle for-if?
@@ -1329,21 +1418,21 @@ for(n in c(2,5,10,20,50)) {
 \end{lstlisting}
 
 \begin{verbatim}
-                 x x2
- [1,] -0.698891202  0
- [2,] -0.039932888  0
- [3,] -0.911485692  0
- [4,]  1.024327736  1
- [5,]  1.539984360  1
- [6,]  0.047069570  1
- [7,] -0.462604205  0
- [8,] -0.002057495  0
- [9,] -1.055314321  0
-[10,] -0.757400142  0
+               x x2
+ [1,]  1.0000731  1
+ [2,]  0.3611223  1
+ [3,] -0.5802274  0
+ [4,]  2.7501777  1
+ [5,]  1.3758549  1
+ [6,] -0.6449127  0
+ [7,] -2.3812881  0
+ [8,]  1.2498486  1
+ [9,] -0.6768266  0
+[10,]  1.1902771  1
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgf77a837}]{\texttt{ifelse}}
+\begin{frame}[fragile,label={sec:orga8757eb}]{\texttt{ifelse}}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 x <- rnorm(10)
@@ -1351,8 +1440,8 @@ x
 \end{lstlisting}
 
 \begin{verbatim}
-[1]  0.06561964  1.62390250  0.58632005  0.46821376 -0.44993996  1.42942913
-[7] -0.60772094  0.62086772 -0.68585615  0.37189368
+[1]  0.2304201 -1.2034347  1.4732810 -0.1425186 -1.5511399 -1.9353629
+[7] -0.3620471  1.3926926 -0.5778959 -0.4644164
 \end{verbatim}
 
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
@@ -1361,7 +1450,7 @@ ifelse(x>0, 1, 0)
 \end{lstlisting}
 
 \begin{verbatim}
-[1] 1 1 1 1 0 1 0 1 0 1
+[1] 1 0 1 0 0 0 0 1 0 0
 \end{verbatim}
 \end{frame}
 \end{document}

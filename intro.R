@@ -1,3 +1,36 @@
+## Lectura de datos
+## Importamos datos en formato tabular de un fichero disponible en un [[https://raw.githubusercontent.com/oscarperpinan/R/master/data/aranjuez.csv][enlace externo]]. 
+
+myURL <- "https://raw.githubusercontent.com/oscarperpinan/R/master/data/aranjuez.csv"
+
+## Las columnas están separadas por comas
+## La primera fila es la cabecera
+datos <- read.table(myURL,
+                    sep=',',
+                    header=TRUE)
+
+## Accedemos al contenido
+
+
+summary(datos)
+
+## Modificamos los datos
+
+## Convertimos unidades (MJ -> kWh)
+datos$Radiation2 <- datos$Radiation / 3.6
+
+## 10 primeras filas de las dos variables
+datos[1:10,
+      c("Radiation", "Radiation2")]
+
+## Representamos gráficamente los datos
+
+library(lattice)
+
+xyplot(Radiation ~ TempAvg, data = datos,
+       type = c("p", "r"),
+       pch = 21, col = 'black', fill = 'gray')
+
 ## Primeros pasos
 
 x <- 1:5
