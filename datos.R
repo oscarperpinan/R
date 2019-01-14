@@ -1,4 +1,3 @@
-
 ## =setwd=, =getwd=, =dir=
 ## En =setwd= hay que especificar el directorio que contiene el repositorio.
 
@@ -39,9 +38,13 @@ summary(aranjuez)
 
 class(NA)
 
+
+
 ## - Operar con =NA= siempre produce un =NA=
 
 1 + NA
+
+
 
 ## - Esto es un "problema" al usar funciones
 
@@ -51,7 +54,7 @@ mean(aranjuez$Radiation, na.rm =  TRUE)
 
 ## Valores ausentes
 
-## Las funciones =is.na= y =anyNA= los identifican
+## Las funciones =is.na= y =anyNA= los identifican 
 
 anyNA(aranjuez)
 
@@ -63,6 +66,7 @@ sum(is.na(aranjuez$Radiation))
 ## - Filas
 
 aranjuez[1:5,]
+
 
 ## - Filas y Columnas
 
@@ -81,39 +85,6 @@ subset(aranjuez,
        subset = (Radiation > 20 & TempAvg < 10),
        select = c(Radiation, TempAvg,
            TempMax, TempMin))
-
-## Forma simple con =stack=
-
-aranjuezWide <- aranjuez[, c('Radiation',
-                             'TempAvg', 'TempMax',
-                             'WindAvg', 'WindMax')]
-
-## - Pasamos de formato =wide= a =long=
-
-aranjuezLong <- stack(aranjuezWide)
-
-head(aranjuezLong)
-
-summary(aranjuezLong)
-
-## Más flexible con =reshape2=
-## - =reshape2= es un paquete que puede facilitar la transformación de =data.frame= y matrices.
-
-library(reshape2)
-
-## =melt= para cambiar de /wide/ a /long/
-
-aranjuezLong2 <- melt(aranjuez, id.vars = 'Date',
-                      variable.name = 'Variable',
-                      value.name = 'Value')
-
-head(aranjuezLong2)
-
-## =dcast= para cambiar de /long/ a /wide/
-
-aranjuezWide2 <- dcast(aranjuezLong2,
-                       Variable ~ Date)
-head(aranjuezWide2[, 1:10])
 
 ## =aggregate=
 
@@ -134,18 +105,53 @@ aggregate(Radiation ~ tempClass + rainy,
 
 ## Agregamos varias variables
 
+
 aggregate(cbind(Radiation, TempAvg) ~ tempClass,
           data = aranjuez, FUN = mean)
 
 aggregate(cbind(Radiation, TempAvg) ~ tempClass + rainy,
           data = aranjuez, FUN = mean)
 
-## Agregamos a partir de un formato =long=
+## Forma simple con =stack= 
+
+aranjuezWide <- aranjuez[, c('Radiation',
+                             'TempAvg', 'TempMax',
+                             'WindAvg', 'WindMax')]
+
+
+## - Pasamos de formato =wide= a =long=
+
+aranjuezLong <- stack(aranjuezWide)
+
+head(aranjuezLong)
+
+summary(aranjuezLong)
+
+## Más flexible con =reshape2=
+## - =reshape2= es un paquete que puede facilitar la transformación de =data.frame= y matrices.
+
+
+library(reshape2)
+
+## =melt= para cambiar de /wide/ a /long/
+
+aranjuezLong2 <- melt(aranjuez, id.vars = 'Date',
+                      variable.name = 'Variable',
+                      value.name = 'Value')
 
 head(aranjuezLong2)
 
+## Agregamos a partir de un formato =long=
+
+
 aggregate(Value ~ Variable, data = aranjuezLong2,
           FUN = mean)
+
+## =dcast= para cambiar de /long/ a /wide/
+
+aranjuezWide2 <- dcast(aranjuezLong2,
+                       Variable ~ Date)
+head(aranjuezWide2[, 1:10])
 
 ## Con =merge=
 ## - Primero construimos un =data.frame= de ejemplo
@@ -153,6 +159,7 @@ aggregate(Value ~ Variable, data = aranjuezLong2,
 USStates <- as.data.frame(state.x77)
 USStates$Name <- rownames(USStates)
 rownames(USStates) <- NULL
+
 
 ## - Lo partimos en estados "fríos" y estados "grandes"
 

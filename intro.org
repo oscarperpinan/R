@@ -1,12 +1,8 @@
 #+TITLE:     Introducción a R
-
-#+STARTUP: beamer
+#+STARTUP: indent
 #+SETUPFILE: config.org
 #+OPTIONS: H:3
 #+PROPERTY: header-args :results output :exports both :session R:intro :tangle yes :comments org
-
-*** Índice de Contenidos
-#+TOC: headlines 1
 
 * Introducción
 

@@ -117,48 +117,6 @@ subset(aranjuez,
 #+end_src
 
 
-* Cambio de formato
-** Forma simple con =stack= 
-#+begin_src R
-aranjuezWide <- aranjuez[, c('Radiation',
-                             'TempAvg', 'TempMax',
-                             'WindAvg', 'WindMax')]
-#+end_src
-- Pasamos de formato =wide= a =long=
-#+begin_src R 
-aranjuezLong <- stack(aranjuezWide)
-
-head(aranjuezLong)
-#+end_src
-
-#+begin_src R
-summary(aranjuezLong)
-#+end_src
-
-** Más flexible con =reshape2=
-- =reshape2= es un paquete que puede facilitar la transformación de =data.frame= y matrices.
-
-#+begin_src R
-library(reshape2)
-#+end_src
-
-** =melt= para cambiar de /wide/ a /long/
-#+begin_src R
-aranjuezLong2 <- melt(aranjuez, id.vars = 'Date',
-                      variable.name = 'Variable',
-                      value.name = 'Value')
-
-head(aranjuezLong2)
-#+end_src
-
-** =dcast= para cambiar de /long/ a /wide/
-#+begin_src R
-aranjuezWide2 <- dcast(aranjuezLong2,
-                       Variable ~ Date)
-head(aranjuezWide2[, 1:10])
-#+end_src
-
-
 * Datos agregados
 
 ** =aggregate=
@@ -195,15 +153,54 @@ aggregate(cbind(Radiation, TempAvg) ~ tempClass + rainy,
 #+end_src
 
 
-** Agregamos a partir de un formato =long=
+* Cambio de formato
+** Forma simple con =stack= 
 #+begin_src R
+aranjuezWide <- aranjuez[, c('Radiation',
+                             'TempAvg', 'TempMax',
+                             'WindAvg', 'WindMax')]
+#+end_src
+- Pasamos de formato =wide= a =long=
+#+begin_src R 
+aranjuezLong <- stack(aranjuezWide)
+
+head(aranjuezLong)
+#+end_src
+
+#+begin_src R
+summary(aranjuezLong)
+#+end_src
+
+** Más flexible con =reshape2=
+- =reshape2= es un paquete que puede facilitar la transformación de =data.frame= y matrices.
+
+#+begin_src R
+library(reshape2)
+#+end_src
+
+** =melt= para cambiar de /wide/ a /long/
+#+begin_src R
+aranjuezLong2 <- melt(aranjuez, id.vars = 'Date',
+                      variable.name = 'Variable',
+                      value.name = 'Value')
+
 head(aranjuezLong2)
 #+end_src
+
+** Agregamos a partir de un formato =long=
 
 #+begin_src R
 aggregate(Value ~ Variable, data = aranjuezLong2,
           FUN = mean)
 #+end_src
+
+** =dcast= para cambiar de /long/ a /wide/
+#+begin_src R
+aranjuezWide2 <- dcast(aranjuezLong2,
+                       Variable ~ Date)
+head(aranjuezWide2[, 1:10])
+#+end_src
+
 
 * Unión de =data.frame=
 ** Con =merge=

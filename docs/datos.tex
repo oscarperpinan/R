@@ -1,4 +1,4 @@
-% Created 2018-04-09 lun 18:35
+% Created 2019-01-15 mar 00:15
 % Intended LaTeX compiler: pdflatex
 \documentclass[xcolor={usenames,svgnames,dvipsnames}]{beamer}
 \usepackage[utf8]{inputenc}
@@ -17,13 +17,12 @@
 \usepackage{color}
 \usepackage{listings}
 \usepackage[spanish]{babel}
-\usecolortheme{rose}
 \setbeamercolor{alerted text}{fg=Blue}
 \setbeamerfont{alerted text}{series=\bfseries}
 \setbeamercolor{block title}{bg=structure.fg!20!bg!50!bg}
 \setbeamercolor{block body}{use=block title,bg=block title.bg}
-\setbeamertemplate{navigation symbols}{}
 \AtBeginSubsection[]{\begin{frame}[plain]\tableofcontents[currentsubsection,sectionstyle=show/shaded,subsectionstyle=show/shaded/hide]\end{frame}}
+\AtBeginSection[]{\begin{frame}[plain]\tableofcontents[currentsection,hideallsubsections]\end{frame}}
 \lstset{keywordstyle=\color{blue}, commentstyle=\color{gray!90}, basicstyle=\ttfamily\small, columns=fullflexible, breaklines=true,linewidth=\textwidth, backgroundcolor=\color{gray!23}, basewidth={0.5em,0.4em}, literate={á}{{\'a}}1 {ñ}{{\~n}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {º}{{\textordmasculine}}1, showstringspaces=false}
 \usepackage{mathpazo}
 \hypersetup{colorlinks=true, linkcolor=Blue, urlcolor=Blue}
@@ -32,7 +31,8 @@
 \beamertemplatenavigationsymbolsempty
 \setbeamertemplate{footline}[frame number]
 \AtBeginSection[]{\begin{frame}[plain]\tableofcontents[currentsection,sectionstyle=show/shaded]\end{frame}}
-\usetheme{Goettingen}
+\usetheme[hideothersubsections]{Goettingen}
+\usecolortheme{rose}
 \usefonttheme{serif}
 \author{Oscar Perpiñán Lamigueiro \\ \url{http://oscarperpinan.github.io}}
 \date{}
@@ -42,15 +42,15 @@
  pdftitle={Manejo de datos con R},
  pdfkeywords={},
  pdfsubject={},
- pdfcreator={Emacs 25.2.2 (Org mode 9.1.9)}, 
+ pdfcreator={Emacs 26.1 (Org mode 9.2)}, 
  pdflang={Spanish}}
 \begin{document}
 
 \maketitle
 
 \section{Lectura de datos}
-\label{sec:org8715787}
-\begin{frame}[fragile,label={sec:org6fe08b3}]{\texttt{setwd}, \texttt{getwd}, \texttt{dir}}
+\label{sec:org5cf3549}
+\begin{frame}[label={sec:org1f8d746},fragile]{\texttt{setwd}, \texttt{getwd}, \texttt{dir}}
  En \texttt{setwd} hay que especificar el directorio que contiene el repositorio.
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
@@ -70,6 +70,7 @@ dir(pattern='.R')
 [7] "intro.R"               "raster.R"              "zoo.R"
 \end{verbatim}
 
+
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 dir('data')
@@ -82,7 +83,7 @@ dir('data')
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:org571387a}]{Lectura de datos con \texttt{read.table}}
+\begin{frame}[label={sec:orgecff3c0},fragile]{Lectura de datos con \texttt{read.table}}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 dats <- read.table('data/aranjuez.csv', sep=',', header=TRUE)
@@ -90,6 +91,7 @@ head(dats)
 \end{lstlisting}
 
 \begin{verbatim}
+
            X TempAvg TempMax TempMin HumidAvg HumidMax WindAvg WindMax Rain
 1 2004-01-01   4.044   10.71  -1.969     88.3     95.9   0.746   3.528    0
 2 2004-01-02   5.777   11.52   1.247     83.3     98.5   1.078   6.880    0
@@ -107,7 +109,7 @@ head(dats)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:org81f8f7d}]{Lectura de datos con \texttt{read.csv}}
+\begin{frame}[label={sec:orgca1806b},fragile]{Lectura de datos con \texttt{read.csv}}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 aranjuez <- read.csv('data/aranjuez.csv')
@@ -123,6 +125,7 @@ class(aranjuez)
 [1] "data.frame"
 \end{verbatim}
 
+
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 names(aranjuez)
@@ -134,7 +137,7 @@ names(aranjuez)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:org7d99e29}]{Inspeccionamos el resultado}
+\begin{frame}[label={sec:org5b2bd4a},fragile]{Inspeccionamos el resultado}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 head(aranjuez)
@@ -180,7 +183,7 @@ tail(aranjuez)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:org06191b3}]{Inspeccionamos el resultado}
+\begin{frame}[label={sec:org03ac43a},fragile]{Inspeccionamos el resultado}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 summary(aranjuez)
@@ -214,7 +217,7 @@ summary(aranjuez)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:org9ac474e}]{Valores ausentes}
+\begin{frame}[label={sec:org842277d},fragile]{Valores ausentes}
  \begin{itemize}
 \item \texttt{NA} está definido como \texttt{logical}
 \end{itemize}
@@ -226,6 +229,7 @@ class(NA)
 \begin{verbatim}
 [1] "logical"
 \end{verbatim}
+
 
 \begin{itemize}
 \item Operar con \texttt{NA} siempre produce un \texttt{NA}
@@ -239,6 +243,7 @@ class(NA)
 [1] NA
 \end{verbatim}
 
+
 \begin{itemize}
 \item Esto es un \guillemotleft{}problema\guillemotright{} al usar funciones
 \end{itemize}
@@ -251,6 +256,7 @@ mean(aranjuez$Radiation)
 [1] NA
 \end{verbatim}
 
+
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 mean(aranjuez$Radiation, na.rm =  TRUE)
@@ -261,7 +267,7 @@ mean(aranjuez$Radiation, na.rm =  TRUE)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orga70cf02}]{Valores ausentes}
+\begin{frame}[label={sec:org5537d10},fragile]{Valores ausentes}
  Las funciones \texttt{is.na} y \texttt{anyNA} los identifican 
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
@@ -272,6 +278,7 @@ anyNA(aranjuez)
 [1] TRUE
 \end{verbatim}
 
+
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 which(is.na(aranjuez$Radiation))
@@ -280,6 +287,7 @@ which(is.na(aranjuez$Radiation))
 \begin{verbatim}
 [1] 1861 1867 1873 1896 1897 1908 1923 2153 2413 2587 2600 2603 2684
 \end{verbatim}
+
 
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
@@ -292,9 +300,9 @@ sum(is.na(aranjuez$Radiation))
 \end{frame}
 
 \section{Indexado}
-\label{sec:orgc505ecd}
+\label{sec:org0ebf9e3}
 
-\begin{frame}[fragile,label={sec:orgb987a8e}]{Indexado con \texttt{[]}}
+\begin{frame}[label={sec:org79b2c65},fragile]{Indexado con \texttt{[]}}
  \begin{itemize}
 \item Filas
 \end{itemize}
@@ -336,7 +344,7 @@ aranjuez[10:14, 1:5]
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgffa6a08}]{Indexado con \texttt{[]}}
+\begin{frame}[label={sec:orgabf44d7},fragile]{Indexado con \texttt{[]}}
  \begin{itemize}
 \item Condición basada en los datos
 \end{itemize}
@@ -348,6 +356,7 @@ head(aranjuez[idx, ])
 \end{lstlisting}
 
 \begin{verbatim}
+
           Date TempAvg TempMax TempMin HumidAvg HumidMax WindAvg WindMax Rain
 82  2004-03-22    9.78   16.12   4.340    51.65     87.9   1.526   7.660    0
 83  2004-03-23    8.50   15.52  -0.290    50.10     83.3   1.533   6.027    0
@@ -365,7 +374,7 @@ head(aranjuez[idx, ])
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgd828aa1}]{\texttt{subset}}
+\begin{frame}[label={sec:org70d8ff7},fragile]{\texttt{subset}}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 subset(aranjuez,
@@ -375,6 +384,7 @@ subset(aranjuez,
 \end{lstlisting}
 
 \begin{verbatim}
+
      Radiation TempAvg TempMax TempMin
 82       21.92   9.780   16.12   4.340
 83       20.62   8.500   15.52  -0.290
@@ -403,9 +413,112 @@ subset(aranjuez,
 \end{frame}
 
 
+\section{Datos agregados}
+\label{sec:org1bbf45d}
+
+\begin{frame}[label={sec:org04bde19},fragile]{\texttt{aggregate}}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+aranjuez$rainy <- aranjuez$Rain > 0
+
+aggregate(Radiation ~ rainy, data = aranjuez,
+          FUN = mean)
+\end{lstlisting}
+
+\begin{verbatim}
+
+  rainy Radiation
+1 FALSE  19.63325
+2  TRUE  10.26028
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[label={sec:orgc9378ff},fragile]{Variable categórica con \texttt{cut}}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+aranjuez$tempClass <- cut(aranjuez$TempAvg, 5)
+
+aggregate(Radiation ~ tempClass, data = aranjuez,
+          FUN = mean)
+\end{lstlisting}
+
+\begin{verbatim}
+
+     tempClass Radiation
+1 (-5.34,1.89]  8.805389
+2  (1.89,9.09]  9.014178
+3  (9.09,16.3] 14.554177
+4  (16.3,23.5] 21.912414
+5  (23.5,30.7] 26.192742
+\end{verbatim}
+
+
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+aggregate(Radiation ~ tempClass + rainy,
+          data = aranjuez, FUN = mean)
+\end{lstlisting}
+
+\begin{verbatim}
+
+      tempClass rainy Radiation
+1  (-5.34,1.89] FALSE  9.869134
+2   (1.89,9.09] FALSE 10.718837
+3   (9.09,16.3] FALSE 17.238283
+4   (16.3,23.5] FALSE 23.238145
+5   (23.5,30.7] FALSE 26.392665
+6  (-5.34,1.89]  TRUE  6.822955
+7   (1.89,9.09]  TRUE  7.063932
+8   (9.09,16.3]  TRUE 11.091063
+9   (16.3,23.5]  TRUE 15.802522
+10  (23.5,30.7]  TRUE 22.545862
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[label={sec:orgdc3d0df},fragile]{Agregamos varias variables}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+aggregate(cbind(Radiation, TempAvg) ~ tempClass,
+          data = aranjuez, FUN = mean)
+\end{lstlisting}
+
+\begin{verbatim}
+
+     tempClass Radiation    TempAvg
+1 (-5.34,1.89]  8.805389  0.3423095
+2  (1.89,9.09]  9.014178  5.6663267
+3  (9.09,16.3] 14.554177 12.5219084
+4  (16.3,23.5] 21.912414 19.7486310
+5  (23.5,30.7] 26.192742 26.0496953
+\end{verbatim}
+
+
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+aggregate(cbind(Radiation, TempAvg) ~ tempClass + rainy,
+          data = aranjuez, FUN = mean)
+\end{lstlisting}
+
+\begin{verbatim}
+
+      tempClass rainy Radiation    TempAvg
+1  (-5.34,1.89] FALSE  9.869134  0.3550122
+2   (1.89,9.09] FALSE 10.718837  5.6657481
+3   (9.09,16.3] FALSE 17.238283 12.6959488
+4   (16.3,23.5] FALSE 23.238145 19.9486604
+5   (23.5,30.7] FALSE 26.392665 26.0896408
+6  (-5.34,1.89]  TRUE  6.822955  0.3186364
+7   (1.89,9.09]  TRUE  7.063932  5.6669887
+8   (9.09,16.3]  TRUE 11.091063 12.2973563
+9   (16.3,23.5]  TRUE 15.802522 18.8267565
+10  (23.5,30.7]  TRUE 22.545862 25.3210345
+\end{verbatim}
+\end{frame}
+
+
 \section{Cambio de formato}
-\label{sec:org9dc9fd1}
-\begin{frame}[fragile,label={sec:org29a83c6}]{Forma simple con \texttt{stack}}
+\label{sec:org9021f69}
+\begin{frame}[label={sec:orgd7fc629},fragile]{Forma simple con \texttt{stack}}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 aranjuezWide <- aranjuez[, c('Radiation',
@@ -424,6 +537,7 @@ head(aranjuezLong)
 \end{lstlisting}
 
 \begin{verbatim}
+
   values       ind
 1  5.490 Radiation
 2  6.537 Radiation
@@ -432,6 +546,7 @@ head(aranjuezLong)
 5 10.300 Radiation
 6  9.940 Radiation
 \end{verbatim}
+
 
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
@@ -450,7 +565,7 @@ NA's   :149
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgb161378}]{Más flexible con \texttt{reshape2}}
+\begin{frame}[label={sec:orgb5ee68f},fragile]{Más flexible con \texttt{reshape2}}
  \begin{itemize}
 \item \texttt{reshape2} es un paquete que puede facilitar la transformación de \texttt{data.frame} y matrices.
 \end{itemize}
@@ -461,7 +576,7 @@ library(reshape2)
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgce02042}]{\texttt{melt} para cambiar de \emph{wide} a \emph{long}}
+\begin{frame}[label={sec:org8f2a0d4},fragile]{\texttt{melt} para cambiar de \emph{wide} a \emph{long}}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 aranjuezLong2 <- melt(aranjuez, id.vars = 'Date',
@@ -472,17 +587,47 @@ head(aranjuezLong2)
 \end{lstlisting}
 
 \begin{verbatim}
+
+Warning message:
+attributes are not identical across measure variables; they will be dropped
+
         Date Variable Value
 1 2004-01-01  TempAvg 4.044
 2 2004-01-02  TempAvg 5.777
-3 2004-01-03  TempAvg 5.850
+3 2004-01-03  TempAvg  5.85
 4 2004-01-04  TempAvg 4.408
 5 2004-01-05  TempAvg 3.081
 6 2004-01-06  TempAvg 2.304
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgc79e352}]{\texttt{dcast} para cambiar de \emph{long} a \emph{wide}}
+\begin{frame}[label={sec:org0e9c932},fragile]{Agregamos a partir de un formato \texttt{long}}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+aggregate(Value ~ Variable, data = aranjuezLong2,
+          FUN = mean)
+\end{lstlisting}
+
+\begin{verbatim}
+
+    Variable Value
+1    TempAvg    NA
+2    TempMax    NA
+3    TempMin    NA
+4   HumidAvg    NA
+5   HumidMax    NA
+6    WindAvg    NA
+7    WindMax    NA
+8       Rain    NA
+9  Radiation    NA
+10        ET    NA
+11     rainy    NA
+12 tempClass    NA
+There were 12 warnings (use warnings() to see them)
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[label={sec:org8553cc9},fragile]{\texttt{dcast} para cambiar de \emph{long} a \emph{wide}}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 aranjuezWide2 <- dcast(aranjuezLong2,
@@ -491,161 +636,30 @@ head(aranjuezWide2[, 1:10])
 \end{lstlisting}
 
 \begin{verbatim}
+
 Using Value as value column: use value.var to override.
+
   Variable 2004-01-01 2004-01-02 2004-01-03 2004-01-04 2004-01-05 2004-01-06
-1  TempAvg      4.044      5.777      5.850      4.408      3.081      2.304
-2  TempMax     10.710     11.520     13.320     15.590     14.580     11.830
+1  TempAvg      4.044      5.777       5.85      4.408      3.081      2.304
+2  TempMax      10.71      11.52      13.32      15.59      14.58      11.83
 3  TempMin     -1.969      1.247      0.377     -2.576     -2.974     -3.379
-4 HumidAvg     88.300     83.300     75.000     82.000     83.200     84.500
-5 HumidMax     95.900     98.500     94.400     97.000     97.000     96.500
+4 HumidAvg       88.3       83.3         75         82       83.2       84.5
+5 HumidMax       95.9       98.5       94.4         97         97       96.5
 6  WindAvg      0.746      1.078      0.979      0.633      0.389      0.436
   2004-01-07 2004-01-08 2004-01-09
-1      2.080      6.405     12.060
-2     11.500     13.380     15.330
-3     -3.109     -1.301      9.830
-4     87.000     88.600     86.800
-5     96.600     97.400     94.500
+1       2.08      6.405      12.06
+2       11.5      13.38      15.33
+3     -3.109     -1.301       9.83
+4         87       88.6       86.8
+5       96.6       97.4       94.5
 6      0.449      1.188      2.737
 \end{verbatim}
 \end{frame}
 
 
-\section{Datos agregados}
-\label{sec:org1612f00}
-
-\begin{frame}[fragile,label={sec:org7ae741c}]{\texttt{aggregate}}
- \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
-\begin{lstlisting}
-aranjuez$rainy <- aranjuez$Rain > 0
-
-aggregate(Radiation ~ rainy, data = aranjuez,
-          FUN = mean)
-\end{lstlisting}
-
-\begin{verbatim}
-  rainy Radiation
-1 FALSE  19.63325
-2  TRUE  10.26028
-\end{verbatim}
-\end{frame}
-
-\begin{frame}[fragile,label={sec:orgb37d094}]{Variable categórica con \texttt{cut}}
- \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
-\begin{lstlisting}
-aranjuez$tempClass <- cut(aranjuez$TempAvg, 5)
-
-aggregate(Radiation ~ tempClass, data = aranjuez,
-          FUN = mean)
-\end{lstlisting}
-
-\begin{verbatim}
-     tempClass Radiation
-1 (-5.34,1.89]  8.805389
-2  (1.89,9.09]  9.014178
-3  (9.09,16.3] 14.554177
-4  (16.3,23.5] 21.912414
-5  (23.5,30.7] 26.192742
-\end{verbatim}
-
-\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
-\begin{lstlisting}
-aggregate(Radiation ~ tempClass + rainy,
-          data = aranjuez, FUN = mean)
-\end{lstlisting}
-
-\begin{verbatim}
-      tempClass rainy Radiation
-1  (-5.34,1.89] FALSE  9.869134
-2   (1.89,9.09] FALSE 10.718837
-3   (9.09,16.3] FALSE 17.238283
-4   (16.3,23.5] FALSE 23.238145
-5   (23.5,30.7] FALSE 26.392665
-6  (-5.34,1.89]  TRUE  6.822955
-7   (1.89,9.09]  TRUE  7.063932
-8   (9.09,16.3]  TRUE 11.091063
-9   (16.3,23.5]  TRUE 15.802522
-10  (23.5,30.7]  TRUE 22.545862
-\end{verbatim}
-\end{frame}
-
-\begin{frame}[fragile,label={sec:org06157ab}]{Agregamos varias variables}
- \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
-\begin{lstlisting}
-aggregate(cbind(Radiation, TempAvg) ~ tempClass,
-          data = aranjuez, FUN = mean)
-\end{lstlisting}
-
-\begin{verbatim}
-     tempClass Radiation    TempAvg
-1 (-5.34,1.89]  8.805389  0.3423095
-2  (1.89,9.09]  9.014178  5.6663267
-3  (9.09,16.3] 14.554177 12.5219084
-4  (16.3,23.5] 21.912414 19.7486310
-5  (23.5,30.7] 26.192742 26.0496953
-\end{verbatim}
-
-\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
-\begin{lstlisting}
-aggregate(cbind(Radiation, TempAvg) ~ tempClass + rainy,
-          data = aranjuez, FUN = mean)
-\end{lstlisting}
-
-\begin{verbatim}
-      tempClass rainy Radiation    TempAvg
-1  (-5.34,1.89] FALSE  9.869134  0.3550122
-2   (1.89,9.09] FALSE 10.718837  5.6657481
-3   (9.09,16.3] FALSE 17.238283 12.6959488
-4   (16.3,23.5] FALSE 23.238145 19.9486604
-5   (23.5,30.7] FALSE 26.392665 26.0896408
-6  (-5.34,1.89]  TRUE  6.822955  0.3186364
-7   (1.89,9.09]  TRUE  7.063932  5.6669887
-8   (9.09,16.3]  TRUE 11.091063 12.2973563
-9   (16.3,23.5]  TRUE 15.802522 18.8267565
-10  (23.5,30.7]  TRUE 22.545862 25.3210345
-\end{verbatim}
-\end{frame}
-
-
-\begin{frame}[fragile,label={sec:orga04aa15}]{Agregamos a partir de un formato \texttt{long}}
- \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
-\begin{lstlisting}
-head(aranjuezLong2)
-\end{lstlisting}
-
-\begin{verbatim}
-        Date Variable Value
-1 2004-01-01  TempAvg 4.044
-2 2004-01-02  TempAvg 5.777
-3 2004-01-03  TempAvg 5.850
-4 2004-01-04  TempAvg 4.408
-5 2004-01-05  TempAvg 3.081
-6 2004-01-06  TempAvg 2.304
-\end{verbatim}
-
-\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
-\begin{lstlisting}
-aggregate(Value ~ Variable, data = aranjuezLong2,
-          FUN = mean)
-\end{lstlisting}
-
-\begin{verbatim}
-    Variable     Value
-1    TempAvg 14.404856
-2    TempMax 22.531033
-3    TempMin  6.887590
-4   HumidAvg 62.160390
-5   HumidMax 87.216887
-6    WindAvg  1.173983
-7    WindMax  5.208021
-8       Rain  1.094255
-9  Radiation 16.741759
-10        ET  3.091191
-\end{verbatim}
-\end{frame}
-
 \section{Unión de \texttt{data.frame}}
-\label{sec:org59c161e}
-\begin{frame}[fragile,label={sec:org18d840c}]{Con \texttt{merge}}
+\label{sec:orge9ba0b8}
+\begin{frame}[label={sec:orgfb1994b},fragile]{Con \texttt{merge}}
  \begin{itemize}
 \item Primero construimos un \texttt{data.frame} de ejemplo
 \end{itemize}
@@ -668,7 +682,7 @@ largeStates <- USStates[USStates$Area>1e5,
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:org61f02c6}]{Con \texttt{merge}}
+\begin{frame}[label={sec:org11211cb},fragile]{Con \texttt{merge}}
  \begin{itemize}
 \item Unimos los dos conjuntos (estados \guillemotleft{}fríos\guillemotright{} y \guillemotleft{}grandes\guillemotright{})
 \end{itemize}
@@ -686,7 +700,7 @@ merge(coldStates, largeStates)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgf80ccec}]{\texttt{merge} usa \texttt{match}}
+\begin{frame}[label={sec:org4eae806},fragile]{\texttt{merge} usa \texttt{match}}
  \begin{itemize}
 \item Estados grandes que también son fríos
 \end{itemize}
@@ -699,8 +713,10 @@ idxLarge
 \end{lstlisting}
 
 \begin{verbatim}
+
 [1] 1 0 0 2 5 6 0 0
 \end{verbatim}
+
 
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
@@ -716,7 +732,7 @@ coldStates[idxLarge,]
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:org39518aa}]{\texttt{merge} usa \texttt{match}}
+\begin{frame}[label={sec:org86a6294},fragile]{\texttt{merge} usa \texttt{match}}
  \begin{itemize}
 \item Estados frios que también son grandes
 \end{itemize}
@@ -729,8 +745,10 @@ idxCold
 \end{lstlisting}
 
 \begin{verbatim}
+
 [1] 1 4 0 0 5 6 0 0 0 0 0
 \end{verbatim}
+
 
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
