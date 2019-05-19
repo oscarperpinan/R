@@ -174,169 +174,234 @@ print(myToDo)
 
 ## Definición de una nueva clase
 
-setClass('task',
+
+setClass('bird',
          slots = c(
-             what = 'character',
-             when = 'Date',
-             priority = 'character')
+             name = 'character',
+             lat = 'numeric',
+             lon = 'numeric',
+             alt = 'numeric',
+             speed = 'numeric',
+             time = 'POSIXct')
          )
 
-getClass('task')
+## Funciones para obtener información de una clase
 
-getSlots('task')
+getClass('bird')
 
-slotNames('task')
+getSlots('bird')
 
-## Creación de un objeto con la clase definida: =new=
-## Una vez que la clase ha sido definida con =setClass=, se puede crear un objeto nuevo con =new=.
+slotNames('bird')
 
-task1 <- new('task',
-             what='Find and fix bugs',
-             when=as.Date('2013-03-15'),
-             priority='High')
+## Creación de un objeto con la clase definida
+## Una vez que la clase ha sido definida con =setClass=, se puede crear un objeto nuevo con =new=. Es habitual definir funciones que construyen y modifican objetos para evitar el uso directo de =new=:
 
-task1
+readBird <- function(name, path)
+{
+    csvFile <- file.path(path, paste0(name, ".csv"))
 
-## Funciones para crear objetos
-## Es habitual definir funciones que construyen y modifican objetos
-## para evitar el uso de =new=:
+    vals <- read.csv(csvFile)
+    
+    new('bird',
+        name = name,
+        lat = vals$latitude,
+        lon = vals$longitude,
+        alt = vals$altitude,
+        speed = vals$speed_2d,
+        time = as.POSIXct(vals$date_time)
+        )
+}
 
-createTask <- function(what, when, priority){
-    new('task',
-        what = what,
-        when = when,
-        priority = priority)
-    }
+## Creación de objetos con la clase definida
 
-task2 <- createTask(what = 'Write an email',
-                    when = as.Date('2013-01-01'),
-                    priority = 'Low')
+eric <- readBird("eric", "data")
+nico <- readBird("nico", "data")
+sanne <- readBird("sanne", "data")
 
-createTask('Oops', 'Hoy', 3)
+## Acceso a los slots
+## A diferencia de =$= en listas y =data.frame=, para extraer información de los /slots/ hay que emplear =@= (pero no es recomendable):
 
-## Definición de la clase =ToDo=
+eric@name
 
-setClass('ToDo',
-         slots = c(tasks = 'list')
+summary(eric@speed)
+
+## Clases =S4= con slots tipo lista
+
+setClass("flock",
+         slots = c(
+             name = "character",
+             members = "list")
          )
 
-myList <- new('ToDo',
-              tasks = list(
-                  t1 = task1,
-                  t2 = task2))
+notAFlock <- new("flock",
+                 name = "flock0",
+                 members = list(eric,
+                                3,
+                                "hello"))
+sapply(notAFlock@members, class)
 
-## Acceso a los slots
-## Para extraer información de los /slots/ hay que emplear =@= (a
-## diferencia de =$= en listas y =data.frame=)
-
-myList@tasks
-
-## Acceso a los slots
-## El /slot/ =tasks= es una lista: empleamos =$= para acceder a sus elementos
-
-myList@tasks$t1
-
-
-## Cada elemento de =tasks= es un objeto de clase =task=: empleamos
-## =@= para extraer sus /slots/.
-
-myList@tasks$t1@what
-
-## Problema con los slots definidos como =list=
-## Dado que el slot =tasks= es una =list=, podemos añadir cualquier
-## cosa. 
-
-  myListOops <- new('ToDo',
-                    tasks=list(t1='Tarea1',
-                      task1, task2))
-
-## Validación
-## Para obligar a que sus elementos sean de clase =task= debemos añadir
-## una función de validación.
+## Función de validación
 
 valida <- function (object) {
-    if (any(sapply(object@tasks,
-                   function(x) !is(x, "task")))) 
-        stop("not a list of task objects")
+    if (any(sapply(object@members,
+                   function(x) !is(x, "bird")))) 
+        stop("only bird objects are accepted.")
     return(TRUE)
 }
 
-setClass('ToDo',
-         slots = c(tasks = 'list'),
-         validity=valida
+setClass("flock",
+         slots = c(
+             name = "character",
+             members = "list"),
+         validity = valida
          )
 
-myListOops <- new('ToDo',
-                  tasks=list(t1='Tarea1',
-                             task1, task2))
+## Ejemplo de objeto =S4= con slot tipo =list=
 
-## Funciones para crear y modificar objetos
-
-createToDo <- function(){
-    new('ToDo')
+newFlock <- function(name, ...){
+    birds <- list(...)
+    new("flock",
+        name = name,
+        members = birds)
 }
 
-addTask <- function(object, task){
-    ## La siguiente comprobación sólo es necesaria si la
-    ## definición de la clase *no* incorpora una función 
-    ## validity
-    stopifnot(is(task,'task'))
-    object@tasks <- c(object@tasks, task)
-    object
-}
+notAFlock <- newFlock("flock0",
+                    eric, 2, "hello")
+
+myFlock <- newFlock("flock1",
+                    eric, nico, sanne)
 
 ## Métodos en =S4=: =setMethod=
-## - Normalmente se definen con =setMethod=.
-## - Hay que definir:
-##   - la =signature= (clase de los argumentos para /esta/ definición del
-##     método)
+## - Normalmente se definen con =setMethod= suministrando:
+##   - la clase de los objetos para /esta/ definición del
+##     método (=signature=)
 ##   - la función a ejecutar (=definition=).
-## - Es necesario que exista un método genérico ya definido. Si no
-##   existe, se define con =setGeneric= y =standardGeneric=
 
-setGeneric('myMethod',
-           function(x, y, ...)
-               standardGeneric('myMethod')
-           )
-
-setGeneric('print')
-
-## Métodos en =S4=: =setGeneric= y =getGeneric=
-## Si ya existe un método genérico, la función =definition= debe tener
-## todos los argumentos de la función genérica y en el mismo orden.
-
-
-library(lattice)  
-isGeneric('xyplot')
-
-getGeneric('xyplot')
-
-## Definición de un método =print= para =task=
-
-setMethod('print', signature = 'task',
-          definition = function(x, ...){
-              cat('What: ', x@what,
-                  '- When:', as.character(x@when),
-                  '- Priority:', x@priority,
-                  '\n')
+setMethod('show',
+          signature = "bird",
+          definition = function(object)
+          {
+              cat("Name: ", object@name, "\n")
+              cat("Latitude: ", summary(object@lat), "\n")
+              cat("Longitude: ", summary(object@lon), "\n")
+              cat("Speed: ", summary(object@speed), "\n")
           })
 
-  print(task1)
+eric
 
-## Definición de un método =print= para =ToDo=
+## Métodos en =S4=: =setMethod=
 
-setMethod('print', signature='ToDo',
-          definition = function(x, ...){
-              cat('This is my ToDo list:\n')
-              tasksList <- x@tasks
-              for (i in seq_along(tasksList)) {
-                  cat('No.', i, ':')
-                  print(tasksList[[i]])
-              }
-              cat('--------------------\n')
+setMethod('show',
+          signature = "flock",
+          definition = function(object)
+          {
+              cat("Flock Name: ", object@name, "\n")
+              N <- length(object@members)
+              lapply(seq_len(N), function(i)
+              {
+                  cat("Bird #", i, "\n")
+                  print(object@members[[i]])
+              })
           })
 
-  print(myList)
+myFlock
+
+## Métodos en =S4=: =setGeneric=
+## - Es necesario que exista un método genérico ya definido.
+
+isGeneric("as.data.frame")
+
+
+## - Si no existe, se define con =setGeneric= (y quizás =standardGeneric=).
+
+setGeneric("as.data.frame")
+
+
+## - La función =definition= debe respetar los argumentos de la función genérica y en el mismo orden.
+
+getGeneric("as.data.frame")
+
+## Métodos en =S4=: ejemplo con =as.data.frame=
+
+setMethod("as.data.frame",
+          signature = "bird",
+          definition = function(x, ...)
+          {
+              data.frame(
+                  name = x@name,
+                  lat = x@lat,
+                  lon = x@lon,
+                  alt = x@alt,
+                  speed = x@speed,
+                  time = x@time)
+          })
+
+ericDF <- as.data.frame(eric)
+
+## Métodos en =S4=: ejemplo con =as.data.frame=
+
+setMethod("as.data.frame",
+          signature = "flock",
+          definition = function(x, ...)
+          {
+              dfs <- lapply(x@members, as.data.frame)
+              dfs <- do.call(rbind, dfs)
+              dfs$flock_name <- x@name
+              dfs
+          })
+
+flockDF <- as.data.frame(myFlock)
+
+## Métodos en =S4=: ejemplo con =xyplot=
+
+library(lattice)
+
+setGeneric("xyplot")
+
+setMethod('xyplot',
+          signature = "bird",
+          definition = function(x, data = NULL, ...)
+          {
+              df <- as.data.frame(x)
+              xyplot(lat ~ lon, data = df, ...)
+          })
+
+xyplot(eric)
+
+## Métodos en =S4=: ejemplo con =xyplot=
+
+
+setMethod('xyplot',
+          signature = "bird",
+          definition = function(x, data = NULL,
+                                mode = "latlon", ...)
+          {
+              df <- as.data.frame(x)
+              switch(mode,
+                     lontime = xyplot(lon ~ time, data = df, ...),
+                     lattime = xyplot(lat ~ time, data = df, ...),
+                     latlon = xyplot(lat ~ lon, data = df, ...),
+                     speed = xyplot(speed ~ time, data = df, ...)
+                     )
+          })
+
+xyplot(eric, mode = "lontime")
+
+## Métodos en =S4=: ejemplo con =xyplot=
+
+
+setMethod('xyplot',
+          signature = "flock",
+          definition = function(x, data = NULL, ...)
+          {
+              df <- as.data.frame(x)
+              xyplot(lon ~ lat,
+                     group = name,
+                     data = df,
+                     auto.key = list(space = "right"))
+              })
+
+xyplot(myFlock)
 
 ## Clases =S3= con clases y métodos =S4=
 ## Para usar objetos de clase =S3= en =signatures= de métodos =S4= o
