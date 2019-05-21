@@ -5,9 +5,12 @@
   class(x)
 
 
-## Pero no tienen atributo ni se consideran formalmente objetos:
+## Pero no tienen atributo...
 
 attr(x, 'class')
+
+
+## ...ni se consideran formalmente objetos
 
 is.object(x)
 
@@ -18,14 +21,17 @@ is.object(x)
   class(x)
 
 
-## Ahora sí es un objeto y su atributo está definido:
-
-attr(x, 'class')
+## Ahora sí es un objeto... 
 
 is.object(x)
 
 
-## Sin embargo, su modo de almacenamiento (clase intrínseca) no cambia:
+## y su atributo está definido
+
+attr(x, 'class')
+
+
+## Sin embargo, su modo de almacenamiento (/clase intrínseca/) no cambia:
 
   mode(x)
 
@@ -49,40 +55,43 @@ is.object(x)
   myToDo
 
 ## Métodos genéricos: =UseMethod=
-## - =UseMethod= sirve para elegir el método correspondiente a la clase
-##   del objeto empleado como argumento en la función.
-
-## - Se debe definir un método genérico, incluyendo llamada a
-##   =UseMethod=.
+## El primer paso para que usar métodos en =S3= es definir un método genérico con =UseMethod=. Esta función selecciona el método correspondiente a la clase del argumento.
 
 summary
 
 
 
-## - Si no hay un método definido para la clase del objeto, =UseMethod= ejecuta la función por defecto:
+## Si no hay un método definido para la clase del objeto, =UseMethod= ejecuta la función por defecto:
 
 summary.default
 
-## Métodos genéricos: =UseMethod=
+## Métodos específicos: =methods=
+## Con =methods= podemos averiguar los métodos que hay definidos para una función particular:
 
+methods('summary')
+
+## Ejemplo de definición de método genérico
+## En primer lugar, definimos la función con =UseMethod=:
 
   myFun <- function(x, ...)UseMethod('myFun')
+
+
+## ... y la función por defecto.
+
   myFun.default <- function(x, ...){
     cat('Funcion genérica\n')
     print(x)
     }
 
+## Ejemplo de definición de método genérico
+## Dado que no hay métodos definidos, esta función siempre ejecuta la función por defecto.
+
+methods('myFun')
+
 x <- rnorm(10)
 myFun(x)
 
 myFun(task1)
-
-## =methods=
-## Con =methods= podemos averiguar los métodos que hay definidos para una función particular:
-
-methods('myFun')
-
-methods('summary')
 
 ## Definición del método para =Task=
 
@@ -96,11 +105,18 @@ myFun.Task <- function(x, number,...)
         '\n')
 }
 
-myFun(task1)
-
 methods(myFun)
 
 methods(class='Task')
+
+## Método de =Task=
+
+
+myFun(task1)
+
+myFun(task2)
+
+myFun(ToDo3)
 
 ## =NextMethod=
 ## Incluyendo =NextMethod= en un método específico llamamos al método genérico (=default=).

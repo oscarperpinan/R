@@ -6,18 +6,17 @@
 #+PROPERTY: header-args :results output :exports both :session R:class :tangle yes :comments org
 
 * OOP en R
-** Programación Orientada a Objetos (OOP)
 
 *** Programación Orientada a Objetos (OOP)
-- Características básicas del paradigma OOP:
-  - Los objectos encapsulan información y control de su comportamiento (/objects/).
-  - Las clases describen propiedades de un grupo de objetos (/class/).
-  - Se pueden definir clases a partir de otras (/inheritance/).
-  - Una función genérica se comporta de forma diferente atendiendo a la
-    clase de uno (o varios) de sus argumentos (/polymorphism/).
-- En =R= coexisten dos implementaciones de la OOP:
-  - =S3=: elaboración informal con enfasis en las funciones genéricas y el polimorfismo.
-  - =S4=: elaboración formal de clases y métodos.
+   - Los objectos encapsulan información y control de su comportamiento (/objects/).
+   - Las clases describen propiedades de un grupo de objetos (/class/).
+   - Se pueden definir clases a partir de otras (/inheritance/).
+   - Una función genérica se comporta de forma diferente atendiendo a la
+     clase de uno (o varios) de sus argumentos (/polymorphism/).
+*** OOP en R
+En =R= coexisten dos implementaciones de la OOP:
+   - =S3=: elaboración informal con enfasis en las funciones genéricas y el polimorfismo.
+   - =S4=: elaboración formal de clases y métodos.
 *** OOP en R
 **** Referencias 						    :B_block:
      :PROPERTIES:
@@ -40,10 +39,11 @@ Los objetos básicos en =R= tienen una clase implícita definida en =S3=. Es acc
   x <- rnorm(10)
   class(x)
 #+end_src
-Pero no tienen atributo ni se consideran formalmente objetos:
+Pero no tienen atributo...
 #+begin_src R
 attr(x, 'class')
 #+end_src
+...ni se consideran formalmente objetos
 #+begin_src R
 is.object(x)
 #+end_src
@@ -55,14 +55,15 @@ Se puede redefinir la clase de un objecto =S3= con =class=
   class(x) <- 'myNumeric'
   class(x)
 #+end_src
-Ahora sí es un objeto y su atributo está definido:
-#+begin_src R
-attr(x, 'class')
-#+end_src
+Ahora sí es un objeto... 
 #+begin_src R
 is.object(x)
 #+end_src
-Sin embargo, su modo de almacenamiento (clase intrínseca) no cambia:
+y su atributo está definido
+#+begin_src R
+attr(x, 'class')
+#+end_src
+Sin embargo, su modo de almacenamiento (/clase intrínseca/) no cambia:
 #+begin_src R
   mode(x)
 #+end_src
@@ -111,28 +112,39 @@ Sin embargo, su modo de almacenamiento (clase intrínseca) no cambia:
   - =summary= :: =summary.lm=
 		 
 *** Métodos genéricos: =UseMethod=
-- =UseMethod= sirve para elegir el método correspondiente a la clase
-  del objeto empleado como argumento en la función.
-
-- Se debe definir un método genérico, incluyendo llamada a
-  =UseMethod=.
+El primer paso para que usar métodos en =S3= es definir un método genérico con =UseMethod=. Esta función selecciona el método correspondiente a la clase del argumento.
 #+begin_src R
 summary
 #+end_src
 
-- Si no hay un método definido para la clase del objeto, =UseMethod= ejecuta la función por defecto:
+Si no hay un método definido para la clase del objeto, =UseMethod= ejecuta la función por defecto:
 #+begin_src R
 summary.default
 #+end_src
 
-*** Métodos genéricos: =UseMethod=
+*** Métodos específicos: =methods=
+Con =methods= podemos averiguar los métodos que hay definidos para una función particular:
+#+begin_src R
+methods('summary')
+#+end_src
 
+*** Ejemplo de definición de método genérico
+En primer lugar, definimos la función con =UseMethod=:
 #+begin_src R
   myFun <- function(x, ...)UseMethod('myFun')
+#+end_src
+... y la función por defecto.
+#+begin_src R
   myFun.default <- function(x, ...){
     cat('Funcion genérica\n')
     print(x)
     }
+#+end_src
+
+*** Ejemplo de definición de método genérico
+Dado que no hay métodos definidos, esta función siempre ejecuta la función por defecto.
+#+begin_src R
+methods('myFun')
 #+end_src
 
 #+begin_src R
@@ -144,14 +156,6 @@ myFun(x)
 myFun(task1)
 #+end_src
 
-*** =methods=
-Con =methods= podemos averiguar los métodos que hay definidos para una función particular:
-#+begin_src R
-methods('myFun')
-#+end_src
-#+begin_src R
-methods('summary')
-#+end_src
 
 *** Definición del método para =Task=
 #+begin_src R
@@ -165,15 +169,30 @@ myFun.Task <- function(x, number,...)
         '\n')
 }
 #+end_src
-#+begin_src R
-myFun(task1)
-#+end_src
+
 #+begin_src R
 methods(myFun)
 #+end_src
+
 #+begin_src R
 methods(class='Task')
 #+end_src
+
+*** Método de =Task=
+
+#+begin_src R
+myFun(task1)
+#+end_src
+
+#+begin_src R
+myFun(task2)
+#+end_src
+
+#+begin_src R
+myFun(ToDo3)
+#+end_src
+
+
 
 
 *** =NextMethod=
