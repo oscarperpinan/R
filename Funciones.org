@@ -175,6 +175,7 @@ warning('Quizás algo no es como debiera...')
 message('Todo en orden por estos lares.')
 #+end_src
 
+
 * Lexical scope
 
 ** Clases de variables
@@ -281,6 +282,89 @@ get('m', env = environment(myFoo))
 get('n', env = environment(myFoo))
 #+end_src
 
+* Funciones para ejecutar funciones
+** =lapply=
+Supongamos que tenemos una lista de objetos, y queremos aplicar a cada elemento la misma función:
+#+begin_src R
+lista <- list(a = rnorm(100),
+              b = runif(100),
+              c = rexp(100))
+#+end_src
+Podemos resolverlo de forma repetitiva...
+#+begin_src R
+sum(lista$a)
+
+sum(lista$b)
+
+sum(lista$c)
+#+end_src
+
+O mejor con =lapply= (lista + función):
+#+begin_src R
+lapply(lista, sum)
+#+end_src
+
+** =do.call=
+Supongamos que queremos usar los elementos de la lista como argumentos de una función.
+
+Resolvemos de forma directa:
+#+begin_src R
+sum(lista$a, lista$b, lista$c)
+#+end_src
+Mejoramos /un poco/ con =with=:
+#+begin_src R
+with(lista, sum(a, b, c))
+#+end_src
+La forma recomendable es mediante =do.call= (función + lista)
+#+begin_src R 
+do.call(sum, lista)
+#+end_src
+** =do.call=
+
+Se emplea frecuentemente para adecuar el resultado de =lapply= (entrega una lista):
+#+begin_src R 
+  x <- rnorm(5)
+  ll <- lapply(1:5, function(i)x^i)
+  do.call(rbind, ll)
+#+end_src
+
+** =Reduce=
+Combina sucesivamente los elementos de un objeto aplicando una función binaria
+#+begin_src R 
+## (((1+2)+3)+4)+5
+Reduce('+', 1:5)
+#+end_src
+** =Reduce=
+#+begin_src R 
+## (((1/2)/3)/4)/5
+Reduce('/', 1:5)
+#+end_src
+
+#+begin_src R 
+foo <- function(u, v)u + 1 /v
+Reduce(foo, c(3, 7, 15, 1, 292))
+## equivalente a
+## foo(foo(foo(foo(3, 7), 15), 1), 292)
+#+end_src
+#+begin_src R
+Reduce(foo, c(3, 7, 15, 1, 292), right=TRUE)
+## equivalente a
+## foo(3, foo(7, foo(15, foo(1, 292))))
+#+end_src
+** Funciones recursivas
+Ejemplo: [[http://en.wikibooks.org/wiki/R_Programming/Working_with_functions#Functions_as_Objects][Serie de Fibonnaci]]
+#+begin_src R 
+fib <- function(n){
+    if (n>2) {
+        c(fib(n-1),
+          sum(tail(fib(n-1),2)))
+    } else if (n>=0) rep(1,n)
+}
+#+end_src
+#+begin_src R 
+fib(10)
+#+end_src
+
 * Debug
 
 ** Post-mortem: =traceback=
@@ -353,20 +437,33 @@ untrace(sumProd)
  
 * Profiling
 ** ¿Cuánto tarda mi función? =system.time=
-
+Defino una función que rellena una matriz de 10^6 filas y =n= columnas con una distribución normal:
 #+begin_src R 
-noise <- function(sd)rnorm(1000, mean=0, sd=sd)
-#+end_src
-#+begin_src R 
-sumNoise <- function(nComponents){
-    vals <- sapply(seq_len(nComponents), noise)
-    rowSums(vals)
+makeNoise <- function(n){
+    sapply(seq_len(n), function(i) rnorm(1e6))
 }
 #+end_src
-#+begin_src R 
-system.time(sumNoise(1000))
+
+#+begin_src R
+M <- makeNoise(100)
+summary(M)
 #+end_src
-** ¿Cuánto tarda cada parte de mi función?: =Rprof=
+** Diferentes formas de sumar
+#+begin_src R
+suma1 <- numeric(1e6)
+system.time(for(i in 1:1e6) suma1[i] <- sum(M[i,]))
+#+end_src
+
+#+begin_src R
+system.time(suma2 <- apply(M, 1, sum))
+#+end_src
+
+#+begin_src R
+system.time(suma3 <- rowSums(M))
+#+end_src
+
+
+** COMMENT ¿Cuánto tarda cada parte de mi función?: =Rprof=
 - Usaremos un fichero temporal
 #+begin_src R 
 tmp <- tempfile()
@@ -380,7 +477,7 @@ Rprof(tmp)
 zz <- sumNoise(1000)
 #+end_src
    
-** ¿Cuánto tarda cada parte de mi función?: =Rprof=
+** COMMENT ¿Cuánto tarda cada parte de mi función?: =Rprof=
 - Paramos el análisis
 #+begin_src R 
 Rprof()
@@ -391,67 +488,3 @@ summaryRprof(tmp)
 #+end_src
 
 
-* Miscelánea
-** =do.call= 
-- Ejemplo: sumar los componentes de una lista
-#+begin_src R 
-lista <- list(a = rnorm(100),
-              b = runif(100),
-              c = rexp(100))
-with(lista, sum(a + b + c))
-#+end_src
-- En lugar de nombrar los componentes, creamos una llamada a una
-  función con =do.call=
-#+begin_src R 
-do.call(sum, lista)
-#+end_src
-** =do.call=
-
-- Se emplea frecuentemente con el resultado de =lapply=
-#+begin_src R 
-  x <- rnorm(5)
-  ll <- lapply(1:5, function(i)x^i)
-  do.call(rbind, ll)
-#+end_src
-- Este mismo ejemplo puede resolverse con =sapply=
-#+begin_src R 
-  sapply(1:5, function(i)x^i)
-#+end_src
-
-** =Reduce=
-- Combina sucesivamente los elementos de un objeto aplicando una
-  función binaria
-#+begin_src R 
-## (((1+2)+3)+4)+5
-Reduce('+', 1:5)
-#+end_src
-** =Reduce=
-#+begin_src R 
-## (((1/2)/3)/4)/5
-Reduce('/', 1:5)
-#+end_src
-
-#+begin_src R 
-foo <- function(u, v)u + 1 /v
-Reduce(foo, c(3, 7, 15, 1, 292))
-## equivalente a
-## foo(foo(foo(foo(3, 7), 15), 1), 292)
-#+end_src
-#+begin_src R
-Reduce(foo, c(3, 7, 15, 1, 292), right=TRUE)
-## equivalente a
-## foo(3, foo(7, foo(15, foo(1, 292))))
-#+end_src
-** Funciones recursivas
-- [[http://en.wikibooks.org/wiki/R_Programming/Working_with_functions#Functions_as_Objects][Serie de Fibonnaci]]
-#+begin_src R 
-fib <- function(n){
-    if (n>2) {
-        c(fib(n-1),
-          sum(tail(fib(n-1),2)))
-    } else if (n>=0) rep(1,n)
-}
-#+end_src
-#+begin_src R 
-fib(10)
-#+end_src

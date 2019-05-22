@@ -104,7 +104,7 @@ foo <- function(x, y){
     if (!(is.numeric(x) & is.numeric(y))){
         stop('arguments must be numeric.')
     } else { x + y }
-} 
+}
 
 foo(2, 3)
 
@@ -148,7 +148,7 @@ myFun(2, 3)
 ## - Las variables libres deben estar disponibles en el entorno
 ##   (=environment=) en el que la función ha sido creada.
 
-environment(myFun) 
+environment(myFun)
 
 ls()
 
@@ -205,6 +205,85 @@ ls(env = environment(myFoo))
 get('m', env = environment(myFoo))
 
 get('n', env = environment(myFoo))
+
+## =lapply=
+## Supongamos que tenemos una lista de objetos, y queremos aplicar a cada elemento la misma función:
+
+lista <- list(a = rnorm(100),
+              b = runif(100),
+              c = rexp(100))
+
+
+## Podemos resolverlo de forma repetitiva...
+
+sum(lista$a)
+
+sum(lista$b)
+
+sum(lista$c)
+
+
+
+## O mejor con =lapply= (lista + función):
+
+lapply(lista, sum)
+
+## =do.call=
+## Supongamos que queremos usar los elementos de la lista como argumentos de una función.
+
+## Resolvemos de forma directa:
+
+sum(lista$a, lista$b, lista$c)
+
+
+## Mejoramos /un poco/ con =with=:
+
+with(lista, sum(a, b, c))
+
+
+## La forma recomendable es mediante =do.call= (función + lista)
+
+do.call(sum, lista)
+
+## =do.call=
+
+## Se emplea frecuentemente para adecuar el resultado de =lapply= (entrega una lista):
+
+  x <- rnorm(5)
+  ll <- lapply(1:5, function(i)x^i)
+  do.call(rbind, ll)
+
+## =Reduce=
+## Combina sucesivamente los elementos de un objeto aplicando una función binaria
+
+## (((1+2)+3)+4)+5
+Reduce('+', 1:5)
+
+## =Reduce=
+
+## (((1/2)/3)/4)/5
+Reduce('/', 1:5)
+
+foo <- function(u, v)u + 1 /v
+Reduce(foo, c(3, 7, 15, 1, 292))
+## equivalente a
+## foo(foo(foo(foo(3, 7), 15), 1), 292)
+
+Reduce(foo, c(3, 7, 15, 1, 292), right=TRUE)
+## equivalente a
+## foo(3, foo(7, foo(15, foo(1, 292))))
+
+## Funciones recursivas
+## Ejemplo: [[http://en.wikibooks.org/wiki/R_Programming/Working_with_functions#Functions_as_Objects][Serie de Fibonnaci]]
+
+fib <- function(n){
+    if (n>2) {
+        c(fib(n-1),
+          sum(tail(fib(n-1),2)))
+    } else if (n>=0) rep(1,n)
+}
+
+fib(10)
 
 ## Post-mortem: =traceback=
 
@@ -263,100 +342,20 @@ body(sumProd)
 untrace(sumProd)
 
 ## ¿Cuánto tarda mi función? =system.time=
+## Defino una función que rellena una matriz de 10^6 filas y =n= columnas con una distribución normal:
 
-
-noise <- function(sd)rnorm(1000, mean=0, sd=sd)
-
-sumNoise <- function(nComponents){
-    vals <- sapply(seq_len(nComponents), noise)
-    rowSums(vals)
+makeNoise <- function(n){
+    sapply(seq_len(n), function(i) rnorm(1e6))
 }
 
-system.time(sumNoise(1000))
+M <- makeNoise(100)
+summary(M)
 
-## ¿Cuánto tarda cada parte de mi función?: =Rprof=
-## - Usaremos un fichero temporal
+## Diferentes formas de sumar
 
-tmp <- tempfile()
+suma1 <- numeric(1e6)
+system.time(for(i in 1:1e6) suma1[i] <- sum(M[i,]))
 
+system.time(suma2 <- apply(M, 1, sum))
 
-## - Activamos la toma de información
-
-Rprof(tmp)
-
-
-## - Ejecutamos el código a analizar
-
-zz <- sumNoise(1000)
-
-## ¿Cuánto tarda cada parte de mi función?: =Rprof=
-## - Paramos el análisis
-
-Rprof()
-
-
-## - Extraemos el resumen
-
-summaryRprof(tmp)
-
-## =do.call= 
-## - Ejemplo: sumar los componentes de una lista
-
-lista <- list(a = rnorm(100),
-              b = runif(100),
-              c = rexp(100))
-with(lista, sum(a + b + c))
-
-
-## - En lugar de nombrar los componentes, creamos una llamada a una
-##   función con =do.call=
-
-do.call(sum, lista)
-
-## =do.call=
-
-## - Se emplea frecuentemente con el resultado de =lapply=
-
-  x <- rnorm(5)
-  ll <- lapply(1:5, function(i)x^i)
-  do.call(rbind, ll)
-
-
-## - Este mismo ejemplo puede resolverse con =sapply=
-
-  sapply(1:5, function(i)x^i)
-
-## =Reduce=
-## - Combina sucesivamente los elementos de un objeto aplicando una
-##   función binaria
-
-## (((1+2)+3)+4)+5
-Reduce('+', 1:5)
-## equivalente a 
-## sum(1:10)
-
-## =Reduce=
-
-## (((1/2)/3)/4)/5
-Reduce('/', 1:5)
-
-foo <- function(u, v)u + 1 /v
-Reduce(foo, c(3, 7, 15, 1, 292))
-## equivalente a
-## foo(foo(foo(foo(3, 7), 15), 1), 292)
-
-Reduce(foo, c(3, 7, 15, 1, 292), right=TRUE)
-## equivalente a
-## foo(3, foo(7, foo(15, foo(1, 292))))
-
-## Funciones recursivas
-## - [[http://en.wikibooks.org/wiki/R_Programming/Working_with_functions#Functions_as_Objects][Serie de Fibonnaci]]
-
-fib <- function(n){
-    if (n>2) {
-        c(fib(n-1),
-          sum(tail(fib(n-1),2)))
-    } else if (n>=0) rep(1,n)
-}
-
-fib(10)
+system.time(suma3 <- rowSums(M))
