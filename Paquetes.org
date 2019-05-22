@@ -25,19 +25,20 @@
 
 ** ¿Por qué crear y publicar un paquete para =R=?
 
-- Es una herramienta cómoda para mantener colecciones coherentes de funciones
-  y datos.
-- Permite publicar código de forma que pueda ser empleado por
-  otros siguiendo unas estructuras comunes.
-- La estructura de un paquete obliga a organizar, limpiar y
-  documentar el código.
-- Al distribuir las herramientas para que otros puedan usarlas, se
-  obtiene realimentación sobre lo publicado, de forma que se
-  aumenta su robustez, se amplian sus funcionalidades y se conecta
-  con otras herramientas y proyectos.
-- "As we enjoy great advantages from the inventions of others, we
-  should be glad of an opportunity to serve others by any
-  invention of ours, and this we should do freely and generously."
+*** Organización
+ - Es una herramienta cómoda para mantener *colecciones coherentes de funciones y datos*.
+ - La estructura de un paquete *obliga a organizar, limpiar y documentar* el código.
+
+** ¿Por qué crear y publicar un paquete para =R=?
+
+*** Colaboración
+ - Permite publicar código de forma que pueda ser *empleado por otros* siguiendo unas *estructuras comunes*.
+ - Al distribuir las herramientas para que otros puedan usarlas, se obtiene *realimentación sobre lo publicado*, de forma que se aumenta su *robustez*, se *amplian sus funcionalidades* y se *conecta con otras herramientas* y proyectos.
+
+** ¿Por qué crear y publicar un paquete para =R=?
+
+*** Ética
+"As we enjoy great advantages from the inventions of others, we should be glad of an opportunity to serve others by any invention of ours, and this we should do freely and generously." (B. Franklin)
 
 ** Algunos consejos genéricos
 
@@ -67,17 +68,16 @@ Extraído de [[http://arxiv.org/abs/1210.0530][Best Practices for Scientific Com
 * Crear un paquete en R
 
 ** Estructura
-- Las fuentes de un paquete de =R= están contenidas en un
-  directorio que contiene al menos:
+Las fuentes de un paquete de =R= están contenidas en un directorio que contiene al menos:
   - Los ficheros DESCRIPTION y NAMESPACE
   - Los subdirectorios:
     - =R=: código en ficheros .R
     - =man=: páginas de ayuda de las funciones, métodos y clases
       contenidos en el paquete.
-- Esta estructura puede ser generada con =package.skeleton=.
+Esta estructura puede ser generada con =package.skeleton=
 
 ** DESCRIPTION
-- El fichero DESCRIPTION contiene la información básica:
+El fichero DESCRIPTION contiene la información básica:
 #+begin_example
      Package: pkgname
      Version: 0.5-1
@@ -101,25 +101,25 @@ Extraído de [[http://arxiv.org/abs/1210.0530][Best Practices for Scientific Com
   =Maintainer= son obligatorios.
 - Si usa métodos =S4= debe incluir =Depends: methods=
 ** NAMESPACE
-- =R= usa un sistema de gestión de /espacio de nombres/ que
+- =R= usa un sistema de gestión de *espacio de nombres* que
   permite al autor del paquete especificar:
-  - las variables del paquete que se exportan (y son, por tanto,
+  - las *variables* del paquete que se *exportan* (y son, por tanto,
     accesibles a los usuarios)
-  - las variables que se importan de otros paquetes.
-  - las clases y métodos =S3= y =S4= que deben registrarse.
+  - las *variables* que se *importan* de otros paquetes.
+  - las *clases y métodos* =S3= y =S4= que deben registrarse.
 - Este mecanismo queda definido en el contenido del fichero
   =NAMESPACE=.
 ** NAMESPACE
 El =NAMESPACE= controla la estrategia de búsqueda de variables
   que utilizan las funciones del paquete:
-  - En primer lugar busca entre las creadas localmente (por el código de la carpeta =R/=).
-  - En segundo lugar busca entre las variables importadas
+  1. En primer lugar busca entre las creadas localmente (por el código de la carpeta =R/=).
+  2. En segundo lugar busca entre las variables importadas
     explícitamente de otros paquetes.
-  - En tercer lugar busca en el =NAMESPACE= del paquete =base=.
-  - Por último busca siguiendo el camino habitual (ver el
+  3. En tercer lugar busca en el =NAMESPACE= del paquete =base=.
+  4. Por último busca siguiendo el camino habitual (ver el
     resultado de =search()=)
 
-** NAMESPACE
+** NAMESPACE: variables
 - Para exportar las variables =f= y =g=:
 #+begin_src R 
 export(f, g)
@@ -134,7 +134,7 @@ import(pkgExt)
 importFrom(pkgExt, var1, var2)
 #+end_src
 
-** NAMESPACE
+** NAMESPACE: clases y métodos
 - Para registrar el método =S3= =print= para la clase =myClass=:
 #+begin_src R 
 S3method(print, myClass)
@@ -210,25 +210,25 @@ importMethodsFrom(package, ...)
 * Publicar un paquete
 
 ** Itinerario
-- Comprobar
-#+begin_example
+1. Comprobar
+   #+begin_src sh
 R CMD check myPackage/
-#+end_example
-- Construir
-#+begin_example 
+#+end_src
+2. Construir
+   #+begin_src sh
 R CMD build myPackage/
-#+end_example
-- Publicar (o actualizar) en un repositorio
+#+end_src
+3. Publicar (o actualizar) en un repositorio
 
 ** Comprobar
 - Comprobar un directorio (desde línea de comandos):
-#+begin_example
+#+begin_src sh
 R CMD check myPackage/
-#+end_example
+#+end_src
 - Comprobar un paquete ya construido (desde línea de comandos):
-#+begin_example
+#+begin_src sh
 R CMD check myPackage.tar.gz
-#+end_example
+#+end_src
 - Esta comprobación incluye más de 20 puntos de prueba detallados
   en el manual [[http://cran.r-project.org/doc/manuals/R-exts.html#Checking-packages][Writing R extensions]].
 ** Construir
@@ -245,14 +245,16 @@ R CMD check myPackage.tar.gz
     :END:
 - Fuente en formato /tarball/: el resultado es un fichero /tarball/ =myPackage.tar.gz= que
      se puede distribuir a cualquier sistema.
-#+begin_example
+#+begin_src sh
 R CMD build myPackage/
-#+end_example
+#+end_src
+
 - Comprimido binario: el resultado es una copia comprimida de la versión
      *instalada* del paquete: depende del sistema operativo.
-#+begin_example
+#+begin_src sh
 R CMD INSTALL --build myPackage/
-#+end_example
+#+end_src
+
 
 ** Comprobar y construir en sistemas Windows
 
@@ -264,9 +266,9 @@ R CMD INSTALL --build myPackage/
 - Para paquetes con código compilado, o en caso de problemas con
   los comandos anteriores, hay que usar [[http://cran.r-project.org/bin/windows/Rtools/][Rtools]].
 - Se pueden instalar fuentes /tarball/ con (ver [[http://cran.r-project.org/doc/manuals/R-admin.html#Windows-packages][R installation and administration]]):
-#+begin_example
+#+begin_src sh
 install.packages(myPackage.tar.gz, type='source')
-#+end_example
+#+end_src
 
 
 ** Repositorios: CRAN
@@ -298,7 +300,7 @@ Otros repositorios destacables son:
 
 - GitHub es actualmente el repositorio de código más importante por número de usuarios y proyectos alojados.
   - Documentación: [[https://guides.github.com/][Guías sobre GitHub]].
-  - Existe una [[https://desktop.github.com/][aplicación de escritorio]] ([[https://help.github.com/desktop/guides/getting-started/][guía introductoria]])
+  - Existe una [[https://desktop.github.com/][aplicación de escritorio]].
 - Emplea =git= para realizar control de versiones.
   - [[https://help.github.com/articles/good-resources-for-learning-git-and-github/][Recursos]] para aprender a usar =git=.
 - [[https://github.com/search?o=desc&q=language:R&ref=searchresults&s=stars&type=Repositories][Proyectos de =R= en GitHub]]. 
@@ -309,9 +311,4 @@ library(remotes)
 ## https://github.com/oscarperpinan/tdr
 install_github("oscarperpinan/tdr") 
 #+end_src
-
-** Ejemplos
-
-- Paquete simple: https://github.com/oscarperpinan/pkgEx
-- Paquete con métodos S4: https://github.com/oscarperpinan/pkgMethods
 
