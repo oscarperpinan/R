@@ -369,9 +369,8 @@ fib(10)
 
 ** Post-mortem: =traceback=
 #+begin_src R 
-sumSq <- function(x, ...){
+sumSq <- function(x, ...)
     sum(x ^ 2, ...)
-}
 
 sumProd <- function(x, y, ...){
     xs <- sumSq(x, ...)
@@ -390,7 +389,7 @@ traceback()
 #+end_src
 
 ** Analizar antes de que ocurra: =debug=
-- Activa la ejecución paso a paso de una función
+=debug= activa la ejecución paso a paso de una función:
 #+begin_src R
 debug(sumProd)
 #+end_src
@@ -444,14 +443,18 @@ makeNoise <- function(n){
 }
 #+end_src
 
-#+begin_src R
+#+begin_src R :cache yes
 M <- makeNoise(100)
 summary(M)
 #+end_src
 ** Diferentes formas de sumar
+=system.time= mide el tiempo de CPU que consume un código[fn:1].
+
 #+begin_src R
-suma1 <- numeric(1e6)
-system.time(for(i in 1:1e6) suma1[i] <- sum(M[i,]))
+system.time({
+    suma1 <- numeric(1e6)
+    for(i in 1:1e6) suma1[i] <- sum(M[i,])
+})
 #+end_src
 
 #+begin_src R
@@ -463,7 +466,7 @@ system.time(suma3 <- rowSums(M))
 #+end_src
 
 
-** COMMENT ¿Cuánto tarda cada parte de mi función?: =Rprof=
+** ¿Cuánto tarda cada parte de mi función?: =Rprof=
 - Usaremos un fichero temporal
 #+begin_src R 
 tmp <- tempfile()
@@ -474,10 +477,15 @@ Rprof(tmp)
 #+end_src
 - Ejecutamos el código a analizar
 #+begin_src R 
-zz <- sumNoise(1000)
+suma1 <- numeric(1e6)
+for(i in 1:1e6) suma1[i] <- sum(M[i,])
+
+suma2 <- apply(M, 1, FUN = sum)
+
+suma3 <- rowSums(M)
 #+end_src
    
-** COMMENT ¿Cuánto tarda cada parte de mi función?: =Rprof=
+** ¿Cuánto tarda cada parte de mi función?: =Rprof=
 - Paramos el análisis
 #+begin_src R 
 Rprof()
@@ -487,4 +495,6 @@ Rprof()
 summaryRprof(tmp)
 #+end_src
 
+* Footnotes
 
+[fn:1] Para entender la diferencia entre =user= y =system= véase explicación [[http://r.789695.n4.nabble.com/Meaning-of-proc-time-tp2303263p2306691.html][aquí]]. 

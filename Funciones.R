@@ -287,9 +287,8 @@ fib(10)
 
 ## Post-mortem: =traceback=
 
-sumSq <- function(x, ...){
+sumSq <- function(x, ...)
     sum(x ^ 2, ...)
-}
 
 sumProd <- function(x, y, ...){
     xs <- sumSq(x, ...)
@@ -304,7 +303,7 @@ sumProd(rnorm(10), letters[1:10])
 traceback()
 
 ## Analizar antes de que ocurra: =debug=
-## - Activa la ejecución paso a paso de una función
+## =debug= activa la ejecución paso a paso de una función:
 
 debug(sumProd)
 
@@ -352,10 +351,44 @@ M <- makeNoise(100)
 summary(M)
 
 ## Diferentes formas de sumar
+## =system.time= mide el tiempo de CPU que consume un código[fn:1].
 
-suma1 <- numeric(1e6)
-system.time(for(i in 1:1e6) suma1[i] <- sum(M[i,]))
+
+system.time({
+    suma1 <- numeric(1e6)
+    for(i in 1:1e6) suma1[i] <- sum(M[i,])
+})
 
 system.time(suma2 <- apply(M, 1, sum))
 
 system.time(suma3 <- rowSums(M))
+
+## ¿Cuánto tarda cada parte de mi función?: =Rprof=
+## - Usaremos un fichero temporal
+
+tmp <- tempfile()
+
+
+## - Activamos la toma de información
+
+Rprof(tmp)
+
+
+## - Ejecutamos el código a analizar
+
+suma1 <- numeric(1e6)
+for(i in 1:1e6) suma1[i] <- sum(M[i,])
+
+suma2 <- apply(M, 1, FUN = sum)
+
+suma3 <- rowSums(M)
+
+## ¿Cuánto tarda cada parte de mi función?: =Rprof=
+## - Paramos el análisis
+
+Rprof()
+
+
+## - Extraemos el resumen
+
+summaryRprof(tmp)
