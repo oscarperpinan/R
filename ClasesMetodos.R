@@ -54,21 +54,36 @@ attr(x, 'class')
   class(myToDo) <- c('ToDo3')
   myToDo
 
-## Métodos genéricos: =UseMethod=
-## El primer paso para que usar métodos en =S3= es definir un método genérico con =UseMethod=. Esta función selecciona el método correspondiente a la clase del argumento.
+## Problemas de la sencillez de =S3=
+
+
+  notToDo <- list(task1, 2019)
+  class(notToDo) <- c('ToDo3')
+  notToDo
+
+## Métodos con =S3=
+
+## Son *sencillos* de usar e implementar pero *poco robustos*.
+
+## Se definen a partir de un método genérico...
 
 summary
 
 
 
-## Si no hay un método definido para la clase del objeto, =UseMethod= ejecuta la función por defecto:
+## ...añadiendo a la función el nombre de la clase con un punto como separador. 
 
-summary.default
+summary.data.frame
 
-## Métodos específicos: =methods=
+## Métodos con =S3=	 
 ## Con =methods= podemos averiguar los métodos que hay definidos para una función particular:
 
 methods('summary')
+
+## Métodos con =S3=
+## Si no hay un método definido para la clase del objeto, =UseMethod= ejecuta la función por defecto:
+
+summary.default
 
 ## Ejemplo de definición de método genérico
 ## En primer lugar, definimos la función con =UseMethod=:
@@ -84,7 +99,7 @@ methods('summary')
     }
 
 ## Ejemplo de definición de método genérico
-## Dado que no hay métodos definidos, esta función siempre ejecuta la función por defecto.
+## Dado que aún no hay métodos definidos, esta función ejecutará la función por defecto.
 
 methods('myFun')
 
@@ -93,7 +108,7 @@ myFun(x)
 
 myFun(task1)
 
-## Definición del método para =Task=
+## Ejemplo de definición de método específico
 
 myFun.Task <- function(x, number,...)
 {
@@ -116,77 +131,9 @@ myFun(task1)
 
 myFun(task2)
 
-myFun(ToDo3)
+myFun(myToDo)
 
-## =NextMethod=
-## Incluyendo =NextMethod= en un método específico llamamos al método genérico (=default=).
-
-  print.Task <- function(x, ...){
-    cat('Task:\n')
-    NextMethod(x, ...) ## Ejecuta print.default
-  }
-
-  print(task1)
-
-## =NextMethod=
-
-  print.ToDo3 <- function(x, ...){
-    cat('This is my ToDo list:\n')
-    NextMethod(x, ...)
-    cat('--------------------\n')
-  }
-
-print(myToDo)
-
-## Definición de un método =S3= para =Task=
-
-print.Task <- function(x, number,...){
-    if (!missing(number))
-        cat('Task no.', number,':\n')
-    cat('What: ', x$what,
-        '- When:', as.character(x$when),
-        '- Priority:', x$priority,
-        '\n')
-}
-
-print(task1)
-
-print(myToDo[[2]])
-
-## Definición de un método =S3= para =ToDo3=
-## - Definimos un método más sofisticado para la clase =ToDo3= *sin*
-##   tener en cuenta el método definido para la clase =Task=.
-
-  print.ToDo3 <- function(x, ...){
-    cat('This is my ToDo list:\n')
-    for (i in seq_along(x)){
-      cat('Task no.', i,':\n')
-      cat('What: ', x[[i]]$what,
-          '- When:', as.character(x[[i]]$when),
-          '- Priority:', x[[i]]$priority,
-          '\n')
-      }
-    cat('--------------------\n')
-  }
-
-  print(myToDo)
-
-## Redefinición del método para =ToDo3=
-
-## - Podemos aligerar el código teniendo en cuenta el método definido para la clase =Task=.
-
-  print.ToDo3 <- function(x, ...){
-      cat('This is my ToDo list:\n')
-      ## Cada uno de los elementos de un
-      ## objeto ToDo3 son Task.  Por tanto,
-      ## x[[i]] es de clase Task y
-      ## print(x[[i]]) ejecuta el metodo
-      ## print.Task
-    for (i in seq_along(x)) print(x[[i]], i)
-      cat('--------------------\n')
-  }
-
-print(myToDo)
+myFun(myToDo)
 
 ## Definición de una nueva clase
 
@@ -354,18 +301,6 @@ setMethod("as.data.frame",
 
 ericDF <- as.data.frame(eric)
 
-## Métodos en =S4=: ejemplo con =as.data.frame=
-
-setMethod("as.data.frame",
-          signature = "flock",
-          definition = function(x, ...)
-          {
-              dfs <- lapply(x@members, as.data.frame)
-              dfs <- do.call(rbind, dfs)
-              dfs$flock_name <- x@name
-              dfs
-          })
-
 flockDF <- as.data.frame(myFlock)
 
 ## Métodos en =S4=: ejemplo con =xyplot=
@@ -384,38 +319,7 @@ setMethod('xyplot',
 
 xyplot(eric)
 
-## Métodos en =S4=: ejemplo con =xyplot=
-
-
-setMethod('xyplot',
-          signature = "bird",
-          definition = function(x, data = NULL,
-                                mode = "latlon", ...)
-          {
-              df <- as.data.frame(x)
-              switch(mode,
-                     lontime = xyplot(lon ~ time, data = df, ...),
-                     lattime = xyplot(lat ~ time, data = df, ...),
-                     latlon = xyplot(lat ~ lon, data = df, ...),
-                     speed = xyplot(speed ~ time, data = df, ...)
-                     )
-          })
-
 xyplot(eric, mode = "lontime")
-
-## Métodos en =S4=: ejemplo con =xyplot=
-
-
-setMethod('xyplot',
-          signature = "flock",
-          definition = function(x, data = NULL, ...)
-          {
-              df <- as.data.frame(x)
-              xyplot(lon ~ lat,
-                     group = name,
-                     data = df,
-                     auto.key = list(space = "right"))
-              })
 
 xyplot(myFlock)
 
