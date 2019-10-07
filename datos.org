@@ -21,26 +21,31 @@ dir(pattern='.R')
 dir('data')
 #+end_src
 
-** Lectura de datos con =read.table=
+** Lectura de datos con =read.table= o =read.csv=
+
+- Función Genérica
 #+begin_src R
 dats <- read.table('data/aranjuez.csv', sep=',', header=TRUE)
+
 head(dats)
 #+end_src
-** Lectura de datos con =read.csv=
+
+- Función específica
 #+begin_src R
 aranjuez <- read.csv('data/aranjuez.csv')
-names(aranjuez)[1] <- 'Date'
+
+head(aranjuez)
 #+end_src
 
 #+begin_src R
 class(aranjuez)
 #+end_src
 
+** Inspeccionamos el resultado
 #+begin_src R
 names(aranjuez)
 #+end_src
 
-** Inspeccionamos el resultado
 #+begin_src R
 head(aranjuez)
 #+end_src
@@ -87,6 +92,36 @@ which(is.na(aranjuez$Radiation))
 #+begin_src R
 sum(is.na(aranjuez$Radiation))
 #+end_src
+** Fechas
+
+#+begin_src R
+names(aranjuez)[1] <- "Date"
+
+aranjuez$Date <- as.Date(aranjuez$Date)
+#+end_src
+
+#+begin_src R
+class(aranjuez$Date)
+
+summary(aranjuez$Date)
+#+end_src
+
+** Fechas
+- Podemos extraer información de un objeto =Date= con la función =format=[fn:1]:
+#+begin_src R
+aranjuez$month <- as.numeric(
+    format(aranjuez$Date, '%m'))
+
+aranjuez$year <- as.numeric(
+    format(aranjuez$Date, '%Y'))
+
+aranjuez$day <- as.numeric(
+    format(aranjuez$Date, '%j'))
+#+end_src
+
+#+begin_src R
+summary(aranjuez[, c("Date", "month", "year", "day")])
+#+end_src
 
 * Indexado
 
@@ -114,6 +149,38 @@ subset(aranjuez,
        subset = (Radiation > 20 & TempAvg < 10),
        select = c(Radiation, TempAvg,
            TempMax, TempMin))
+#+end_src
+
+** Ejercicio
+
+*** Valores en las estaciones
+Extrae dos subconjuntos de datos, uno correspondiente al invierno y otro correspondiente al verano, incluyendo las variables de radiación y temperatura media, fecha y mes. 
+
+Con estos dos =data.frame= obtén uno conjunto, diferenciando la estación de cada registro.
+
+Puedes suponer que el invierno comenzó el 22 de diciembre y terminó el 20 de marzo, y el verano comenzó el 21 de junio y terminó el 23 de septiembre.
+
+
+** Solución
+#+begin_src R :tangle no
+invierno <- subset(aranjuez,
+                   select = c(Date, day, month, 
+                              Radiation, TempAvg),
+                   subset = day < 79 | day > 357)
+#+end_src
+
+#+begin_src R :tangle no
+verano <- subset(aranjuez,
+                 select = c(Date, day, month,
+                            Radiation, TempAvg),
+                   subset = day > 173 & day < 267)
+#+end_src
+
+#+begin_src R :tangle no
+invierno$id <- "Invierno"
+verano$id <- "Verano"
+
+aranjuez2 <- rbind(invierno, verano)
 #+end_src
 
 
@@ -153,10 +220,40 @@ aggregate(cbind(Radiation, TempAvg) ~ tempClass + rainy,
 #+end_src
 
 
+** Ejercicio
+
+*** Valores en las estaciones
+A partir del =data.frame= que incluía los datos de invierno y verano, calcula:
+
+- La *mediana* de las variables de radiación y temperatura por estación.
+- La *desviación estándar* relativa a la media de las variables de radiación y temperatura por estación.
+
+A partir del =data.frame= completo calcula la *media* interanual diaria de las variables de radiación y temperatura.
+
+** Solución
+#+begin_src R :exports code :tangle no
+## Mediana
+aggregate(cbind(Radiation, TempAvg) ~ id,
+          data = aranjuez2,
+          FUN = median)
+
+## Desviación estándar relativa
+sdr <- function(x) sd(x) / mean(x)
+
+aggregate(cbind(Radiation, TempAvg) ~ id,
+          data = aranjuez2,
+          FUN = sdr)
+
+## Media interanual
+aggregate(cbind(Radiation, TempAvg) ~ day,
+          data = aranjuez,
+          FUN = mean)
+#+end_src
+
 * Cambio de formato
 ** Forma simple con =stack= 
 #+begin_src R
-aranjuezWide <- aranjuez[, c('Radiation',
+aranjuezWide <- aranjuez[, c('Date', 'Radiation',
                              'TempAvg', 'TempMax',
                              'WindAvg', 'WindMax')]
 #+end_src
@@ -180,7 +277,7 @@ library(reshape2)
 
 ** =melt= para cambiar de /wide/ a /long/
 #+begin_src R
-aranjuezLong2 <- melt(aranjuez, id.vars = 'Date',
+aranjuezLong2 <- melt(aranjuezWide, id.vars = 'Date',
                       variable.name = 'Variable',
                       value.name = 'Value')
 
@@ -246,3 +343,7 @@ idxCold
 #+begin_src R
 largeStates[idxCold,]
 #+end_src
+
+* Footnotes
+
+[fn:1]Más información en =help(format.Date)= y =help(strptime)=. 
