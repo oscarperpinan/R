@@ -3,12 +3,12 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
 <head>
-<!-- 2019-05-22 mié 20:23 -->
+<!-- 2020-02-17 lun 23:25 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Funciones</title>
 <meta name="generator" content="Org mode" />
-<meta name="author" content="Oscar Perpiñán Lamigueiro @@latex:\\@@ http://oscarperpinan.github.io" />
+<meta name="author" content="[[https://oscarperpinan.github.io][Oscar Perpiñán Lamigueiro]]Oscar Perpiñán Lamigueiro" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center;
@@ -203,7 +203,7 @@
 @licstart  The following is the entire license notice for the
 JavaScript code in this tag.
 
-Copyright (C) 2012-2018 Free Software Foundation, Inc.
+Copyright (C) 2012-2020 Free Software Foundation, Inc.
 
 The JavaScript code in this tag is free software: you can
 redistribute it and/or modify it under the terms of the GNU
@@ -244,18 +244,40 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
 <div id="content">
 <h1 class="title">Funciones</h1>
 
 
-<div id="outline-container-orgc810a35" class="outline-2">
-<h2 id="orgc810a35"><span class="section-number-2">1</span> Conceptos Básicos</h2>
+<div id="outline-container-org733c965" class="outline-2">
+<h2 id="org733c965"><span class="section-number-2">1</span> Conceptos Básicos</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org0c57b29" class="outline-3">
-<h3 id="org0c57b29"><span class="section-number-3">1.1</span> Fuentes de información</h3>
+<div id="outline-container-orgba2eef0" class="outline-3">
+<h3 id="orgba2eef0"><span class="section-number-3">1.1</span> Fuentes de información</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li><a href="http://cran.r-project.org/doc/manuals/R-intro.html">R introduction</a></li>
@@ -264,8 +286,8 @@ for the JavaScript code in this tag.
 </ul>
 </div>
 </div>
-<div id="outline-container-orgca4a637" class="outline-3">
-<h3 id="orgca4a637"><span class="section-number-3">1.2</span> Componentes de una función</h3>
+<div id="outline-container-orgba74405" class="outline-3">
+<h3 id="orgba74405"><span class="section-number-3">1.2</span> Componentes de una función</h3>
 <div class="outline-text-3" id="text-1-2">
 <ul class="org-ul">
 <li>Una función se define con <code>function</code></li>
@@ -285,8 +307,8 @@ for the JavaScript code in this tag.
 </ul>
 </div>
 </div>
-<div id="outline-container-orgf038aae" class="outline-3">
-<h3 id="orgf038aae"><span class="section-number-3">1.3</span> Mi primera función</h3>
+<div id="outline-container-org8a4878c" class="outline-3">
+<h3 id="org8a4878c"><span class="section-number-3">1.3</span> Mi primera función</h3>
 <div class="outline-text-3" id="text-1-3">
 <ul class="org-ul">
 <li>Definición</li>
@@ -325,14 +347,15 @@ $y
 
 <pre class="example">
 {
-    x + y
+    x
+y
 }
 </pre>
 </div>
 </div>
 
-<div id="outline-container-orgeade927" class="outline-3">
-<h3 id="orgeade927"><span class="section-number-3">1.4</span> Mi primera función</h3>
+<div id="outline-container-orged40e5c" class="outline-3">
+<h3 id="orged40e5c"><span class="section-number-3">1.4</span> Mi primera función</h3>
 <div class="outline-text-3" id="text-1-4">
 <div class="org-src-container">
 <pre class="src src-R">myFun(1, 2)
@@ -365,8 +388,8 @@ $y
 </div>
 </div>
 
-<div id="outline-container-org27428cf" class="outline-3">
-<h3 id="org27428cf"><span class="section-number-3">1.5</span> Argumentos: nombre y orden</h3>
+<div id="outline-container-org8faec9a" class="outline-3">
+<h3 id="org8faec9a"><span class="section-number-3">1.5</span> Argumentos: nombre y orden</h3>
 <div class="outline-text-3" id="text-1-5">
 <p>
 Una función identifica sus argumentos por su nombre y por su orden (sin nombre)
@@ -411,8 +434,8 @@ Una función identifica sus argumentos por su nombre y por su orden (sin nombre)
 </div>
 </div>
 
-<div id="outline-container-org232633f" class="outline-3">
-<h3 id="org232633f"><span class="section-number-3">1.6</span> Argumentos: valores por defecto</h3>
+<div id="outline-container-org219130b" class="outline-3">
+<h3 id="org219130b"><span class="section-number-3">1.6</span> Argumentos: valores por defecto</h3>
 <div class="outline-text-3" id="text-1-6">
 <ul class="org-ul">
 <li>Se puede asignar un valor por defecto a los argumentos</li>
@@ -446,8 +469,8 @@ Una función identifica sus argumentos por su nombre y por su orden (sin nombre)
 </div>
 </div>
 
-<div id="outline-container-org782776f" class="outline-3">
-<h3 id="org782776f"><span class="section-number-3">1.7</span> Funciones sin argumentos</h3>
+<div id="outline-container-orgf3cdd8c" class="outline-3">
+<h3 id="orgf3cdd8c"><span class="section-number-3">1.7</span> Funciones sin argumentos</h3>
 <div class="outline-text-3" id="text-1-7">
 <div class="org-src-container">
 <pre class="src src-R"><span class="org-function-name">hello</span> <span class="org-ess-assignment">&lt;-</span> <span class="org-ess-keyword">function</span>()
@@ -468,8 +491,8 @@ Una función identifica sus argumentos por su nombre y por su orden (sin nombre)
 </div>
 </div>
 
-<div id="outline-container-orgb4d3360" class="outline-3">
-<h3 id="orgb4d3360"><span class="section-number-3">1.8</span> Argumentos sin nombre: <code>...</code></h3>
+<div id="outline-container-org1b7153a" class="outline-3">
+<h3 id="org1b7153a"><span class="section-number-3">1.8</span> Argumentos sin nombre: <code>...</code></h3>
 <div class="outline-text-3" id="text-1-8">
 <div class="org-src-container">
 <pre class="src src-R"><span class="org-function-name">pwrSum</span> <span class="org-ess-assignment">&lt;-</span> <span class="org-ess-keyword">function</span>(x, power, ...)
@@ -486,6 +509,7 @@ pwrSum(x, 2)
 </div>
 
 <pre class="example">
+
 [1] 385
 </pre>
 
@@ -497,6 +521,7 @@ pwrSum(x, 2)
 </div>
 
 <pre class="example">
+
 [1] NA
 </pre>
 
@@ -512,8 +537,8 @@ pwrSum(x, 2)
 </div>
 </div>
 
-<div id="outline-container-orgc0fa848" class="outline-3">
-<h3 id="orgc0fa848"><span class="section-number-3">1.9</span> Argumentos ausentes: <code>missing</code></h3>
+<div id="outline-container-org99ae0b6" class="outline-3">
+<h3 id="org99ae0b6"><span class="section-number-3">1.9</span> Argumentos ausentes: <code>missing</code></h3>
 <div class="outline-text-3" id="text-1-9">
 <div class="org-src-container">
 <pre class="src src-R"><span class="org-function-name">suma10</span> <span class="org-ess-assignment">&lt;-</span> <span class="org-ess-keyword">function</span>(x, y)
@@ -535,8 +560,8 @@ pwrSum(x, 2)
 </div>
 </div>
 
-<div id="outline-container-org0eebe2c" class="outline-3">
-<h3 id="org0eebe2c"><span class="section-number-3">1.10</span> Control de errores: <code>stopifnot</code></h3>
+<div id="outline-container-org7bc13ea" class="outline-3">
+<h3 id="org7bc13ea"><span class="section-number-3">1.10</span> Control de errores: <code>stopifnot</code></h3>
 <div class="outline-text-3" id="text-1-10">
 <div class="org-src-container">
 <pre class="src src-R"><span class="org-function-name">foo</span> <span class="org-ess-assignment">&lt;-</span> <span class="org-ess-keyword">function</span>(x, y)
@@ -568,8 +593,8 @@ Error in foo(1:10, "a") : is.numeric(x) &amp; is.numeric(y) is not TRUE
 </div>
 </div>
 
-<div id="outline-container-orgadfa5c4" class="outline-3">
-<h3 id="orgadfa5c4"><span class="section-number-3">1.11</span> Control de errores: <code>stop</code></h3>
+<div id="outline-container-orgc2f531a" class="outline-3">
+<h3 id="orgc2f531a"><span class="section-number-3">1.11</span> Control de errores: <code>stop</code></h3>
 <div class="outline-text-3" id="text-1-11">
 <div class="org-src-container">
 <pre class="src src-R"><span class="org-function-name">foo</span> <span class="org-ess-assignment">&lt;-</span> <span class="org-ess-keyword">function</span>(x, y){
@@ -601,8 +626,8 @@ Error in foo(2, "a") : arguments must be numeric.
 </div>
 </div>
 
-<div id="outline-container-org5adb033" class="outline-3">
-<h3 id="org5adb033"><span class="section-number-3">1.12</span> Mensajes para el usuario</h3>
+<div id="outline-container-org960999d" class="outline-3">
+<h3 id="org960999d"><span class="section-number-3">1.12</span> Mensajes para el usuario</h3>
 <div class="outline-text-3" id="text-1-12">
 <p>
 <code>stop</code> para la ejecución y emite un mensaje de error
@@ -647,12 +672,12 @@ Todo en orden por estos lares.
 </div>
 
 
-<div id="outline-container-org7f0bdcb" class="outline-2">
-<h2 id="org7f0bdcb"><span class="section-number-2">2</span> Lexical scope</h2>
+<div id="outline-container-orgaf7579c" class="outline-2">
+<h2 id="orgaf7579c"><span class="section-number-2">2</span> Lexical scope</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org532df08" class="outline-3">
-<h3 id="org532df08"><span class="section-number-3">2.1</span> Clases de variables</h3>
+<div id="outline-container-orgb8ecb94" class="outline-3">
+<h3 id="orgb8ecb94"><span class="section-number-3">2.1</span> Clases de variables</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 Las variables que se emplean en el cuerpo de una función pueden
@@ -681,13 +706,14 @@ myFun(2, 3)
 </div>
 
 <pre class="example">
+
 [1] 580
 </pre>
 </div>
 </div>
 
-<div id="outline-container-org621c9b0" class="outline-3">
-<h3 id="org621c9b0"><span class="section-number-3">2.2</span> Lexical scope</h3>
+<div id="outline-container-orga92cd2c" class="outline-3">
+<h3 id="orga92cd2c"><span class="section-number-3">2.2</span> Lexical scope</h3>
 <div class="outline-text-3" id="text-2-2">
 <ul class="org-ul">
 <li>Las variables libres deben estar disponibles en el entorno
@@ -709,19 +735,17 @@ myFun(2, 3)
 </div>
 
 <pre class="example">
- [1] "a"               "anidada"         "b"               "constructor"    
- [5] "diamonds"        "fib"             "foo"             "hello"          
- [9] "i"               "lista"           "ll"              "lmFertEduCatAgr"
-[13] "m"               "M"               "makeNoise"       "myFoo"          
-[17] "myFun"           "power"           "pwrSum"          "suma1"          
-[21] "suma10"          "suma2"           "suma3"           "sumProd"        
-[25] "sumSq"           "tmp"             "x"               "zz"
+ [1] "a"           "anidada"     "b"           "constructor" "fib"        
+ [6] "foo"         "hello"       "i"           "lista"       "ll"         
+[11] "M"           "makeNoise"   "myFoo"       "myFun"       "power"      
+[16] "pwrSum"      "suma1"       "suma10"      "suma2"       "suma3"      
+[21] "sumProd"     "sumSq"       "tmp"         "x"
 </pre>
 </div>
 </div>
 
-<div id="outline-container-orgb0d4f12" class="outline-3">
-<h3 id="orgb0d4f12"><span class="section-number-3">2.3</span> Lexical scope: funciones anidadas</h3>
+<div id="outline-container-orge7d8f7d" class="outline-3">
+<h3 id="orge7d8f7d"><span class="section-number-3">2.3</span> Lexical scope: funciones anidadas</h3>
 <div class="outline-text-3" id="text-2-3">
 <div class="org-src-container">
 <pre class="src src-R"><span class="org-function-name">anidada</span> <span class="org-ess-assignment">&lt;-</span> <span class="org-ess-keyword">function</span>(x, y){
@@ -743,7 +767,7 @@ myFun(2, 3)
 </div>
 
 <pre class="example">
-&lt;environment: 0x55e3aaf881f8&gt;
+&lt;environment: 0x561467f15098&gt;
 [1] 113
 </pre>
 
@@ -759,8 +783,8 @@ myFun(2, 3)
 </div>
 </div>
 
-<div id="outline-container-org06d0404" class="outline-3">
-<h3 id="org06d0404"><span class="section-number-3">2.4</span> Lexical scope: funciones anidadas</h3>
+<div id="outline-container-org0066c6c" class="outline-3">
+<h3 id="org0066c6c"><span class="section-number-3">2.4</span> Lexical scope: funciones anidadas</h3>
 <div class="outline-text-3" id="text-2-4">
 <div class="org-src-container">
 <pre class="src src-R">xn
@@ -793,8 +817,8 @@ Error: objeto 'interna' no encontrado
 </div>
 </div>
 
-<div id="outline-container-org4e26cce" class="outline-3">
-<h3 id="org4e26cce"><span class="section-number-3">2.5</span> Funciones que devuelven funciones</h3>
+<div id="outline-container-orgac8abae" class="outline-3">
+<h3 id="orgac8abae"><span class="section-number-3">2.5</span> Funciones que devuelven funciones</h3>
 <div class="outline-text-3" id="text-2-5">
 <div class="org-src-container">
 <pre class="src src-R"><span class="org-function-name">constructor</span> <span class="org-ess-assignment">&lt;-</span> <span class="org-ess-keyword">function</span>(m, n){
@@ -813,11 +837,13 @@ myFoo
 </div>
 
 <pre class="example">
+
 function(x)
     {
-        m*x + n
+        m*x
+n
     }
-&lt;environment: 0x55e3aaf76df0&gt;
+&lt;environment: 0x561465446120&gt;
 </pre>
 
 
@@ -828,13 +854,14 @@ myFoo(5)
 </div>
 
 <pre class="example">
+
 [1] 53
 </pre>
 </div>
 </div>
 
-<div id="outline-container-org66b4541" class="outline-3">
-<h3 id="org66b4541"><span class="section-number-3">2.6</span> Funciones que devuelven funciones</h3>
+<div id="outline-container-org673f6f2" class="outline-3">
+<h3 id="org673f6f2"><span class="section-number-3">2.6</span> Funciones que devuelven funciones</h3>
 <div class="outline-text-3" id="text-2-6">
 <div class="org-src-container">
 <pre class="src src-R">class(myFoo)
@@ -852,7 +879,7 @@ myFoo(5)
 </div>
 
 <pre class="example">
-&lt;environment: 0x55e3aaf76df0&gt;
+&lt;environment: 0x561465446120&gt;
 </pre>
 
 
@@ -862,13 +889,11 @@ myFoo(5)
 </div>
 
 <pre class="example">
- [1] "a"               "anidada"         "b"               "constructor"    
- [5] "diamonds"        "fib"             "foo"             "hello"          
- [9] "i"               "lista"           "ll"              "lmFertEduCatAgr"
-[13] "m"               "M"               "makeNoise"       "myFoo"          
-[17] "myFun"           "power"           "pwrSum"          "suma1"          
-[21] "suma10"          "suma2"           "suma3"           "sumProd"        
-[25] "sumSq"           "tmp"             "x"               "zz"
+ [1] "a"           "anidada"     "b"           "constructor" "fib"        
+ [6] "foo"         "hello"       "i"           "lista"       "ll"         
+[11] "M"           "makeNoise"   "myFoo"       "myFun"       "power"      
+[16] "pwrSum"      "suma1"       "suma10"      "suma2"       "suma3"      
+[21] "sumProd"     "sumSq"       "tmp"         "x"
 </pre>
 
 
@@ -904,12 +929,12 @@ myFoo(5)
 </div>
 </div>
 
-<div id="outline-container-org6bb505b" class="outline-2">
-<h2 id="org6bb505b"><span class="section-number-2">3</span> Funciones para ejecutar funciones</h2>
+<div id="outline-container-org3e490b3" class="outline-2">
+<h2 id="org3e490b3"><span class="section-number-2">3</span> Funciones para ejecutar funciones</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org180642d" class="outline-3">
-<h3 id="org180642d"><span class="section-number-3">3.1</span> <code>lapply</code></h3>
+<div id="outline-container-org66c03bd" class="outline-3">
+<h3 id="org66c03bd"><span class="section-number-3">3.1</span> <code>lapply</code></h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 Supongamos que tenemos una lista de objetos, y queremos aplicar a cada elemento la misma función:
@@ -934,9 +959,11 @@ sum(lista$c)
 </div>
 
 <pre class="example">
-[1] 8.489702
-[1] 50.83217
-[1] 107.1475
+[1] 8.551703
+
+[1] 48.13393
+
+[1] 91.70712
 </pre>
 
 
@@ -950,19 +977,19 @@ O mejor con <code>lapply</code> (lista + función):
 
 <pre class="example">
 $a
-[1] 8.489702
+[1] 8.551703
 
 $b
-[1] 50.83217
+[1] 48.13393
 
 $c
-[1] 107.1475
+[1] 91.70712
 </pre>
 </div>
 </div>
 
-<div id="outline-container-orgd76acde" class="outline-3">
-<h3 id="orgd76acde"><span class="section-number-3">3.2</span> <code>do.call</code></h3>
+<div id="outline-container-orge5ba3b9" class="outline-3">
+<h3 id="orge5ba3b9"><span class="section-number-3">3.2</span> <code>do.call</code></h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 Supongamos que queremos usar los elementos de la lista como argumentos de una función.
@@ -977,7 +1004,7 @@ Resolvemos de forma directa:
 </div>
 
 <pre class="example">
-[1] 166.4693
+[1] 148.3928
 </pre>
 
 
@@ -990,7 +1017,7 @@ Mejoramos <i>un poco</i> con <code>with</code>:
 </div>
 
 <pre class="example">
-[1] 166.4693
+[1] 148.3928
 </pre>
 
 
@@ -1003,13 +1030,13 @@ La forma recomendable es mediante <code>do.call</code> (función + lista)
 </div>
 
 <pre class="example">
-[1] 166.4693
+[1] 148.3928
 </pre>
 </div>
 </div>
 
-<div id="outline-container-orgf74c6d0" class="outline-3">
-<h3 id="orgf74c6d0"><span class="section-number-3">3.3</span> <code>do.call</code></h3>
+<div id="outline-container-org3b45ce5" class="outline-3">
+<h3 id="org3b45ce5"><span class="section-number-3">3.3</span> <code>do.call</code></h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 Se emplea frecuentemente para adecuar el resultado de <code>lapply</code> (entrega una lista):
@@ -1022,18 +1049,19 @@ Se emplea frecuentemente para adecuar el resultado de <code>lapply</code> (entre
 </div>
 
 <pre class="example">
-            [,1]      [,2]       [,3]      [,4]      [,5]
-[1,] -0.55075982 -1.361554  -1.608803  2.307038 0.6017228
-[2,]  0.30333638  1.853829   2.588246  5.322423 0.3620703
-[3,] -0.16706549 -2.524089  -4.163977 12.279030 0.2178660
-[4,]  0.09201296  3.436683   6.699018 28.328184 0.1310949
-[5,] -0.05067704 -4.679229 -10.777397 65.354187 0.0788828
+
+              [,1]      [,2]     [,3]       [,4]     [,5]
+[1,] -0.1741481604  1.836011 1.572541 0.38827268 1.408270
+[2,]  0.0303275818  3.370936 2.472885 0.15075568 1.983224
+[3,] -0.0052814926  6.189075 3.888713 0.05853431 2.792915
+[4,]  0.0009197622 11.363209 6.115161 0.02272727 3.933179
+[5,] -0.0001601749 20.862975 9.616340 0.00882438 5.538978
 </pre>
 </div>
 </div>
 
-<div id="outline-container-org9b13f81" class="outline-3">
-<h3 id="org9b13f81"><span class="section-number-3">3.4</span> <code>Reduce</code></h3>
+<div id="outline-container-org35fd363" class="outline-3">
+<h3 id="org35fd363"><span class="section-number-3">3.4</span> <code>Reduce</code></h3>
 <div class="outline-text-3" id="text-3-4">
 <p>
 Combina sucesivamente los elementos de un objeto aplicando una función binaria
@@ -1045,13 +1073,14 @@ Reduce(<span class="org-string">'+'</span>, 1:5)
 </div>
 
 <pre class="example">
+
 [1] 15
 </pre>
 </div>
 </div>
 
-<div id="outline-container-org45b57ba" class="outline-3">
-<h3 id="org45b57ba"><span class="section-number-3">3.5</span> <code>Reduce</code></h3>
+<div id="outline-container-org5ce8da1" class="outline-3">
+<h3 id="org5ce8da1"><span class="section-number-3">3.5</span> <code>Reduce</code></h3>
 <div class="outline-text-3" id="text-3-5">
 <div class="org-src-container">
 <pre class="src src-R"><span class="org-comment-delimiter">## </span><span class="org-comment">(((1/2)/3)/4)/5</span>
@@ -1060,6 +1089,7 @@ Reduce(<span class="org-string">'/'</span>, 1:5)
 </div>
 
 <pre class="example">
+
 [1] 0.008333333
 </pre>
 
@@ -1073,6 +1103,7 @@ Reduce(foo, c(3, 7, 15, 1, 292))
 </div>
 
 <pre class="example">
+
 [1] 4.212948
 </pre>
 
@@ -1090,8 +1121,8 @@ Reduce(foo, c(3, 7, 15, 1, 292))
 </div>
 </div>
 
-<div id="outline-container-org7bbfcc3" class="outline-3">
-<h3 id="org7bbfcc3"><span class="section-number-3">3.6</span> Funciones recursivas</h3>
+<div id="outline-container-org60b0e4f" class="outline-3">
+<h3 id="org60b0e4f"><span class="section-number-3">3.6</span> Funciones recursivas</h3>
 <div class="outline-text-3" id="text-3-6">
 <p>
 Ejemplo: <a href="http://en.wikibooks.org/wiki/R_Programming/Working_with_functions#Functions_as_Objects">Serie de Fibonnaci</a>
@@ -1118,12 +1149,12 @@ Ejemplo: <a href="http://en.wikibooks.org/wiki/R_Programming/Working_with_functi
 </div>
 </div>
 
-<div id="outline-container-orgb03effc" class="outline-2">
-<h2 id="orgb03effc"><span class="section-number-2">4</span> Debug</h2>
+<div id="outline-container-org33603d8" class="outline-2">
+<h2 id="org33603d8"><span class="section-number-2">4</span> Debug</h2>
 <div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-org961f247" class="outline-3">
-<h3 id="org961f247"><span class="section-number-3">4.1</span> Post-mortem: <code>traceback</code></h3>
+<div id="outline-container-orge03bd6b" class="outline-3">
+<h3 id="orge03bd6b"><span class="section-number-3">4.1</span> Post-mortem: <code>traceback</code></h3>
 <div class="outline-text-3" id="text-4-1">
 <div class="org-src-container">
 <pre class="src src-R"><span class="org-function-name">sumSq</span> <span class="org-ess-assignment">&lt;-</span> <span class="org-ess-keyword">function</span>(x, ...)
@@ -1143,7 +1174,7 @@ Ejemplo: <a href="http://en.wikibooks.org/wiki/R_Programming/Working_with_functi
 </div>
 
 <pre class="example">
-[1] 15.84303
+[1] 38.5012
 </pre>
 
 
@@ -1169,8 +1200,8 @@ Error in x^2 : argumento no-numérico para operador binario
 </div>
 </div>
 
-<div id="outline-container-org6395680" class="outline-3">
-<h3 id="org6395680"><span class="section-number-3">4.2</span> Analizar antes de que ocurra: <code>debug</code></h3>
+<div id="outline-container-org2f1ceac" class="outline-3">
+<h3 id="org2f1ceac"><span class="section-number-3">4.2</span> Analizar antes de que ocurra: <code>debug</code></h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 <code>debug</code> activa la ejecución paso a paso de una función:
@@ -1199,9 +1230,42 @@ terminar un bucle).</li>
 </div>
 </div>
 
-<div id="outline-container-orgeedc65b" class="outline-3">
-<h3 id="orgeedc65b"><span class="section-number-3">4.3</span> Analizar antes de que ocurra: <code>trace</code></h3>
+<div id="outline-container-orgecdd622" class="outline-3">
+<h3 id="orgecdd622"><span class="section-number-3">4.3</span> <i>Debugging</i> con RStudio</h3>
 <div class="outline-text-3" id="text-4-3">
+<ul class="org-ul">
+<li><a href="https://support.rstudio.com/hc/en-us/articles/205612627-Debugging-with-RStudio">Artículo</a></li>
+<li><a href="https://vimeo.com/99375765https://vimeo.com/97831988">Vídeo</a></li>
+</ul>
+<ul class="org-ul">
+<li><a href="http://adv-r.had.co.nz/Exceptions-Debugging.html"><i>Debugging</i> explicado por H. Wickham</a></li>
+
+<li>Ejemplo: grabar en un fichero y usar <i>source</i></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-R"><span class="org-function-name">sumSq</span> <span class="org-ess-assignment">&lt;-</span> <span class="org-ess-keyword">function</span>(x, ...)
+    sum(x ^ 2, ...)
+
+<span class="org-function-name">sumProd</span> <span class="org-ess-assignment">&lt;-</span> <span class="org-ess-keyword">function</span>(x, y, ...){
+    xs <span class="org-ess-assignment">&lt;-</span> sumSq(x, ...)
+    ys <span class="org-ess-assignment">&lt;-</span> sumSq(y, ...)
+    xs * ys
+}
+
+sumProd(rnorm(10), letters[1:10])
+</pre>
+</div>
+
+<pre class="example">
+
+Error in x^2 : argumento no-numérico para operador binario
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgf96a328" class="outline-3">
+<h3 id="orgf96a328"><span class="section-number-3">4.4</span> Analizar antes de que ocurra: <code>trace</code></h3>
+<div class="outline-text-3" id="text-4-4">
 <ul class="org-ul">
 <li><code>trace</code> permite mayor control que <code>debug</code></li>
 </ul>
@@ -1231,10 +1295,10 @@ function(x, y, ...){
     ys &lt;- sumSq(y, ...)
     xs * ys
 }
-&lt;bytecode: 0x55e3a7594f68&gt;
 
 ## (to see the tracing code, look at body(object))
 </pre>
+
 
 <div class="org-src-container">
 <pre class="src src-R">body(sumProd)
@@ -1257,9 +1321,9 @@ function(x, y, ...){
 </div>
 </div>
 
-<div id="outline-container-orgc5c12ae" class="outline-3">
-<h3 id="orgc5c12ae"><span class="section-number-3">4.4</span> Analizar antes de que ocurra: <code>trace</code></h3>
-<div class="outline-text-3" id="text-4-4">
+<div id="outline-container-orga111204" class="outline-3">
+<h3 id="orga111204"><span class="section-number-3">4.5</span> Analizar antes de que ocurra: <code>trace</code></h3>
+<div class="outline-text-3" id="text-4-5">
 <ul class="org-ul">
 <li>Los comandos <code>n</code> y <code>c</code> cambian respecto a <code>debug</code>:
 <ul class="org-ul">
@@ -1275,28 +1339,14 @@ terminar un bucle).</li>
 </div>
 </div>
 </div>
-
-<div id="outline-container-orgb0f300a" class="outline-3">
-<h3 id="orgb0f300a"><span class="section-number-3">4.5</span> Más recursos</h3>
-<div class="outline-text-3" id="text-4-5">
-<ul class="org-ul">
-<li>Debugging en RStudio
-<ul class="org-ul">
-<li><a href="https://support.rstudio.com/hc/en-us/articles/205612627-Debugging-with-RStudio">Artículo</a></li>
-<li><a href="https://vimeo.com/97831988">Vídeo</a></li>
-</ul></li>
-<li><a href="http://adv-r.had.co.nz/Exceptions-Debugging.html"><i>Debugging</i> explicado por H. Wickham</a></li>
-</ul>
-</div>
-</div>
 </div>
 
-<div id="outline-container-org266291d" class="outline-2">
-<h2 id="org266291d"><span class="section-number-2">5</span> Profiling</h2>
+<div id="outline-container-orgcbbfe4c" class="outline-2">
+<h2 id="orgcbbfe4c"><span class="section-number-2">5</span> Profiling</h2>
 <div class="outline-text-2" id="text-5">
 </div>
-<div id="outline-container-org57c800a" class="outline-3">
-<h3 id="org57c800a"><span class="section-number-3">5.1</span> ¿Cuánto tarda mi función? <code>system.time</code></h3>
+<div id="outline-container-orgc5fe7a4" class="outline-3">
+<h3 id="orgc5fe7a4"><span class="section-number-3">5.1</span> ¿Cuánto tarda mi función? <code>system.time</code></h3>
 <div class="outline-text-3" id="text-5-1">
 <p>
 Defino una función que rellena una matriz de 10<sup>6</sup> filas y <code>n</code> columnas con una distribución normal:
@@ -1315,250 +1365,251 @@ summary(M)
 </div>
 
 <pre class="example">
+
        V1                  V2                  V3           
- Min.   :-4.744061   Min.   :-4.614207   Min.   :-4.840808  
- 1st Qu.:-0.673220   1st Qu.:-0.674554   1st Qu.:-0.673997  
- Median : 0.001441   Median :-0.000626   Median : 0.001366  
- Mean   : 0.000868   Mean   :-0.000324   Mean   : 0.000544  
- 3rd Qu.: 0.675404   3rd Qu.: 0.673979   3rd Qu.: 0.675865  
- Max.   : 5.057772   Max.   : 5.467457   Max.   : 4.556630  
+ Min.   :-4.850557   Min.   :-4.794546   Min.   :-4.959313  
+ 1st Qu.:-0.676386   1st Qu.:-0.675196   1st Qu.:-0.673844  
+ Median :-0.000827   Median :-0.000570   Median :-0.001241  
+ Mean   :-0.001329   Mean   :-0.000532   Mean   : 0.000115  
+ 3rd Qu.: 0.673604   3rd Qu.: 0.674320   3rd Qu.: 0.673666  
+ Max.   : 4.937682   Max.   : 4.724857   Max.   : 4.829274  
        V4                  V5                  V6           
- Min.   :-4.855362   Min.   :-4.625621   Min.   :-4.687500  
- 1st Qu.:-0.672866   1st Qu.:-0.673310   1st Qu.:-0.674329  
- Median : 0.001635   Median :-0.000994   Median : 0.001183  
- Mean   : 0.001151   Mean   :-0.000773   Mean   : 0.000159  
- 3rd Qu.: 0.675017   3rd Qu.: 0.674156   3rd Qu.: 0.675346  
- Max.   : 4.994363   Max.   : 5.276039   Max.   : 4.726836  
+ Min.   :-4.746586   Min.   :-4.418662   Min.   :-4.922335  
+ 1st Qu.:-0.672089   1st Qu.:-0.675456   1st Qu.:-0.675237  
+ Median : 0.000235   Median : 0.000346   Median :-0.001352  
+ Mean   : 0.000877   Mean   :-0.000081   Mean   :-0.000835  
+ 3rd Qu.: 0.672989   3rd Qu.: 0.673988   3rd Qu.: 0.674756  
+ Max.   : 5.064697   Max.   : 5.112633   Max.   : 4.896000  
        V7                  V8                  V9           
- Min.   :-4.698333   Min.   :-5.071905   Min.   :-4.984151  
- 1st Qu.:-0.675398   1st Qu.:-0.673706   1st Qu.:-0.673066  
- Median :-0.001933   Median :-0.001020   Median : 0.002034  
- Mean   :-0.001188   Mean   :-0.001321   Mean   : 0.001885  
- 3rd Qu.: 0.674389   3rd Qu.: 0.671993   3rd Qu.: 0.677920  
- Max.   : 4.749034   Max.   : 4.996226   Max.   : 4.437860  
+ Min.   :-4.644428   Min.   :-4.627102   Min.   :-5.352816  
+ 1st Qu.:-0.672574   1st Qu.:-0.673407   1st Qu.:-0.674217  
+ Median : 0.002164   Median : 0.000271   Median :-0.000229  
+ Mean   : 0.002565   Mean   : 0.000547   Mean   : 0.000024  
+ 3rd Qu.: 0.677710   3rd Qu.: 0.674456   3rd Qu.: 0.675413  
+ Max.   : 4.618701   Max.   : 4.601317   Max.   : 4.949978  
       V10                 V11                 V12           
- Min.   :-5.464344   Min.   :-4.674910   Min.   :-4.961835  
- 1st Qu.:-0.674413   1st Qu.:-0.674086   1st Qu.:-0.676861  
- Median : 0.000768   Median : 0.001002   Median :-0.000207  
- Mean   : 0.001527   Mean   : 0.000033   Mean   :-0.001468  
- 3rd Qu.: 0.677143   3rd Qu.: 0.674414   3rd Qu.: 0.673470  
- Max.   : 4.699352   Max.   : 4.803944   Max.   : 4.503655  
+ Min.   :-5.027927   Min.   :-4.903829   Min.   :-4.697789  
+ 1st Qu.:-0.675302   1st Qu.:-0.674489   1st Qu.:-0.675601  
+ Median :-0.000820   Median :-0.000714   Median :-0.001707  
+ Mean   :-0.000438   Mean   :-0.000620   Mean   :-0.001225  
+ 3rd Qu.: 0.675767   3rd Qu.: 0.674138   3rd Qu.: 0.673670  
+ Max.   : 5.346777   Max.   : 4.676823   Max.   : 4.580514  
       V13                 V14                 V15           
- Min.   :-4.951352   Min.   :-5.042427   Min.   :-4.741670  
- 1st Qu.:-0.675560   1st Qu.:-0.676030   1st Qu.:-0.674961  
- Median :-0.000590   Median :-0.000700   Median : 0.001081  
- Mean   :-0.000918   Mean   :-0.000437   Mean   : 0.001055  
- 3rd Qu.: 0.674159   3rd Qu.: 0.674286   3rd Qu.: 0.676888  
- Max.   : 4.752366   Max.   : 4.816343   Max.   : 4.741994  
+ Min.   :-4.509624   Min.   :-5.036134   Min.   :-4.782108  
+ 1st Qu.:-0.673944   1st Qu.:-0.674532   1st Qu.:-0.673579  
+ Median : 0.000975   Median : 0.000433   Median : 0.000503  
+ Mean   : 0.000949   Mean   : 0.000039   Mean   : 0.000373  
+ 3rd Qu.: 0.675379   3rd Qu.: 0.674557   3rd Qu.: 0.673238  
+ Max.   : 4.909678   Max.   : 4.641636   Max.   : 4.858559  
       V16                 V17                 V18           
- Min.   :-5.166864   Min.   :-5.046180   Min.   :-5.062963  
- 1st Qu.:-0.674267   1st Qu.:-0.672999   1st Qu.:-0.675790  
- Median : 0.001911   Median : 0.000749   Median :-0.000232  
- Mean   : 0.000361   Mean   : 0.000615   Mean   :-0.000860  
- 3rd Qu.: 0.674753   3rd Qu.: 0.675715   3rd Qu.: 0.673213  
- Max.   : 5.095021   Max.   : 4.762989   Max.   : 4.991325  
+ Min.   :-4.840236   Min.   :-4.884061   Min.   :-4.802291  
+ 1st Qu.:-0.676883   1st Qu.:-0.674009   1st Qu.:-0.676295  
+ Median :-0.001808   Median :-0.000962   Median : 0.000528  
+ Mean   :-0.000204   Mean   : 0.000562   Mean   :-0.000269  
+ 3rd Qu.: 0.677312   3rd Qu.: 0.674364   3rd Qu.: 0.675237  
+ Max.   : 5.173266   Max.   : 4.633160   Max.   : 4.861439  
       V19                 V20                 V21           
- Min.   :-4.535959   Min.   :-4.830982   Min.   :-5.194490  
- 1st Qu.:-0.674487   1st Qu.:-0.675513   1st Qu.:-0.673294  
- Median :-0.001058   Median :-0.000589   Median :-0.000784  
- Mean   :-0.000349   Mean   :-0.001410   Mean   :-0.000154  
- 3rd Qu.: 0.674239   3rd Qu.: 0.674354   3rd Qu.: 0.674034  
- Max.   : 5.219982   Max.   : 4.514762   Max.   : 5.095876  
+ Min.   :-4.734104   Min.   :-4.628800   Min.   :-4.998211  
+ 1st Qu.:-0.676435   1st Qu.:-0.675693   1st Qu.:-0.675295  
+ Median :-0.000923   Median :-0.000543   Median : 0.001051  
+ Mean   :-0.001369   Mean   : 0.000363   Mean   : 0.000287  
+ 3rd Qu.: 0.672723   3rd Qu.: 0.675628   3rd Qu.: 0.676204  
+ Max.   : 4.519534   Max.   : 4.770924   Max.   : 4.872298  
       V22                 V23                 V24           
- Min.   :-4.861253   Min.   :-4.708703   Min.   :-4.898835  
- 1st Qu.:-0.674713   1st Qu.:-0.677151   1st Qu.:-0.674264  
- Median :-0.000019   Median :-0.001099   Median :-0.001043  
- Mean   :-0.000167   Mean   :-0.000064   Mean   :-0.000528  
- 3rd Qu.: 0.675440   3rd Qu.: 0.675951   3rd Qu.: 0.672770  
- Max.   : 4.987770   Max.   : 4.765466   Max.   : 4.972243  
+ Min.   :-4.584718   Min.   :-5.008954   Min.   :-4.962820  
+ 1st Qu.:-0.674432   1st Qu.:-0.675657   1st Qu.:-0.673911  
+ Median :-0.001037   Median : 0.000553   Median :-0.000414  
+ Mean   :-0.001069   Mean   :-0.000315   Mean   : 0.000217  
+ 3rd Qu.: 0.672974   3rd Qu.: 0.673243   3rd Qu.: 0.674113  
+ Max.   : 4.896479   Max.   : 5.849746   Max.   : 4.723353  
       V25                 V26                 V27           
- Min.   :-4.758664   Min.   :-4.656429   Min.   :-4.839906  
- 1st Qu.:-0.673880   1st Qu.:-0.673873   1st Qu.:-0.676508  
- Median :-0.001657   Median : 0.000630   Median :-0.001681  
- Mean   :-0.000519   Mean   : 0.001395   Mean   :-0.001532  
- 3rd Qu.: 0.674320   3rd Qu.: 0.675536   3rd Qu.: 0.672955  
- Max.   : 4.599153   Max.   : 5.083516   Max.   : 4.895979  
+ Min.   :-4.648474   Min.   :-5.041275   Min.   :-5.076685  
+ 1st Qu.:-0.673811   1st Qu.:-0.675506   1st Qu.:-0.673777  
+ Median : 0.001180   Median :-0.000345   Median : 0.001884  
+ Mean   : 0.000649   Mean   : 0.000347   Mean   : 0.001570  
+ 3rd Qu.: 0.674306   3rd Qu.: 0.676356   3rd Qu.: 0.675758  
+ Max.   : 4.820999   Max.   : 4.928471   Max.   : 4.949749  
       V28                 V29                 V30           
- Min.   :-5.045172   Min.   :-4.500525   Min.   :-4.627149  
- 1st Qu.:-0.673704   1st Qu.:-0.673522   1st Qu.:-0.674557  
- Median : 0.000679   Median : 0.000236   Median :-0.000091  
- Mean   : 0.000209   Mean   : 0.000081   Mean   :-0.000503  
- 3rd Qu.: 0.673346   3rd Qu.: 0.673692   3rd Qu.: 0.674137  
- Max.   : 4.741277   Max.   : 4.758619   Max.   : 4.814824  
+ Min.   :-4.782954   Min.   :-5.421742   Min.   :-5.172364  
+ 1st Qu.:-0.675536   1st Qu.:-0.675365   1st Qu.:-0.672259  
+ Median :-0.000095   Median :-0.001912   Median : 0.001398  
+ Mean   :-0.001065   Mean   :-0.001701   Mean   : 0.001383  
+ 3rd Qu.: 0.672350   3rd Qu.: 0.672334   3rd Qu.: 0.675230  
+ Max.   : 5.436804   Max.   : 5.085306   Max.   : 4.964369  
       V31                 V32                 V33           
- Min.   :-4.900488   Min.   :-4.834541   Min.   :-5.125517  
- 1st Qu.:-0.671665   1st Qu.:-0.674335   1st Qu.:-0.674215  
- Median :-0.000021   Median : 0.000292   Median : 0.001781  
- Mean   : 0.000206   Mean   : 0.000080   Mean   : 0.001316  
- 3rd Qu.: 0.671988   3rd Qu.: 0.673660   3rd Qu.: 0.676290  
- Max.   : 5.262798   Max.   : 4.810985   Max.   : 4.978200  
+ Min.   :-4.667793   Min.   :-4.833797   Min.   :-4.694007  
+ 1st Qu.:-0.675107   1st Qu.:-0.671960   1st Qu.:-0.674966  
+ Median :-0.001197   Median : 0.001690   Median : 0.001354  
+ Mean   :-0.000142   Mean   : 0.002202   Mean   : 0.000867  
+ 3rd Qu.: 0.675070   3rd Qu.: 0.676421   3rd Qu.: 0.674366  
+ Max.   : 4.787195   Max.   : 4.699088   Max.   : 5.010420  
       V34                 V35                 V36           
- Min.   :-4.863579   Min.   :-5.110182   Min.   :-4.652401  
- 1st Qu.:-0.673607   1st Qu.:-0.674679   1st Qu.:-0.672864  
- Median :-0.001424   Median : 0.000463   Median :-0.000378  
- Mean   :-0.000388   Mean   :-0.000163   Mean   : 0.000650  
- 3rd Qu.: 0.673129   3rd Qu.: 0.673420   3rd Qu.: 0.674517  
- Max.   : 4.644706   Max.   : 5.568015   Max.   : 5.373416  
+ Min.   :-5.446058   Min.   :-4.533631   Min.   :-4.752244  
+ 1st Qu.:-0.673664   1st Qu.:-0.674191   1st Qu.:-0.672597  
+ Median : 0.001297   Median : 0.000455   Median : 0.001093  
+ Mean   : 0.000679   Mean   :-0.000148   Mean   : 0.001487  
+ 3rd Qu.: 0.673649   3rd Qu.: 0.674547   3rd Qu.: 0.675785  
+ Max.   : 5.414420   Max.   : 5.189383   Max.   : 4.849343  
       V37                 V38                 V39           
- Min.   :-4.788255   Min.   :-4.522164   Min.   :-4.856823  
- 1st Qu.:-0.671514   1st Qu.:-0.676621   1st Qu.:-0.673515  
- Median :-0.000685   Median :-0.000826   Median : 0.000442  
- Mean   : 0.000590   Mean   :-0.001633   Mean   : 0.001233  
- 3rd Qu.: 0.673976   3rd Qu.: 0.673365   3rd Qu.: 0.676035  
- Max.   : 4.664485   Max.   : 4.910088   Max.   : 4.840348  
+ Min.   :-4.807822   Min.   :-4.922465   Min.   :-4.574132  
+ 1st Qu.:-0.675665   1st Qu.:-0.673740   1st Qu.:-0.674085  
+ Median :-0.000619   Median : 0.001534   Median : 0.000419  
+ Mean   :-0.000317   Mean   : 0.001441   Mean   : 0.000211  
+ 3rd Qu.: 0.674693   3rd Qu.: 0.675951   3rd Qu.: 0.675237  
+ Max.   : 4.711566   Max.   : 5.234585   Max.   : 4.912451  
       V40                 V41                 V42           
- Min.   :-4.794268   Min.   :-4.706101   Min.   :-4.647193  
- 1st Qu.:-0.675184   1st Qu.:-0.676055   1st Qu.:-0.676240  
- Median :-0.000083   Median : 0.000618   Median :-0.002475  
- Mean   :-0.000090   Mean   : 0.000311   Mean   :-0.001760  
- 3rd Qu.: 0.675757   3rd Qu.: 0.675044   3rd Qu.: 0.673705  
- Max.   : 4.726223   Max.   : 4.675562   Max.   : 4.956956  
+ Min.   :-4.742904   Min.   :-5.386501   Min.   :-4.999125  
+ 1st Qu.:-0.674248   1st Qu.:-0.674838   1st Qu.:-0.672386  
+ Median : 0.000948   Median :-0.001003   Median : 0.001399  
+ Mean   :-0.000004   Mean   :-0.000596   Mean   : 0.001309  
+ 3rd Qu.: 0.674465   3rd Qu.: 0.673916   3rd Qu.: 0.676335  
+ Max.   : 4.915512   Max.   : 4.789493   Max.   : 4.707417  
       V43                 V44                 V45           
- Min.   :-4.980195   Min.   :-4.564547   Min.   :-4.986746  
- 1st Qu.:-0.673845   1st Qu.:-0.673398   1st Qu.:-0.673359  
- Median :-0.000175   Median : 0.001559   Median : 0.001026  
- Mean   :-0.000213   Mean   : 0.001462   Mean   : 0.000706  
- 3rd Qu.: 0.673135   3rd Qu.: 0.676034   3rd Qu.: 0.675391  
- Max.   : 4.972574   Max.   : 5.080799   Max.   : 4.853049  
+ Min.   :-4.753084   Min.   :-4.709842   Min.   :-5.273677  
+ 1st Qu.:-0.674923   1st Qu.:-0.674049   1st Qu.:-0.674362  
+ Median :-0.000884   Median : 0.000834   Median : 0.000490  
+ Mean   :-0.000630   Mean   :-0.000506   Mean   : 0.000223  
+ 3rd Qu.: 0.674982   3rd Qu.: 0.673910   3rd Qu.: 0.673923  
+ Max.   : 4.932571   Max.   : 5.026923   Max.   : 4.653212  
       V46                 V47                 V48           
- Min.   :-4.811445   Min.   :-4.897435   Min.   :-5.089017  
- 1st Qu.:-0.673674   1st Qu.:-0.673677   1st Qu.:-0.675418  
- Median : 0.000595   Median : 0.000852   Median : 0.002805  
- Mean   : 0.000173   Mean   : 0.000949   Mean   : 0.001862  
- 3rd Qu.: 0.675212   3rd Qu.: 0.676273   3rd Qu.: 0.678313  
- Max.   : 5.418014   Max.   : 4.547664   Max.   : 4.822002  
+ Min.   :-4.996664   Min.   :-4.738134   Min.   :-4.859197  
+ 1st Qu.:-0.676372   1st Qu.:-0.673854   1st Qu.:-0.674312  
+ Median :-0.000825   Median : 0.001036   Median :-0.000106  
+ Mean   :-0.000718   Mean   : 0.000624   Mean   :-0.000005  
+ 3rd Qu.: 0.674396   3rd Qu.: 0.674806   3rd Qu.: 0.674820  
+ Max.   : 5.120740   Max.   : 5.081875   Max.   : 4.877178  
       V49                 V50                 V51           
- Min.   :-4.795779   Min.   :-4.942669   Min.   :-4.752360  
- 1st Qu.:-0.677541   1st Qu.:-0.676033   1st Qu.:-0.675310  
- Median :-0.002189   Median :-0.000472   Median : 0.000021  
- Mean   :-0.000700   Mean   :-0.001488   Mean   : 0.000664  
- 3rd Qu.: 0.675472   3rd Qu.: 0.674617   3rd Qu.: 0.675662  
- Max.   : 5.413333   Max.   : 5.305668   Max.   : 4.765685  
+ Min.   :-4.953889   Min.   :-4.520459   Min.   :-4.708236  
+ 1st Qu.:-0.675264   1st Qu.:-0.673504   1st Qu.:-0.673751  
+ Median :-0.000249   Median :-0.001242   Median : 0.000700  
+ Mean   :-0.000428   Mean   :-0.000663   Mean   : 0.000855  
+ 3rd Qu.: 0.674614   3rd Qu.: 0.673366   3rd Qu.: 0.676419  
+ Max.   : 4.985089   Max.   : 4.661399   Max.   : 4.840113  
       V52                 V53                 V54           
- Min.   :-5.250422   Min.   :-5.319640   Min.   :-5.009351  
- 1st Qu.:-0.673668   1st Qu.:-0.675474   1st Qu.:-0.671939  
- Median : 0.002390   Median :-0.002539   Median : 0.000705  
- Mean   : 0.001157   Mean   :-0.001871   Mean   : 0.000144  
- 3rd Qu.: 0.675155   3rd Qu.: 0.672826   3rd Qu.: 0.673715  
- Max.   : 5.114749   Max.   : 4.627143   Max.   : 5.906985  
+ Min.   :-4.862482   Min.   :-5.107180   Min.   :-5.798235  
+ 1st Qu.:-0.674127   1st Qu.:-0.675357   1st Qu.:-0.674056  
+ Median :-0.000690   Median :-0.001088   Median :-0.002170  
+ Mean   :-0.001007   Mean   :-0.000679   Mean   :-0.001286  
+ 3rd Qu.: 0.673654   3rd Qu.: 0.672905   3rd Qu.: 0.672970  
+ Max.   : 4.751464   Max.   : 5.179290   Max.   : 4.702111  
       V55                 V56                 V57           
- Min.   :-4.701626   Min.   :-4.602506   Min.   :-4.956234  
- 1st Qu.:-0.672497   1st Qu.:-0.675696   1st Qu.:-0.673656  
- Median : 0.002310   Median :-0.000897   Median : 0.000228  
- Mean   : 0.002287   Mean   :-0.000308   Mean   : 0.000893  
- 3rd Qu.: 0.676015   3rd Qu.: 0.672925   3rd Qu.: 0.674874  
- Max.   : 4.647982   Max.   : 5.091073   Max.   : 4.892341  
+ Min.   :-5.005057   Min.   :-5.060830   Min.   :-5.105633  
+ 1st Qu.:-0.673712   1st Qu.:-0.676715   1st Qu.:-0.673642  
+ Median :-0.001579   Median :-0.000958   Median : 0.001118  
+ Mean   :-0.000529   Mean   :-0.001274   Mean   : 0.000237  
+ 3rd Qu.: 0.674349   3rd Qu.: 0.672709   3rd Qu.: 0.674212  
+ Max.   : 4.658009   Max.   : 4.753345   Max.   : 4.951854  
       V58                 V59                 V60           
- Min.   :-4.780485   Min.   :-4.516412   Min.   :-4.677366  
- 1st Qu.:-0.672726   1st Qu.:-0.673791   1st Qu.:-0.673906  
- Median : 0.001126   Median : 0.001473   Median : 0.000126  
- Mean   : 0.001778   Mean   : 0.001180   Mean   : 0.000226  
- 3rd Qu.: 0.675519   3rd Qu.: 0.674614   3rd Qu.: 0.673868  
- Max.   : 4.753521   Max.   : 5.209606   Max.   : 4.905310  
+ Min.   :-4.822032   Min.   :-4.776918   Min.   :-4.640167  
+ 1st Qu.:-0.672959   1st Qu.:-0.674258   1st Qu.:-0.674527  
+ Median : 0.001876   Median :-0.001701   Median :-0.001111  
+ Mean   : 0.001451   Mean   :-0.000080   Mean   :-0.000308  
+ 3rd Qu.: 0.676163   3rd Qu.: 0.674081   3rd Qu.: 0.674874  
+ Max.   : 4.719650   Max.   : 4.674338   Max.   : 4.794550  
       V61                 V62                 V63           
- Min.   :-4.656071   Min.   :-4.866517   Min.   :-5.253979  
- 1st Qu.:-0.674548   1st Qu.:-0.675739   1st Qu.:-0.674271  
- Median : 0.000202   Median :-0.000619   Median :-0.000227  
- Mean   : 0.001039   Mean   :-0.000317   Mean   : 0.000325  
- 3rd Qu.: 0.676381   3rd Qu.: 0.673709   3rd Qu.: 0.675609  
- Max.   : 4.788622   Max.   : 4.644802   Max.   : 4.712988  
+ Min.   :-4.967301   Min.   :-4.366678   Min.   :-4.801026  
+ 1st Qu.:-0.674279   1st Qu.:-0.673558   1st Qu.:-0.675316  
+ Median :-0.000496   Median :-0.000239   Median : 0.000897  
+ Mean   :-0.001024   Mean   : 0.000339   Mean   : 0.000617  
+ 3rd Qu.: 0.673062   3rd Qu.: 0.674447   3rd Qu.: 0.676415  
+ Max.   : 4.704742   Max.   : 4.800138   Max.   : 4.992336  
       V64                 V65                 V66           
- Min.   :-4.857339   Min.   :-5.040047   Min.   :-4.984635  
- 1st Qu.:-0.673994   1st Qu.:-0.671617   1st Qu.:-0.674770  
- Median :-0.000723   Median : 0.002019   Median :-0.001198  
- Mean   : 0.000123   Mean   : 0.002235   Mean   :-0.001287  
- 3rd Qu.: 0.673585   3rd Qu.: 0.675603   3rd Qu.: 0.672837  
- Max.   : 4.513948   Max.   : 4.865335   Max.   : 4.692417  
+ Min.   :-5.160700   Min.   :-4.720091   Min.   :-4.869707  
+ 1st Qu.:-0.675937   1st Qu.:-0.675230   1st Qu.:-0.677457  
+ Median : 0.000050   Median :-0.000026   Median :-0.004332  
+ Mean   :-0.000888   Mean   : 0.000342   Mean   :-0.002243  
+ 3rd Qu.: 0.673925   3rd Qu.: 0.675889   3rd Qu.: 0.672396  
+ Max.   : 5.233259   Max.   : 4.550943   Max.   : 4.574867  
       V67                 V68                 V69           
- Min.   :-4.709750   Min.   :-4.862034   Min.   :-4.695578  
- 1st Qu.:-0.674452   1st Qu.:-0.674765   1st Qu.:-0.673811  
- Median :-0.000064   Median :-0.001680   Median : 0.000754  
- Mean   :-0.000837   Mean   : 0.000497   Mean   :-0.000202  
- 3rd Qu.: 0.672007   3rd Qu.: 0.674681   3rd Qu.: 0.673535  
- Max.   : 4.702295   Max.   : 5.061991   Max.   : 4.486999  
+ Min.   :-4.863161   Min.   :-5.044760   Min.   :-5.093013  
+ 1st Qu.:-0.673692   1st Qu.:-0.675270   1st Qu.:-0.673751  
+ Median :-0.001351   Median :-0.000887   Median :-0.000434  
+ Mean   :-0.000251   Mean   : 0.000325   Mean   :-0.000079  
+ 3rd Qu.: 0.674305   3rd Qu.: 0.675674   3rd Qu.: 0.676045  
+ Max.   : 5.108234   Max.   : 5.261013   Max.   : 4.745168  
       V70                 V71                 V72           
- Min.   :-4.645594   Min.   :-4.798209   Min.   :-4.696798  
- 1st Qu.:-0.673368   1st Qu.:-0.671926   1st Qu.:-0.673307  
- Median : 0.000637   Median : 0.001784   Median : 0.000217  
- Mean   : 0.000504   Mean   : 0.001691   Mean   : 0.000045  
- 3rd Qu.: 0.674369   3rd Qu.: 0.674585   3rd Qu.: 0.673408  
- Max.   : 4.702703   Max.   : 4.700611   Max.   : 4.769359  
+ Min.   :-4.756397   Min.   :-4.936753   Min.   :-4.474239  
+ 1st Qu.:-0.673857   1st Qu.:-0.673124   1st Qu.:-0.675507  
+ Median : 0.002404   Median : 0.001445   Median :-0.000661  
+ Mean   : 0.000838   Mean   : 0.001182   Mean   : 0.000048  
+ 3rd Qu.: 0.674465   3rd Qu.: 0.676302   3rd Qu.: 0.675517  
+ Max.   : 4.744661   Max.   : 5.116368   Max.   : 4.921679  
       V73                 V74                 V75           
- Min.   :-4.644225   Min.   :-4.604387   Min.   :-4.531087  
- 1st Qu.:-0.673305   1st Qu.:-0.673577   1st Qu.:-0.675646  
- Median : 0.002551   Median :-0.000225   Median :-0.000247  
- Mean   : 0.001188   Mean   : 0.000358   Mean   :-0.000396  
- 3rd Qu.: 0.675703   3rd Qu.: 0.676519   3rd Qu.: 0.675457  
- Max.   : 4.641535   Max.   : 4.982708   Max.   : 4.933764  
+ Min.   :-4.827140   Min.   :-4.856865   Min.   :-4.779098  
+ 1st Qu.:-0.675988   1st Qu.:-0.673974   1st Qu.:-0.676952  
+ Median : 0.000424   Median :-0.001063   Median : 0.001478  
+ Mean   : 0.000151   Mean   :-0.000969   Mean   :-0.000148  
+ 3rd Qu.: 0.674845   3rd Qu.: 0.671933   3rd Qu.: 0.674716  
+ Max.   : 4.846236   Max.   : 4.655334   Max.   : 4.461740  
       V76                 V77                 V78           
- Min.   :-5.019913   Min.   :-4.983896   Min.   :-4.792313  
- 1st Qu.:-0.674658   1st Qu.:-0.674713   1st Qu.:-0.675432  
- Median : 0.000529   Median :-0.001188   Median :-0.002025  
- Mean   : 0.000118   Mean   :-0.001179   Mean   :-0.002125  
- 3rd Qu.: 0.674640   3rd Qu.: 0.671751   3rd Qu.: 0.671820  
- Max.   : 4.474925   Max.   : 5.073182   Max.   : 4.761905  
+ Min.   :-4.653744   Min.   :-4.406902   Min.   :-4.718347  
+ 1st Qu.:-0.674304   1st Qu.:-0.673636   1st Qu.:-0.674781  
+ Median : 0.001131   Median : 0.002247   Median :-0.000615  
+ Mean   : 0.000609   Mean   : 0.000869   Mean   :-0.000468  
+ 3rd Qu.: 0.674453   3rd Qu.: 0.674921   3rd Qu.: 0.673226  
+ Max.   : 5.264564   Max.   : 4.795977   Max.   : 5.220267  
       V79                 V80                 V81           
- Min.   :-4.781387   Min.   :-5.128899   Min.   :-4.623971  
- 1st Qu.:-0.674538   1st Qu.:-0.674753   1st Qu.:-0.671304  
- Median : 0.000531   Median : 0.000573   Median : 0.001618  
- Mean   : 0.000901   Mean   : 0.000864   Mean   : 0.002157  
- 3rd Qu.: 0.674618   3rd Qu.: 0.675071   3rd Qu.: 0.675377  
- Max.   : 4.812967   Max.   : 4.796416   Max.   : 4.764486  
+ Min.   :-4.880356   Min.   :-4.988047   Min.   :-4.913894  
+ 1st Qu.:-0.675600   1st Qu.:-0.676624   1st Qu.:-0.672188  
+ Median :-0.001672   Median :-0.002173   Median :-0.001573  
+ Mean   :-0.001071   Mean   :-0.001445   Mean   :-0.000749  
+ 3rd Qu.: 0.674288   3rd Qu.: 0.673656   3rd Qu.: 0.672490  
+ Max.   : 4.748778   Max.   : 4.935536   Max.   : 4.681703  
       V82                 V83                 V84           
- Min.   :-4.825972   Min.   :-5.466961   Min.   :-4.838455  
- 1st Qu.:-0.674957   1st Qu.:-0.675813   1st Qu.:-0.675697  
- Median :-0.000413   Median :-0.001118   Median :-0.001710  
- Mean   :-0.000342   Mean   :-0.000653   Mean   :-0.001085  
- 3rd Qu.: 0.674760   3rd Qu.: 0.675361   3rd Qu.: 0.673761  
- Max.   : 4.700011   Max.   : 4.929093   Max.   : 5.111040  
+ Min.   :-4.883418   Min.   :-4.901276   Min.   :-5.079876  
+ 1st Qu.:-0.674083   1st Qu.:-0.672021   1st Qu.:-0.675706  
+ Median :-0.000996   Median :-0.000583   Median :-0.000639  
+ Mean   :-0.000086   Mean   : 0.000978   Mean   : 0.000049  
+ 3rd Qu.: 0.673292   3rd Qu.: 0.674668   3rd Qu.: 0.675364  
+ Max.   : 4.944165   Max.   : 4.944620   Max.   : 4.569763  
       V85                 V86                 V87           
- Min.   :-4.669761   Min.   :-4.799953   Min.   :-4.981196  
- 1st Qu.:-0.671861   1st Qu.:-0.672830   1st Qu.:-0.674951  
- Median : 0.001851   Median : 0.000320   Median : 0.000835  
- Mean   : 0.002005   Mean   :-0.000123   Mean   :-0.000153  
- 3rd Qu.: 0.676978   3rd Qu.: 0.675136   3rd Qu.: 0.672333  
- Max.   : 4.774587   Max.   : 4.511883   Max.   : 4.748976  
+ Min.   :-4.641984   Min.   :-4.949596   Min.   :-4.611695  
+ 1st Qu.:-0.675703   1st Qu.:-0.676107   1st Qu.:-0.673572  
+ Median : 0.000791   Median :-0.000695   Median :-0.000016  
+ Mean   :-0.000274   Mean   :-0.001878   Mean   : 0.000228  
+ 3rd Qu.: 0.674507   3rd Qu.: 0.672439   3rd Qu.: 0.674904  
+ Max.   : 5.031343   Max.   : 5.217666   Max.   : 5.637254  
       V88                 V89                 V90           
- Min.   :-5.063680   Min.   :-4.622325   Min.   :-4.890907  
- 1st Qu.:-0.672702   1st Qu.:-0.674058   1st Qu.:-0.671872  
- Median : 0.002021   Median :-0.001122   Median : 0.001670  
- Mean   : 0.001157   Mean   :-0.001943   Mean   : 0.001123  
- 3rd Qu.: 0.675405   3rd Qu.: 0.671314   3rd Qu.: 0.673844  
- Max.   : 5.117869   Max.   : 4.713761   Max.   : 4.765657  
+ Min.   :-5.004213   Min.   :-4.761411   Min.   :-4.885385  
+ 1st Qu.:-0.671865   1st Qu.:-0.673912   1st Qu.:-0.676176  
+ Median : 0.001239   Median : 0.000242   Median :-0.001612  
+ Mean   : 0.002014   Mean   : 0.000157   Mean   :-0.001368  
+ 3rd Qu.: 0.676138   3rd Qu.: 0.674306   3rd Qu.: 0.672445  
+ Max.   : 4.986575   Max.   : 4.730267   Max.   : 4.723730  
       V91                 V92                 V93           
- Min.   :-4.869539   Min.   :-4.984608   Min.   :-5.188314  
- 1st Qu.:-0.677259   1st Qu.:-0.675243   1st Qu.:-0.673718  
- Median :-0.002971   Median : 0.000133   Median : 0.000354  
- Mean   :-0.001765   Mean   :-0.000156   Mean   : 0.000616  
- 3rd Qu.: 0.673569   3rd Qu.: 0.674890   3rd Qu.: 0.674229  
- Max.   : 4.756104   Max.   : 4.664630   Max.   : 4.858454  
+ Min.   :-4.446145   Min.   :-5.038213   Min.   :-4.968904  
+ 1st Qu.:-0.673762   1st Qu.:-0.673108   1st Qu.:-0.674537  
+ Median : 0.001250   Median : 0.002066   Median : 0.000254  
+ Mean   : 0.000878   Mean   : 0.002104   Mean   : 0.000594  
+ 3rd Qu.: 0.676381   3rd Qu.: 0.676996   3rd Qu.: 0.675007  
+ Max.   : 4.925884   Max.   : 4.868710   Max.   : 4.980750  
       V94                 V95                 V96           
- Min.   :-5.281237   Min.   :-4.659431   Min.   :-4.715716  
- 1st Qu.:-0.673833   1st Qu.:-0.675240   1st Qu.:-0.675549  
- Median : 0.001799   Median :-0.000032   Median :-0.001451  
- Mean   : 0.000666   Mean   :-0.000457   Mean   :-0.001837  
- 3rd Qu.: 0.675970   3rd Qu.: 0.675593   3rd Qu.: 0.671377  
- Max.   : 5.213899   Max.   : 4.563757   Max.   : 5.224793  
+ Min.   :-4.585104   Min.   :-4.782599   Min.   :-5.465619  
+ 1st Qu.:-0.675851   1st Qu.:-0.675098   1st Qu.:-0.672931  
+ Median : 0.000276   Median :-0.002806   Median : 0.001174  
+ Mean   :-0.001256   Mean   :-0.001156   Mean   : 0.001409  
+ 3rd Qu.: 0.672974   3rd Qu.: 0.673394   3rd Qu.: 0.676320  
+ Max.   : 5.144434   Max.   : 5.329044   Max.   : 4.860244  
       V97                 V98                 V99           
- Min.   :-4.889216   Min.   :-4.846267   Min.   :-5.808840  
- 1st Qu.:-0.676169   1st Qu.:-0.676768   1st Qu.:-0.674442  
- Median :-0.001597   Median :-0.001276   Median : 0.000793  
- Mean   :-0.001286   Mean   :-0.001388   Mean   : 0.000001  
- 3rd Qu.: 0.673154   3rd Qu.: 0.673555   3rd Qu.: 0.674289  
- Max.   : 4.733302   Max.   : 4.695957   Max.   : 5.006915  
+ Min.   :-4.562743   Min.   :-4.924833   Min.   :-4.946087  
+ 1st Qu.:-0.673969   1st Qu.:-0.674671   1st Qu.:-0.672491  
+ Median :-0.001026   Median : 0.000308   Median : 0.001414  
+ Mean   :-0.000260   Mean   :-0.000628   Mean   : 0.001663  
+ 3rd Qu.: 0.672525   3rd Qu.: 0.672930   3rd Qu.: 0.675098  
+ Max.   : 4.627507   Max.   : 4.670783   Max.   : 4.471793  
       V100          
- Min.   :-4.927842  
- 1st Qu.:-0.676038  
- Median : 0.000128  
- Mean   : 0.000303  
- 3rd Qu.: 0.675637  
- Max.   : 4.437032
+ Min.   :-5.108010  
+ 1st Qu.:-0.673406  
+ Median : 0.000605  
+ Mean   : 0.000219  
+ 3rd Qu.: 0.675098  
+ Max.   : 4.465086
 </pre>
 </div>
 </div>
 
-<div id="outline-container-org6e491b6" class="outline-3">
-<h3 id="org6e491b6"><span class="section-number-3">5.2</span> Diferentes formas de sumar</h3>
+<div id="outline-container-orgf54633d" class="outline-3">
+<h3 id="orgf54633d"><span class="section-number-3">5.2</span> Diferentes formas de sumar</h3>
 <div class="outline-text-3" id="text-5-2">
 <p>
 <code>system.time</code> mide el tiempo de CPU que consume un código<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>.
@@ -1573,8 +1624,9 @@ summary(M)
 </div>
 
 <pre class="example">
+
  user  system elapsed 
-1.664   0.001   1.658
+1.565   0.008   2.090
 </pre>
 
 
@@ -1585,7 +1637,7 @@ summary(M)
 
 <pre class="example">
  user  system elapsed 
-2.391   0.150   2.528
+2.718   0.028   2.747
 </pre>
 
 
@@ -1596,14 +1648,14 @@ summary(M)
 
 <pre class="example">
  user  system elapsed 
-0.313   0.000   0.311
+0.323   0.000   0.323
 </pre>
 </div>
 </div>
 
 
-<div id="outline-container-org0cbc7bd" class="outline-3">
-<h3 id="org0cbc7bd"><span class="section-number-3">5.3</span> ¿Cuánto tarda cada parte de mi función?: <code>Rprof</code></h3>
+<div id="outline-container-orgd8a5126" class="outline-3">
+<h3 id="orgd8a5126"><span class="section-number-3">5.3</span> ¿Cuánto tarda cada parte de mi función?: <code>Rprof</code></h3>
 <div class="outline-text-3" id="text-5-3">
 <ul class="org-ul">
 <li>Usaremos un fichero temporal</li>
@@ -1636,8 +1688,8 @@ suma3 <span class="org-ess-assignment">&lt;-</span> rowSums(M)
 </div>
 </div>
 
-<div id="outline-container-org8b61da5" class="outline-3">
-<h3 id="org8b61da5"><span class="section-number-3">5.4</span> ¿Cuánto tarda cada parte de mi función?: <code>Rprof</code></h3>
+<div id="outline-container-orgf0f9ad7" class="outline-3">
+<h3 id="orgf0f9ad7"><span class="section-number-3">5.4</span> ¿Cuánto tarda cada parte de mi función?: <code>Rprof</code></h3>
 <div class="outline-text-3" id="text-5-4">
 <ul class="org-ul">
 <li>Paramos el análisis</li>
@@ -1658,29 +1710,127 @@ suma3 <span class="org-ess-assignment">&lt;-</span> rowSums(M)
 <pre class="example">
 $by.self
                 self.time self.pct total.time total.pct
-"apply"              1.46    45.06       2.76     85.19
-"aperm.default"      0.84    25.93       0.84     25.93
-"FUN"                0.44    13.58       0.44     13.58
-"rowSums"            0.30     9.26       0.30      9.26
-"sum"                0.18     5.56       0.18      5.56
-"unlist"             0.02     0.62       0.02      0.62
+"apply"              1.64    50.00       2.62     79.88
+"aperm.default"      0.46    14.02       0.46     14.02
+"FUN"                0.46    14.02       0.46     14.02
+"rowSums"            0.34    10.37       0.34     10.37
+"sum"                0.32     9.76       0.32      9.76
+"unlist"             0.04     1.22       0.04      1.22
+"lengths"            0.02     0.61       0.02      0.61
 
 $by.total
                 total.time total.pct self.time self.pct
-"apply"               2.76     85.19      1.46    45.06
-"aperm.default"       0.84     25.93      0.84    25.93
-"aperm"               0.84     25.93      0.00     0.00
-"FUN"                 0.44     13.58      0.44    13.58
-"rowSums"             0.30      9.26      0.30     9.26
-"sum"                 0.18      5.56      0.18     5.56
-"unlist"              0.02      0.62      0.02     0.62
+"apply"               2.62     79.88      1.64    50.00
+"aperm.default"       0.46     14.02      0.46    14.02
+"FUN"                 0.46     14.02      0.46    14.02
+"aperm"               0.46     14.02      0.00     0.00
+"rowSums"             0.34     10.37      0.34    10.37
+"sum"                 0.32      9.76      0.32     9.76
+"unlist"              0.04      1.22      0.04     1.22
+"lengths"             0.02      0.61      0.02     0.61
 
 $sample.interval
 [1] 0.02
 
 $sampling.time
-[1] 3.24
+[1] 3.28
 </pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3a1b4c9" class="outline-2">
+<h2 id="org3a1b4c9"><span class="section-number-2">6</span> Ejercicios</h2>
+<div class="outline-text-2" id="text-6">
+</div>
+<div id="outline-container-org08a03fa" class="outline-3">
+<h3 id="org08a03fa"><span class="section-number-3">6.1</span> Áreas de figuras geométricas</h3>
+<div class="outline-text-3" id="text-6-1">
+<p>
+Escribe una función que calcule el área de un círculo, un triángulo o un cuadrado. La función empleará, a su vez, una función diferente definida para cada caso.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb986383" class="outline-3">
+<h3 id="orgb986383"><span class="section-number-3">6.2</span> Conversión de temperaturas</h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
+  Escribe una función para realizar la conversión de temperaturas. La función trabajará a partir de un valor (número real) y una letra. La letra indica la escala en la que se introduce esa temperatura. Si la letra es &rsquo;C&rsquo;, la temperatura se convertirá de grados centígrados a Fahrenheit. Si la letra es &rsquo;F&rsquo; la temperatura se convertirá de grados Fahrenheit a grados Centígrados. 
+Se usarán 2 funciones auxiliares, <code>cent2fahr</code> y <code>fahr2cent</code> para convertir de una escala a otra. Estas funciones aceptan un parámetro (la temperatura en una escala) y devuelven el valor en la otra escala. 
+</p>
+
+<p>
+Nota: La relación entre ambas escalas es \(T_F = 9/5 \cdot T_C + 32\)
+</p>
+</div>
+</div>
+
+<div id="outline-container-org841ae68" class="outline-3">
+<h3 id="org841ae68"><span class="section-number-3">6.3</span> Tablas de multiplicar</h3>
+<div class="outline-text-3" id="text-6-3">
+<p>
+Construye un programa que muestre por pantalla las tablas de multiplicar del 1 al 10, a partir de dos funciones específicas. La primera función debe devolver el producto de dos valores numéricos enteros dados como parámetros. La segunda función debe mostrar por pantalla la tabla de multiplicar de un número dado como parámetro.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb3edb3d" class="outline-3">
+<h3 id="orgb3edb3d"><span class="section-number-3">6.4</span> Números combinatorios</h3>
+<div class="outline-text-3" id="text-6-4">
+<p>
+Escribe una función que calcule y muestre en pantalla el número combinatorio a partir de los valores <code>n</code> y <code>k</code>.
+</p>
+
+<p>
+\[
+ nk = \frac{n!}{(n - k)! \cdot k!}
+ \]
+</p>
+
+<p>
+Esta función debe estar construida en base a dos funciones auxiliares, una para calcular el factorial de un número, y otra para calcular el número combinatorio.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org68d86fb" class="outline-3">
+<h3 id="org68d86fb"><span class="section-number-3">6.5</span> Fibonacci</h3>
+<div class="outline-text-3" id="text-6-5">
+<p>
+Escribe una <b>función recursiva</b> que genere los <code>n</code> primeros términos de la serie de Fibonacci. Esta función aceptará el número entero <code>n</code> como argumento. Este valor debe ser positivo, de forma que si el usuario introduce un valor negativo la función devolverá un error.
+</p>
+
+<p>
+Nota: En la serie de Fibonacci los dos primeros números son 1, y el resto se obtiene sumando los dos anteriores: \(1, 1, 2, 3, 5, 8, 13, 21, \ldots\)
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgdbe4666" class="outline-3">
+<h3 id="orgdbe4666"><span class="section-number-3">6.6</span> Serie de Taylor</h3>
+<div class="outline-text-3" id="text-6-6">
+<p>
+Escribe un conjunto de funciones para calcular la aproximación de \(e ^ {-x}\) mediante el desarrollo de Taylor:
+</p>
+
+<p>
+\[
+  e^{-x} = 1 + \sum_{i = 1}^\infty \frac{(-x)^n}{n!}
+  \]
+</p>
+
+<p>
+La función principal acepta como argumentos el valor del número real <code>x</code> y el número de términos deseados. Se basará en otras tres funciones: 
+</p>
+
+<ul class="org-ul">
+<li><code>factorial</code> calcula el factorial de un número entero <code>n</code>.</li>
+
+<li><code>potencia</code> calcula la potencia <code>n</code> de un número real <code>x</code>.</li>
+
+<li><code>exponencial</code> calcula la aproximación anterior de un número real <code>x</code> usando <code>n</code> términos de la serie de Taylor.</li>
+</ul>
 </div>
 </div>
 </div>
@@ -1696,8 +1846,8 @@ Para entender la diferencia entre <code>user</code> y <code>system</code> véase
 </div>
 </div></div>
 <div id="postamble" class="status">
-<p class="author">Autor: Oscar Perpiñán Lamigueiro  <a href="http://oscarperpinan.github.io">http://oscarperpinan.github.io</a></p>
-<p class="date">Created: 2019-05-22 mié 20:23</p>
+<p class="author">Autor: <a href="https://oscarperpinan.github.io">Oscar Perpiñán Lamigueiro</a></p>
+<p class="date">Created: 2020-02-17 lun 23:25</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

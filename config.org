@@ -1,7 +1,7 @@
-#+AUTHOR:    Oscar Perpiñán Lamigueiro @@latex:\\@@ http://oscarperpinan.github.io
+#+AUTHOR:    [[https://oscarperpinan.github.io][Oscar Perpiñán Lamigueiro]]
 #+EMAIL:     oscar.perpinan@upm.es
-#+EMAIL:     
-#+DATE: 
+#+DATE:
+#+BEAMER_HEADER:\institute[UPM]{Universidad Politécnica de Madrid}
 #+LANGUAGE:  es
 #+OPTIONS:   num:t toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc

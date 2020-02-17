@@ -1,4 +1,4 @@
-% Created 2019-05-22 mié 20:21
+% Created 2020-02-17 lun 23:23
 % Intended LaTeX compiler: pdflatex
 \documentclass[xcolor={usenames,svgnames,dvipsnames}]{beamer}
 \usepackage[utf8]{inputenc}
@@ -34,15 +34,16 @@
 \usetheme{Boadilla}
 \usecolortheme{rose}
 \usefonttheme{serif}
-\author{Oscar Perpiñán Lamigueiro \\ \url{http://oscarperpinan.github.io}}
+\author{\href{https://oscarperpinan.github.io}{Oscar Perpiñán Lamigueiro}}
 \date{}
 \title{Funciones}
+\institute[UPM]{Universidad Politécnica de Madrid}
 \hypersetup{
- pdfauthor={Oscar Perpiñán Lamigueiro \\ \url{http://oscarperpinan.github.io}},
+ pdfauthor={\href{https://oscarperpinan.github.io}{Oscar Perpiñán Lamigueiro}},
  pdftitle={Funciones},
  pdfkeywords={},
  pdfsubject={},
- pdfcreator={Emacs 26.1 (Org mode 9.2)}, 
+ pdfcreator={Emacs 26.1 (Org mode 9.3.4)}, 
  pdflang={Spanish}}
 \begin{document}
 
@@ -50,16 +51,16 @@
 
 
 \section{Conceptos Básicos}
-\label{sec:org90fb4bd}
+\label{sec:org807d780}
 
-\begin{frame}[label={sec:orgba86409}]{Fuentes de información}
+\begin{frame}[label={sec:org7b974ac}]{Fuentes de información}
 \begin{itemize}
 \item \href{http://cran.r-project.org/doc/manuals/R-intro.html}{R introduction}
 \item \href{http://cran.r-project.org/doc/manuals/R-lang.html}{R Language Definition}
 \item \href{http://www.springer.com/gb/book/9780387759357}{Software for Data Analysis}
 \end{itemize}
 \end{frame}
-\begin{frame}[label={sec:org739898e},fragile]{Componentes de una función}
+\begin{frame}[label={sec:orgd31c708},fragile]{Componentes de una función}
  \begin{itemize}
 \item Una función se define con \texttt{function}
 \end{itemize}
@@ -75,7 +76,7 @@
 \end{itemize}
 \end{itemize}
 \end{frame}
-\begin{frame}[label={sec:orgd678c5a},fragile]{Mi primera función}
+\begin{frame}[label={sec:orgfa16a57},fragile]{Mi primera función}
  \begin{itemize}
 \item Definición
 \end{itemize}
@@ -113,12 +114,13 @@ body(myFun)
 
 \begin{verbatim}
 {
-    x + y
+    x
+y
 }
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[label={sec:org568a98e},fragile]{Mi primera función}
+\begin{frame}[label={sec:orgd84b1d2},fragile]{Mi primera función}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 myFun(1, 2)
@@ -149,7 +151,7 @@ myFun(1:10, 3)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[label={sec:orgae51e27},fragile]{Argumentos: nombre y orden}
+\begin{frame}[label={sec:orgbe93e06},fragile]{Argumentos: nombre y orden}
  Una función identifica sus argumentos por su nombre y por su orden (sin nombre)
 
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
@@ -190,7 +192,7 @@ power(exp=2, x=1:10)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[label={sec:org1a4cda5},fragile]{Argumentos: valores por defecto}
+\begin{frame}[label={sec:org6c422f9},fragile]{Argumentos: valores por defecto}
  \begin{itemize}
 \item Se puede asignar un valor por defecto a los argumentos
 \end{itemize}
@@ -222,7 +224,7 @@ power(1:10, 2)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[label={sec:org69fa95d},fragile]{Funciones sin argumentos}
+\begin{frame}[label={sec:org0458aec},fragile]{Funciones sin argumentos}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 hello <- function()
@@ -241,7 +243,7 @@ hello()
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[label={sec:org9630a41},fragile]{Argumentos sin nombre: \texttt{...}}
+\begin{frame}[label={sec:orgf53235a},fragile]{Argumentos sin nombre: \texttt{...}}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 pwrSum <- function(x, power, ...)
@@ -257,6 +259,7 @@ pwrSum(x, 2)
 \end{lstlisting}
 
 \begin{verbatim}
+
 [1] 385
 \end{verbatim}
 
@@ -268,6 +271,7 @@ pwrSum(x, 2)
 \end{lstlisting}
 
 \begin{verbatim}
+
 [1] NA
 \end{verbatim}
 
@@ -282,7 +286,7 @@ pwrSum(x, 2, na.rm=TRUE)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[label={sec:org583e850},fragile]{Argumentos ausentes: \texttt{missing}}
+\begin{frame}[label={sec:orgca020c7},fragile]{Argumentos ausentes: \texttt{missing}}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 suma10 <- function(x, y)
@@ -302,7 +306,7 @@ suma10(1:10)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[label={sec:org70517cc},fragile]{Control de errores: \texttt{stopifnot}}
+\begin{frame}[label={sec:orgf5e922a},fragile]{Control de errores: \texttt{stopifnot}}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 foo <- function(x, y)
@@ -332,7 +336,7 @@ Error in foo(1:10, "a") : is.numeric(x) & is.numeric(y) is not TRUE
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[label={sec:orgf0627b3},fragile]{Control de errores: \texttt{stop}}
+\begin{frame}[label={sec:orge737c5c},fragile]{Control de errores: \texttt{stop}}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 foo <- function(x, y){
@@ -362,7 +366,7 @@ Error in foo(2, "a") : arguments must be numeric.
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[label={sec:org038524d},fragile]{Mensajes para el usuario}
+\begin{frame}[label={sec:org0f4b548},fragile]{Mensajes para el usuario}
  \texttt{stop} para la ejecución y emite un mensaje de error
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
@@ -399,9 +403,9 @@ Todo en orden por estos lares.
 
 
 \section{Lexical scope}
-\label{sec:org42b3ed7}
+\label{sec:orgb2e409a}
 
-\begin{frame}[label={sec:org4231f06},fragile]{Clases de variables}
+\begin{frame}[label={sec:orga32f7a1},fragile]{Clases de variables}
  Las variables que se emplean en el cuerpo de una función pueden
 dividirse en:
 \begin{itemize}
@@ -427,11 +431,12 @@ myFun(2, 3)
 \end{lstlisting}
 
 \begin{verbatim}
+
 [1] 580
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[label={sec:orgb43f2f9},fragile]{Lexical scope}
+\begin{frame}[label={sec:org1728385},fragile]{Lexical scope}
  \begin{itemize}
 \item Las variables libres deben estar disponibles en el entorno
 (\texttt{environment}) en el que la función ha sido creada.
@@ -452,17 +457,15 @@ ls()
 \end{lstlisting}
 
 \begin{verbatim}
- [1] "a"               "anidada"         "b"               "constructor"    
- [5] "diamonds"        "fib"             "foo"             "hello"          
- [9] "i"               "lista"           "ll"              "lmFertEduCatAgr"
-[13] "m"               "M"               "makeNoise"       "myFoo"          
-[17] "myFun"           "power"           "pwrSum"          "suma1"          
-[21] "suma10"          "suma2"           "suma3"           "sumProd"        
-[25] "sumSq"           "tmp"             "x"               "zz"
+ [1] "a"           "anidada"     "b"           "constructor" "fib"        
+ [6] "foo"         "hello"       "i"           "lista"       "ll"         
+[11] "M"           "makeNoise"   "myFoo"       "myFun"       "power"      
+[16] "pwrSum"      "suma1"       "suma10"      "suma2"       "suma3"      
+[21] "sumProd"     "sumSq"       "tmp"         "x"
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[label={sec:org405410b},fragile]{Lexical scope: funciones anidadas}
+\begin{frame}[label={sec:org826acc0},fragile]{Lexical scope: funciones anidadas}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 anidada <- function(x, y){
@@ -483,7 +486,7 @@ anidada(1:3, 2:4)
 \end{lstlisting}
 
 \begin{verbatim}
-<environment: 0x55e3ae6bec90>
+<environment: 0x561461a60550>
 [1] 113
 \end{verbatim}
 
@@ -498,7 +501,7 @@ sum((1:3)^2, (2:4)^3)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[label={sec:org1e90b54},fragile]{Lexical scope: funciones anidadas}
+\begin{frame}[label={sec:orgd230cb0},fragile]{Lexical scope: funciones anidadas}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 xn
@@ -529,7 +532,7 @@ Error: objeto 'interna' no encontrado
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[label={sec:org9a6bf12},fragile]{Funciones que devuelven funciones}
+\begin{frame}[label={sec:org013a655},fragile]{Funciones que devuelven funciones}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 constructor <- function(m, n){
@@ -547,11 +550,13 @@ myFoo
 \end{lstlisting}
 
 \begin{verbatim}
+
 function(x)
     {
-        m*x + n
+        m*x
+n
     }
-<environment: 0x55e3ae654500>
+<environment: 0x561469bf1458>
 \end{verbatim}
 
 
@@ -562,11 +567,12 @@ myFoo(5)
 \end{lstlisting}
 
 \begin{verbatim}
+
 [1] 53
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[label={sec:orga959dcb},fragile]{Funciones que devuelven funciones}
+\begin{frame}[label={sec:orgaa6227e},fragile]{Funciones que devuelven funciones}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 class(myFoo)
@@ -583,7 +589,7 @@ environment(myFoo)
 \end{lstlisting}
 
 \begin{verbatim}
-<environment: 0x55e3ae654500>
+<environment: 0x561469bf1458>
 \end{verbatim}
 
 
@@ -593,13 +599,11 @@ ls()
 \end{lstlisting}
 
 \begin{verbatim}
- [1] "a"               "anidada"         "b"               "constructor"    
- [5] "diamonds"        "fib"             "foo"             "hello"          
- [9] "i"               "lista"           "ll"              "lmFertEduCatAgr"
-[13] "m"               "M"               "makeNoise"       "myFoo"          
-[17] "myFun"           "power"           "pwrSum"          "suma1"          
-[21] "suma10"          "suma2"           "suma3"           "sumProd"        
-[25] "sumSq"           "tmp"             "x"               "zz"
+ [1] "a"           "anidada"     "b"           "constructor" "fib"        
+ [6] "foo"         "hello"       "i"           "lista"       "ll"         
+[11] "M"           "makeNoise"   "myFoo"       "myFun"       "power"      
+[16] "pwrSum"      "suma1"       "suma10"      "suma2"       "suma3"      
+[21] "sumProd"     "sumSq"       "tmp"         "x"
 \end{verbatim}
 
 
@@ -634,8 +638,8 @@ get('n', env = environment(myFoo))
 \end{frame}
 
 \section{Funciones para ejecutar funciones}
-\label{sec:orgbd6f26d}
-\begin{frame}[label={sec:org1d182df},fragile]{\texttt{lapply}}
+\label{sec:org51c9b1e}
+\begin{frame}[label={sec:orga96fb82},fragile]{\texttt{lapply}}
  Supongamos que tenemos una lista de objetos, y queremos aplicar a cada elemento la misma función:
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
@@ -655,9 +659,11 @@ sum(lista$c)
 \end{lstlisting}
 
 \begin{verbatim}
-[1] -0.5135241
-[1] 53.80815
-[1] 85.80208
+[1] -3.295036
+
+[1] 51.57184
+
+[1] 99.86313
 \end{verbatim}
 
 
@@ -669,17 +675,17 @@ lapply(lista, sum)
 
 \begin{verbatim}
 $a
-[1] -0.5135241
+[1] -3.295036
 
 $b
-[1] 53.80815
+[1] 51.57184
 
 $c
-[1] 85.80208
+[1] 99.86313
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[label={sec:orgcf8f19a},fragile]{\texttt{do.call}}
+\begin{frame}[label={sec:orga29c1f0},fragile]{\texttt{do.call}}
  Supongamos que queremos usar los elementos de la lista como argumentos de una función.
 
 Resolvemos de forma directa:
@@ -689,7 +695,7 @@ sum(lista$a, lista$b, lista$c)
 \end{lstlisting}
 
 \begin{verbatim}
-[1] 139.0967
+[1] 148.1399
 \end{verbatim}
 
 
@@ -700,7 +706,7 @@ with(lista, sum(a, b, c))
 \end{lstlisting}
 
 \begin{verbatim}
-[1] 139.0967
+[1] 148.1399
 \end{verbatim}
 
 
@@ -711,11 +717,11 @@ do.call(sum, lista)
 \end{lstlisting}
 
 \begin{verbatim}
-[1] 139.0967
+[1] 148.1399
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[label={sec:org80337b1},fragile]{\texttt{do.call}}
+\begin{frame}[label={sec:org4001958},fragile]{\texttt{do.call}}
  Se emplea frecuentemente para adecuar el resultado de \texttt{lapply} (entrega una lista):
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
@@ -725,16 +731,17 @@ do.call(sum, lista)
 \end{lstlisting}
 
 \begin{verbatim}
-           [,1]      [,2]       [,3]     [,4]     [,5]
-[1,] -0.7138158 0.9317848 0.56947704 1.092146 1.219154
-[2,]  0.5095330 0.8682229 0.32430410 1.192784 1.486337
-[3,] -0.3637127 0.8089969 0.18468374 1.302694 1.812074
-[4,]  0.2596239 0.7538110 0.10517315 1.422733 2.209197
-[5,] -0.1853236 0.7023897 0.05989369 1.553833 2.693352
+
+          [,1]       [,2]       [,3]      [,4]      [,5]
+[1,]  1.980628 -0.8595001 0.45504847 -1.469399 0.6453231
+[2,]  3.922888  0.7387405 0.20706911  2.159134 0.4164419
+[3,]  7.769784 -0.6349475 0.09422648 -3.172631 0.2687396
+[4,] 15.389054  0.5457375 0.04287762  4.661861 0.1734239
+[5,] 30.479996 -0.4690614 0.01951139 -6.850136 0.1119144
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[label={sec:orgbeeb4b8},fragile]{\texttt{Reduce}}
+\begin{frame}[label={sec:orgd71f79d},fragile]{\texttt{Reduce}}
  Combina sucesivamente los elementos de un objeto aplicando una función binaria
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
@@ -743,11 +750,12 @@ Reduce('+', 1:5)
 \end{lstlisting}
 
 \begin{verbatim}
+
 [1] 15
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[label={sec:orge13435f},fragile]{\texttt{Reduce}}
+\begin{frame}[label={sec:orgca0e686},fragile]{\texttt{Reduce}}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 ## (((1/2)/3)/4)/5
@@ -755,6 +763,7 @@ Reduce('/', 1:5)
 \end{lstlisting}
 
 \begin{verbatim}
+
 [1] 0.008333333
 \end{verbatim}
 
@@ -768,6 +777,7 @@ Reduce(foo, c(3, 7, 15, 1, 292))
 \end{lstlisting}
 
 \begin{verbatim}
+
 [1] 4.212948
 \end{verbatim}
 
@@ -784,7 +794,7 @@ Reduce(foo, c(3, 7, 15, 1, 292), right=TRUE)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[label={sec:org54048cf},fragile]{Funciones recursivas}
+\begin{frame}[label={sec:org73d81ea},fragile]{Funciones recursivas}
  Ejemplo: \href{http://en.wikibooks.org/wiki/R\_Programming/Working\_with\_functions\#Functions\_as\_Objects}{Serie de Fibonnaci}
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
@@ -807,9 +817,9 @@ fib(10)
 \end{frame}
 
 \section{Debug}
-\label{sec:orgae6e940}
+\label{sec:org2b6fcb0}
 
-\begin{frame}[label={sec:org4d668ea},fragile]{Post-mortem: \texttt{traceback}}
+\begin{frame}[label={sec:orga900526},fragile]{Post-mortem: \texttt{traceback}}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 sumSq <- function(x, ...)
@@ -828,7 +838,7 @@ sumProd(rnorm(10), runif(10))
 \end{lstlisting}
 
 \begin{verbatim}
-[1] 40.00681
+[1] 8.711019
 \end{verbatim}
 
 
@@ -853,7 +863,7 @@ traceback()
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[label={sec:orgb2759af},fragile]{Analizar antes de que ocurra: \texttt{debug}}
+\begin{frame}[label={sec:orgb6c7b9a},fragile]{Analizar antes de que ocurra: \texttt{debug}}
  \texttt{debug} activa la ejecución paso a paso de una función:
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
@@ -878,7 +888,37 @@ undebug(sumProd)
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:org0fc576c},fragile]{Analizar antes de que ocurra: \texttt{trace}}
+\begin{frame}[label={sec:orgfcb0a28},fragile]{\emph{Debugging} con RStudio}
+ \begin{itemize}
+\item \href{https://support.rstudio.com/hc/en-us/articles/205612627-Debugging-with-RStudio}{Artículo}
+\item \href{https://vimeo.com/99375765https://vimeo.com/97831988}{Vídeo}
+\end{itemize}
+\begin{itemize}
+\item \href{http://adv-r.had.co.nz/Exceptions-Debugging.html}{\emph{Debugging} explicado por H. Wickham}
+
+\item Ejemplo: grabar en un fichero y usar \emph{source}
+\end{itemize}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+sumSq <- function(x, ...)
+    sum(x ^ 2, ...)
+
+sumProd <- function(x, y, ...){
+    xs <- sumSq(x, ...)
+    ys <- sumSq(y, ...)
+    xs * ys
+}
+
+sumProd(rnorm(10), letters[1:10])
+\end{lstlisting}
+
+\begin{verbatim}
+
+Error in x^2 : argumento no-numérico para operador binario
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[label={sec:org37c4363},fragile]{Analizar antes de que ocurra: \texttt{trace}}
  \begin{itemize}
 \item \texttt{trace} permite mayor control que \texttt{debug}
 \end{itemize}
@@ -908,10 +948,10 @@ function(x, y, ...){
     ys <- sumSq(y, ...)
     xs * ys
 }
-<bytecode: 0x55e3a6184de0>
 
 ## (to see the tracing code, look at body(object))
 \end{verbatim}
+
 
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
@@ -933,7 +973,7 @@ body(sumProd)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[label={sec:orgfa381fd},fragile]{Analizar antes de que ocurra: \texttt{trace}}
+\begin{frame}[label={sec:org75004e4},fragile]{Analizar antes de que ocurra: \texttt{trace}}
  \begin{itemize}
 \item Los comandos \texttt{n} y \texttt{c} cambian respecto a \texttt{debug}:
 \begin{itemize}
@@ -949,20 +989,9 @@ untrace(sumProd)
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:org149fb0e}]{Más recursos}
-\begin{itemize}
-\item Debugging en RStudio
-\begin{itemize}
-\item \href{https://support.rstudio.com/hc/en-us/articles/205612627-Debugging-with-RStudio}{Artículo}
-\item \href{https://vimeo.com/97831988}{Vídeo}
-\end{itemize}
-\item \href{http://adv-r.had.co.nz/Exceptions-Debugging.html}{\emph{Debugging} explicado por H. Wickham}
-\end{itemize}
-\end{frame}
-
 \section{Profiling}
-\label{sec:org6c21914}
-\begin{frame}[label={sec:org4570aee},fragile]{¿Cuánto tarda mi función? \texttt{system.time}}
+\label{sec:org0dfd80d}
+\begin{frame}[label={sec:org4ea8038},fragile]{¿Cuánto tarda mi función? \texttt{system.time}}
  Defino una función que rellena una matriz de 10\textsuperscript{6} filas y \texttt{n} columnas con una distribución normal:
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
@@ -978,241 +1007,242 @@ summary(M)
 \end{lstlisting}
 
 \begin{verbatim}
+
        V1                  V2                  V3           
- Min.   :-4.734116   Min.   :-4.598497   Min.   :-4.737993  
- 1st Qu.:-0.672882   1st Qu.:-0.674885   1st Qu.:-0.673589  
- Median : 0.002169   Median : 0.000201   Median : 0.000154  
- Mean   : 0.001107   Mean   :-0.000276   Mean   : 0.000282  
- 3rd Qu.: 0.675470   3rd Qu.: 0.673820   3rd Qu.: 0.674238  
- Max.   : 5.196789   Max.   : 5.751186   Max.   : 4.540216  
-       V4                  V5                  V6                 V7           
- Min.   :-4.746465   Min.   :-5.138755   Min.   :-4.98647   Min.   :-4.757454  
- 1st Qu.:-0.674177   1st Qu.:-0.672330   1st Qu.:-0.67461   1st Qu.:-0.676046  
- Median : 0.001735   Median : 0.000239   Median :-0.00053   Median :-0.002339  
- Mean   : 0.000301   Mean   :-0.000064   Mean   :-0.00004   Mean   :-0.001178  
- 3rd Qu.: 0.674728   3rd Qu.: 0.673775   3rd Qu.: 0.67227   3rd Qu.: 0.674123  
- Max.   : 4.834753   Max.   : 4.986100   Max.   : 4.86728   Max.   : 4.722494  
-       V8                  V9                 V10           
- Min.   :-4.895707   Min.   :-5.513674   Min.   :-4.870733  
- 1st Qu.:-0.676299   1st Qu.:-0.674142   1st Qu.:-0.675979  
- Median :-0.003492   Median : 0.000204   Median : 0.000763  
- Mean   :-0.001901   Mean   : 0.000042   Mean   :-0.000706  
- 3rd Qu.: 0.671765   3rd Qu.: 0.675653   3rd Qu.: 0.674383  
- Max.   : 4.606960   Max.   : 4.785318   Max.   : 4.871267  
-      V11                 V12                 V13           
- Min.   :-5.153347   Min.   :-5.277090   Min.   :-4.810390  
- 1st Qu.:-0.673566   1st Qu.:-0.671908   1st Qu.:-0.675884  
- Median : 0.001277   Median : 0.002219   Median :-0.001190  
- Mean   :-0.000118   Mean   : 0.001417   Mean   :-0.000823  
- 3rd Qu.: 0.674845   3rd Qu.: 0.674619   3rd Qu.: 0.673088  
- Max.   : 5.031631   Max.   : 4.986504   Max.   : 4.760537  
-      V14                 V15                 V16           
- Min.   :-5.105052   Min.   :-5.356945   Min.   :-4.619211  
- 1st Qu.:-0.675811   1st Qu.:-0.676363   1st Qu.:-0.675063  
- Median :-0.000476   Median :-0.000209   Median :-0.002079  
- Mean   :-0.000727   Mean   : 0.000236   Mean   :-0.001035  
- 3rd Qu.: 0.676599   3rd Qu.: 0.675304   3rd Qu.: 0.672903  
- Max.   : 4.788265   Max.   : 4.843420   Max.   : 4.881039  
-      V17                 V18                 V19           
- Min.   :-5.030051   Min.   :-4.530239   Min.   :-4.640407  
- 1st Qu.:-0.673383   1st Qu.:-0.673626   1st Qu.:-0.674456  
- Median : 0.001469   Median :-0.002242   Median :-0.001409  
- Mean   : 0.001073   Mean   : 0.000010   Mean   :-0.000900  
- 3rd Qu.: 0.675187   3rd Qu.: 0.674442   3rd Qu.: 0.672845  
- Max.   : 4.636643   Max.   : 4.757554   Max.   : 4.539099  
+ Min.   :-4.697129   Min.   :-5.086494   Min.   :-5.144483  
+ 1st Qu.:-0.673276   1st Qu.:-0.674048   1st Qu.:-0.672202  
+ Median :-0.001501   Median :-0.000023   Median : 0.001893  
+ Mean   :-0.001615   Mean   :-0.000317   Mean   : 0.002187  
+ 3rd Qu.: 0.673160   3rd Qu.: 0.672780   3rd Qu.: 0.676579  
+ Max.   : 4.468142   Max.   : 4.853063   Max.   : 4.741897  
+       V4                  V5                  V6           
+ Min.   :-4.983313   Min.   :-4.927291   Min.   :-4.684501  
+ 1st Qu.:-0.675177   1st Qu.:-0.677671   1st Qu.:-0.674668  
+ Median :-0.000469   Median :-0.000469   Median : 0.001684  
+ Mean   :-0.000161   Mean   :-0.000120   Mean   : 0.001354  
+ 3rd Qu.: 0.674433   3rd Qu.: 0.674996   3rd Qu.: 0.677215  
+ Max.   : 4.819135   Max.   : 5.013616   Max.   : 4.876185  
+       V7                  V8                  V9           
+ Min.   :-4.606624   Min.   :-4.759520   Min.   :-4.486057  
+ 1st Qu.:-0.672966   1st Qu.:-0.674023   1st Qu.:-0.674597  
+ Median :-0.001805   Median :-0.001627   Median :-0.000094  
+ Mean   :-0.001356   Mean   :-0.000174   Mean   :-0.000506  
+ 3rd Qu.: 0.671379   3rd Qu.: 0.673357   3rd Qu.: 0.673683  
+ Max.   : 4.937610   Max.   : 4.769564   Max.   : 4.998585  
+      V10                 V11                 V12           
+ Min.   :-4.893114   Min.   :-4.973934   Min.   :-5.441027  
+ 1st Qu.:-0.673309   1st Qu.:-0.674037   1st Qu.:-0.676575  
+ Median :-0.000482   Median : 0.000342   Median :-0.001992  
+ Mean   : 0.000629   Mean   :-0.000425   Mean   :-0.000971  
+ 3rd Qu.: 0.674886   3rd Qu.: 0.673628   3rd Qu.: 0.674397  
+ Max.   : 4.952198   Max.   : 4.612258   Max.   : 4.602244  
+      V13                 V14                 V15           
+ Min.   :-4.822871   Min.   :-4.698819   Min.   :-4.846533  
+ 1st Qu.:-0.674612   1st Qu.:-0.672195   1st Qu.:-0.672971  
+ Median : 0.001903   Median : 0.000851   Median : 0.000757  
+ Mean   : 0.000426   Mean   : 0.000447   Mean   : 0.001030  
+ 3rd Qu.: 0.675208   3rd Qu.: 0.672648   3rd Qu.: 0.676183  
+ Max.   : 4.921475   Max.   : 5.053218   Max.   : 4.575553  
+      V16                 V17                 V18                 V19          
+ Min.   :-5.071355   Min.   :-4.600348   Min.   :-4.814996   Min.   :-5.29565  
+ 1st Qu.:-0.674516   1st Qu.:-0.678022   1st Qu.:-0.672917   1st Qu.:-0.67538  
+ Median :-0.001434   Median :-0.002216   Median : 0.000444   Median : 0.00125  
+ Mean   : 0.000043   Mean   :-0.002813   Mean   : 0.001087   Mean   :-0.00031  
+ 3rd Qu.: 0.674611   3rd Qu.: 0.671441   3rd Qu.: 0.674044   3rd Qu.: 0.67437  
+ Max.   : 4.628296   Max.   : 4.937067   Max.   : 5.201685   Max.   : 5.21104  
       V20                 V21                 V22           
- Min.   :-4.865603   Min.   :-4.970040   Min.   :-4.988017  
- 1st Qu.:-0.674424   1st Qu.:-0.675082   1st Qu.:-0.673167  
- Median :-0.000096   Median : 0.000567   Median : 0.000142  
- Mean   :-0.000687   Mean   : 0.000919   Mean   : 0.000733  
- 3rd Qu.: 0.674149   3rd Qu.: 0.676452   3rd Qu.: 0.674971  
- Max.   : 4.952046   Max.   : 4.524130   Max.   : 4.863026  
+ Min.   :-5.176395   Min.   :-5.001858   Min.   :-5.046585  
+ 1st Qu.:-0.676086   1st Qu.:-0.675955   1st Qu.:-0.675688  
+ Median :-0.001354   Median :-0.000662   Median :-0.000789  
+ Mean   :-0.001603   Mean   :-0.000766   Mean   :-0.001263  
+ 3rd Qu.: 0.672796   3rd Qu.: 0.674041   3rd Qu.: 0.672625  
+ Max.   : 4.751937   Max.   : 4.819381   Max.   : 4.655208  
       V23                 V24                 V25           
- Min.   :-4.812722   Min.   :-5.013179   Min.   :-4.837260  
- 1st Qu.:-0.674944   1st Qu.:-0.672214   1st Qu.:-0.675529  
- Median :-0.001995   Median : 0.000951   Median :-0.000741  
- Mean   :-0.001068   Mean   : 0.001300   Mean   :-0.001224  
- 3rd Qu.: 0.672623   3rd Qu.: 0.676519   3rd Qu.: 0.674000  
- Max.   : 4.721530   Max.   : 4.679433   Max.   : 4.967416  
+ Min.   :-4.784760   Min.   :-5.201011   Min.   :-4.833053  
+ 1st Qu.:-0.674445   1st Qu.:-0.675459   1st Qu.:-0.673446  
+ Median : 0.000580   Median :-0.001455   Median : 0.000137  
+ Mean   :-0.000127   Mean   : 0.000025   Mean   : 0.000352  
+ 3rd Qu.: 0.672743   3rd Qu.: 0.674726   3rd Qu.: 0.673681  
+ Max.   : 4.693870   Max.   : 4.810501   Max.   : 4.719421  
       V26                 V27                 V28           
- Min.   :-4.521097   Min.   :-4.543440   Min.   :-4.893254  
- 1st Qu.:-0.676986   1st Qu.:-0.673934   1st Qu.:-0.672862  
- Median :-0.000098   Median : 0.001944   Median : 0.000650  
- Mean   :-0.000790   Mean   : 0.000614   Mean   : 0.000764  
- 3rd Qu.: 0.673750   3rd Qu.: 0.674596   3rd Qu.: 0.676071  
- Max.   : 4.792611   Max.   : 4.719143   Max.   : 4.745419  
+ Min.   :-4.769456   Min.   :-4.582715   Min.   :-4.715943  
+ 1st Qu.:-0.673722   1st Qu.:-0.676423   1st Qu.:-0.675448  
+ Median : 0.001197   Median :-0.001205   Median :-0.000046  
+ Mean   : 0.001213   Mean   :-0.000571   Mean   :-0.000512  
+ 3rd Qu.: 0.676158   3rd Qu.: 0.674560   3rd Qu.: 0.674872  
+ Max.   : 5.495472   Max.   : 4.913162   Max.   : 4.762072  
       V29                 V30                 V31           
- Min.   :-4.976386   Min.   :-4.862520   Min.   :-4.577104  
- 1st Qu.:-0.674888   1st Qu.:-0.675261   1st Qu.:-0.675057  
- Median :-0.000639   Median :-0.002338   Median :-0.001226  
- Mean   :-0.000189   Mean   :-0.000812   Mean   :-0.000483  
- 3rd Qu.: 0.673794   3rd Qu.: 0.674718   3rd Qu.: 0.674688  
- Max.   : 4.640175   Max.   : 4.686452   Max.   : 4.752810  
+ Min.   :-4.915755   Min.   :-4.782626   Min.   :-4.968282  
+ 1st Qu.:-0.673279   1st Qu.:-0.675127   1st Qu.:-0.675411  
+ Median : 0.000618   Median : 0.001140   Median :-0.000641  
+ Mean   : 0.000089   Mean   : 0.000972   Mean   :-0.000133  
+ 3rd Qu.: 0.673559   3rd Qu.: 0.675319   3rd Qu.: 0.674341  
+ Max.   : 5.625269   Max.   : 4.660672   Max.   : 4.804794  
       V32                 V33                 V34           
- Min.   :-5.127770   Min.   :-5.077334   Min.   :-4.579959  
- 1st Qu.:-0.672806   1st Qu.:-0.673575   1st Qu.:-0.674795  
- Median : 0.001505   Median : 0.001191   Median : 0.000880  
- Mean   : 0.001211   Mean   : 0.000516   Mean   : 0.000752  
- 3rd Qu.: 0.675547   3rd Qu.: 0.674348   3rd Qu.: 0.676229  
- Max.   : 5.075057   Max.   : 4.852766   Max.   : 5.233123  
+ Min.   :-5.208053   Min.   :-5.005482   Min.   :-4.535712  
+ 1st Qu.:-0.672772   1st Qu.:-0.671251   1st Qu.:-0.675080  
+ Median : 0.000001   Median : 0.001536   Median :-0.000139  
+ Mean   : 0.000124   Mean   : 0.001502   Mean   : 0.000297  
+ 3rd Qu.: 0.675108   3rd Qu.: 0.674508   3rd Qu.: 0.675074  
+ Max.   : 4.949054   Max.   : 4.620808   Max.   : 4.631801  
       V35                 V36                 V37           
- Min.   :-4.900995   Min.   :-4.832822   Min.   :-4.627498  
- 1st Qu.:-0.675796   1st Qu.:-0.673493   1st Qu.:-0.677036  
- Median :-0.001143   Median : 0.002146   Median :-0.000950  
- Mean   :-0.001633   Mean   : 0.000811   Mean   :-0.000728  
- 3rd Qu.: 0.672544   3rd Qu.: 0.675353   3rd Qu.: 0.675966  
- Max.   : 4.650680   Max.   : 4.959822   Max.   : 4.890211  
+ Min.   :-4.544964   Min.   :-5.181317   Min.   :-4.907276  
+ 1st Qu.:-0.676433   1st Qu.:-0.672412   1st Qu.:-0.674910  
+ Median :-0.000547   Median : 0.001155   Median :-0.000114  
+ Mean   :-0.001777   Mean   : 0.001139   Mean   :-0.000170  
+ 3rd Qu.: 0.673492   3rd Qu.: 0.676382   3rd Qu.: 0.676013  
+ Max.   : 4.883498   Max.   : 4.861152   Max.   : 4.538400  
       V38                 V39                 V40           
- Min.   :-4.734693   Min.   :-4.705371   Min.   :-5.536268  
- 1st Qu.:-0.674062   1st Qu.:-0.673118   1st Qu.:-0.673627  
- Median : 0.001038   Median : 0.001753   Median : 0.000764  
- Mean   : 0.000902   Mean   : 0.001650   Mean   : 0.001259  
- 3rd Qu.: 0.675676   3rd Qu.: 0.676971   3rd Qu.: 0.677178  
- Max.   : 4.610681   Max.   : 4.985710   Max.   : 4.977075  
+ Min.   :-4.570870   Min.   :-5.039802   Min.   :-5.086259  
+ 1st Qu.:-0.673897   1st Qu.:-0.673343   1st Qu.:-0.675440  
+ Median :-0.000591   Median : 0.002170   Median :-0.001194  
+ Mean   :-0.000153   Mean   : 0.001088   Mean   :-0.000507  
+ 3rd Qu.: 0.673553   3rd Qu.: 0.676210   3rd Qu.: 0.675422  
+ Max.   : 4.972339   Max.   : 4.832430   Max.   : 5.157213  
       V41                 V42                 V43           
- Min.   :-4.796530   Min.   :-4.768484   Min.   :-4.625197  
- 1st Qu.:-0.675166   1st Qu.:-0.674473   1st Qu.:-0.676893  
- Median :-0.000081   Median :-0.000029   Median : 0.000064  
- Mean   : 0.000038   Mean   : 0.000230   Mean   :-0.000280  
- 3rd Qu.: 0.674726   3rd Qu.: 0.674736   3rd Qu.: 0.673744  
- Max.   : 4.870631   Max.   : 4.514226   Max.   : 4.571729  
+ Min.   :-4.759814   Min.   :-4.997090   Min.   :-4.717749  
+ 1st Qu.:-0.674044   1st Qu.:-0.675320   1st Qu.:-0.672478  
+ Median : 0.000208   Median : 0.000092   Median :-0.001294  
+ Mean   : 0.000165   Mean   :-0.000037   Mean   :-0.000594  
+ 3rd Qu.: 0.676443   3rd Qu.: 0.673694   3rd Qu.: 0.672348  
+ Max.   : 4.639199   Max.   : 4.489568   Max.   : 4.839490  
       V44                 V45                 V46           
- Min.   :-4.625186   Min.   :-4.449711   Min.   :-4.985139  
- 1st Qu.:-0.673461   1st Qu.:-0.674954   1st Qu.:-0.675972  
- Median : 0.000116   Median :-0.002232   Median :-0.000517  
- Mean   : 0.000614   Mean   :-0.000501   Mean   :-0.000651  
- 3rd Qu.: 0.674281   3rd Qu.: 0.673768   3rd Qu.: 0.673818  
- Max.   : 4.695246   Max.   : 5.448868   Max.   : 5.030201  
+ Min.   :-4.958688   Min.   :-4.879315   Min.   :-4.704138  
+ 1st Qu.:-0.673216   1st Qu.:-0.671828   1st Qu.:-0.672962  
+ Median : 0.001013   Median :-0.000072   Median : 0.000806  
+ Mean   : 0.001118   Mean   : 0.001269   Mean   : 0.000716  
+ 3rd Qu.: 0.673817   3rd Qu.: 0.675338   3rd Qu.: 0.676459  
+ Max.   : 4.756538   Max.   : 4.820473   Max.   : 4.952218  
       V47                 V48                 V49           
- Min.   :-4.868966   Min.   :-4.882403   Min.   :-5.020267  
- 1st Qu.:-0.674752   1st Qu.:-0.674667   1st Qu.:-0.674735  
- Median : 0.000089   Median : 0.001947   Median : 0.000657  
- Mean   : 0.000506   Mean   : 0.000722   Mean   : 0.001133  
- 3rd Qu.: 0.675203   3rd Qu.: 0.675766   3rd Qu.: 0.677766  
- Max.   : 5.800592   Max.   : 4.554565   Max.   : 4.672349  
+ Min.   :-4.842215   Min.   :-4.849413   Min.   :-5.254544  
+ 1st Qu.:-0.671463   1st Qu.:-0.671403   1st Qu.:-0.676353  
+ Median :-0.000034   Median : 0.002342   Median :-0.000442  
+ Mean   :-0.000291   Mean   : 0.000888   Mean   :-0.000469  
+ 3rd Qu.: 0.672152   3rd Qu.: 0.673961   3rd Qu.: 0.674543  
+ Max.   : 4.927199   Max.   : 4.942227   Max.   : 4.584801  
       V50                 V51                 V52           
- Min.   :-4.766416   Min.   :-4.971858   Min.   :-5.104029  
- 1st Qu.:-0.676425   1st Qu.:-0.677097   1st Qu.:-0.674769  
- Median :-0.000095   Median :-0.001730   Median :-0.001840  
- Mean   :-0.001028   Mean   :-0.001782   Mean   :-0.000823  
- 3rd Qu.: 0.673600   3rd Qu.: 0.673173   3rd Qu.: 0.673661  
- Max.   : 4.668569   Max.   : 5.100885   Max.   : 4.552456  
+ Min.   :-5.410137   Min.   :-4.839286   Min.   :-4.632591  
+ 1st Qu.:-0.674206   1st Qu.:-0.674121   1st Qu.:-0.675837  
+ Median : 0.001548   Median : 0.001679   Median : 0.000597  
+ Mean   : 0.000115   Mean   : 0.000544   Mean   :-0.000806  
+ 3rd Qu.: 0.674398   3rd Qu.: 0.675121   3rd Qu.: 0.674094  
+ Max.   : 4.873526   Max.   : 4.696721   Max.   : 4.879410  
       V53                 V54                 V55           
- Min.   :-4.577183   Min.   :-5.178116   Min.   :-4.939930  
- 1st Qu.:-0.675446   1st Qu.:-0.674266   1st Qu.:-0.678100  
- Median : 0.000249   Median : 0.001545   Median :-0.003276  
- Mean   : 0.000613   Mean   : 0.001154   Mean   :-0.003193  
- 3rd Qu.: 0.675266   3rd Qu.: 0.676066   3rd Qu.: 0.670605  
- Max.   : 4.913329   Max.   : 5.071320   Max.   : 4.735906  
+ Min.   :-4.869369   Min.   :-4.828177   Min.   :-4.792432  
+ 1st Qu.:-0.675837   1st Qu.:-0.674225   1st Qu.:-0.673689  
+ Median :-0.001148   Median : 0.001099   Median : 0.000635  
+ Mean   :-0.001131   Mean   : 0.000781   Mean   : 0.000476  
+ 3rd Qu.: 0.673272   3rd Qu.: 0.674586   3rd Qu.: 0.674144  
+ Max.   : 5.404056   Max.   : 4.849851   Max.   : 4.642590  
       V56                 V57                 V58           
- Min.   :-5.133533   Min.   :-5.134264   Min.   :-4.790040  
- 1st Qu.:-0.673182   1st Qu.:-0.676902   1st Qu.:-0.676669  
- Median :-0.000006   Median :-0.001577   Median :-0.001132  
- Mean   : 0.001182   Mean   :-0.002023   Mean   :-0.001232  
- 3rd Qu.: 0.677433   3rd Qu.: 0.672540   3rd Qu.: 0.673222  
- Max.   : 4.861322   Max.   : 4.750161   Max.   : 4.646367  
+ Min.   :-4.420110   Min.   :-5.210427   Min.   :-5.115755  
+ 1st Qu.:-0.675826   1st Qu.:-0.673421   1st Qu.:-0.674553  
+ Median : 0.000332   Median : 0.000542   Median :-0.001201  
+ Mean   :-0.000487   Mean   : 0.000353   Mean   :-0.000137  
+ 3rd Qu.: 0.674770   3rd Qu.: 0.674478   3rd Qu.: 0.673922  
+ Max.   : 4.802298   Max.   : 4.841936   Max.   : 4.894869  
       V59                 V60                 V61           
- Min.   :-4.925651   Min.   :-4.746249   Min.   :-4.803768  
- 1st Qu.:-0.674902   1st Qu.:-0.673520   1st Qu.:-0.674064  
- Median : 0.000179   Median : 0.001949   Median : 0.000151  
- Mean   : 0.000513   Mean   : 0.000853   Mean   :-0.000251  
- 3rd Qu.: 0.675776   3rd Qu.: 0.673760   3rd Qu.: 0.673651  
- Max.   : 4.792419   Max.   : 4.626651   Max.   : 5.090257  
+ Min.   :-4.736686   Min.   :-4.987290   Min.   :-4.748928  
+ 1st Qu.:-0.673231   1st Qu.:-0.673690   1st Qu.:-0.672966  
+ Median : 0.000609   Median : 0.000908   Median :-0.000005  
+ Mean   : 0.000440   Mean   : 0.000978   Mean   : 0.000596  
+ 3rd Qu.: 0.674495   3rd Qu.: 0.675084   3rd Qu.: 0.674745  
+ Max.   : 4.974113   Max.   : 4.590604   Max.   : 4.815448  
       V62                 V63                 V64           
- Min.   :-4.675016   Min.   :-5.612974   Min.   :-4.756755  
- 1st Qu.:-0.674248   1st Qu.:-0.674476   1st Qu.:-0.676050  
- Median :-0.001003   Median : 0.000982   Median : 0.000563  
- Mean   : 0.000024   Mean   :-0.000010   Mean   : 0.000093  
- 3rd Qu.: 0.675016   3rd Qu.: 0.674445   3rd Qu.: 0.675233  
- Max.   : 5.017194   Max.   : 4.601094   Max.   : 4.837581  
+ Min.   :-4.560318   Min.   :-4.951513   Min.   :-4.920279  
+ 1st Qu.:-0.675278   1st Qu.:-0.675598   1st Qu.:-0.672393  
+ Median :-0.002135   Median :-0.000433   Median : 0.000778  
+ Mean   :-0.000972   Mean   :-0.000941   Mean   : 0.000278  
+ 3rd Qu.: 0.674811   3rd Qu.: 0.674748   3rd Qu.: 0.674196  
+ Max.   : 4.604551   Max.   : 4.705857   Max.   : 4.933980  
       V65                 V66                 V67           
- Min.   :-4.802963   Min.   :-4.957485   Min.   :-4.982592  
- 1st Qu.:-0.676071   1st Qu.:-0.676250   1st Qu.:-0.673894  
- Median :-0.000807   Median : 0.000453   Median :-0.000775  
- Mean   :-0.000519   Mean   :-0.000139   Mean   :-0.000233  
- 3rd Qu.: 0.675241   3rd Qu.: 0.674811   3rd Qu.: 0.673265  
- Max.   : 5.471271   Max.   : 4.797355   Max.   : 4.837173  
+ Min.   :-4.732589   Min.   :-4.766184   Min.   :-5.000064  
+ 1st Qu.:-0.673558   1st Qu.:-0.674616   1st Qu.:-0.674405  
+ Median :-0.001908   Median : 0.000456   Median : 0.001280  
+ Mean   : 0.000088   Mean   : 0.000204   Mean   : 0.000958  
+ 3rd Qu.: 0.673893   3rd Qu.: 0.675196   3rd Qu.: 0.675694  
+ Max.   : 4.673648   Max.   : 4.593069   Max.   : 5.194548  
       V68                 V69                 V70           
- Min.   :-4.704199   Min.   :-4.757344   Min.   :-5.406135  
- 1st Qu.:-0.674004   1st Qu.:-0.674410   1st Qu.:-0.671858  
- Median : 0.000163   Median : 0.000806   Median : 0.002570  
- Mean   :-0.000485   Mean   : 0.000814   Mean   : 0.002365  
- 3rd Qu.: 0.674284   3rd Qu.: 0.676805   3rd Qu.: 0.676977  
- Max.   : 4.649307   Max.   : 4.662423   Max.   : 4.770026  
+ Min.   :-4.924575   Min.   :-4.798559   Min.   :-5.372333  
+ 1st Qu.:-0.673609   1st Qu.:-0.674562   1st Qu.:-0.672871  
+ Median : 0.001479   Median : 0.000608   Median : 0.001651  
+ Mean   : 0.000681   Mean   :-0.000374   Mean   : 0.000679  
+ 3rd Qu.: 0.674296   3rd Qu.: 0.675299   3rd Qu.: 0.675174  
+ Max.   : 5.296182   Max.   : 4.756053   Max.   : 4.873048  
       V71                 V72                 V73           
- Min.   :-4.992920   Min.   :-4.867174   Min.   :-4.797343  
- 1st Qu.:-0.674030   1st Qu.:-0.676276   1st Qu.:-0.675166  
- Median :-0.000346   Median :-0.001924   Median :-0.002238  
- Mean   :-0.000278   Mean   :-0.000761   Mean   :-0.001712  
- 3rd Qu.: 0.673780   3rd Qu.: 0.674297   3rd Qu.: 0.672760  
- Max.   : 4.762700   Max.   : 4.966699   Max.   : 4.875862  
+ Min.   :-4.637978   Min.   :-4.832514   Min.   :-4.595978  
+ 1st Qu.:-0.675686   1st Qu.:-0.675648   1st Qu.:-0.674533  
+ Median :-0.001953   Median : 0.000064   Median :-0.001275  
+ Mean   :-0.001555   Mean   :-0.000840   Mean   :-0.000395  
+ 3rd Qu.: 0.671865   3rd Qu.: 0.674422   3rd Qu.: 0.672037  
+ Max.   : 4.633471   Max.   : 4.628628   Max.   : 5.137100  
       V74                 V75                 V76           
- Min.   :-5.084939   Min.   :-5.711110   Min.   :-4.786553  
- 1st Qu.:-0.676834   1st Qu.:-0.676410   1st Qu.:-0.672727  
- Median :-0.000723   Median :-0.000053   Median : 0.000794  
- Mean   :-0.001326   Mean   :-0.000948   Mean   : 0.000448  
- 3rd Qu.: 0.673189   3rd Qu.: 0.673581   3rd Qu.: 0.673085  
- Max.   : 5.288847   Max.   : 4.545478   Max.   : 5.028019  
-      V77                 V78                 V79                V80           
- Min.   :-4.829731   Min.   :-4.523914   Min.   :-4.63374   Min.   :-4.530448  
- 1st Qu.:-0.672166   1st Qu.:-0.673966   1st Qu.:-0.67339   1st Qu.:-0.673511  
- Median : 0.001332   Median : 0.000963   Median :-0.00133   Median : 0.003233  
- Mean   : 0.000970   Mean   : 0.000408   Mean   :-0.00007   Mean   : 0.002277  
- 3rd Qu.: 0.673391   3rd Qu.: 0.673318   3rd Qu.: 0.67319   3rd Qu.: 0.677542  
- Max.   : 4.656470   Max.   : 4.667442   Max.   : 5.14557   Max.   : 4.504096  
-      V81                 V82                 V83           
- Min.   :-4.645786   Min.   :-4.590900   Min.   :-5.179611  
- 1st Qu.:-0.675145   1st Qu.:-0.675299   1st Qu.:-0.675527  
- Median :-0.001193   Median : 0.000114   Median : 0.001725  
- Mean   :-0.001292   Mean   : 0.000069   Mean   : 0.000442  
- 3rd Qu.: 0.672932   3rd Qu.: 0.674450   3rd Qu.: 0.674654  
- Max.   : 4.703301   Max.   : 5.274000   Max.   : 5.621961  
-      V84                 V85                 V86           
- Min.   :-5.023343   Min.   :-4.820378   Min.   :-4.618428  
- 1st Qu.:-0.674270   1st Qu.:-0.673109   1st Qu.:-0.675796  
- Median : 0.000196   Median : 0.002036   Median :-0.001797  
- Mean   :-0.000330   Mean   : 0.001627   Mean   :-0.000397  
- 3rd Qu.: 0.675411   3rd Qu.: 0.676325   3rd Qu.: 0.675198  
- Max.   : 4.765588   Max.   : 4.693340   Max.   : 4.674830  
-      V87                 V88                 V89                 V90          
- Min.   :-4.590683   Min.   :-5.283651   Min.   :-4.949791   Min.   :-4.62191  
- 1st Qu.:-0.674548   1st Qu.:-0.673073   1st Qu.:-0.674963   1st Qu.:-0.67362  
- Median :-0.001145   Median :-0.000013   Median :-0.000255   Median : 0.00068  
- Mean   : 0.000273   Mean   : 0.000753   Mean   :-0.001445   Mean   : 0.00123  
- 3rd Qu.: 0.675323   3rd Qu.: 0.675622   3rd Qu.: 0.673495   3rd Qu.: 0.67728  
- Max.   : 4.801970   Max.   : 4.974775   Max.   : 4.466188   Max.   : 5.32879  
-      V91                 V92                 V93           
- Min.   :-4.886936   Min.   :-5.239516   Min.   :-4.672187  
- 1st Qu.:-0.672676   1st Qu.:-0.673898   1st Qu.:-0.674098  
- Median :-0.001677   Median : 0.000831   Median :-0.000301  
- Mean   :-0.000393   Mean   : 0.000104   Mean   :-0.000798  
- 3rd Qu.: 0.671623   3rd Qu.: 0.674016   3rd Qu.: 0.672917  
- Max.   : 4.731693   Max.   : 4.922819   Max.   : 4.996379  
-      V94                 V95                 V96           
- Min.   :-4.748866   Min.   :-4.610138   Min.   :-5.229372  
- 1st Qu.:-0.673381   1st Qu.:-0.673380   1st Qu.:-0.674608  
- Median :-0.000493   Median : 0.000519   Median :-0.001016  
- Mean   : 0.000222   Mean   : 0.000245   Mean   :-0.000955  
- 3rd Qu.: 0.673766   3rd Qu.: 0.674079   3rd Qu.: 0.673187  
- Max.   : 5.223873   Max.   : 4.783574   Max.   : 5.011628  
-      V97                 V98                 V99           
- Min.   :-4.770265   Min.   :-4.485672   Min.   :-5.146650  
- 1st Qu.:-0.674162   1st Qu.:-0.674577   1st Qu.:-0.675671  
- Median : 0.000359   Median :-0.000739   Median :-0.000235  
- Mean   : 0.000671   Mean   :-0.000653   Mean   :-0.001382  
- 3rd Qu.: 0.675124   3rd Qu.: 0.674521   3rd Qu.: 0.672630  
- Max.   : 4.838386   Max.   : 4.711454   Max.   : 4.462623  
-      V100          
- Min.   :-4.955105  
- 1st Qu.:-0.671640  
- Median : 0.001866  
- Mean   : 0.001162  
- 3rd Qu.: 0.674710  
- Max.   : 4.868854
+ Min.   :-4.783647   Min.   :-4.777854   Min.   :-5.083633  
+ 1st Qu.:-0.674341   1st Qu.:-0.676715   1st Qu.:-0.674155  
+ Median :-0.001364   Median : 0.000192   Median :-0.000379  
+ Mean   :-0.000480   Mean   :-0.000253   Mean   : 0.000402  
+ 3rd Qu.: 0.674250   3rd Qu.: 0.676088   3rd Qu.: 0.675277  
+ Max.   : 5.173989   Max.   : 4.800704   Max.   : 4.920299  
+      V77                 V78                 V79           
+ Min.   :-4.929574   Min.   :-4.786791   Min.   :-4.740853  
+ 1st Qu.:-0.676746   1st Qu.:-0.673485   1st Qu.:-0.676100  
+ Median :-0.000961   Median : 0.001988   Median :-0.001468  
+ Mean   :-0.001248   Mean   : 0.002005   Mean   :-0.000874  
+ 3rd Qu.: 0.673981   3rd Qu.: 0.676627   3rd Qu.: 0.673314  
+ Max.   : 4.879963   Max.   : 5.358316   Max.   : 4.715124  
+      V80                 V81                 V82           
+ Min.   :-5.075354   Min.   :-4.913480   Min.   :-4.954405  
+ 1st Qu.:-0.673489   1st Qu.:-0.675919   1st Qu.:-0.674136  
+ Median : 0.001091   Median : 0.000948   Median : 0.001028  
+ Mean   : 0.001123   Mean   : 0.000065   Mean   : 0.000389  
+ 3rd Qu.: 0.674574   3rd Qu.: 0.676413   3rd Qu.: 0.675357  
+ Max.   : 4.757778   Max.   : 4.718851   Max.   : 4.651396  
+      V83                 V84                 V85           
+ Min.   :-4.603997   Min.   :-4.913549   Min.   :-4.979754  
+ 1st Qu.:-0.676505   1st Qu.:-0.673239   1st Qu.:-0.675702  
+ Median :-0.002669   Median : 0.001292   Median :-0.001124  
+ Mean   :-0.002476   Mean   : 0.001252   Mean   :-0.000474  
+ 3rd Qu.: 0.674596   3rd Qu.: 0.675289   3rd Qu.: 0.673350  
+ Max.   : 5.251794   Max.   : 4.890851   Max.   : 4.584618  
+      V86                 V87                 V88           
+ Min.   :-4.935014   Min.   :-5.226603   Min.   :-4.991085  
+ 1st Qu.:-0.671238   1st Qu.:-0.674180   1st Qu.:-0.673474  
+ Median : 0.000475   Median : 0.001644   Median : 0.000496  
+ Mean   : 0.001124   Mean   : 0.000198   Mean   : 0.000177  
+ 3rd Qu.: 0.674834   3rd Qu.: 0.675379   3rd Qu.: 0.673509  
+ Max.   : 5.561107   Max.   : 4.641129   Max.   : 5.404080  
+      V89                 V90                 V91           
+ Min.   :-4.958053   Min.   :-5.250973   Min.   :-4.720112  
+ 1st Qu.:-0.672739   1st Qu.:-0.674843   1st Qu.:-0.675115  
+ Median :-0.000846   Median :-0.000256   Median :-0.002661  
+ Mean   : 0.000108   Mean   : 0.000441   Mean   :-0.001701  
+ 3rd Qu.: 0.673058   3rd Qu.: 0.676608   3rd Qu.: 0.672111  
+ Max.   : 4.593092   Max.   : 4.591916   Max.   : 4.582245  
+      V92                 V93                 V94           
+ Min.   :-4.983946   Min.   :-4.647100   Min.   :-4.304167  
+ 1st Qu.:-0.671601   1st Qu.:-0.671354   1st Qu.:-0.672783  
+ Median :-0.000571   Median : 0.002618   Median : 0.000019  
+ Mean   : 0.000342   Mean   : 0.001548   Mean   : 0.000714  
+ 3rd Qu.: 0.673882   3rd Qu.: 0.675053   3rd Qu.: 0.674838  
+ Max.   : 4.651265   Max.   : 4.738345   Max.   : 5.216128  
+      V95                 V96                 V97           
+ Min.   :-4.915043   Min.   :-5.008904   Min.   :-4.742168  
+ 1st Qu.:-0.674146   1st Qu.:-0.675606   1st Qu.:-0.674595  
+ Median :-0.000521   Median : 0.000867   Median :-0.001365  
+ Mean   :-0.000703   Mean   : 0.000215   Mean   : 0.000236  
+ 3rd Qu.: 0.674252   3rd Qu.: 0.676486   3rd Qu.: 0.676038  
+ Max.   : 4.769609   Max.   : 4.959832   Max.   : 4.869743  
+      V98                 V99                 V100          
+ Min.   :-4.855720   Min.   :-4.692284   Min.   :-5.059369  
+ 1st Qu.:-0.675190   1st Qu.:-0.674815   1st Qu.:-0.674610  
+ Median :-0.000847   Median : 0.000043   Median : 0.000172  
+ Mean   :-0.000388   Mean   : 0.000349   Mean   :-0.000193  
+ 3rd Qu.: 0.674963   3rd Qu.: 0.675579   3rd Qu.: 0.674563  
+ Max.   : 4.812510   Max.   : 4.478586   Max.   : 4.750664
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[label={sec:orgd268ca5},fragile]{Diferentes formas de sumar}
+\begin{frame}[label={sec:org4f3d3e4},fragile]{Diferentes formas de sumar}
  \texttt{system.time} mide el tiempo de CPU que consume un código\footnote{Para entender la diferencia entre \texttt{user} y \texttt{system} véase explicación \href{http://r.789695.n4.nabble.com/Meaning-of-proc-time-tp2303263p2306691.html}{aquí}.}.
 
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
@@ -1224,8 +1254,9 @@ system.time({
 \end{lstlisting}
 
 \begin{verbatim}
+
  user  system elapsed 
-1.425   0.000   1.428
+1.738   0.008   2.445
 \end{verbatim}
 
 
@@ -1236,7 +1267,7 @@ system.time(suma2 <- apply(M, 1, sum))
 
 \begin{verbatim}
  user  system elapsed 
-2.598   0.152   2.750
+2.426   0.047   2.481
 \end{verbatim}
 
 
@@ -1247,12 +1278,12 @@ system.time(suma3 <- rowSums(M))
 
 \begin{verbatim}
  user  system elapsed 
-0.308   0.000   0.308
+0.299   0.000   0.300
 \end{verbatim}
 \end{frame}
 
 
-\begin{frame}[label={sec:orge200a18},fragile]{¿Cuánto tarda cada parte de mi función?: \texttt{Rprof}}
+\begin{frame}[label={sec:org1582a3d},fragile]{¿Cuánto tarda cada parte de mi función?: \texttt{Rprof}}
  \begin{itemize}
 \item Usaremos un fichero temporal
 \end{itemize}
@@ -1283,7 +1314,7 @@ suma3 <- rowSums(M)
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:org4571afc},fragile]{¿Cuánto tarda cada parte de mi función?: \texttt{Rprof}}
+\begin{frame}[label={sec:org4222e4c},fragile]{¿Cuánto tarda cada parte de mi función?: \texttt{Rprof}}
  \begin{itemize}
 \item Paramos el análisis
 \end{itemize}
@@ -1303,30 +1334,81 @@ summaryRprof(tmp)
 \begin{verbatim}
 $by.self
                 self.time self.pct total.time total.pct
-"apply"              1.12    36.60       2.40     78.43
-"aperm.default"      0.70    22.88       0.70     22.88
-"FUN"                0.52    16.99       0.52     16.99
-"sum"                0.34    11.11       0.34     11.11
-"rowSums"            0.32    10.46       0.32     10.46
-"unlist"             0.04     1.31       0.04      1.31
-"lengths"            0.02     0.65       0.02      0.65
+"apply"              1.78    50.28       2.86     80.79
+"aperm.default"      0.56    15.82       0.56     15.82
+"FUN"                0.44    12.43       0.44     12.43
+"rowSums"            0.40    11.30       0.40     11.30
+"sum"                0.28     7.91       0.28      7.91
+"lengths"            0.04     1.13       0.04      1.13
+"unlist"             0.04     1.13       0.04      1.13
 
 $by.total
                 total.time total.pct self.time self.pct
-"apply"               2.40     78.43      1.12    36.60
-"aperm.default"       0.70     22.88      0.70    22.88
-"aperm"               0.70     22.88      0.00     0.00
-"FUN"                 0.52     16.99      0.52    16.99
-"sum"                 0.34     11.11      0.34    11.11
-"rowSums"             0.32     10.46      0.32    10.46
-"unlist"              0.04      1.31      0.04     1.31
-"lengths"             0.02      0.65      0.02     0.65
+"apply"               2.86     80.79      1.78    50.28
+"aperm.default"       0.56     15.82      0.56    15.82
+"aperm"               0.56     15.82      0.00     0.00
+"FUN"                 0.44     12.43      0.44    12.43
+"rowSums"             0.40     11.30      0.40    11.30
+"sum"                 0.28      7.91      0.28     7.91
+"lengths"             0.04      1.13      0.04     1.13
+"unlist"              0.04      1.13      0.04     1.13
 
 $sample.interval
 [1] 0.02
 
 $sampling.time
-[1] 3.06
+[1] 3.54
 \end{verbatim}
+\end{frame}
+
+\section{Ejercicios}
+\label{sec:org3292dd1}
+\begin{frame}[label={sec:orgccd7ab2}]{Áreas de figuras geométricas}
+Escribe una función que calcule el área de un círculo, un triángulo o un cuadrado. La función empleará, a su vez, una función diferente definida para cada caso.
+\end{frame}
+
+\begin{frame}[label={sec:org882d42e},fragile]{Conversión de temperaturas}
+   Escribe una función para realizar la conversión de temperaturas. La función trabajará a partir de un valor (número real) y una letra. La letra indica la escala en la que se introduce esa temperatura. Si la letra es 'C', la temperatura se convertirá de grados centígrados a Fahrenheit. Si la letra es 'F' la temperatura se convertirá de grados Fahrenheit a grados Centígrados. 
+Se usarán 2 funciones auxiliares, \texttt{cent2fahr} y \texttt{fahr2cent} para convertir de una escala a otra. Estas funciones aceptan un parámetro (la temperatura en una escala) y devuelven el valor en la otra escala. 
+
+Nota: La relación entre ambas escalas es \(T_F = 9/5 \cdot T_C + 32\)
+\end{frame}
+
+\begin{frame}[label={sec:orgf5cc504}]{Tablas de multiplicar}
+Construye un programa que muestre por pantalla las tablas de multiplicar del 1 al 10, a partir de dos funciones específicas. La primera función debe devolver el producto de dos valores numéricos enteros dados como parámetros. La segunda función debe mostrar por pantalla la tabla de multiplicar de un número dado como parámetro.
+\end{frame}
+
+\begin{frame}[label={sec:orga4915e2},fragile]{Números combinatorios}
+ Escribe una función que calcule y muestre en pantalla el número combinatorio a partir de los valores \texttt{n} y \texttt{k}.
+
+\[
+ nk = \frac{n!}{(n - k)! \cdot k!}
+ \]
+
+Esta función debe estar construida en base a dos funciones auxiliares, una para calcular el factorial de un número, y otra para calcular el número combinatorio.
+\end{frame}
+
+\begin{frame}[label={sec:orgb0edaa6},fragile]{Fibonacci}
+ Escribe una \alert{función recursiva} que genere los \texttt{n} primeros términos de la serie de Fibonacci. Esta función aceptará el número entero \texttt{n} como argumento. Este valor debe ser positivo, de forma que si el usuario introduce un valor negativo la función devolverá un error.
+
+Nota: En la serie de Fibonacci los dos primeros números son 1, y el resto se obtiene sumando los dos anteriores: \(1, 1, 2, 3, 5, 8, 13, 21, \ldots\)
+\end{frame}
+
+\begin{frame}[label={sec:org7fc2398},fragile]{Serie de Taylor}
+ Escribe un conjunto de funciones para calcular la aproximación de \(e ^ {-x}\) mediante el desarrollo de Taylor:
+
+\[
+  e^{-x} = 1 + \sum_{i = 1}^\infty \frac{(-x)^n}{n!}
+  \]
+
+La función principal acepta como argumentos el valor del número real \texttt{x} y el número de términos deseados. Se basará en otras tres funciones: 
+
+\begin{itemize}
+\item \texttt{factorial} calcula el factorial de un número entero \texttt{n}.
+
+\item \texttt{potencia} calcula la potencia \texttt{n} de un número real \texttt{x}.
+
+\item \texttt{exponencial} calcula la aproximación anterior de un número real \texttt{x} usando \texttt{n} términos de la serie de Taylor.
+\end{itemize}
 \end{frame}
 \end{document}

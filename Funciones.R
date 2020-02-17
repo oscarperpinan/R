@@ -319,6 +319,24 @@ debug(sumProd)
 
 undebug(sumProd)
 
+## /Debugging/ con RStudio
+##   - [[https://support.rstudio.com/hc/en-us/articles/205612627-Debugging-with-RStudio][Artículo]]
+##   - [[https://vimeo.com/99375765https://vimeo.com/97831988][Vídeo]]
+## - [[http://adv-r.had.co.nz/Exceptions-Debugging.html][/Debugging/ explicado por H. Wickham]]
+
+## - Ejemplo: grabar en un fichero y usar /source/
+
+sumSq <- function(x, ...)
+    sum(x ^ 2, ...)
+
+sumProd <- function(x, y, ...){
+    xs <- sumSq(x, ...)
+    ys <- sumSq(y, ...)
+    xs * ys
+}
+
+sumProd(rnorm(10), letters[1:10])
+
 ## Analizar antes de que ocurra: =trace=
 ## - =trace= permite mayor control que =debug=
 
