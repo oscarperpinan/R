@@ -205,7 +205,7 @@ importMethodsFrom(package, ...)
 ** Ejemplos
 
 - Paquete simple: https://github.com/oscarperpinan/pkgEx
-- Paquete con métodos S4: https://github.com/oscarperpinan/pkgMethods
+- Paquete con métodos S4: https://github.com/oscarperpinan/birds
 
 * Publicar un paquete
 
