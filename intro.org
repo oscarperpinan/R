@@ -80,7 +80,7 @@ datos[1:10,
 #+end_src
 
 *** Representamos gráficamente los datos
-#+begin_src R :file figs/intro.pdf :results output graphics 
+#+begin_src R :file figs/intro.pdf :results graphics file :export results 
 library(lattice)
 
 xyplot(Radiation ~ TempAvg, data = datos,

@@ -3,7 +3,7 @@
 #+SETUPFILE: config.org
 #+OPTIONS: H:2
 #+PROPERTY: exports both 
-#+PROPERTY: results output graphics
+#+PROPERTY: results graphics file
 #+PROPERTY: eval no
 
 

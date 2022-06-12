@@ -1,6 +1,6 @@
-% Created 2019-10-07 lun 13:09
+% Created 2022-06-12 dom 23:58
 % Intended LaTeX compiler: pdflatex
-\documentclass[xcolor={usenames,svgnames,dvipsnames}]{beamer}
+\documentclass[aspectratio=169, usenames,svgnames,dvipsnames]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
@@ -28,29 +28,34 @@
 \hypersetup{colorlinks=true, linkcolor=Blue, urlcolor=Blue}
 \usepackage{fancyvrb}
 \DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\tiny, formatcom = {\color{black!70}}}
-\beamertemplatenavigationsymbolsempty
-\setbeamertemplate{footline}[frame number]
 \AtBeginSection[]{\begin{frame}[plain]\tableofcontents[currentsection,sectionstyle=show/shaded]\end{frame}}
 \usetheme{Boadilla}
 \usecolortheme{rose}
 \usefonttheme{serif}
-\author{Oscar Perpiñán Lamigueiro \\ \url{http://oscarperpinan.github.io}}
+\author{\href{https://oscarperpinan.github.io}{Oscar Perpiñán Lamigueiro}}
 \date{}
 \title{Manejo de datos con R}
+\institute[UPM]{Universidad Politécnica de Madrid}
+\beamertemplatenavigationsymbolsempty
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{itemize items}[triangle]
+\setbeamertemplate{enumerate items}[circle]
+\setbeamertemplate{section in toc}[circle]
+\setbeamertemplate{subsection in toc}[circle]
 \hypersetup{
- pdfauthor={Oscar Perpiñán Lamigueiro \\ \url{http://oscarperpinan.github.io}},
+ pdfauthor={\href{https://oscarperpinan.github.io}{Oscar Perpiñán Lamigueiro}},
  pdftitle={Manejo de datos con R},
  pdfkeywords={},
  pdfsubject={},
- pdfcreator={Emacs 26.1 (Org mode 9.2)}, 
+ pdfcreator={Emacs 27.1 (Org mode 9.4.6)}, 
  pdflang={Spanish}}
 \begin{document}
 
 \maketitle
 
 \section{Lectura de datos}
-\label{sec:org31de411}
-\begin{frame}[label={sec:orgc617302},fragile]{\texttt{setwd}, \texttt{getwd}, \texttt{dir}}
+\label{sec:org4f3c9b7}
+\begin{frame}[label={sec:org67cb4d3},fragile]{\texttt{setwd}, \texttt{getwd}, \texttt{dir}}
  En \texttt{setwd} hay que especificar el directorio que contiene el repositorio.
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
@@ -86,7 +91,7 @@ dir('data')
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[label={sec:orgec6be94},fragile]{Lectura de datos con \texttt{read.table} o \texttt{read.csv}}
+\begin{frame}[label={sec:org8cb32cd},fragile]{Lectura de datos con \texttt{read.table} o \texttt{read.csv}}
  \begin{itemize}
 \item Función Genérica
 \end{itemize}
@@ -98,6 +103,7 @@ head(dats)
 \end{lstlisting}
 
 \begin{verbatim}
+
            X TempAvg TempMax TempMin HumidAvg HumidMax WindAvg WindMax Rain
 1 2004-01-01   4.044   10.71  -1.969     88.3     95.9   0.746   3.528    0
 2 2004-01-02   5.777   11.52   1.247     83.3     98.5   1.078   6.880    0
@@ -125,6 +131,7 @@ head(aranjuez)
 \end{lstlisting}
 
 \begin{verbatim}
+
            X TempAvg TempMax TempMin HumidAvg HumidMax WindAvg WindMax Rain
 1 2004-01-01   4.044   10.71  -1.969     88.3     95.9   0.746   3.528    0
 2 2004-01-02   5.777   11.52   1.247     83.3     98.5   1.078   6.880    0
@@ -151,7 +158,7 @@ class(aranjuez)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[label={sec:org5ab7b45},fragile]{Inspeccionamos el resultado}
+\begin{frame}[label={sec:orgb38e873},fragile]{Inspeccionamos el resultado}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 names(aranjuez)
@@ -208,21 +215,21 @@ tail(aranjuez)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[label={sec:orgc633398},fragile]{Inspeccionamos el resultado}
+\begin{frame}[label={sec:org2ee67bd},fragile]{Inspeccionamos el resultado}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 summary(aranjuez)
 \end{lstlisting}
 
 \begin{verbatim}
-          X           TempAvg          TempMax          TempMin       
- 2004-01-01:   1   Min.   :-5.309   Min.   :-2.362   Min.   :-12.980  
- 2004-01-02:   1   1st Qu.: 7.692   1st Qu.:14.530   1st Qu.:  1.515  
- 2004-01-03:   1   Median :13.810   Median :21.670   Median :  7.170  
- 2004-01-04:   1   Mean   :14.405   Mean   :22.531   Mean   :  6.888  
- 2004-01-05:   1   3rd Qu.:21.615   3rd Qu.:30.875   3rd Qu.: 12.590  
- 2004-01-06:   1   Max.   :30.680   Max.   :41.910   Max.   : 22.710  
- (Other)   :2892                                     NA's   :4        
+      X                TempAvg          TempMax          TempMin       
+ Length:2898        Min.   :-5.309   Min.   :-2.362   Min.   :-12.980  
+ Class :character   1st Qu.: 7.692   1st Qu.:14.530   1st Qu.:  1.515  
+ Mode  :character   Median :13.810   Median :21.670   Median :  7.170  
+                    Mean   :14.405   Mean   :22.531   Mean   :  6.888  
+                    3rd Qu.:21.615   3rd Qu.:30.875   3rd Qu.: 12.590  
+                    Max.   :30.680   Max.   :41.910   Max.   : 22.710  
+                                                      NA's   :4        
     HumidAvg         HumidMax         WindAvg         WindMax      
  Min.   : 19.89   Min.   : 35.88   Min.   :0.251   Min.   : 0.000  
  1st Qu.: 47.04   1st Qu.: 81.60   1st Qu.:0.667   1st Qu.: 3.783  
@@ -242,7 +249,7 @@ summary(aranjuez)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[label={sec:orga765716},fragile]{Valores ausentes}
+\begin{frame}[label={sec:orgdebe588},fragile]{Valores ausentes}
  \begin{itemize}
 \item \texttt{NA} está definido como \texttt{logical}
 \end{itemize}
@@ -292,7 +299,7 @@ mean(aranjuez$Radiation, na.rm =  TRUE)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[label={sec:org2f4838d},fragile]{Valores ausentes}
+\begin{frame}[label={sec:org4d8f3f9},fragile]{Valores ausentes}
  Las funciones \texttt{is.na} y \texttt{anyNA} los identifican 
 \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
@@ -324,7 +331,7 @@ sum(is.na(aranjuez$Radiation))
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[label={sec:orgd93e532},fragile]{Fechas}
+\begin{frame}[label={sec:org519e8fe},fragile]{Fechas}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 names(aranjuez)[1] <- "Date"
@@ -341,12 +348,13 @@ summary(aranjuez$Date)
 
 \begin{verbatim}
 [1] "Date"
+
         Min.      1st Qu.       Median         Mean      3rd Qu.         Max. 
 "2004-01-01" "2005-12-29" "2008-01-09" "2008-01-03" "2010-01-02" "2011-12-31"
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[label={sec:org8640562},fragile]{Fechas}
+\begin{frame}[label={sec:orgc513235},fragile]{Fechas}
  \begin{itemize}
 \item Podemos extraer información de un objeto \texttt{Date} con la función \texttt{format}\footnote{Más información en \texttt{help(format.Date)} y \texttt{help(strptime)}.}:
 \end{itemize}
@@ -379,9 +387,9 @@ Max.   :2011-12-31   Max.   :12.000   Max.   :2011   Max.   :366.0
 \end{frame}
 
 \section{Indexado}
-\label{sec:org0331173}
+\label{sec:orgb57a631}
 
-\begin{frame}[label={sec:org6af0893},fragile]{Indexado con \texttt{[]}}
+\begin{frame}[label={sec:orgc847b36},fragile]{Indexado con \texttt{[]}}
  \begin{itemize}
 \item Filas
 \end{itemize}
@@ -423,7 +431,7 @@ aranjuez[10:14, 1:5]
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[label={sec:org6b6998b},fragile]{Indexado con \texttt{[]}}
+\begin{frame}[label={sec:org300ffbb},fragile]{Indexado con \texttt{[]}}
  \begin{itemize}
 \item Condición basada en los datos
 \end{itemize}
@@ -435,6 +443,7 @@ head(aranjuez[idx, ])
 \end{lstlisting}
 
 \begin{verbatim}
+
           Date TempAvg TempMax TempMin HumidAvg HumidMax WindAvg WindMax Rain
 82  2004-03-22    9.78   16.12   4.340    51.65     87.9   1.526   7.660    0
 83  2004-03-23    8.50   15.52  -0.290    50.10     83.3   1.533   6.027    0
@@ -452,7 +461,7 @@ head(aranjuez[idx, ])
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[label={sec:org1baaee1},fragile]{\texttt{subset}}
+\begin{frame}[label={sec:org38fe785},fragile]{\texttt{subset}}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 subset(aranjuez,
@@ -462,6 +471,7 @@ subset(aranjuez,
 \end{lstlisting}
 
 \begin{verbatim}
+
      Radiation TempAvg TempMax TempMin
 82       21.92   9.780   16.12   4.340
 83       20.62   8.500   15.52  -0.290
@@ -489,7 +499,7 @@ subset(aranjuez,
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[label={sec:org9d9e6d2},fragile]{Ejercicio}
+\begin{frame}[label={sec:orga8e3994},fragile]{Ejercicio}
  \begin{block}{Valores en las estaciones}
 Extrae dos subconjuntos de datos, uno correspondiente al invierno y otro correspondiente al verano, incluyendo las variables de radiación y temperatura media, fecha y mes. 
 
@@ -500,7 +510,7 @@ Puedes suponer que el invierno comenzó el 22 de diciembre y terminó el 20 de m
 \end{frame}
 
 
-\begin{frame}[label={sec:orgf6d9d48},fragile]{Solución}
+\begin{frame}[label={sec:orgd966bef},fragile]{Solución}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 invierno <- subset(aranjuez,
@@ -528,9 +538,9 @@ aranjuez2 <- rbind(invierno, verano)
 
 
 \section{Datos agregados}
-\label{sec:orgfab00f3}
+\label{sec:org67886a3}
 
-\begin{frame}[label={sec:org781c883},fragile]{\texttt{aggregate}}
+\begin{frame}[label={sec:org09343a5},fragile]{\texttt{aggregate}}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 aranjuez$rainy <- aranjuez$Rain > 0
@@ -540,13 +550,14 @@ aggregate(Radiation ~ rainy, data = aranjuez,
 \end{lstlisting}
 
 \begin{verbatim}
+
   rainy Radiation
 1 FALSE  19.63325
 2  TRUE  10.26028
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[label={sec:org374a71a},fragile]{Variable categórica con \texttt{cut}}
+\begin{frame}[label={sec:orgf02d5be},fragile]{Variable categórica con \texttt{cut}}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 aranjuez$tempClass <- cut(aranjuez$TempAvg, 5)
@@ -556,6 +567,7 @@ aggregate(Radiation ~ tempClass, data = aranjuez,
 \end{lstlisting}
 
 \begin{verbatim}
+
      tempClass Radiation
 1 (-5.34,1.89]  8.805389
 2  (1.89,9.09]  9.014178
@@ -572,6 +584,7 @@ aggregate(Radiation ~ tempClass + rainy,
 \end{lstlisting}
 
 \begin{verbatim}
+
       tempClass rainy Radiation
 1  (-5.34,1.89] FALSE  9.869134
 2   (1.89,9.09] FALSE 10.718837
@@ -586,7 +599,7 @@ aggregate(Radiation ~ tempClass + rainy,
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[label={sec:orgd531dcc},fragile]{Agregamos varias variables}
+\begin{frame}[label={sec:orgb388a58},fragile]{Agregamos varias variables}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 aggregate(cbind(Radiation, TempAvg) ~ tempClass,
@@ -594,6 +607,7 @@ aggregate(cbind(Radiation, TempAvg) ~ tempClass,
 \end{lstlisting}
 
 \begin{verbatim}
+
      tempClass Radiation    TempAvg
 1 (-5.34,1.89]  8.805389  0.3423095
 2  (1.89,9.09]  9.014178  5.6663267
@@ -610,6 +624,7 @@ aggregate(cbind(Radiation, TempAvg) ~ tempClass + rainy,
 \end{lstlisting}
 
 \begin{verbatim}
+
       tempClass rainy Radiation    TempAvg
 1  (-5.34,1.89] FALSE  9.869134  0.3550122
 2   (1.89,9.09] FALSE 10.718837  5.6657481
@@ -625,7 +640,7 @@ aggregate(cbind(Radiation, TempAvg) ~ tempClass + rainy,
 \end{frame}
 
 
-\begin{frame}[label={sec:orge794ee0},fragile]{Ejercicio}
+\begin{frame}[label={sec:orga07a239},fragile]{Ejercicio}
  \begin{block}{Valores en las estaciones}
 A partir del \texttt{data.frame} que incluía los datos de invierno y verano, calcula:
 
@@ -638,7 +653,7 @@ A partir del \texttt{data.frame} completo calcula la \alert{media} interanual di
 \end{block}
 \end{frame}
 
-\begin{frame}[label={sec:orgba5fcfa},fragile]{Solución}
+\begin{frame}[label={sec:org7b6a550},fragile]{Solución}
  \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 ## Mediana
@@ -660,134 +675,9 @@ aggregate(cbind(Radiation, TempAvg) ~ day,
 \end{lstlisting}
 \end{frame}
 
-\section{Cambio de formato}
-\label{sec:org4e90043}
-\begin{frame}[label={sec:org097d986},fragile]{Forma simple con \texttt{stack}}
- \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
-\begin{lstlisting}
-aranjuezWide <- aranjuez[, c('Date', 'Radiation',
-                             'TempAvg', 'TempMax',
-                             'WindAvg', 'WindMax')]
-\end{lstlisting}
-
-\begin{itemize}
-\item Pasamos de formato \texttt{wide} a \texttt{long}
-\end{itemize}
-\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
-\begin{lstlisting}
-aranjuezLong <- stack(aranjuezWide)
-
-head(aranjuezLong)
-\end{lstlisting}
-
-\begin{verbatim}
-Warning message:
-In stack.data.frame(aranjuezWide) : non-vector columns will be ignored
-  values       ind
-1  5.490 Radiation
-2  6.537 Radiation
-3  8.810 Radiation
-4  9.790 Radiation
-5 10.300 Radiation
-6  9.940 Radiation
-\end{verbatim}
-
-
-\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
-\begin{lstlisting}
-summary(aranjuezLong)
-\end{lstlisting}
-
-\begin{verbatim}
-    values              ind      
-Min.   :-5.309   Radiation:2898  
-1st Qu.: 3.158   TempAvg  :2898  
-Median : 8.720   TempMax  :2898  
-Mean   :12.074   WindAvg  :2898  
-3rd Qu.:19.970   WindMax  :2898  
-Max.   :41.910                   
-NA's   :149
-\end{verbatim}
-\end{frame}
-
-\begin{frame}[label={sec:org3cf6c3a},fragile]{Más flexible con \texttt{reshape2}}
- \begin{itemize}
-\item \texttt{reshape2} es un paquete que puede facilitar la transformación de \texttt{data.frame} y matrices.
-\end{itemize}
-
-\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
-\begin{lstlisting}
-library(reshape2)
-\end{lstlisting}
-\end{frame}
-
-\begin{frame}[label={sec:orgdf9896f},fragile]{\texttt{melt} para cambiar de \emph{wide} a \emph{long}}
- \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
-\begin{lstlisting}
-aranjuezLong2 <- melt(aranjuezWide, id.vars = 'Date',
-                      variable.name = 'Variable',
-                      value.name = 'Value')
-
-head(aranjuezLong2)
-\end{lstlisting}
-
-\begin{verbatim}
-        Date  Variable  Value
-1 2004-01-01 Radiation  5.490
-2 2004-01-02 Radiation  6.537
-3 2004-01-03 Radiation  8.810
-4 2004-01-04 Radiation  9.790
-5 2004-01-05 Radiation 10.300
-6 2004-01-06 Radiation  9.940
-\end{verbatim}
-\end{frame}
-
-\begin{frame}[label={sec:orgeee8529},fragile]{Agregamos a partir de un formato \texttt{long}}
- \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
-\begin{lstlisting}
-aggregate(Value ~ Variable, data = aranjuezLong2,
-          FUN = mean)
-\end{lstlisting}
-
-\begin{verbatim}
-   Variable     Value
-1 Radiation 16.741759
-2   TempAvg 14.404856
-3   TempMax 22.531033
-4   WindAvg  1.173983
-5   WindMax  5.208021
-\end{verbatim}
-\end{frame}
-
-\begin{frame}[label={sec:orga2ac84f},fragile]{\texttt{dcast} para cambiar de \emph{long} a \emph{wide}}
- \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
-\begin{lstlisting}
-aranjuezWide2 <- dcast(aranjuezLong2,
-                       Variable ~ Date)
-head(aranjuezWide2[, 1:10])
-\end{lstlisting}
-
-\begin{verbatim}
-Using Value as value column: use value.var to override.
-   Variable 2004-01-01 2004-01-02 2004-01-03 2004-01-04 2004-01-05 2004-01-06
-1 Radiation      5.490      6.537      8.810      9.790     10.300      9.940
-2   TempAvg      4.044      5.777      5.850      4.408      3.081      2.304
-3   TempMax     10.710     11.520     13.320     15.590     14.580     11.830
-4   WindAvg      0.746      1.078      0.979      0.633      0.389      0.436
-5   WindMax      3.528      6.880      6.576      3.704      2.244      2.136
-  2004-01-07 2004-01-08 2004-01-09
-1      7.410      4.630      4.995
-2      2.080      6.405     12.060
-3     11.500     13.380     15.330
-4      0.449      1.188      2.737
-5      3.949      6.821      7.750
-\end{verbatim}
-\end{frame}
-
-
 \section{Unión de \texttt{data.frame}}
-\label{sec:org7576f53}
-\begin{frame}[label={sec:org0c41244},fragile]{Con \texttt{merge}}
+\label{sec:orgeb8cabf}
+\begin{frame}[label={sec:org8b8852d},fragile]{Con \texttt{merge}}
  \begin{itemize}
 \item Primero construimos un \texttt{data.frame} de ejemplo
 \end{itemize}
@@ -810,7 +700,7 @@ largeStates <- USStates[USStates$Area>1e5,
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:orgfb7886d},fragile]{Con \texttt{merge}}
+\begin{frame}[label={sec:org9555fd0},fragile]{Con \texttt{merge}}
  \begin{itemize}
 \item Unimos los dos conjuntos (estados \guillemotleft{}fríos\guillemotright{} y \guillemotleft{}grandes\guillemotright{})
 \end{itemize}
@@ -828,7 +718,7 @@ merge(coldStates, largeStates)
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[label={sec:org94ec765},fragile]{\texttt{merge} usa \texttt{match}}
+\begin{frame}[label={sec:org0daf063},fragile]{\texttt{merge} usa \texttt{match}}
  \begin{itemize}
 \item Estados grandes que también son fríos
 \end{itemize}
@@ -841,6 +731,7 @@ idxLarge
 \end{lstlisting}
 
 \begin{verbatim}
+
 [1] 1 0 0 2 5 6 0 0
 \end{verbatim}
 
@@ -859,7 +750,7 @@ coldStates[idxLarge,]
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[label={sec:org997596f},fragile]{\texttt{merge} usa \texttt{match}}
+\begin{frame}[label={sec:org4713eaa},fragile]{\texttt{merge} usa \texttt{match}}
  \begin{itemize}
 \item Estados frios que también son grandes
 \end{itemize}
@@ -872,6 +763,7 @@ idxCold
 \end{lstlisting}
 
 \begin{verbatim}
+
 [1] 1 4 0 0 5 6 0 0 0 0 0
 \end{verbatim}
 
@@ -887,6 +779,134 @@ largeStates[idxCold,]
 6  Colorado 103766
 26  Montana 145587
 28   Nevada 109889
+\end{verbatim}
+\end{frame}
+
+\section{Cambio de formato}
+\label{sec:org34f484c}
+\begin{frame}[label={sec:org8d3688d},fragile]{Forma simple con \texttt{stack}}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+aranjuezWide <- aranjuez[, c('Date', 'Radiation',
+                             'TempAvg', 'TempMax',
+                             'WindAvg', 'WindMax')]
+\end{lstlisting}
+
+\begin{itemize}
+\item Pasamos de formato \texttt{wide} a \texttt{long}
+\end{itemize}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+aranjuezLong <- stack(aranjuezWide)
+
+head(aranjuezLong)
+\end{lstlisting}
+
+\begin{verbatim}
+Warning message:
+In stack.data.frame(aranjuezWide) : non-vector columns will be ignored
+
+  values       ind
+1  5.490 Radiation
+2  6.537 Radiation
+3  8.810 Radiation
+4  9.790 Radiation
+5 10.300 Radiation
+6  9.940 Radiation
+\end{verbatim}
+
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+summary(aranjuezLong)
+\end{lstlisting}
+
+\begin{verbatim}
+    values              ind      
+Min.   :-5.309   Radiation:2898  
+1st Qu.: 3.158   TempAvg  :2898  
+Median : 8.720   TempMax  :2898  
+Mean   :12.074   WindAvg  :2898  
+3rd Qu.:19.970   WindMax  :2898  
+Max.   :41.910                   
+NA's   :149
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[label={sec:org23fa577},fragile]{Más flexible con \texttt{reshape2}}
+ \begin{itemize}
+\item \texttt{reshape2} es un paquete que puede facilitar la transformación de \texttt{data.frame} y matrices.
+\end{itemize}
+
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+library(reshape2)
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[label={sec:org39caf1d},fragile]{\texttt{melt} para cambiar de \emph{wide} a \emph{long}}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+aranjuezLong2 <- melt(aranjuezWide, id.vars = 'Date',
+                      variable.name = 'Variable',
+                      value.name = 'Value')
+
+head(aranjuezLong2)
+\end{lstlisting}
+
+\begin{verbatim}
+
+        Date  Variable  Value
+1 2004-01-01 Radiation  5.490
+2 2004-01-02 Radiation  6.537
+3 2004-01-03 Radiation  8.810
+4 2004-01-04 Radiation  9.790
+5 2004-01-05 Radiation 10.300
+6 2004-01-06 Radiation  9.940
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[label={sec:org0b22ea1},fragile]{Agregamos a partir de un formato \texttt{long}}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+aggregate(Value ~ Variable, data = aranjuezLong2,
+          FUN = mean)
+\end{lstlisting}
+
+\begin{verbatim}
+
+   Variable     Value
+1 Radiation 16.741759
+2   TempAvg 14.404856
+3   TempMax 22.531033
+4   WindAvg  1.173983
+5   WindMax  5.208021
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[label={sec:org44498a5},fragile]{\texttt{dcast} para cambiar de \emph{long} a \emph{wide}}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+aranjuezWide2 <- dcast(aranjuezLong2,
+                       Variable ~ Date)
+head(aranjuezWide2[, 1:10])
+\end{lstlisting}
+
+\begin{verbatim}
+
+Using Value as value column: use value.var to override.
+
+   Variable 2004-01-01 2004-01-02 2004-01-03 2004-01-04 2004-01-05 2004-01-06
+1 Radiation      5.490      6.537      8.810      9.790     10.300      9.940
+2   TempAvg      4.044      5.777      5.850      4.408      3.081      2.304
+3   TempMax     10.710     11.520     13.320     15.590     14.580     11.830
+4   WindAvg      0.746      1.078      0.979      0.633      0.389      0.436
+5   WindMax      3.528      6.880      6.576      3.704      2.244      2.136
+  2004-01-07 2004-01-08 2004-01-09
+1      7.410      4.630      4.995
+2      2.080      6.405     12.060
+3     11.500     13.380     15.330
+4      0.449      1.188      2.737
+5      3.949      6.821      7.750
 \end{verbatim}
 \end{frame}
 \end{document}
