@@ -143,6 +143,46 @@ aggregate(cbind(Radiation, TempAvg) ~ tempClass,
 aggregate(cbind(Radiation, TempAvg) ~ tempClass + rainy,
           data = aranjuez, FUN = mean)
 
+## Con =merge=
+## - Primero construimos un =data.frame= de ejemplo
+
+USStates <- as.data.frame(state.x77)
+USStates$Name <- rownames(USStates)
+rownames(USStates) <- NULL
+
+
+## - Lo partimos en estados "fríos" y estados "grandes"
+
+coldStates <- USStates[USStates$Frost>150,
+                       c('Name', 'Frost')]
+largeStates <- USStates[USStates$Area>1e5,
+                        c('Name', 'Area')]
+
+## Con =merge=
+## - Unimos los dos conjuntos (estados "fríos" y "grandes")
+
+merge(coldStates, largeStates)
+
+## =merge= usa =match=
+## - Estados grandes que también son fríos
+
+idxLarge <- match(largeStates$Name,
+                  coldStates$Name,
+                  nomatch=0)
+idxLarge
+
+coldStates[idxLarge,]
+
+## =merge= usa =match=
+## - Estados frios que también son grandes
+
+idxCold <- match(coldStates$Name,
+                 largeStates$Name,
+                 nomatch=0)
+idxCold
+
+largeStates[idxCold,]
+
 ## Forma simple con =stack= 
 
 aranjuezWide <- aranjuez[, c('Date', 'Radiation',
@@ -183,43 +223,3 @@ aggregate(Value ~ Variable, data = aranjuezLong2,
 aranjuezWide2 <- dcast(aranjuezLong2,
                        Variable ~ Date)
 head(aranjuezWide2[, 1:10])
-
-## Con =merge=
-## - Primero construimos un =data.frame= de ejemplo
-
-USStates <- as.data.frame(state.x77)
-USStates$Name <- rownames(USStates)
-rownames(USStates) <- NULL
-
-
-## - Lo partimos en estados "fríos" y estados "grandes"
-
-coldStates <- USStates[USStates$Frost>150,
-                       c('Name', 'Frost')]
-largeStates <- USStates[USStates$Area>1e5,
-                        c('Name', 'Area')]
-
-## Con =merge=
-## - Unimos los dos conjuntos (estados "fríos" y "grandes")
-
-merge(coldStates, largeStates)
-
-## =merge= usa =match=
-## - Estados grandes que también son fríos
-
-idxLarge <- match(largeStates$Name,
-                  coldStates$Name,
-                  nomatch=0)
-idxLarge
-
-coldStates[idxLarge,]
-
-## =merge= usa =match=
-## - Estados frios que también son grandes
-
-idxCold <- match(coldStates$Name,
-                 largeStates$Name,
-                 nomatch=0)
-idxCold
-
-largeStates[idxCold,]
