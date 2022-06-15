@@ -1,8 +1,8 @@
-% Created 2016-02-22 lun 18:20
-\documentclass[xcolor={usenames,svgnames,dvipsnames}]{beamer}
+% Created 2022-06-15 mié 20:11
+% Intended LaTeX compiler: pdflatex
+\documentclass[aspectratio=169, usenames,svgnames,dvipsnames]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{fixltx2e}
 \usepackage{graphicx}
 \usepackage{grffile}
 \usepackage{longtable}
@@ -16,42 +16,46 @@
 \usepackage{hyperref}
 \usepackage{color}
 \usepackage{listings}
-\usecolortheme{rose}
+\usepackage[spanish]{babel}
 \setbeamercolor{alerted text}{fg=Blue}
 \setbeamerfont{alerted text}{series=\bfseries}
 \setbeamercolor{block title}{bg=structure.fg!20!bg!50!bg}
 \setbeamercolor{block body}{use=block title,bg=block title.bg}
-\setbeamertemplate{navigation symbols}{}
 \AtBeginSubsection[]{\begin{frame}[plain]\tableofcontents[currentsubsection,sectionstyle=show/shaded,subsectionstyle=show/shaded/hide]\end{frame}}
-\lstset{keywordstyle=\color{blue}, commentstyle=\color{gray!90}, basicstyle=\ttfamily\small, columns=fullflexible, breaklines=true,linewidth=\textwidth, backgroundcolor=\color{gray!23}, basewidth={0.5em,0.4em}, literate={á}{{\'a}}1 {ñ}{{\~n}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {º}{{\textordmasculine}}1}
+\AtBeginSection[]{\begin{frame}[plain]\tableofcontents[currentsection,hideallsubsections]\end{frame}}
+\lstset{keywordstyle=\color{blue}, commentstyle=\color{gray!90}, basicstyle=\ttfamily\small, columns=fullflexible, breaklines=true,linewidth=\textwidth, backgroundcolor=\color{gray!23}, basewidth={0.5em,0.4em}, literate={á}{{\'a}}1 {ñ}{{\~n}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {º}{{\textordmasculine}}1, showstringspaces=false}
 \usepackage{mathpazo}
 \hypersetup{colorlinks=true, linkcolor=Blue, urlcolor=Blue}
 \usepackage{fancyvrb}
 \DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\tiny, formatcom = {\color{black!70}}}
-\usetheme{Goettingen}
+\usetheme{Boadilla}
+\usecolortheme{rose}
 \usefonttheme{serif}
-\author{Oscar Perpiñán Lamigueiro $\backslash$\ \url{http://oscarperpinan.github.io}}
+\author{\href{https://oscarperpinan.github.io}{Oscar Perpiñán Lamigueiro}}
 \date{}
 \title{Gráficos con R}
+\institute[UPM]{Universidad Politécnica de Madrid}
+\beamertemplatenavigationsymbolsempty
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{itemize items}[triangle]
+\setbeamertemplate{enumerate items}[circle]
+\setbeamertemplate{section in toc}[circle]
+\setbeamertemplate{subsection in toc}[circle]
 \hypersetup{
- pdfauthor={Oscar Perpiñán Lamigueiro $\backslash$\ \url{http://oscarperpinan.github.io}},
+ pdfauthor={\href{https://oscarperpinan.github.io}{Oscar Perpiñán Lamigueiro}},
  pdftitle={Gráficos con R},
  pdfkeywords={},
  pdfsubject={},
- pdfcreator={Emacs 24.5.1 (Org mode 8.3.3)}, 
+ pdfcreator={Emacs 27.1 (Org mode 9.4.6)}, 
  pdflang={Spanish}}
 \begin{document}
 
 \maketitle
-\begin{frame}{Outline}
-\tableofcontents
-\end{frame}
-
 
 
 \section{Introducción}
-\label{sec:orgheadline4}
-\begin{frame}[fragile,label={sec:orgheadline1}]{Base y grid}
+\label{sec:orgfd0e472}
+\begin{frame}[label={sec:org2785367},fragile]{Base y grid}
  \begin{itemize}
 \item En \texttt{R} existen dos formas de generar gráficos:
 \begin{itemize}
@@ -60,39 +64,37 @@
 \end{itemize}
 \item Los gráficos base sólo producen un resultado gráfico, pero no un objeto.
 \item Los gráficos \texttt{grid} generan un resultado gráfico \alert{y} un objeto.
+\item Dentro del conjunto \texttt{grid} existen dos grandes paquetes: \texttt{lattice} y \texttt{ggplot2}.
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline2}]{Gráficos \texttt{lattice}}
- Dentro del conjunto \texttt{grid} existen dos grandes paquetes:
-
-\begin{block}{\texttt{lattice}}
-\begin{itemize}
+\begin{frame}[label={sec:orgf871320},fragile]{Gráficos \texttt{lattice}}
+ \begin{itemize}
 \item Implementación de los gráficos \emph{trellis}, \emph{The Elements of Graphing Data} de Cleveland)
 
 \item Estructura matricial de paneles definida a través de una fórmula.
 \end{itemize}
 
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 library(lattice)
 
 xyplot(wt ~ mpg | am, data = mtcars, groups = cyl)
 \end{lstlisting}
-\end{block}
+
+\begin{itemize}
+\item Documentación: \href{http://lmdvr.r-forge.r-project.org/figures/figures.html}{Código y Figuras del libro}
+\end{itemize}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline3}]{Gráficos \texttt{ggplot2}}
- Dentro del conjunto \texttt{grid} existen dos grandes paquetes:
-
-\begin{block}{\texttt{ggplot2}}
-\begin{itemize}
+\begin{frame}[label={sec:org7712b92},fragile]{Gráficos \texttt{ggplot2}}
+ \begin{itemize}
 \item Implementación de \emph{The Grammar of Graphics} de Wilkinson.
 
 \item Combinación de funciones que proporcionan los componentes (capas) del gráfico.
 \end{itemize}
 
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 library(ggplot2)
 
@@ -100,13 +102,18 @@ ggplot(mtcars, aes(mpg, wt)) +
     geom_point(aes(colour=factor(cyl))) +
     facet_grid(. ~ am)
 \end{lstlisting}
-\end{block}
+
+\begin{itemize}
+\item \href{http://docs.ggplot2.org/current/}{Documentación de ggplot2}
+\item \href{http://ggplot2.org/book/}{Codigo del libro}
+\item \href{http://learnr.wordpress.com/2009/06/28/ggplot2-version-of-figures-in-lattice-multivariate-data-visualization-with-r-part-1/}{ggplot2 desde lattice} (\href{http://learnr.files.wordpress.com/2009/08/latbook.pdf}{PDF})
+\end{itemize}
 \end{frame}
 
 \section{Datos de ejemplo}
-\label{sec:orgheadline7}
-\begin{frame}[fragile,label={sec:orgheadline5}]{Leemos desde el archivo local}
- \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\label{sec:org2baa8f6}
+\begin{frame}[label={sec:org9883a3a},fragile]{Leemos desde el archivo local}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   aranjuez <- read.csv('data/aranjuez.csv')
 
@@ -114,214 +121,265 @@ ggplot(mtcars, aes(mpg, wt)) +
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline6}]{Añadimos algunas columnas}
- \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\begin{frame}[label={sec:org154cde7},fragile]{Añadimos algunas columnas}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 aranjuez$date <- as.Date(aranjuez$X)
 \end{lstlisting}
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
-  aranjuez$month <- as.numeric(
-                    format(aranjuez$date, '%m'))
+aranjuez$month <- as.numeric(
+    format(aranjuez$date, '%m'))
 
-  aranjuez$year <- as.numeric(
-                   format(aranjuez$date, '%Y'))
+aranjuez$year <- as.numeric(
+    format(aranjuez$date, '%Y'))
 
-  aranjuez$day <- as.numeric(
-                  format(aranjuez$date, '%j'))
+aranjuez$day <- as.numeric(
+    format(aranjuez$date, '%j'))
 
-  aranjuez$quarter <- quarters(aranjuez$date)
+aranjuez$quarter <- quarters(aranjuez$date)
+      
 \end{lstlisting}
 \end{frame}
 
+\section{Catálogo de gráficos}
+\label{sec:orgcb2f11e}
 
-\section{lattice}
-\label{sec:orgheadline63}
-
-\begin{frame}[fragile,label={sec:orgheadline8}]{lattice}
- \begin{itemize}
-\item Documentación: \href{http://lmdvr.r-forge.r-project.org/figures/figures.html}{Código y Figuras del libro}
-\end{itemize}
-
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\begin{frame}[label={sec:orge4ea54a},fragile]{Gráfico de dispersión de puntos}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
-  library(lattice)
+xyplot(Radiation ~ TempAvg, data=aranjuez)
+\end{lstlisting}
+
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+ggplot(aranjuez, aes(TempAvg, Radiation)) + 
+    geom_point()
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline9}]{\texttt{xyplot}}
- \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\begin{frame}[label={sec:orgc4c95b7}]{}
+\begin{center}
+\includegraphics[height=\textheight]{figs/xyplot.png}
+\end{center}
+\end{frame}
+
+\begin{frame}[label={sec:org7fd3482},fragile]{Añadimos rejilla}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
-  xyplot(Radiation ~ TempAvg, data=aranjuez)
+xyplot(Radiation ~ TempAvg, data=aranjuez,
+       grid = TRUE)
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:orgheadline10}]{}
-\includegraphics[width=.9\linewidth]{figs/xyplot.png}
+\begin{frame}[label={sec:org18aef03}]{}
+\begin{center}
+\includegraphics[height=\textheight]{figs/xyplotPG.png}
+\end{center}
 \end{frame}
 
 
-\begin{frame}[fragile,label={sec:orgheadline11}]{Añadimos rejilla}
- \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\begin{frame}[label={sec:orgd69e362},fragile]{Añadimos regresión lineal}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
-  xyplot(Radiation ~ TempAvg, data=aranjuez,
-         grid = TRUE)
+xyplot(Radiation ~ TempAvg, data=aranjuez,
+       type=c('p', 'r'), grid = TRUE,
+       lwd=2, col.line='black')
+  
+\end{lstlisting}
+
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+ggplot(aranjuez, aes(TempAvg, Radiation)) + 
+    geom_point() +
+    geom_smooth(method = "lm")
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:orgheadline12}]{}
-\includegraphics[width=.9\linewidth]{figs/xyplotPG.png}
+\begin{frame}[label={sec:org1045847}]{}
+\begin{center}
+\includegraphics[height=\textheight]{figs/xyplotPRG.png}
+\end{center}
 \end{frame}
 
 
-\begin{frame}[fragile,label={sec:orgheadline13}]{Añadimos regresión lineal}
- \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\begin{frame}[label={sec:orgf6fe697},fragile]{Añadimos ajuste local}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
-  xyplot(Radiation ~ TempAvg, data=aranjuez,
-         type=c('p', 'r'), grid = TRUE,
-         lwd=2, col.line='black')
+xyplot(Radiation ~ TempAvg, data=aranjuez,
+       type=c('p', 'smooth'), grid = TRUE,
+       lwd=2, col.line='black')
+\end{lstlisting}
+
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+ggplot(aranjuez, aes(TempAvg, Radiation)) + 
+    geom_point() +
+    geom_smooth()
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:orgheadline14}]{}
-\includegraphics[width=.9\linewidth]{figs/xyplotPRG.png}
+\begin{frame}[label={sec:org75d42d8}]{}
+\begin{center}
+\includegraphics[height=\textheight]{figs/xyplotSmooth.png}
+\end{center}
 \end{frame}
 
 
-
-\begin{frame}[fragile,label={sec:orgheadline15}]{Añadimos ajuste local}
- \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\begin{frame}[label={sec:orga3e186b},fragile]{Paneles}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
-  xyplot(Radiation ~ TempAvg, data=aranjuez,
-         type=c('p', 'smooth'), grid = TRUE,
-         lwd=2, col.line='black')
+xyplot(Radiation ~ TempAvg|factor(year),
+       data=aranjuez)
+\end{lstlisting}
+
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+ggplot(aranjuez, aes(TempAvg, Radiation)) + 
+    geom_point() +
+    facet_wrap(~factor(year))
+\end{lstlisting}
+\end{frame}
+\begin{frame}[label={sec:org37f7cef}]{}
+\begin{center}
+\includegraphics[height=\textheight]{figs/xyplotYear.png}
+\end{center}
+\end{frame}
+
+\begin{frame}[label={sec:org02400df},fragile]{Grupos}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+xyplot(Radiation ~ TempAvg, groups=quarter,
+       data=aranjuez, auto.key=list(space='right'))
+\end{lstlisting}
+
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+ggplot(aranjuez, aes(TempAvg, Radiation,
+                     color = quarter)) + 
+    geom_point()
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:orgheadline16}]{}
-\includegraphics[width=.9\linewidth]{figs/xyplotSmooth.png}
+\begin{frame}[label={sec:orgca32312}]{}
+\begin{center}
+\includegraphics[height=\textheight]{figs/xyplotQuarter.png}
+\end{center}
 \end{frame}
 
-
-\begin{frame}[fragile,label={sec:orgheadline17}]{Paneles}
- \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\begin{frame}[label={sec:org8df30bd},fragile]{Paneles y grupos}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
-  xyplot(Radiation ~ TempAvg|factor(year),
-         data=aranjuez)
+xyplot(Radiation ~ TempAvg|factor(year),
+       groups=quarter,
+       data=aranjuez,
+       layout=c(4, 2),
+       auto.key=list(space='right'))
+\end{lstlisting}
+
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+ggplot(aranjuez, aes(TempAvg, Radiation,
+                     color = quarter)) + 
+    geom_point() +
+    facet_wrap(~factor(year))
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:orgheadline18}]{}
-\includegraphics[width=.9\linewidth]{figs/xyplotYear.png}
+\begin{frame}[label={sec:orgc6a17a4}]{}
+\begin{center}
+\includegraphics[height=\textheight]{figs/xyplotQuarterYear.png}
+\end{center}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline19}]{Grupos}
- \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\begin{frame}[label={sec:org8e4e75e},fragile]{Paneles y grupos}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
-  xyplot(Radiation ~ TempAvg, groups=quarter,
-         data=aranjuez, auto.key=list(space='right'))
+xyplot(Radiation ~ TempAvg|factor(year),
+       groups=quarter,
+       data=aranjuez,
+       layout=c(4, 2),
+       type=c('p', 'r'),
+       auto.key=list(space='right'))
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:orgheadline20}]{}
-\includegraphics[width=.9\linewidth]{figs/xyplotQuarter.png}
+\begin{frame}[label={sec:org6b297f0}]{}
+\begin{center}
+\includegraphics[height=\textheight]{figs/xyplotQuarterYearSmooth.png}
+\end{center}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline21}]{Paneles y grupos}
- \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\begin{frame}[label={sec:org8f8a039},fragile]{Colores y tamaños}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
-  xyplot(Radiation ~ TempAvg|factor(year),
-         groups=quarter,
-         data=aranjuez,
-         layout=c(4, 2),
-         auto.key=list(space='right'))
+xyplot(Radiation ~ TempAvg,
+       type=c('p', 'r'),
+       cex=2, col='blue',
+       alpha=.5, pch=19,
+       lwd=3, col.line='black',
+       data=aranjuez)
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:orgheadline22}]{}
-\includegraphics[width=.9\linewidth]{figs/xyplotQuarterYear.png}
+\begin{frame}[label={sec:orgd37e0cb}]{}
+\begin{center}
+\includegraphics[height=\textheight]{figs/xyplotColors.png}
+\end{center}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline23}]{Paneles y grupos}
- \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\begin{frame}[label={sec:orgf696e37},fragile]{Colores con grupos}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
-  xyplot(Radiation ~ TempAvg|factor(year),
-         groups=quarter,
-         data=aranjuez,
-         layout=c(4, 2),
-         type=c('p', 'r'),
-         auto.key=list(space='right'))
+xyplot(Radiation ~ TempAvg,
+       group=quarter,
+       col=c('red', 'blue', 'green', 'yellow'),
+       pch=19,
+       auto.key=list(space='right'),
+       data=aranjuez)
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:orgheadline24}]{}
-\includegraphics[width=.9\linewidth]{figs/xyplotQuarterYearSmooth.png}
+\begin{frame}[label={sec:org54c514f}]{}
+\begin{center}
+\includegraphics[height=\textheight]{figs/xyplotColorGroups.png}
+\end{center}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline25}]{Colores y tamaños}
- \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
-\begin{lstlisting}
-  xyplot(Radiation ~ TempAvg,
-         type=c('p', 'r'),
-         cex=2, col='blue',
-         alpha=.5, pch=19,
-         lwd=3, col.line='black',
-         data=aranjuez)
-\end{lstlisting}
-\end{frame}
-
-\begin{frame}[label={sec:orgheadline26}]{}
-\includegraphics[width=.9\linewidth]{figs/xyplotColors.png}
-\end{frame}
-
-\begin{frame}[fragile,label={sec:orgheadline27}]{Colores con grupos}
- \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
-\begin{lstlisting}
-  xyplot(Radiation ~ TempAvg,
-         group=quarter,
-         col=c('red', 'blue', 'green', 'yellow'),
-         pch=19,
-         auto.key=list(space='right'),
-         data=aranjuez)
-\end{lstlisting}
-\end{frame}
-
-\begin{frame}[label={sec:orgheadline28}]{}
-\includegraphics[width=.9\linewidth]{figs/xyplotColorGroups.png}
-\end{frame}
-
-\begin{frame}[fragile,label={sec:orgheadline29}]{Colores con grupos: \texttt{par.settings} y \texttt{simpleTheme}}
+\begin{frame}[label={sec:org6078d79},fragile]{Colores con grupos: \texttt{par.settings} y \texttt{simpleTheme}}
  \begin{itemize}
 \item Primero definimos el tema con \texttt{simpleTheme}
 \end{itemize}
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
-  myTheme <- simpleTheme(col=c('red', 'blue',
-                          'green', 'yellow'),
-                          pch=19, alpha=.6)
+myTheme <- simpleTheme(col=c('red', 'blue',
+                             'green', 'yellow'),
+                       pch=19, alpha=.6)
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline30}]{Colores con grupos: \texttt{par.settings} y \texttt{simpleTheme}}
+\begin{frame}[label={sec:org7ab7b56},fragile]{Colores con grupos: \texttt{par.settings} y \texttt{simpleTheme}}
  \begin{itemize}
 \item Aplicamos el resultado en \texttt{par.settings}
 \end{itemize}
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
-  xyplot(Radiation ~ TempAvg,
-         groups=quarter,
-         par.settings=myTheme,
-         auto.key=list(space='right'),
-         data=aranjuez)
+xyplot(Radiation ~ TempAvg,
+       groups=quarter,
+       par.settings=myTheme,
+       auto.key=list(space='right'),
+       data=aranjuez)
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:orgheadline31}]{}
-\includegraphics[width=.9\linewidth]{figs/myTheme.png}
+\begin{frame}[label={sec:org10fe9be}]{}
+\begin{center}
+\includegraphics[height=\textheight]{figs/myTheme.png}
+\end{center}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline32}]{Colores: brewer.pal}
- \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\begin{frame}[label={sec:org267f8c8},fragile]{Colores: brewer.pal}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 library(RColorBrewer)
 
@@ -335,8 +393,8 @@ myTheme <- simpleTheme(col = myPal,
 \end{block}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline33}]{Asignamos paleta con \texttt{par.settings}}
- \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\begin{frame}[label={sec:orgc040022},fragile]{Asignamos paleta con \texttt{par.settings}}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 xyplot(Radiation ~ TempAvg,
        groups=quarter,
@@ -346,75 +404,74 @@ xyplot(Radiation ~ TempAvg,
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:orgheadline34}]{}
-\includegraphics[width=.9\linewidth]{figs/brewer.png}
+\begin{frame}[label={sec:orgac89a31}]{}
+\begin{center}
+\includegraphics[height=\textheight]{figs/brewer.png}
+\end{center}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline35}]{Paneles a medida}
- \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\begin{frame}[label={sec:org2fad885},fragile]{Matriz de gráficos de dispersión}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
-  xyplot(Radiation ~ TempAvg, data=aranjuez,
-         panel=function(x, y, ...){
-             panel.xyplot(x, y, ...)
-             minIdx <- which.min(x)
-             maxIdx <- which.max(x)
-             panel.points(x[c(minIdx, maxIdx)],
-                          y[c(minIdx, maxIdx)],
-                          cex=2, col='red')
-             panel.text(x[minIdx], y[minIdx],
-                        'MIN', pos=1)
-             })
+splom(aranjuez[,c("TempAvg", "HumidAvg", "WindAvg",
+                  "Rain", "Radiation", "ET")],
+      pscale=0, alpha=0.6, cex=0.3, pch=19)
+\end{lstlisting}
+
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+library(GGally)
+ggpairs(aranjuez)
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:orgheadline36}]{}
-\includegraphics[width=.9\linewidth]{figs/panel.png}
+\begin{frame}[label={sec:orga146bab}]{}
+\begin{center}
+\includegraphics[height=\textheight]{figs/splom.png}
+\end{center}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline37}]{Matriz de gráficos de dispersión}
- \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\begin{frame}[label={sec:orgd77128d},fragile]{Matriz de gráficos de dispersión}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
-  splom(aranjuez[,c("TempAvg", "HumidAvg", "WindAvg",
-                    "Rain", "Radiation", "ET")],
-        pscale=0, alpha=0.6, cex=0.3, pch=19)
+splom(aranjuez[,c("TempAvg", "HumidAvg", "WindAvg",
+                  "Rain", "Radiation", "ET")],
+      groups=aranjuez$quarter,
+      auto.key=list(space='right'),
+      pscale=0, alpha=0.6, cex=0.3, pch=19)
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:orgheadline38}]{}
-\includegraphics[width=.9\linewidth]{figs/splom.png}
+\begin{frame}[label={sec:org1ec73f4}]{}
+\begin{center}
+\includegraphics[height=\textheight]{figs/splomGroup.png}
+\end{center}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline39}]{Matriz de gráficos de dispersión}
- \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\begin{frame}[label={sec:org49aa1ee},fragile]{Mapa de niveles}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
-  splom(aranjuez[,c("TempAvg", "HumidAvg", "WindAvg",
-                    "Rain", "Radiation", "ET")],
-        groups=aranjuez$quarter,
-        auto.key=list(space='right'),
-        pscale=0, alpha=0.6, cex=0.3, pch=19)
+levelplot(TempAvg ~ year * day, data = aranjuez)
+\end{lstlisting}
+
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+ggplot(aranjuez, aes(year, day)) + 
+    geom_raster(aes(fill = TempAvg))
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:orgheadline40}]{}
-\includegraphics[width=.9\linewidth]{figs/splomGroup.png}
+\begin{frame}[label={sec:org9bbe135}]{}
+\begin{center}
+\includegraphics[height=\textheight]{figs/levelplot.png}
+\end{center}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline41}]{\texttt{levelplot}}
- \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
-\begin{lstlisting}
-  levelplot(TempAvg ~ year * day, data = aranjuez)
-\end{lstlisting}
-\end{frame}
-
-\begin{frame}[label={sec:orgheadline42}]{}
-\includegraphics[width=.9\linewidth]{figs/levelplot.png}
-\end{frame}
-
-\begin{frame}[fragile,label={sec:orgheadline43}]{\texttt{levelplot} con una paleta mejor}
+\begin{frame}[label={sec:org8c489a5},fragile]{\texttt{levelplot} con una paleta mejor}
  \begin{itemize}
 \item Usamos \texttt{colorRampPalette} para generar una función que interpola colores a partir de una paleta
 \end{itemize}
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 levelPal <- colorRampPalette(
     brewer.pal(n = 9, 'Oranges'))
@@ -423,20 +480,15 @@ levelPal <- colorRampPalette(
 \item Comprobamos que es una función generadora de colores
 \end{itemize}
 
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 levelPal(14)
 \end{lstlisting}
 
-\begin{verbatim}
-[1] "#FFF5EB" "#FEEBD9" "#FDE0C3" "#FDD3A8" "#FDC088" "#FDAB67" "#FD974A"
-[8] "#F9812F" "#F16B16" "#E45709" "#D14501" "#B13A02" "#973003" "#7F2704"
-\end{verbatim}
-
 \begin{itemize}
 \item Usamos esta función con \texttt{col.regions}
 \end{itemize}
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   levelplot(TempAvg ~ year * day,
             col.regions = levelPal,
@@ -444,96 +496,115 @@ levelPal(14)
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:orgheadline44}]{}
-\includegraphics[width=.9\linewidth]{figs/levelplotPal.png}
+\begin{frame}[label={sec:org5463c92}]{}
+\begin{center}
+\includegraphics[height=\textheight]{figs/levelplotPal.png}
+\end{center}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline45}]{\texttt{contourplot}}
- \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\begin{frame}[label={sec:org0be014f},fragile]{Gráfico de contornos}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
-  contourplot(TempAvg ~ year * day,
-              data = aranjuez,
-              lwd = .5,
-              labels = list(cex = 0.6),
-              label.style = 'align',
-              cuts = 5)
+contourplot(TempAvg ~ year * day,
+            data = aranjuez,
+            lwd = .5,
+            labels = list(cex = 0.6),
+            label.style = 'align',
+            cuts = 5)
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:orgheadline46}]{}
-\includegraphics[width=.9\linewidth]{figs/contourplot.png}
+\begin{frame}[label={sec:orgb7b5ca2}]{}
+\begin{center}
+\includegraphics[height=\textheight]{figs/contourplot.png}
+\end{center}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline47}]{Box-and-Whiskers}
- \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\begin{frame}[label={sec:org8da657a},fragile]{Box-and-Whiskers}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
-  bwplot(Radiation ~ month, data=aranjuez,
-         horizontal=FALSE, pch='|')
+bwplot(Radiation ~ month, data=aranjuez,
+       horizontal = FALSE, pch='|')
+\end{lstlisting}
+
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+ggplot(aranjuez, aes(factor(month), Radiation)) + 
+    geom_boxplot()
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:orgheadline48}]{}
-\includegraphics[width=.9\linewidth]{figs/bwplot.png}
+\begin{frame}[label={sec:orgeb97d86}]{}
+\begin{center}
+\includegraphics[height=\textheight]{figs/bwplot.png}
+\end{center}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline49}]{Box-and-Whiskers}
- \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\begin{frame}[label={sec:org2c0fcd7},fragile]{Box-and-Whiskers}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
-  bwplot(Radiation ~ month, data=aranjuez,
-         horizontal=FALSE,
-         panel=panel.violin)
+bwplot(Radiation ~ month, data=aranjuez,
+       horizontal=FALSE,
+       panel=panel.violin)
+\end{lstlisting}
+
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+ggplot(aranjuez, aes(factor(month), Radiation)) + 
+    geom_violin()
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:orgheadline50}]{}
-\includegraphics[width=.9\linewidth]{figs/violin.png}
+\begin{frame}[label={sec:org0fbae67}]{}
+\begin{center}
+\includegraphics[height=\textheight]{figs/violin.png}
+\end{center}
 \end{frame}
 
 
-\begin{frame}[fragile,label={sec:orgheadline51}]{Histogramas}
- \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\begin{frame}[label={sec:org951f8d1},fragile]{Histogramas}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
-  histogram(~ Radiation|factor(year), data=aranjuez)
+histogram(~ Radiation|factor(year), data=aranjuez)
+\end{lstlisting}
+
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+ggplot(aranjuez, aes(Radiation)) + 
+    geom_histogram() +
+    facet_wrap(~factor(year))
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:orgheadline52}]{}
-\includegraphics[width=.9\linewidth]{figs/histogram.png}
+\begin{frame}[label={sec:orgb6da44b}]{}
+\begin{center}
+\includegraphics[height=\textheight]{figs/histogram.png}
+\end{center}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline53}]{Gráficos de densidad}
- \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\begin{frame}[label={sec:org966ad70},fragile]{Gráficos de densidad}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 densityplot(~ Radiation, groups=quarter,
             data=aranjuez,
             auto.key=list(space='right'))
 \end{lstlisting}
-\end{frame}
 
-\begin{frame}[label={sec:orgheadline54}]{}
-\includegraphics[width=.9\linewidth]{figs/density.png}
-\end{frame}
-
-\begin{frame}[fragile,label={sec:orgheadline55}]{\texttt{dotplot}}
- \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
-  avRad <- aggregate(Radiation ~ month * year,
-                     data=aranjuez, FUN=mean)
-\end{lstlisting}
-
-\lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
-\begin{lstlisting}
-  dotplot(month ~ Radiation|factor(year), data=avRad)
+ggplot(aranjuez, aes(Radiation, color = quarter)) + 
+    geom_density()
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:orgheadline56}]{}
-\includegraphics[width=.9\linewidth]{figs/dotplot.png}
+\begin{frame}[label={sec:orge187a1d}]{}
+\begin{center}
+\includegraphics[height=\textheight]{figs/density.png}
+\end{center}
 \end{frame}
 
-
-\begin{frame}[fragile,label={sec:orgheadline57}]{Quantile-Quantile}
- \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\begin{frame}[label={sec:org7fb68ac},fragile]{Quantile-Quantile}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   firstHalf <- aranjuez$quarter %in% c('Q1', 'Q2')
   
@@ -541,12 +612,14 @@ densityplot(~ Radiation, groups=quarter,
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:orgheadline58}]{}
-\includegraphics[width=.9\linewidth]{figs/qqHalf.png}
+\begin{frame}[label={sec:orgba0a355}]{}
+\begin{center}
+\includegraphics[height=\textheight]{figs/qqHalf.png}
+\end{center}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline59}]{Quantile-quantile}
- \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\begin{frame}[label={sec:org4f770a6},fragile]{Quantile-quantile}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   winter <- aranjuez$quarter %in% c('Q1', 'Q4')
   
@@ -554,30 +627,23 @@ densityplot(~ Radiation, groups=quarter,
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:orgheadline60}]{}
-\includegraphics[width=.9\linewidth]{figs/qqWinter.png}
+\begin{frame}[label={sec:org5a7cb01}]{}
+\begin{center}
+\includegraphics[height=\textheight]{figs/qqWinter.png}
+\end{center}
 \end{frame}
 
-\begin{frame}[fragile,label={sec:orgheadline61}]{Quantile-Quantile}
- \lstset{language=R,label= ,caption= ,captionpos=b,numbers=none}
+\begin{frame}[label={sec:org2604b37},fragile]{Quantile-Quantile}
+ \lstset{language=r,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
   qqmath(~TempAvg, data=aranjuez,
          groups=year, distribution=qnorm)
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:orgheadline62}]{}
-\includegraphics[width=.9\linewidth]{figs/qqNorm.png}
-\end{frame}
-
-
-\section{ggplot2}
-\label{sec:orgheadline65}
-\begin{frame}[label={sec:orgheadline64}]{ggplot2}
-\begin{itemize}
-\item \href{http://docs.ggplot2.org/current/}{Documentación de ggplot2}
-\item \href{http://ggplot2.org/book/}{Codigo del libro}
-\item \href{http://learnr.wordpress.com/2009/06/28/ggplot2-version-of-figures-in-lattice-multivariate-data-visualization-with-r-part-1/}{ggplot2 desde lattice} (\href{http://learnr.files.wordpress.com/2009/08/latbook.pdf}{PDF})
-\end{itemize}
+\begin{frame}[label={sec:org4170d35}]{}
+\begin{center}
+\includegraphics[height=\textheight]{figs/qqNorm.png}
+\end{center}
 \end{frame}
 \end{document}
