@@ -1,9 +1,9 @@
-Introducción a R
-====
+Introducción a jariza00
+====v.2.0.0
 Este repositorio incluye diapositivas, datos y código que utilizo en cursos introductorios a R.
 
 [![CC-BY-SA](https://i.creativecommons.org/l/by-sa/4.0/88x31.png)](http://creativecommons.org/licenses/by-sa/4.0/) Este material está
-bajo una licencia [Creative Commons CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/).
+bajo una licencia [Creative Commons CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/2.0/).
 
 Cómo usar esta documentación
 ---- 
